@@ -41,7 +41,7 @@ final IID_IUIAutomationSelectionPattern2 = GUID.fromComponents(
   0x532bfae,
   0xc011,
   0x4e32,
-  Uint8List.fromList(const [0xa3, 0x43, 0x6d, 0x64, 0x2d, 0x79, 0x85, 0x55]),
+  .fromList(const [0xa3, 0x43, 0x6d, 0x64, 0x2d, 0x79, 0x85, 0x55]),
 );
 
 /// Extends the IUIAutomationSelectionPattern interface to provide information
@@ -111,7 +111,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets an IUIAutomationElement object representing the last item in a group
@@ -129,7 +129,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets an IUIAutomationElement object representing the currently selected
@@ -147,7 +147,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets an integer value indicating the number of selected items.
@@ -181,7 +181,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets a cached IUIAutomationElement object representing the last item in a
@@ -199,7 +199,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets a cached IUIAutomationElement object representing the currently
@@ -217,7 +217,7 @@ class IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Gets a cached integer value indicating the number of selected items.

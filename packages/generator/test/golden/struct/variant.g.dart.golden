@@ -57,7 +57,7 @@ sealed class VARIANT_0_0 extends Struct {
 
   external VARIANT_0_0_0 Anonymous;
 
-  VARENUM get vt => VARENUM(_vt);
+  VARENUM get vt => .new(_vt);
   set vt(VARENUM value) => _vt = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -162,15 +162,15 @@ sealed class VARIANT_0_0_0 extends Union {
 
   bool get boolVal => _boolVal != FALSE;
   set boolVal(bool value) => _boolVal = value ? VARIANT_TRUE : FALSE;
-  BSTR get bstrVal => BSTR(_bstrVal);
+  BSTR get bstrVal => .new(_bstrVal);
   set bstrVal(BSTR value) => _bstrVal = value;
-  IUnknown? get punkVal => _punkVal.isNull ? null : IUnknown(_punkVal);
+  IUnknown? get punkVal => _punkVal.isNull ? null : .new(_punkVal);
   set punkVal(IUnknown? value) => _punkVal = value?.ptr ?? nullptr;
-  IDispatch? get pdispVal => _pdispVal.isNull ? null : IDispatch(_pdispVal);
+  IDispatch? get pdispVal => _pdispVal.isNull ? null : .new(_pdispVal);
   set pdispVal(IDispatch? value) => _pdispVal = value?.ptr ?? nullptr;
-  CHAR get cVal => CHAR(_cVal);
+  CHAR get cVal => .new(_cVal);
   set cVal(CHAR value) => _cVal = value;
-  PSTR get pcVal => PSTR(_pcVal);
+  PSTR get pcVal => .new(_pcVal);
   set pcVal(PSTR value) => _pcVal = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -307,7 +307,7 @@ sealed class VARIANT_0_0_0_0 extends Struct {
   external Pointer pvRecord;
   external VTablePointer _pRecInfo;
 
-  IRecordInfo? get pRecInfo => _pRecInfo.isNull ? null : IRecordInfo(_pRecInfo);
+  IRecordInfo? get pRecInfo => _pRecInfo.isNull ? null : .new(_pRecInfo);
   set pRecInfo(IRecordInfo? value) => _pRecInfo = value?.ptr ?? nullptr;
 
   /// Allocates native memory and copies the contents of this struct into it.

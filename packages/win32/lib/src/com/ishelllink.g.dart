@@ -40,7 +40,7 @@ final IID_IShellLink = GUID.fromComponents(
   0x214f9,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Exposes methods that create, modify, and resolve Shell links.
@@ -294,7 +294,7 @@ class IShellLink extends IUnknown implements ComInterface {
     }
     final result$ = piShowCmd.value;
     free(piShowCmd);
-    return SHOW_WINDOW_CMD(result$);
+    return .new(result$);
   }
 
   /// Sets the show command for a Shell link object.

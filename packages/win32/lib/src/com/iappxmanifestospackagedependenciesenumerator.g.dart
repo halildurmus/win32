@@ -40,7 +40,7 @@ final IID_IAppxManifestOSPackageDependenciesEnumerator = GUID.fromComponents(
   0xb84e2fc3,
   0xf8ec,
   0x4bc1,
-  Uint8List.fromList(const [0x8a, 0xe2, 0x15, 0x63, 0x46, 0xf5, 0xff, 0xea]),
+  .fromList(const [0x8a, 0xe2, 0x15, 0x63, 0x46, 0xf5, 0xff, 0xea]),
 );
 
 /// {@category com}
@@ -90,7 +90,7 @@ class IAppxManifestOSPackageDependenciesEnumerator extends IUnknown
     final result$ = osPackageDependency.value;
     free(osPackageDependency);
     if (result$.isNull) return null;
-    return IAppxManifestOSPackageDependency(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

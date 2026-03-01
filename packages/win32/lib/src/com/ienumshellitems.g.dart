@@ -41,7 +41,7 @@ final IID_IEnumShellItems = GUID.fromComponents(
   0x70629033,
   0xe363,
   0x4a28,
-  Uint8List.fromList(const [0xa5, 0x67, 0xd, 0xb7, 0x80, 0x6, 0xe6, 0xd7]),
+  .fromList(const [0xa5, 0x67, 0xd, 0xb7, 0x80, 0x6, 0xe6, 0xd7]),
 );
 
 /// Exposes enumeration of IShellItem interfaces.
@@ -146,7 +146,7 @@ class IEnumShellItems extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumShellItems(result$);
+    return .new(result$);
   }
 
   @override

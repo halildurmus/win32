@@ -42,7 +42,7 @@ final IID_IMMDevice = GUID.fromComponents(
   0xd666063f,
   0x1587,
   0x4e43,
-  Uint8List.fromList(const [0x81, 0xf1, 0xb9, 0x48, 0xe8, 0x7, 0x36, 0x3f]),
+  .fromList(const [0x81, 0xf1, 0xb9, 0x48, 0xe8, 0x7, 0x36, 0x3f]),
 );
 
 /// Encapsulates the generic features of a multimedia device resource.
@@ -143,7 +143,7 @@ class IMMDevice extends IUnknown implements ComInterface {
     final result$ = ppProperties.value;
     free(ppProperties);
     if (result$.isNull) return null;
-    return IPropertyStore(result$);
+    return .new(result$);
   }
 
   /// Retrieves an endpoint ID string that identifies the audio endpoint device.
@@ -161,7 +161,7 @@ class IMMDevice extends IUnknown implements ComInterface {
     }
     final result$ = ppstrId.value;
     free(ppstrId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the current device state.
@@ -179,7 +179,7 @@ class IMMDevice extends IUnknown implements ComInterface {
     }
     final result$ = pdwState.value;
     free(pdwState);
-    return DEVICE_STATE(result$);
+    return .new(result$);
   }
 
   @override

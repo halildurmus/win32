@@ -79,7 +79,7 @@ PROCESS_DPI_AWARENESS GetProcessDpiAwareness(HANDLE? hprocess) {
   }
   final result$ = value.value;
   free(value);
-  return PROCESS_DPI_AWARENESS(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer<Int32>)>(
@@ -106,7 +106,7 @@ DEVICE_SCALE_FACTOR GetScaleFactorForMonitor(HMONITOR hMon) {
   }
   final result$ = pScale.value;
   free(pScale);
-  return DEVICE_SCALE_FACTOR(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer<Int32>)>(

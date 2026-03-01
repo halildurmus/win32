@@ -45,7 +45,7 @@ final IID_ISensor = GUID.fromComponents(
   0x5fa08f80,
   0x2657,
   0x458e,
-  Uint8List.fromList(const [0xaf, 0x75, 0x46, 0xf7, 0x3f, 0xa6, 0xac, 0x5c]),
+  .fromList(const [0xaf, 0x75, 0x46, 0xf7, 0x3f, 0xa6, 0xac, 0x5c]),
 );
 
 /// Represents a sensor.
@@ -185,7 +185,7 @@ class ISensor extends IUnknown implements ComInterface {
     }
     final result$ = pFriendlyName.value;
     free(pFriendlyName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a property value.
@@ -222,7 +222,7 @@ class ISensor extends IUnknown implements ComInterface {
     final result$ = ppProperties.value;
     free(ppProperties);
     if (result$.isNull) return null;
-    return IPortableDeviceValues(result$);
+    return .new(result$);
   }
 
   /// Retrieves a set of PROPERTYKEYs that represent the data fields the sensor
@@ -242,7 +242,7 @@ class ISensor extends IUnknown implements ComInterface {
     final result$ = ppDataFields.value;
     free(ppDataFields);
     if (result$.isNull) return null;
-    return IPortableDeviceKeyCollection(result$);
+    return .new(result$);
   }
 
   /// Specifies sensor properties.
@@ -263,7 +263,7 @@ class ISensor extends IUnknown implements ComInterface {
     final result$ = ppResults.value;
     free(ppResults);
     if (result$.isNull) return null;
-    return IPortableDeviceValues(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the sensor supports the specified data field.
@@ -299,7 +299,7 @@ class ISensor extends IUnknown implements ComInterface {
     }
     final result$ = pState.value;
     free(pState);
-    return SensorState(result$);
+    return .new(result$);
   }
 
   /// Retrieves the most recent sensor data report.
@@ -318,7 +318,7 @@ class ISensor extends IUnknown implements ComInterface {
     final result$ = ppDataReport.value;
     free(ppDataReport);
     if (result$.isNull) return null;
-    return ISensorDataReport(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the sensor supports the specified event.

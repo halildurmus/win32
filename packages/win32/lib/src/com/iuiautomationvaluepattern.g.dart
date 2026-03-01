@@ -39,7 +39,7 @@ final IID_IUIAutomationValuePattern = GUID.fromComponents(
   0xa94cd8b1,
   0x844,
   0x4cd6,
-  Uint8List.fromList(const [0x9d, 0x2d, 0x64, 0x5, 0x37, 0xab, 0x39, 0xe9]),
+  .fromList(const [0x9d, 0x2d, 0x64, 0x5, 0x37, 0xab, 0x39, 0xe9]),
 );
 
 /// Provides access to a control that contains a value that does not span a
@@ -107,7 +107,7 @@ class IUIAutomationValuePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the value of the element is read-only.
@@ -139,7 +139,7 @@ class IUIAutomationValuePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether the value of the element

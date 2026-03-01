@@ -40,7 +40,7 @@ final IID_IUIAutomationGridItemPattern = GUID.fromComponents(
   0x78f8ef57,
   0x66c3,
   0x4e09,
-  Uint8List.fromList(const [0xbd, 0x7c, 0xe7, 0x9b, 0x20, 0x4, 0x89, 0x4d]),
+  .fromList(const [0xbd, 0x7c, 0xe7, 0x9b, 0x20, 0x4, 0x89, 0x4d]),
 );
 
 /// Provides access to a child control in a grid-style container that supports
@@ -107,7 +107,7 @@ class IUIAutomationGridItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the zero-based index of the row that contains the grid item.
@@ -188,7 +188,7 @@ class IUIAutomationGridItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached zero-based index of the row that contains the item.

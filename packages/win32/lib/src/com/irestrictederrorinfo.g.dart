@@ -39,7 +39,7 @@ final IID_IRestrictedErrorInfo = GUID.fromComponents(
   0x82ba7092,
   0x4c88,
   0x427d,
-  Uint8List.fromList(const [0xa7, 0xbc, 0x16, 0xdd, 0x93, 0xfe, 0xb6, 0x7e]),
+  .fromList(const [0xa7, 0xbc, 0x16, 0xdd, 0x93, 0xfe, 0xb6, 0x7e]),
 );
 
 /// Represents the details of an error, including restricted error information.
@@ -125,7 +125,7 @@ class IRestrictedErrorInfo extends IUnknown implements ComInterface {
     }
     final result$ = reference.value;
     free(reference);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

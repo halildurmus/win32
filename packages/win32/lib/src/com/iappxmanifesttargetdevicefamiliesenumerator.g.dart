@@ -40,7 +40,7 @@ final IID_IAppxManifestTargetDeviceFamiliesEnumerator = GUID.fromComponents(
   0x36537f36,
   0x27a4,
   0x4788,
-  Uint8List.fromList(const [0x88, 0xc0, 0x73, 0x38, 0x19, 0x57, 0x50, 0x17]),
+  .fromList(const [0x88, 0xc0, 0x73, 0x38, 0x19, 0x57, 0x50, 0x17]),
 );
 
 /// {@category com}
@@ -90,7 +90,7 @@ class IAppxManifestTargetDeviceFamiliesEnumerator extends IUnknown
     final result$ = targetDeviceFamily.value;
     free(targetDeviceFamily);
     if (result$.isNull) return null;
-    return IAppxManifestTargetDeviceFamily(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

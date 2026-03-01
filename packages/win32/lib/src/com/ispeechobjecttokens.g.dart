@@ -41,7 +41,7 @@ final IID_ISpeechObjectTokens = GUID.fromComponents(
   0x9285b776,
   0x2e7b,
   0x4bc0,
-  Uint8List.fromList(const [0xb5, 0x3e, 0x58, 0xe, 0xb6, 0xfa, 0x96, 0x7f]),
+  .fromList(const [0xb5, 0x3e, 0x58, 0xe, 0xb6, 0xfa, 0x96, 0x7f]),
 );
 
 /// Represents a collection of SpObjectToken objects.
@@ -103,7 +103,7 @@ class ISpeechObjectTokens extends IDispatch implements ComInterface {
     final result$ = token.value;
     free(token);
     if (result$.isNull) return null;
-    return ISpeechObjectToken(result$);
+    return .new(result$);
   }
 
   IUnknown? get newEnum {
@@ -116,7 +116,7 @@ class ISpeechObjectTokens extends IDispatch implements ComInterface {
     final result$ = ppEnumVARIANT.value;
     free(ppEnumVARIANT);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   @override

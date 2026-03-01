@@ -41,7 +41,7 @@ final IID_IShellLinkDual = GUID.fromComponents(
   0x88a05c00,
   0xf000,
   0x11ce,
-  Uint8List.fromList(const [0x83, 0x50, 0x44, 0x45, 0x53, 0x54, 0x0, 0x0]),
+  .fromList(const [0x83, 0x50, 0x44, 0x45, 0x53, 0x54, 0x0, 0x0]),
 );
 
 /// {@category com}
@@ -110,7 +110,7 @@ class IShellLinkDual extends IDispatch implements ComInterface {
     }
     final result$ = pbs.value;
     free(pbs);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set path(BSTR bs) {
@@ -127,7 +127,7 @@ class IShellLinkDual extends IDispatch implements ComInterface {
     }
     final result$ = pbs.value;
     free(pbs);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set description(BSTR bs) {
@@ -144,7 +144,7 @@ class IShellLinkDual extends IDispatch implements ComInterface {
     }
     final result$ = pbs.value;
     free(pbs);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set workingDirectory(BSTR bs) {
@@ -161,7 +161,7 @@ class IShellLinkDual extends IDispatch implements ComInterface {
     }
     final result$ = pbs.value;
     free(pbs);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set arguments(BSTR bs) {

@@ -40,7 +40,7 @@ final IID_IEnumString = GUID.fromComponents(
   0x101,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Enumerates strings.
@@ -131,7 +131,7 @@ class IEnumString extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   @override

@@ -43,7 +43,7 @@ final IID_IAppxManifestReader3 = GUID.fromComponents(
   0xc43825ab,
   0x69b7,
   0x400a,
-  Uint8List.fromList(const [0x97, 0x9, 0xcc, 0x37, 0xf5, 0xa7, 0x2d, 0x24]),
+  .fromList(const [0x97, 0x9, 0xcc, 0x37, 0xf5, 0xa7, 0x2d, 0x24]),
 );
 
 /// Represents an object model of the package manifest that provides methods to
@@ -99,7 +99,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2
     final result$ = capabilities.value;
     free(capabilities);
     if (result$.isNull) return null;
-    return IAppxManifestCapabilitiesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -113,7 +113,7 @@ class IAppxManifestReader3 extends IAppxManifestReader2
     final result$ = targetDeviceFamilies.value;
     free(targetDeviceFamilies);
     if (result$.isNull) return null;
-    return IAppxManifestTargetDeviceFamiliesEnumerator(result$);
+    return .new(result$);
   }
 
   @override

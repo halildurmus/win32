@@ -42,7 +42,7 @@ final IID_IRunningObjectTable = GUID.fromComponents(
   0x10,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Manages access to the running object table (ROT), a globally accessible
@@ -180,7 +180,7 @@ class IRunningObjectTable extends IUnknown implements ComInterface {
     final result$ = ppunkObject.value;
     free(ppunkObject);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Records the time that a running object was last modified.
@@ -233,7 +233,7 @@ class IRunningObjectTable extends IUnknown implements ComInterface {
     final result$ = ppenumMoniker.value;
     free(ppenumMoniker);
     if (result$.isNull) return null;
-    return IEnumMoniker(result$);
+    return .new(result$);
   }
 
   @override

@@ -40,7 +40,7 @@ final IID_IAppxManifestDriverConstraintsEnumerator = GUID.fromComponents(
   0xd402b2d1,
   0xf600,
   0x49e0,
-  Uint8List.fromList(const [0x95, 0xe6, 0x97, 0x5d, 0x8d, 0xa1, 0x3d, 0x89]),
+  .fromList(const [0x95, 0xe6, 0x97, 0x5d, 0x8d, 0xa1, 0x3d, 0x89]),
 );
 
 /// {@category com}
@@ -89,7 +89,7 @@ class IAppxManifestDriverConstraintsEnumerator extends IUnknown
     final result$ = driverConstraint.value;
     free(driverConstraint);
     if (result$.isNull) return null;
-    return IAppxManifestDriverConstraint(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

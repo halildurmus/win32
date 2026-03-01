@@ -47,7 +47,7 @@ final IID_IAppxManifestReader = GUID.fromComponents(
   0x4e1bd148,
   0x55a0,
   0x4480,
-  Uint8List.fromList(const [0xa3, 0xd1, 0x15, 0x54, 0x47, 0x10, 0x63, 0x7c]),
+  .fromList(const [0xa3, 0xd1, 0x15, 0x54, 0x47, 0x10, 0x63, 0x7c]),
 );
 
 /// Represents an object model of the package manifest that provides methods to
@@ -131,7 +131,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = packageId.value;
     free(packageId);
     if (result$.isNull) return null;
-    return IAppxManifestPackageId(result$);
+    return .new(result$);
   }
 
   /// Gets the properties of the package as defined in the manifest.
@@ -150,7 +150,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = packageProperties.value;
     free(packageProperties);
     if (result$.isNull) return null;
-    return IAppxManifestProperties(result$);
+    return .new(result$);
   }
 
   /// Gets an enumerator that iterates through dependencies defined in the
@@ -170,7 +170,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = dependencies.value;
     free(dependencies);
     if (result$.isNull) return null;
-    return IAppxManifestPackageDependenciesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Gets the list of capabilities requested by the package.
@@ -188,7 +188,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     }
     final result$ = capabilities.value;
     free(capabilities);
-    return APPX_CAPABILITIES(result$);
+    return .new(result$);
   }
 
   /// Gets an enumerator that iterates through the resources defined in the
@@ -208,7 +208,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = resources.value;
     free(resources);
     if (result$.isNull) return null;
-    return IAppxManifestResourcesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Gets an enumerator that iterates through the device capabilities defined
@@ -228,7 +228,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = deviceCapabilities.value;
     free(deviceCapabilities);
     if (result$.isNull) return null;
-    return IAppxManifestDeviceCapabilitiesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Gets the specified prerequisite as defined in the package manifest.
@@ -266,7 +266,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = applications.value;
     free(applications);
     if (result$.isNull) return null;
-    return IAppxManifestApplicationsEnumerator(result$);
+    return .new(result$);
   }
 
   /// Gets the raw XML parsed and read by the manifest reader.
@@ -285,7 +285,7 @@ class IAppxManifestReader extends IUnknown implements ComInterface {
     final result$ = manifestStream.value;
     free(manifestStream);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   @override

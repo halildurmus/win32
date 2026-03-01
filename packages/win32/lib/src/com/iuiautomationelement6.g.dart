@@ -40,7 +40,7 @@ final IID_IUIAutomationElement6 = GUID.fromComponents(
   0x4780d450,
   0x8bca,
   0x4977,
-  Uint8List.fromList(const [0xaf, 0xa5, 0xa4, 0xa5, 0x17, 0xf5, 0x55, 0xe3]),
+  .fromList(const [0xaf, 0xa5, 0xa4, 0xa5, 0x17, 0xf5, 0x55, 0xe3]),
 );
 
 /// Extends the IUIAutomationElement5 interface to provide access to current and
@@ -90,7 +90,7 @@ class IUIAutomationElement6 extends IUIAutomationElement5
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the cached full description of the automation element.
@@ -106,7 +106,7 @@ class IUIAutomationElement6 extends IUIAutomationElement5
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

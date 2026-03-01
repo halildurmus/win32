@@ -42,7 +42,7 @@ final IID_ITypeLib = GUID.fromComponents(
   0x20402,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Represents a type library, the data that describes a set of objects.
@@ -144,7 +144,7 @@ class ITypeLib extends IUnknown implements ComInterface {
     final result$ = ppTInfo.value;
     free(ppTInfo);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   /// Retrieves the type of a type description.
@@ -162,7 +162,7 @@ class ITypeLib extends IUnknown implements ComInterface {
     }
     final result$ = pTKind.value;
     free(pTKind);
-    return TYPEKIND(result$);
+    return .new(result$);
   }
 
   /// Retrieves the type description that corresponds to the specified GUID.
@@ -181,7 +181,7 @@ class ITypeLib extends IUnknown implements ComInterface {
     final result$ = ppTinfo.value;
     free(ppTinfo);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   /// Retrieves the structure that contains the library's attributes.
@@ -219,7 +219,7 @@ class ITypeLib extends IUnknown implements ComInterface {
     final result$ = ppTComp.value;
     free(ppTComp);
     if (result$.isNull) return null;
-    return ITypeComp(result$);
+    return .new(result$);
   }
 
   /// Retrieves the documentation string for the library, the complete Help file

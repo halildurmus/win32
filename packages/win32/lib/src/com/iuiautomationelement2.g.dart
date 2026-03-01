@@ -42,7 +42,7 @@ final IID_IUIAutomationElement2 = GUID.fromComponents(
   0x6749c683,
   0xf70d,
   0x4487,
-  Uint8List.fromList(const [0xa6, 0x98, 0x5f, 0x79, 0xd5, 0x52, 0x90, 0xd6]),
+  .fromList(const [0xa6, 0x98, 0x5f, 0x79, 0xd5, 0x52, 0x90, 0xd6]),
 );
 
 /// Extends the IUIAutomationElement interface.
@@ -135,7 +135,7 @@ class IUIAutomationElement2 extends IUIAutomationElement
     }
     final result$ = retVal.value;
     free(retVal);
-    return LiveSetting(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates the type of notifications, if any,
@@ -152,7 +152,7 @@ class IUIAutomationElement2 extends IUIAutomationElement
     }
     final result$ = retVal.value;
     free(retVal);
-    return LiveSetting(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of elements that indicates the reading order before the
@@ -170,7 +170,7 @@ class IUIAutomationElement2 extends IUIAutomationElement
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached array of elements that indicate the reading order
@@ -188,7 +188,7 @@ class IUIAutomationElement2 extends IUIAutomationElement
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   @override

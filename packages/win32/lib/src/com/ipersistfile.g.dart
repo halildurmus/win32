@@ -41,7 +41,7 @@ final IID_IPersistFile = GUID.fromComponents(
   0x10b,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Enables an object to be loaded from or saved to a disk file, rather than a
@@ -143,7 +143,7 @@ class IPersistFile extends IPersist implements ComInterface {
     }
     final result$ = ppszFileName.value;
     free(ppszFileName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

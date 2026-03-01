@@ -41,7 +41,7 @@ final IID_IWbemCallResult = GUID.fromComponents(
   0x44aca675,
   0xe8fc,
   0x11d0,
-  Uint8List.fromList(const [0xa0, 0x7c, 0x0, 0xc0, 0x4f, 0xb6, 0x88, 0x20]),
+  .fromList(const [0xa0, 0x7c, 0x0, 0xc0, 0x4f, 0xb6, 0x88, 0x20]),
 );
 
 /// Used for semisynchronous calls of the IWbemServices interface.
@@ -107,7 +107,7 @@ class IWbemCallResult extends IUnknown implements ComInterface {
     final result$ = ppResultObject.value;
     free(ppResultObject);
     if (result$.isNull) return null;
-    return IWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Returns the assigned object path of an instance newly created by
@@ -126,7 +126,7 @@ class IWbemCallResult extends IUnknown implements ComInterface {
     }
     final result$ = pstrResultString.value;
     free(pstrResultString);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the IWbemServices pointer, which results from a semisynchronous
@@ -146,7 +146,7 @@ class IWbemCallResult extends IUnknown implements ComInterface {
     final result$ = ppServices.value;
     free(ppServices);
     if (result$.isNull) return null;
-    return IWbemServices(result$);
+    return .new(result$);
   }
 
   /// Returns to the user the status of the current outstanding semisynchronous

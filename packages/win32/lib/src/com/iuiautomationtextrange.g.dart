@@ -44,7 +44,7 @@ final IID_IUIAutomationTextRange = GUID.fromComponents(
   0xa543cc6a,
   0xf4ae,
   0x494b,
-  Uint8List.fromList(const [0x82, 0x39, 0xc8, 0x14, 0x48, 0x11, 0x87, 0xa8]),
+  .fromList(const [0x82, 0x39, 0xc8, 0x14, 0x48, 0x11, 0x87, 0xa8]),
 );
 
 /// Provides access to a span of continuous text in a container that supports
@@ -160,7 +160,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     final result$ = clonedRange.value;
     free(clonedRange);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a value that specifies whether this text range has the same
@@ -250,7 +250,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a text range subset that contains the specified text.
@@ -277,7 +277,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves the value of the specified text attribute across the entire text
@@ -332,7 +332,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     final result$ = enclosingElement.value;
     free(enclosingElement);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Returns the plain text of the text range.
@@ -350,7 +350,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     }
     final result$ = text.value;
     free(text);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Moves the text range forward or backward by the specified number of text
@@ -490,7 +490,7 @@ class IUIAutomationTextRange extends IUnknown implements ComInterface {
     final result$ = children.value;
     free(children);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   @override

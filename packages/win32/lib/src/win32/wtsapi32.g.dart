@@ -42,7 +42,7 @@ import '../win32_result.dart';
 /// {@category wtsapi32}
 Win32Result<bool> WTSRegisterSessionNotification(HWND hWnd, int dwFlags) {
   final result_ = WTSRegisterSessionNotification_Wrapper(hWnd, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unregisters the specified window so that it receives no further session
@@ -54,5 +54,5 @@ Win32Result<bool> WTSRegisterSessionNotification(HWND hWnd, int dwFlags) {
 /// {@category wtsapi32}
 Win32Result<bool> WTSUnRegisterSessionNotification(HWND hWnd) {
   final result_ = WTSUnRegisterSessionNotification_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

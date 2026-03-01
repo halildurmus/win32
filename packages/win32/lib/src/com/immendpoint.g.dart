@@ -40,7 +40,7 @@ final IID_IMMEndpoint = GUID.fromComponents(
   0x1be09788,
   0x6894,
   0x4089,
-  Uint8List.fromList(const [0x85, 0x86, 0x9a, 0x2a, 0x6c, 0x26, 0x5a, 0xc5]),
+  .fromList(const [0x85, 0x86, 0x9a, 0x2a, 0x6c, 0x26, 0x5a, 0xc5]),
 );
 
 /// Represents an audio endpoint device.
@@ -85,7 +85,7 @@ class IMMEndpoint extends IUnknown implements ComInterface {
     }
     final result$ = pDataFlow.value;
     free(pDataFlow);
-    return EDataFlow(result$);
+    return .new(result$);
   }
 
   @override

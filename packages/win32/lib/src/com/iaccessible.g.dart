@@ -41,7 +41,7 @@ final IID_IAccessible = GUID.fromComponents(
   0x618736e0,
   0x3c3d,
   0x11cf,
-  Uint8List.fromList(const [0x81, 0xc, 0x0, 0xaa, 0x0, 0x38, 0x9b, 0x71]),
+  .fromList(const [0x81, 0xc, 0x0, 0xaa, 0x0, 0x38, 0x9b, 0x71]),
 );
 
 /// Exposes methods and properties that make a user interface element and its
@@ -159,7 +159,7 @@ class IAccessible extends IDispatch implements ComInterface {
     final result$ = ppdispParent.value;
     free(ppdispParent);
     if (result$.isNull) return null;
-    return IDispatch(result$);
+    return .new(result$);
   }
 
   /// Retrieves the number of children that belong to this object.
@@ -198,7 +198,7 @@ class IAccessible extends IDispatch implements ComInterface {
     final result$ = ppdispChild.value;
     free(ppdispChild);
     if (result$.isNull) return null;
-    return IDispatch(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the specified object.
@@ -218,7 +218,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszName.value;
     free(pszName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the value of the specified object.
@@ -238,7 +238,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszValue.value;
     free(pszValue);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a string that describes the visual appearance of the specified
@@ -259,7 +259,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszDescription.value;
     free(pszDescription);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves information that describes the role of the specified object.
@@ -315,7 +315,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszHelp.value;
     free(pszHelp);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the full path of the WinHelp file that is associated with the
@@ -359,7 +359,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszKeyboardShortcut.value;
     free(pszKeyboardShortcut);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the object that has the keyboard focus.
@@ -414,7 +414,7 @@ class IAccessible extends IDispatch implements ComInterface {
     }
     final result$ = pszDefaultAction.value;
     free(pszDefaultAction);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Modifies the selection or moves the keyboard focus of the specified

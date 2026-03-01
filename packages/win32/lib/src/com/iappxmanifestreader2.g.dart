@@ -41,7 +41,7 @@ final IID_IAppxManifestReader2 = GUID.fromComponents(
   0xd06f67bc,
   0xb31d,
   0x4eba,
-  Uint8List.fromList(const [0xa8, 0xaf, 0x63, 0x8e, 0x73, 0xe7, 0x7b, 0x4d]),
+  .fromList(const [0xa8, 0xaf, 0x63, 0x8e, 0x73, 0xe7, 0x7b, 0x4d]),
 );
 
 /// Represents an object model of the package manifest that provides methods to
@@ -94,7 +94,7 @@ class IAppxManifestReader2 extends IAppxManifestReader implements ComInterface {
     final result$ = resources.value;
     free(resources);
     if (result$.isNull) return null;
-    return IAppxManifestQualifiedResourcesEnumerator(result$);
+    return .new(result$);
   }
 
   @override

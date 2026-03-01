@@ -43,7 +43,7 @@ import '../win32_result.dart';
 /// {@category ktmw32}
 Win32Result<bool> CommitTransaction(HANDLE transactionHandle) {
   final result_ = CommitTransaction_Wrapper(transactionHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a new transaction object.
@@ -70,7 +70,7 @@ Win32Result<HANDLE> CreateTransaction(
     timeout ?? NULL,
     description ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Requests that the specified transaction be rolled back.
@@ -81,5 +81,5 @@ Win32Result<HANDLE> CreateTransaction(
 /// {@category ktmw32}
 Win32Result<bool> RollbackTransaction(HANDLE transactionHandle) {
   final result_ = RollbackTransaction_Wrapper(transactionHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

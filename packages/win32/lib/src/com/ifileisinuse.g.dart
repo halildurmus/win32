@@ -40,7 +40,7 @@ final IID_IFileIsInUse = GUID.fromComponents(
   0x64a1cbf0,
   0x3a1a,
   0x4461,
-  Uint8List.fromList(const [0x91, 0x58, 0x37, 0x69, 0x69, 0x69, 0x39, 0x50]),
+  .fromList(const [0x91, 0x58, 0x37, 0x69, 0x69, 0x69, 0x39, 0x50]),
 );
 
 /// Exposes methods that can be called to get information on or close a file
@@ -99,7 +99,7 @@ class IFileIsInUse extends IUnknown implements ComInterface {
     }
     final result$ = ppszName.value;
     free(ppszName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets a value that indicates how the file in use is being used.
@@ -117,7 +117,7 @@ class IFileIsInUse extends IUnknown implements ComInterface {
     }
     final result$ = pfut.value;
     free(pfut);
-    return FILE_USAGE_TYPE(result$);
+    return .new(result$);
   }
 
   /// Determines whether the file can be closed and whether the UI is capable of
@@ -155,7 +155,7 @@ class IFileIsInUse extends IUnknown implements ComInterface {
     }
     final result$ = phwnd.value;
     free(phwnd);
-    return HWND(result$);
+    return .new(result$);
   }
 
   /// Closes the file currently in use.

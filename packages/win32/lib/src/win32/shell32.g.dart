@@ -51,7 +51,7 @@ Win32Result<Pointer<Pointer<Utf16>>> CommandLineToArgv(
   Pointer<Int32> pNumArgs,
 ) {
   final result_ = CommandLineToArgvW_Wrapper(lpCmdLine, pNumArgs);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Registers whether a window accepts dropped files.
@@ -296,7 +296,7 @@ external Pointer _ShellExecute(
 /// {@category shell32}
 Win32Result<bool> ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) {
   final result_ = ShellExecuteExW_Wrapper(pExecInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Empties the Recycle Bin on the specified drive.
@@ -335,7 +335,7 @@ external int _SHEmptyRecycleBin(
 /// {@category shell32}
 Win32Result<int> SHFileOperation(Pointer<SHFILEOPSTRUCT> lpFileOp) {
   final result_ = SHFileOperationW_Wrapper(lpFileOp);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Frees a file name mapping object that was retrieved by the SHFileOperation
@@ -371,7 +371,7 @@ IShellFolder? SHGetDesktopFolder() {
   final result$ = ppshf.value;
   free(ppshf);
   if (result$.isNull) return null;
-  return IShellFolder(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<VTablePointer>)>(symbol: 'SHGetDesktopFolder')
@@ -525,7 +525,7 @@ PWSTR SHGetKnownFolderPath(
   }
   final result$ = ppszPath.value;
   free(ppszPath);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<

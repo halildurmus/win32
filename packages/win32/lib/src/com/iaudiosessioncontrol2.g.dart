@@ -40,7 +40,7 @@ final IID_IAudioSessionControl2 = GUID.fromComponents(
   0xbfb7ff88,
   0x7239,
   0x4fc9,
-  Uint8List.fromList(const [0x8f, 0xa2, 0x7, 0xc9, 0x50, 0xbe, 0x9c, 0x6d]),
+  .fromList(const [0x8f, 0xa2, 0x7, 0xc9, 0x50, 0xbe, 0x9c, 0x6d]),
 );
 
 /// Can be used by a client to get information about the audio session.
@@ -101,7 +101,7 @@ class IAudioSessionControl2 extends IAudioSessionControl
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the identifier of the audio session instance.
@@ -119,7 +119,7 @@ class IAudioSessionControl2 extends IAudioSessionControl
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the process identifier of the audio session.

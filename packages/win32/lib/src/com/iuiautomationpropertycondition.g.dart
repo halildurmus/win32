@@ -42,7 +42,7 @@ final IID_IUIAutomationPropertyCondition = GUID.fromComponents(
   0x99ebf2cb,
   0x5578,
   0x4267,
-  Uint8List.fromList(const [0x9a, 0xd4, 0xaf, 0xd6, 0xea, 0x77, 0xe9, 0x4b]),
+  .fromList(const [0x9a, 0xd4, 0xaf, 0xd6, 0xea, 0x77, 0xe9, 0x4b]),
 );
 
 /// Represents a condition based on a property value that is used to find UI
@@ -95,7 +95,7 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition
     }
     final result$ = propertyId.value;
     free(propertyId);
-    return UIA_PROPERTY_ID(result$);
+    return .new(result$);
   }
 
   /// Retrieves the property value that must be matched for the condition to be
@@ -126,7 +126,7 @@ class IUIAutomationPropertyCondition extends IUIAutomationCondition
     }
     final result$ = flags.value;
     free(flags);
-    return PropertyConditionFlags(result$);
+    return .new(result$);
   }
 
   @override

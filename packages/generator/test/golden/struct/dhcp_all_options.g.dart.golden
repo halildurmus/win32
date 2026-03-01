@@ -37,9 +37,9 @@ sealed class DHCP_ALL_OPTIONS_0 extends Struct {
   external Pointer<Utf16> _VendorName;
   external Pointer<Utf16> _ClassName;
 
-  PWSTR get VendorName => PWSTR(_VendorName);
+  PWSTR get VendorName => .new(_VendorName);
   set VendorName(PWSTR value) => _VendorName = value;
-  PWSTR get ClassName => PWSTR(_ClassName);
+  PWSTR get ClassName => .new(_ClassName);
   set ClassName(PWSTR value) => _ClassName = value;
 
   /// Allocates native memory and copies the contents of this struct into it.

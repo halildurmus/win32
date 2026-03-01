@@ -41,7 +41,7 @@ final IID_IUIAutomationLegacyIAccessiblePattern = GUID.fromComponents(
   0x828055ad,
   0x355b,
   0x4435,
-  Uint8List.fromList(const [0x86, 0xd5, 0x3b, 0x51, 0xc1, 0x4a, 0x9b, 0x1b]),
+  .fromList(const [0x86, 0xd5, 0x3b, 0x51, 0xc1, 0x4a, 0x9b, 0x1b]),
 );
 
 /// Exposes methods and properties that enable Microsoft UI Automation clients
@@ -198,7 +198,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszName.value;
     free(pszName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility value property.
@@ -214,7 +214,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszValue.value;
     free(pszValue);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility description of the element.
@@ -230,7 +230,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszDescription.value;
     free(pszDescription);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility role identifier of the
@@ -280,7 +280,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszHelp.value;
     free(pszHelp);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility keyboard shortcut property
@@ -299,7 +299,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszKeyboardShortcut.value;
     free(pszKeyboardShortcut);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility property that identifies the
@@ -319,7 +319,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     final result$ = pvarSelectedChildren.value;
     free(pvarSelectedChildren);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility current default action for
@@ -336,7 +336,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszDefaultAction.value;
     free(pszDefaultAction);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility child identifier for
@@ -370,7 +370,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszName.value;
     free(pszName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility value property.
@@ -386,7 +386,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszValue.value;
     free(pszValue);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility description of the
@@ -403,7 +403,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszDescription.value;
     free(pszDescription);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility role of the element.
@@ -453,7 +453,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszHelp.value;
     free(pszHelp);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility keyboard shortcut
@@ -472,7 +472,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszKeyboardShortcut.value;
     free(pszKeyboardShortcut);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Microsoft Active Accessibility property that
@@ -492,7 +492,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     final result$ = pvarSelectedChildren.value;
     free(pvarSelectedChildren);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Microsoft Active Accessibility cached default action for the
@@ -509,7 +509,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     }
     final result$ = pszDefaultAction.value;
     free(pszDefaultAction);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves an IAccessible object that corresponds to the Microsoft UI
@@ -529,7 +529,7 @@ class IUIAutomationLegacyIAccessiblePattern extends IUnknown
     final result$ = ppAccessible.value;
     free(ppAccessible);
     if (result$.isNull) return null;
-    return IAccessible(result$);
+    return .new(result$);
   }
 
   @override

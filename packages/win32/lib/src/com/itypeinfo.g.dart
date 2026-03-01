@@ -44,7 +44,7 @@ final IID_ITypeInfo = GUID.fromComponents(
   0x20401,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Used for reading information about objects.
@@ -222,7 +222,7 @@ class ITypeInfo extends IUnknown implements ComInterface {
     final result$ = ppTComp.value;
     free(ppTComp);
     if (result$.isNull) return null;
-    return ITypeComp(result$);
+    return .new(result$);
   }
 
   /// Retrieves the FUNCDESC structure that contains information about a
@@ -318,7 +318,7 @@ class ITypeInfo extends IUnknown implements ComInterface {
     }
     final result$ = pImplTypeFlags.value;
     free(pImplTypeFlags);
-    return IMPLTYPEFLAGS(result$);
+    return .new(result$);
   }
 
   /// Maps between member names and member IDs, and parameter names and
@@ -443,7 +443,7 @@ class ITypeInfo extends IUnknown implements ComInterface {
     final result$ = ppTInfo.value;
     free(ppTInfo);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   /// Retrieves the addresses of static functions or variables, such as those
@@ -506,7 +506,7 @@ class ITypeInfo extends IUnknown implements ComInterface {
     }
     final result$ = pBstrMops.value;
     free(pBstrMops);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the containing type library and the index of the type

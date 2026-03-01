@@ -44,7 +44,7 @@ final IID_IAppxPackageReader = GUID.fromComponents(
   0xb5c49650,
   0x99bc,
   0x481c,
-  Uint8List.fromList(const [0x9a, 0x34, 0x3d, 0x53, 0xa4, 0x10, 0x67, 0x8]),
+  .fromList(const [0x9a, 0x34, 0x3d, 0x53, 0xa4, 0x10, 0x67, 0x8]),
 );
 
 /// Provides a read-only object model for app packages.
@@ -111,7 +111,7 @@ class IAppxPackageReader extends IUnknown implements ComInterface {
     final result$ = blockMapReader.value;
     free(blockMapReader);
     if (result$.isNull) return null;
-    return IAppxBlockMapReader(result$);
+    return .new(result$);
   }
 
   /// Retrieves a footprint file from the package.
@@ -130,7 +130,7 @@ class IAppxPackageReader extends IUnknown implements ComInterface {
     final result$ = file.value;
     free(file);
     if (result$.isNull) return null;
-    return IAppxFile(result$);
+    return .new(result$);
   }
 
   /// Retrieves a payload file from the package.
@@ -149,7 +149,7 @@ class IAppxPackageReader extends IUnknown implements ComInterface {
     final result$ = file.value;
     free(file);
     if (result$.isNull) return null;
-    return IAppxFile(result$);
+    return .new(result$);
   }
 
   /// Retrieves an enumerator that iterates through the payload files in the
@@ -169,7 +169,7 @@ class IAppxPackageReader extends IUnknown implements ComInterface {
     final result$ = filesEnumerator.value;
     free(filesEnumerator);
     if (result$.isNull) return null;
-    return IAppxFilesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Retrieves the object model of the app manifest of the package.
@@ -188,7 +188,7 @@ class IAppxPackageReader extends IUnknown implements ComInterface {
     final result$ = manifestReader.value;
     free(manifestReader);
     if (result$.isNull) return null;
-    return IAppxManifestReader(result$);
+    return .new(result$);
   }
 
   @override

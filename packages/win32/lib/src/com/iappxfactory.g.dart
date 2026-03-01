@@ -44,7 +44,7 @@ final IID_IAppxFactory = GUID.fromComponents(
   0xbeb94909,
   0xe451,
   0x438b,
-  Uint8List.fromList(const [0xb5, 0xa7, 0xd7, 0x9e, 0x76, 0x7b, 0x75, 0xd8]),
+  .fromList(const [0xb5, 0xa7, 0xd7, 0x9e, 0x76, 0x7b, 0x75, 0xd8]),
 );
 
 /// Creates objects for reading and writing app packages.
@@ -127,7 +127,7 @@ class IAppxFactory extends IUnknown implements ComInterface {
     final result$ = packageWriter.value;
     free(packageWriter);
     if (result$.isNull) return null;
-    return IAppxPackageWriter(result$);
+    return .new(result$);
   }
 
   /// Creates a read-only package reader from the contents provided by an
@@ -151,7 +151,7 @@ class IAppxFactory extends IUnknown implements ComInterface {
     final result$ = packageReader.value;
     free(packageReader);
     if (result$.isNull) return null;
-    return IAppxPackageReader(result$);
+    return .new(result$);
   }
 
   /// Creates a read-only manifest object model from contents provided by an
@@ -173,7 +173,7 @@ class IAppxFactory extends IUnknown implements ComInterface {
     final result$ = manifestReader.value;
     free(manifestReader);
     if (result$.isNull) return null;
-    return IAppxManifestReader(result$);
+    return .new(result$);
   }
 
   /// Creates a read-only block map object model from contents provided by an
@@ -195,7 +195,7 @@ class IAppxFactory extends IUnknown implements ComInterface {
     final result$ = blockMapReader.value;
     free(blockMapReader);
     if (result$.isNull) return null;
-    return IAppxBlockMapReader(result$);
+    return .new(result$);
   }
 
   /// Creates a read-only block map object model from contents provided by an
@@ -225,7 +225,7 @@ class IAppxFactory extends IUnknown implements ComInterface {
     final result$ = blockMapReader.value;
     free(blockMapReader);
     if (result$.isNull) return null;
-    return IAppxBlockMapReader(result$);
+    return .new(result$);
   }
 
   @override

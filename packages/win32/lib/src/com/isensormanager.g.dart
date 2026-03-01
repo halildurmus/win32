@@ -42,7 +42,7 @@ final IID_ISensorManager = GUID.fromComponents(
   0xbd77db67,
   0x45a8,
   0x42dc,
-  Uint8List.fromList(const [0x8d, 0x0, 0x6d, 0xcf, 0x15, 0xf8, 0x37, 0x7a]),
+  .fromList(const [0x8d, 0x0, 0x6d, 0xcf, 0x15, 0xf8, 0x37, 0x7a]),
 );
 
 /// Provides methods for discovering and retrieving available sensors and a
@@ -109,7 +109,7 @@ class ISensorManager extends IUnknown implements ComInterface {
     final result$ = ppSensorsFound.value;
     free(ppSensorsFound);
     if (result$.isNull) return null;
-    return ISensorCollection(result$);
+    return .new(result$);
   }
 
   /// Retrieves a collection containing all sensors associated with the
@@ -129,7 +129,7 @@ class ISensorManager extends IUnknown implements ComInterface {
     final result$ = ppSensorsFound.value;
     free(ppSensorsFound);
     if (result$.isNull) return null;
-    return ISensorCollection(result$);
+    return .new(result$);
   }
 
   /// Retrieves a pointer to the specified sensor.
@@ -148,7 +148,7 @@ class ISensorManager extends IUnknown implements ComInterface {
     final result$ = ppSensor.value;
     free(ppSensor);
     if (result$.isNull) return null;
-    return ISensor(result$);
+    return .new(result$);
   }
 
   /// Specifies the interface through which to receive sensor manager event

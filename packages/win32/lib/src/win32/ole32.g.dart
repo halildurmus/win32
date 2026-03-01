@@ -333,7 +333,7 @@ IMalloc? CoGetMalloc(int dwMemContext) {
   final result$ = ppMalloc.value;
   free(ppMalloc);
   if (result$.isNull) return null;
-  return IMalloc(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Uint32, Pointer<VTablePointer>)>(symbol: 'CoGetMalloc')
@@ -356,7 +356,7 @@ CO_MTA_USAGE_COOKIE CoIncrementMTAUsage() {
   }
   final result$ = pCookie.value;
   free(pCookie);
-  return CO_MTA_USAGE_COOKIE(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<Pointer>)>(symbol: 'CoIncrementMTAUsage')
@@ -663,7 +663,7 @@ IStream? CreateStreamOnHGlobal(HGLOBAL? hGlobal, bool fDeleteOnRelease) {
   final result$ = ppstm.value;
   free(ppstm);
   if (result$.isNull) return null;
-  return IStream(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Int32, Pointer<VTablePointer>)>(
@@ -714,7 +714,7 @@ HGLOBAL GetHGlobalFromStream(IStream? pstm) {
   }
   final result$ = phglobal.value;
   free(phglobal);
-  return HGLOBAL(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(VTablePointer, Pointer<Pointer>)>(
@@ -796,7 +796,7 @@ PWSTR ProgIDFromCLSID(Pointer<GUID> clsid) {
   }
   final result$ = lplpszProgID.value;
   free(lplpszProgID);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(
@@ -868,7 +868,7 @@ PWSTR StringFromCLSID(Pointer<GUID> rclsid) {
   }
   final result$ = lplpsz.value;
   free(lplpsz);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(
@@ -916,7 +916,7 @@ PWSTR StringFromIID(Pointer<GUID> rclsid) {
   }
   final result$ = lplpsz.value;
   free(lplpsz);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(

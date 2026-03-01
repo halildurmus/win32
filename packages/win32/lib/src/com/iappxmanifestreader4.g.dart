@@ -41,7 +41,7 @@ final IID_IAppxManifestReader4 = GUID.fromComponents(
   0x4579bb7c,
   0x741d,
   0x4161,
-  Uint8List.fromList(const [0xb5, 0xa1, 0x47, 0xbd, 0x3b, 0x78, 0xad, 0x9b]),
+  .fromList(const [0xb5, 0xa1, 0x47, 0xbd, 0x3b, 0x78, 0xad, 0x9b]),
 );
 
 /// Represents an object model of the package manifest that provides methods to
@@ -89,7 +89,7 @@ class IAppxManifestReader4 extends IAppxManifestReader3
     final result$ = optionalPackageInfo.value;
     free(optionalPackageInfo);
     if (result$.isNull) return null;
-    return IAppxManifestOptionalPackageInfo(result$);
+    return .new(result$);
   }
 
   @override

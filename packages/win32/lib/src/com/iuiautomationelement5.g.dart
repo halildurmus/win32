@@ -41,7 +41,7 @@ final IID_IUIAutomationElement5 = GUID.fromComponents(
   0x98141c1d,
   0xd0e,
   0x4175,
-  Uint8List.fromList(const [0xbb, 0xe2, 0x6b, 0xff, 0x45, 0x58, 0x42, 0xa7]),
+  .fromList(const [0xbb, 0xe2, 0x6b, 0xff, 0x45, 0x58, 0x42, 0xa7]),
 );
 
 /// Extends the IUIAutomationElement4 interface to provide access to current and
@@ -97,7 +97,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_LANDMARKTYPE_ID(result$);
+    return .new(result$);
   }
 
   /// Gets a string containing the current localized landmark type for the
@@ -114,7 +114,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the cached landmark type ID for the automation element.
@@ -130,7 +130,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_LANDMARKTYPE_ID(result$);
+    return .new(result$);
   }
 
   /// Gets a string containing the cached localized landmark type for the
@@ -147,7 +147,7 @@ class IUIAutomationElement5 extends IUIAutomationElement4
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

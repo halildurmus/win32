@@ -42,7 +42,7 @@ final IID_ISpeechAudioFormat = GUID.fromComponents(
   0xe6e9c590,
   0x3e18,
   0x40e3,
-  Uint8List.fromList(const [0x82, 0x99, 0x6, 0x1f, 0x98, 0xbd, 0xe7, 0xc7]),
+  .fromList(const [0x82, 0x99, 0x6, 0x1f, 0x98, 0xbd, 0xe7, 0xc7]),
 );
 
 /// {@category com}
@@ -91,7 +91,7 @@ class ISpeechAudioFormat extends IDispatch implements ComInterface {
     }
     final result$ = audioFormat.value;
     free(audioFormat);
-    return SpeechAudioFormatType(result$);
+    return .new(result$);
   }
 
   set type(SpeechAudioFormatType audioFormat) {
@@ -108,7 +108,7 @@ class ISpeechAudioFormat extends IDispatch implements ComInterface {
     }
     final result$ = guid.value;
     free(guid);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set guid(BSTR guid) {
@@ -127,7 +127,7 @@ class ISpeechAudioFormat extends IDispatch implements ComInterface {
     final result$ = speechWaveFormatEx.value;
     free(speechWaveFormatEx);
     if (result$.isNull) return null;
-    return ISpeechWaveFormatEx(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

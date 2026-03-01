@@ -40,7 +40,7 @@ final IID_IEnumSTATSTG = GUID.fromComponents(
   0xd,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Enumerates an array of STATSTG structures.
@@ -132,7 +132,7 @@ class IEnumSTATSTG extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumSTATSTG(result$);
+    return .new(result$);
   }
 
   @override

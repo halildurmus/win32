@@ -42,7 +42,7 @@ final IID_IUIAutomationCacheRequest = GUID.fromComponents(
   0xb32a92b5,
   0xbc25,
   0x4078,
-  Uint8List.fromList(const [0x9c, 0x8, 0xd7, 0xee, 0x95, 0xc4, 0x8e, 0x3]),
+  .fromList(const [0x9c, 0x8, 0xd7, 0xee, 0x95, 0xc4, 0x8e, 0x3]),
 );
 
 /// Exposes properties and methods of a cache request.
@@ -135,7 +135,7 @@ class IUIAutomationCacheRequest extends IUnknown implements ComInterface {
     final result$ = clonedRequest.value;
     free(clonedRequest);
     if (result$.isNull) return null;
-    return IUIAutomationCacheRequest(result$);
+    return .new(result$);
   }
 
   /// Specifies the scope of caching.
@@ -151,7 +151,7 @@ class IUIAutomationCacheRequest extends IUnknown implements ComInterface {
     }
     final result$ = scope.value;
     free(scope);
-    return TreeScope(result$);
+    return .new(result$);
   }
 
   set treeScope(TreeScope scope) {
@@ -174,7 +174,7 @@ class IUIAutomationCacheRequest extends IUnknown implements ComInterface {
     final result$ = filter.value;
     free(filter);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   set treeFilter(IUIAutomationCondition? filter) {
@@ -196,7 +196,7 @@ class IUIAutomationCacheRequest extends IUnknown implements ComInterface {
     }
     final result$ = mode.value;
     free(mode);
-    return AutomationElementMode(result$);
+    return .new(result$);
   }
 
   set automationElementMode(AutomationElementMode mode) {

@@ -40,7 +40,7 @@ final IID_IShellItemImageFactory = GUID.fromComponents(
   0xbcc18b79,
   0xba16,
   0x442f,
-  Uint8List.fromList(const [0x80, 0xc4, 0x8a, 0x59, 0xc3, 0xc, 0x46, 0x3b]),
+  .fromList(const [0x80, 0xc4, 0x8a, 0x59, 0xc3, 0xc, 0x46, 0x3b]),
 );
 
 /// Exposes a method to return either icons or thumbnails for Shell items.
@@ -93,7 +93,7 @@ class IShellItemImageFactory extends IUnknown implements ComInterface {
     }
     final result$ = phbm.value;
     free(phbm);
-    return HBITMAP(result$);
+    return .new(result$);
   }
 
   @override

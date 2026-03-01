@@ -42,7 +42,7 @@ final IID_INetworkConnection = GUID.fromComponents(
   0xdcb00005,
   0x570f,
   0x4a9b,
-  Uint8List.fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
+  .fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
 );
 
 /// Represents a single network connection.
@@ -107,7 +107,7 @@ class INetworkConnection extends IDispatch implements ComInterface {
     final result$ = ppNetwork.value;
     free(ppNetwork);
     if (result$.isNull) return null;
-    return INetwork(result$);
+    return .new(result$);
   }
 
   /// Specifies if the associated network connection has internet connectivity.
@@ -157,7 +157,7 @@ class INetworkConnection extends IDispatch implements ComInterface {
     }
     final result$ = pConnectivity.value;
     free(pConnectivity);
-    return NLM_CONNECTIVITY(result$);
+    return .new(result$);
   }
 
   /// Returns the Connection ID associated with this network connection.
@@ -207,7 +207,7 @@ class INetworkConnection extends IDispatch implements ComInterface {
     }
     final result$ = pDomainType.value;
     free(pDomainType);
-    return NLM_DOMAIN_TYPE(result$);
+    return .new(result$);
   }
 
   @override

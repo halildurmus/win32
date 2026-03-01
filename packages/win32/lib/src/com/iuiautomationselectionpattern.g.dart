@@ -40,7 +40,7 @@ final IID_IUIAutomationSelectionPattern = GUID.fromComponents(
   0x5ed5202e,
   0xb2ac,
   0x47a6,
-  Uint8List.fromList(const [0xb6, 0x38, 0x4b, 0xb, 0xf1, 0x40, 0xd7, 0x8e]),
+  .fromList(const [0xb6, 0x38, 0x4b, 0xb, 0xf1, 0x40, 0xd7, 0x8e]),
 );
 
 /// Provides access to a control that contains selectable child items.
@@ -110,7 +110,7 @@ class IUIAutomationSelectionPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Indicates whether more than one item in the container can be selected at
@@ -162,7 +162,7 @@ class IUIAutomationSelectionPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether more than one item in the

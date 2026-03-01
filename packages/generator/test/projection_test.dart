@@ -100,7 +100,7 @@ typedef FONTENUMPROC =
       final parameters = projection.generateGuidParameters(guid);
       check(parameters.map((p) => p.accept(DartEmitter())).join(', ')).equals(
         '0x7ab36653, 0x1796, 0x484b, '
-        'Uint8List.fromList(const [0xbd, 0xfa, 0xe7, 0x4f, 0x1d, 0xb7, 0xc1, 0xdc])',
+        '.fromList(const [0xbd, 0xfa, 0xe7, 0x4f, 0x1d, 0xb7, 0xc1, 0xdc])',
       );
     });
 

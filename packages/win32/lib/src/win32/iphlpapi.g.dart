@@ -71,7 +71,7 @@ external int _AddIPAddress(
 WIN32_ERROR ConvertInterfaceGuidToLuid(
   Pointer<GUID> interfaceGuid,
   Pointer<NET_LUID_LH> interfaceLuid,
-) => WIN32_ERROR(_ConvertInterfaceGuidToLuid(interfaceGuid, interfaceLuid));
+) => .new(_ConvertInterfaceGuidToLuid(interfaceGuid, interfaceLuid));
 
 @Native<Uint32 Function(Pointer<GUID>, Pointer<NET_LUID_LH>)>(
   symbol: 'ConvertInterfaceGuidToLuid',

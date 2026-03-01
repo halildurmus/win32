@@ -40,7 +40,7 @@ final IID_IUIAutomationTableItemPattern = GUID.fromComponents(
   0xb964eb3,
   0xef2e,
   0x4464,
-  Uint8List.fromList(const [0x9c, 0x79, 0x61, 0xd6, 0x17, 0x37, 0xa2, 0x7e]),
+  .fromList(const [0x9c, 0x79, 0x61, 0xd6, 0x17, 0x37, 0xa2, 0x7e]),
 );
 
 /// Provides access to a child element in a container that supports
@@ -105,7 +105,7 @@ class IUIAutomationTableItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the column headers associated with a table item or cell.
@@ -124,7 +124,7 @@ class IUIAutomationTableItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached row headers associated with a table item or cell.
@@ -143,7 +143,7 @@ class IUIAutomationTableItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached column headers associated with a table item or cell.
@@ -162,7 +162,7 @@ class IUIAutomationTableItemPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   @override

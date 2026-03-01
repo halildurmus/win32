@@ -45,7 +45,7 @@ import '../win32_result.dart';
 /// {@category psapi}
 Win32Result<bool> EmptyWorkingSet(HANDLE hProcess) {
   final result_ = EmptyWorkingSet_Wrapper(hProcess);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the load address for each device driver in the system.
@@ -60,7 +60,7 @@ Win32Result<bool> EnumDeviceDrivers(
   Pointer<Uint32> lpcbNeeded,
 ) {
   final result_ = EnumDeviceDrivers_Wrapper(lpImageBase, cb, lpcbNeeded);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Calls the callback routine for each installed pagefile in the system.
@@ -74,7 +74,7 @@ Win32Result<bool> EnumPageFiles(
   Pointer pContext,
 ) {
   final result_ = EnumPageFilesW_Wrapper(pCallBackRoutine, pContext);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the process identifier for each process object in the system.
@@ -89,7 +89,7 @@ Win32Result<bool> EnumProcesses(
   Pointer<Uint32> lpcbNeeded,
 ) {
   final result_ = EnumProcesses_Wrapper(lpidProcess, cb, lpcbNeeded);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle for each module in the specified process.
@@ -110,7 +110,7 @@ Win32Result<bool> EnumProcessModules(
     cb,
     lpcbNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle for each module in the specified process that meets the
@@ -134,7 +134,7 @@ Win32Result<bool> EnumProcessModulesEx(
     lpcbNeeded,
     dwFilterFlag,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the base name of the specified device driver.
@@ -153,7 +153,7 @@ Win32Result<int> GetDeviceDriverBaseName(
     lpBaseName,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the path available for the specified device driver.
@@ -172,7 +172,7 @@ Win32Result<int> GetDeviceDriverFileName(
     lpFilename,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Checks whether the specified address is within a memory-mapped file in the
@@ -191,7 +191,7 @@ Win32Result<int> GetMappedFileName(
   int nSize,
 ) {
   final result_ = GetMappedFileNameW_Wrapper(hProcess, lpv, lpFilename, nSize);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the base name of the specified module.
@@ -212,7 +212,7 @@ Win32Result<int> GetModuleBaseName(
     lpBaseName,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the fully qualified path for the file containing the specified
@@ -234,7 +234,7 @@ Win32Result<int> GetModuleFileNameEx(
     lpFilename,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the specified module in the MODULEINFO
@@ -256,7 +256,7 @@ Win32Result<bool> GetModuleInformation(
     lpmodinfo,
     cb,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the performance values contained in the PERFORMANCE_INFORMATION
@@ -271,7 +271,7 @@ Win32Result<bool> GetPerformanceInfo(
   int cb,
 ) {
   final result_ = GetPerformanceInfo_Wrapper(pPerformanceInformation, cb);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the name of the executable file for the specified process.
@@ -290,7 +290,7 @@ Win32Result<int> GetProcessImageFileName(
     lpImageFileName,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the memory usage of the specified process.
@@ -305,5 +305,5 @@ Win32Result<bool> GetProcessMemoryInfo(
   int cb,
 ) {
   final result_ = GetProcessMemoryInfo_Wrapper(process, ppsmemCounters, cb);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

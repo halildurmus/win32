@@ -33,7 +33,7 @@ final IID_IInspectable = GUID.fromComponents(
   0xaf86e2e0,
   0xb12d,
   0x4c6a,
-  Uint8List.fromList(const [0x9c, 0x5a, 0xd7, 0xaa, 0x65, 0x10, 0x1e, 0x90]),
+  .fromList(const [0x9c, 0x5a, 0xd7, 0xaa, 0x65, 0x10, 0x1e, 0x90]),
 );
 
 /// Provides functionality required for all Windows Runtime classes.
@@ -98,7 +98,7 @@ class IInspectable extends IUnknown implements ComInterface {
     }
     final result$ = className.value;
     free(className);
-    return HSTRING(result$);
+    return .new(result$);
   }
 
   /// Gets the trust level of the current Windows Runtime object.
@@ -116,7 +116,7 @@ class IInspectable extends IUnknown implements ComInterface {
     }
     final result$ = trustLevel.value;
     free(trustLevel);
-    return TrustLevel(result$);
+    return .new(result$);
   }
 
   @override

@@ -46,7 +46,7 @@ final IID_ISpeechVoice = GUID.fromComponents(
   0x269316d8,
   0x57bd,
   0x11d2,
-  Uint8List.fromList(const [0x9e, 0xee, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
+  .fromList(const [0x9e, 0xee, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
 );
 
 /// {@category com}
@@ -184,7 +184,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = status.value;
     free(status);
     if (result$.isNull) return null;
-    return ISpeechVoiceStatus(result$);
+    return .new(result$);
   }
 
   ISpeechObjectToken? get voice {
@@ -197,7 +197,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = voice.value;
     free(voice);
     if (result$.isNull) return null;
-    return ISpeechObjectToken(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -217,7 +217,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = audioOutput.value;
     free(audioOutput);
     if (result$.isNull) return null;
-    return ISpeechObjectToken(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -239,7 +239,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = audioOutputStream.value;
     free(audioOutputStream);
     if (result$.isNull) return null;
-    return ISpeechBaseStream(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -318,7 +318,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     }
     final result$ = eventInterestFlags.value;
     free(eventInterestFlags);
-    return SpeechVoiceEvents(result$);
+    return .new(result$);
   }
 
   set eventInterests(SpeechVoiceEvents eventInterestFlags) {
@@ -340,7 +340,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     }
     final result$ = priority.value;
     free(priority);
-    return SpeechVoicePriority(result$);
+    return .new(result$);
   }
 
   set alertBoundary(SpeechVoiceEvents boundary) {
@@ -357,7 +357,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     }
     final result$ = boundary.value;
     free(boundary);
-    return SpeechVoiceEvents(result$);
+    return .new(result$);
   }
 
   set synchronousSpeakTimeout(int msTimeout) {
@@ -448,7 +448,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = objectTokens.value;
     free(objectTokens);
     if (result$.isNull) return null;
-    return ISpeechObjectTokens(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -472,7 +472,7 @@ class ISpeechVoice extends IDispatch implements ComInterface {
     final result$ = objectTokens.value;
     free(objectTokens);
     if (result$.isNull) return null;
-    return ISpeechObjectTokens(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

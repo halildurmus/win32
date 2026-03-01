@@ -43,7 +43,7 @@ import '../win32_result.dart';
 /// {@category wevtapi}
 Win32Result<bool> EvtClose(EVT_HANDLE object) {
   final result_ = EvtClose_Wrapper(object);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a bookmark that identifies an event in a channel.
@@ -54,10 +54,7 @@ Win32Result<bool> EvtClose(EVT_HANDLE object) {
 /// {@category wevtapi}
 Win32Result<EVT_HANDLE> EvtCreateBookmark(PCWSTR? bookmarkXml) {
   final result_ = EvtCreateBookmark_Wrapper(bookmarkXml ?? nullptr);
-  return Win32Result(
-    value: EVT_HANDLE(result_.value.i64),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Creates a context that specifies the information in the event that you want
@@ -77,10 +74,7 @@ Win32Result<EVT_HANDLE> EvtCreateRenderContext(
     valuePaths ?? nullptr,
     flags,
   );
-  return Win32Result(
-    value: EVT_HANDLE(result_.value.i64),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Gets a text message that contains the extended error information for the
@@ -130,7 +124,7 @@ Win32Result<bool> EvtGetQueryInfo(
     propertyValueBuffer ?? nullptr,
     propertyValueBufferUsed,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the next event from the query or subscription results.
@@ -155,7 +149,7 @@ Win32Result<bool> EvtNext(
     flags,
     returned,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Establishes a connection to a remote computer that you can use when calling
@@ -170,10 +164,7 @@ Win32Result<EVT_HANDLE> EvtOpenSession(
   Pointer login,
 ) {
   final result_ = EvtOpenSession_Wrapper(loginClass, login, NULL, NULL);
-  return Win32Result(
-    value: EVT_HANDLE(result_.value.i64),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Runs a query to retrieve events from a channel or log file that match the
@@ -195,10 +186,7 @@ Win32Result<EVT_HANDLE> EvtQuery(
     query ?? nullptr,
     flags,
   );
-  return Win32Result(
-    value: EVT_HANDLE(result_.value.i64),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Renders an XML fragment based on the rendering context that you specify.
@@ -225,7 +213,7 @@ Win32Result<bool> EvtRender(
     bufferUsed,
     propertyCount,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Seeks to a specific event in a query result set.
@@ -247,7 +235,7 @@ Win32Result<bool> EvtSeek(
     NULL,
     flags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Updates the bookmark with information that identifies the specified event.
@@ -258,5 +246,5 @@ Win32Result<bool> EvtSeek(
 /// {@category wevtapi}
 Win32Result<bool> EvtUpdateBookmark(EVT_HANDLE bookmark, EVT_HANDLE event) {
   final result_ = EvtUpdateBookmark_Wrapper(bookmark, event);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

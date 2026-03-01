@@ -46,7 +46,7 @@ final IID_IWbemServices = GUID.fromComponents(
   0x9556dc99,
   0x828c,
   0x11cf,
-  Uint8List.fromList(const [0xa3, 0x7e, 0x0, 0xaa, 0x0, 0x32, 0x40, 0xc7]),
+  .fromList(const [0xa3, 0x7e, 0x0, 0xaa, 0x0, 0x32, 0x40, 0xc7]),
 );
 
 /// Used by clients and providers to access WMI services.
@@ -363,7 +363,7 @@ class IWbemServices extends IUnknown implements ComInterface {
     final result$ = ppResponseHandler.value;
     free(ppResponseHandler);
     if (result$.isNull) return null;
-    return IWbemObjectSink(result$);
+    return .new(result$);
   }
 
   /// Retrieves a class or instance.
@@ -553,7 +553,7 @@ class IWbemServices extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Returns an enumeration of all classes that the class provider supports.
@@ -719,7 +719,7 @@ class IWbemServices extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Creates an enumerator that asynchronously returns the instances of a
@@ -778,7 +778,7 @@ class IWbemServices extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Executes a query to retrieve objects asynchronously.
@@ -842,7 +842,7 @@ class IWbemServices extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Performs the same task as `IWbemServices.execNotificationQuery` except

@@ -40,7 +40,7 @@ final IID_IUIAutomationSpreadsheetItemPattern = GUID.fromComponents(
   0x7d4fb86c,
   0x8d34,
   0x40e1,
-  Uint8List.fromList(const [0x8e, 0x83, 0x62, 0xc1, 0x52, 0x4, 0xe3, 0x35]),
+  .fromList(const [0x8e, 0x83, 0x62, 0xc1, 0x52, 0x4, 0xe3, 0x35]),
 );
 
 /// Enables a client application to retrieve information about an item (cell) in
@@ -107,7 +107,7 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of elements representing the annotations associated
@@ -127,7 +127,7 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of annotation type identifiers indicating the types of
@@ -162,7 +162,7 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached array of elements representing the annotations
@@ -182,7 +182,7 @@ class IUIAutomationSpreadsheetItemPattern extends IUnknown
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached array of annotation type identifiers indicating the

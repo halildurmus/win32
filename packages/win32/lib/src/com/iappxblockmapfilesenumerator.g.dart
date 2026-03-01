@@ -40,7 +40,7 @@ final IID_IAppxBlockMapFilesEnumerator = GUID.fromComponents(
   0x2b856a2,
   0x4262,
   0x4070,
-  Uint8List.fromList(const [0xba, 0xcb, 0x1a, 0x8c, 0xbb, 0xc4, 0x23, 0x5]),
+  .fromList(const [0xba, 0xcb, 0x1a, 0x8c, 0xbb, 0xc4, 0x23, 0x5]),
 );
 
 /// Enumerates the files from a block map.
@@ -96,7 +96,7 @@ class IAppxBlockMapFilesEnumerator extends IUnknown implements ComInterface {
     final result$ = file.value;
     free(file);
     if (result$.isNull) return null;
-    return IAppxBlockMapFile(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a file at the current position of the

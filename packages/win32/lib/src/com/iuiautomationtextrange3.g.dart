@@ -44,7 +44,7 @@ final IID_IUIAutomationTextRange3 = GUID.fromComponents(
   0x6a315d69,
   0x5512,
   0x4c2e,
-  Uint8List.fromList(const [0x85, 0xf0, 0x53, 0xfc, 0xe6, 0xdd, 0x4b, 0xc2]),
+  .fromList(const [0x85, 0xf0, 0x53, 0xfc, 0xe6, 0xdd, 0x4b, 0xc2]),
 );
 
 /// Extends the IUIAutomationTextRange2 interface to support faster access to
@@ -123,7 +123,7 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2
     final result$ = enclosingElement.value;
     free(enclosingElement);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Returns the children and supplied properties and patterns for elements in
@@ -150,7 +150,7 @@ class IUIAutomationTextRange3 extends IUIAutomationTextRange2
     final result$ = children.value;
     free(children);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Returns all of the requested text attribute values for a text range in a

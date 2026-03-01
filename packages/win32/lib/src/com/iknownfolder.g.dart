@@ -40,7 +40,7 @@ final IID_IKnownFolder = GUID.fromComponents(
   0x3aa7af7e,
   0x9b36,
   0x420c,
-  Uint8List.fromList(const [0xa8, 0xe3, 0xf7, 0x7d, 0x46, 0x74, 0xa4, 0x88]),
+  .fromList(const [0xa8, 0xe3, 0xf7, 0x7d, 0x46, 0x74, 0xa4, 0x88]),
 );
 
 /// Exposes methods that allow an application to retrieve information about a
@@ -129,7 +129,7 @@ class IKnownFolder extends IUnknown implements ComInterface {
     }
     final result$ = pCategory.value;
     free(pCategory);
-    return KF_CATEGORY(result$);
+    return .new(result$);
   }
 
   /// Retrieves the location of a known folder in the Shell namespace in the
@@ -177,7 +177,7 @@ class IKnownFolder extends IUnknown implements ComInterface {
     }
     final result$ = ppszPath.value;
     free(ppszPath);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Assigns a new path to a known folder.

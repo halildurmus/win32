@@ -41,7 +41,7 @@ final IID_IAudioSessionControl = GUID.fromComponents(
   0xf4b1a599,
   0x7266,
   0x4319,
-  Uint8List.fromList(const [0xa8, 0xca, 0xe7, 0xa, 0xcb, 0x11, 0xe8, 0xcd]),
+  .fromList(const [0xa8, 0xca, 0xe7, 0xa, 0xcb, 0x11, 0xe8, 0xcd]),
 );
 
 /// Enables a client to configure the control parameters for an audio session
@@ -122,7 +122,7 @@ class IAudioSessionControl extends IUnknown implements ComInterface {
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return AudioSessionState(result$);
+    return .new(result$);
   }
 
   /// Retrieves the display name for the audio session.
@@ -140,7 +140,7 @@ class IAudioSessionControl extends IUnknown implements ComInterface {
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Assigns a display name to the current session.
@@ -170,7 +170,7 @@ class IAudioSessionControl extends IUnknown implements ComInterface {
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Assigns a display icon to the current session.

@@ -39,7 +39,7 @@ final IID_IAppxManifestOSPackageDependency = GUID.fromComponents(
   0x154995ee,
   0x54a6,
   0x4f14,
-  Uint8List.fromList(const [0xac, 0x97, 0xd8, 0xcf, 0x5, 0x19, 0x64, 0x4b]),
+  .fromList(const [0xac, 0x97, 0xd8, 0xcf, 0x5, 0x19, 0x64, 0x4b]),
 );
 
 /// {@category com}
@@ -83,7 +83,7 @@ class IAppxManifestOSPackageDependency extends IUnknown
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

@@ -43,7 +43,7 @@ final IID_IStorage = GUID.fromComponents(
   0xb,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Supports the creation and management of structured storage objects.
@@ -189,7 +189,7 @@ class IStorage extends IUnknown implements ComInterface {
     final result$ = ppstm.value;
     free(ppstm);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   /// Opens an existing stream object within this storage object in the
@@ -211,7 +211,7 @@ class IStorage extends IUnknown implements ComInterface {
     final result$ = ppstm.value;
     free(ppstm);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   /// Creates and opens a new storage object nested within this storage object
@@ -238,7 +238,7 @@ class IStorage extends IUnknown implements ComInterface {
     final result$ = ppstg.value;
     free(ppstg);
     if (result$.isNull) return null;
-    return IStorage(result$);
+    return .new(result$);
   }
 
   /// Opens an existing storage object with the specified name in the specified
@@ -274,7 +274,7 @@ class IStorage extends IUnknown implements ComInterface {
     final result$ = ppstg.value;
     free(ppstg);
     if (result$.isNull) return null;
-    return IStorage(result$);
+    return .new(result$);
   }
 
   /// Copies the entire contents of an open storage object to another storage
@@ -372,7 +372,7 @@ class IStorage extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumSTATSTG(result$);
+    return .new(result$);
   }
 
   /// Removes the specified storage or stream from this storage object.

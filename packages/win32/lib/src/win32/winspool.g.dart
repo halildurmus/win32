@@ -102,10 +102,7 @@ Win32Result<PRINTER_HANDLE> AddPrinter(
   Pointer<Uint8> pPrinter,
 ) {
   final result_ = AddPrinterW_Wrapper(pName ?? nullptr, level, pPrinter);
-  return Win32Result(
-    value: PRINTER_HANDLE(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Adds a connection to the specified printer for the current user.
@@ -200,7 +197,7 @@ external int _AdvancedDocumentProperties(
 /// {@category winspool}
 Win32Result<bool> ClosePrinter(PRINTER_HANDLE hPrinter) {
   final result_ = ClosePrinter_Wrapper(hPrinter);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a handle to a spool file associated with the print job currently
@@ -293,7 +290,7 @@ external int _DeleteForm(Pointer hPrinter, Pointer<Utf16> pFormName);
 /// {@category winspool}
 Win32Result<bool> DeletePrinter(PRINTER_HANDLE hPrinter) {
   final result_ = DeletePrinter_Wrapper(hPrinter);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Deletes a connection to a printer that was established by a call to
@@ -503,7 +500,7 @@ Win32Result<bool> EnumJobs(
     pcbNeeded,
     pcReturned,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates configuration data for a specified printer.
@@ -664,7 +661,7 @@ Win32Result<bool> EnumPrinters(
     pcbNeeded,
     pcReturned,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a change notification object created by calling the
@@ -904,7 +901,7 @@ Win32Result<bool> GetPrinter(
     cbBuf,
     pcbNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves configuration data for the specified printer or print server.
@@ -1019,7 +1016,7 @@ external int _GetPrintExecutionData(Pointer<PRINT_EXECUTION_DATA> pData);
 /// {@category winspool}
 Win32Result<HANDLE> GetSpoolFileHandle(PRINTER_HANDLE hPrinter) {
   final result_ = GetSpoolFileHandle_Wrapper(hPrinter);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Verifies that the contents of a DEVMODE structure are valid.
@@ -1052,7 +1049,7 @@ Win32Result<bool> OpenPrinter(
     phPrinter,
     pDefault ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to the specified printer, print server, or other types of
@@ -1074,7 +1071,7 @@ Win32Result<bool> OpenPrinter2(
     pDefault ?? nullptr,
     pOptions ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Displays a printer-properties property sheet for the specified printer.
@@ -1269,7 +1266,7 @@ Win32Result<bool> SetPort(
     dwLevel,
     pPortInfo,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the data for a specified printer or sets the state of the specified
@@ -1291,7 +1288,7 @@ Win32Result<bool> SetPrinter(
     pPrinter ?? nullptr,
     command,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the configuration data for a printer or print server.

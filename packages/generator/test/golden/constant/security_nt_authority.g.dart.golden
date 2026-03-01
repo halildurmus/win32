@@ -1,4 +1,3 @@
 SECURITY_NT_AUTHORITY|
-final SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY =
-    Struct.create<SID_IDENTIFIER_AUTHORITY>()
-      ..Value.elements.buffer.asUint8List().setAll(0, const [0, 0, 0, 0, 0, 5]);
+final SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY = Struct.create()
+  ..Value.elements.buffer.asUint8List().setAll(0, const [0, 0, 0, 0, 0, 5]);

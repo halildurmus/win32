@@ -41,7 +41,7 @@ final IID_IDesktopWallpaper = GUID.fromComponents(
   0xb92b56a9,
   0x8b55,
   0x4e14,
-  Uint8List.fromList(const [0x9a, 0x89, 0x1, 0x99, 0xbb, 0xb6, 0xf9, 0x3b]),
+  .fromList(const [0x9a, 0x89, 0x1, 0x99, 0xbb, 0xb6, 0xf9, 0x3b]),
 );
 
 /// Provides methods for managing the desktop wallpaper.
@@ -149,7 +149,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     }
     final result$ = wallpaper.value;
     free(wallpaper);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the unique ID of one of the system's monitors.
@@ -169,7 +169,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     }
     final result$ = monitorID.value;
     free(monitorID);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the number of monitors that are associated with the system.
@@ -241,7 +241,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     }
     final result$ = color.value;
     free(color);
-    return COLORREF(result$);
+    return .new(result$);
   }
 
   /// Sets the display option for the desktop wallpaper image, determining
@@ -272,7 +272,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     }
     final result$ = position.value;
     free(position);
-    return DESKTOP_WALLPAPER_POSITION(result$);
+    return .new(result$);
   }
 
   /// Specifies the images to use for the desktop wallpaper slideshow.
@@ -303,7 +303,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     final result$ = items.value;
     free(items);
     if (result$.isNull) return null;
-    return IShellItemArray(result$);
+    return .new(result$);
   }
 
   /// Sets the desktop wallpaper slideshow settings for shuffle and timing.
@@ -368,7 +368,7 @@ class IDesktopWallpaper extends IUnknown implements ComInterface {
     }
     final result$ = state.value;
     free(state);
-    return DESKTOP_SLIDESHOW_STATE(result$);
+    return .new(result$);
   }
 
   /// Enables or disables the desktop background.

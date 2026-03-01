@@ -42,7 +42,7 @@ final IID_INetwork = GUID.fromComponents(
   0xdcb00002,
   0x570f,
   0x4a9b,
-  Uint8List.fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
+  .fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
 );
 
 /// Represents a network on the local machine.
@@ -129,7 +129,7 @@ class INetwork extends IDispatch implements ComInterface {
     }
     final result$ = pszNetworkName.value;
     free(pszNetworkName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sets or renames a network.
@@ -159,7 +159,7 @@ class INetwork extends IDispatch implements ComInterface {
     }
     final result$ = pszDescription.value;
     free(pszDescription);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sets or replaces the description for a network.
@@ -205,7 +205,7 @@ class INetwork extends IDispatch implements ComInterface {
     }
     final result$ = pNetworkType.value;
     free(pNetworkType);
-    return NLM_DOMAIN_TYPE(result$);
+    return .new(result$);
   }
 
   /// Returns an enumeration of all network connections for a network.
@@ -227,7 +227,7 @@ class INetwork extends IDispatch implements ComInterface {
     final result$ = ppEnumNetworkConnection.value;
     free(ppEnumNetworkConnection);
     if (result$.isNull) return null;
-    return IEnumNetworkConnections(result$);
+    return .new(result$);
   }
 
   /// Returns the local date and time when the network was created and
@@ -303,7 +303,7 @@ class INetwork extends IDispatch implements ComInterface {
     }
     final result$ = pConnectivity.value;
     free(pConnectivity);
-    return NLM_CONNECTIVITY(result$);
+    return .new(result$);
   }
 
   /// Returns the category of a network.
@@ -321,7 +321,7 @@ class INetwork extends IDispatch implements ComInterface {
     }
     final result$ = pCategory.value;
     free(pCategory);
-    return NLM_NETWORK_CATEGORY(result$);
+    return .new(result$);
   }
 
   /// Sets the category of a network.

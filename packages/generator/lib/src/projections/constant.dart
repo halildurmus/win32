@@ -111,10 +111,10 @@ final class ConstantProjection extends Projection with ProjectionMixin {
       assignment: cb
           .refer('Struct')
           .property('create')
-          .call(const [], const {}, [cb.refer('DEVPROPKEY')])
+          .call(const [])
           .cascade('fmtid')
           .assign(
-            cb.refer('GUID').property('fromComponents').call([
+            cb.refer('').property('fromComponents').call([
               ...generateGuidParameters(guidComponents),
             ]),
           )
@@ -172,10 +172,10 @@ final class ConstantProjection extends Projection with ProjectionMixin {
       assignment: cb
           .refer('Struct')
           .property('create')
-          .call(const [], const {}, [cb.refer('PROPERTYKEY')])
+          .call(const [])
           .cascade('fmtid')
           .assign(
-            cb.refer('GUID').property('fromComponents').call([
+            cb.refer('').property('fromComponents').call([
               ...generateGuidParameters(guidComponents),
             ]),
           )
@@ -201,7 +201,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
       assignment: cb
           .refer('Struct')
           .property('create')
-          .call(const [], const {}, [cb.refer('SID_IDENTIFIER_AUTHORITY')])
+          .call(const [])
           .cascade('Value')
           .property('elements')
           .property('buffer')

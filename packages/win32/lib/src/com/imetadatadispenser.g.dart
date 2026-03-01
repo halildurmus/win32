@@ -39,7 +39,7 @@ final IID_IMetaDataDispenser = GUID.fromComponents(
   0x809c652e,
   0x7396,
   0x11d2,
-  Uint8List.fromList(const [0x97, 0x71, 0x0, 0xa0, 0xc9, 0xb4, 0xd5, 0xc]),
+  .fromList(const [0x97, 0x71, 0x0, 0xa0, 0xc9, 0xb4, 0xd5, 0xc]),
 );
 
 /// Provides methods to create a new metadata scope, or open an existing one.
@@ -123,7 +123,7 @@ class IMetaDataDispenser extends IUnknown implements ComInterface {
     final result$ = ppIUnk.value;
     free(ppIUnk);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Opens an existing file from disk, and maps its metadata into memory for
@@ -143,7 +143,7 @@ class IMetaDataDispenser extends IUnknown implements ComInterface {
     final result$ = ppIUnk.value;
     free(ppIUnk);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Opens an area of memory that contains existing metadata.
@@ -172,7 +172,7 @@ class IMetaDataDispenser extends IUnknown implements ComInterface {
     final result$ = ppIUnk.value;
     free(ppIUnk);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   @override

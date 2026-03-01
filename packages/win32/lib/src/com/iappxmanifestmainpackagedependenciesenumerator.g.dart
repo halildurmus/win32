@@ -40,7 +40,7 @@ final IID_IAppxManifestMainPackageDependenciesEnumerator = GUID.fromComponents(
   0xa99c4f00,
   0x51d2,
   0x4f0f,
-  Uint8List.fromList(const [0xba, 0x46, 0x7e, 0xd5, 0x25, 0x5e, 0xbd, 0xff]),
+  .fromList(const [0xba, 0x46, 0x7e, 0xd5, 0x25, 0x5e, 0xbd, 0xff]),
 );
 
 /// Enumerates &lt;MainPackageDependency&gt; elements from an app manifest.
@@ -102,7 +102,7 @@ class IAppxManifestMainPackageDependenciesEnumerator extends IUnknown
     final result$ = mainPackageDependency.value;
     free(mainPackageDependency);
     if (result$.isNull) return null;
-    return IAppxManifestMainPackageDependency(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a &lt;MainPackageDependency&gt; element at the

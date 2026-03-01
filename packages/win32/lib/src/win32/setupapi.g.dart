@@ -44,7 +44,7 @@ import '../win32_result.dart';
 /// {@category setupapi}
 Win32Result<bool> SetupDiDestroyDeviceInfoList(HDEVINFO deviceInfoSet) {
   final result_ = SetupDiDestroyDeviceInfoList_Wrapper(deviceInfoSet);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns a SP_DEVINFO_DATA structure that specifies a device information
@@ -64,7 +64,7 @@ Win32Result<bool> SetupDiEnumDeviceInfo(
     memberIndex,
     deviceInfoData,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates the device interfaces that are contained in a device information
@@ -88,7 +88,7 @@ Win32Result<bool> SetupDiEnumDeviceInterfaces(
     memberIndex,
     deviceInterfaceData,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns a handle to a device information set that contains requested device
@@ -110,7 +110,7 @@ Win32Result<HDEVINFO> SetupDiGetClassDevs(
     hwndParent ?? nullptr,
     flags,
   );
-  return Win32Result(value: HDEVINFO(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Retrieves the device instance ID that is associated with a device
@@ -134,7 +134,7 @@ Win32Result<bool> SetupDiGetDeviceInstanceId(
     deviceInstanceIdSize,
     requiredSize ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns details about a device interface.
@@ -159,7 +159,7 @@ Win32Result<bool> SetupDiGetDeviceInterfaceDetail(
     requiredSize ?? nullptr,
     deviceInfoData ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a specified Plug and Play device property.
@@ -186,7 +186,7 @@ Win32Result<bool> SetupDiGetDeviceRegistryProperty(
     propertyBufferSize,
     requiredSize ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Opens a registry key for device-specific configuration information.
@@ -211,5 +211,5 @@ Win32Result<HKEY> SetupDiOpenDevRegKey(
     keyType,
     samDesired,
   );
-  return Win32Result(value: HKEY(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }

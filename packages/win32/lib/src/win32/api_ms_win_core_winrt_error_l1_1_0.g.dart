@@ -52,7 +52,7 @@ IRestrictedErrorInfo? GetRestrictedErrorInfo() {
   final result$ = ppRestrictedErrorInfo.value;
   free(ppRestrictedErrorInfo);
   if (result$.isNull) return null;
-  return IRestrictedErrorInfo(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<VTablePointer>)>(

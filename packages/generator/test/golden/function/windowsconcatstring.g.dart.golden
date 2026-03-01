@@ -18,7 +18,7 @@ HSTRING WindowsConcatString(HSTRING? string1, HSTRING? string2) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(

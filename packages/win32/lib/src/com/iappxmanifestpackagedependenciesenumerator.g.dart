@@ -40,7 +40,7 @@ final IID_IAppxManifestPackageDependenciesEnumerator = GUID.fromComponents(
   0xb43bbcf9,
   0x65a6,
   0x42dd,
-  Uint8List.fromList(const [0xba, 0xc0, 0x8c, 0x67, 0x41, 0xe7, 0xf5, 0xa4]),
+  .fromList(const [0xba, 0xc0, 0x8c, 0x67, 0x41, 0xe7, 0xf5, 0xa4]),
 );
 
 /// Enumerates the package dependencies defined in the package manifest.
@@ -99,7 +99,7 @@ class IAppxManifestPackageDependenciesEnumerator extends IUnknown
     final result$ = dependency.value;
     free(dependency);
     if (result$.isNull) return null;
-    return IAppxManifestPackageDependency(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a package dependency at the current position

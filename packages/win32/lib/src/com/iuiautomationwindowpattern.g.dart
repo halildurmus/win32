@@ -40,7 +40,7 @@ final IID_IUIAutomationWindowPattern = GUID.fromComponents(
   0xfaef453,
   0x9208,
   0x43ef,
-  Uint8List.fromList(const [0xbb, 0xb2, 0x3b, 0x48, 0x51, 0x77, 0x86, 0x4f]),
+  .fromList(const [0xbb, 0xb2, 0x3b, 0x48, 0x51, 0x77, 0x86, 0x4f]),
 );
 
 /// Provides access to the fundamental functionality of a window.
@@ -228,7 +228,7 @@ class IUIAutomationWindowPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return WindowVisualState(result$);
+    return .new(result$);
   }
 
   /// Retrieves the current state of the window for the purposes of user
@@ -245,7 +245,7 @@ class IUIAutomationWindowPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return WindowInteractionState(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether the window can be
@@ -329,7 +329,7 @@ class IUIAutomationWindowPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return WindowVisualState(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates the current state of the window
@@ -346,7 +346,7 @@ class IUIAutomationWindowPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return WindowInteractionState(result$);
+    return .new(result$);
   }
 
   @override

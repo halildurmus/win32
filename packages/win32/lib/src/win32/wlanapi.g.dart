@@ -45,7 +45,7 @@ import '../win32_result.dart';
 /// {@category wlanapi}
 Win32Result<Pointer> WlanAllocateMemory(int dwMemorySize) {
   final result_ = WlanAllocateMemory_Wrapper(dwMemorySize);
-  return Win32Result(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_.value.ptr, error: result_.error);
 }
 
 /// Closes a connection to the server.

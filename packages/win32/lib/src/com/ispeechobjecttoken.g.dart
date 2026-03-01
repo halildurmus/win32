@@ -44,7 +44,7 @@ final IID_ISpeechObjectToken = GUID.fromComponents(
   0xc74a3adc,
   0xb727,
   0x4500,
-  Uint8List.fromList(const [0xa8, 0x4a, 0xb5, 0x26, 0x72, 0x1c, 0x8b, 0x8c]),
+  .fromList(const [0xa8, 0x4a, 0xb5, 0x26, 0x72, 0x1c, 0x8b, 0x8c]),
 );
 
 /// {@category com}
@@ -143,7 +143,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     }
     final result$ = objectId.value;
     free(objectId);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   ISpeechDataKey? get dataKey {
@@ -156,7 +156,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     final result$ = dataKey.value;
     free(dataKey);
     if (result$.isNull) return null;
-    return ISpeechDataKey(result$);
+    return .new(result$);
   }
 
   ISpeechObjectTokenCategory? get category {
@@ -169,7 +169,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     final result$ = category.value;
     free(category);
     if (result$.isNull) return null;
-    return ISpeechObjectTokenCategory(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -182,7 +182,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     }
     final result$ = description.value;
     free(description);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -204,7 +204,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     }
     final result$ = attributeValue.value;
     free(attributeValue);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -220,7 +220,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     final result$ = object.value;
     free(object);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -254,7 +254,7 @@ class ISpeechObjectToken extends IDispatch implements ComInterface {
     }
     final result$ = filePath.value;
     free(filePath);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

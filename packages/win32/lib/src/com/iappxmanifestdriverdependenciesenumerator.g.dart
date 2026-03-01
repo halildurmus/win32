@@ -40,7 +40,7 @@ final IID_IAppxManifestDriverDependenciesEnumerator = GUID.fromComponents(
   0xfe039db2,
   0x467f,
   0x4755,
-  Uint8List.fromList(const [0x84, 0x4, 0x8f, 0x5e, 0xb6, 0x86, 0x5b, 0x33]),
+  .fromList(const [0x84, 0x4, 0x8f, 0x5e, 0xb6, 0x86, 0x5b, 0x33]),
 );
 
 /// {@category com}
@@ -89,7 +89,7 @@ class IAppxManifestDriverDependenciesEnumerator extends IUnknown
     final result$ = driverDependency.value;
     free(driverDependency);
     if (result$.isNull) return null;
-    return IAppxManifestDriverDependency(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

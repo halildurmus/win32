@@ -42,7 +42,7 @@ final IID_IAppxManifestReader7 = GUID.fromComponents(
   0x8efe6f27,
   0xce0,
   0x4988,
-  Uint8List.fromList(const [0xb3, 0x2d, 0x73, 0x8e, 0xb6, 0x3d, 0xb3, 0xb7]),
+  .fromList(const [0xb3, 0x2d, 0x73, 0x8e, 0xb6, 0x3d, 0xb3, 0xb7]),
 );
 
 /// {@category com}
@@ -91,7 +91,7 @@ class IAppxManifestReader7 extends IUnknown implements ComInterface {
     final result$ = driverDependencies.value;
     free(driverDependencies);
     if (result$.isNull) return null;
-    return IAppxManifestDriverDependenciesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -107,7 +107,7 @@ class IAppxManifestReader7 extends IUnknown implements ComInterface {
     final result$ = osPackageDependencies.value;
     free(osPackageDependencies);
     if (result$.isNull) return null;
-    return IAppxManifestOSPackageDependenciesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -123,7 +123,7 @@ class IAppxManifestReader7 extends IUnknown implements ComInterface {
     final result$ = hostRuntimeDependencies.value;
     free(hostRuntimeDependencies);
     if (result$.isNull) return null;
-    return IAppxManifestHostRuntimeDependenciesEnumerator(result$);
+    return .new(result$);
   }
 
   @override

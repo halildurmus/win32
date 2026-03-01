@@ -40,7 +40,7 @@ final IID_IUIAutomationNotCondition = GUID.fromComponents(
   0xf528b657,
   0x847b,
   0x498c,
-  Uint8List.fromList(const [0x88, 0x96, 0xd5, 0x2b, 0x56, 0x54, 0x7, 0xa1]),
+  .fromList(const [0x88, 0x96, 0xd5, 0x2b, 0x56, 0x54, 0x7, 0xa1]),
 );
 
 /// Represents a condition that is the negative of another condition.
@@ -93,7 +93,7 @@ class IUIAutomationNotCondition extends IUIAutomationCondition
     final result$ = condition.value;
     free(condition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   @override

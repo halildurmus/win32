@@ -222,7 +222,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
           hexExpression(data1),
           hexExpression(data2),
           hexExpression(data3),
-          cb.refer('Uint8List').property('fromList').call([
+          cb.refer('').property('fromList').call([
             cb.literalConstList(data4Chunks.map(hexExpression).toFixedList()),
           ]),
         ]).code,

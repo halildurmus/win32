@@ -39,7 +39,7 @@ final IID_IUIAutomationObjectModelPattern = GUID.fromComponents(
   0x71c284b3,
   0xc14d,
   0x4d14,
-  Uint8List.fromList(const [0x98, 0x1e, 0x19, 0x75, 0x1b, 0xd, 0x75, 0x6d]),
+  .fromList(const [0x98, 0x1e, 0x19, 0x75, 0x1b, 0xd, 0x75, 0x6d]),
 );
 
 /// Provides access to the underlying object model implemented by a control or
@@ -93,7 +93,7 @@ class IUIAutomationObjectModelPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   @override

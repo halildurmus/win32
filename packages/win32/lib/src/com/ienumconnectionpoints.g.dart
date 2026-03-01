@@ -41,7 +41,7 @@ final IID_IEnumConnectionPoints = GUID.fromComponents(
   0xb196b285,
   0xbab4,
   0x101a,
-  Uint8List.fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
+  .fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
 );
 
 /// Enumerates connection points.
@@ -138,7 +138,7 @@ class IEnumConnectionPoints extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumConnectionPoints(result$);
+    return .new(result$);
   }
 
   @override

@@ -42,7 +42,7 @@ final IID_ISpeechDataKey = GUID.fromComponents(
   0xce17c09b,
   0x4efa,
   0x44d5,
-  Uint8List.fromList(const [0xa4, 0xc9, 0x59, 0xd9, 0x58, 0x5a, 0xb0, 0xcd]),
+  .fromList(const [0xa4, 0xc9, 0x59, 0xd9, 0x58, 0x5a, 0xb0, 0xcd]),
 );
 
 /// {@category com}
@@ -145,7 +145,7 @@ class ISpeechDataKey extends IDispatch implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -179,7 +179,7 @@ class ISpeechDataKey extends IDispatch implements ComInterface {
     final result$ = subKey.value;
     free(subKey);
     if (result$.isNull) return null;
-    return ISpeechDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -193,7 +193,7 @@ class ISpeechDataKey extends IDispatch implements ComInterface {
     final result$ = subKey.value;
     free(subKey);
     if (result$.isNull) return null;
-    return ISpeechDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -220,7 +220,7 @@ class ISpeechDataKey extends IDispatch implements ComInterface {
     }
     final result$ = subKeyName.value;
     free(subKeyName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -233,7 +233,7 @@ class ISpeechDataKey extends IDispatch implements ComInterface {
     }
     final result$ = valueName.value;
     free(valueName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

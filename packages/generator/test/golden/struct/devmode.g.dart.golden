@@ -124,24 +124,23 @@ base class DEVMODE extends Struct {
 
   /// Specifies bit flags identifying which of the following DEVMODEW members
   /// are in use.
-  DEVMODE_FIELD_FLAGS get dmFields => DEVMODE_FIELD_FLAGS(_dmFields);
+  DEVMODE_FIELD_FLAGS get dmFields => .new(_dmFields);
 
   set dmFields(DEVMODE_FIELD_FLAGS value) => _dmFields = value;
 
   /// For printers, specifies whether a color printer should print color or
   /// monochrome.
-  DEVMODE_COLOR get dmColor => DEVMODE_COLOR(_dmColor);
+  DEVMODE_COLOR get dmColor => .new(_dmColor);
 
   set dmColor(DEVMODE_COLOR value) => _dmColor = value;
-  DEVMODE_DUPLEX get dmDuplex => DEVMODE_DUPLEX(_dmDuplex);
+  DEVMODE_DUPLEX get dmDuplex => .new(_dmDuplex);
   set dmDuplex(DEVMODE_DUPLEX value) => _dmDuplex = value;
 
   /// For printers, specifies how TrueType fonts should be printed.
-  DEVMODE_TRUETYPE_OPTION get dmTTOption =>
-      DEVMODE_TRUETYPE_OPTION(_dmTTOption);
+  DEVMODE_TRUETYPE_OPTION get dmTTOption => .new(_dmTTOption);
 
   set dmTTOption(DEVMODE_TRUETYPE_OPTION value) => _dmTTOption = value;
-  DEVMODE_COLLATE get dmCollate => DEVMODE_COLLATE(_dmCollate);
+  DEVMODE_COLLATE get dmCollate => .new(_dmCollate);
   set dmCollate(DEVMODE_COLLATE value) => _dmCollate = value;
 
   /// For printers, specifies the name of the form to use; such as "Letter" or
@@ -250,11 +249,11 @@ sealed class DEVMODE_0_1 extends Struct {
   external int _dmDisplayFixedOutput;
 
   DEVMODE_DISPLAY_ORIENTATION get dmDisplayOrientation =>
-      DEVMODE_DISPLAY_ORIENTATION(_dmDisplayOrientation);
+      .new(_dmDisplayOrientation);
   set dmDisplayOrientation(DEVMODE_DISPLAY_ORIENTATION value) =>
       _dmDisplayOrientation = value;
   DEVMODE_DISPLAY_FIXED_OUTPUT get dmDisplayFixedOutput =>
-      DEVMODE_DISPLAY_FIXED_OUTPUT(_dmDisplayFixedOutput);
+      .new(_dmDisplayFixedOutput);
   set dmDisplayFixedOutput(DEVMODE_DISPLAY_FIXED_OUTPUT value) =>
       _dmDisplayFixedOutput = value;
 

@@ -117,7 +117,7 @@ final class EnumProjection extends Projection with ProjectionMixin {
         ),
       )
       ..lambda = true
-      ..body = .new('$name(_ $operator other);'),
+      ..body = .new('.new(_ $operator other);'),
   );
 
   @override

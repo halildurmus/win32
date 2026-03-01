@@ -40,7 +40,7 @@ final IID_IAppxManifestQualifiedResourcesEnumerator = GUID.fromComponents(
   0x8ef6adfe,
   0x3762,
   0x4a8f,
-  Uint8List.fromList(const [0x93, 0x73, 0x2f, 0xc5, 0xd4, 0x44, 0xc8, 0xd2]),
+  .fromList(const [0x93, 0x73, 0x2f, 0xc5, 0xd4, 0x44, 0xc8, 0xd2]),
 );
 
 /// {@category com}
@@ -89,7 +89,7 @@ class IAppxManifestQualifiedResourcesEnumerator extends IUnknown
     final result$ = resource.value;
     free(resource);
     if (result$.isNull) return null;
-    return IAppxManifestQualifiedResource(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

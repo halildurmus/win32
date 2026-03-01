@@ -33,7 +33,7 @@ const win32ImportLibraries = [
 
 Logger createDefaultLogger() {
   final logger = Logger.detached('CBuilder')
-    ..level = Level.INFO
+    ..level = .INFO
     ..onRecord.listen((record) {
       if (record.message.contains(
         'Microsoft (R) C/C++ Optimizing Compiler Version',
@@ -47,7 +47,7 @@ Logger createDefaultLogger() {
         return;
       }
 
-      if (record.level >= Level.WARNING) {
+      if (record.level >= .WARNING) {
         stderr.writeln(record.message);
       } else {
         stdout.writeln(record.message);
@@ -82,7 +82,7 @@ void main(List<String> args) async {
     CodeAsset createCodeAsset(String library) => CodeAsset(
       package: packageName,
       name: 'src/win32/${normalizeDynamicLibraryName(library)}.g.dart',
-      linkMode: DynamicLoadingSystem(Uri.file(library)),
+      linkMode: DynamicLoadingSystem(.file(library)),
     );
 
     output.assets.code.addAll(dynamicLibraries.map(createCodeAsset));

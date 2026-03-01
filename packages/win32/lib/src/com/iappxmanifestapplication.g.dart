@@ -39,7 +39,7 @@ final IID_IAppxManifestApplication = GUID.fromComponents(
   0x5da89bf4,
   0x3773,
   0x46be,
-  Uint8List.fromList(const [0xb6, 0x50, 0x7e, 0x74, 0x48, 0x63, 0xb7, 0xe8]),
+  .fromList(const [0xb6, 0x50, 0x7e, 0x74, 0x48, 0x63, 0xb7, 0xe8]),
 );
 
 /// Provides access to attribute values of the application.
@@ -95,7 +95,7 @@ class IAppxManifestApplication extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the application user model identifier.
@@ -113,7 +113,7 @@ class IAppxManifestApplication extends IUnknown implements ComInterface {
     }
     final result$ = appUserModelId.value;
     free(appUserModelId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

@@ -41,7 +41,7 @@ final IID_IConnectionPoint = GUID.fromComponents(
   0xb196b286,
   0xbab4,
   0x101a,
-  Uint8List.fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
+  .fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
 );
 
 /// Supports connection points for connectable objects.
@@ -123,7 +123,7 @@ class IConnectionPoint extends IUnknown implements ComInterface {
     final result$ = ppCPC.value;
     free(ppCPC);
     if (result$.isNull) return null;
-    return IConnectionPointContainer(result$);
+    return .new(result$);
   }
 
   /// Establishes a connection between a connection point object and the
@@ -175,7 +175,7 @@ class IConnectionPoint extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumConnections(result$);
+    return .new(result$);
   }
 
   @override

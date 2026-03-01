@@ -42,7 +42,7 @@ final IID_ISpObjectTokenCategory = GUID.fromComponents(
   0x2d3d3845,
   0x39af,
   0x4850,
-  Uint8List.fromList(const [0xbb, 0xf9, 0x40, 0xb4, 0x97, 0x80, 0x1, 0x1d]),
+  .fromList(const [0xbb, 0xf9, 0x40, 0xb4, 0x97, 0x80, 0x1, 0x1d]),
 );
 
 /// {@category com}
@@ -112,7 +112,7 @@ class ISpObjectTokenCategory extends ISpDataKey implements ComInterface {
     }
     final result$ = ppszCoMemCategoryId.value;
     free(ppszCoMemCategoryId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -126,7 +126,7 @@ class ISpObjectTokenCategory extends ISpDataKey implements ComInterface {
     final result$ = ppDataKey.value;
     free(ppDataKey);
     if (result$.isNull) return null;
-    return ISpDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -150,7 +150,7 @@ class ISpObjectTokenCategory extends ISpDataKey implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumSpObjectTokens(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -170,7 +170,7 @@ class ISpObjectTokenCategory extends ISpDataKey implements ComInterface {
     }
     final result$ = ppszCoMemTokenId.value;
     free(ppszCoMemTokenId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

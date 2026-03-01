@@ -660,7 +660,9 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
         ..type = .getter
         ..name = name
         ..lambda = true
-        ..body = cb.refer(type).newInstance([cb.refer(name.privatize())]).code,
+        ..body = cb.refer('.new').newInstance([
+          cb.refer(name.privatize()),
+        ]).code,
     ),
     .new(
       (b) => b
@@ -692,9 +694,7 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
             .property('isNull')
             .conditional(
               cb.literalNull,
-              cb.refer(field.type.publicType).newInstance([
-                cb.refer(name.privatize()),
-              ]),
+              cb.refer('.new').newInstance([cb.refer(name.privatize())]),
             )
             .code,
     ),

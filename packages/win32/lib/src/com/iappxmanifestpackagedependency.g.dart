@@ -39,7 +39,7 @@ final IID_IAppxManifestPackageDependency = GUID.fromComponents(
   0xe4946b59,
   0x733e,
   0x43f0,
-  Uint8List.fromList(const [0xa7, 0x24, 0x3b, 0xde, 0x4c, 0x12, 0x85, 0xa0]),
+  .fromList(const [0xa7, 0x24, 0x3b, 0xde, 0x4c, 0x12, 0x85, 0xa0]),
 );
 
 /// Describes the dependency of one package on another package.
@@ -97,7 +97,7 @@ class IAppxManifestPackageDependency extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the name of the publisher that produced the package on which the
@@ -116,7 +116,7 @@ class IAppxManifestPackageDependency extends IUnknown implements ComInterface {
     }
     final result$ = publisher.value;
     free(publisher);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the minimum version of the package on which the current package has a

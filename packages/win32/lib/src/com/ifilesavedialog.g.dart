@@ -44,7 +44,7 @@ final IID_IFileSaveDialog = GUID.fromComponents(
   0x84bccd23,
   0x5fde,
   0x4cdb,
-  Uint8List.fromList(const [0xae, 0xa4, 0xaf, 0x64, 0xb8, 0x3d, 0x78, 0xab]),
+  .fromList(const [0xae, 0xa4, 0xaf, 0x64, 0xb8, 0x3d, 0x78, 0xab]),
 );
 
 /// Extends the IFileDialog interface by adding methods specific to the save
@@ -161,7 +161,7 @@ class IFileSaveDialog extends IFileDialog implements ComInterface {
     final result$ = ppStore.value;
     free(ppStore);
     if (result$.isNull) return null;
-    return IPropertyStore(result$);
+    return .new(result$);
   }
 
   /// Applies a set of properties to an item using the Shell's copy engine.

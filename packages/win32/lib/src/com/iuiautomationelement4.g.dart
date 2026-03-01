@@ -41,7 +41,7 @@ final IID_IUIAutomationElement4 = GUID.fromComponents(
   0x3b6e233c,
   0x52fb,
   0x4063,
-  Uint8List.fromList(const [0xa4, 0xc9, 0x77, 0xc0, 0x75, 0xc2, 0xa0, 0x6b]),
+  .fromList(const [0xa4, 0xc9, 0x77, 0xc0, 0x75, 0xc2, 0xa0, 0x6b]),
 );
 
 /// Extends the IUIAutomationElement3 interface.
@@ -178,7 +178,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Returns the cached 1-based integer for the ordinal position in the set for
@@ -264,7 +264,7 @@ class IUIAutomationElement4 extends IUIAutomationElement3
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   @override

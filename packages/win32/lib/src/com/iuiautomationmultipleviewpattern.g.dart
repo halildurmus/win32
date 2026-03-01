@@ -39,7 +39,7 @@ final IID_IUIAutomationMultipleViewPattern = GUID.fromComponents(
   0x8d253c91,
   0x1dc5,
   0x4bb5,
-  Uint8List.fromList(const [0xb1, 0x8f, 0xad, 0xe1, 0x6f, 0xa4, 0x95, 0xe8]),
+  .fromList(const [0xb1, 0x8f, 0xad, 0xe1, 0x6f, 0xa4, 0x95, 0xe8]),
 );
 
 /// Provides access to a control that can switch between multiple
@@ -106,7 +106,7 @@ class IUIAutomationMultipleViewPattern extends IUnknown
     }
     final result$ = name.value;
     free(name);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sets the view of the control.

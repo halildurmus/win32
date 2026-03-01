@@ -42,7 +42,7 @@ final IID_IMetaDataDispenserEx = GUID.fromComponents(
   0x31bcfce2,
   0xdafb,
   0x11d2,
-  Uint8List.fromList(const [0x9f, 0x81, 0x0, 0xc0, 0x4f, 0x79, 0xa0, 0xa3]),
+  .fromList(const [0x9f, 0x81, 0x0, 0xc0, 0x4f, 0x79, 0xa0, 0xa3]),
 );
 
 /// Extends the IMetaDataDispenser interface to provide the capability to
@@ -179,7 +179,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser implements ComInterface {
     final result$ = ppIUnk.value;
     free(ppIUnk);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Gets the directory that holds the current common language runtime (CLR).

@@ -40,7 +40,7 @@ final IID_IUIAutomationTextRangeArray = GUID.fromComponents(
   0xce4ae76a,
   0xe717,
   0x4c98,
-  Uint8List.fromList(const [0x81, 0xea, 0x47, 0x37, 0x1d, 0x2, 0x8e, 0xb6]),
+  .fromList(const [0x81, 0xea, 0x47, 0x37, 0x1d, 0x2, 0x8e, 0xb6]),
 );
 
 /// Represents a collection of IUIAutomationTextRange objects.
@@ -110,7 +110,7 @@ class IUIAutomationTextRangeArray extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   @override

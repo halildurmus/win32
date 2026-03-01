@@ -42,7 +42,7 @@ final IID_IUIAutomationTextPattern2 = GUID.fromComponents(
   0x506a921a,
   0xfcc9,
   0x409f,
-  Uint8List.fromList(const [0xb2, 0x3b, 0x37, 0xeb, 0x74, 0x10, 0x68, 0x72]),
+  .fromList(const [0xb2, 0x3b, 0x37, 0xeb, 0x74, 0x10, 0x68, 0x72]),
 );
 
 /// Extends the IUIAutomationTextPattern interface.
@@ -104,7 +104,7 @@ class IUIAutomationTextPattern2 extends IUIAutomationTextPattern
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a zero-length text range at the location of the caret that

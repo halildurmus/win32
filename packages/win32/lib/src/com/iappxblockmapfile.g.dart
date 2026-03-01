@@ -41,7 +41,7 @@ final IID_IAppxBlockMapFile = GUID.fromComponents(
   0x277672ac,
   0x4f63,
   0x42c1,
-  Uint8List.fromList(const [0x8a, 0xbc, 0xbe, 0xae, 0x36, 0x0, 0xeb, 0x59]),
+  .fromList(const [0x8a, 0xbc, 0xbe, 0xae, 0x36, 0x0, 0xeb, 0x59]),
 );
 
 /// Represents a file in the block map.
@@ -109,7 +109,7 @@ class IAppxBlockMapFile extends IUnknown implements ComInterface {
     final result$ = blocks.value;
     free(blocks);
     if (result$.isNull) return null;
-    return IAppxBlockMapBlocksEnumerator(result$);
+    return .new(result$);
   }
 
   /// Retrieves the size of the zip local file header of the associated zip file
@@ -146,7 +146,7 @@ class IAppxBlockMapFile extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the uncompressed size of the associated zip file item.

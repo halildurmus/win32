@@ -41,7 +41,7 @@ final IID_IEnumSpObjectTokens = GUID.fromComponents(
   0x6b64f9e,
   0x7fda,
   0x11d2,
-  Uint8List.fromList(const [0xb4, 0xf2, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
+  .fromList(const [0xb4, 0xf2, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
 );
 
 /// {@category com}
@@ -123,7 +123,7 @@ class IEnumSpObjectTokens extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumSpObjectTokens(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -137,7 +137,7 @@ class IEnumSpObjectTokens extends IUnknown implements ComInterface {
     final result$ = ppToken.value;
     free(ppToken);
     if (result$.isNull) return null;
-    return ISpObjectToken(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

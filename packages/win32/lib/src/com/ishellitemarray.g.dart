@@ -43,7 +43,7 @@ final IID_IShellItemArray = GUID.fromComponents(
   0xb63ea76d,
   0x1f85,
   0x456f,
-  Uint8List.fromList(const [0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b]),
+  .fromList(const [0xa1, 0x9c, 0x48, 0x15, 0x9e, 0xfa, 0x85, 0x8b]),
 );
 
 /// Exposes methods that create and manipulate Shell item arrays.
@@ -218,7 +218,7 @@ class IShellItemArray extends IUnknown implements ComInterface {
     }
     final result$ = psfgaoAttribs.value;
     free(psfgaoAttribs);
-    return SFGAO_FLAGS(result$);
+    return .new(result$);
   }
 
   /// Gets the number of items in the given IShellItem array.
@@ -255,7 +255,7 @@ class IShellItemArray extends IUnknown implements ComInterface {
     final result$ = ppsi.value;
     free(ppsi);
     if (result$.isNull) return null;
-    return IShellItem(result$);
+    return .new(result$);
   }
 
   /// Gets an enumerator of the items in the array.
@@ -274,7 +274,7 @@ class IShellItemArray extends IUnknown implements ComInterface {
     final result$ = ppenumShellItems.value;
     free(ppenumShellItems);
     if (result$.isNull) return null;
-    return IEnumShellItems(result$);
+    return .new(result$);
   }
 
   @override

@@ -39,7 +39,7 @@ final IID_IAppxManifestHostRuntimeDependency = GUID.fromComponents(
   0x3455d234,
   0x8414,
   0x410d,
-  Uint8List.fromList(const [0x95, 0xc7, 0x7b, 0x35, 0x25, 0x5b, 0x83, 0x91]),
+  .fromList(const [0x95, 0xc7, 0x7b, 0x35, 0x25, 0x5b, 0x83, 0x91]),
 );
 
 /// {@category com}
@@ -87,7 +87,7 @@ class IAppxManifestHostRuntimeDependency extends IUnknown
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -100,7 +100,7 @@ class IAppxManifestHostRuntimeDependency extends IUnknown
     }
     final result$ = publisher.value;
     free(publisher);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

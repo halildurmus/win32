@@ -45,7 +45,7 @@ final IID_IUIAutomation6 = GUID.fromComponents(
   0xaae072da,
   0x29e3,
   0x413d,
-  Uint8List.fromList(const [0x87, 0xa7, 0x19, 0x2d, 0xbf, 0x81, 0xed, 0x10]),
+  .fromList(const [0x87, 0xa7, 0x19, 0x2d, 0xbf, 0x81, 0xed, 0x10]),
 );
 
 /// Extends the IUIAutomation5 interface to expose additional methods for
@@ -127,7 +127,7 @@ class IUIAutomation6 extends IUIAutomation5 implements ComInterface {
     final result$ = handlerGroup.value;
     free(handlerGroup);
     if (result$.isNull) return null;
-    return IUIAutomationEventHandlerGroup(result$);
+    return .new(result$);
   }
 
   /// Registers a collection of event handler methods specified with the
@@ -189,7 +189,7 @@ class IUIAutomation6 extends IUIAutomation5 implements ComInterface {
     }
     final result$ = connectionRecoveryBehaviorOptions.value;
     free(connectionRecoveryBehaviorOptions);
-    return ConnectionRecoveryBehaviorOptions(result$);
+    return .new(result$);
   }
 
   set connectionRecoveryBehavior(
@@ -215,7 +215,7 @@ class IUIAutomation6 extends IUIAutomation5 implements ComInterface {
     }
     final result$ = coalesceEventsOptions.value;
     free(coalesceEventsOptions);
-    return CoalesceEventsOptions(result$);
+    return .new(result$);
   }
 
   set coalesceEvents(CoalesceEventsOptions coalesceEventsOptions) {

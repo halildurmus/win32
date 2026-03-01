@@ -35,7 +35,7 @@ final IID_IWinHttpRequest = GUID.fromComponents(
   0x16fe2ec,
   0xb2c8,
   0x45f8,
-  Uint8List.fromList(const [0xb2, 0x3b, 0x39, 0xe5, 0x3a, 0x75, 0x39, 0x6b]),
+  .fromList(const [0xb2, 0x3b, 0x39, 0xe5, 0x3a, 0x75, 0x39, 0x6b]),
 );
 
 /// Provides all of the nonevent methods for Microsoft Windows HTTP Services
@@ -187,7 +187,7 @@ class IWinHttpRequest extends IDispatch implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves all HTTP response headers.
@@ -205,7 +205,7 @@ class IWinHttpRequest extends IDispatch implements ComInterface {
     }
     final result$ = headers.value;
     free(headers);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sends an HTTP request to an HTTP server.
@@ -249,7 +249,7 @@ class IWinHttpRequest extends IDispatch implements ComInterface {
     }
     final result$ = status.value;
     free(status);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the response entity body as text.
@@ -265,7 +265,7 @@ class IWinHttpRequest extends IDispatch implements ComInterface {
     }
     final result$ = body.value;
     free(body);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the response entity body as an array of unsigned bytes.

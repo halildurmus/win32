@@ -41,7 +41,7 @@ final IID_IUIAutomationTextChildPattern = GUID.fromComponents(
   0x6552b038,
   0xae05,
   0x40c8,
-  Uint8List.fromList(const [0xab, 0xfd, 0xaa, 0x8, 0x35, 0x2a, 0xab, 0x86]),
+  .fromList(const [0xab, 0xfd, 0xaa, 0x8, 0x35, 0x2a, 0xab, 0x86]),
 );
 
 /// Provides access a text-based control (or an object embedded in text) that is
@@ -93,7 +93,7 @@ class IUIAutomationTextChildPattern extends IUnknown implements ComInterface {
     final result$ = container.value;
     free(container);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a text range that encloses this child element.
@@ -110,7 +110,7 @@ class IUIAutomationTextChildPattern extends IUnknown implements ComInterface {
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   @override

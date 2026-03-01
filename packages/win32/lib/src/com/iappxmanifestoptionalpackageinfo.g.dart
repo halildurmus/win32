@@ -39,7 +39,7 @@ final IID_IAppxManifestOptionalPackageInfo = GUID.fromComponents(
   0x2634847d,
   0x5b5d,
   0x4fe5,
-  Uint8List.fromList(const [0xa2, 0x43, 0x0, 0x2f, 0xf9, 0x5e, 0xdc, 0x7e]),
+  .fromList(const [0xa2, 0x43, 0x0, 0x2f, 0xf9, 0x5e, 0xdc, 0x7e]),
 );
 
 /// Provides access to attribute values of the optional package information.
@@ -113,7 +113,7 @@ class IAppxManifestOptionalPackageInfo extends IUnknown
     }
     final result$ = mainPackageName.value;
     free(mainPackageName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

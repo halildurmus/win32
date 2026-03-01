@@ -43,7 +43,7 @@ final IID_IMoniker = GUID.fromComponents(
   0xf,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Enables you to use a moniker object, which contains information that
@@ -292,7 +292,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     final result$ = ppmkComposite.value;
     free(ppmkComposite);
     if (result$.isNull) return null;
-    return IMoniker(result$);
+    return .new(result$);
   }
 
   /// Retrieves a pointer to an enumerator for the components of a composite
@@ -312,7 +312,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     final result$ = ppenumMoniker.value;
     free(ppenumMoniker);
     if (result$.isNull) return null;
-    return IEnumMoniker(result$);
+    return .new(result$);
   }
 
   /// Determines whether this moniker is identical to the specified moniker.
@@ -408,7 +408,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     final result$ = ppmk.value;
     free(ppmk);
     if (result$.isNull) return null;
-    return IMoniker(result$);
+    return .new(result$);
   }
 
   /// Creates a new moniker based on the prefix that this moniker has in common
@@ -430,7 +430,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     final result$ = ppmkPrefix.value;
     free(ppmkPrefix);
     if (result$.isNull) return null;
-    return IMoniker(result$);
+    return .new(result$);
   }
 
   /// Creates a relative moniker between this moniker and the specified moniker.
@@ -451,7 +451,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     final result$ = ppmkRelPath.value;
     free(ppmkRelPath);
     if (result$.isNull) return null;
-    return IMoniker(result$);
+    return .new(result$);
   }
 
   /// Retrieves the display name for the moniker.
@@ -476,7 +476,7 @@ class IMoniker extends IPersistStream implements ComInterface {
     }
     final result$ = ppszDisplayName.value;
     free(ppszDisplayName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Converts a display name into a moniker.

@@ -40,7 +40,7 @@ final IID_ISpellingError = GUID.fromComponents(
   0xb7c82d61,
   0xfbe8,
   0x4b47,
-  Uint8List.fromList(const [0x9b, 0x27, 0x6c, 0xd, 0x2e, 0xd, 0xe0, 0xa3]),
+  .fromList(const [0x9b, 0x27, 0x6c, 0xd, 0x2e, 0xd, 0xe0, 0xa3]),
 );
 
 /// Provides information about a spelling error.
@@ -122,7 +122,7 @@ class ISpellingError extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return CORRECTIVE_ACTION(result$);
+    return .new(result$);
   }
 
   /// Gets the text to use as replacement text when the corrective action is
@@ -139,7 +139,7 @@ class ISpellingError extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

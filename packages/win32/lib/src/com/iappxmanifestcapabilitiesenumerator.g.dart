@@ -39,7 +39,7 @@ final IID_IAppxManifestCapabilitiesEnumerator = GUID.fromComponents(
   0x11d22258,
   0xf470,
   0x42c1,
-  Uint8List.fromList(const [0xb2, 0x91, 0x83, 0x61, 0xc5, 0x43, 0x7e, 0x41]),
+  .fromList(const [0xb2, 0x91, 0x83, 0x61, 0xc5, 0x43, 0x7e, 0x41]),
 );
 
 /// {@category com}
@@ -85,7 +85,7 @@ class IAppxManifestCapabilitiesEnumerator extends IUnknown
     }
     final result$ = capability.value;
     free(capability);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

@@ -44,7 +44,7 @@ import '../win32_result.dart';
 /// {@category dbghelp}
 Win32Result<bool> SymCleanup(HANDLE hProcess) {
   final result_ = SymCleanup_Wrapper(hProcess);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates all symbols in a process.
@@ -67,7 +67,7 @@ Win32Result<bool> SymEnumSymbols(
     enumSymbolsCallback,
     userContext ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves symbol information for the specified address.
@@ -88,7 +88,7 @@ Win32Result<bool> SymFromAddr(
     displacement ?? nullptr,
     symbol,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves symbol information for the specified managed code token.
@@ -104,7 +104,7 @@ Win32Result<bool> SymFromToken(
   Pointer<SYMBOL_INFO> symbol,
 ) {
   final result_ = SymFromTokenW_Wrapper(hProcess, base, token, symbol);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets whether the specified extended symbol option on or off.
@@ -136,7 +136,7 @@ Win32Result<bool> SymInitialize(
     userSearchPath ?? nullptr,
     fInvadeProcess ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Loads the symbol table for the specified module.
@@ -165,7 +165,7 @@ Win32Result<int> SymLoadModuleEx(
     data ?? nullptr,
     flags ?? NULL,
   );
-  return Win32Result(value: result_.value.u64, error: result_.error);
+  return .new(value: result_.value.u64, error: result_.error);
 }
 
 /// Turns the specified extended symbol option on or off.
@@ -201,7 +201,7 @@ external int _SymSetOptions(int symOptions);
 /// {@category dbghelp}
 Win32Result<bool> SymSetParentWindow(HWND hwnd) {
   final result_ = SymSetParentWindow_Wrapper(hwnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the local scope to the symbol that matches the specified address.
@@ -212,7 +212,7 @@ Win32Result<bool> SymSetParentWindow(HWND hwnd) {
 /// {@category dbghelp}
 Win32Result<bool> SymSetScopeFromAddr(HANDLE hProcess, int address) {
   final result_ = SymSetScopeFromAddr_Wrapper(hProcess, address);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the local scope to the symbol that matches the specified index.
@@ -227,7 +227,7 @@ Win32Result<bool> SymSetScopeFromIndex(
   int index,
 ) {
   final result_ = SymSetScopeFromIndex_Wrapper(hProcess, baseOfDll, index);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the local scope to the symbol that matches the specified address and
@@ -247,7 +247,7 @@ Win32Result<bool> SymSetScopeFromInlineContext(
     address,
     inlineContext,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the search path for the specified process.
@@ -258,7 +258,7 @@ Win32Result<bool> SymSetScopeFromInlineContext(
 /// {@category dbghelp}
 Win32Result<bool> SymSetSearchPath(HANDLE hProcess, PCWSTR? searchPathA) {
   final result_ = SymSetSearchPathW_Wrapper(hProcess, searchPathA ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unloads the symbol table.
@@ -269,7 +269,7 @@ Win32Result<bool> SymSetSearchPath(HANDLE hProcess, PCWSTR? searchPathA) {
 /// {@category dbghelp}
 Win32Result<bool> SymUnloadModule(HANDLE hProcess, int baseOfDll) {
   final result_ = SymUnloadModule_Wrapper(hProcess, baseOfDll);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unloads the symbol table.
@@ -280,7 +280,7 @@ Win32Result<bool> SymUnloadModule(HANDLE hProcess, int baseOfDll) {
 /// {@category dbghelp}
 Win32Result<bool> SymUnloadModule64(HANDLE hProcess, int baseOfDll) {
   final result_ = SymUnloadModule64_Wrapper(hProcess, baseOfDll);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Undecorates the specified decorated C++ symbol name.
@@ -301,5 +301,5 @@ Win32Result<int> UnDecorateSymbolName(
     maxStringLength,
     flags,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }

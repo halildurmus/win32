@@ -87,7 +87,7 @@ HSTRING WindowsConcatString(HSTRING? string1, HSTRING? string2) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
@@ -118,7 +118,7 @@ HSTRING WindowsCreateString(PCWSTR? sourceString, int length) {
   }
   final result$ = string.value;
   free(string);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer<Pointer>)>(
@@ -181,7 +181,7 @@ HSTRING WindowsDuplicateString(HSTRING? string) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer<Pointer>)>(
@@ -282,7 +282,7 @@ HSTRING WindowsPromoteStringBuffer(HSTRING_BUFFER bufferHandle) {
   }
   final result$ = string.value;
   free(string);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer<Pointer>)>(
@@ -322,7 +322,7 @@ HSTRING WindowsReplaceString(
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer, Pointer, Pointer<Pointer>)>(
@@ -386,7 +386,7 @@ HSTRING WindowsSubstring(HSTRING? string, int startIndex) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Uint32, Pointer<Pointer>)>(
@@ -429,7 +429,7 @@ HSTRING WindowsSubstringWithSpecifiedLength(
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Uint32, Uint32, Pointer<Pointer>)>(
@@ -462,7 +462,7 @@ HSTRING WindowsTrimStringEnd(HSTRING? string, HSTRING? trimString) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
@@ -498,7 +498,7 @@ HSTRING WindowsTrimStringStart(HSTRING? string, HSTRING? trimString) {
   }
   final result$ = newString.value;
   free(newString);
-  return HSTRING(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(

@@ -40,7 +40,7 @@ final IID_IAppxManifestReader5 = GUID.fromComponents(
   0x8d7ae132,
   0xa690,
   0x4c00,
-  Uint8List.fromList(const [0xb7, 0x5a, 0x6a, 0xae, 0x1f, 0xea, 0xac, 0x80]),
+  .fromList(const [0xb7, 0x5a, 0x6a, 0xae, 0x1f, 0xea, 0xac, 0x80]),
 );
 
 /// Represents an object model of the package manifest that provides methods to
@@ -94,7 +94,7 @@ class IAppxManifestReader5 extends IUnknown implements ComInterface {
     final result$ = mainPackageDependencies.value;
     free(mainPackageDependencies);
     if (result$.isNull) return null;
-    return IAppxManifestMainPackageDependenciesEnumerator(result$);
+    return .new(result$);
   }
 
   @override

@@ -40,7 +40,7 @@ final IID_ISensorCollection = GUID.fromComponents(
   0x23571e11,
   0xe545,
   0x4dd8,
-  Uint8List.fromList(const [0xa3, 0x37, 0xb8, 0x9b, 0xf4, 0x4b, 0x10, 0xdf]),
+  .fromList(const [0xa3, 0x37, 0xb8, 0x9b, 0xf4, 0x4b, 0x10, 0xdf]),
 );
 
 /// Represents a collection of sensors, such as all the sensors connected to a
@@ -101,7 +101,7 @@ class ISensorCollection extends IUnknown implements ComInterface {
     final result$ = ppSensor.value;
     free(ppSensor);
     if (result$.isNull) return null;
-    return ISensor(result$);
+    return .new(result$);
   }
 
   /// Retrieves the count of sensors in the collection.

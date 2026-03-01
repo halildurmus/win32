@@ -41,7 +41,7 @@ final IID_IAudioSessionManager = GUID.fromComponents(
   0xbfa971f1,
   0x4d5e,
   0x40bb,
-  Uint8List.fromList(const [0x93, 0x5e, 0x96, 0x70, 0x39, 0xbf, 0xbe, 0xe4]),
+  .fromList(const [0x93, 0x5e, 0x96, 0x70, 0x39, 0xbf, 0xbe, 0xe4]),
 );
 
 /// Enables a client to access the session controls and volume controls for both
@@ -107,7 +107,7 @@ class IAudioSessionManager extends IUnknown implements ComInterface {
     final result$ = sessionControl.value;
     free(sessionControl);
     if (result$.isNull) return null;
-    return IAudioSessionControl(result$);
+    return .new(result$);
   }
 
   /// Retrieves a simple audio volume control.
@@ -136,7 +136,7 @@ class IAudioSessionManager extends IUnknown implements ComInterface {
     final result$ = audioVolume.value;
     free(audioVolume);
     if (result$.isNull) return null;
-    return ISimpleAudioVolume(result$);
+    return .new(result$);
   }
 
   @override

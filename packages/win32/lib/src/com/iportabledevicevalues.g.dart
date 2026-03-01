@@ -45,7 +45,7 @@ final IID_IPortableDeviceValues = GUID.fromComponents(
   0x6848f6f2,
   0x3155,
   0x4f86,
-  Uint8List.fromList(const [0xb6, 0xf5, 0x26, 0x3e, 0xee, 0xab, 0x31, 0x43]),
+  .fromList(const [0xb6, 0xf5, 0x26, 0x3e, 0xee, 0xab, 0x31, 0x43]),
 );
 
 /// Holds a collection of PROPERTYKEY/PROPVARIANT pairs.
@@ -349,7 +349,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     }
     final result$ = pValue.value;
     free(pValue);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Adds a new ULONG value (type VT_UI4) or overwrites an existing one.
@@ -529,7 +529,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     }
     final result$ = pValue.value;
     free(pValue);
-    return HRESULT(result$);
+    return .new(result$);
   }
 
   /// Adds a new REFPROPERTYKEY value (type VT_UNKNOWN) or overwrites an
@@ -620,7 +620,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     final result$ = ppValue.value;
     free(ppValue);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Adds a new GUID value (type VT_CLSID) or overwrites an existing one.
@@ -722,7 +722,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     final result$ = ppValue.value;
     free(ppValue);
     if (result$.isNull) return null;
-    return IPortableDeviceValues(result$);
+    return .new(result$);
   }
 
   /// Adds a new IPortableDevicePropVariantCollection value (type VT_UNKNOWN) or
@@ -767,7 +767,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     final result$ = ppValue.value;
     free(ppValue);
     if (result$.isNull) return null;
-    return IPortableDevicePropVariantCollection(result$);
+    return .new(result$);
   }
 
   /// Adds a new SetIPortableDeviceKeyCollectionValue value (type VT_UNKNOWN) or
@@ -809,7 +809,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     final result$ = ppValue.value;
     free(ppValue);
     if (result$.isNull) return null;
-    return IPortableDeviceKeyCollection(result$);
+    return .new(result$);
   }
 
   /// Adds a new IPortableDeviceValuesCollection value (type VT_UNKNOWN) or
@@ -855,7 +855,7 @@ class IPortableDeviceValues extends IUnknown implements ComInterface {
     final result$ = ppValue.value;
     free(ppValue);
     if (result$.isNull) return null;
-    return IPortableDeviceValuesCollection(result$);
+    return .new(result$);
   }
 
   /// Removes an item from the collection.

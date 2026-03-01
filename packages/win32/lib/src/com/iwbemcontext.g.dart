@@ -41,7 +41,7 @@ final IID_IWbemContext = GUID.fromComponents(
   0x44aca674,
   0xe8fc,
   0x11d0,
-  Uint8List.fromList(const [0xa0, 0x7c, 0x0, 0xc0, 0x4f, 0xb6, 0x88, 0x20]),
+  .fromList(const [0xa0, 0x7c, 0x0, 0xc0, 0x4f, 0xb6, 0x88, 0x20]),
 );
 
 /// Used to communicate additional context information to providers when
@@ -124,7 +124,7 @@ class IWbemContext extends IUnknown implements ComInterface {
     final result$ = ppNewCopy.value;
     free(ppNewCopy);
     if (result$.isNull) return null;
-    return IWbemContext(result$);
+    return .new(result$);
   }
 
   /// Returns a SAFEARRAY structure of all of the names of the named context

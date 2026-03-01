@@ -40,7 +40,7 @@ final IID_IUIAutomationDockPattern = GUID.fromComponents(
   0xfde5ef97,
   0x1464,
   0x48f6,
-  Uint8List.fromList(const [0x90, 0xbf, 0x43, 0xd0, 0x94, 0x8e, 0x86, 0xec]),
+  .fromList(const [0x90, 0xbf, 0x43, 0xd0, 0x94, 0x8e, 0x86, 0xec]),
 );
 
 /// Provides access to a control that enables child elements to be arranged
@@ -104,7 +104,7 @@ class IUIAutomationDockPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return DockPosition(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached dock position of this element within its docking
@@ -121,7 +121,7 @@ class IUIAutomationDockPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return DockPosition(result$);
+    return .new(result$);
   }
 
   @override

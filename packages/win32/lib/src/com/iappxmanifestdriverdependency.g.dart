@@ -40,7 +40,7 @@ final IID_IAppxManifestDriverDependency = GUID.fromComponents(
   0x1210cb94,
   0x5a92,
   0x4602,
-  Uint8List.fromList(const [0xbe, 0x24, 0x79, 0xf3, 0x18, 0xaf, 0x4a, 0xf9]),
+  .fromList(const [0xbe, 0x24, 0x79, 0xf3, 0x18, 0xaf, 0x4a, 0xf9]),
 );
 
 /// {@category com}
@@ -82,7 +82,7 @@ class IAppxManifestDriverDependency extends IUnknown implements ComInterface {
     final result$ = driverConstraints.value;
     free(driverConstraints);
     if (result$.isNull) return null;
-    return IAppxManifestDriverConstraintsEnumerator(result$);
+    return .new(result$);
   }
 
   @override

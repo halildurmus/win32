@@ -41,7 +41,7 @@ final IID_IUIAutomationTextEditPattern = GUID.fromComponents(
   0x17e21576,
   0x996c,
   0x4870,
-  Uint8List.fromList(const [0x99, 0xd9, 0xbf, 0xf3, 0x23, 0x38, 0xc, 0x6]),
+  .fromList(const [0x99, 0xd9, 0xbf, 0xf3, 0x23, 0x38, 0xc, 0x6]),
 );
 
 /// Provides access to a control that modifies text, for example a control that
@@ -100,7 +100,7 @@ class IUIAutomationTextEditPattern extends IUIAutomationTextPattern
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Returns the current conversion target range.
@@ -119,7 +119,7 @@ class IUIAutomationTextEditPattern extends IUIAutomationTextPattern
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   @override

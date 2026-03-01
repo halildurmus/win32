@@ -40,7 +40,7 @@ final IID_ISpDataKey = GUID.fromComponents(
   0x14056581,
   0xe16c,
   0x11d2,
-  Uint8List.fromList(const [0xbb, 0x90, 0x0, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0]),
+  .fromList(const [0xbb, 0x90, 0x0, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0]),
 );
 
 /// {@category com}
@@ -148,7 +148,7 @@ class ISpDataKey extends IUnknown implements ComInterface {
     }
     final result$ = ppszValue.value;
     free(ppszValue);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -176,7 +176,7 @@ class ISpDataKey extends IUnknown implements ComInterface {
     final result$ = ppSubKey.value;
     free(ppSubKey);
     if (result$.isNull) return null;
-    return ISpDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -190,7 +190,7 @@ class ISpDataKey extends IUnknown implements ComInterface {
     final result$ = ppSubKey.value;
     free(ppSubKey);
     if (result$.isNull) return null;
-    return ISpDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -217,7 +217,7 @@ class ISpDataKey extends IUnknown implements ComInterface {
     }
     final result$ = ppszSubKeyName.value;
     free(ppszSubKeyName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -230,7 +230,7 @@ class ISpDataKey extends IUnknown implements ComInterface {
     }
     final result$ = ppszValueName.value;
     free(ppszValueName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

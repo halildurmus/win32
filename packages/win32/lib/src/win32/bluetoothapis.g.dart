@@ -113,7 +113,7 @@ external int _BluetoothEnumerateInstalledServices(
 /// {@category bluetoothapis}
 Win32Result<bool> BluetoothFindDeviceClose(HBLUETOOTH_DEVICE_FIND hFind) {
   final result_ = BluetoothFindDeviceClose_Wrapper(hFind);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Begins the enumeration Bluetooth devices.
@@ -127,10 +127,7 @@ Win32Result<HBLUETOOTH_DEVICE_FIND> BluetoothFindFirstDevice(
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
 ) {
   final result_ = BluetoothFindFirstDevice_Wrapper(pbtsp, pbtdi);
-  return Win32Result(
-    value: HBLUETOOTH_DEVICE_FIND(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Begins the enumeration of local Bluetooth radios.
@@ -144,10 +141,7 @@ Win32Result<HBLUETOOTH_RADIO_FIND> BluetoothFindFirstRadio(
   Pointer<Pointer> phRadio,
 ) {
   final result_ = BluetoothFindFirstRadio_Wrapper(pbtfrp, phRadio);
-  return Win32Result(
-    value: HBLUETOOTH_RADIO_FIND(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Finds the next Bluetooth device.
@@ -161,7 +155,7 @@ Win32Result<bool> BluetoothFindNextDevice(
   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
 ) {
   final result_ = BluetoothFindNextDevice_Wrapper(hFind, pbtdi);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Finds the next Bluetooth radio.
@@ -175,7 +169,7 @@ Win32Result<bool> BluetoothFindNextRadio(
   Pointer<Pointer> phRadio,
 ) {
   final result_ = BluetoothFindNextRadio_Wrapper(hFind, phRadio);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes the enumeration handle associated with finding Bluetooth radios.
@@ -186,7 +180,7 @@ Win32Result<bool> BluetoothFindNextRadio(
 /// {@category bluetoothapis}
 Win32Result<bool> BluetoothFindRadioClose(HBLUETOOTH_RADIO_FIND hFind) {
   final result_ = BluetoothFindRadioClose_Wrapper(hFind);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Specifies the end of reliable write procedures, and the writes should be
@@ -755,7 +749,7 @@ Win32Result<int> BluetoothGetRadioInfo(
   Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo,
 ) {
   final result_ = BluetoothGetRadioInfo_Wrapper(hRadio, pRadioInfo);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Determines whether a Bluetooth radio or radios is connectable.
@@ -868,7 +862,7 @@ Win32Result<bool> BluetoothSdpEnumAttributes(
     pfnCallback,
     pvParam,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the attribute value for an attribute identifier.
@@ -1063,7 +1057,7 @@ external int _BluetoothSetServiceState(
 /// {@category bluetoothapis}
 Win32Result<bool> BluetoothUnregisterAuthentication(int hRegHandle) {
   final result_ = BluetoothUnregisterAuthentication_Wrapper(hRegHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Updates the local computer cache about a Bluetooth device.

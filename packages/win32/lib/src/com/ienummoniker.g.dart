@@ -41,7 +41,7 @@ final IID_IEnumMoniker = GUID.fromComponents(
   0x102,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Enumerates the components of a moniker or the monikers in a table of
@@ -130,7 +130,7 @@ class IEnumMoniker extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumMoniker(result$);
+    return .new(result$);
   }
 
   @override

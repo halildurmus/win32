@@ -42,7 +42,7 @@ final IID_IEnumWbemClassObject = GUID.fromComponents(
   0x27947e1,
   0xd731,
   0x11ce,
-  Uint8List.fromList(const [0xa3, 0x57, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1]),
+  .fromList(const [0xa3, 0x57, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1]),
 );
 
 /// Used to enumerate Common Information Model (CIM) objects and is similar to a
@@ -145,7 +145,7 @@ class IEnumWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// You can use the `IEnumWbemClassObject.skip` method to move the current

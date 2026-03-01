@@ -14,5 +14,5 @@ HSTRING getRuntimeClassName() {
   }
   final result$ = className.value;
   free(className);
-  return HSTRING(result$);
+  return .new(result$);
 }

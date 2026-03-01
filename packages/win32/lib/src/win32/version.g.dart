@@ -52,7 +52,7 @@ Win32Result<bool> GetFileVersionInfo(
     dwLen,
     lpData,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves version information for the specified file.
@@ -74,7 +74,7 @@ Win32Result<bool> GetFileVersionInfoEx(
     dwLen,
     lpData,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the operating system can retrieve version information for
@@ -95,7 +95,7 @@ Win32Result<int> GetFileVersionInfoSize(
     lptstrFilename,
     lpdwHandle ?? nullptr,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Determines whether the operating system can retrieve version information for
@@ -118,7 +118,7 @@ Win32Result<int> GetFileVersionInfoSizeEx(
     lpwstrFilename,
     lpdwHandle,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Determines where to install a file based on whether it locates another
@@ -141,7 +141,7 @@ VER_FIND_FILE_STATUS VerFindFile(
   Pointer<Uint32> puCurDirLen,
   PWSTR szDestDir,
   Pointer<Uint32> puDestDirLen,
-) => VER_FIND_FILE_STATUS(
+) => .new(
   _VerFindFile(
     uFlags,
     szFileName,
@@ -197,7 +197,7 @@ VER_INSTALL_FILE_STATUS VerInstallFile(
   PCWSTR szCurDir,
   PWSTR szTmpFile,
   Pointer<Uint32> puTmpFileLen,
-) => VER_INSTALL_FILE_STATUS(
+) => .new(
   _VerInstallFile(
     uFlags,
     szSrcFileName,

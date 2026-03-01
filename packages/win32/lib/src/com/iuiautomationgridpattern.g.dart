@@ -40,7 +40,7 @@ final IID_IUIAutomationGridPattern = GUID.fromComponents(
   0x414c3cdc,
   0x856b,
   0x4f5b,
-  Uint8List.fromList(const [0x85, 0x38, 0x31, 0x31, 0xc6, 0x30, 0x25, 0x50]),
+  .fromList(const [0x85, 0x38, 0x31, 0x31, 0xc6, 0x30, 0x25, 0x50]),
 );
 
 /// Provides access to a control that acts as a container for a collection of
@@ -102,7 +102,7 @@ class IUIAutomationGridPattern extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the number of rows in the grid.

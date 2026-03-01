@@ -40,7 +40,7 @@ final IID_IEnumResources = GUID.fromComponents(
   0x2dd81fe3,
   0xa83c,
   0x4da9,
-  Uint8List.fromList(const [0xa3, 0x30, 0x47, 0x24, 0x9d, 0x34, 0x5b, 0xa1]),
+  .fromList(const [0xa3, 0x30, 0x47, 0x24, 0x9d, 0x34, 0x5b, 0xa1]),
 );
 
 /// Exposes resource enumeration methods.
@@ -139,7 +139,7 @@ class IEnumResources extends IUnknown implements ComInterface {
     final result$ = ppenumr.value;
     free(ppenumr);
     if (result$.isNull) return null;
-    return IEnumResources(result$);
+    return .new(result$);
   }
 
   @override

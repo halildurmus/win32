@@ -44,7 +44,7 @@ final IID_IFileDialog = GUID.fromComponents(
   0x42f85136,
   0xdb7e,
   0x439c,
-  Uint8List.fromList(const [0x85, 0xf1, 0xe4, 0x7, 0x5d, 0x13, 0x5f, 0xc8]),
+  .fromList(const [0x85, 0xf1, 0xe4, 0x7, 0x5d, 0x13, 0x5f, 0xc8]),
 );
 
 /// Exposes methods that initialize, show, and get results from the common file
@@ -240,7 +240,7 @@ class IFileDialog extends IModalWindow implements ComInterface {
     }
     final result$ = pfos.value;
     free(pfos);
-    return FILEOPENDIALOGOPTIONS(result$);
+    return .new(result$);
   }
 
   /// Sets the folder used as a default if there is not a recently used folder
@@ -287,7 +287,7 @@ class IFileDialog extends IModalWindow implements ComInterface {
     final result$ = ppsi.value;
     free(ppsi);
     if (result$.isNull) return null;
-    return IShellItem(result$);
+    return .new(result$);
   }
 
   /// Gets the user's current selection in the dialog.
@@ -306,7 +306,7 @@ class IFileDialog extends IModalWindow implements ComInterface {
     final result$ = ppsi.value;
     free(ppsi);
     if (result$.isNull) return null;
-    return IShellItem(result$);
+    return .new(result$);
   }
 
   /// Sets the file name that appears in the File name edit box when that dialog
@@ -337,7 +337,7 @@ class IFileDialog extends IModalWindow implements ComInterface {
     }
     final result$ = pszName.value;
     free(pszName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Sets the title of the dialog.
@@ -392,7 +392,7 @@ class IFileDialog extends IModalWindow implements ComInterface {
     final result$ = ppsi.value;
     free(ppsi);
     if (result$.isNull) return null;
-    return IShellItem(result$);
+    return .new(result$);
   }
 
   /// Adds a folder to the list of places available for the user to open or save

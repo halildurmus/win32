@@ -41,7 +41,7 @@ final IID_ISpeechVoiceStatus = GUID.fromComponents(
   0x8be47b07,
   0x57f6,
   0x11d2,
-  Uint8List.fromList(const [0x9e, 0xee, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
+  .fromList(const [0x9e, 0xee, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
 );
 
 /// Defines the types of information returned by the SpVoice.Status method.
@@ -141,7 +141,7 @@ class ISpeechVoiceStatus extends IDispatch implements ComInterface {
     }
     final result$ = state.value;
     free(state);
-    return SpeechRunState(result$);
+    return .new(result$);
   }
 
   int get inputWordPosition {
@@ -201,7 +201,7 @@ class ISpeechVoiceStatus extends IDispatch implements ComInterface {
     }
     final result$ = bookmark.value;
     free(bookmark);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   int get lastBookmarkId {

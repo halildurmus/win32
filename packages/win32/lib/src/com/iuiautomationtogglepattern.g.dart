@@ -40,7 +40,7 @@ final IID_IUIAutomationTogglePattern = GUID.fromComponents(
   0x94cf8058,
   0x9b8d,
   0x4ab9,
-  Uint8List.fromList(const [0x8b, 0xfd, 0x4c, 0xd0, 0xa3, 0x3c, 0x8c, 0x70]),
+  .fromList(const [0x8b, 0xfd, 0x4c, 0xd0, 0xa3, 0x3c, 0x8c, 0x70]),
 );
 
 /// Provides access to a control that can cycle through a set of states, and
@@ -104,7 +104,7 @@ class IUIAutomationTogglePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return ToggleState(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached state of the control.
@@ -120,7 +120,7 @@ class IUIAutomationTogglePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return ToggleState(result$);
+    return .new(result$);
   }
 
   @override

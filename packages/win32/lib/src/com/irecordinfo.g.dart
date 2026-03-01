@@ -42,7 +42,7 @@ final IID_IRecordInfo = GUID.fromComponents(
   0x2f,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Describes the structure of a particular UDT.
@@ -203,7 +203,7 @@ class IRecordInfo extends IUnknown implements ComInterface {
     }
     final result$ = pbstrName.value;
     free(pbstrName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the number of bytes of memory necessary to hold the record instance.
@@ -240,7 +240,7 @@ class IRecordInfo extends IUnknown implements ComInterface {
     final result$ = ppTypeInfo.value;
     free(ppTypeInfo);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   /// Returns a pointer to the VARIANT containing the value of a given field

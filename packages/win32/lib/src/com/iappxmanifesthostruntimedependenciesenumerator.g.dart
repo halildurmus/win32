@@ -40,7 +40,7 @@ final IID_IAppxManifestHostRuntimeDependenciesEnumerator = GUID.fromComponents(
   0x6427a646,
   0x7f49,
   0x433e,
-  Uint8List.fromList(const [0xb1, 0xa6, 0xd, 0xa3, 0x9, 0xf6, 0x88, 0x5a]),
+  .fromList(const [0xb1, 0xa6, 0xd, 0xa3, 0x9, 0xf6, 0x88, 0x5a]),
 );
 
 /// {@category com}
@@ -91,7 +91,7 @@ class IAppxManifestHostRuntimeDependenciesEnumerator extends IUnknown
     final result$ = hostRuntimeDependency.value;
     free(hostRuntimeDependency);
     if (result$.isNull) return null;
-    return IAppxManifestHostRuntimeDependency(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

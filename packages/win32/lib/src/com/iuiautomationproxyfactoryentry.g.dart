@@ -41,7 +41,7 @@ final IID_IUIAutomationProxyFactoryEntry = GUID.fromComponents(
   0xd50e472e,
   0xb64b,
   0x490c,
-  Uint8List.fromList(const [0xbc, 0xa1, 0xd3, 0x6, 0x96, 0xf9, 0xf2, 0x89]),
+  .fromList(const [0xbc, 0xa1, 0xd3, 0x6, 0x96, 0xf9, 0xf2, 0x89]),
 );
 
 /// Represents a proxy factory in the table maintained by Microsoft UI
@@ -119,7 +119,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown implements ComInterface {
     final result$ = factory.value;
     free(factory);
     if (result$.isNull) return null;
-    return IUIAutomationProxyFactory(result$);
+    return .new(result$);
   }
 
   /// Sets or retrieves the name of the window class served by the proxy
@@ -138,7 +138,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown implements ComInterface {
     }
     final result$ = className.value;
     free(className);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sets or retrieves the name of the image of the proxy factory.
@@ -156,7 +156,7 @@ class IUIAutomationProxyFactoryEntry extends IUnknown implements ComInterface {
     }
     final result$ = imageName.value;
     free(imageName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Sets or retrieves a value that specifies whether the proxy allows

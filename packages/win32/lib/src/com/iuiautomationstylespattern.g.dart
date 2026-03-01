@@ -40,7 +40,7 @@ final IID_IUIAutomationStylesPattern = GUID.fromComponents(
   0x85b5f0a2,
   0xbd79,
   0x484a,
-  Uint8List.fromList(const [0xad, 0x2b, 0x38, 0x8c, 0x98, 0x38, 0xd5, 0xfb]),
+  .fromList(const [0xad, 0x2b, 0x38, 0x8c, 0x98, 0x38, 0xd5, 0xfb]),
 );
 
 /// Enables Microsoft UI Automation clients to retrieve the visual styles
@@ -135,7 +135,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_STYLE_ID(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the visual style associated with an element in a
@@ -152,7 +152,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the fill color of an element in a document.
@@ -180,7 +180,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the shape of an element in a document.
@@ -196,7 +196,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the color of the pattern used to fill an element in a document.
@@ -229,7 +229,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -258,7 +258,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_STYLE_ID(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached name of the visual style associated with an element
@@ -275,7 +275,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached fill color of an element in a document.
@@ -303,7 +303,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached shape of an element in a document.
@@ -319,7 +319,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached color of the pattern used to fill an element in a
@@ -353,7 +353,7 @@ class IUIAutomationStylesPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

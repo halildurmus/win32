@@ -41,7 +41,7 @@ final IID_IKnownFolderManager = GUID.fromComponents(
   0x8be2d872,
   0x86aa,
   0x4d47,
-  Uint8List.fromList(const [0xb7, 0x76, 0x32, 0xcc, 0xa4, 0xc, 0x70, 0x18]),
+  .fromList(const [0xb7, 0x76, 0x32, 0xcc, 0xa4, 0xc, 0x70, 0x18]),
 );
 
 /// Exposes methods that create, enumerate or manage existing known folders.
@@ -191,7 +191,7 @@ class IKnownFolderManager extends IUnknown implements ComInterface {
     final result$ = ppkf.value;
     free(ppkf);
     if (result$.isNull) return null;
-    return IKnownFolder(result$);
+    return .new(result$);
   }
 
   /// Gets an object that represents a known folder identified by its canonical
@@ -211,7 +211,7 @@ class IKnownFolderManager extends IUnknown implements ComInterface {
     final result$ = ppkf.value;
     free(ppkf);
     if (result$.isNull) return null;
-    return IKnownFolder(result$);
+    return .new(result$);
   }
 
   /// Adds a new known folder to the registry.
@@ -263,7 +263,7 @@ class IKnownFolderManager extends IUnknown implements ComInterface {
     final result$ = ppkf.value;
     free(ppkf);
     if (result$.isNull) return null;
-    return IKnownFolder(result$);
+    return .new(result$);
   }
 
   /// Gets an object that represents a known folder based on an IDList.
@@ -286,7 +286,7 @@ class IKnownFolderManager extends IUnknown implements ComInterface {
     final result$ = ppkf.value;
     free(ppkf);
     if (result$.isNull) return null;
-    return IKnownFolder(result$);
+    return .new(result$);
   }
 
   /// Redirects folder requests for common and per-user folders.

@@ -40,7 +40,7 @@ final IID_IUIAutomationDragPattern = GUID.fromComponents(
   0x1dc7b570,
   0x1f54,
   0x4bad,
-  Uint8List.fromList(const [0xbc, 0xda, 0xd3, 0x6a, 0x72, 0x2f, 0xb7, 0xbd]),
+  .fromList(const [0xbc, 0xda, 0xd3, 0x6a, 0x72, 0x2f, 0xb7, 0xbd]),
 );
 
 /// Provides access to information exposed by a UI Automation provider for an
@@ -141,7 +141,7 @@ class IUIAutomationDragPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached localized string that indicates what happens when the
@@ -158,7 +158,7 @@ class IUIAutomationDragPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of localized strings that enumerate the full set of
@@ -214,7 +214,7 @@ class IUIAutomationDragPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached collection of elements that represent the full set of
@@ -234,7 +234,7 @@ class IUIAutomationDragPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   @override

@@ -52,7 +52,7 @@ Win32Result<HKL> ActivateKeyboardLayout(
   ACTIVATE_KEYBOARD_LAYOUT_FLAGS flags,
 ) {
   final result_ = ActivateKeyboardLayout_Wrapper(hkl, flags);
-  return Win32Result(value: HKL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Places the given window in the system-maintained clipboard format listener
@@ -64,7 +64,7 @@ Win32Result<HKL> ActivateKeyboardLayout(
 /// {@category user32}
 Win32Result<bool> AddClipboardFormatListener(HWND hwnd) {
   final result_ = AddClipboardFormatListener_Wrapper(hwnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Calculates the required size of the window rectangle, based on the desired
@@ -87,7 +87,7 @@ Win32Result<bool> AdjustWindowRect(
     dwStyle,
     bMenu ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Calculates the required size of the window rectangle, based on the desired
@@ -112,7 +112,7 @@ Win32Result<bool> AdjustWindowRectEx(
     bMenu ? TRUE : FALSE,
     dwExStyle,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Calculates the required size of the window rectangle, based on the desired
@@ -136,7 +136,7 @@ Win32Result<bool> AdjustWindowRectExForDpi(
     dwExStyle,
     dpi,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables the specified process to set the foreground window using the
@@ -150,7 +150,7 @@ Win32Result<bool> AdjustWindowRectExForDpi(
 /// {@category user32}
 Win32Result<bool> AllowSetForegroundWindow(int dwProcessId) {
   final result_ = AllowSetForegroundWindow_Wrapper(dwProcessId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables you to produce special effects when showing or hiding windows.
@@ -168,7 +168,7 @@ Win32Result<bool> AnimateWindow(
   ANIMATE_WINDOW_FLAGS dwFlags,
 ) {
   final result_ = AnimateWindow_Wrapper(hWnd, dwTime, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Indicates whether an owned, visible, top-level pop-up, or overlapped window
@@ -209,7 +209,7 @@ Win32Result<bool> AppendMenu(
     uIDNewItem,
     lpNewItem ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether two DPI_AWARENESS_CONTEXT values are identical.
@@ -241,7 +241,7 @@ external int _AreDpiAwarenessContextsEqual(
 /// {@category user32}
 Win32Result<int> ArrangeIconicWindows(HWND hWnd) {
   final result_ = ArrangeIconicWindows_Wrapper(hWnd);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Attaches or detaches the input processing mechanism of one thread to that of
@@ -267,7 +267,7 @@ external int _AttachThreadInput(int idAttach, int idAttachTo, int fAttach);
 /// {@category user32}
 Win32Result<HDWP> BeginDeferWindowPos(int nNumWindows) {
   final result_ = BeginDeferWindowPos_Wrapper(nNumWindows);
-  return Win32Result(value: HDWP(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Prepares the specified window for painting and fills a PAINTSTRUCT structure
@@ -292,7 +292,7 @@ external Pointer _BeginPaint(Pointer hWnd, Pointer<PAINTSTRUCT> lpPaint);
 /// {@category user32}
 Win32Result<bool> BlockInput(bool fBlockIt) {
   final result_ = BlockInput_Wrapper(fBlockIt ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Brings the specified window to the top of the Z order.
@@ -307,7 +307,7 @@ Win32Result<bool> BlockInput(bool fBlockIt) {
 /// {@category user32}
 Win32Result<bool> BringWindowToTop(HWND hWnd) {
   final result_ = BringWindowToTop_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sends a message to the specified recipients.
@@ -330,7 +330,7 @@ Win32Result<int> BroadcastSystemMessage(
     wParam,
     lParam,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sends a message to the specified recipients.
@@ -355,7 +355,7 @@ Win32Result<int> BroadcastSystemMessageEx(
     lParam,
     pbsmInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Calculates an appropriate pop-up window position using the specified anchor
@@ -379,7 +379,7 @@ Win32Result<bool> CalculatePopupWindowPosition(
     excludeRect ?? nullptr,
     popupWindowPosition,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Passes the specified message and hook code to the hook procedures associated
@@ -467,7 +467,7 @@ Win32Result<int> CascadeWindows(
     cKids,
     lpKids ?? nullptr,
   );
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Removes a specified window from the chain of clipboard viewers.
@@ -494,7 +494,7 @@ external int _ChangeClipboardChain(Pointer hWndRemove, Pointer hWndNewNext);
 DISP_CHANGE ChangeDisplaySettings(
   Pointer<DEVMODE>? lpDevMode,
   CDS_TYPE dwFlags,
-) => DISP_CHANGE(_ChangeDisplaySettings(lpDevMode ?? nullptr, dwFlags));
+) => .new(_ChangeDisplaySettings(lpDevMode ?? nullptr, dwFlags));
 
 @Native<Int32 Function(Pointer<DEVMODE>, Uint32)>(
   symbol: 'ChangeDisplaySettingsW',
@@ -514,7 +514,7 @@ DISP_CHANGE ChangeDisplaySettingsEx(
   Pointer<DEVMODE>? lpDevMode,
   CDS_TYPE dwflags,
   Pointer? lParam,
-) => DISP_CHANGE(
+) => .new(
   _ChangeDisplaySettingsEx(
     lpszDeviceName ?? nullptr,
     lpDevMode ?? nullptr,
@@ -547,7 +547,7 @@ Win32Result<bool> ChangeWindowMessageFilter(
   CHANGE_WINDOW_MESSAGE_FILTER_FLAGS dwFlag,
 ) {
   final result_ = ChangeWindowMessageFilter_Wrapper(message, dwFlag);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Modifies the User Interface Privilege Isolation (UIPI) message filter for a
@@ -569,7 +569,7 @@ Win32Result<bool> ChangeWindowMessageFilterEx(
     action,
     pChangeFilterStruct ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes the check state of a button control.
@@ -584,7 +584,7 @@ Win32Result<bool> CheckDlgButton(
   DLG_BUTTON_CHECK_STATE uCheck,
 ) {
   final result_ = CheckDlgButton_Wrapper(hDlg, nIDButton, uCheck);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds a check mark to (checks) a specified radio button in a group and
@@ -606,7 +606,7 @@ Win32Result<bool> CheckRadioButton(
     nIDLastButton,
     nIDCheckButton,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines which, if any, of the child windows belonging to a parent window
@@ -664,7 +664,7 @@ external int _ClientToScreen(Pointer hWnd, Pointer<POINT> lpPoint);
 /// {@category user32}
 Win32Result<bool> ClipCursor(Pointer<RECT>? lpRect) {
   final result_ = ClipCursor_Wrapper(lpRect ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes the clipboard.
@@ -675,7 +675,7 @@ Win32Result<bool> ClipCursor(Pointer<RECT>? lpRect) {
 /// {@category user32}
 Win32Result<bool> CloseClipboard() {
   final result_ = CloseClipboard_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes an open handle to a desktop object.
@@ -686,7 +686,7 @@ Win32Result<bool> CloseClipboard() {
 /// {@category user32}
 Win32Result<bool> CloseDesktop(HDESK hDesktop) {
   final result_ = CloseDesktop_Wrapper(hDesktop);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes resources associated with a gesture information handle.
@@ -697,7 +697,7 @@ Win32Result<bool> CloseDesktop(HDESK hDesktop) {
 /// {@category user32}
 Win32Result<bool> CloseGestureInfoHandle(HGESTUREINFO hGestureInfo) {
   final result_ = CloseGestureInfoHandle_Wrapper(hGestureInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a touch input handle, frees process memory associated with it, and
@@ -709,7 +709,7 @@ Win32Result<bool> CloseGestureInfoHandle(HGESTUREINFO hGestureInfo) {
 /// {@category user32}
 Win32Result<bool> CloseTouchInputHandle(HTOUCHINPUT hTouchInput) {
   final result_ = CloseTouchInputHandle_Wrapper(hTouchInput);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Minimizes (but does not destroy) the specified window.
@@ -720,7 +720,7 @@ Win32Result<bool> CloseTouchInputHandle(HTOUCHINPUT hTouchInput) {
 /// {@category user32}
 Win32Result<bool> CloseWindow(HWND hWnd) {
   final result_ = CloseWindow_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes an open window station handle.
@@ -731,7 +731,7 @@ Win32Result<bool> CloseWindow(HWND hWnd) {
 /// {@category user32}
 Win32Result<bool> CloseWindowStation(HWINSTA hWinSta) {
   final result_ = CloseWindowStation_Wrapper(hWinSta);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies the specified accelerator table.
@@ -768,7 +768,7 @@ external int _CopyAcceleratorTable(
 /// {@category user32}
 Win32Result<HICON> CopyIcon(HICON hIcon) {
   final result_ = CopyIcon_Wrapper(hIcon);
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a new image (icon, cursor, or bitmap) and copies the attributes of
@@ -789,7 +789,7 @@ Win32Result<HANDLE> CopyImage(
   IMAGE_FLAGS flags,
 ) {
   final result_ = CopyImage_Wrapper(h, type, cx, cy, flags);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Copies the coordinates of one rectangle to another.
@@ -813,7 +813,7 @@ external int _CopyRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc);
 /// {@category user32}
 Win32Result<int> CountClipboardFormats() {
   final result_ = CountClipboardFormats_Wrapper();
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Creates an accelerator table.
@@ -824,7 +824,7 @@ Win32Result<int> CountClipboardFormats() {
 /// {@category user32}
 Win32Result<HACCEL> CreateAcceleratorTable(Pointer<ACCEL> paccel, int cAccel) {
   final result_ = CreateAcceleratorTableW_Wrapper(paccel, cAccel);
-  return Win32Result(value: HACCEL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a new shape for the system caret and assigns ownership of the caret
@@ -848,7 +848,7 @@ Win32Result<bool> CreateCaret(
     nWidth,
     nHeight,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a cursor having the specified size, bit patterns, and hot spot.
@@ -875,7 +875,7 @@ Win32Result<HCURSOR> CreateCursor(
     pvANDPlane,
     pvXORPlane,
   );
-  return Win32Result(value: HCURSOR(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a new desktop, associates it with the current window station of the
@@ -899,7 +899,7 @@ Win32Result<HDESK> CreateDesktop(
     dwDesiredAccess,
     lpsa ?? nullptr,
   );
-  return Win32Result(value: HDESK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a new desktop with the specified heap, associates it with the
@@ -927,7 +927,7 @@ Win32Result<HDESK> CreateDesktopEx(
     ulHeapSize,
     nullptr,
   );
-  return Win32Result(value: HDESK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a modeless dialog box from a dialog box template in memory.
@@ -950,7 +950,7 @@ Win32Result<HWND> CreateDialogIndirectParam(
     lpDialogFunc ?? nullptr,
     dwInitParam,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an icon that has the specified size, colors, and bit patterns.
@@ -977,7 +977,7 @@ Win32Result<HICON> CreateIcon(
     lpbANDbits,
     lpbXORbits,
   );
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an icon or cursor from resource bits describing the icon.
@@ -998,7 +998,7 @@ Win32Result<HICON> CreateIconFromResource(
     fIcon ? TRUE : FALSE,
     dwVer,
   );
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an icon or cursor from resource bits describing the icon.
@@ -1025,7 +1025,7 @@ Win32Result<HICON> CreateIconFromResourceEx(
     cyDesired,
     flags,
   );
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an icon or cursor from an ICONINFO structure.
@@ -1036,7 +1036,7 @@ Win32Result<HICON> CreateIconFromResourceEx(
 /// {@category user32}
 Win32Result<HICON> CreateIconIndirect(Pointer<ICONINFO> piconinfo) {
   final result_ = CreateIconIndirect_Wrapper(piconinfo);
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a multiple-document interface (MDI) child window.
@@ -1069,7 +1069,7 @@ Win32Result<HWND> CreateMDIWindow(
     hInstance ?? nullptr,
     lParam,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a menu.
@@ -1083,7 +1083,7 @@ Win32Result<HWND> CreateMDIWindow(
 /// {@category user32}
 Win32Result<HMENU> CreateMenu() {
   final result_ = CreateMenu_Wrapper();
-  return Win32Result(value: HMENU(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a drop-down menu, submenu, or shortcut menu.
@@ -1094,7 +1094,7 @@ Win32Result<HMENU> CreateMenu() {
 /// {@category user32}
 Win32Result<HMENU> CreatePopupMenu() {
   final result_ = CreatePopupMenu_Wrapper();
-  return Win32Result(value: HMENU(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an overlapped, pop-up, or child window with an extended window
@@ -1132,7 +1132,7 @@ Win32Result<HWND> CreateWindowEx(
     hInstance ?? nullptr,
     lpParam ?? nullptr,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a window station object, associates it with the calling process, and
@@ -1154,7 +1154,7 @@ Win32Result<HWINSTA> CreateWindowStation(
     dwDesiredAccess,
     lpsa ?? nullptr,
   );
-  return Win32Result(value: HWINSTA(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Updates the specified multiple-window — position structure for the specified
@@ -1184,7 +1184,7 @@ Win32Result<HDWP> DeferWindowPos(
     cy,
     uFlags,
   );
-  return Win32Result(value: HDWP(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Provides default processing for any window message that the window procedure
@@ -1256,7 +1256,7 @@ Win32Result<bool> DeleteMenu(
   MENU_ITEM_FLAGS uFlags,
 ) {
   final result_ = DeleteMenu_Wrapper(hMenu, uPosition, uFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys an accelerator table.
@@ -1281,7 +1281,7 @@ external int _DestroyAcceleratorTable(Pointer hAccel);
 /// {@category user32}
 Win32Result<bool> DestroyCaret() {
   final result_ = DestroyCaret_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys a cursor and frees any memory the cursor occupied.
@@ -1294,7 +1294,7 @@ Win32Result<bool> DestroyCaret() {
 /// {@category user32}
 Win32Result<bool> DestroyCursor(HCURSOR hCursor) {
   final result_ = DestroyCursor_Wrapper(hCursor);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys an icon and frees any memory the icon occupied.
@@ -1305,7 +1305,7 @@ Win32Result<bool> DestroyCursor(HCURSOR hCursor) {
 /// {@category user32}
 Win32Result<bool> DestroyIcon(HICON hIcon) {
   final result_ = DestroyIcon_Wrapper(hIcon);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys the specified menu and frees any memory that the menu occupies.
@@ -1316,7 +1316,7 @@ Win32Result<bool> DestroyIcon(HICON hIcon) {
 /// {@category user32}
 Win32Result<bool> DestroyMenu(HMENU hMenu) {
   final result_ = DestroyMenu_Wrapper(hMenu);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys the specified window.
@@ -1327,7 +1327,7 @@ Win32Result<bool> DestroyMenu(HMENU hMenu) {
 /// {@category user32}
 Win32Result<bool> DestroyWindow(HWND hWnd) {
   final result_ = DestroyWindow_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a modal dialog box from a dialog box template in memory.
@@ -1350,7 +1350,7 @@ Win32Result<int> DialogBoxIndirectParam(
     lpDialogFunc ?? nullptr,
     dwInitParam,
   );
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Disables the window ghosting feature for the calling GUI process.
@@ -1507,7 +1507,7 @@ external int _DrawFrameControl(
 /// {@category user32}
 Win32Result<bool> DrawIcon(HDC hDC, int x, int y, HICON hIcon) {
   final result_ = DrawIcon_Wrapper(hDC, x, y, hIcon);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Displays an image and applies a visual effect to indicate a state, such as a
@@ -1646,7 +1646,7 @@ external int _DrawTextEx(
 /// {@category user32}
 Win32Result<bool> EmptyClipboard() {
   final result_ = EmptyClipboard_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables, disables, or grays the specified menu item.
@@ -1671,7 +1671,7 @@ external int _EnableMenuItem(Pointer hMenu, int uIDEnableItem, int uEnable);
 /// {@category user32}
 Win32Result<bool> EnableMouseInPointer(bool fEnable) {
   final result_ = EnableMouseInPointer_Wrapper(fEnable ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// In high-DPI displays, enables automatic display scaling of the non-client
@@ -1685,7 +1685,7 @@ Win32Result<bool> EnableMouseInPointer(bool fEnable) {
 /// {@category user32}
 Win32Result<bool> EnableNonClientDpiScaling(HWND hwnd) {
   final result_ = EnableNonClientDpiScaling_Wrapper(hwnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables or disables one or both scroll bar arrows.
@@ -1700,7 +1700,7 @@ Win32Result<bool> EnableScrollBar(
   ENABLE_SCROLL_BAR_ARROWS wArrows,
 ) {
   final result_ = EnableScrollBar_Wrapper(hWnd, wSBflags, wArrows);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables or disables mouse and keyboard input to the specified window or
@@ -1730,7 +1730,7 @@ external int _EnableWindow(Pointer hWnd, int bEnable);
 /// {@category user32}
 Win32Result<bool> EndDeferWindowPos(HDWP hWinPosInfo) {
   final result_ = EndDeferWindowPos_Wrapper(hWinPosInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Destroys a modal dialog box, causing the system to end any processing for
@@ -1742,7 +1742,7 @@ Win32Result<bool> EndDeferWindowPos(HDWP hWinPosInfo) {
 /// {@category user32}
 Win32Result<bool> EndDialog(HWND hDlg, int nResult) {
   final result_ = EndDialog_Wrapper(hDlg, nResult);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Ends the calling thread's active menu.
@@ -1753,7 +1753,7 @@ Win32Result<bool> EndDialog(HWND hDlg, int nResult) {
 /// {@category user32}
 Win32Result<bool> EndMenu() {
   final result_ = EndMenu_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Marks the end of painting in the specified window.
@@ -1804,7 +1804,7 @@ external int _EnumChildWindows(
 /// {@category user32}
 Win32Result<int> EnumClipboardFormats(int format) {
   final result_ = EnumClipboardFormats_Wrapper(format);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Enumerates all top-level windows associated with the specified desktop.
@@ -1822,7 +1822,7 @@ Win32Result<bool> EnumDesktopWindows(
   LPARAM lParam,
 ) {
   final result_ = EnumDesktopWindows_Wrapper(hDesktop ?? nullptr, lpfn, lParam);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Lets you obtain information about the display devices in the current
@@ -1999,7 +1999,7 @@ Win32Result<bool> EnumWindows(
   LPARAM lParam,
 ) {
   final result_ = EnumWindows_Wrapper(lpEnumFunc, lParam);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the two specified rectangles are equal by comparing the
@@ -2060,7 +2060,7 @@ Win32Result<HWND> FindWindow(PCWSTR? lpClassName, PCWSTR? lpWindowName) {
     lpClassName ?? nullptr,
     lpWindowName ?? nullptr,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a handle to a window whose class name and window name match the
@@ -2086,7 +2086,7 @@ Win32Result<HWND> FindWindowEx(
     lpszClass ?? nullptr,
     lpszWindow ?? nullptr,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Draws a border around the specified rectangle by using the specified brush.
@@ -2138,7 +2138,7 @@ Win32Result<bool> GetAltTabInfo(
     pszItemText ?? nullptr,
     cchItemText,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the handle to the ancestor of the specified window.
@@ -2176,7 +2176,7 @@ external int _GetAsyncKeyState(int vKey);
 @pragma('vm:prefer-inline')
 DPI_AWARENESS GetAwarenessFromDpiAwarenessContext(
   DPI_AWARENESS_CONTEXT value,
-) => DPI_AWARENESS(_GetAwarenessFromDpiAwarenessContext(value));
+) => .new(_GetAwarenessFromDpiAwarenessContext(value));
 
 @Native<Int32 Function(Pointer)>(symbol: 'GetAwarenessFromDpiAwarenessContext')
 external int _GetAwarenessFromDpiAwarenessContext(Pointer value);
@@ -2206,7 +2206,7 @@ external Pointer _GetCapture();
 /// {@category user32}
 Win32Result<int> GetCaretBlinkTime() {
   final result_ = GetCaretBlinkTime_Wrapper();
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Copies the caret's position to the specified POINT structure.
@@ -2217,7 +2217,7 @@ Win32Result<int> GetCaretBlinkTime() {
 /// {@category user32}
 Win32Result<bool> GetCaretPos(Pointer<POINT> lpPoint) {
   final result_ = GetCaretPos_Wrapper(lpPoint);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about a window class.
@@ -2236,7 +2236,7 @@ Win32Result<bool> GetClassInfo(
     lpClassName,
     lpWndClass,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about a window class, including a handle to the small
@@ -2258,7 +2258,7 @@ Win32Result<bool> GetClassInfoEx(
     lpszClass,
     lpwcx,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the specified value from the WNDCLASSEX structure associated with
@@ -2270,7 +2270,7 @@ Win32Result<bool> GetClassInfoEx(
 /// {@category user32}
 Win32Result<int> GetClassLongPtr(HWND hWnd, GET_CLASS_LONG_INDEX nIndex) {
   final result_ = GetClassLongPtrW_Wrapper(hWnd, nIndex);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Retrieves the name of the class to which the specified window belongs.
@@ -2281,7 +2281,7 @@ Win32Result<int> GetClassLongPtr(HWND hWnd, GET_CLASS_LONG_INDEX nIndex) {
 /// {@category user32}
 Win32Result<int> GetClassName(HWND hWnd, PWSTR lpClassName, int nMaxCount) {
   final result_ = GetClassNameW_Wrapper(hWnd, lpClassName, nMaxCount);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the coordinates of a window's client area.
@@ -2292,7 +2292,7 @@ Win32Result<int> GetClassName(HWND hWnd, PWSTR lpClassName, int nMaxCount) {
 /// {@category user32}
 Win32Result<bool> GetClientRect(HWND hWnd, Pointer<RECT> lpRect) {
   final result_ = GetClientRect_Wrapper(hWnd, lpRect);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves data from the clipboard in a specified format.
@@ -2305,7 +2305,7 @@ Win32Result<bool> GetClientRect(HWND hWnd, Pointer<RECT> lpRect) {
 /// {@category user32}
 Win32Result<HANDLE> GetClipboardData(int uFormat) {
   final result_ = GetClipboardData_Wrapper(uFormat);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves from the clipboard the name of the specified registered format.
@@ -2326,7 +2326,7 @@ Win32Result<int> GetClipboardFormatName(
     lpszFormatName,
     cchMaxCount,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the window handle of the current owner of the clipboard.
@@ -2337,7 +2337,7 @@ Win32Result<int> GetClipboardFormatName(
 /// {@category user32}
 Win32Result<HWND> GetClipboardOwner() {
   final result_ = GetClipboardOwner_Wrapper();
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the clipboard sequence number for the current window station.
@@ -2360,7 +2360,7 @@ external int _GetClipboardSequenceNumber();
 /// {@category user32}
 Win32Result<HWND> GetClipboardViewer() {
   final result_ = GetClipboardViewer_Wrapper();
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the screen coordinates of the rectangular area to which the cursor
@@ -2372,7 +2372,7 @@ Win32Result<HWND> GetClipboardViewer() {
 /// {@category user32}
 Win32Result<bool> GetClipCursor(Pointer<RECT> lpRect) {
   final result_ = GetClipCursor_Wrapper(lpRect);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to the current cursor.
@@ -2395,7 +2395,7 @@ external Pointer _GetCursor();
 /// {@category user32}
 Win32Result<bool> GetCursorInfo(Pointer<CURSORINFO> pci) {
   final result_ = GetCursorInfo_Wrapper(pci);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the position of the mouse cursor, in screen coordinates.
@@ -2406,7 +2406,7 @@ Win32Result<bool> GetCursorInfo(Pointer<CURSORINFO> pci) {
 /// {@category user32}
 Win32Result<bool> GetCursorPos(Pointer<POINT> lpPoint) {
   final result_ = GetCursorPos_Wrapper(lpPoint);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to a device context (DC) for the client area of a
@@ -2474,10 +2474,7 @@ external int _GetDialogBaseUnits();
 Win32Result<DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS>
 GetDialogControlDpiChangeBehavior(HWND hWnd) {
   final result_ = GetDialogControlDpiChangeBehavior_Wrapper(hWnd);
-  return Win32Result(
-    value: DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS(result_.value.i32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i32), error: result_.error);
 }
 
 /// Returns the flags that might have been set on a given dialog by an earlier
@@ -2489,10 +2486,7 @@ GetDialogControlDpiChangeBehavior(HWND hWnd) {
 /// {@category user32}
 Win32Result<DIALOG_DPI_CHANGE_BEHAVIORS> GetDialogDpiChangeBehavior(HWND hDlg) {
   final result_ = GetDialogDpiChangeBehavior_Wrapper(hDlg);
-  return Win32Result(
-    value: DIALOG_DPI_CHANGE_BEHAVIORS(result_.value.i32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i32), error: result_.error);
 }
 
 /// Retrieves the screen auto-rotation preferences for the current process.
@@ -2518,7 +2512,7 @@ external int _GetDisplayAutoRotationPreferences(Pointer<Int32> pOrientation);
 /// {@category user32}
 Win32Result<HWND> GetDlgItem(HWND? hDlg, int nIDDlgItem) {
   final result_ = GetDlgItem_Wrapper(hDlg ?? nullptr, nIDDlgItem);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Translates the text of a specified control in a dialog box into an integer
@@ -2540,7 +2534,7 @@ Win32Result<int> GetDlgItemInt(
     lpTranslated ?? nullptr,
     bSigned ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the title or text associated with a control in a dialog box.
@@ -2556,7 +2550,7 @@ Win32Result<int> GetDlgItemText(
   int cchMax,
 ) {
   final result_ = GetDlgItemTextW_Wrapper(hDlg, nIDDlgItem, lpString, cchMax);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the current double-click time for the mouse.
@@ -2662,7 +2656,7 @@ Win32Result<bool> GetGestureConfig(
     pGestureConfig,
     cbSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves additional information about a gesture from its GESTUREINFO
@@ -2682,7 +2676,7 @@ Win32Result<bool> GetGestureExtraArgs(
     cbExtraArgs,
     pExtraArgs,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a GESTUREINFO structure given a handle to the gesture information.
@@ -2696,7 +2690,7 @@ Win32Result<bool> GetGestureInfo(
   Pointer<GESTUREINFO> pGestureInfo,
 ) {
   final result_ = GetGestureInfo_Wrapper(hGestureInfo, pGestureInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the active window or a specified GUI thread.
@@ -2707,7 +2701,7 @@ Win32Result<bool> GetGestureInfo(
 /// {@category user32}
 Win32Result<bool> GetGUIThreadInfo(int idThread, Pointer<GUITHREADINFO> pgui) {
   final result_ = GetGUIThreadInfo_Wrapper(idThread, pgui);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the specified icon or cursor.
@@ -2718,7 +2712,7 @@ Win32Result<bool> GetGUIThreadInfo(int idThread, Pointer<GUITHREADINFO> pgui) {
 /// {@category user32}
 Win32Result<bool> GetIconInfo(HICON hIcon, Pointer<ICONINFO> piconinfo) {
   final result_ = GetIconInfo_Wrapper(hIcon, piconinfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the specified icon or cursor.
@@ -2773,7 +2767,7 @@ external Pointer _GetKeyboardLayout(int idThread);
 /// {@category user32}
 Win32Result<int> GetKeyboardLayoutList(int nBuff, Pointer<Pointer>? lpList) {
   final result_ = GetKeyboardLayoutList_Wrapper(nBuff, lpList ?? nullptr);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the name of the active input locale identifier (formerly called
@@ -2785,7 +2779,7 @@ Win32Result<int> GetKeyboardLayoutList(int nBuff, Pointer<Pointer>? lpList) {
 /// {@category user32}
 Win32Result<bool> GetKeyboardLayoutName(PWSTR pwszKLID) {
   final result_ = GetKeyboardLayoutNameW_Wrapper(pwszKLID);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies the status of the 256 virtual keys to the specified buffer.
@@ -2796,7 +2790,7 @@ Win32Result<bool> GetKeyboardLayoutName(PWSTR pwszKLID) {
 /// {@category user32}
 Win32Result<bool> GetKeyboardState(Pointer<Uint8> lpKeyState) {
   final result_ = GetKeyboardState_Wrapper(lpKeyState);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the current keyboard.
@@ -2807,7 +2801,7 @@ Win32Result<bool> GetKeyboardState(Pointer<Uint8> lpKeyState) {
 /// {@category user32}
 Win32Result<int> GetKeyboardType(int nTypeFlag) {
   final result_ = GetKeyboardType_Wrapper(nTypeFlag);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a string that represents the name of a key.
@@ -2818,7 +2812,7 @@ Win32Result<int> GetKeyboardType(int nTypeFlag) {
 /// {@category user32}
 Win32Result<int> GetKeyNameText(int lParam, PWSTR lpString, int cchSize) {
   final result_ = GetKeyNameTextW_Wrapper(lParam, lpString, cchSize);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the status of the specified virtual key.
@@ -2867,7 +2861,7 @@ Win32Result<bool> GetLayeredWindowAttributes(
     pbAlpha ?? nullptr,
     pdwFlags ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to the menu assigned to the specified window.
@@ -2895,7 +2889,7 @@ Win32Result<bool> GetMenuBarInfo(
   Pointer<MENUBARINFO> pmbi,
 ) {
   final result_ = GetMenuBarInfo_Wrapper(hwnd, idObject, idItem, pmbi);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines the default menu item on the specified menu.
@@ -2910,7 +2904,7 @@ Win32Result<int> GetMenuDefaultItem(
   GET_MENU_DEFAULT_ITEM_FLAGS gmdiFlags,
 ) {
   final result_ = GetMenuDefaultItem_Wrapper(hMenu, fByPos, gmdiFlags);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about a specified menu.
@@ -2921,7 +2915,7 @@ Win32Result<int> GetMenuDefaultItem(
 /// {@category user32}
 Win32Result<bool> GetMenuInfo(HMENU param0, Pointer<MENUINFO> param1) {
   final result_ = GetMenuInfo_Wrapper(param0, param1);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines the number of items in the specified menu.
@@ -2932,7 +2926,7 @@ Win32Result<bool> GetMenuInfo(HMENU param0, Pointer<MENUINFO> param1) {
 /// {@category user32}
 Win32Result<int> GetMenuItemCount(HMENU? hMenu) {
   final result_ = GetMenuItemCount_Wrapper(hMenu ?? nullptr);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the menu item identifier of a menu item located at the specified
@@ -2966,7 +2960,7 @@ Win32Result<bool> GetMenuItemInfo(
     fByPosition ? TRUE : FALSE,
     lpmii,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the bounding rectangle for the specified menu item.
@@ -2987,7 +2981,7 @@ Win32Result<bool> GetMenuItemRect(
     uItem,
     lprcItem,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the menu flags associated with the specified menu item.
@@ -3129,7 +3123,7 @@ Win32Result<int> GetMouseMovePointsEx(
     nBufPoints,
     resolution,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a handle to the first control in a group of controls that precedes
@@ -3145,7 +3139,7 @@ Win32Result<HWND> GetNextDlgGroupItem(HWND hDlg, HWND? hCtl, bool bPrevious) {
     hCtl ?? nullptr,
     bPrevious ? TRUE : FALSE,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a handle to the first control that has the WS_TABSTOP style that
@@ -3161,7 +3155,7 @@ Win32Result<HWND> GetNextDlgTabItem(HWND hDlg, HWND? hCtl, bool bPrevious) {
     hCtl ?? nullptr,
     bPrevious ? TRUE : FALSE,
   );
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the handle to the window that currently has the clipboard open.
@@ -3172,7 +3166,7 @@ Win32Result<HWND> GetNextDlgTabItem(HWND hDlg, HWND? hCtl, bool bPrevious) {
 /// {@category user32}
 Win32Result<HWND> GetOpenClipboardWindow() {
   final result_ = GetOpenClipboardWindow_Wrapper();
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a handle to the specified window's parent or owner.
@@ -3183,7 +3177,7 @@ Win32Result<HWND> GetOpenClipboardWindow() {
 /// {@category user32}
 Win32Result<HWND> GetParent(HWND hWnd) {
   final result_ = GetParent_Wrapper(hWnd);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the position of the cursor in physical coordinates.
@@ -3194,7 +3188,7 @@ Win32Result<HWND> GetParent(HWND hWnd) {
 /// {@category user32}
 Win32Result<bool> GetPhysicalCursorPos(Pointer<POINT> lpPoint) {
   final result_ = GetPhysicalCursorPos_Wrapper(lpPoint);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the cursor identifier associated with the specified pointer.
@@ -3205,7 +3199,7 @@ Win32Result<bool> GetPhysicalCursorPos(Pointer<POINT> lpPoint) {
 /// {@category user32}
 Win32Result<bool> GetPointerCursorId(int pointerId, Pointer<Uint32> cursorId) {
   final result_ = GetPointerCursorId_Wrapper(pointerId, cursorId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of information for the specified pointers associated
@@ -3225,7 +3219,7 @@ Win32Result<bool> GetPointerFrameInfo(
     pointerCount,
     pointerInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of information (including coalesced input frames) for
@@ -3247,7 +3241,7 @@ Win32Result<bool> GetPointerFrameInfoHistory(
     pointerCount,
     pointerInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of pen-based information for the specified pointers
@@ -3267,7 +3261,7 @@ Win32Result<bool> GetPointerFramePenInfo(
     pointerCount,
     penInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of pen-based information (including coalesced input
@@ -3290,7 +3284,7 @@ Win32Result<bool> GetPointerFramePenInfoHistory(
     pointerCount,
     penInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of touch-based information for the specified pointers
@@ -3310,7 +3304,7 @@ Win32Result<bool> GetPointerFrameTouchInfo(
     pointerCount,
     touchInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the entire frame of touch-based information (including coalesced input
@@ -3333,7 +3327,7 @@ Win32Result<bool> GetPointerFrameTouchInfoHistory(
     pointerCount,
     touchInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the information for the specified pointer associated with the current
@@ -3348,7 +3342,7 @@ Win32Result<bool> GetPointerInfo(
   Pointer<POINTER_INFO> pointerInfo,
 ) {
   final result_ = GetPointerInfo_Wrapper(pointerId, pointerInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the information associated with the individual inputs, if any, that
@@ -3368,7 +3362,7 @@ Win32Result<bool> GetPointerInfoHistory(
     entriesCount,
     pointerInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets one or more transforms for the pointer information coordinates
@@ -3388,7 +3382,7 @@ Win32Result<bool> GetPointerInputTransform(
     historyCount,
     inputTransform,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the pen-based information for the specified pointer (of type PT_PEN)
@@ -3403,7 +3397,7 @@ Win32Result<bool> GetPointerPenInfo(
   Pointer<POINTER_PEN_INFO> penInfo,
 ) {
   final result_ = GetPointerPenInfo_Wrapper(pointerId, penInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the pen-based information associated with the individual inputs, if
@@ -3424,7 +3418,7 @@ Win32Result<bool> GetPointerPenInfoHistory(
     entriesCount,
     penInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the touch-based information for the specified pointer (of type
@@ -3439,7 +3433,7 @@ Win32Result<bool> GetPointerTouchInfo(
   Pointer<POINTER_TOUCH_INFO> touchInfo,
 ) {
   final result_ = GetPointerTouchInfo_Wrapper(pointerId, touchInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets the touch-based information associated with the individual inputs, if
@@ -3460,7 +3454,7 @@ Win32Result<bool> GetPointerTouchInfoHistory(
     entriesCount,
     touchInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the pointer type for a specified pointer.
@@ -3471,7 +3465,7 @@ Win32Result<bool> GetPointerTouchInfoHistory(
 /// {@category user32}
 Win32Result<bool> GetPointerType(int pointerId, Pointer<Int32> pointerType) {
   final result_ = GetPointerType_Wrapper(pointerId, pointerType);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the first available clipboard format in the specified list.
@@ -3488,7 +3482,7 @@ Win32Result<int> GetPriorityClipboardFormat(
     paFormatPriorityList,
     cFormats,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a handle to the current window station for the calling process.
@@ -3499,7 +3493,7 @@ Win32Result<int> GetPriorityClipboardFormat(
 /// {@category user32}
 Win32Result<HWINSTA> GetProcessWindowStation() {
   final result_ = GetProcessWindowStation_Wrapper();
-  return Win32Result(value: HWINSTA(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a data handle from the property list of the specified window.
@@ -3534,7 +3528,7 @@ Win32Result<int> GetRawInputBuffer(
     pcbSize,
     cbSizeHeader,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the raw input from the specified device.
@@ -3587,7 +3581,7 @@ Win32Result<int> GetRawInputDeviceInfo(
     pData ?? nullptr,
     pcbSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Enumerates the raw input devices attached to the system.
@@ -3606,7 +3600,7 @@ Win32Result<int> GetRawInputDeviceList(
     puiNumDevices,
     cbSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the information about the raw input devices for the current
@@ -3626,7 +3620,7 @@ Win32Result<int> GetRegisteredRawInputDevices(
     puiNumDevices,
     cbSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the specified scroll bar.
@@ -3641,7 +3635,7 @@ Win32Result<bool> GetScrollBarInfo(
   Pointer<SCROLLBARINFO> psbi,
 ) {
   final result_ = GetScrollBarInfo_Wrapper(hwnd, idObject, psbi);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the parameters of a scroll bar, including the minimum and maximum
@@ -3658,7 +3652,7 @@ Win32Result<bool> GetScrollInfo(
   Pointer<SCROLLINFO> lpsi,
 ) {
   final result_ = GetScrollInfo_Wrapper(hwnd, nBar, lpsi);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to the Shell's desktop window.
@@ -3764,7 +3758,7 @@ external int _GetSystemMetrics(int nIndex);
 /// {@category user32}
 Win32Result<int> GetSystemMetricsForDpi(SYSTEM_METRICS_INDEX nIndex, int dpi) {
   final result_ = GetSystemMetricsForDpi_Wrapper(nIndex, dpi);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Computes the width and height of a character string.
@@ -3807,7 +3801,7 @@ external int _GetTabbedTextExtent(
 /// {@category user32}
 Win32Result<HDESK> GetThreadDesktop(int dwThreadId) {
   final result_ = GetThreadDesktop_Wrapper(dwThreadId);
-  return Win32Result(value: HDESK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Gets the DPI_AWARENESS_CONTEXT for the current thread.
@@ -3831,7 +3825,7 @@ external Pointer _GetThreadDpiAwarenessContext();
 /// {@category user32}
 @pragma('vm:prefer-inline')
 DPI_HOSTING_BEHAVIOR GetThreadDpiHostingBehavior() =>
-    DPI_HOSTING_BEHAVIOR(_GetThreadDpiHostingBehavior());
+    .new(_GetThreadDpiHostingBehavior());
 
 @Native<Int32 Function()>(symbol: 'GetThreadDpiHostingBehavior')
 external int _GetThreadDpiHostingBehavior();
@@ -3844,7 +3838,7 @@ external int _GetThreadDpiHostingBehavior();
 /// {@category user32}
 Win32Result<bool> GetTitleBarInfo(HWND hwnd, Pointer<TITLEBARINFO> pti) {
   final result_ = GetTitleBarInfo_Wrapper(hwnd, pti);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Examines the Z order of the child windows associated with the specified
@@ -3857,7 +3851,7 @@ Win32Result<bool> GetTitleBarInfo(HWND hwnd, Pointer<TITLEBARINFO> pti) {
 /// {@category user32}
 Win32Result<HWND> GetTopWindow(HWND? hWnd) {
   final result_ = GetTopWindow_Wrapper(hWnd ?? nullptr);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves detailed information about touch inputs associated with a
@@ -3879,7 +3873,7 @@ Win32Result<bool> GetTouchInputInfo(
     pInputs,
     cbSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets pointer data before it has gone through touch prediction processing.
@@ -3910,7 +3904,7 @@ Win32Result<bool> GetUpdatedClipboardFormats(
     cFormats,
     pcFormatsOut,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the coordinates of the smallest rectangle that completely encloses
@@ -3939,7 +3933,7 @@ external int _GetUpdateRect(Pointer hWnd, Pointer<RECT> lpRect, int bErase);
 /// {@category user32}
 @pragma('vm:prefer-inline')
 GDI_REGION_TYPE GetUpdateRgn(HWND hWnd, HRGN hRgn, bool bErase) =>
-    GDI_REGION_TYPE(_GetUpdateRgn(hWnd, hRgn, bErase ? TRUE : FALSE));
+    .new(_GetUpdateRgn(hWnd, hRgn, bErase ? TRUE : FALSE));
 
 @Native<Int32 Function(Pointer, Pointer, Int32)>(symbol: 'GetUpdateRgn')
 external int _GetUpdateRgn(Pointer hWnd, Pointer hRgn, int bErase);
@@ -3964,7 +3958,7 @@ Win32Result<bool> GetUserObjectInformation(
     nLength,
     lpnLengthNeeded ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to a window that has the specified relationship (Z-Order
@@ -3976,7 +3970,7 @@ Win32Result<bool> GetUserObjectInformation(
 /// {@category user32}
 Win32Result<HWND> GetWindow(HWND hWnd, GET_WINDOW_CMD uCmd) {
   final result_ = GetWindow_Wrapper(hWnd, uCmd);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the device context (DC) for the entire window, including title
@@ -4004,7 +3998,7 @@ Win32Result<bool> GetWindowDisplayAffinity(
   Pointer<Uint32> pdwAffinity,
 ) {
   final result_ = GetWindowDisplayAffinity_Wrapper(hWnd, pdwAffinity);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns the DPI_AWARENESS_CONTEXT associated with a window.
@@ -4028,7 +4022,7 @@ external Pointer _GetWindowDpiAwarenessContext(Pointer hwnd);
 /// {@category user32}
 @pragma('vm:prefer-inline')
 DPI_HOSTING_BEHAVIOR GetWindowDpiHostingBehavior(HWND hwnd) =>
-    DPI_HOSTING_BEHAVIOR(_GetWindowDpiHostingBehavior(hwnd));
+    .new(_GetWindowDpiHostingBehavior(hwnd));
 
 @Native<Int32 Function(Pointer)>(symbol: 'GetWindowDpiHostingBehavior')
 external int _GetWindowDpiHostingBehavior(Pointer hwnd);
@@ -4041,7 +4035,7 @@ external int _GetWindowDpiHostingBehavior(Pointer hwnd);
 /// {@category user32}
 Win32Result<bool> GetWindowInfo(HWND hwnd, Pointer<WINDOWINFO> pwi) {
   final result_ = GetWindowInfo_Wrapper(hwnd, pwi);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the specified window.
@@ -4055,7 +4049,7 @@ Win32Result<bool> GetWindowInfo(HWND hwnd, Pointer<WINDOWINFO> pwi) {
 /// {@category user32}
 Win32Result<int> GetWindowLongPtr(HWND hWnd, WINDOW_LONG_PTR_INDEX nIndex) {
   final result_ = GetWindowLongPtrW_Wrapper(hWnd, nIndex);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Retrieves the full path and file name of the module associated with the
@@ -4090,7 +4084,7 @@ Win32Result<bool> GetWindowPlacement(
   Pointer<WINDOWPLACEMENT> lpwndpl,
 ) {
   final result_ = GetWindowPlacement_Wrapper(hWnd, lpwndpl);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the dimensions of the bounding rectangle of the specified window.
@@ -4104,7 +4098,7 @@ Win32Result<bool> GetWindowPlacement(
 /// {@category user32}
 Win32Result<bool> GetWindowRect(HWND hWnd, Pointer<RECT> lpRect) {
   final result_ = GetWindowRect_Wrapper(hWnd, lpRect);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Obtains a copy of the window region of a window.
@@ -4115,7 +4109,7 @@ Win32Result<bool> GetWindowRect(HWND hWnd, Pointer<RECT> lpRect) {
 /// {@category user32}
 @pragma('vm:prefer-inline')
 GDI_REGION_TYPE GetWindowRgn(HWND hWnd, HRGN hRgn) =>
-    GDI_REGION_TYPE(_GetWindowRgn(hWnd, hRgn));
+    .new(_GetWindowRgn(hWnd, hRgn));
 
 @Native<Int32 Function(Pointer, Pointer)>(symbol: 'GetWindowRgn')
 external int _GetWindowRgn(Pointer hWnd, Pointer hRgn);
@@ -4129,7 +4123,7 @@ external int _GetWindowRgn(Pointer hWnd, Pointer hRgn);
 /// {@category user32}
 @pragma('vm:prefer-inline')
 GDI_REGION_TYPE GetWindowRgnBox(HWND hWnd, Pointer<RECT> lprc) =>
-    GDI_REGION_TYPE(_GetWindowRgnBox(hWnd, lprc));
+    .new(_GetWindowRgnBox(hWnd, lprc));
 
 @Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'GetWindowRgnBox')
 external int _GetWindowRgnBox(Pointer hWnd, Pointer<RECT> lprc);
@@ -4147,7 +4141,7 @@ external int _GetWindowRgnBox(Pointer hWnd, Pointer<RECT> lprc);
 /// {@category user32}
 Win32Result<int> GetWindowText(HWND hWnd, PWSTR lpString, int nMaxCount) {
   final result_ = GetWindowTextW_Wrapper(hWnd, lpString, nMaxCount);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the length, in characters, of the specified window's title bar
@@ -4159,7 +4153,7 @@ Win32Result<int> GetWindowText(HWND hWnd, PWSTR lpString, int nMaxCount) {
 /// {@category user32}
 Win32Result<int> GetWindowTextLength(HWND hWnd) {
   final result_ = GetWindowTextLengthW_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the identifier of the thread that created the specified window
@@ -4248,7 +4242,7 @@ external int _GrayString(
 /// {@category user32}
 Win32Result<bool> HideCaret(HWND? hWnd) {
   final result_ = HideCaret_Wrapper(hWnd ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds or removes highlighting from an item in a menu bar.
@@ -4331,7 +4325,7 @@ Win32Result<bool> InsertMenu(
     uIDNewItem,
     lpNewItem ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Inserts a new menu item at the specified position in a menu.
@@ -4352,7 +4346,7 @@ Win32Result<bool> InsertMenuItem(
     fByPosition ? TRUE : FALSE,
     lpmi,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Calculates the intersection of two source rectangles and places the
@@ -4447,7 +4441,7 @@ external int _IsChild(Pointer hWndParent, Pointer hWnd);
 /// {@category user32}
 Win32Result<bool> IsClipboardFormatAvailable(int format) {
   final result_ = IsClipboardFormatAvailable_Wrapper(format);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether a message is intended for the specified dialog box and,
@@ -4526,7 +4520,7 @@ external int _IsIconic(Pointer hWnd);
 /// {@category user32}
 Win32Result<bool> IsImmersiveProcess(HANDLE hProcess) {
   final result_ = IsImmersiveProcess_Wrapper(hProcess);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether a handle is a menu handle.
@@ -4693,7 +4687,7 @@ external int _IsZoomed(Pointer hWnd);
 /// {@category user32}
 Win32Result<bool> KillTimer(HWND? hWnd, int uIDEvent) {
   final result_ = KillTimer_Wrapper(hWnd ?? nullptr, uIDEvent);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Loads the specified accelerator table.
@@ -4704,7 +4698,7 @@ Win32Result<bool> KillTimer(HWND? hWnd, int uIDEvent) {
 /// {@category user32}
 Win32Result<HACCEL> LoadAccelerators(HINSTANCE? hInstance, PCWSTR lpTableName) {
   final result_ = LoadAcceleratorsW_Wrapper(hInstance ?? nullptr, lpTableName);
-  return Win32Result(value: HACCEL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified cursor resource from the executable (.EXE) file
@@ -4716,7 +4710,7 @@ Win32Result<HACCEL> LoadAccelerators(HINSTANCE? hInstance, PCWSTR lpTableName) {
 /// {@category user32}
 Win32Result<HCURSOR> LoadCursor(HINSTANCE? hInstance, PCWSTR lpCursorName) {
   final result_ = LoadCursorW_Wrapper(hInstance ?? nullptr, lpCursorName);
-  return Win32Result(value: HCURSOR(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a cursor based on data contained in a file.
@@ -4727,7 +4721,7 @@ Win32Result<HCURSOR> LoadCursor(HINSTANCE? hInstance, PCWSTR lpCursorName) {
 /// {@category user32}
 Win32Result<HCURSOR> LoadCursorFromFile(PCWSTR lpFileName) {
   final result_ = LoadCursorFromFileW_Wrapper(lpFileName);
-  return Win32Result(value: HCURSOR(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified icon resource from the executable (.exe) file associated
@@ -4739,7 +4733,7 @@ Win32Result<HCURSOR> LoadCursorFromFile(PCWSTR lpFileName) {
 /// {@category user32}
 Win32Result<HICON> LoadIcon(HINSTANCE? hInstance, PCWSTR lpIconName) {
   final result_ = LoadIconW_Wrapper(hInstance ?? nullptr, lpIconName);
-  return Win32Result(value: HICON(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads an icon, cursor, animated cursor, or bitmap.
@@ -4764,7 +4758,7 @@ Win32Result<HANDLE> LoadImage(
     cy,
     fuLoad,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads a new input locale identifier (formerly called the keyboard layout)
@@ -4779,7 +4773,7 @@ Win32Result<HKL> LoadKeyboardLayout(
   ACTIVATE_KEYBOARD_LAYOUT_FLAGS flags,
 ) {
   final result_ = LoadKeyboardLayoutW_Wrapper(pwszKLID, flags);
-  return Win32Result(value: HKL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified menu resource from the executable (.exe) file associated
@@ -4791,7 +4785,7 @@ Win32Result<HKL> LoadKeyboardLayout(
 /// {@category user32}
 Win32Result<HMENU> LoadMenu(HINSTANCE? hInstance, PCWSTR lpMenuName) {
   final result_ = LoadMenuW_Wrapper(hInstance ?? nullptr, lpMenuName);
-  return Win32Result(value: HMENU(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified menu template in memory.
@@ -4802,7 +4796,7 @@ Win32Result<HMENU> LoadMenu(HINSTANCE? hInstance, PCWSTR lpMenuName) {
 /// {@category user32}
 Win32Result<HMENU> LoadMenuIndirect(Pointer lpMenuTemplate) {
   final result_ = LoadMenuIndirectW_Wrapper(lpMenuTemplate);
-  return Win32Result(value: HMENU(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads a string resource from the executable file associated with a specified
@@ -4825,7 +4819,7 @@ Win32Result<int> LoadString(
     lpBuffer,
     cchBufferMax,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// The foreground process can call the LockSetForegroundWindow function to
@@ -4839,7 +4833,7 @@ Win32Result<bool> LockSetForegroundWindow(
   FOREGROUND_WINDOW_LOCK_CODE uLockCode,
 ) {
   final result_ = LockSetForegroundWindow_Wrapper(uLockCode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Disables or enables drawing in the specified window.
@@ -4865,7 +4859,7 @@ external int _LockWindowUpdate(Pointer hWndLock);
 /// {@category user32}
 Win32Result<bool> LockWorkStation() {
   final result_ = LockWorkStation_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Converts the logical coordinates of a point in a window to physical
@@ -4920,7 +4914,7 @@ Win32Result<int> LookupIconIdFromDirectory(
     presbits,
     fIcon ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Searches through icon or cursor data for the icon or cursor that best fits
@@ -4944,7 +4938,7 @@ Win32Result<int> LookupIconIdFromDirectoryEx(
     cyDesired,
     flags,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Converts the specified dialog box units to screen units (pixels).
@@ -4955,7 +4949,7 @@ Win32Result<int> LookupIconIdFromDirectoryEx(
 /// {@category user32}
 Win32Result<bool> MapDialogRect(HWND hDlg, Pointer<RECT> lpRect) {
   final result_ = MapDialogRect_Wrapper(hDlg, lpRect);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Translates (maps) a virtual-key code into a scan code or character value, or
@@ -5039,7 +5033,7 @@ external int _MenuItemFromPoint(Pointer hWnd, Pointer hMenu, POINT ptScreen);
 /// {@category user32}
 Win32Result<bool> MessageBeep(MESSAGEBOX_STYLE uType) {
   final result_ = MessageBeep_Wrapper(uType);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Displays a modal dialog box that contains a system icon, a set of buttons,
@@ -5065,10 +5059,7 @@ Win32Result<MESSAGEBOX_RESULT> MessageBox(
     lpCaption ?? nullptr,
     uType,
   );
-  return Win32Result(
-    value: MESSAGEBOX_RESULT(result_.value.i32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i32), error: result_.error);
 }
 
 /// Creates, displays, and operates a message box.
@@ -5091,10 +5082,7 @@ Win32Result<MESSAGEBOX_RESULT> MessageBoxEx(
     uType,
     wLanguageId,
   );
-  return Win32Result(
-    value: MESSAGEBOX_RESULT(result_.value.i32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i32), error: result_.error);
 }
 
 /// Changes an existing menu item.
@@ -5117,7 +5105,7 @@ Win32Result<bool> ModifyMenu(
     uIDNewItem,
     lpNewItem ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle to the display monitor that contains a specified point.
@@ -5183,7 +5171,7 @@ Win32Result<bool> MoveWindow(
     nHeight,
     bRepaint ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Waits until one or all of the specified objects are in the signaled state or
@@ -5209,10 +5197,7 @@ Win32Result<WAIT_EVENT> MsgWaitForMultipleObjects(
     dwMilliseconds,
     dwWakeMask,
   );
-  return Win32Result(
-    value: WAIT_EVENT(result_.value.u32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.u32), error: result_.error);
 }
 
 /// Waits until one or all of the specified objects are in the signaled state,
@@ -5239,10 +5224,7 @@ Win32Result<WAIT_EVENT> MsgWaitForMultipleObjectsEx(
     dwWakeMask,
     dwFlags,
   );
-  return Win32Result(
-    value: WAIT_EVENT(result_.value.u32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.u32), error: result_.error);
 }
 
 /// Signals the system that a predefined event occurred.
@@ -5304,7 +5286,7 @@ external int _OffsetRect(Pointer<RECT> lprc, int dx, int dy);
 /// {@category user32}
 Win32Result<bool> OpenClipboard(HWND? hWndNewOwner) {
   final result_ = OpenClipboard_Wrapper(hWndNewOwner ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Opens the specified desktop object.
@@ -5325,7 +5307,7 @@ Win32Result<HDESK> OpenDesktop(
     fInherit ? TRUE : FALSE,
     dwDesiredAccess,
   );
-  return Win32Result(value: HDESK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Restores a minimized (iconic) window to its previous size and position; it
@@ -5337,7 +5319,7 @@ Win32Result<HDESK> OpenDesktop(
 /// {@category user32}
 Win32Result<bool> OpenIcon(HWND hWnd) {
   final result_ = OpenIcon_Wrapper(hWnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Opens the desktop that receives user input.
@@ -5356,7 +5338,7 @@ Win32Result<HDESK> OpenInputDesktop(
     fInherit ? TRUE : FALSE,
     dwDesiredAccess,
   );
-  return Win32Result(value: HDESK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Opens the specified window station.
@@ -5375,7 +5357,7 @@ Win32Result<HWINSTA> OpenWindowStation(
     fInherit ? TRUE : FALSE,
     dwDesiredAccess,
   );
-  return Win32Result(value: HWINSTA(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Fills the clipping region in the specified device context with the desktop
@@ -5480,7 +5462,7 @@ Win32Result<bool> PostMessage(
   LPARAM lParam,
 ) {
   final result_ = PostMessageW_Wrapper(hWnd ?? nullptr, msg, wParam, lParam);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Indicates to the system that a thread has made a request to terminate
@@ -5513,7 +5495,7 @@ Win32Result<bool> PostThreadMessage(
   LPARAM lParam,
 ) {
   final result_ = PostThreadMessageW_Wrapper(idThread, msg, wParam, lParam);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies a visual window into the specified device context (DC), typically a
@@ -5633,7 +5615,7 @@ external int _RedrawWindow(
 /// {@category user32}
 Win32Result<int> RegisterClass(Pointer<WNDCLASS> lpWndClass) {
   final result_ = RegisterClassW_Wrapper(lpWndClass);
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Registers a window class for subsequent use in calls to the CreateWindow or
@@ -5645,7 +5627,7 @@ Win32Result<int> RegisterClass(Pointer<WNDCLASS> lpWndClass) {
 /// {@category user32}
 Win32Result<int> RegisterClassEx(Pointer<WNDCLASSEX> param0) {
   final result_ = RegisterClassExW_Wrapper(param0);
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Registers a new clipboard format.
@@ -5658,7 +5640,7 @@ Win32Result<int> RegisterClassEx(Pointer<WNDCLASSEX> param0) {
 /// {@category user32}
 Win32Result<int> RegisterClipboardFormat(PCWSTR lpszFormat) {
   final result_ = RegisterClipboardFormatW_Wrapper(lpszFormat);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Registers the device or type of device for which a window will receive
@@ -5678,10 +5660,7 @@ Win32Result<HDEVNOTIFY> RegisterDeviceNotification(
     notificationFilter,
     flags,
   );
-  return Win32Result(
-    value: HDEVNOTIFY(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Defines a system-wide hot key.
@@ -5697,7 +5676,7 @@ Win32Result<bool> RegisterHotKey(
   int vk,
 ) {
   final result_ = RegisterHotKey_Wrapper(hWnd ?? nullptr, id, fsModifiers, vk);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Registers the application to receive power setting notifications for the
@@ -5717,10 +5696,7 @@ Win32Result<HPOWERNOTIFY> RegisterPowerSettingNotification(
     powerSettingGuid,
     flags,
   );
-  return Win32Result(
-    value: HPOWERNOTIFY(result_.value.i64),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Registers the devices that supply the raw input data.
@@ -5739,7 +5715,7 @@ Win32Result<bool> RegisterRawInputDevices(
     uiNumDevices,
     cbSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Registers a window to process the WM_TOUCHHITTESTING notification.
@@ -5750,7 +5726,7 @@ Win32Result<bool> RegisterRawInputDevices(
 /// {@category user32}
 Win32Result<bool> RegisterTouchHitTestingWindow(HWND hwnd, int value) {
   final result_ = RegisterTouchHitTestingWindow_Wrapper(hwnd, value);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Registers a window as being touch-capable.
@@ -5764,7 +5740,7 @@ Win32Result<bool> RegisterTouchWindow(
   REGISTER_TOUCH_WINDOW_FLAGS ulFlags,
 ) {
   final result_ = RegisterTouchWindow_Wrapper(hwnd, ulFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Defines a new window message that is guaranteed to be unique throughout the
@@ -5778,7 +5754,7 @@ Win32Result<bool> RegisterTouchWindow(
 /// {@category user32}
 Win32Result<int> RegisterWindowMessage(PCWSTR lpString) {
   final result_ = RegisterWindowMessageW_Wrapper(lpString);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Releases the mouse capture from a window in the current thread and restores
@@ -5790,7 +5766,7 @@ Win32Result<int> RegisterWindowMessage(PCWSTR lpString) {
 /// {@category user32}
 Win32Result<bool> ReleaseCapture() {
   final result_ = ReleaseCapture_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Releases a device context (DC), freeing it for use by other applications.
@@ -5817,7 +5793,7 @@ external int _ReleaseDC(Pointer hWnd, Pointer hDC);
 /// {@category user32}
 Win32Result<bool> RemoveClipboardFormatListener(HWND hwnd) {
   final result_ = RemoveClipboardFormatListener_Wrapper(hwnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Deletes a menu item or detaches a submenu from the specified menu.
@@ -5832,7 +5808,7 @@ Win32Result<bool> RemoveMenu(
   MENU_ITEM_FLAGS uFlags,
 ) {
   final result_ = RemoveMenu_Wrapper(hMenu, uPosition, uFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Removes an entry from the property list of the specified window.
@@ -5845,7 +5821,7 @@ Win32Result<bool> RemoveMenu(
 /// {@category user32}
 Win32Result<HANDLE> RemoveProp(HWND hWnd, PCWSTR lpString) {
   final result_ = RemovePropW_Wrapper(hWnd, lpString);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Replies to a message sent from another thread by the SendMessage function.
@@ -5898,7 +5874,7 @@ Win32Result<bool> ScrollDC(
     hrgnUpdate ?? nullptr,
     lprcUpdate ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Scrolls the contents of the specified window's client area.
@@ -5921,7 +5897,7 @@ Win32Result<bool> ScrollWindow(
     lpRect ?? nullptr,
     lpClipRect ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Scrolls the contents of the specified window's client area.
@@ -5950,7 +5926,7 @@ Win32Result<int> ScrollWindowEx(
     prcUpdate ?? nullptr,
     flags,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sends a message to the specified control in a dialog box.
@@ -5987,7 +5963,7 @@ external int _SendDlgItemMessage(
 /// {@category user32}
 Win32Result<int> SendInput(int cInputs, Pointer<INPUT> pInputs, int cbSize) {
   final result_ = SendInput_Wrapper(cInputs, pInputs, cbSize);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Sends the specified message to a window or windows.
@@ -6011,7 +5987,7 @@ Win32Result<LRESULT> SendMessage(
     wParam ?? NULL,
     lParam ?? NULL,
   );
-  return Win32Result(value: LRESULT(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Sends the specified message to a window or windows.
@@ -6036,7 +6012,7 @@ Win32Result<bool> SendMessageCallback(
     lpResultCallBack,
     dwData,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sends the specified message to one or more windows.
@@ -6063,7 +6039,7 @@ Win32Result<LRESULT> SendMessageTimeout(
     uTimeout,
     lpdwResult ?? nullptr,
   );
-  return Win32Result(value: LRESULT(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Sends the specified message to a window or windows.
@@ -6079,7 +6055,7 @@ Win32Result<bool> SendNotifyMessage(
   LPARAM lParam,
 ) {
   final result_ = SendNotifyMessageW_Wrapper(hWnd, msg, wParam, lParam);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Activates a window.
@@ -6092,7 +6068,7 @@ Win32Result<bool> SendNotifyMessage(
 /// {@category user32}
 Win32Result<HWND> SetActiveWindow(HWND hWnd) {
   final result_ = SetActiveWindow_Wrapper(hWnd);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Sets the mouse capture to the specified window belonging to the current
@@ -6119,7 +6095,7 @@ external Pointer _SetCapture(Pointer hWnd);
 /// {@category user32}
 Win32Result<bool> SetCaretBlinkTime(int uMSeconds) {
   final result_ = SetCaretBlinkTime_Wrapper(uMSeconds);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Moves the caret to the specified coordinates.
@@ -6134,7 +6110,7 @@ Win32Result<bool> SetCaretBlinkTime(int uMSeconds) {
 /// {@category user32}
 Win32Result<bool> SetCaretPos(int x, int y) {
   final result_ = SetCaretPos_Wrapper(x, y);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Replaces the specified value at the specified offset in the extra class
@@ -6151,7 +6127,7 @@ Win32Result<int> SetClassLongPtr(
   int dwNewLong,
 ) {
   final result_ = SetClassLongPtrW_Wrapper(hWnd, nIndex, dwNewLong);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Places data on the clipboard in a specified clipboard format.
@@ -6162,7 +6138,7 @@ Win32Result<int> SetClassLongPtr(
 /// {@category user32}
 Win32Result<HANDLE> SetClipboardData(int uFormat, HANDLE? hMem) {
   final result_ = SetClipboardData_Wrapper(uFormat, hMem ?? nullptr);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Adds the specified window to the chain of clipboard viewers.
@@ -6177,7 +6153,7 @@ Win32Result<HANDLE> SetClipboardData(int uFormat, HANDLE? hMem) {
 /// {@category user32}
 Win32Result<HWND> SetClipboardViewer(HWND hWndNewViewer) {
   final result_ = SetClipboardViewer_Wrapper(hWndNewViewer);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a timer with the specified time-out value and coalescing tolerance
@@ -6201,7 +6177,7 @@ Win32Result<int> SetCoalescableTimer(
     lpTimerFunc ?? nullptr,
     uToleranceDelay,
   );
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Sets the cursor shape.
@@ -6224,7 +6200,7 @@ external Pointer _SetCursor(Pointer hCursor);
 /// {@category user32}
 Win32Result<bool> SetCursorPos(int x, int y) {
   final result_ = SetCursorPos_Wrapper(x, y);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Overrides the default per-monitor DPI scaling behavior of a child window in
@@ -6240,7 +6216,7 @@ Win32Result<bool> SetDialogControlDpiChangeBehavior(
   DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values,
 ) {
   final result_ = SetDialogControlDpiChangeBehavior_Wrapper(hWnd, mask, values);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Dialogs in Per-Monitor v2 contexts are automatically DPI scaled.
@@ -6257,7 +6233,7 @@ Win32Result<bool> SetDialogDpiChangeBehavior(
   DIALOG_DPI_CHANGE_BEHAVIORS values,
 ) {
   final result_ = SetDialogDpiChangeBehavior_Wrapper(hDlg, mask, values);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the screen auto-rotation preferences for the current process.
@@ -6331,7 +6307,7 @@ Win32Result<bool> SetDlgItemInt(
     uValue,
     bSigned ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the title or text of a control in a dialog box.
@@ -6342,7 +6318,7 @@ Win32Result<bool> SetDlgItemInt(
 /// {@category user32}
 Win32Result<bool> SetDlgItemText(HWND hDlg, int nIDDlgItem, PCWSTR lpString) {
   final result_ = SetDlgItemTextW_Wrapper(hDlg, nIDDlgItem, lpString);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the double-click time for the mouse.
@@ -6353,7 +6329,7 @@ Win32Result<bool> SetDlgItemText(HWND hDlg, int nIDDlgItem, PCWSTR lpString) {
 /// {@category user32}
 Win32Result<bool> SetDoubleClickTime(int param0) {
   final result_ = SetDoubleClickTime_Wrapper(param0);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the keyboard focus to the specified window.
@@ -6366,7 +6342,7 @@ Win32Result<bool> SetDoubleClickTime(int param0) {
 /// {@category user32}
 Win32Result<HWND> SetFocus(HWND? hWnd) {
   final result_ = SetFocus_Wrapper(hWnd ?? nullptr);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Brings the thread that created the specified window into the foreground and
@@ -6402,7 +6378,7 @@ Win32Result<bool> SetGestureConfig(
     pGestureConfig,
     cbSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies an array of keyboard key states into the calling thread's keyboard
@@ -6418,7 +6394,7 @@ Win32Result<bool> SetGestureConfig(
 /// {@category user32}
 Win32Result<bool> SetKeyboardState(Pointer<Uint8> lpKeyState) {
   final result_ = SetKeyboardState_Wrapper(lpKeyState);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the opacity and transparency color key of a layered window.
@@ -6439,7 +6415,7 @@ Win32Result<bool> SetLayeredWindowAttributes(
     bAlpha,
     dwFlags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Assigns a new menu to the specified window.
@@ -6450,7 +6426,7 @@ Win32Result<bool> SetLayeredWindowAttributes(
 /// {@category user32}
 Win32Result<bool> SetMenu(HWND hWnd, HMENU? hMenu) {
   final result_ = SetMenu_Wrapper(hWnd, hMenu ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the default menu item for the specified menu.
@@ -6461,7 +6437,7 @@ Win32Result<bool> SetMenu(HWND hWnd, HMENU? hMenu) {
 /// {@category user32}
 Win32Result<bool> SetMenuDefaultItem(HMENU hMenu, int uItem, int fByPos) {
   final result_ = SetMenuDefaultItem_Wrapper(hMenu, uItem, fByPos);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets information for a specified menu.
@@ -6472,7 +6448,7 @@ Win32Result<bool> SetMenuDefaultItem(HMENU hMenu, int uItem, int fByPos) {
 /// {@category user32}
 Win32Result<bool> SetMenuInfo(HMENU param0, Pointer<MENUINFO> param1) {
   final result_ = SetMenuInfo_Wrapper(param0, param1);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Associates the specified bitmap with a menu item.
@@ -6498,7 +6474,7 @@ Win32Result<bool> SetMenuItemBitmaps(
     hBitmapUnchecked ?? nullptr,
     hBitmapChecked ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes information about a menu item.
@@ -6519,7 +6495,7 @@ Win32Result<bool> SetMenuItemInfo(
     fByPositon ? TRUE : FALSE,
     lpmii,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the extra message information for the current thread.
@@ -6543,7 +6519,7 @@ external int _SetMessageExtraInfo(int lParam);
 /// {@category user32}
 Win32Result<HWND> SetParent(HWND hWndChild, HWND? hWndNewParent) {
   final result_ = SetParent_Wrapper(hWndChild, hWndNewParent ?? nullptr);
-  return Win32Result(value: HWND(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Sets the position of the cursor in physical coordinates.
@@ -6554,7 +6530,7 @@ Win32Result<HWND> SetParent(HWND hWndChild, HWND? hWndNewParent) {
 /// {@category user32}
 Win32Result<bool> SetPhysicalCursorPos(int x, int y) {
   final result_ = SetPhysicalCursorPos_Wrapper(x, y);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the process-default DPI awareness to system-DPI awareness.
@@ -6583,7 +6559,7 @@ external int _SetProcessDPIAware();
 /// {@category user32}
 Win32Result<bool> SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT value) {
   final result_ = SetProcessDpiAwarenessContext_Wrapper(value);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds a new entry or changes an existing entry in the property list of the
@@ -6595,7 +6571,7 @@ Win32Result<bool> SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT value) {
 /// {@category user32}
 Win32Result<bool> SetProp(HWND hWnd, PCWSTR lpString, HANDLE? hData) {
   final result_ = SetPropW_Wrapper(hWnd, lpString, hData ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the coordinates of the specified rectangle.
@@ -6679,7 +6655,7 @@ Win32Result<bool> SetSysColors(
   Pointer<Uint32> lpaRgbValues,
 ) {
   final result_ = SetSysColors_Wrapper(cElements, lpaElements, lpaRgbValues);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables an application to customize the system cursors.
@@ -6694,7 +6670,7 @@ Win32Result<bool> SetSysColors(
 /// {@category user32}
 Win32Result<bool> SetSystemCursor(HCURSOR hcur, SYSTEM_CURSOR_ID id) {
   final result_ = SetSystemCursor_Wrapper(hcur, id);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Set the DPI awareness for the current thread to the provided value.
@@ -6722,7 +6698,7 @@ external Pointer _SetThreadDpiAwarenessContext(Pointer dpiContext);
 /// {@category user32}
 @pragma('vm:prefer-inline')
 DPI_HOSTING_BEHAVIOR SetThreadDpiHostingBehavior(DPI_HOSTING_BEHAVIOR value) =>
-    DPI_HOSTING_BEHAVIOR(_SetThreadDpiHostingBehavior(value));
+    .new(_SetThreadDpiHostingBehavior(value));
 
 @Native<Int32 Function(Int32)>(symbol: 'SetThreadDpiHostingBehavior')
 external int _SetThreadDpiHostingBehavior(int value);
@@ -6745,7 +6721,7 @@ Win32Result<int> SetTimer(
     uElapse,
     lpTimerFunc ?? nullptr,
   );
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Sets information about the specified window station or desktop object.
@@ -6766,7 +6742,7 @@ Win32Result<bool> SetUserObjectInformation(
     pvInfo,
     nLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Stores the display affinity setting in kernel mode on the hWnd associated
@@ -6781,7 +6757,7 @@ Win32Result<bool> SetWindowDisplayAffinity(
   WINDOW_DISPLAY_AFFINITY dwAffinity,
 ) {
   final result_ = SetWindowDisplayAffinity_Wrapper(hWnd, dwAffinity);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes an attribute of the specified window.
@@ -6796,7 +6772,7 @@ Win32Result<int> SetWindowLongPtr(
   int dwNewLong,
 ) {
   final result_ = SetWindowLongPtrW_Wrapper(hWnd, nIndex, dwNewLong);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Sets the show state and the restored, minimized, and maximized positions of
@@ -6811,7 +6787,7 @@ Win32Result<bool> SetWindowPlacement(
   Pointer<WINDOWPLACEMENT> lpwndpl,
 ) {
   final result_ = SetWindowPlacement_Wrapper(hWnd, lpwndpl);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes the size, position, and Z order of a child, pop-up, or top-level
@@ -6843,7 +6819,7 @@ Win32Result<bool> SetWindowPos(
     cy,
     uFlags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the window region of a window.
@@ -6877,7 +6853,7 @@ Win32Result<HHOOK> SetWindowsHookEx(
     hmod ?? nullptr,
     dwThreadId,
   );
-  return Win32Result(value: HHOOK(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Changes the text of the specified window's title bar (if it has one).
@@ -6892,7 +6868,7 @@ Win32Result<HHOOK> SetWindowsHookEx(
 /// {@category user32}
 Win32Result<bool> SetWindowText(HWND hWnd, PCWSTR? lpString) {
   final result_ = SetWindowTextW_Wrapper(hWnd, lpString ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Makes the caret visible on the screen at the caret's current position.
@@ -6905,7 +6881,7 @@ Win32Result<bool> SetWindowText(HWND hWnd, PCWSTR? lpString) {
 /// {@category user32}
 Win32Result<bool> ShowCaret(HWND? hWnd) {
   final result_ = ShowCaret_Wrapper(hWnd ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Displays or hides the cursor.
@@ -6928,7 +6904,7 @@ external int _ShowCursor(int bShow);
 /// {@category user32}
 Win32Result<bool> ShowOwnedPopups(HWND hWnd, bool fShow) {
   final result_ = ShowOwnedPopups_Wrapper(hWnd, fShow ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the specified window's show state.
@@ -6968,7 +6944,7 @@ external int _ShowWindowAsync(Pointer hWnd, int nCmdShow);
 /// {@category user32}
 Win32Result<bool> SkipPointerFrameMessages(int pointerId) {
   final result_ = SkipPointerFrameMessages_Wrapper(pointerId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Triggers a visual signal to indicate that a sound is playing.
@@ -7029,7 +7005,7 @@ external int _SwapMouseButton(int fSwap);
 /// {@category user32}
 Win32Result<bool> SwitchDesktop(HDESK hDesktop) {
   final result_ = SwitchDesktop_Wrapper(hDesktop);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Switches focus to the specified window and brings it to the foreground.
@@ -7063,7 +7039,7 @@ Win32Result<bool> SystemParametersInfo(
     pvParam ?? nullptr,
     fWinIni,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the value of one of the system-wide parameters, taking into
@@ -7087,7 +7063,7 @@ Win32Result<bool> SystemParametersInfoForDpi(
     fWinIni,
     dpi,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Writes a character string at a specified location, expanding tabs to the
@@ -7164,7 +7140,7 @@ Win32Result<int> TileWindows(
     cKids,
     lpKids ?? nullptr,
   );
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Translates the specified virtual-key code and keyboard state to the
@@ -7392,7 +7368,7 @@ Win32Result<int> TranslateAccelerator(
   Pointer<MSG> lpMsg,
 ) {
   final result_ = TranslateAcceleratorW_Wrapper(hWnd, hAccTable, lpMsg);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Processes accelerator keystrokes for window menu commands of the
@@ -7435,7 +7411,7 @@ external int _TranslateMessage(Pointer<MSG> lpMsg);
 /// {@category user32}
 Win32Result<bool> UnhookWindowsHookEx(HHOOK hhk) {
   final result_ = UnhookWindowsHookEx_Wrapper(hhk);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates the union of two rectangles.
@@ -7470,7 +7446,7 @@ external int _UnionRect(
 /// {@category user32}
 Win32Result<bool> UnloadKeyboardLayout(HKL hkl) {
   final result_ = UnloadKeyboardLayout_Wrapper(hkl);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unregisters a window class, freeing the memory required for the class.
@@ -7481,7 +7457,7 @@ Win32Result<bool> UnloadKeyboardLayout(HKL hkl) {
 /// {@category user32}
 Win32Result<bool> UnregisterClass(PCWSTR lpClassName, HINSTANCE? hInstance) {
   final result_ = UnregisterClassW_Wrapper(lpClassName, hInstance ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes the specified device notification handle.
@@ -7492,7 +7468,7 @@ Win32Result<bool> UnregisterClass(PCWSTR lpClassName, HINSTANCE? hInstance) {
 /// {@category user32}
 Win32Result<bool> UnregisterDeviceNotification(HDEVNOTIFY handle) {
   final result_ = UnregisterDeviceNotification_Wrapper(handle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Frees a hot key previously registered by the calling thread.
@@ -7503,7 +7479,7 @@ Win32Result<bool> UnregisterDeviceNotification(HDEVNOTIFY handle) {
 /// {@category user32}
 Win32Result<bool> UnregisterHotKey(HWND? hWnd, int id) {
   final result_ = UnregisterHotKey_Wrapper(hWnd ?? nullptr, id);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unregisters the power setting notification.
@@ -7514,7 +7490,7 @@ Win32Result<bool> UnregisterHotKey(HWND? hWnd, int id) {
 /// {@category user32}
 Win32Result<bool> UnregisterPowerSettingNotification(HPOWERNOTIFY handle) {
   final result_ = UnregisterPowerSettingNotification_Wrapper(handle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Registers a window as no longer being touch-capable.
@@ -7525,7 +7501,7 @@ Win32Result<bool> UnregisterPowerSettingNotification(HPOWERNOTIFY handle) {
 /// {@category user32}
 Win32Result<bool> UnregisterTouchWindow(HWND hwnd) {
   final result_ = UnregisterTouchWindow_Wrapper(hwnd);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Updates the position, size, shape, content, and translucency of a layered
@@ -7579,7 +7555,7 @@ Win32Result<bool> UserHandleGrantAccess(
     hJob,
     bGrant ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Validates the client area within a rectangle by removing the rectangle from
@@ -7666,7 +7642,7 @@ external int _WaitForInputIdle(Pointer hProcess, int dwMilliseconds);
 /// {@category user32}
 Win32Result<bool> WaitMessage() {
   final result_ = WaitMessage_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns a handle to the window associated with the specified display device

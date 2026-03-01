@@ -43,7 +43,7 @@ import '../win32_result.dart';
 /// {@category dxva2}
 Win32Result<bool> DestroyPhysicalMonitor(HANDLE hMonitor) {
   final result_ = DestroyPhysicalMonitor_Wrapper(hMonitor);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes an array of physical monitor handles.
@@ -60,7 +60,7 @@ Win32Result<bool> DestroyPhysicalMonitors(
     dwPhysicalMonitorArraySize,
     pPhysicalMonitorArray,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a monitor's minimum, maximum, and current brightness settings.
@@ -81,7 +81,7 @@ Win32Result<int> GetMonitorBrightness(
     pdwCurrentBrightness,
     pdwMaximumBrightness,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the configuration capabilities of a monitor.
@@ -127,7 +127,7 @@ Win32Result<int> GetMonitorColorTemperature(
     hMonitor,
     pctCurrentColorTemperature,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a monitor's minimum, maximum, and current contrast settings.
@@ -148,7 +148,7 @@ Win32Result<int> GetMonitorContrast(
     pdwCurrentContrast,
     pdwMaximumContrast,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a monitor's minimum, maximum, and current horizontal or vertical
@@ -172,7 +172,7 @@ Win32Result<int> GetMonitorDisplayAreaPosition(
     pdwCurrentPosition,
     pdwMaximumPosition,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a monitor's minimum, maximum, and current width or height.
@@ -195,7 +195,7 @@ Win32Result<int> GetMonitorDisplayAreaSize(
     pdwCurrentWidthOrHeight,
     pdwMaximumWidthOrHeight,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a monitor's red, green, or blue drive value.
@@ -218,7 +218,7 @@ Win32Result<int> GetMonitorRedGreenOrBlueDrive(
     pdwCurrentDrive,
     pdwMaximumDrive,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a monitor's red, green, or blue gain value.
@@ -241,7 +241,7 @@ Win32Result<int> GetMonitorRedGreenOrBlueGain(
     pdwCurrentGain,
     pdwMaximumGain,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the type of technology used by a monitor.
@@ -258,7 +258,7 @@ Win32Result<int> GetMonitorTechnologyType(
     hMonitor,
     pdtyDisplayTechnologyType,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the number of physical monitors associated with an HMONITOR
@@ -276,7 +276,7 @@ Win32Result<bool> GetNumberOfPhysicalMonitorsFromHMONITOR(
     hMonitor,
     pdwNumberOfPhysicalMonitors,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the physical monitors associated with an HMONITOR monitor handle.
@@ -295,7 +295,7 @@ Win32Result<bool> GetPhysicalMonitorsFromHMONITOR(
     dwPhysicalMonitorArraySize,
     pPhysicalMonitorArray,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Saves the current monitor settings to the display's nonvolatile storage.
@@ -306,7 +306,7 @@ Win32Result<bool> GetPhysicalMonitorsFromHMONITOR(
 /// {@category dxva2}
 Win32Result<int> SaveCurrentMonitorSettings(HANDLE hMonitor) {
   final result_ = SaveCurrentMonitorSettings_Wrapper(hMonitor);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets a monitor's brightness value.
@@ -317,7 +317,7 @@ Win32Result<int> SaveCurrentMonitorSettings(HANDLE hMonitor) {
 /// {@category dxva2}
 Win32Result<int> SetMonitorBrightness(HANDLE hMonitor, int dwNewBrightness) {
   final result_ = SetMonitorBrightness_Wrapper(hMonitor, dwNewBrightness);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets a monitor's color temperature.
@@ -334,7 +334,7 @@ Win32Result<int> SetMonitorColorTemperature(
     hMonitor,
     ctCurrentColorTemperature,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets a monitor's contrast value.
@@ -345,7 +345,7 @@ Win32Result<int> SetMonitorColorTemperature(
 /// {@category dxva2}
 Win32Result<int> SetMonitorContrast(HANDLE hMonitor, int dwNewContrast) {
   final result_ = SetMonitorContrast_Wrapper(hMonitor, dwNewContrast);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets the horizontal or vertical position of a monitor's display area.
@@ -364,7 +364,7 @@ Win32Result<int> SetMonitorDisplayAreaPosition(
     ptPositionType,
     dwNewPosition,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets the width or height of a monitor's display area.
@@ -383,7 +383,7 @@ Win32Result<int> SetMonitorDisplayAreaSize(
     stSizeType,
     dwNewDisplayAreaWidthOrHeight,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sets a monitor's red, green, or blue drive value.

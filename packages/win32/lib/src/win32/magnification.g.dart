@@ -285,7 +285,7 @@ Win32Result<bool> MagSetInputTransform(
     pRectSource,
     pRectDest,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the list of windows to be magnified or the list of windows to be

@@ -39,7 +39,7 @@ final IID_IAppxManifestDriverConstraint = GUID.fromComponents(
   0xc031bee4,
   0xbbcc,
   0x48ea,
-  Uint8List.fromList(const [0xa2, 0x37, 0xc3, 0x40, 0x45, 0xc8, 0xa, 0x7]),
+  .fromList(const [0xa2, 0x37, 0xc3, 0x40, 0x45, 0xc8, 0xa, 0x7]),
 );
 
 /// {@category com}
@@ -86,7 +86,7 @@ class IAppxManifestDriverConstraint extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -112,7 +112,7 @@ class IAppxManifestDriverConstraint extends IUnknown implements ComInterface {
     }
     final result$ = minDate.value;
     free(minDate);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

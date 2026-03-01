@@ -39,7 +39,7 @@ final IID_IAppxManifestHostRuntimeDependency2 = GUID.fromComponents(
   0xc26f23a8,
   0xee10,
   0x4ad6,
-  Uint8List.fromList(const [0xb8, 0x98, 0x2b, 0x4d, 0x7a, 0xeb, 0xfe, 0x6a]),
+  .fromList(const [0xb8, 0x98, 0x2b, 0x4d, 0x7a, 0xeb, 0xfe, 0x6a]),
 );
 
 /// {@category com}
@@ -81,7 +81,7 @@ class IAppxManifestHostRuntimeDependency2 extends IUnknown
     }
     final result$ = packageFamilyName.value;
     free(packageFamilyName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

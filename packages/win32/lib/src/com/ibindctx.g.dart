@@ -41,7 +41,7 @@ final IID_IBindCtx = GUID.fromComponents(
   0xe,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Provides access to a bind context, which is an object that stores
@@ -187,7 +187,7 @@ class IBindCtx extends IUnknown implements ComInterface {
     final result$ = pprot.value;
     free(pprot);
     if (result$.isNull) return null;
-    return IRunningObjectTable(result$);
+    return .new(result$);
   }
 
   /// Associates an object with a string key in the bind context's string-keyed
@@ -222,7 +222,7 @@ class IBindCtx extends IUnknown implements ComInterface {
     final result$ = ppunk.value;
     free(ppunk);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves a pointer to an interface that can be used to enumerate the keys
@@ -242,7 +242,7 @@ class IBindCtx extends IUnknown implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   /// Removes the specified key and its associated pointer from the bind

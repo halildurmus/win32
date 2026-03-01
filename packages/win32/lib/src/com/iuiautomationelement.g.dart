@@ -45,7 +45,7 @@ final IID_IUIAutomationElement = GUID.fromComponents(
   0xd22108aa,
   0x8ac5,
   0x49a5,
-  Uint8List.fromList(const [0x83, 0x7b, 0x37, 0xbb, 0xb3, 0xd7, 0x59, 0x1e]),
+  .fromList(const [0x83, 0x7b, 0x37, 0xbb, 0xb3, 0xd7, 0x59, 0x1e]),
 );
 
 /// Exposes methods and properties for a UI Automation element, which represents
@@ -356,7 +356,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Returns all UI Automation elements that satisfy the specified condition.
@@ -380,7 +380,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the first child or descendant element that matches the specified
@@ -413,7 +413,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Returns all UI Automation elements that satisfy the specified condition,
@@ -446,7 +446,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a new UI Automation element with an updated cache.
@@ -469,7 +469,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = updatedElement.value;
     free(updatedElement);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the current value of a property for this UI Automation element.
@@ -639,7 +639,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = patternObject.value;
     free(patternObject);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves from the cache the IUnknown interface of the specified control
@@ -659,7 +659,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = patternObject.value;
     free(patternObject);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves from the cache the parent of this UI Automation element.
@@ -678,7 +678,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = parent.value;
     free(parent);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached child elements of this UI Automation element.
@@ -697,7 +697,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = children.value;
     free(children);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the identifier of the process that hosts the element.
@@ -729,7 +729,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_CONTROLTYPE_ID(result$);
+    return .new(result$);
   }
 
   /// Retrieves a localized description of the control type of the element.
@@ -745,7 +745,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the element.
@@ -761,7 +761,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the accelerator key for the element.
@@ -777,7 +777,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the access key character for the element.
@@ -793,7 +793,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the element has keyboard focus.
@@ -857,7 +857,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the class name of the element.
@@ -873,7 +873,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the help text for the element.
@@ -889,7 +889,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the culture identifier for the element.
@@ -969,7 +969,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return HWND(result$);
+    return .new(result$);
   }
 
   /// Retrieves a description of the type of UI item represented by the element.
@@ -985,7 +985,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the element is off-screen.
@@ -1017,7 +1017,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return OrientationType(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the underlying UI framework.
@@ -1033,7 +1033,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the element is required to be filled out on a form.
@@ -1065,7 +1065,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the coordinates of the rectangle that completely encloses the
@@ -1097,7 +1097,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Accessible Rich Internet Applications (ARIA) role of the
@@ -1114,7 +1114,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the Accessible Rich Internet Applications (ARIA) properties of
@@ -1131,7 +1131,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Indicates whether the element contains valid data for a form.
@@ -1165,7 +1165,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of elements that describe this element.
@@ -1182,7 +1182,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of elements that indicates the reading order after the
@@ -1200,7 +1200,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a description of the provider for this element.
@@ -1216,7 +1216,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached ID of the process that hosts the element.
@@ -1248,7 +1248,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_CONTROLTYPE_ID(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached localized description of the control type of the
@@ -1265,7 +1265,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached name of the element.
@@ -1281,7 +1281,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached accelerator key for the element.
@@ -1297,7 +1297,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached access key character for the element.
@@ -1313,7 +1313,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// A cached value that indicates whether the element has keyboard focus.
@@ -1378,7 +1378,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached class name of the element.
@@ -1394,7 +1394,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached help text for the element.
@@ -1410,7 +1410,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates the culture associated with the
@@ -1493,7 +1493,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return HWND(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached string that describes the type of item represented by
@@ -1510,7 +1510,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether the element is off-screen.
@@ -1542,7 +1542,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return OrientationType(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached name of the underlying UI framework associated with
@@ -1559,7 +1559,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether the element is required to
@@ -1592,7 +1592,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached coordinates of the rectangle that completely encloses
@@ -1625,7 +1625,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Accessible Rich Internet Applications (ARIA) role of
@@ -1642,7 +1642,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached Accessible Rich Internet Applications (ARIA)
@@ -1659,7 +1659,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates whether the element contains valid
@@ -1694,7 +1694,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached array of elements that describe this element.
@@ -1711,7 +1711,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached array of elements that indicate the reading order after
@@ -1729,7 +1729,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached description of the provider for this element.
@@ -1745,7 +1745,7 @@ class IUIAutomationElement extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a point on the element that can be clicked.

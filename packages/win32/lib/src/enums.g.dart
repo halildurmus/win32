@@ -12,8 +12,8 @@ extension type const ACCEL_VIRT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ACCEL_VIRT_FLAGS other) => _ & other._ == other._;
 
-  ACCEL_VIRT_FLAGS operator &(int other) => ACCEL_VIRT_FLAGS(_ & other);
-  ACCEL_VIRT_FLAGS operator |(int other) => ACCEL_VIRT_FLAGS(_ | other);
+  ACCEL_VIRT_FLAGS operator &(int other) => .new(_ & other);
+  ACCEL_VIRT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FVIRTKEY = ACCEL_VIRT_FLAGS(1);
@@ -31,8 +31,8 @@ extension type const ACTIVATEOPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ACTIVATEOPTIONS other) => _ & other._ == other._;
 
-  ACTIVATEOPTIONS operator &(int other) => ACTIVATEOPTIONS(_ & other);
-  ACTIVATEOPTIONS operator |(int other) => ACTIVATEOPTIONS(_ | other);
+  ACTIVATEOPTIONS operator &(int other) => .new(_ & other);
+  ACTIVATEOPTIONS operator |(int other) => .new(_ | other);
 }
 
 const AO_NONE = ACTIVATEOPTIONS(0);
@@ -78,10 +78,8 @@ extension type const ADVANCED_FEATURE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ADVANCED_FEATURE_FLAGS other) => _ & other._ == other._;
 
-  ADVANCED_FEATURE_FLAGS operator &(int other) =>
-      ADVANCED_FEATURE_FLAGS(_ & other);
-  ADVANCED_FEATURE_FLAGS operator |(int other) =>
-      ADVANCED_FEATURE_FLAGS(_ | other);
+  ADVANCED_FEATURE_FLAGS operator &(int other) => .new(_ & other);
+  ADVANCED_FEATURE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FADF_AUTO = ADVANCED_FEATURE_FLAGS(1);
@@ -113,8 +111,8 @@ extension type const ANIMATE_WINDOW_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ANIMATE_WINDOW_FLAGS other) => _ & other._ == other._;
 
-  ANIMATE_WINDOW_FLAGS operator &(int other) => ANIMATE_WINDOW_FLAGS(_ & other);
-  ANIMATE_WINDOW_FLAGS operator |(int other) => ANIMATE_WINDOW_FLAGS(_ | other);
+  ANIMATE_WINDOW_FLAGS operator &(int other) => .new(_ & other);
+  ANIMATE_WINDOW_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const AW_ACTIVATE = ANIMATE_WINDOW_FLAGS(131072);
@@ -145,8 +143,8 @@ extension type const APPX_CAPABILITIES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(APPX_CAPABILITIES other) => _ & other._ == other._;
 
-  APPX_CAPABILITIES operator &(int other) => APPX_CAPABILITIES(_ & other);
-  APPX_CAPABILITIES operator |(int other) => APPX_CAPABILITIES(_ | other);
+  APPX_CAPABILITIES operator &(int other) => .new(_ & other);
+  APPX_CAPABILITIES operator |(int other) => .new(_ | other);
 }
 
 /// Your Internet connection for outgoing connections to the Internet.
@@ -385,10 +383,8 @@ extension type const AUDCLNT_STREAMOPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(AUDCLNT_STREAMOPTIONS other) => _ & other._ == other._;
 
-  AUDCLNT_STREAMOPTIONS operator &(int other) =>
-      AUDCLNT_STREAMOPTIONS(_ & other);
-  AUDCLNT_STREAMOPTIONS operator |(int other) =>
-      AUDCLNT_STREAMOPTIONS(_ | other);
+  AUDCLNT_STREAMOPTIONS operator &(int other) => .new(_ & other);
+  AUDCLNT_STREAMOPTIONS operator |(int other) => .new(_ | other);
 }
 
 /// No stream options.
@@ -420,10 +416,8 @@ extension type const AUDIO_DUCKING_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(AUDIO_DUCKING_OPTIONS other) => _ & other._ == other._;
 
-  AUDIO_DUCKING_OPTIONS operator &(int other) =>
-      AUDIO_DUCKING_OPTIONS(_ & other);
-  AUDIO_DUCKING_OPTIONS operator |(int other) =>
-      AUDIO_DUCKING_OPTIONS(_ | other);
+  AUDIO_DUCKING_OPTIONS operator &(int other) => .new(_ & other);
+  AUDIO_DUCKING_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 /// The associated audio stream should use the default audio ducking behavior.
@@ -705,10 +699,8 @@ extension type const BROADCAST_SYSTEM_MESSAGE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(BROADCAST_SYSTEM_MESSAGE_FLAGS other) => _ & other._ == other._;
 
-  BROADCAST_SYSTEM_MESSAGE_FLAGS operator &(int other) =>
-      BROADCAST_SYSTEM_MESSAGE_FLAGS(_ & other);
-  BROADCAST_SYSTEM_MESSAGE_FLAGS operator |(int other) =>
-      BROADCAST_SYSTEM_MESSAGE_FLAGS(_ | other);
+  BROADCAST_SYSTEM_MESSAGE_FLAGS operator &(int other) => .new(_ & other);
+  BROADCAST_SYSTEM_MESSAGE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const BSF_ALLOWSFW = BROADCAST_SYSTEM_MESSAGE_FLAGS(128);
@@ -738,10 +730,8 @@ extension type const BROADCAST_SYSTEM_MESSAGE_INFO(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(BROADCAST_SYSTEM_MESSAGE_INFO other) => _ & other._ == other._;
 
-  BROADCAST_SYSTEM_MESSAGE_INFO operator &(int other) =>
-      BROADCAST_SYSTEM_MESSAGE_INFO(_ & other);
-  BROADCAST_SYSTEM_MESSAGE_INFO operator |(int other) =>
-      BROADCAST_SYSTEM_MESSAGE_INFO(_ | other);
+  BROADCAST_SYSTEM_MESSAGE_INFO operator &(int other) => .new(_ & other);
+  BROADCAST_SYSTEM_MESSAGE_INFO operator |(int other) => .new(_ | other);
 }
 
 const BSM_ALLCOMPONENTS = BROADCAST_SYSTEM_MESSAGE_INFO(0);
@@ -863,8 +853,8 @@ extension type const CASCADE_WINDOWS_HOW(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CASCADE_WINDOWS_HOW other) => _ & other._ == other._;
 
-  CASCADE_WINDOWS_HOW operator &(int other) => CASCADE_WINDOWS_HOW(_ & other);
-  CASCADE_WINDOWS_HOW operator |(int other) => CASCADE_WINDOWS_HOW(_ | other);
+  CASCADE_WINDOWS_HOW operator &(int other) => .new(_ & other);
+  CASCADE_WINDOWS_HOW operator |(int other) => .new(_ | other);
 }
 
 const MDITILE_SKIPDISABLED = CASCADE_WINDOWS_HOW(2);
@@ -876,8 +866,8 @@ extension type const CDCONTROLSTATEF(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CDCONTROLSTATEF other) => _ & other._ == other._;
 
-  CDCONTROLSTATEF operator &(int other) => CDCONTROLSTATEF(_ & other);
-  CDCONTROLSTATEF operator |(int other) => CDCONTROLSTATEF(_ | other);
+  CDCONTROLSTATEF operator &(int other) => .new(_ & other);
+  CDCONTROLSTATEF operator |(int other) => .new(_ | other);
 }
 
 const CDCS_INACTIVE = CDCONTROLSTATEF(0);
@@ -893,8 +883,8 @@ extension type const CDS_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CDS_TYPE other) => _ & other._ == other._;
 
-  CDS_TYPE operator &(int other) => CDS_TYPE(_ & other);
-  CDS_TYPE operator |(int other) => CDS_TYPE(_ | other);
+  CDS_TYPE operator &(int other) => .new(_ & other);
+  CDS_TYPE operator |(int other) => .new(_ | other);
 }
 
 const CDS_FULLSCREEN = CDS_TYPE(4);
@@ -924,10 +914,8 @@ extension type const CERT_QUERY_ENCODING_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CERT_QUERY_ENCODING_TYPE other) => _ & other._ == other._;
 
-  CERT_QUERY_ENCODING_TYPE operator &(int other) =>
-      CERT_QUERY_ENCODING_TYPE(_ & other);
-  CERT_QUERY_ENCODING_TYPE operator |(int other) =>
-      CERT_QUERY_ENCODING_TYPE(_ | other);
+  CERT_QUERY_ENCODING_TYPE operator &(int other) => .new(_ & other);
+  CERT_QUERY_ENCODING_TYPE operator |(int other) => .new(_ | other);
 }
 
 const X509_ASN_ENCODING = CERT_QUERY_ENCODING_TYPE(1);
@@ -946,8 +934,8 @@ extension type const CHOOSECOLOR_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CHOOSECOLOR_FLAGS other) => _ & other._ == other._;
 
-  CHOOSECOLOR_FLAGS operator &(int other) => CHOOSECOLOR_FLAGS(_ & other);
-  CHOOSECOLOR_FLAGS operator |(int other) => CHOOSECOLOR_FLAGS(_ | other);
+  CHOOSECOLOR_FLAGS operator &(int other) => .new(_ & other);
+  CHOOSECOLOR_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const CC_RGBINIT = CHOOSECOLOR_FLAGS(1);
@@ -973,8 +961,8 @@ extension type const CHOOSEFONT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CHOOSEFONT_FLAGS other) => _ & other._ == other._;
 
-  CHOOSEFONT_FLAGS operator &(int other) => CHOOSEFONT_FLAGS(_ & other);
-  CHOOSEFONT_FLAGS operator |(int other) => CHOOSEFONT_FLAGS(_ | other);
+  CHOOSEFONT_FLAGS operator &(int other) => .new(_ & other);
+  CHOOSEFONT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const CF_APPLY = CHOOSEFONT_FLAGS(512);
@@ -1040,8 +1028,8 @@ extension type const CHOOSEFONT_FONT_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CHOOSEFONT_FONT_TYPE other) => _ & other._ == other._;
 
-  CHOOSEFONT_FONT_TYPE operator &(int other) => CHOOSEFONT_FONT_TYPE(_ & other);
-  CHOOSEFONT_FONT_TYPE operator |(int other) => CHOOSEFONT_FONT_TYPE(_ | other);
+  CHOOSEFONT_FONT_TYPE operator &(int other) => .new(_ & other);
+  CHOOSEFONT_FONT_TYPE operator |(int other) => .new(_ | other);
 }
 
 const BOLD_FONTTYPE = CHOOSEFONT_FONT_TYPE(256);
@@ -1061,10 +1049,8 @@ extension type const CLEAR_COMM_ERROR_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CLEAR_COMM_ERROR_FLAGS other) => _ & other._ == other._;
 
-  CLEAR_COMM_ERROR_FLAGS operator &(int other) =>
-      CLEAR_COMM_ERROR_FLAGS(_ & other);
-  CLEAR_COMM_ERROR_FLAGS operator |(int other) =>
-      CLEAR_COMM_ERROR_FLAGS(_ | other);
+  CLEAR_COMM_ERROR_FLAGS operator &(int other) => .new(_ & other);
+  CLEAR_COMM_ERROR_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const CE_BREAK = CLEAR_COMM_ERROR_FLAGS(16);
@@ -1156,8 +1142,8 @@ extension type const CLSCTX(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CLSCTX other) => _ & other._ == other._;
 
-  CLSCTX operator &(int other) => CLSCTX(_ & other);
-  CLSCTX operator |(int other) => CLSCTX(_ | other);
+  CLSCTX operator &(int other) => .new(_ & other);
+  CLSCTX operator |(int other) => .new(_ | other);
 }
 
 /// The code that creates and manages objects of this class is a DLL that runs
@@ -1270,8 +1256,8 @@ extension type const COINIT(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(COINIT other) => _ & other._ == other._;
 
-  COINIT operator &(int other) => COINIT(_ & other);
-  COINIT operator |(int other) => COINIT(_ | other);
+  COINIT operator &(int other) => .new(_ & other);
+  COINIT operator |(int other) => .new(_ | other);
 }
 
 /// Initializes the thread for apartment-threaded object concurrency.
@@ -1296,8 +1282,8 @@ extension type const COMMPROP_STOP_PARITY(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(COMMPROP_STOP_PARITY other) => _ & other._ == other._;
 
-  COMMPROP_STOP_PARITY operator &(int other) => COMMPROP_STOP_PARITY(_ & other);
-  COMMPROP_STOP_PARITY operator |(int other) => COMMPROP_STOP_PARITY(_ | other);
+  COMMPROP_STOP_PARITY operator &(int other) => .new(_ & other);
+  COMMPROP_STOP_PARITY operator |(int other) => .new(_ | other);
 }
 
 const STOPBITS_10 = COMMPROP_STOP_PARITY(1);
@@ -1321,8 +1307,8 @@ extension type const COMM_EVENT_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(COMM_EVENT_MASK other) => _ & other._ == other._;
 
-  COMM_EVENT_MASK operator &(int other) => COMM_EVENT_MASK(_ & other);
-  COMM_EVENT_MASK operator |(int other) => COMM_EVENT_MASK(_ | other);
+  COMM_EVENT_MASK operator &(int other) => .new(_ & other);
+  COMM_EVENT_MASK operator |(int other) => .new(_ | other);
 }
 
 const EV_BREAK = COMM_EVENT_MASK(64);
@@ -1394,10 +1380,8 @@ extension type const CONSOLE_CHARACTER_ATTRIBUTES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CONSOLE_CHARACTER_ATTRIBUTES other) => _ & other._ == other._;
 
-  CONSOLE_CHARACTER_ATTRIBUTES operator &(int other) =>
-      CONSOLE_CHARACTER_ATTRIBUTES(_ & other);
-  CONSOLE_CHARACTER_ATTRIBUTES operator |(int other) =>
-      CONSOLE_CHARACTER_ATTRIBUTES(_ | other);
+  CONSOLE_CHARACTER_ATTRIBUTES operator &(int other) => .new(_ & other);
+  CONSOLE_CHARACTER_ATTRIBUTES operator |(int other) => .new(_ | other);
 }
 
 const FOREGROUND_BLUE = CONSOLE_CHARACTER_ATTRIBUTES(1);
@@ -1437,8 +1421,8 @@ extension type const CONSOLE_MODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CONSOLE_MODE other) => _ & other._ == other._;
 
-  CONSOLE_MODE operator &(int other) => CONSOLE_MODE(_ & other);
-  CONSOLE_MODE operator |(int other) => CONSOLE_MODE(_ | other);
+  CONSOLE_MODE operator &(int other) => .new(_ & other);
+  CONSOLE_MODE operator |(int other) => .new(_ | other);
 }
 
 const ENABLE_PROCESSED_INPUT = CONSOLE_MODE(1);
@@ -1476,8 +1460,8 @@ extension type const COPYFILE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(COPYFILE_FLAGS other) => _ & other._ == other._;
 
-  COPYFILE_FLAGS operator &(int other) => COPYFILE_FLAGS(_ & other);
-  COPYFILE_FLAGS operator |(int other) => COPYFILE_FLAGS(_ | other);
+  COPYFILE_FLAGS operator &(int other) => .new(_ & other);
+  COPYFILE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const COPY_FILE_FAIL_IF_EXISTS = COPYFILE_FLAGS(1);
@@ -1525,10 +1509,8 @@ extension type const COPYPROGRESSROUTINE_PROGRESS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(COPYPROGRESSROUTINE_PROGRESS other) => _ & other._ == other._;
 
-  COPYPROGRESSROUTINE_PROGRESS operator &(int other) =>
-      COPYPROGRESSROUTINE_PROGRESS(_ & other);
-  COPYPROGRESSROUTINE_PROGRESS operator |(int other) =>
-      COPYPROGRESSROUTINE_PROGRESS(_ | other);
+  COPYPROGRESSROUTINE_PROGRESS operator &(int other) => .new(_ & other);
+  COPYPROGRESSROUTINE_PROGRESS operator |(int other) => .new(_ | other);
 }
 
 const PROGRESS_CONTINUE = COPYPROGRESSROUTINE_PROGRESS(0);
@@ -1566,8 +1548,8 @@ extension type const CREATE_EVENT(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CREATE_EVENT other) => _ & other._ == other._;
 
-  CREATE_EVENT operator &(int other) => CREATE_EVENT(_ & other);
-  CREATE_EVENT operator |(int other) => CREATE_EVENT(_ | other);
+  CREATE_EVENT operator &(int other) => .new(_ & other);
+  CREATE_EVENT operator |(int other) => .new(_ | other);
 }
 
 const CREATE_EVENT_INITIAL_SET = CREATE_EVENT(2);
@@ -1579,8 +1561,8 @@ extension type const CRED_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CRED_FLAGS other) => _ & other._ == other._;
 
-  CRED_FLAGS operator &(int other) => CRED_FLAGS(_ & other);
-  CRED_FLAGS operator |(int other) => CRED_FLAGS(_ | other);
+  CRED_FLAGS operator &(int other) => .new(_ & other);
+  CRED_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const CRED_FLAGS_PASSWORD_FOR_CERT = CRED_FLAGS(1);
@@ -1645,8 +1627,8 @@ extension type const CWP_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(CWP_FLAGS other) => _ & other._ == other._;
 
-  CWP_FLAGS operator &(int other) => CWP_FLAGS(_ & other);
-  CWP_FLAGS operator |(int other) => CWP_FLAGS(_ | other);
+  CWP_FLAGS operator &(int other) => .new(_ & other);
+  CWP_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const CWP_ALL = CWP_FLAGS(0);
@@ -2300,10 +2282,8 @@ extension type const DEFINE_DOS_DEVICE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DEFINE_DOS_DEVICE_FLAGS other) => _ & other._ == other._;
 
-  DEFINE_DOS_DEVICE_FLAGS operator &(int other) =>
-      DEFINE_DOS_DEVICE_FLAGS(_ & other);
-  DEFINE_DOS_DEVICE_FLAGS operator |(int other) =>
-      DEFINE_DOS_DEVICE_FLAGS(_ | other);
+  DEFINE_DOS_DEVICE_FLAGS operator &(int other) => .new(_ & other);
+  DEFINE_DOS_DEVICE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DDD_RAW_TARGET_PATH = DEFINE_DOS_DEVICE_FLAGS(1);
@@ -2364,10 +2344,8 @@ extension type const DESKTOP_SLIDESHOW_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DESKTOP_SLIDESHOW_OPTIONS other) => _ & other._ == other._;
 
-  DESKTOP_SLIDESHOW_OPTIONS operator &(int other) =>
-      DESKTOP_SLIDESHOW_OPTIONS(_ & other);
-  DESKTOP_SLIDESHOW_OPTIONS operator |(int other) =>
-      DESKTOP_SLIDESHOW_OPTIONS(_ | other);
+  DESKTOP_SLIDESHOW_OPTIONS operator &(int other) => .new(_ & other);
+  DESKTOP_SLIDESHOW_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const DSO_SHUFFLEIMAGES = DESKTOP_SLIDESHOW_OPTIONS(1);
@@ -2377,10 +2355,8 @@ extension type const DESKTOP_SLIDESHOW_STATE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DESKTOP_SLIDESHOW_STATE other) => _ & other._ == other._;
 
-  DESKTOP_SLIDESHOW_STATE operator &(int other) =>
-      DESKTOP_SLIDESHOW_STATE(_ & other);
-  DESKTOP_SLIDESHOW_STATE operator |(int other) =>
-      DESKTOP_SLIDESHOW_STATE(_ | other);
+  DESKTOP_SLIDESHOW_STATE operator &(int other) => .new(_ & other);
+  DESKTOP_SLIDESHOW_STATE operator |(int other) => .new(_ | other);
 }
 
 const DSS_ENABLED = DESKTOP_SLIDESHOW_STATE(1);
@@ -2528,8 +2504,8 @@ extension type const DEVMODE_FIELD_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DEVMODE_FIELD_FLAGS other) => _ & other._ == other._;
 
-  DEVMODE_FIELD_FLAGS operator &(int other) => DEVMODE_FIELD_FLAGS(_ & other);
-  DEVMODE_FIELD_FLAGS operator |(int other) => DEVMODE_FIELD_FLAGS(_ | other);
+  DEVMODE_FIELD_FLAGS operator &(int other) => .new(_ & other);
+  DEVMODE_FIELD_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DM_SPECVERSION = DEVMODE_FIELD_FLAGS(1025);
@@ -2648,8 +2624,8 @@ extension type const DFCS_STATE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DFCS_STATE other) => _ & other._ == other._;
 
-  DFCS_STATE operator &(int other) => DFCS_STATE(_ & other);
-  DFCS_STATE operator |(int other) => DFCS_STATE(_ | other);
+  DFCS_STATE operator &(int other) => .new(_ & other);
+  DFCS_STATE operator |(int other) => .new(_ | other);
 }
 
 const DFCS_CAPTIONCLOSE = DFCS_STATE(0);
@@ -2738,10 +2714,8 @@ extension type const DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS other) => _ & other._ == other._;
 
-  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS operator &(int other) =>
-      DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS(_ & other);
-  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS operator |(int other) =>
-      DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS(_ | other);
+  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS operator &(int other) => .new(_ & other);
+  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS operator |(int other) => .new(_ | other);
 }
 
 /// The default behavior of the dialog manager.
@@ -2767,10 +2741,8 @@ extension type const DIALOG_DPI_CHANGE_BEHAVIORS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DIALOG_DPI_CHANGE_BEHAVIORS other) => _ & other._ == other._;
 
-  DIALOG_DPI_CHANGE_BEHAVIORS operator &(int other) =>
-      DIALOG_DPI_CHANGE_BEHAVIORS(_ & other);
-  DIALOG_DPI_CHANGE_BEHAVIORS operator |(int other) =>
-      DIALOG_DPI_CHANGE_BEHAVIORS(_ | other);
+  DIALOG_DPI_CHANGE_BEHAVIORS operator &(int other) => .new(_ & other);
+  DIALOG_DPI_CHANGE_BEHAVIORS operator |(int other) => .new(_ | other);
 }
 
 /// The default behavior of the dialog manager.
@@ -2803,8 +2775,8 @@ extension type const DISPATCH_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DISPATCH_FLAGS other) => _ & other._ == other._;
 
-  DISPATCH_FLAGS operator &(int other) => DISPATCH_FLAGS(_ & other);
-  DISPATCH_FLAGS operator |(int other) => DISPATCH_FLAGS(_ | other);
+  DISPATCH_FLAGS operator &(int other) => .new(_ & other);
+  DISPATCH_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DISPATCH_METHOD = DISPATCH_FLAGS(1);
@@ -3118,10 +3090,8 @@ extension type const DISPLAY_DEVICE_STATE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DISPLAY_DEVICE_STATE_FLAGS other) => _ & other._ == other._;
 
-  DISPLAY_DEVICE_STATE_FLAGS operator &(int other) =>
-      DISPLAY_DEVICE_STATE_FLAGS(_ & other);
-  DISPLAY_DEVICE_STATE_FLAGS operator |(int other) =>
-      DISPLAY_DEVICE_STATE_FLAGS(_ | other);
+  DISPLAY_DEVICE_STATE_FLAGS operator &(int other) => .new(_ & other);
+  DISPLAY_DEVICE_STATE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = DISPLAY_DEVICE_STATE_FLAGS(1);
@@ -3374,8 +3344,8 @@ extension type const DRAWEDGE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAWEDGE_FLAGS other) => _ & other._ == other._;
 
-  DRAWEDGE_FLAGS operator &(int other) => DRAWEDGE_FLAGS(_ & other);
-  DRAWEDGE_FLAGS operator |(int other) => DRAWEDGE_FLAGS(_ | other);
+  DRAWEDGE_FLAGS operator &(int other) => .new(_ & other);
+  DRAWEDGE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const BDR_RAISEDOUTER = DRAWEDGE_FLAGS(1);
@@ -3407,8 +3377,8 @@ extension type const DRAWSTATE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAWSTATE_FLAGS other) => _ & other._ == other._;
 
-  DRAWSTATE_FLAGS operator &(int other) => DRAWSTATE_FLAGS(_ & other);
-  DRAWSTATE_FLAGS operator |(int other) => DRAWSTATE_FLAGS(_ | other);
+  DRAWSTATE_FLAGS operator &(int other) => .new(_ & other);
+  DRAWSTATE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DST_COMPLEX = DRAWSTATE_FLAGS(0);
@@ -3440,8 +3410,8 @@ extension type const DRAW_CAPTION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAW_CAPTION_FLAGS other) => _ & other._ == other._;
 
-  DRAW_CAPTION_FLAGS operator &(int other) => DRAW_CAPTION_FLAGS(_ & other);
-  DRAW_CAPTION_FLAGS operator |(int other) => DRAW_CAPTION_FLAGS(_ | other);
+  DRAW_CAPTION_FLAGS operator &(int other) => .new(_ & other);
+  DRAW_CAPTION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DC_ACTIVE = DRAW_CAPTION_FLAGS(1);
@@ -3463,8 +3433,8 @@ extension type const DRAW_EDGE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAW_EDGE_FLAGS other) => _ & other._ == other._;
 
-  DRAW_EDGE_FLAGS operator &(int other) => DRAW_EDGE_FLAGS(_ & other);
-  DRAW_EDGE_FLAGS operator |(int other) => DRAW_EDGE_FLAGS(_ | other);
+  DRAW_EDGE_FLAGS operator &(int other) => .new(_ & other);
+  DRAW_EDGE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const BF_ADJUST = DRAW_EDGE_FLAGS(8192);
@@ -3510,8 +3480,8 @@ extension type const DRAW_TEXT_FORMAT(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAW_TEXT_FORMAT other) => _ & other._ == other._;
 
-  DRAW_TEXT_FORMAT operator &(int other) => DRAW_TEXT_FORMAT(_ & other);
-  DRAW_TEXT_FORMAT operator |(int other) => DRAW_TEXT_FORMAT(_ | other);
+  DRAW_TEXT_FORMAT operator &(int other) => .new(_ & other);
+  DRAW_TEXT_FORMAT operator |(int other) => .new(_ | other);
 }
 
 const DT_BOTTOM = DRAW_TEXT_FORMAT(8);
@@ -3567,10 +3537,8 @@ extension type const DRAW_THEME_PARENT_BACKGROUND_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DRAW_THEME_PARENT_BACKGROUND_FLAGS other) => _ & other._ == other._;
 
-  DRAW_THEME_PARENT_BACKGROUND_FLAGS operator &(int other) =>
-      DRAW_THEME_PARENT_BACKGROUND_FLAGS(_ & other);
-  DRAW_THEME_PARENT_BACKGROUND_FLAGS operator |(int other) =>
-      DRAW_THEME_PARENT_BACKGROUND_FLAGS(_ | other);
+  DRAW_THEME_PARENT_BACKGROUND_FLAGS operator &(int other) => .new(_ & other);
+  DRAW_THEME_PARENT_BACKGROUND_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DTPB_WINDOWDC = DRAW_THEME_PARENT_BACKGROUND_FLAGS(1);
@@ -3603,8 +3571,8 @@ extension type const DTTOPTS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DTTOPTS_FLAGS other) => _ & other._ == other._;
 
-  DTTOPTS_FLAGS operator &(int other) => DTTOPTS_FLAGS(_ & other);
-  DTTOPTS_FLAGS operator |(int other) => DTTOPTS_FLAGS(_ | other);
+  DTTOPTS_FLAGS operator &(int other) => .new(_ & other);
+  DTTOPTS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DTT_TEXTCOLOR = DTTOPTS_FLAGS(1);
@@ -3642,10 +3610,8 @@ extension type const DUPLICATE_HANDLE_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DUPLICATE_HANDLE_OPTIONS other) => _ & other._ == other._;
 
-  DUPLICATE_HANDLE_OPTIONS operator &(int other) =>
-      DUPLICATE_HANDLE_OPTIONS(_ & other);
-  DUPLICATE_HANDLE_OPTIONS operator |(int other) =>
-      DUPLICATE_HANDLE_OPTIONS(_ | other);
+  DUPLICATE_HANDLE_OPTIONS operator &(int other) => .new(_ & other);
+  DUPLICATE_HANDLE_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const DUPLICATE_CLOSE_SOURCE = DUPLICATE_HANDLE_OPTIONS(1);
@@ -3763,8 +3729,8 @@ extension type const DWM_SHOWCONTACT(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(DWM_SHOWCONTACT other) => _ & other._ == other._;
 
-  DWM_SHOWCONTACT operator &(int other) => DWM_SHOWCONTACT(_ & other);
-  DWM_SHOWCONTACT operator |(int other) => DWM_SHOWCONTACT(_ | other);
+  DWM_SHOWCONTACT operator &(int other) => .new(_ & other);
+  DWM_SHOWCONTACT operator |(int other) => .new(_ | other);
 }
 
 /// Down.
@@ -3893,10 +3859,8 @@ extension type const ENUM_DISPLAY_SETTINGS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ENUM_DISPLAY_SETTINGS_FLAGS other) => _ & other._ == other._;
 
-  ENUM_DISPLAY_SETTINGS_FLAGS operator &(int other) =>
-      ENUM_DISPLAY_SETTINGS_FLAGS(_ & other);
-  ENUM_DISPLAY_SETTINGS_FLAGS operator |(int other) =>
-      ENUM_DISPLAY_SETTINGS_FLAGS(_ | other);
+  ENUM_DISPLAY_SETTINGS_FLAGS operator &(int other) => .new(_ & other);
+  ENUM_DISPLAY_SETTINGS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const EDS_RAWMODE = ENUM_DISPLAY_SETTINGS_FLAGS(2);
@@ -3935,8 +3899,8 @@ extension type const ENUM_SERVICE_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ENUM_SERVICE_TYPE other) => _ & other._ == other._;
 
-  ENUM_SERVICE_TYPE operator &(int other) => ENUM_SERVICE_TYPE(_ & other);
-  ENUM_SERVICE_TYPE operator |(int other) => ENUM_SERVICE_TYPE(_ | other);
+  ENUM_SERVICE_TYPE operator &(int other) => .new(_ & other);
+  ENUM_SERVICE_TYPE operator |(int other) => .new(_ | other);
 }
 
 const SERVICE_DRIVER = ENUM_SERVICE_TYPE(11);
@@ -4117,8 +4081,8 @@ extension type const ETO_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ETO_OPTIONS other) => _ & other._ == other._;
 
-  ETO_OPTIONS operator &(int other) => ETO_OPTIONS(_ & other);
-  ETO_OPTIONS operator |(int other) => ETO_OPTIONS(_ | other);
+  ETO_OPTIONS operator &(int other) => .new(_ & other);
+  ETO_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const ETO_OPAQUE = ETO_OPTIONS(2);
@@ -4354,8 +4318,8 @@ extension type const EXECUTION_STATE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(EXECUTION_STATE other) => _ & other._ == other._;
 
-  EXECUTION_STATE operator &(int other) => EXECUTION_STATE(_ & other);
-  EXECUTION_STATE operator |(int other) => EXECUTION_STATE(_ | other);
+  EXECUTION_STATE operator &(int other) => .new(_ & other);
+  EXECUTION_STATE operator |(int other) => .new(_ | other);
 }
 
 const ES_AWAYMODE_REQUIRED = EXECUTION_STATE(64);
@@ -4783,10 +4747,8 @@ extension type const FILEOPENDIALOGOPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILEOPENDIALOGOPTIONS other) => _ & other._ == other._;
 
-  FILEOPENDIALOGOPTIONS operator &(int other) =>
-      FILEOPENDIALOGOPTIONS(_ & other);
-  FILEOPENDIALOGOPTIONS operator |(int other) =>
-      FILEOPENDIALOGOPTIONS(_ | other);
+  FILEOPENDIALOGOPTIONS operator &(int other) => .new(_ & other);
+  FILEOPENDIALOGOPTIONS operator |(int other) => .new(_ | other);
 }
 
 const FOS_OVERWRITEPROMPT = FILEOPENDIALOGOPTIONS(2);
@@ -4840,8 +4802,8 @@ extension type const FILEOPERATION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILEOPERATION_FLAGS other) => _ & other._ == other._;
 
-  FILEOPERATION_FLAGS operator &(int other) => FILEOPERATION_FLAGS(_ & other);
-  FILEOPERATION_FLAGS operator |(int other) => FILEOPERATION_FLAGS(_ | other);
+  FILEOPERATION_FLAGS operator &(int other) => .new(_ & other);
+  FILEOPERATION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FOFX_NOSKIPJUNCTIONS = FILEOPERATION_FLAGS(65536);
@@ -4915,8 +4877,8 @@ extension type const FILE_ACCESS_RIGHTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILE_ACCESS_RIGHTS other) => _ & other._ == other._;
 
-  FILE_ACCESS_RIGHTS operator &(int other) => FILE_ACCESS_RIGHTS(_ & other);
-  FILE_ACCESS_RIGHTS operator |(int other) => FILE_ACCESS_RIGHTS(_ | other);
+  FILE_ACCESS_RIGHTS operator &(int other) => .new(_ & other);
+  FILE_ACCESS_RIGHTS operator |(int other) => .new(_ | other);
 }
 
 const FILE_READ_DATA = FILE_ACCESS_RIGHTS(1);
@@ -5019,10 +4981,8 @@ extension type const FILE_FLAGS_AND_ATTRIBUTES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILE_FLAGS_AND_ATTRIBUTES other) => _ & other._ == other._;
 
-  FILE_FLAGS_AND_ATTRIBUTES operator &(int other) =>
-      FILE_FLAGS_AND_ATTRIBUTES(_ & other);
-  FILE_FLAGS_AND_ATTRIBUTES operator |(int other) =>
-      FILE_FLAGS_AND_ATTRIBUTES(_ | other);
+  FILE_FLAGS_AND_ATTRIBUTES operator &(int other) => .new(_ & other);
+  FILE_FLAGS_AND_ATTRIBUTES operator |(int other) => .new(_ | other);
 }
 
 const FILE_ATTRIBUTE_READONLY = FILE_FLAGS_AND_ATTRIBUTES(1);
@@ -5206,8 +5166,8 @@ extension type const FILE_NOTIFY_CHANGE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILE_NOTIFY_CHANGE other) => _ & other._ == other._;
 
-  FILE_NOTIFY_CHANGE operator &(int other) => FILE_NOTIFY_CHANGE(_ & other);
-  FILE_NOTIFY_CHANGE operator |(int other) => FILE_NOTIFY_CHANGE(_ | other);
+  FILE_NOTIFY_CHANGE operator &(int other) => .new(_ & other);
+  FILE_NOTIFY_CHANGE operator |(int other) => .new(_ | other);
 }
 
 const FILE_NOTIFY_CHANGE_FILE_NAME = FILE_NOTIFY_CHANGE(1);
@@ -5231,8 +5191,8 @@ extension type const FILE_SHARE_MODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FILE_SHARE_MODE other) => _ & other._ == other._;
 
-  FILE_SHARE_MODE operator &(int other) => FILE_SHARE_MODE(_ & other);
-  FILE_SHARE_MODE operator |(int other) => FILE_SHARE_MODE(_ | other);
+  FILE_SHARE_MODE operator &(int other) => .new(_ & other);
+  FILE_SHARE_MODE operator |(int other) => .new(_ | other);
 }
 
 const FILE_SHARE_NONE = FILE_SHARE_MODE(0);
@@ -5323,8 +5283,8 @@ extension type const FINDREPLACE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FINDREPLACE_FLAGS other) => _ & other._ == other._;
 
-  FINDREPLACE_FLAGS operator &(int other) => FINDREPLACE_FLAGS(_ & other);
-  FINDREPLACE_FLAGS operator |(int other) => FINDREPLACE_FLAGS(_ | other);
+  FINDREPLACE_FLAGS operator &(int other) => .new(_ & other);
+  FINDREPLACE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FR_DOWN = FINDREPLACE_FLAGS(1);
@@ -5380,8 +5340,8 @@ extension type const FIND_FIRST_EX_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FIND_FIRST_EX_FLAGS other) => _ & other._ == other._;
 
-  FIND_FIRST_EX_FLAGS operator &(int other) => FIND_FIRST_EX_FLAGS(_ & other);
-  FIND_FIRST_EX_FLAGS operator |(int other) => FIND_FIRST_EX_FLAGS(_ | other);
+  FIND_FIRST_EX_FLAGS operator &(int other) => .new(_ & other);
+  FIND_FIRST_EX_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FIND_FIRST_EX_CASE_SENSITIVE = FIND_FIRST_EX_FLAGS(1);
@@ -5447,8 +5407,8 @@ extension type const FONT_CLIP_PRECISION(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FONT_CLIP_PRECISION other) => _ & other._ == other._;
 
-  FONT_CLIP_PRECISION operator &(int other) => FONT_CLIP_PRECISION(_ & other);
-  FONT_CLIP_PRECISION operator |(int other) => FONT_CLIP_PRECISION(_ | other);
+  FONT_CLIP_PRECISION operator &(int other) => .new(_ & other);
+  FONT_CLIP_PRECISION operator |(int other) => .new(_ | other);
 }
 
 const CLIP_DEFAULT_PRECIS = FONT_CLIP_PRECISION(0);
@@ -5576,10 +5536,8 @@ extension type const FORMAT_MESSAGE_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(FORMAT_MESSAGE_OPTIONS other) => _ & other._ == other._;
 
-  FORMAT_MESSAGE_OPTIONS operator &(int other) =>
-      FORMAT_MESSAGE_OPTIONS(_ & other);
-  FORMAT_MESSAGE_OPTIONS operator |(int other) =>
-      FORMAT_MESSAGE_OPTIONS(_ | other);
+  FORMAT_MESSAGE_OPTIONS operator &(int other) => .new(_ & other);
+  FORMAT_MESSAGE_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const FORMAT_MESSAGE_ALLOCATE_BUFFER = FORMAT_MESSAGE_OPTIONS(256);
@@ -5726,10 +5684,8 @@ extension type const GENERIC_ACCESS_RIGHTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GENERIC_ACCESS_RIGHTS other) => _ & other._ == other._;
 
-  GENERIC_ACCESS_RIGHTS operator &(int other) =>
-      GENERIC_ACCESS_RIGHTS(_ & other);
-  GENERIC_ACCESS_RIGHTS operator |(int other) =>
-      GENERIC_ACCESS_RIGHTS(_ | other);
+  GENERIC_ACCESS_RIGHTS operator &(int other) => .new(_ & other);
+  GENERIC_ACCESS_RIGHTS operator |(int other) => .new(_ | other);
 }
 
 const GENERIC_READ = GENERIC_ACCESS_RIGHTS(2147483648);
@@ -5745,8 +5701,8 @@ extension type const GESTURECONFIG_ID(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GESTURECONFIG_ID other) => _ & other._ == other._;
 
-  GESTURECONFIG_ID operator &(int other) => GESTURECONFIG_ID(_ & other);
-  GESTURECONFIG_ID operator |(int other) => GESTURECONFIG_ID(_ | other);
+  GESTURECONFIG_ID operator &(int other) => .new(_ & other);
+  GESTURECONFIG_ID operator |(int other) => .new(_ | other);
 }
 
 const GID_BEGIN = GESTURECONFIG_ID(1);
@@ -5833,10 +5789,8 @@ extension type const GETPROPERTYSTOREFLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GETPROPERTYSTOREFLAGS other) => _ & other._ == other._;
 
-  GETPROPERTYSTOREFLAGS operator &(int other) =>
-      GETPROPERTYSTOREFLAGS(_ & other);
-  GETPROPERTYSTOREFLAGS operator |(int other) =>
-      GETPROPERTYSTOREFLAGS(_ | other);
+  GETPROPERTYSTOREFLAGS operator &(int other) => .new(_ & other);
+  GETPROPERTYSTOREFLAGS operator |(int other) => .new(_ | other);
 }
 
 /// Meaning to a calling process: Return a read-only property store that
@@ -5894,10 +5848,8 @@ extension type const GET_ADAPTERS_ADDRESSES_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GET_ADAPTERS_ADDRESSES_FLAGS other) => _ & other._ == other._;
 
-  GET_ADAPTERS_ADDRESSES_FLAGS operator &(int other) =>
-      GET_ADAPTERS_ADDRESSES_FLAGS(_ & other);
-  GET_ADAPTERS_ADDRESSES_FLAGS operator |(int other) =>
-      GET_ADAPTERS_ADDRESSES_FLAGS(_ | other);
+  GET_ADAPTERS_ADDRESSES_FLAGS operator &(int other) => .new(_ & other);
+  GET_ADAPTERS_ADDRESSES_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const GAA_FLAG_SKIP_UNICAST = GET_ADAPTERS_ADDRESSES_FLAGS(1);
@@ -5975,8 +5927,8 @@ extension type const GET_DCX_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GET_DCX_FLAGS other) => _ & other._ == other._;
 
-  GET_DCX_FLAGS operator &(int other) => GET_DCX_FLAGS(_ & other);
-  GET_DCX_FLAGS operator |(int other) => GET_DCX_FLAGS(_ | other);
+  GET_DCX_FLAGS operator &(int other) => .new(_ & other);
+  GET_DCX_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DCX_WINDOW = GET_DCX_FLAGS(1);
@@ -6109,10 +6061,8 @@ extension type const GET_FILE_VERSION_INFO_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GET_FILE_VERSION_INFO_FLAGS other) => _ & other._ == other._;
 
-  GET_FILE_VERSION_INFO_FLAGS operator &(int other) =>
-      GET_FILE_VERSION_INFO_FLAGS(_ & other);
-  GET_FILE_VERSION_INFO_FLAGS operator |(int other) =>
-      GET_FILE_VERSION_INFO_FLAGS(_ | other);
+  GET_FILE_VERSION_INFO_FLAGS operator &(int other) => .new(_ & other);
+  GET_FILE_VERSION_INFO_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const FILE_VER_GET_LOCALISED = GET_FILE_VERSION_INFO_FLAGS(1);
@@ -6126,10 +6076,8 @@ extension type const GET_MENU_DEFAULT_ITEM_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GET_MENU_DEFAULT_ITEM_FLAGS other) => _ & other._ == other._;
 
-  GET_MENU_DEFAULT_ITEM_FLAGS operator &(int other) =>
-      GET_MENU_DEFAULT_ITEM_FLAGS(_ & other);
-  GET_MENU_DEFAULT_ITEM_FLAGS operator |(int other) =>
-      GET_MENU_DEFAULT_ITEM_FLAGS(_ | other);
+  GET_MENU_DEFAULT_ITEM_FLAGS operator &(int other) => .new(_ & other);
+  GET_MENU_DEFAULT_ITEM_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const GMDI_GOINTOPOPUPS = GET_MENU_DEFAULT_ITEM_FLAGS(2);
@@ -6209,8 +6157,8 @@ extension type const GLOBAL_ALLOC_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GLOBAL_ALLOC_FLAGS other) => _ & other._ == other._;
 
-  GLOBAL_ALLOC_FLAGS operator &(int other) => GLOBAL_ALLOC_FLAGS(_ & other);
-  GLOBAL_ALLOC_FLAGS operator |(int other) => GLOBAL_ALLOC_FLAGS(_ | other);
+  GLOBAL_ALLOC_FLAGS operator &(int other) => .new(_ & other);
+  GLOBAL_ALLOC_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const GHND = GLOBAL_ALLOC_FLAGS(66);
@@ -6228,8 +6176,8 @@ extension type const GUITHREADINFO_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(GUITHREADINFO_FLAGS other) => _ & other._ == other._;
 
-  GUITHREADINFO_FLAGS operator &(int other) => GUITHREADINFO_FLAGS(_ & other);
-  GUITHREADINFO_FLAGS operator |(int other) => GUITHREADINFO_FLAGS(_ | other);
+  GUITHREADINFO_FLAGS operator &(int other) => .new(_ & other);
+  GUITHREADINFO_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const GUI_CARETBLINKING = GUITHREADINFO_FLAGS(1);
@@ -6247,8 +6195,8 @@ extension type const HANDLE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(HANDLE_FLAGS other) => _ & other._ == other._;
 
-  HANDLE_FLAGS operator &(int other) => HANDLE_FLAGS(_ & other);
-  HANDLE_FLAGS operator |(int other) => HANDLE_FLAGS(_ | other);
+  HANDLE_FLAGS operator &(int other) => .new(_ & other);
+  HANDLE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const HANDLE_FLAG_INHERIT = HANDLE_FLAGS(1);
@@ -6294,8 +6242,8 @@ extension type const HEAP_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(HEAP_FLAGS other) => _ & other._ == other._;
 
-  HEAP_FLAGS operator &(int other) => HEAP_FLAGS(_ & other);
-  HEAP_FLAGS operator |(int other) => HEAP_FLAGS(_ | other);
+  HEAP_FLAGS operator &(int other) => .new(_ & other);
+  HEAP_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const HEAP_NONE = HEAP_FLAGS(0);
@@ -6388,8 +6336,8 @@ extension type const HOT_KEY_MODIFIERS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(HOT_KEY_MODIFIERS other) => _ & other._ == other._;
 
-  HOT_KEY_MODIFIERS operator &(int other) => HOT_KEY_MODIFIERS(_ & other);
-  HOT_KEY_MODIFIERS operator |(int other) => HOT_KEY_MODIFIERS(_ | other);
+  HOT_KEY_MODIFIERS operator &(int other) => .new(_ & other);
+  HOT_KEY_MODIFIERS operator |(int other) => .new(_ | other);
 }
 
 const MOD_ALT = HOT_KEY_MODIFIERS(1);
@@ -6407,8 +6355,8 @@ extension type const IDLFLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(IDLFLAGS other) => _ & other._ == other._;
 
-  IDLFLAGS operator &(int other) => IDLFLAGS(_ & other);
-  IDLFLAGS operator |(int other) => IDLFLAGS(_ | other);
+  IDLFLAGS operator &(int other) => .new(_ & other);
+  IDLFLAGS operator |(int other) => .new(_ | other);
 }
 
 const IDLFLAG_NONE = IDLFLAGS(0);
@@ -6545,8 +6493,8 @@ extension type const IMAGE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(IMAGE_FLAGS other) => _ & other._ == other._;
 
-  IMAGE_FLAGS operator &(int other) => IMAGE_FLAGS(_ & other);
-  IMAGE_FLAGS operator |(int other) => IMAGE_FLAGS(_ | other);
+  IMAGE_FLAGS operator &(int other) => .new(_ & other);
+  IMAGE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const LR_CREATEDIBSECTION = IMAGE_FLAGS(8192);
@@ -6578,8 +6526,8 @@ extension type const IMPLTYPEFLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(IMPLTYPEFLAGS other) => _ & other._ == other._;
 
-  IMPLTYPEFLAGS operator &(int other) => IMPLTYPEFLAGS(_ & other);
-  IMPLTYPEFLAGS operator |(int other) => IMPLTYPEFLAGS(_ | other);
+  IMPLTYPEFLAGS operator &(int other) => .new(_ & other);
+  IMPLTYPEFLAGS operator |(int other) => .new(_ | other);
 }
 
 const IMPLTYPEFLAG_FDEFAULT = IMPLTYPEFLAGS(1);
@@ -6595,10 +6543,8 @@ extension type const INITCOMMONCONTROLSEX_ICC(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(INITCOMMONCONTROLSEX_ICC other) => _ & other._ == other._;
 
-  INITCOMMONCONTROLSEX_ICC operator &(int other) =>
-      INITCOMMONCONTROLSEX_ICC(_ & other);
-  INITCOMMONCONTROLSEX_ICC operator |(int other) =>
-      INITCOMMONCONTROLSEX_ICC(_ | other);
+  INITCOMMONCONTROLSEX_ICC operator &(int other) => .new(_ & other);
+  INITCOMMONCONTROLSEX_ICC operator |(int other) => .new(_ | other);
 }
 
 const ICC_ANIMATE_CLASS = INITCOMMONCONTROLSEX_ICC(128);
@@ -6776,10 +6722,8 @@ extension type const JOB_OBJECT_IO_RATE_CONTROL_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(JOB_OBJECT_IO_RATE_CONTROL_FLAGS other) => _ & other._ == other._;
 
-  JOB_OBJECT_IO_RATE_CONTROL_FLAGS operator &(int other) =>
-      JOB_OBJECT_IO_RATE_CONTROL_FLAGS(_ & other);
-  JOB_OBJECT_IO_RATE_CONTROL_FLAGS operator |(int other) =>
-      JOB_OBJECT_IO_RATE_CONTROL_FLAGS(_ | other);
+  JOB_OBJECT_IO_RATE_CONTROL_FLAGS operator &(int other) => .new(_ & other);
+  JOB_OBJECT_IO_RATE_CONTROL_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const JOB_OBJECT_IO_RATE_CONTROL_ENABLE = JOB_OBJECT_IO_RATE_CONTROL_FLAGS(1);
@@ -6802,10 +6746,8 @@ extension type const KBDLLHOOKSTRUCT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(KBDLLHOOKSTRUCT_FLAGS other) => _ & other._ == other._;
 
-  KBDLLHOOKSTRUCT_FLAGS operator &(int other) =>
-      KBDLLHOOKSTRUCT_FLAGS(_ & other);
-  KBDLLHOOKSTRUCT_FLAGS operator |(int other) =>
-      KBDLLHOOKSTRUCT_FLAGS(_ | other);
+  KBDLLHOOKSTRUCT_FLAGS operator &(int other) => .new(_ & other);
+  KBDLLHOOKSTRUCT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const LLKHF_EXTENDED = KBDLLHOOKSTRUCT_FLAGS(1);
@@ -6823,8 +6765,8 @@ extension type const KEYBD_EVENT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(KEYBD_EVENT_FLAGS other) => _ & other._ == other._;
 
-  KEYBD_EVENT_FLAGS operator &(int other) => KEYBD_EVENT_FLAGS(_ & other);
-  KEYBD_EVENT_FLAGS operator |(int other) => KEYBD_EVENT_FLAGS(_ | other);
+  KEYBD_EVENT_FLAGS operator &(int other) => .new(_ & other);
+  KEYBD_EVENT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const KEYEVENTF_EXTENDEDKEY = KEYBD_EVENT_FLAGS(1);
@@ -6988,8 +6930,8 @@ extension type const KNOWN_FOLDER_FLAG(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(KNOWN_FOLDER_FLAG other) => _ & other._ == other._;
 
-  KNOWN_FOLDER_FLAG operator &(int other) => KNOWN_FOLDER_FLAG(_ & other);
-  KNOWN_FOLDER_FLAG operator |(int other) => KNOWN_FOLDER_FLAG(_ | other);
+  KNOWN_FOLDER_FLAG operator &(int other) => .new(_ & other);
+  KNOWN_FOLDER_FLAG operator |(int other) => .new(_ | other);
 }
 
 /// Specifies no special retrieval options.
@@ -7052,10 +6994,8 @@ extension type const LAYERED_WINDOW_ATTRIBUTES_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(LAYERED_WINDOW_ATTRIBUTES_FLAGS other) => _ & other._ == other._;
 
-  LAYERED_WINDOW_ATTRIBUTES_FLAGS operator &(int other) =>
-      LAYERED_WINDOW_ATTRIBUTES_FLAGS(_ & other);
-  LAYERED_WINDOW_ATTRIBUTES_FLAGS operator |(int other) =>
-      LAYERED_WINDOW_ATTRIBUTES_FLAGS(_ | other);
+  LAYERED_WINDOW_ATTRIBUTES_FLAGS operator &(int other) => .new(_ & other);
+  LAYERED_WINDOW_ATTRIBUTES_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const LWA_ALPHA = LAYERED_WINDOW_ATTRIBUTES_FLAGS(2);
@@ -7067,8 +7007,8 @@ extension type const LOAD_LIBRARY_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(LOAD_LIBRARY_FLAGS other) => _ & other._ == other._;
 
-  LOAD_LIBRARY_FLAGS operator &(int other) => LOAD_LIBRARY_FLAGS(_ & other);
-  LOAD_LIBRARY_FLAGS operator |(int other) => LOAD_LIBRARY_FLAGS(_ | other);
+  LOAD_LIBRARY_FLAGS operator &(int other) => .new(_ & other);
+  LOAD_LIBRARY_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DONT_RESOLVE_DLL_REFERENCES = LOAD_LIBRARY_FLAGS(1);
@@ -7104,8 +7044,8 @@ extension type const LOCAL_ALLOC_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(LOCAL_ALLOC_FLAGS other) => _ & other._ == other._;
 
-  LOCAL_ALLOC_FLAGS operator &(int other) => LOCAL_ALLOC_FLAGS(_ & other);
-  LOCAL_ALLOC_FLAGS operator |(int other) => LOCAL_ALLOC_FLAGS(_ | other);
+  LOCAL_ALLOC_FLAGS operator &(int other) => .new(_ & other);
+  LOCAL_ALLOC_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const LHND = LOCAL_ALLOC_FLAGS(66);
@@ -7151,8 +7091,8 @@ extension type const LOCK_FILE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(LOCK_FILE_FLAGS other) => _ & other._ == other._;
 
-  LOCK_FILE_FLAGS operator &(int other) => LOCK_FILE_FLAGS(_ & other);
-  LOCK_FILE_FLAGS operator |(int other) => LOCK_FILE_FLAGS(_ | other);
+  LOCK_FILE_FLAGS operator &(int other) => .new(_ & other);
+  LOCK_FILE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const LOCKFILE_EXCLUSIVE_LOCK = LOCK_FILE_FLAGS(2);
@@ -7237,8 +7177,8 @@ extension type const MACHINE_ATTRIBUTES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MACHINE_ATTRIBUTES other) => _ & other._ == other._;
 
-  MACHINE_ATTRIBUTES operator &(int other) => MACHINE_ATTRIBUTES(_ & other);
-  MACHINE_ATTRIBUTES operator |(int other) => MACHINE_ATTRIBUTES(_ | other);
+  MACHINE_ATTRIBUTES operator &(int other) => .new(_ & other);
+  MACHINE_ATTRIBUTES operator |(int other) => .new(_ | other);
 }
 
 /// The specified architecture of code can run in user mode.
@@ -7542,8 +7482,8 @@ extension type const MENUINFO_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENUINFO_MASK other) => _ & other._ == other._;
 
-  MENUINFO_MASK operator &(int other) => MENUINFO_MASK(_ & other);
-  MENUINFO_MASK operator |(int other) => MENUINFO_MASK(_ | other);
+  MENUINFO_MASK operator &(int other) => .new(_ & other);
+  MENUINFO_MASK operator |(int other) => .new(_ | other);
 }
 
 const MIM_APPLYTOSUBMENUS = MENUINFO_MASK(2147483648);
@@ -7563,8 +7503,8 @@ extension type const MENUINFO_STYLE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENUINFO_STYLE other) => _ & other._ == other._;
 
-  MENUINFO_STYLE operator &(int other) => MENUINFO_STYLE(_ & other);
-  MENUINFO_STYLE operator |(int other) => MENUINFO_STYLE(_ | other);
+  MENUINFO_STYLE operator &(int other) => .new(_ & other);
+  MENUINFO_STYLE operator |(int other) => .new(_ | other);
 }
 
 const MNS_AUTODISMISS = MENUINFO_STYLE(268435456);
@@ -7584,8 +7524,8 @@ extension type const MENU_ITEM_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENU_ITEM_FLAGS other) => _ & other._ == other._;
 
-  MENU_ITEM_FLAGS operator &(int other) => MENU_ITEM_FLAGS(_ & other);
-  MENU_ITEM_FLAGS operator |(int other) => MENU_ITEM_FLAGS(_ | other);
+  MENU_ITEM_FLAGS operator &(int other) => .new(_ & other);
+  MENU_ITEM_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const MF_BYCOMMAND = MENU_ITEM_FLAGS(0);
@@ -7649,8 +7589,8 @@ extension type const MENU_ITEM_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENU_ITEM_MASK other) => _ & other._ == other._;
 
-  MENU_ITEM_MASK operator &(int other) => MENU_ITEM_MASK(_ & other);
-  MENU_ITEM_MASK operator |(int other) => MENU_ITEM_MASK(_ | other);
+  MENU_ITEM_MASK operator &(int other) => .new(_ & other);
+  MENU_ITEM_MASK operator |(int other) => .new(_ | other);
 }
 
 const MIIM_BITMAP = MENU_ITEM_MASK(128);
@@ -7676,8 +7616,8 @@ extension type const MENU_ITEM_STATE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENU_ITEM_STATE other) => _ & other._ == other._;
 
-  MENU_ITEM_STATE operator &(int other) => MENU_ITEM_STATE(_ & other);
-  MENU_ITEM_STATE operator |(int other) => MENU_ITEM_STATE(_ | other);
+  MENU_ITEM_STATE operator &(int other) => .new(_ & other);
+  MENU_ITEM_STATE operator |(int other) => .new(_ | other);
 }
 
 const MFS_GRAYED = MENU_ITEM_STATE(3);
@@ -7701,8 +7641,8 @@ extension type const MENU_ITEM_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MENU_ITEM_TYPE other) => _ & other._ == other._;
 
-  MENU_ITEM_TYPE operator &(int other) => MENU_ITEM_TYPE(_ & other);
-  MENU_ITEM_TYPE operator |(int other) => MENU_ITEM_TYPE(_ | other);
+  MENU_ITEM_TYPE operator &(int other) => .new(_ & other);
+  MENU_ITEM_TYPE operator |(int other) => .new(_ | other);
 }
 
 const MFT_BITMAP = MENU_ITEM_TYPE(4);
@@ -7757,8 +7697,8 @@ extension type const MESSAGEBOX_STYLE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MESSAGEBOX_STYLE other) => _ & other._ == other._;
 
-  MESSAGEBOX_STYLE operator &(int other) => MESSAGEBOX_STYLE(_ & other);
-  MESSAGEBOX_STYLE operator |(int other) => MESSAGEBOX_STYLE(_ | other);
+  MESSAGEBOX_STYLE operator &(int other) => .new(_ & other);
+  MESSAGEBOX_STYLE operator |(int other) => .new(_ | other);
 }
 
 const MB_ABORTRETRYIGNORE = MESSAGEBOX_STYLE(2);
@@ -7840,8 +7780,8 @@ extension type const MIDI_WAVE_OPEN_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MIDI_WAVE_OPEN_TYPE other) => _ & other._ == other._;
 
-  MIDI_WAVE_OPEN_TYPE operator &(int other) => MIDI_WAVE_OPEN_TYPE(_ & other);
-  MIDI_WAVE_OPEN_TYPE operator |(int other) => MIDI_WAVE_OPEN_TYPE(_ | other);
+  MIDI_WAVE_OPEN_TYPE operator &(int other) => .new(_ & other);
+  MIDI_WAVE_OPEN_TYPE operator |(int other) => .new(_ | other);
 }
 
 const CALLBACK_TYPEMASK = MIDI_WAVE_OPEN_TYPE(458752);
@@ -7897,10 +7837,8 @@ extension type const MODEMDEVCAPS_DIAL_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MODEMDEVCAPS_DIAL_OPTIONS other) => _ & other._ == other._;
 
-  MODEMDEVCAPS_DIAL_OPTIONS operator &(int other) =>
-      MODEMDEVCAPS_DIAL_OPTIONS(_ & other);
-  MODEMDEVCAPS_DIAL_OPTIONS operator |(int other) =>
-      MODEMDEVCAPS_DIAL_OPTIONS(_ | other);
+  MODEMDEVCAPS_DIAL_OPTIONS operator &(int other) => .new(_ & other);
+  MODEMDEVCAPS_DIAL_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const DIALOPTION_BILLING = MODEMDEVCAPS_DIAL_OPTIONS(64);
@@ -7914,10 +7852,8 @@ extension type const MODEMDEVCAPS_SPEAKER_MODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MODEMDEVCAPS_SPEAKER_MODE other) => _ & other._ == other._;
 
-  MODEMDEVCAPS_SPEAKER_MODE operator &(int other) =>
-      MODEMDEVCAPS_SPEAKER_MODE(_ & other);
-  MODEMDEVCAPS_SPEAKER_MODE operator |(int other) =>
-      MODEMDEVCAPS_SPEAKER_MODE(_ | other);
+  MODEMDEVCAPS_SPEAKER_MODE operator &(int other) => .new(_ & other);
+  MODEMDEVCAPS_SPEAKER_MODE operator |(int other) => .new(_ | other);
 }
 
 const MDMSPKRFLAG_CALLSETUP = MODEMDEVCAPS_SPEAKER_MODE(8);
@@ -7933,10 +7869,8 @@ extension type const MODEMDEVCAPS_SPEAKER_VOLUME(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MODEMDEVCAPS_SPEAKER_VOLUME other) => _ & other._ == other._;
 
-  MODEMDEVCAPS_SPEAKER_VOLUME operator &(int other) =>
-      MODEMDEVCAPS_SPEAKER_VOLUME(_ & other);
-  MODEMDEVCAPS_SPEAKER_VOLUME operator |(int other) =>
-      MODEMDEVCAPS_SPEAKER_VOLUME(_ | other);
+  MODEMDEVCAPS_SPEAKER_VOLUME operator &(int other) => .new(_ & other);
+  MODEMDEVCAPS_SPEAKER_VOLUME operator |(int other) => .new(_ | other);
 }
 
 const MDMVOLFLAG_HIGH = MODEMDEVCAPS_SPEAKER_VOLUME(4);
@@ -7970,8 +7904,8 @@ extension type const MODEM_STATUS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MODEM_STATUS_FLAGS other) => _ & other._ == other._;
 
-  MODEM_STATUS_FLAGS operator &(int other) => MODEM_STATUS_FLAGS(_ & other);
-  MODEM_STATUS_FLAGS operator |(int other) => MODEM_STATUS_FLAGS(_ | other);
+  MODEM_STATUS_FLAGS operator &(int other) => .new(_ & other);
+  MODEM_STATUS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const MS_CTS_ON = MODEM_STATUS_FLAGS(16);
@@ -8023,8 +7957,8 @@ extension type const MOUSE_EVENT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MOUSE_EVENT_FLAGS other) => _ & other._ == other._;
 
-  MOUSE_EVENT_FLAGS operator &(int other) => MOUSE_EVENT_FLAGS(_ & other);
-  MOUSE_EVENT_FLAGS operator |(int other) => MOUSE_EVENT_FLAGS(_ | other);
+  MOUSE_EVENT_FLAGS operator &(int other) => .new(_ & other);
+  MOUSE_EVENT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const MOUSEEVENTF_ABSOLUTE = MOUSE_EVENT_FLAGS(32768);
@@ -8073,8 +8007,8 @@ extension type const MOVE_FILE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(MOVE_FILE_FLAGS other) => _ & other._ == other._;
 
-  MOVE_FILE_FLAGS operator &(int other) => MOVE_FILE_FLAGS(_ & other);
-  MOVE_FILE_FLAGS operator |(int other) => MOVE_FILE_FLAGS(_ | other);
+  MOVE_FILE_FLAGS operator &(int other) => .new(_ & other);
+  MOVE_FILE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const MOVEFILE_COPY_ALLOWED = MOVE_FILE_FLAGS(2);
@@ -8108,9 +8042,9 @@ extension type const MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS(int _)
       _ & other._ == other._;
 
   MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS operator &(int other) =>
-      MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS(_ & other);
+      .new(_ & other);
   MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS operator |(int other) =>
-      MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS(_ | other);
+      .new(_ | other);
 }
 
 const MWMO_NONE = MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS(0);
@@ -8133,8 +8067,8 @@ extension type const NAMED_PIPE_MODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(NAMED_PIPE_MODE other) => _ & other._ == other._;
 
-  NAMED_PIPE_MODE operator &(int other) => NAMED_PIPE_MODE(_ & other);
-  NAMED_PIPE_MODE operator |(int other) => NAMED_PIPE_MODE(_ | other);
+  NAMED_PIPE_MODE operator &(int other) => .new(_ & other);
+  NAMED_PIPE_MODE operator |(int other) => .new(_ | other);
 }
 
 const PIPE_WAIT = NAMED_PIPE_MODE(0);
@@ -8415,10 +8349,8 @@ extension type const NOTIFY_ICON_DATA_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(NOTIFY_ICON_DATA_FLAGS other) => _ & other._ == other._;
 
-  NOTIFY_ICON_DATA_FLAGS operator &(int other) =>
-      NOTIFY_ICON_DATA_FLAGS(_ & other);
-  NOTIFY_ICON_DATA_FLAGS operator |(int other) =>
-      NOTIFY_ICON_DATA_FLAGS(_ | other);
+  NOTIFY_ICON_DATA_FLAGS operator &(int other) => .new(_ & other);
+  NOTIFY_ICON_DATA_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const NIF_MESSAGE = NOTIFY_ICON_DATA_FLAGS(1);
@@ -8442,10 +8374,8 @@ extension type const NOTIFY_ICON_INFOTIP_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(NOTIFY_ICON_INFOTIP_FLAGS other) => _ & other._ == other._;
 
-  NOTIFY_ICON_INFOTIP_FLAGS operator &(int other) =>
-      NOTIFY_ICON_INFOTIP_FLAGS(_ & other);
-  NOTIFY_ICON_INFOTIP_FLAGS operator |(int other) =>
-      NOTIFY_ICON_INFOTIP_FLAGS(_ | other);
+  NOTIFY_ICON_INFOTIP_FLAGS operator &(int other) => .new(_ & other);
+  NOTIFY_ICON_INFOTIP_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const NIIF_NONE = NOTIFY_ICON_INFOTIP_FLAGS(0);
@@ -8484,8 +8414,8 @@ extension type const NOTIFY_ICON_STATE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(NOTIFY_ICON_STATE other) => _ & other._ == other._;
 
-  NOTIFY_ICON_STATE operator &(int other) => NOTIFY_ICON_STATE(_ & other);
-  NOTIFY_ICON_STATE operator |(int other) => NOTIFY_ICON_STATE(_ | other);
+  NOTIFY_ICON_STATE operator &(int other) => .new(_ & other);
+  NOTIFY_ICON_STATE operator |(int other) => .new(_ | other);
 }
 
 const NIS_HIDDEN = NOTIFY_ICON_STATE(1);
@@ -8606,10 +8536,8 @@ extension type const OBJECT_SECURITY_INFORMATION(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(OBJECT_SECURITY_INFORMATION other) => _ & other._ == other._;
 
-  OBJECT_SECURITY_INFORMATION operator &(int other) =>
-      OBJECT_SECURITY_INFORMATION(_ & other);
-  OBJECT_SECURITY_INFORMATION operator |(int other) =>
-      OBJECT_SECURITY_INFORMATION(_ | other);
+  OBJECT_SECURITY_INFORMATION operator &(int other) => .new(_ & other);
+  OBJECT_SECURITY_INFORMATION operator |(int other) => .new(_ | other);
 }
 
 const ATTRIBUTE_SECURITY_INFORMATION = OBJECT_SECURITY_INFORMATION(32);
@@ -8649,8 +8577,8 @@ extension type const OPEN_FILENAME_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(OPEN_FILENAME_FLAGS other) => _ & other._ == other._;
 
-  OPEN_FILENAME_FLAGS operator &(int other) => OPEN_FILENAME_FLAGS(_ & other);
-  OPEN_FILENAME_FLAGS operator |(int other) => OPEN_FILENAME_FLAGS(_ | other);
+  OPEN_FILENAME_FLAGS operator &(int other) => .new(_ & other);
+  OPEN_FILENAME_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const OFN_READONLY = OPEN_FILENAME_FLAGS(1);
@@ -8710,10 +8638,8 @@ extension type const OPEN_FILENAME_FLAGS_EX(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(OPEN_FILENAME_FLAGS_EX other) => _ & other._ == other._;
 
-  OPEN_FILENAME_FLAGS_EX operator &(int other) =>
-      OPEN_FILENAME_FLAGS_EX(_ & other);
-  OPEN_FILENAME_FLAGS_EX operator |(int other) =>
-      OPEN_FILENAME_FLAGS_EX(_ | other);
+  OPEN_FILENAME_FLAGS_EX operator &(int other) => .new(_ & other);
+  OPEN_FILENAME_FLAGS_EX operator |(int other) => .new(_ | other);
 }
 
 const OFN_EX_NONE = OPEN_FILENAME_FLAGS_EX(0);
@@ -8725,10 +8651,8 @@ extension type const OPEN_THEME_DATA_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(OPEN_THEME_DATA_FLAGS other) => _ & other._ == other._;
 
-  OPEN_THEME_DATA_FLAGS operator &(int other) =>
-      OPEN_THEME_DATA_FLAGS(_ & other);
-  OPEN_THEME_DATA_FLAGS operator |(int other) =>
-      OPEN_THEME_DATA_FLAGS(_ | other);
+  OPEN_THEME_DATA_FLAGS operator &(int other) => .new(_ & other);
+  OPEN_THEME_DATA_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const OTD_FORCE_RECT_SIZING = OPEN_THEME_DATA_FLAGS(1);
@@ -8745,10 +8669,8 @@ extension type const ORIENTATION_PREFERENCE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ORIENTATION_PREFERENCE other) => _ & other._ == other._;
 
-  ORIENTATION_PREFERENCE operator &(int other) =>
-      ORIENTATION_PREFERENCE(_ & other);
-  ORIENTATION_PREFERENCE operator |(int other) =>
-      ORIENTATION_PREFERENCE(_ | other);
+  ORIENTATION_PREFERENCE operator &(int other) => .new(_ & other);
+  ORIENTATION_PREFERENCE operator |(int other) => .new(_ | other);
 }
 
 /// The process has no device orientation preferences.
@@ -9147,10 +9069,8 @@ extension type const PAGE_PROTECTION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PAGE_PROTECTION_FLAGS other) => _ & other._ == other._;
 
-  PAGE_PROTECTION_FLAGS operator &(int other) =>
-      PAGE_PROTECTION_FLAGS(_ & other);
-  PAGE_PROTECTION_FLAGS operator |(int other) =>
-      PAGE_PROTECTION_FLAGS(_ | other);
+  PAGE_PROTECTION_FLAGS operator &(int other) => .new(_ & other);
+  PAGE_PROTECTION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const PAGE_NOACCESS = PAGE_PROTECTION_FLAGS(1);
@@ -9236,8 +9156,8 @@ extension type const PAGE_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PAGE_TYPE other) => _ & other._ == other._;
 
-  PAGE_TYPE operator &(int other) => PAGE_TYPE(_ & other);
-  PAGE_TYPE operator |(int other) => PAGE_TYPE(_ | other);
+  PAGE_TYPE operator &(int other) => .new(_ & other);
+  PAGE_TYPE operator |(int other) => .new(_ | other);
 }
 
 const MEM_PRIVATE = PAGE_TYPE(131072);
@@ -9251,8 +9171,8 @@ extension type const PARAMFLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PARAMFLAGS other) => _ & other._ == other._;
 
-  PARAMFLAGS operator &(int other) => PARAMFLAGS(_ & other);
-  PARAMFLAGS operator |(int other) => PARAMFLAGS(_ | other);
+  PARAMFLAGS operator &(int other) => .new(_ & other);
+  PARAMFLAGS operator |(int other) => .new(_ | other);
 }
 
 const PARAMFLAG_NONE = PARAMFLAGS(0);
@@ -9276,8 +9196,8 @@ extension type const PATHCCH_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PATHCCH_OPTIONS other) => _ & other._ == other._;
 
-  PATHCCH_OPTIONS operator &(int other) => PATHCCH_OPTIONS(_ & other);
-  PATHCCH_OPTIONS operator |(int other) => PATHCCH_OPTIONS(_ | other);
+  PATHCCH_OPTIONS operator &(int other) => .new(_ & other);
+  PATHCCH_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const PATHCCH_NONE = PATHCCH_OPTIONS(0);
@@ -9301,10 +9221,8 @@ extension type const PEEK_MESSAGE_REMOVE_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PEEK_MESSAGE_REMOVE_TYPE other) => _ & other._ == other._;
 
-  PEEK_MESSAGE_REMOVE_TYPE operator &(int other) =>
-      PEEK_MESSAGE_REMOVE_TYPE(_ & other);
-  PEEK_MESSAGE_REMOVE_TYPE operator |(int other) =>
-      PEEK_MESSAGE_REMOVE_TYPE(_ | other);
+  PEEK_MESSAGE_REMOVE_TYPE operator &(int other) => .new(_ & other);
+  PEEK_MESSAGE_REMOVE_TYPE operator |(int other) => .new(_ | other);
 }
 
 const PM_NOREMOVE = PEEK_MESSAGE_REMOVE_TYPE(0);
@@ -9326,8 +9244,8 @@ extension type const PEN_STYLE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PEN_STYLE other) => _ & other._ == other._;
 
-  PEN_STYLE operator &(int other) => PEN_STYLE(_ & other);
-  PEN_STYLE operator |(int other) => PEN_STYLE(_ | other);
+  PEN_STYLE operator &(int other) => .new(_ & other);
+  PEN_STYLE operator |(int other) => .new(_ | other);
 }
 
 const PS_GEOMETRIC = PEN_STYLE(65536);
@@ -9438,8 +9356,8 @@ extension type const POINTER_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(POINTER_FLAGS other) => _ & other._ == other._;
 
-  POINTER_FLAGS operator &(int other) => POINTER_FLAGS(_ & other);
-  POINTER_FLAGS operator |(int other) => POINTER_FLAGS(_ | other);
+  POINTER_FLAGS operator &(int other) => .new(_ & other);
+  POINTER_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const POINTER_FLAG_NONE = POINTER_FLAGS(0);
@@ -9701,10 +9619,8 @@ extension type const PRINTER_ACCESS_RIGHTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PRINTER_ACCESS_RIGHTS other) => _ & other._ == other._;
 
-  PRINTER_ACCESS_RIGHTS operator &(int other) =>
-      PRINTER_ACCESS_RIGHTS(_ & other);
-  PRINTER_ACCESS_RIGHTS operator |(int other) =>
-      PRINTER_ACCESS_RIGHTS(_ | other);
+  PRINTER_ACCESS_RIGHTS operator &(int other) => .new(_ & other);
+  PRINTER_ACCESS_RIGHTS operator |(int other) => .new(_ | other);
 }
 
 const PRINTER_ALL_ACCESS = PRINTER_ACCESS_RIGHTS(983052);
@@ -9855,10 +9771,8 @@ extension type const PROCESS_ACCESS_RIGHTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PROCESS_ACCESS_RIGHTS other) => _ & other._ == other._;
 
-  PROCESS_ACCESS_RIGHTS operator &(int other) =>
-      PROCESS_ACCESS_RIGHTS(_ & other);
-  PROCESS_ACCESS_RIGHTS operator |(int other) =>
-      PROCESS_ACCESS_RIGHTS(_ | other);
+  PROCESS_ACCESS_RIGHTS operator &(int other) => .new(_ & other);
+  PROCESS_ACCESS_RIGHTS operator |(int other) => .new(_ | other);
 }
 
 const PROCESS_TERMINATE = PROCESS_ACCESS_RIGHTS(1);
@@ -9908,10 +9822,8 @@ extension type const PROCESS_CREATION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PROCESS_CREATION_FLAGS other) => _ & other._ == other._;
 
-  PROCESS_CREATION_FLAGS operator &(int other) =>
-      PROCESS_CREATION_FLAGS(_ & other);
-  PROCESS_CREATION_FLAGS operator |(int other) =>
-      PROCESS_CREATION_FLAGS(_ | other);
+  PROCESS_CREATION_FLAGS operator &(int other) => .new(_ & other);
+  PROCESS_CREATION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DEBUG_PROCESS = PROCESS_CREATION_FLAGS(1);
@@ -10066,8 +9978,8 @@ extension type const PURGE_COMM_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(PURGE_COMM_FLAGS other) => _ & other._ == other._;
 
-  PURGE_COMM_FLAGS operator &(int other) => PURGE_COMM_FLAGS(_ & other);
-  PURGE_COMM_FLAGS operator |(int other) => PURGE_COMM_FLAGS(_ | other);
+  PURGE_COMM_FLAGS operator &(int other) => .new(_ & other);
+  PURGE_COMM_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const PURGE_RXABORT = PURGE_COMM_FLAGS(2);
@@ -10108,8 +10020,8 @@ extension type const ProviderOptions(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ProviderOptions other) => _ & other._ == other._;
 
-  ProviderOptions operator &(int other) => ProviderOptions(_ & other);
-  ProviderOptions operator |(int other) => ProviderOptions(_ | other);
+  ProviderOptions operator &(int other) => .new(_ & other);
+  ProviderOptions operator |(int other) => .new(_ | other);
 }
 
 /// The provider is a client-side (proxy) provider.
@@ -10150,8 +10062,8 @@ extension type const QUEUE_STATUS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(QUEUE_STATUS_FLAGS other) => _ & other._ == other._;
 
-  QUEUE_STATUS_FLAGS operator &(int other) => QUEUE_STATUS_FLAGS(_ & other);
-  QUEUE_STATUS_FLAGS operator |(int other) => QUEUE_STATUS_FLAGS(_ | other);
+  QUEUE_STATUS_FLAGS operator &(int other) => .new(_ & other);
+  QUEUE_STATUS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const QS_ALLEVENTS = QUEUE_STATUS_FLAGS(1215);
@@ -10187,8 +10099,8 @@ extension type const RAWINPUTDEVICE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(RAWINPUTDEVICE_FLAGS other) => _ & other._ == other._;
 
-  RAWINPUTDEVICE_FLAGS operator &(int other) => RAWINPUTDEVICE_FLAGS(_ & other);
-  RAWINPUTDEVICE_FLAGS operator |(int other) => RAWINPUTDEVICE_FLAGS(_ | other);
+  RAWINPUTDEVICE_FLAGS operator &(int other) => .new(_ & other);
+  RAWINPUTDEVICE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const RIDEV_REMOVE = RAWINPUTDEVICE_FLAGS(1);
@@ -10232,8 +10144,8 @@ extension type const REDRAW_WINDOW_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REDRAW_WINDOW_FLAGS other) => _ & other._ == other._;
 
-  REDRAW_WINDOW_FLAGS operator &(int other) => REDRAW_WINDOW_FLAGS(_ & other);
-  REDRAW_WINDOW_FLAGS operator |(int other) => REDRAW_WINDOW_FLAGS(_ | other);
+  REDRAW_WINDOW_FLAGS operator &(int other) => .new(_ & other);
+  REDRAW_WINDOW_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const RDW_INVALIDATE = REDRAW_WINDOW_FLAGS(1);
@@ -10265,10 +10177,8 @@ extension type const REGISTER_NOTIFICATION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REGISTER_NOTIFICATION_FLAGS other) => _ & other._ == other._;
 
-  REGISTER_NOTIFICATION_FLAGS operator &(int other) =>
-      REGISTER_NOTIFICATION_FLAGS(_ & other);
-  REGISTER_NOTIFICATION_FLAGS operator |(int other) =>
-      REGISTER_NOTIFICATION_FLAGS(_ | other);
+  REGISTER_NOTIFICATION_FLAGS operator &(int other) => .new(_ & other);
+  REGISTER_NOTIFICATION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DEVICE_NOTIFY_SERVICE_HANDLE = REGISTER_NOTIFICATION_FLAGS(1);
@@ -10298,8 +10208,8 @@ extension type const REG_NOTIFY_FILTER(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REG_NOTIFY_FILTER other) => _ & other._ == other._;
 
-  REG_NOTIFY_FILTER operator &(int other) => REG_NOTIFY_FILTER(_ & other);
-  REG_NOTIFY_FILTER operator |(int other) => REG_NOTIFY_FILTER(_ | other);
+  REG_NOTIFY_FILTER operator &(int other) => .new(_ & other);
+  REG_NOTIFY_FILTER operator |(int other) => .new(_ | other);
 }
 
 const REG_NOTIFY_CHANGE_NAME = REG_NOTIFY_FILTER(1);
@@ -10317,10 +10227,8 @@ extension type const REG_OPEN_CREATE_OPTIONS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REG_OPEN_CREATE_OPTIONS other) => _ & other._ == other._;
 
-  REG_OPEN_CREATE_OPTIONS operator &(int other) =>
-      REG_OPEN_CREATE_OPTIONS(_ & other);
-  REG_OPEN_CREATE_OPTIONS operator |(int other) =>
-      REG_OPEN_CREATE_OPTIONS(_ | other);
+  REG_OPEN_CREATE_OPTIONS operator &(int other) => .new(_ & other);
+  REG_OPEN_CREATE_OPTIONS operator |(int other) => .new(_ | other);
 }
 
 const REG_OPTION_RESERVED = REG_OPEN_CREATE_OPTIONS(0);
@@ -10349,8 +10257,8 @@ extension type const REG_ROUTINE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REG_ROUTINE_FLAGS other) => _ & other._ == other._;
 
-  REG_ROUTINE_FLAGS operator &(int other) => REG_ROUTINE_FLAGS(_ & other);
-  REG_ROUTINE_FLAGS operator |(int other) => REG_ROUTINE_FLAGS(_ | other);
+  REG_ROUTINE_FLAGS operator &(int other) => .new(_ & other);
+  REG_ROUTINE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const RRF_RT_DWORD = REG_ROUTINE_FLAGS(24);
@@ -10388,8 +10296,8 @@ extension type const REG_SAM_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(REG_SAM_FLAGS other) => _ & other._ == other._;
 
-  REG_SAM_FLAGS operator &(int other) => REG_SAM_FLAGS(_ & other);
-  REG_SAM_FLAGS operator |(int other) => REG_SAM_FLAGS(_ | other);
+  REG_SAM_FLAGS operator &(int other) => .new(_ & other);
+  REG_SAM_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const KEY_QUERY_VALUE = REG_SAM_FLAGS(1);
@@ -10500,8 +10408,8 @@ extension type const ROP_CODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ROP_CODE other) => _ & other._ == other._;
 
-  ROP_CODE operator &(int other) => ROP_CODE(_ & other);
-  ROP_CODE operator |(int other) => ROP_CODE(_ | other);
+  ROP_CODE operator &(int other) => .new(_ & other);
+  ROP_CODE operator |(int other) => .new(_ | other);
 }
 
 const BLACKNESS = ROP_CODE(66);
@@ -10543,8 +10451,8 @@ extension type const ROT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(ROT_FLAGS other) => _ & other._ == other._;
 
-  ROT_FLAGS operator &(int other) => ROT_FLAGS(_ & other);
-  ROT_FLAGS operator |(int other) => ROT_FLAGS(_ | other);
+  ROT_FLAGS operator &(int other) => .new(_ & other);
+  ROT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const ROTFLAGS_REGISTRATIONKEEPSALIVE = ROT_FLAGS(1);
@@ -10911,8 +10819,8 @@ extension type const SCROLLBAR_CONSTANTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SCROLLBAR_CONSTANTS other) => _ & other._ == other._;
 
-  SCROLLBAR_CONSTANTS operator &(int other) => SCROLLBAR_CONSTANTS(_ & other);
-  SCROLLBAR_CONSTANTS operator |(int other) => SCROLLBAR_CONSTANTS(_ | other);
+  SCROLLBAR_CONSTANTS operator &(int other) => .new(_ & other);
+  SCROLLBAR_CONSTANTS operator |(int other) => .new(_ | other);
 }
 
 const SB_CTL = SCROLLBAR_CONSTANTS(2);
@@ -10928,8 +10836,8 @@ extension type const SCROLLINFO_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SCROLLINFO_MASK other) => _ & other._ == other._;
 
-  SCROLLINFO_MASK operator &(int other) => SCROLLINFO_MASK(_ & other);
-  SCROLLINFO_MASK operator |(int other) => SCROLLINFO_MASK(_ | other);
+  SCROLLINFO_MASK operator &(int other) => .new(_ & other);
+  SCROLLINFO_MASK operator |(int other) => .new(_ | other);
 }
 
 const SIF_ALL = SCROLLINFO_MASK(23);
@@ -10949,8 +10857,8 @@ extension type const SCROLL_WINDOW_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SCROLL_WINDOW_FLAGS other) => _ & other._ == other._;
 
-  SCROLL_WINDOW_FLAGS operator &(int other) => SCROLL_WINDOW_FLAGS(_ & other);
-  SCROLL_WINDOW_FLAGS operator |(int other) => SCROLL_WINDOW_FLAGS(_ | other);
+  SCROLL_WINDOW_FLAGS operator &(int other) => .new(_ & other);
+  SCROLL_WINDOW_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SW_SCROLLCHILDREN = SCROLL_WINDOW_FLAGS(1);
@@ -11043,10 +10951,8 @@ extension type const SECURITY_DESCRIPTOR_CONTROL(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SECURITY_DESCRIPTOR_CONTROL other) => _ & other._ == other._;
 
-  SECURITY_DESCRIPTOR_CONTROL operator &(int other) =>
-      SECURITY_DESCRIPTOR_CONTROL(_ & other);
-  SECURITY_DESCRIPTOR_CONTROL operator |(int other) =>
-      SECURITY_DESCRIPTOR_CONTROL(_ | other);
+  SECURITY_DESCRIPTOR_CONTROL operator &(int other) => .new(_ & other);
+  SECURITY_DESCRIPTOR_CONTROL operator |(int other) => .new(_ | other);
 }
 
 const SE_OWNER_DEFAULTED = SECURITY_DESCRIPTOR_CONTROL(1);
@@ -11082,10 +10988,8 @@ extension type const SEND_MESSAGE_TIMEOUT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SEND_MESSAGE_TIMEOUT_FLAGS other) => _ & other._ == other._;
 
-  SEND_MESSAGE_TIMEOUT_FLAGS operator &(int other) =>
-      SEND_MESSAGE_TIMEOUT_FLAGS(_ & other);
-  SEND_MESSAGE_TIMEOUT_FLAGS operator |(int other) =>
-      SEND_MESSAGE_TIMEOUT_FLAGS(_ | other);
+  SEND_MESSAGE_TIMEOUT_FLAGS operator &(int other) => .new(_ & other);
+  SEND_MESSAGE_TIMEOUT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SMTO_ABORTIFHUNG = SEND_MESSAGE_TIMEOUT_FLAGS(2);
@@ -11103,8 +11007,8 @@ extension type const SEND_RECV_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SEND_RECV_FLAGS other) => _ & other._ == other._;
 
-  SEND_RECV_FLAGS operator &(int other) => SEND_RECV_FLAGS(_ & other);
-  SEND_RECV_FLAGS operator |(int other) => SEND_RECV_FLAGS(_ | other);
+  SEND_RECV_FLAGS operator &(int other) => .new(_ & other);
+  SEND_RECV_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const MSG_OOB = SEND_RECV_FLAGS(1);
@@ -11170,8 +11074,8 @@ extension type const SERVICE_NOTIFY(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SERVICE_NOTIFY other) => _ & other._ == other._;
 
-  SERVICE_NOTIFY operator &(int other) => SERVICE_NOTIFY(_ & other);
-  SERVICE_NOTIFY operator |(int other) => SERVICE_NOTIFY(_ | other);
+  SERVICE_NOTIFY operator &(int other) => .new(_ & other);
+  SERVICE_NOTIFY operator |(int other) => .new(_ | other);
 }
 
 const SERVICE_NOTIFY_CREATED = SERVICE_NOTIFY(128);
@@ -11320,10 +11224,8 @@ extension type const SETUP_DI_GET_CLASS_DEVS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SETUP_DI_GET_CLASS_DEVS_FLAGS other) => _ & other._ == other._;
 
-  SETUP_DI_GET_CLASS_DEVS_FLAGS operator &(int other) =>
-      SETUP_DI_GET_CLASS_DEVS_FLAGS(_ & other);
-  SETUP_DI_GET_CLASS_DEVS_FLAGS operator |(int other) =>
-      SETUP_DI_GET_CLASS_DEVS_FLAGS(_ | other);
+  SETUP_DI_GET_CLASS_DEVS_FLAGS operator &(int other) => .new(_ & other);
+  SETUP_DI_GET_CLASS_DEVS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const DIGCF_DEFAULT = SETUP_DI_GET_CLASS_DEVS_FLAGS(1);
@@ -11431,10 +11333,8 @@ extension type const SET_DISPLAY_CONFIG_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SET_DISPLAY_CONFIG_FLAGS other) => _ & other._ == other._;
 
-  SET_DISPLAY_CONFIG_FLAGS operator &(int other) =>
-      SET_DISPLAY_CONFIG_FLAGS(_ & other);
-  SET_DISPLAY_CONFIG_FLAGS operator |(int other) =>
-      SET_DISPLAY_CONFIG_FLAGS(_ | other);
+  SET_DISPLAY_CONFIG_FLAGS operator &(int other) => .new(_ & other);
+  SET_DISPLAY_CONFIG_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SDC_USE_DATABASE_CURRENT = SET_DISPLAY_CONFIG_FLAGS(15);
@@ -11485,10 +11385,8 @@ extension type const SET_THEME_APP_PROPERTIES_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SET_THEME_APP_PROPERTIES_FLAGS other) => _ & other._ == other._;
 
-  SET_THEME_APP_PROPERTIES_FLAGS operator &(int other) =>
-      SET_THEME_APP_PROPERTIES_FLAGS(_ & other);
-  SET_THEME_APP_PROPERTIES_FLAGS operator |(int other) =>
-      SET_THEME_APP_PROPERTIES_FLAGS(_ | other);
+  SET_THEME_APP_PROPERTIES_FLAGS operator &(int other) => .new(_ & other);
+  SET_THEME_APP_PROPERTIES_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const ALLOW_NONCLIENT = SET_THEME_APP_PROPERTIES_FLAGS(1);
@@ -11504,8 +11402,8 @@ extension type const SET_WINDOW_POS_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SET_WINDOW_POS_FLAGS other) => _ & other._ == other._;
 
-  SET_WINDOW_POS_FLAGS operator &(int other) => SET_WINDOW_POS_FLAGS(_ & other);
-  SET_WINDOW_POS_FLAGS operator |(int other) => SET_WINDOW_POS_FLAGS(_ | other);
+  SET_WINDOW_POS_FLAGS operator &(int other) => .new(_ & other);
+  SET_WINDOW_POS_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SWP_ASYNCWINDOWPOS = SET_WINDOW_POS_FLAGS(16384);
@@ -11543,8 +11441,8 @@ extension type const SFGAO_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SFGAO_FLAGS other) => _ & other._ == other._;
 
-  SFGAO_FLAGS operator &(int other) => SFGAO_FLAGS(_ & other);
-  SFGAO_FLAGS operator |(int other) => SFGAO_FLAGS(_ | other);
+  SFGAO_FLAGS operator &(int other) => .new(_ & other);
+  SFGAO_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SFGAO_CANCOPY = SFGAO_FLAGS(1);
@@ -11637,8 +11535,8 @@ extension type const SHGFI_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SHGFI_FLAGS other) => _ & other._ == other._;
 
-  SHGFI_FLAGS operator &(int other) => SHGFI_FLAGS(_ & other);
-  SHGFI_FLAGS operator |(int other) => SHGFI_FLAGS(_ | other);
+  SHGFI_FLAGS operator &(int other) => .new(_ & other);
+  SHGFI_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SHGFI_ADDOVERLAYS = SHGFI_FLAGS(32);
@@ -11715,8 +11613,8 @@ extension type const SHUTDOWN_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SHUTDOWN_FLAGS other) => _ & other._ == other._;
 
-  SHUTDOWN_FLAGS operator &(int other) => SHUTDOWN_FLAGS(_ & other);
-  SHUTDOWN_FLAGS operator |(int other) => SHUTDOWN_FLAGS(_ | other);
+  SHUTDOWN_FLAGS operator &(int other) => .new(_ & other);
+  SHUTDOWN_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SHUTDOWN_FORCE_OTHERS = SHUTDOWN_FLAGS(1);
@@ -11758,8 +11656,8 @@ extension type const SHUTDOWN_REASON(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SHUTDOWN_REASON other) => _ & other._ == other._;
 
-  SHUTDOWN_REASON operator &(int other) => SHUTDOWN_REASON(_ & other);
-  SHUTDOWN_REASON operator |(int other) => SHUTDOWN_REASON(_ | other);
+  SHUTDOWN_REASON operator &(int other) => .new(_ & other);
+  SHUTDOWN_REASON operator |(int other) => .new(_ | other);
 }
 
 const SHTDN_REASON_NONE = SHUTDOWN_REASON(0);
@@ -11869,8 +11767,8 @@ extension type const SIATTRIBFLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SIATTRIBFLAGS other) => _ & other._ == other._;
 
-  SIATTRIBFLAGS operator &(int other) => SIATTRIBFLAGS(_ & other);
-  SIATTRIBFLAGS operator |(int other) => SIATTRIBFLAGS(_ | other);
+  SIATTRIBFLAGS operator &(int other) => .new(_ & other);
+  SIATTRIBFLAGS operator |(int other) => .new(_ | other);
 }
 
 const SIATTRIBFLAGS_AND = SIATTRIBFLAGS(1);
@@ -11917,8 +11815,8 @@ extension type const SIIGBF(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SIIGBF other) => _ & other._ == other._;
 
-  SIIGBF operator &(int other) => SIIGBF(_ & other);
-  SIIGBF operator |(int other) => SIIGBF(_ | other);
+  SIIGBF operator &(int other) => .new(_ & other);
+  SIIGBF operator |(int other) => .new(_ | other);
 }
 
 const SIIGBF_RESIZETOFIT = SIIGBF(0);
@@ -11987,8 +11885,8 @@ extension type const SND_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SND_FLAGS other) => _ & other._ == other._;
 
-  SND_FLAGS operator &(int other) => SND_FLAGS(_ & other);
-  SND_FLAGS operator |(int other) => SND_FLAGS(_ | other);
+  SND_FLAGS operator &(int other) => .new(_ & other);
+  SND_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SND_APPLICATION = SND_FLAGS(128);
@@ -12209,8 +12107,8 @@ extension type const STARTUPINFOW_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(STARTUPINFOW_FLAGS other) => _ & other._ == other._;
 
-  STARTUPINFOW_FLAGS operator &(int other) => STARTUPINFOW_FLAGS(_ & other);
-  STARTUPINFOW_FLAGS operator |(int other) => STARTUPINFOW_FLAGS(_ | other);
+  STARTUPINFOW_FLAGS operator &(int other) => .new(_ & other);
+  STARTUPINFOW_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const STARTF_FORCEONFEEDBACK = STARTUPINFOW_FLAGS(64);
@@ -12351,8 +12249,8 @@ extension type const STGC(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(STGC other) => _ & other._ == other._;
 
-  STGC operator &(int other) => STGC(_ & other);
-  STGC operator |(int other) => STGC(_ | other);
+  STGC operator &(int other) => .new(_ & other);
+  STGC operator |(int other) => .new(_ | other);
 }
 
 /// You can specify this condition with <b>STGC_CONSOLIDATE</b>, or some
@@ -12384,8 +12282,8 @@ extension type const STGM(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(STGM other) => _ & other._ == other._;
 
-  STGM operator &(int other) => STGM(_ & other);
-  STGM operator |(int other) => STGM(_ | other);
+  STGM operator &(int other) => .new(_ & other);
+  STGM operator |(int other) => .new(_ | other);
 }
 
 const STGM_DIRECT = STGM(0);
@@ -12502,8 +12400,8 @@ extension type const SYMBOLIC_LINK_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYMBOLIC_LINK_FLAGS other) => _ & other._ == other._;
 
-  SYMBOLIC_LINK_FLAGS operator &(int other) => SYMBOLIC_LINK_FLAGS(_ & other);
-  SYMBOLIC_LINK_FLAGS operator |(int other) => SYMBOLIC_LINK_FLAGS(_ | other);
+  SYMBOLIC_LINK_FLAGS operator &(int other) => .new(_ & other);
+  SYMBOLIC_LINK_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SYMBOLIC_LINK_FLAG_DIRECTORY = SYMBOLIC_LINK_FLAGS(1);
@@ -12515,8 +12413,8 @@ extension type const SYMBOL_INFO_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYMBOL_INFO_FLAGS other) => _ & other._ == other._;
 
-  SYMBOL_INFO_FLAGS operator &(int other) => SYMBOL_INFO_FLAGS(_ & other);
-  SYMBOL_INFO_FLAGS operator |(int other) => SYMBOL_INFO_FLAGS(_ | other);
+  SYMBOL_INFO_FLAGS operator &(int other) => .new(_ & other);
+  SYMBOL_INFO_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SYMFLAG_CLR_TOKEN = SYMBOL_INFO_FLAGS(262144);
@@ -12558,8 +12456,8 @@ extension type const SYM_LOAD_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYM_LOAD_FLAGS other) => _ & other._ == other._;
 
-  SYM_LOAD_FLAGS operator &(int other) => SYM_LOAD_FLAGS(_ & other);
-  SYM_LOAD_FLAGS operator |(int other) => SYM_LOAD_FLAGS(_ | other);
+  SYM_LOAD_FLAGS operator &(int other) => .new(_ & other);
+  SYM_LOAD_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SLMFLAG_NONE = SYM_LOAD_FLAGS(0);
@@ -12575,10 +12473,8 @@ extension type const SYNCHRONIZATION_ACCESS_RIGHTS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYNCHRONIZATION_ACCESS_RIGHTS other) => _ & other._ == other._;
 
-  SYNCHRONIZATION_ACCESS_RIGHTS operator &(int other) =>
-      SYNCHRONIZATION_ACCESS_RIGHTS(_ & other);
-  SYNCHRONIZATION_ACCESS_RIGHTS operator |(int other) =>
-      SYNCHRONIZATION_ACCESS_RIGHTS(_ | other);
+  SYNCHRONIZATION_ACCESS_RIGHTS operator &(int other) => .new(_ & other);
+  SYNCHRONIZATION_ACCESS_RIGHTS operator |(int other) => .new(_ | other);
 }
 
 const EVENT_ALL_ACCESS = SYNCHRONIZATION_ACCESS_RIGHTS(2031619);
@@ -12894,10 +12790,8 @@ extension type const SYSTEM_PARAMETERS_INFO_ACTION(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYSTEM_PARAMETERS_INFO_ACTION other) => _ & other._ == other._;
 
-  SYSTEM_PARAMETERS_INFO_ACTION operator &(int other) =>
-      SYSTEM_PARAMETERS_INFO_ACTION(_ & other);
-  SYSTEM_PARAMETERS_INFO_ACTION operator |(int other) =>
-      SYSTEM_PARAMETERS_INFO_ACTION(_ | other);
+  SYSTEM_PARAMETERS_INFO_ACTION operator &(int other) => .new(_ & other);
+  SYSTEM_PARAMETERS_INFO_ACTION operator |(int other) => .new(_ | other);
 }
 
 const SPI_GETBEEP = SYSTEM_PARAMETERS_INFO_ACTION(1);
@@ -13391,10 +13285,8 @@ extension type const SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS other) => _ & other._ == other._;
 
-  SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS operator &(int other) =>
-      SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(_ & other);
-  SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS operator |(int other) =>
-      SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(_ | other);
+  SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS operator &(int other) => .new(_ & other);
+  SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const SPIF_UPDATEINIFILE = SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(1);
@@ -13853,10 +13745,8 @@ extension type const SynchronizedInputType(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(SynchronizedInputType other) => _ & other._ == other._;
 
-  SynchronizedInputType operator &(int other) =>
-      SynchronizedInputType(_ & other);
-  SynchronizedInputType operator |(int other) =>
-      SynchronizedInputType(_ | other);
+  SynchronizedInputType operator &(int other) => .new(_ & other);
+  SynchronizedInputType operator |(int other) => .new(_ | other);
 }
 
 /// A key has been released.
@@ -13882,10 +13772,8 @@ extension type const TASKDIALOG_COMMON_BUTTON_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TASKDIALOG_COMMON_BUTTON_FLAGS other) => _ & other._ == other._;
 
-  TASKDIALOG_COMMON_BUTTON_FLAGS operator &(int other) =>
-      TASKDIALOG_COMMON_BUTTON_FLAGS(_ & other);
-  TASKDIALOG_COMMON_BUTTON_FLAGS operator |(int other) =>
-      TASKDIALOG_COMMON_BUTTON_FLAGS(_ | other);
+  TASKDIALOG_COMMON_BUTTON_FLAGS operator &(int other) => .new(_ & other);
+  TASKDIALOG_COMMON_BUTTON_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const TDCBF_OK_BUTTON = TASKDIALOG_COMMON_BUTTON_FLAGS(1);
@@ -13915,8 +13803,8 @@ extension type const TASKDIALOG_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TASKDIALOG_FLAGS other) => _ & other._ == other._;
 
-  TASKDIALOG_FLAGS operator &(int other) => TASKDIALOG_FLAGS(_ & other);
-  TASKDIALOG_FLAGS operator |(int other) => TASKDIALOG_FLAGS(_ | other);
+  TASKDIALOG_FLAGS operator &(int other) => .new(_ & other);
+  TASKDIALOG_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const TDF_ENABLE_HYPERLINKS = TASKDIALOG_FLAGS(1);
@@ -14495,10 +14383,8 @@ extension type const THREAD_CREATION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(THREAD_CREATION_FLAGS other) => _ & other._ == other._;
 
-  THREAD_CREATION_FLAGS operator &(int other) =>
-      THREAD_CREATION_FLAGS(_ & other);
-  THREAD_CREATION_FLAGS operator |(int other) =>
-      THREAD_CREATION_FLAGS(_ | other);
+  THREAD_CREATION_FLAGS operator &(int other) => .new(_ & other);
+  THREAD_CREATION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const THREAD_CREATE_RUN_IMMEDIATELY = THREAD_CREATION_FLAGS(0);
@@ -14512,8 +14398,8 @@ extension type const THREAD_ERROR_MODE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(THREAD_ERROR_MODE other) => _ & other._ == other._;
 
-  THREAD_ERROR_MODE operator &(int other) => THREAD_ERROR_MODE(_ & other);
-  THREAD_ERROR_MODE operator |(int other) => THREAD_ERROR_MODE(_ | other);
+  THREAD_ERROR_MODE operator &(int other) => .new(_ & other);
+  THREAD_ERROR_MODE operator |(int other) => .new(_ | other);
 }
 
 const SEM_ALL_ERRORS = THREAD_ERROR_MODE(0);
@@ -14538,8 +14424,8 @@ extension type const TMPF_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TMPF_FLAGS other) => _ & other._ == other._;
 
-  TMPF_FLAGS operator &(int other) => TMPF_FLAGS(_ & other);
-  TMPF_FLAGS operator |(int other) => TMPF_FLAGS(_ | other);
+  TMPF_FLAGS operator &(int other) => .new(_ & other);
+  TMPF_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const TMPF_FIXED_PITCH = TMPF_FLAGS(1);
@@ -14555,8 +14441,8 @@ extension type const TOKEN_ACCESS_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TOKEN_ACCESS_MASK other) => _ & other._ == other._;
 
-  TOKEN_ACCESS_MASK operator &(int other) => TOKEN_ACCESS_MASK(_ & other);
-  TOKEN_ACCESS_MASK operator |(int other) => TOKEN_ACCESS_MASK(_ | other);
+  TOKEN_ACCESS_MASK operator &(int other) => .new(_ & other);
+  TOKEN_ACCESS_MASK operator |(int other) => .new(_ | other);
 }
 
 const TOKEN_DELETE = TOKEN_ACCESS_MASK(65536);
@@ -14833,8 +14719,8 @@ extension type const TOUCHEVENTF_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TOUCHEVENTF_FLAGS other) => _ & other._ == other._;
 
-  TOUCHEVENTF_FLAGS operator &(int other) => TOUCHEVENTF_FLAGS(_ & other);
-  TOUCHEVENTF_FLAGS operator |(int other) => TOUCHEVENTF_FLAGS(_ | other);
+  TOUCHEVENTF_FLAGS operator &(int other) => .new(_ & other);
+  TOUCHEVENTF_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const TOUCHEVENTF_MOVE = TOUCHEVENTF_FLAGS(1);
@@ -14858,8 +14744,8 @@ extension type const TOUCHINPUTMASKF_MASK(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TOUCHINPUTMASKF_MASK other) => _ & other._ == other._;
 
-  TOUCHINPUTMASKF_MASK operator &(int other) => TOUCHINPUTMASKF_MASK(_ & other);
-  TOUCHINPUTMASKF_MASK operator |(int other) => TOUCHINPUTMASKF_MASK(_ | other);
+  TOUCHINPUTMASKF_MASK operator &(int other) => .new(_ & other);
+  TOUCHINPUTMASKF_MASK operator |(int other) => .new(_ | other);
 }
 
 const TOUCHINPUTMASKF_TIMEFROMSYSTEM = TOUCHINPUTMASKF_MASK(1);
@@ -14873,10 +14759,8 @@ extension type const TRACK_POPUP_MENU_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(TRACK_POPUP_MENU_FLAGS other) => _ & other._ == other._;
 
-  TRACK_POPUP_MENU_FLAGS operator &(int other) =>
-      TRACK_POPUP_MENU_FLAGS(_ & other);
-  TRACK_POPUP_MENU_FLAGS operator |(int other) =>
-      TRACK_POPUP_MENU_FLAGS(_ | other);
+  TRACK_POPUP_MENU_FLAGS operator &(int other) => .new(_ & other);
+  TRACK_POPUP_MENU_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const TPM_LEFTBUTTON = TRACK_POPUP_MENU_FLAGS(0);
@@ -16054,8 +15938,8 @@ extension type const VARENUM(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VARENUM other) => _ & other._ == other._;
 
-  VARENUM operator &(int other) => VARENUM(_ & other);
-  VARENUM operator |(int other) => VARENUM(_ | other);
+  VARENUM operator &(int other) => .new(_ & other);
+  VARENUM operator |(int other) => .new(_ | other);
 }
 
 /// Not specified.
@@ -16292,8 +16176,8 @@ extension type const VAR_CHANGE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VAR_CHANGE_FLAGS other) => _ & other._ == other._;
 
-  VAR_CHANGE_FLAGS operator &(int other) => VAR_CHANGE_FLAGS(_ & other);
-  VAR_CHANGE_FLAGS operator |(int other) => VAR_CHANGE_FLAGS(_ | other);
+  VAR_CHANGE_FLAGS operator &(int other) => .new(_ & other);
+  VAR_CHANGE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const VARIANT_NOVALUEPROP = VAR_CHANGE_FLAGS(1);
@@ -16344,8 +16228,8 @@ extension type const VER_FIND_FILE_STATUS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VER_FIND_FILE_STATUS other) => _ & other._ == other._;
 
-  VER_FIND_FILE_STATUS operator &(int other) => VER_FIND_FILE_STATUS(_ & other);
-  VER_FIND_FILE_STATUS operator |(int other) => VER_FIND_FILE_STATUS(_ | other);
+  VER_FIND_FILE_STATUS operator &(int other) => .new(_ & other);
+  VER_FIND_FILE_STATUS operator |(int other) => .new(_ | other);
 }
 
 const VFF_CURNEDEST = VER_FIND_FILE_STATUS(1);
@@ -16359,8 +16243,8 @@ extension type const VER_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VER_FLAGS other) => _ & other._ == other._;
 
-  VER_FLAGS operator &(int other) => VER_FLAGS(_ & other);
-  VER_FLAGS operator |(int other) => VER_FLAGS(_ | other);
+  VER_FLAGS operator &(int other) => .new(_ & other);
+  VER_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const VER_MINORVERSION = VER_FLAGS(1);
@@ -16391,10 +16275,8 @@ extension type const VER_INSTALL_FILE_STATUS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VER_INSTALL_FILE_STATUS other) => _ & other._ == other._;
 
-  VER_INSTALL_FILE_STATUS operator &(int other) =>
-      VER_INSTALL_FILE_STATUS(_ & other);
-  VER_INSTALL_FILE_STATUS operator |(int other) =>
-      VER_INSTALL_FILE_STATUS(_ | other);
+  VER_INSTALL_FILE_STATUS operator &(int other) => .new(_ & other);
+  VER_INSTALL_FILE_STATUS operator |(int other) => .new(_ | other);
 }
 
 const VIF_TEMPFILE = VER_INSTALL_FILE_STATUS(1);
@@ -16444,10 +16326,8 @@ extension type const VIRTUAL_ALLOCATION_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VIRTUAL_ALLOCATION_TYPE other) => _ & other._ == other._;
 
-  VIRTUAL_ALLOCATION_TYPE operator &(int other) =>
-      VIRTUAL_ALLOCATION_TYPE(_ & other);
-  VIRTUAL_ALLOCATION_TYPE operator |(int other) =>
-      VIRTUAL_ALLOCATION_TYPE(_ | other);
+  VIRTUAL_ALLOCATION_TYPE operator &(int other) => .new(_ & other);
+  VIRTUAL_ALLOCATION_TYPE operator |(int other) => .new(_ | other);
 }
 
 const MEM_COMMIT = VIRTUAL_ALLOCATION_TYPE(4096);
@@ -16975,10 +16855,8 @@ extension type const VS_FIXEDFILEINFO_FILE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(VS_FIXEDFILEINFO_FILE_FLAGS other) => _ & other._ == other._;
 
-  VS_FIXEDFILEINFO_FILE_FLAGS operator &(int other) =>
-      VS_FIXEDFILEINFO_FILE_FLAGS(_ & other);
-  VS_FIXEDFILEINFO_FILE_FLAGS operator |(int other) =>
-      VS_FIXEDFILEINFO_FILE_FLAGS(_ | other);
+  VS_FIXEDFILEINFO_FILE_FLAGS operator &(int other) => .new(_ & other);
+  VS_FIXEDFILEINFO_FILE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const VS_FF_DEBUG = VS_FIXEDFILEINFO_FILE_FLAGS(1);
@@ -17175,10 +17053,8 @@ extension type const WBEM_GENERIC_FLAG_TYPE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WBEM_GENERIC_FLAG_TYPE other) => _ & other._ == other._;
 
-  WBEM_GENERIC_FLAG_TYPE operator &(int other) =>
-      WBEM_GENERIC_FLAG_TYPE(_ & other);
-  WBEM_GENERIC_FLAG_TYPE operator |(int other) =>
-      WBEM_GENERIC_FLAG_TYPE(_ | other);
+  WBEM_GENERIC_FLAG_TYPE operator &(int other) => .new(_ & other);
+  WBEM_GENERIC_FLAG_TYPE operator |(int other) => .new(_ | other);
 }
 
 const WBEM_FLAG_RETURN_IMMEDIATELY = WBEM_GENERIC_FLAG_TYPE(16);
@@ -24134,10 +24010,8 @@ extension type const WINDOWPLACEMENT_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WINDOWPLACEMENT_FLAGS other) => _ & other._ == other._;
 
-  WINDOWPLACEMENT_FLAGS operator &(int other) =>
-      WINDOWPLACEMENT_FLAGS(_ & other);
-  WINDOWPLACEMENT_FLAGS operator |(int other) =>
-      WINDOWPLACEMENT_FLAGS(_ | other);
+  WINDOWPLACEMENT_FLAGS operator &(int other) => .new(_ & other);
+  WINDOWPLACEMENT_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const WPF_ASYNCWINDOWPLACEMENT = WINDOWPLACEMENT_FLAGS(4);
@@ -24204,8 +24078,8 @@ extension type const WINDOW_EX_STYLE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WINDOW_EX_STYLE other) => _ & other._ == other._;
 
-  WINDOW_EX_STYLE operator &(int other) => WINDOW_EX_STYLE(_ & other);
-  WINDOW_EX_STYLE operator |(int other) => WINDOW_EX_STYLE(_ | other);
+  WINDOW_EX_STYLE operator &(int other) => .new(_ & other);
+  WINDOW_EX_STYLE operator |(int other) => .new(_ | other);
 }
 
 const WS_EX_DLGMODALFRAME = WINDOW_EX_STYLE(1);
@@ -24303,8 +24177,8 @@ extension type const WINDOW_STYLE(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WINDOW_STYLE other) => _ & other._ == other._;
 
-  WINDOW_STYLE operator &(int other) => WINDOW_STYLE(_ & other);
-  WINDOW_STYLE operator |(int other) => WINDOW_STYLE(_ | other);
+  WINDOW_STYLE operator &(int other) => .new(_ & other);
+  WINDOW_STYLE operator |(int other) => .new(_ | other);
 }
 
 const WS_OVERLAPPED = WINDOW_STYLE(0);
@@ -24826,10 +24700,8 @@ extension type const WLAN_NOTIFICATION_SOURCES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WLAN_NOTIFICATION_SOURCES other) => _ & other._ == other._;
 
-  WLAN_NOTIFICATION_SOURCES operator &(int other) =>
-      WLAN_NOTIFICATION_SOURCES(_ & other);
-  WLAN_NOTIFICATION_SOURCES operator |(int other) =>
-      WLAN_NOTIFICATION_SOURCES(_ | other);
+  WLAN_NOTIFICATION_SOURCES operator &(int other) => .new(_ & other);
+  WLAN_NOTIFICATION_SOURCES operator |(int other) => .new(_ | other);
 }
 
 const WLAN_NOTIFICATION_SOURCE_NONE = WLAN_NOTIFICATION_SOURCES(0);
@@ -24947,8 +24819,8 @@ extension type const WNDCLASS_STYLES(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WNDCLASS_STYLES other) => _ & other._ == other._;
 
-  WNDCLASS_STYLES operator &(int other) => WNDCLASS_STYLES(_ & other);
-  WNDCLASS_STYLES operator |(int other) => WNDCLASS_STYLES(_ | other);
+  WNDCLASS_STYLES operator &(int other) => .new(_ & other);
+  WNDCLASS_STYLES operator |(int other) => .new(_ | other);
 }
 
 const CS_VREDRAW = WNDCLASS_STYLES(1);
@@ -24988,10 +24860,8 @@ extension type const WSL_DISTRIBUTION_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(WSL_DISTRIBUTION_FLAGS other) => _ & other._ == other._;
 
-  WSL_DISTRIBUTION_FLAGS operator &(int other) =>
-      WSL_DISTRIBUTION_FLAGS(_ & other);
-  WSL_DISTRIBUTION_FLAGS operator |(int other) =>
-      WSL_DISTRIBUTION_FLAGS(_ | other);
+  WSL_DISTRIBUTION_FLAGS operator &(int other) => .new(_ & other);
+  WSL_DISTRIBUTION_FLAGS operator |(int other) => .new(_ | other);
 }
 
 /// No flags are being supplied.
@@ -25126,10 +24996,8 @@ extension type const XINPUT_CAPABILITIES_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(XINPUT_CAPABILITIES_FLAGS other) => _ & other._ == other._;
 
-  XINPUT_CAPABILITIES_FLAGS operator &(int other) =>
-      XINPUT_CAPABILITIES_FLAGS(_ & other);
-  XINPUT_CAPABILITIES_FLAGS operator |(int other) =>
-      XINPUT_CAPABILITIES_FLAGS(_ | other);
+  XINPUT_CAPABILITIES_FLAGS operator &(int other) => .new(_ & other);
+  XINPUT_CAPABILITIES_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const XINPUT_CAPS_VOICE_SUPPORTED = XINPUT_CAPABILITIES_FLAGS(4);
@@ -25177,8 +25045,8 @@ extension type const XINPUT_FLAG(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(XINPUT_FLAG other) => _ & other._ == other._;
 
-  XINPUT_FLAG operator &(int other) => XINPUT_FLAG(_ & other);
-  XINPUT_FLAG operator |(int other) => XINPUT_FLAG(_ | other);
+  XINPUT_FLAG operator &(int other) => .new(_ & other);
+  XINPUT_FLAG operator |(int other) => .new(_ | other);
 }
 
 const XINPUT_FLAG_ALL = XINPUT_FLAG(0);
@@ -25190,10 +25058,8 @@ extension type const XINPUT_GAMEPAD_BUTTON_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(XINPUT_GAMEPAD_BUTTON_FLAGS other) => _ & other._ == other._;
 
-  XINPUT_GAMEPAD_BUTTON_FLAGS operator &(int other) =>
-      XINPUT_GAMEPAD_BUTTON_FLAGS(_ & other);
-  XINPUT_GAMEPAD_BUTTON_FLAGS operator |(int other) =>
-      XINPUT_GAMEPAD_BUTTON_FLAGS(_ | other);
+  XINPUT_GAMEPAD_BUTTON_FLAGS operator &(int other) => .new(_ & other);
+  XINPUT_GAMEPAD_BUTTON_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const XINPUT_GAMEPAD_DPAD_UP = XINPUT_GAMEPAD_BUTTON_FLAGS(1);
@@ -25235,10 +25101,8 @@ extension type const XINPUT_KEYSTROKE_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(XINPUT_KEYSTROKE_FLAGS other) => _ & other._ == other._;
 
-  XINPUT_KEYSTROKE_FLAGS operator &(int other) =>
-      XINPUT_KEYSTROKE_FLAGS(_ & other);
-  XINPUT_KEYSTROKE_FLAGS operator |(int other) =>
-      XINPUT_KEYSTROKE_FLAGS(_ | other);
+  XINPUT_KEYSTROKE_FLAGS operator &(int other) => .new(_ & other);
+  XINPUT_KEYSTROKE_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const XINPUT_KEYSTROKE_KEYDOWN = XINPUT_KEYSTROKE_FLAGS(1);

@@ -200,7 +200,7 @@ mixin ProjectionMixin on Projection {
 
     return [
       ...guidParams.take(3).map(generateHexExpression),
-      cb.refer('Uint8List').property('fromList').call([
+      cb.refer('').property('fromList').call([
         cb.literalConstList(
           guidParams.skip(3).map(generateHexExpression).toFixedList(),
         ),

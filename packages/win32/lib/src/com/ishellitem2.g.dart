@@ -43,7 +43,7 @@ final IID_IShellItem2 = GUID.fromComponents(
   0x7e9fb0d3,
   0x919f,
   0x4307,
-  Uint8List.fromList(const [0xab, 0x2e, 0x9b, 0x18, 0x60, 0x31, 0xc, 0x93]),
+  .fromList(const [0xab, 0x2e, 0x9b, 0x18, 0x60, 0x31, 0xc, 0x93]),
 );
 
 /// Extends IShellItem with methods that retrieve various property values of the
@@ -377,7 +377,7 @@ class IShellItem2 extends IShellItem implements ComInterface {
     }
     final result$ = ppsz.value;
     free(ppsz);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the UInt32 value of a specified property key.

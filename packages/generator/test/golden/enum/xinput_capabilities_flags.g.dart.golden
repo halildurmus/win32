@@ -4,10 +4,8 @@ extension type const XINPUT_CAPABILITIES_FLAGS(int _) implements int {
   /// Whether this instance has all the bit fields specified in [other].
   bool has(XINPUT_CAPABILITIES_FLAGS other) => _ & other._ == other._;
 
-  XINPUT_CAPABILITIES_FLAGS operator &(int other) =>
-      XINPUT_CAPABILITIES_FLAGS(_ & other);
-  XINPUT_CAPABILITIES_FLAGS operator |(int other) =>
-      XINPUT_CAPABILITIES_FLAGS(_ | other);
+  XINPUT_CAPABILITIES_FLAGS operator &(int other) => .new(_ & other);
+  XINPUT_CAPABILITIES_FLAGS operator |(int other) => .new(_ | other);
 }
 
 const XINPUT_CAPS_VOICE_SUPPORTED = XINPUT_CAPABILITIES_FLAGS(4);

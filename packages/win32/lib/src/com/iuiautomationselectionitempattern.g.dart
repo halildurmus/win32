@@ -40,7 +40,7 @@ final IID_IUIAutomationSelectionItemPattern = GUID.fromComponents(
   0xa8efa66a,
   0xfda,
   0x421a,
-  Uint8List.fromList(const [0x91, 0x94, 0x38, 0x2, 0x1f, 0x35, 0x78, 0xea]),
+  .fromList(const [0x91, 0x94, 0x38, 0x2, 0x1f, 0x35, 0x78, 0xea]),
 );
 
 /// Provides access to the selectable child items of a container control that
@@ -157,7 +157,7 @@ class IUIAutomationSelectionItemPattern extends IUnknown
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// A cached value that indicates whether this item is selected.
@@ -191,7 +191,7 @@ class IUIAutomationSelectionItemPattern extends IUnknown
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

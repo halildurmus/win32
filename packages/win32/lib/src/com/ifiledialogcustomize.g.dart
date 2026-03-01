@@ -40,7 +40,7 @@ final IID_IFileDialogCustomize = GUID.fromComponents(
   0xe6fdd21a,
   0x163f,
   0x4975,
-  Uint8List.fromList(const [0x9c, 0x8c, 0xa6, 0x9f, 0x1b, 0xa3, 0x70, 0x34]),
+  .fromList(const [0x9c, 0x8c, 0xa6, 0x9f, 0x1b, 0xa3, 0x70, 0x34]),
 );
 
 /// Exposes methods that allow an application to add controls to a common file
@@ -294,7 +294,7 @@ class IFileDialogCustomize extends IUnknown implements ComInterface {
     }
     final result$ = pdwState.value;
     free(pdwState);
-    return CDCONTROLSTATEF(result$);
+    return .new(result$);
   }
 
   /// Sets the current visibility and enabled states of a given control.
@@ -425,7 +425,7 @@ class IFileDialogCustomize extends IUnknown implements ComInterface {
     }
     final result$ = pdwState.value;
     free(pdwState);
-    return CDCONTROLSTATEF(result$);
+    return .new(result$);
   }
 
   /// Sets the current state of an item in a container control found in the

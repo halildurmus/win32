@@ -40,7 +40,7 @@ final IID_IAppxManifestPackageId = GUID.fromComponents(
   0x283ce2d7,
   0x7153,
   0x4a91,
-  Uint8List.fromList(const [0x96, 0x49, 0x7a, 0xf, 0x72, 0x40, 0x94, 0x5f]),
+  .fromList(const [0x96, 0x49, 0x7a, 0xf, 0x72, 0x40, 0x94, 0x5f]),
 );
 
 /// Provides access to the package identity.
@@ -116,7 +116,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the processor architecture as defined in the manifest.
@@ -134,7 +134,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = architecture.value;
     free(architecture);
-    return APPX_PACKAGE_ARCHITECTURE(result$);
+    return .new(result$);
   }
 
   /// Gets the name of the package publisher as defined in the manifest.
@@ -152,7 +152,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = publisher.value;
     free(publisher);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the version of the package as defined in the manifest.
@@ -188,7 +188,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = resourceId.value;
     free(resourceId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Compares the specified publisher with the publisher defined in the
@@ -225,7 +225,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = packageFullName.value;
     free(packageFullName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the package family name.
@@ -243,7 +243,7 @@ class IAppxManifestPackageId extends IUnknown implements ComInterface {
     }
     final result$ = packageFamilyName.value;
     free(packageFamilyName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

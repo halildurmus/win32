@@ -533,7 +533,7 @@ IRecordInfo? SafeArrayGetRecordInfo(Pointer<SAFEARRAY> psa) {
   final result$ = prinfo.value;
   free(prinfo);
   if (result$.isNull) return null;
-  return IRecordInfo(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<VTablePointer>)>(
@@ -590,7 +590,7 @@ VARENUM SafeArrayGetVartype(Pointer<SAFEARRAY> psa) {
   }
   final result$ = pvt.value;
   free(pvt);
-  return VARENUM(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Uint16>)>(
@@ -960,7 +960,7 @@ BSTR VarBstrCat(BSTR bstrLeft, BSTR bstrRight) {
   }
   final result$ = pbstrResult.value;
   free(pbstrResult);
-  return BSTR(result$);
+  return .new(result$);
 }
 
 @Native<

@@ -42,7 +42,7 @@ final IID_IFileDialogEvents = GUID.fromComponents(
   0x973510db,
   0x7d7f,
   0x452b,
-  Uint8List.fromList(const [0x89, 0x75, 0x74, 0xa8, 0x58, 0x28, 0xd3, 0x54]),
+  .fromList(const [0x89, 0x75, 0x74, 0xa8, 0x58, 0x28, 0xd3, 0x54]),
 );
 
 /// Exposes methods that allow notification of events within a common file
@@ -184,7 +184,7 @@ class IFileDialogEvents extends IUnknown implements ComInterface {
     }
     final result$ = pResponse.value;
     free(pResponse);
-    return FDE_SHAREVIOLATION_RESPONSE(result$);
+    return .new(result$);
   }
 
   /// Called when the dialog is opened to notify the application of the initial
@@ -217,7 +217,7 @@ class IFileDialogEvents extends IUnknown implements ComInterface {
     }
     final result$ = pResponse.value;
     free(pResponse);
-    return FDE_OVERWRITE_RESPONSE(result$);
+    return .new(result$);
   }
 
   @override

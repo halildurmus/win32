@@ -43,7 +43,7 @@ final IID_IAppxBlockMapReader = GUID.fromComponents(
   0x5efec991,
   0xbca3,
   0x42d1,
-  Uint8List.fromList(const [0x9e, 0xc2, 0xe9, 0x2d, 0x60, 0x9e, 0xc2, 0x2a]),
+  .fromList(const [0x9e, 0xc2, 0xe9, 0x2d, 0x60, 0x9e, 0xc2, 0x2a]),
 );
 
 /// Represents a read-only object model for block maps that provides access to
@@ -108,7 +108,7 @@ class IAppxBlockMapReader extends IUnknown implements ComInterface {
     final result$ = file.value;
     free(file);
     if (result$.isNull) return null;
-    return IAppxBlockMapFile(result$);
+    return .new(result$);
   }
 
   /// Retrieves an enumerator for traversing the files listed in the block map.
@@ -127,7 +127,7 @@ class IAppxBlockMapReader extends IUnknown implements ComInterface {
     final result$ = enumerator.value;
     free(enumerator);
     if (result$.isNull) return null;
-    return IAppxBlockMapFilesEnumerator(result$);
+    return .new(result$);
   }
 
   /// Retrieves the URI for the hash algorithm used to create block hashes in
@@ -147,7 +147,7 @@ class IAppxBlockMapReader extends IUnknown implements ComInterface {
     final result$ = hashMethod.value;
     free(hashMethod);
     if (result$.isNull) return null;
-    return IUri(result$);
+    return .new(result$);
   }
 
   /// Retrieves a read-only stream that represents the XML content of the block
@@ -167,7 +167,7 @@ class IAppxBlockMapReader extends IUnknown implements ComInterface {
     final result$ = blockMapStream.value;
     free(blockMapStream);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   @override

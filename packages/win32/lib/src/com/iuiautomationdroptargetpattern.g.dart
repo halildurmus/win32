@@ -39,7 +39,7 @@ final IID_IUIAutomationDropTargetPattern = GUID.fromComponents(
   0x69a095f7,
   0xeee4,
   0x430e,
-  Uint8List.fromList(const [0xa4, 0x6b, 0xfb, 0x73, 0xb1, 0xae, 0x39, 0xa5]),
+  .fromList(const [0xa4, 0x6b, 0xfb, 0x73, 0xb1, 0xae, 0x39, 0xa5]),
 );
 
 /// Provides access to drag-and-drop information exposed by a Microsoft UI
@@ -98,7 +98,7 @@ class IUIAutomationDropTargetPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached localized string that describes what happens when the
@@ -115,7 +115,7 @@ class IUIAutomationDropTargetPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of localized strings that enumerate the full set of

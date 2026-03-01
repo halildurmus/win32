@@ -43,7 +43,7 @@ final IID_IWbemClassObject = GUID.fromComponents(
   0xdc12a681,
   0x737f,
   0x11cf,
-  Uint8List.fromList(const [0x88, 0x4d, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
+  .fromList(const [0x88, 0x4d, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
 );
 
 /// Contains and manipulates both class definitions and class object instances.
@@ -207,7 +207,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppQualSet.value;
     free(ppQualSet);
     if (result$.isNull) return null;
-    return IWbemQualifierSet(result$);
+    return .new(result$);
   }
 
   /// Retrieves the specified property value, if it exists.
@@ -346,7 +346,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppQualSet.value;
     free(ppQualSet);
     if (result$.isNull) return null;
-    return IWbemQualifierSet(result$);
+    return .new(result$);
   }
 
   /// Returns a new object that is a complete clone of the current object.
@@ -367,7 +367,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppCopy.value;
     free(ppCopy);
     if (result$.isNull) return null;
-    return IWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Returns a textual rendering of the object in the MOF syntax.
@@ -385,7 +385,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     }
     final result$ = pstrObjectText.value;
     free(pstrObjectText);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Use the `IWbemClassObject.spawnDerivedClass` method to create a newly
@@ -405,7 +405,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppNewClass.value;
     free(ppNewClass);
     if (result$.isNull) return null;
-    return IWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Use the `IWbemClassObject.spawnInstance` method to create a new instance
@@ -425,7 +425,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppNewInstance.value;
     free(ppNewInstance);
     if (result$.isNull) return null;
-    return IWbemClassObject(result$);
+    return .new(result$);
   }
 
   /// Compares an object to another Windows Management object.
@@ -458,7 +458,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     }
     final result$ = pstrClassName.value;
     free(pstrClassName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Determines if the current class or instance derives from a specified
@@ -597,7 +597,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     final result$ = ppQualSet.value;
     free(ppQualSet);
     if (result$.isNull) return null;
-    return IWbemQualifierSet(result$);
+    return .new(result$);
   }
 
   /// Used to determine the class for which a method was declared.
@@ -615,7 +615,7 @@ class IWbemClassObject extends IUnknown implements ComInterface {
     }
     final result$ = pstrClassName.value;
     free(pstrClassName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

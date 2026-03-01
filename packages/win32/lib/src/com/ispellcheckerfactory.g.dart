@@ -41,7 +41,7 @@ final IID_ISpellCheckerFactory = GUID.fromComponents(
   0x8e018a9d,
   0x2415,
   0x4677,
-  Uint8List.fromList(const [0xbf, 0x8, 0x79, 0x4e, 0xa6, 0x1f, 0x94, 0xbb]),
+  .fromList(const [0xbf, 0x8, 0x79, 0x4e, 0xa6, 0x1f, 0x94, 0xbb]),
 );
 
 /// A factory for instantiating a spell checker (ISpellChecker) as well as
@@ -98,7 +98,7 @@ class ISpellCheckerFactory extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   /// Determines if the specified language is supported by a registered spell
@@ -136,7 +136,7 @@ class ISpellCheckerFactory extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return ISpellChecker(result$);
+    return .new(result$);
   }
 
   @override

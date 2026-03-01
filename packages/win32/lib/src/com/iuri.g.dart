@@ -41,7 +41,7 @@ final IID_IUri = GUID.fromComponents(
   0xa39ee748,
   0x6a27,
   0x4817,
-  Uint8List.fromList(const [0xa6, 0xf2, 0x13, 0x91, 0x4b, 0xef, 0x58, 0x90]),
+  .fromList(const [0xa6, 0xf2, 0x13, 0x91, 0x4b, 0xef, 0x58, 0x90]),
 );
 
 /// Exposes methods and properties used to parse and build Uniform Resource
@@ -221,7 +221,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrAbsoluteUri.value;
     free(pbstrAbsoluteUri);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -234,7 +234,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrAuthority.value;
     free(pbstrAuthority);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -247,7 +247,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrDisplayString.value;
     free(pbstrDisplayString);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -260,7 +260,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrDomain.value;
     free(pbstrDomain);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -273,7 +273,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrExtension.value;
     free(pbstrExtension);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -286,7 +286,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrFragment.value;
     free(pbstrFragment);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -299,7 +299,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrHost.value;
     free(pbstrHost);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -312,7 +312,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrPassword.value;
     free(pbstrPassword);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -325,7 +325,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrPath.value;
     free(pbstrPath);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -338,7 +338,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrPathAndQuery.value;
     free(pbstrPathAndQuery);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -351,7 +351,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrQuery.value;
     free(pbstrQuery);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -364,7 +364,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrRawUri.value;
     free(pbstrRawUri);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -377,7 +377,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrSchemeName.value;
     free(pbstrSchemeName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -390,7 +390,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrUserInfo.value;
     free(pbstrUserInfo);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -403,7 +403,7 @@ class IUri extends IUnknown implements ComInterface {
     }
     final result$ = pbstrUserName.value;
     free(pbstrUserName);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

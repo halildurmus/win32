@@ -40,7 +40,7 @@ final IID_IEnumConnections = GUID.fromComponents(
   0xb196b287,
   0xbab4,
   0x101a,
-  Uint8List.fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
+  .fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
 );
 
 /// Enumerates the current connections for a connectable object.
@@ -131,7 +131,7 @@ class IEnumConnections extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumConnections(result$);
+    return .new(result$);
   }
 
   @override

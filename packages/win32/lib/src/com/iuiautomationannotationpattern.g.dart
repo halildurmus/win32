@@ -41,7 +41,7 @@ final IID_IUIAutomationAnnotationPattern = GUID.fromComponents(
   0x9a175b21,
   0x339e,
   0x41b1,
-  Uint8List.fromList(const [0x8e, 0x8b, 0x62, 0x3f, 0x6b, 0x68, 0x10, 0x98]),
+  .fromList(const [0x8e, 0x8b, 0x62, 0x3f, 0x6b, 0x68, 0x10, 0x98]),
 );
 
 /// Provides access to the properties of an annotation in a document.
@@ -109,7 +109,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_ANNOTATIONTYPE(result$);
+    return .new(result$);
   }
 
   /// Retrieves the localized name of this annotation's type.
@@ -125,7 +125,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the annotation author.
@@ -141,7 +141,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the date and time that this annotation was created.
@@ -157,7 +157,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the element that is being annotated.
@@ -174,7 +174,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that identifies this annotation's type.
@@ -190,7 +190,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_ANNOTATIONTYPE(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached localized name of this annotation's type.
@@ -206,7 +206,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached name of the annotation author.
@@ -222,7 +222,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached date and time that this annotation was created.
@@ -238,7 +238,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached element that is being annotated.
@@ -255,7 +255,7 @@ class IUIAutomationAnnotationPattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

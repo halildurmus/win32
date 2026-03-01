@@ -40,7 +40,7 @@ final IID_IAppxFilesEnumerator = GUID.fromComponents(
   0xf007eeaf,
   0x9831,
   0x411c,
-  Uint8List.fromList(const [0x98, 0x47, 0x91, 0x7c, 0xdc, 0x62, 0xd1, 0xfe]),
+  .fromList(const [0x98, 0x47, 0x91, 0x7c, 0xdc, 0x62, 0xd1, 0xfe]),
 );
 
 /// Enumerates the payload files in a package.
@@ -95,7 +95,7 @@ class IAppxFilesEnumerator extends IUnknown implements ComInterface {
     final result$ = file.value;
     free(file);
     if (result$.isNull) return null;
-    return IAppxFile(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a payload file at the current position of the

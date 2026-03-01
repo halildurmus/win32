@@ -40,7 +40,7 @@ final IID_IAudioSessionEnumerator = GUID.fromComponents(
   0xe2f5bb11,
   0x570,
   0x40ca,
-  Uint8List.fromList(const [0xac, 0xdd, 0x3a, 0xa0, 0x12, 0x77, 0xde, 0xe8]),
+  .fromList(const [0xac, 0xdd, 0x3a, 0xa0, 0x12, 0x77, 0xde, 0xe8]),
 );
 
 /// Enumerates audio sessions on an audio device.
@@ -112,7 +112,7 @@ class IAudioSessionEnumerator extends IUnknown implements ComInterface {
     final result$ = session.value;
     free(session);
     if (result$.isNull) return null;
-    return IAudioSessionControl(result$);
+    return .new(result$);
   }
 
   @override

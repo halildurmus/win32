@@ -40,7 +40,7 @@ final IID_IPortableDeviceValuesCollection = GUID.fromComponents(
   0x6e3f2d79,
   0x4e07,
   0x48c4,
-  Uint8List.fromList(const [0x82, 0x8, 0xd8, 0xc2, 0xe5, 0xaf, 0x4a, 0x99]),
+  .fromList(const [0x82, 0x8, 0xd8, 0xc2, 0xe5, 0xaf, 0x4a, 0x99]),
 );
 
 /// Holds a collection of zero-based indexed IPortableDeviceValues interfaces.
@@ -113,7 +113,7 @@ class IPortableDeviceValuesCollection extends IUnknown implements ComInterface {
     final result$ = ppValues.value;
     free(ppValues);
     if (result$.isNull) return null;
-    return IPortableDeviceValues(result$);
+    return .new(result$);
   }
 
   /// IPortableDeviceValuesCollection::Add method - The Add method adds an item

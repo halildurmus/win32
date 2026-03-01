@@ -43,7 +43,7 @@ final IID_ISpeechBaseStream = GUID.fromComponents(
   0x6450336f,
   0x7d49,
   0x4ced,
-  Uint8List.fromList(const [0x80, 0x97, 0x49, 0xd6, 0xde, 0xe3, 0x72, 0x94]),
+  .fromList(const [0x80, 0x97, 0x49, 0xd6, 0xde, 0xe3, 0x72, 0x94]),
 );
 
 /// Defines properties and methods for manipulating data streams.
@@ -98,7 +98,7 @@ class ISpeechBaseStream extends IDispatch implements ComInterface {
     final result$ = audioFormat.value;
     free(audioFormat);
     if (result$.isNull) return null;
-    return ISpeechAudioFormat(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

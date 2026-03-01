@@ -40,7 +40,7 @@ final IID_IAppxBlockMapBlocksEnumerator = GUID.fromComponents(
   0x6b429b5b,
   0x36ef,
   0x479e,
-  Uint8List.fromList(const [0xb9, 0xeb, 0xc, 0x14, 0x82, 0xb4, 0x9e, 0x16]),
+  .fromList(const [0xb9, 0xeb, 0xc, 0x14, 0x82, 0xb4, 0x9e, 0x16]),
 );
 
 /// Enumerates the blocks from a block map in a single file.
@@ -96,7 +96,7 @@ class IAppxBlockMapBlocksEnumerator extends IUnknown implements ComInterface {
     final result$ = block.value;
     free(block);
     if (result$.isNull) return null;
-    return IAppxBlockMapBlock(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a block at the current position of the

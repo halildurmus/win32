@@ -45,7 +45,7 @@ final IID_INetworkListManager = GUID.fromComponents(
   0xdcb00000,
   0x570f,
   0x4a9b,
-  Uint8List.fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
+  .fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
 );
 
 /// Provides a set of methods to perform network list management functions.
@@ -122,7 +122,7 @@ class INetworkListManager extends IDispatch implements ComInterface {
     final result$ = ppEnumNetwork.value;
     free(ppEnumNetwork);
     if (result$.isNull) return null;
-    return IEnumNetworks(result$);
+    return .new(result$);
   }
 
   /// Retrieves a network based on a supplied network ID.
@@ -141,7 +141,7 @@ class INetworkListManager extends IDispatch implements ComInterface {
     final result$ = ppNetwork.value;
     free(ppNetwork);
     if (result$.isNull) return null;
-    return INetwork(result$);
+    return .new(result$);
   }
 
   /// Enumerates a complete list of the network connections that have been made.
@@ -160,7 +160,7 @@ class INetworkListManager extends IDispatch implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumNetworkConnections(result$);
+    return .new(result$);
   }
 
   /// Retrieves a network based on a supplied Network Connection ID.
@@ -181,7 +181,7 @@ class INetworkListManager extends IDispatch implements ComInterface {
     final result$ = ppNetworkConnection.value;
     free(ppNetworkConnection);
     if (result$.isNull) return null;
-    return INetworkConnection(result$);
+    return .new(result$);
   }
 
   /// Specifies if the local machine has internet connectivity.
@@ -231,7 +231,7 @@ class INetworkListManager extends IDispatch implements ComInterface {
     }
     final result$ = pConnectivity.value;
     free(pConnectivity);
-    return NLM_CONNECTIVITY(result$);
+    return .new(result$);
   }
 
   /// Applies a specific set of connection profile values to the internet

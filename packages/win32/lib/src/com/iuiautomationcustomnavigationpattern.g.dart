@@ -41,7 +41,7 @@ final IID_IUIAutomationCustomNavigationPattern = GUID.fromComponents(
   0x1ea217a,
   0x1766,
   0x47ed,
-  Uint8List.fromList(const [0xa6, 0xcc, 0xac, 0xf4, 0x92, 0x85, 0x4b, 0x1f]),
+  .fromList(const [0xa6, 0xcc, 0xac, 0xf4, 0x92, 0x85, 0x4b, 0x1f]),
 );
 
 /// Exposes a method to support access by a Microsoft UI Automation client to
@@ -96,7 +96,7 @@ class IUIAutomationCustomNavigationPattern extends IUnknown
     final result$ = pRetVal.value;
     free(pRetVal);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

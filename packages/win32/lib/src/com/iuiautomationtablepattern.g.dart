@@ -41,7 +41,7 @@ final IID_IUIAutomationTablePattern = GUID.fromComponents(
   0x620e691c,
   0xea96,
   0x4710,
-  Uint8List.fromList(const [0xa8, 0x50, 0x75, 0x4b, 0x24, 0xce, 0x24, 0x17]),
+  .fromList(const [0xa8, 0x50, 0x75, 0x4b, 0x24, 0xce, 0x24, 0x17]),
 );
 
 /// Provides access to a control that acts as a container for a collection of
@@ -112,7 +112,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a collection of UI Automation elements representing all the
@@ -132,7 +132,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the primary direction of traversal for the table.
@@ -148,7 +148,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return RowOrColumnMajor(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached collection of UI Automation elements representing all
@@ -168,7 +168,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached collection of UI Automation elements representing all
@@ -188,7 +188,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     final result$ = retVal.value;
     free(retVal);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves the cached primary direction of traversal for the table.
@@ -204,7 +204,7 @@ class IUIAutomationTablePattern extends IUnknown implements ComInterface {
     }
     final result$ = retVal.value;
     free(retVal);
-    return RowOrColumnMajor(result$);
+    return .new(result$);
   }
 
   @override

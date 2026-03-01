@@ -41,7 +41,7 @@ final IID_IAppxFile = GUID.fromComponents(
   0x91df827b,
   0x94fd,
   0x468f,
-  Uint8List.fromList(const [0x82, 0x7b, 0x57, 0xf4, 0x1b, 0x2f, 0x6f, 0x2e]),
+  .fromList(const [0x82, 0x7b, 0x57, 0xf4, 0x1b, 0x2f, 0x6f, 0x2e]),
 );
 
 /// Retrieves information about a payload or footprint file in a package.
@@ -102,7 +102,7 @@ class IAppxFile extends IUnknown implements ComInterface {
     }
     final result$ = compressionOption.value;
     free(compressionOption);
-    return APPX_COMPRESSION_OPTION(result$);
+    return .new(result$);
   }
 
   /// Retrieves the content type of the file.
@@ -120,7 +120,7 @@ class IAppxFile extends IUnknown implements ComInterface {
     }
     final result$ = contentType.value;
     free(contentType);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the name of the file, including its path relative to the package
@@ -139,7 +139,7 @@ class IAppxFile extends IUnknown implements ComInterface {
     }
     final result$ = fileName.value;
     free(fileName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the uncompressed size of the file.
@@ -177,7 +177,7 @@ class IAppxFile extends IUnknown implements ComInterface {
     final result$ = stream.value;
     free(stream);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   @override

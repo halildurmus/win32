@@ -39,7 +39,7 @@ final IID_IAppxManifestMainPackageDependency = GUID.fromComponents(
   0x5d0611c,
   0xbc29,
   0x46d5,
-  Uint8List.fromList(const [0x97, 0xe2, 0x84, 0xb9, 0xc7, 0x9b, 0xd8, 0xae]),
+  .fromList(const [0x97, 0xe2, 0x84, 0xb9, 0xc7, 0x9b, 0xd8, 0xae]),
 );
 
 /// Provides access to attribute values of the main package dependency.
@@ -99,7 +99,7 @@ class IAppxManifestMainPackageDependency extends IUnknown
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the publisher of the main package dependency from the
@@ -118,7 +118,7 @@ class IAppxManifestMainPackageDependency extends IUnknown
     }
     final result$ = publisher.value;
     free(publisher);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the package family name of the main package dependency from the
@@ -137,7 +137,7 @@ class IAppxManifestMainPackageDependency extends IUnknown
     }
     final result$ = packageFamilyName.value;
     free(packageFamilyName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

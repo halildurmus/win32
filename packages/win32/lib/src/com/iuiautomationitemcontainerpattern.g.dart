@@ -42,7 +42,7 @@ final IID_IUIAutomationItemContainerPattern = GUID.fromComponents(
   0xc690fdb2,
   0x27a8,
   0x423c,
-  Uint8List.fromList(const [0x81, 0x2d, 0x42, 0x97, 0x73, 0xc9, 0x8, 0x4e]),
+  .fromList(const [0x81, 0x2d, 0x42, 0x97, 0x73, 0xc9, 0x8, 0x4e]),
 );
 
 /// Exposes a method that retrieves an item from a container, such as a virtual
@@ -115,7 +115,7 @@ class IUIAutomationItemContainerPattern extends IUnknown
     final result$ = pFound.value;
     free(pFound);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

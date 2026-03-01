@@ -53,7 +53,7 @@ final IID_IUIAutomation = GUID.fromComponents(
   0x30cbe57d,
   0xd9d0,
   0x452a,
-  Uint8List.fromList(const [0xab, 0x13, 0x7a, 0xc5, 0xac, 0x48, 0x25, 0xee]),
+  .fromList(const [0xab, 0x13, 0x7a, 0xc5, 0xac, 0x48, 0x25, 0xee]),
 );
 
 /// Exposes methods that enable Microsoft UI Automation client applications to
@@ -450,7 +450,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = root.value;
     free(root);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a UI Automation element for the specified window.
@@ -469,7 +469,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the UI Automation element at the specified point on the desktop.
@@ -488,7 +488,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the UI Automation element that has the input focus.
@@ -507,7 +507,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the UI Automation element that represents the desktop,
@@ -532,7 +532,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = root.value;
     free(root);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a UI Automation element for the specified window, prefetches the
@@ -563,7 +563,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the UI Automation element at the specified point on the desktop,
@@ -594,7 +594,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the UI Automation element that has the input focus, prefetches
@@ -623,7 +623,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a tree walker object that can be used to traverse the Microsoft
@@ -647,7 +647,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = walker.value;
     free(walker);
     if (result$.isNull) return null;
-    return IUIAutomationTreeWalker(result$);
+    return .new(result$);
   }
 
   /// Retrieves an IUIAutomationTreeWalker interface used to discover control
@@ -665,7 +665,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = walker.value;
     free(walker);
     if (result$.isNull) return null;
-    return IUIAutomationTreeWalker(result$);
+    return .new(result$);
   }
 
   /// Retrieves an IUIAutomationTreeWalker interface used to discover content
@@ -683,7 +683,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = walker.value;
     free(walker);
     if (result$.isNull) return null;
-    return IUIAutomationTreeWalker(result$);
+    return .new(result$);
   }
 
   /// Retrieves a tree walker object used to traverse an unfiltered view of the
@@ -701,7 +701,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = walker.value;
     free(walker);
     if (result$.isNull) return null;
-    return IUIAutomationTreeWalker(result$);
+    return .new(result$);
   }
 
   /// Retrieves a predefined IUIAutomationCondition interface that selects all
@@ -719,7 +719,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = condition.value;
     free(condition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Retrieves a predefined IUIAutomationCondition interface that selects
@@ -737,7 +737,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = condition.value;
     free(condition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Retrieves a predefined IUIAutomationCondition interface that selects
@@ -755,7 +755,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = condition.value;
     free(condition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a cache request.
@@ -774,7 +774,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = cacheRequest.value;
     free(cacheRequest);
     if (result$.isNull) return null;
-    return IUIAutomationCacheRequest(result$);
+    return .new(result$);
   }
 
   /// Retrieves a predefined condition that selects all elements.
@@ -793,7 +793,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that is always false.
@@ -812,7 +812,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that selects elements that have a property with the
@@ -837,7 +837,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that selects elements that have a property with the
@@ -863,7 +863,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that selects elements that match both of two
@@ -893,7 +893,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that selects elements based on multiple conditions,
@@ -917,7 +917,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that selects elements from a native array, based on
@@ -947,7 +947,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a combination of two conditions where a match exists if either of
@@ -977,7 +977,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a combination of two or more conditions where a match exists if
@@ -1001,7 +1001,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a combination of two or more conditions where a match exists if
@@ -1031,7 +1031,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Creates a condition that is the negative of a specified condition.
@@ -1054,7 +1054,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = newCondition.value;
     free(newCondition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   /// Registers a method that handles Microsoft UI Automation events.
@@ -1400,7 +1400,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = factoryEntry.value;
     free(factoryEntry);
     if (result$.isNull) return null;
-    return IUIAutomationProxyFactoryEntry(result$);
+    return .new(result$);
   }
 
   /// Retrieves an object that represents the mapping of Window classnames and
@@ -1418,7 +1418,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = factoryMapping.value;
     free(factoryMapping);
     if (result$.isNull) return null;
-    return IUIAutomationProxyFactoryMapping(result$);
+    return .new(result$);
   }
 
   /// Retrieves the registered programmatic name of a property.
@@ -1436,7 +1436,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the registered programmatic name of a control pattern.
@@ -1454,7 +1454,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Retrieves the control patterns that might be supported on a UI Automation
@@ -1541,7 +1541,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = notSupportedValue.value;
     free(notSupportedValue);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves a static token object representing a text attribute that is a
@@ -1561,7 +1561,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = mixedAttributeValue.value;
     free(mixedAttributeValue);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves a UI Automation element for the specified accessible object from
@@ -1591,7 +1591,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves a UI Automation element for the specified accessible object from
@@ -1625,7 +1625,7 @@ class IUIAutomation extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

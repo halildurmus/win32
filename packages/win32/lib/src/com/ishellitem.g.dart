@@ -42,7 +42,7 @@ final IID_IShellItem = GUID.fromComponents(
   0x43826d1e,
   0xe718,
   0x42ee,
-  Uint8List.fromList(const [0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe]),
+  .fromList(const [0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe]),
 );
 
 /// Exposes methods that retrieve information about a Shell item.
@@ -146,7 +146,7 @@ class IShellItem extends IUnknown implements ComInterface {
     final result$ = ppsi.value;
     free(ppsi);
     if (result$.isNull) return null;
-    return IShellItem(result$);
+    return .new(result$);
   }
 
   /// Gets the display name of the IShellItem object.
@@ -164,7 +164,7 @@ class IShellItem extends IUnknown implements ComInterface {
     }
     final result$ = ppszName.value;
     free(ppszName);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets a requested set of attributes of the IShellItem object.
@@ -182,7 +182,7 @@ class IShellItem extends IUnknown implements ComInterface {
     }
     final result$ = psfgaoAttribs.value;
     free(psfgaoAttribs);
-    return SFGAO_FLAGS(result$);
+    return .new(result$);
   }
 
   /// Compares two IShellItem objects.

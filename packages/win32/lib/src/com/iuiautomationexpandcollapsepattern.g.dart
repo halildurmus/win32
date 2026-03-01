@@ -40,7 +40,7 @@ final IID_IUIAutomationExpandCollapsePattern = GUID.fromComponents(
   0x619be086,
   0x1f4e,
   0x4ee4,
-  Uint8List.fromList(const [0xba, 0xfa, 0x21, 0x1, 0x28, 0x73, 0x87, 0x30]),
+  .fromList(const [0xba, 0xfa, 0x21, 0x1, 0x28, 0x73, 0x87, 0x30]),
 );
 
 /// Provides access to a control that can visually expand to display content,
@@ -122,7 +122,7 @@ class IUIAutomationExpandCollapsePattern extends IUnknown
     }
     final result$ = retVal.value;
     free(retVal);
-    return ExpandCollapseState(result$);
+    return .new(result$);
   }
 
   /// Retrieves a cached value that indicates the state, expanded or collapsed,
@@ -139,7 +139,7 @@ class IUIAutomationExpandCollapsePattern extends IUnknown
     }
     final result$ = retVal.value;
     free(retVal);
-    return ExpandCollapseState(result$);
+    return .new(result$);
   }
 
   @override

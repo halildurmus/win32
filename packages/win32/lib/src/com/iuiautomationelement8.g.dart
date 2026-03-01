@@ -41,7 +41,7 @@ final IID_IUIAutomationElement8 = GUID.fromComponents(
   0x8c60217d,
   0x5411,
   0x4cde,
-  Uint8List.fromList(const [0xbc, 0xc0, 0x1c, 0xed, 0xa2, 0x23, 0x83, 0xc]),
+  .fromList(const [0xbc, 0xc0, 0x1c, 0xed, 0xa2, 0x23, 0x83, 0xc]),
 );
 
 /// Extends the IUIAutomationElement7 interface.
@@ -90,7 +90,7 @@ class IUIAutomationElement8 extends IUIAutomationElement7
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_HEADINGLEVEL_ID(result$);
+    return .new(result$);
   }
 
   /// Gets the cached heading level of the automation element.
@@ -106,7 +106,7 @@ class IUIAutomationElement8 extends IUIAutomationElement7
     }
     final result$ = retVal.value;
     free(retVal);
-    return UIA_HEADINGLEVEL_ID(result$);
+    return .new(result$);
   }
 
   @override

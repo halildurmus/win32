@@ -12,5 +12,5 @@ BSTR get responseText {
   }
   final result$ = body.value;
   free(body);
-  return BSTR(result$);
+  return .new(result$);
 }

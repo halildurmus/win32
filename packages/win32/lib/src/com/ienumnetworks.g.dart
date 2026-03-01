@@ -43,7 +43,7 @@ final IID_IEnumNetworks = GUID.fromComponents(
   0xdcb00003,
   0x570f,
   0x4a9b,
-  Uint8List.fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
+  .fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
 );
 
 /// A standard enumerator for networks.
@@ -105,7 +105,7 @@ class IEnumNetworks extends IDispatch implements ComInterface {
     final result$ = ppEnumVar.value;
     free(ppEnumVar);
     if (result$.isNull) return null;
-    return IEnumVARIANT(result$);
+    return .new(result$);
   }
 
   /// Gets the next specified number of elements in the enumeration sequence.
@@ -166,7 +166,7 @@ class IEnumNetworks extends IDispatch implements ComInterface {
     final result$ = ppEnumNetwork.value;
     free(ppEnumNetwork);
     if (result$.isNull) return null;
-    return IEnumNetworks(result$);
+    return .new(result$);
   }
 
   @override

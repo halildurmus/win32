@@ -43,7 +43,7 @@ final IID_IUIAutomationTextPattern = GUID.fromComponents(
   0x32eba289,
   0x3583,
   0x42c9,
-  Uint8List.fromList(const [0x9c, 0x59, 0x3b, 0x6d, 0x9a, 0x1e, 0x9b, 0x6a]),
+  .fromList(const [0x9c, 0x59, 0x3b, 0x6d, 0x9a, 0x1e, 0x9b, 0x6a]),
 );
 
 /// Provides access to a control that contains text.
@@ -112,7 +112,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a text range enclosing a child element such as an image,
@@ -132,7 +132,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a collection of text ranges that represents the currently
@@ -152,7 +152,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     final result$ = ranges.value;
     free(ranges);
     if (result$.isNull) return null;
-    return IUIAutomationTextRangeArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves an array of disjoint text ranges from a text-based control where
@@ -172,7 +172,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     final result$ = ranges.value;
     free(ranges);
     if (result$.isNull) return null;
-    return IUIAutomationTextRangeArray(result$);
+    return .new(result$);
   }
 
   /// Retrieves a text range that encloses the main text of a document.
@@ -189,7 +189,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     final result$ = range.value;
     free(range);
     if (result$.isNull) return null;
-    return IUIAutomationTextRange(result$);
+    return .new(result$);
   }
 
   /// Retrieves a value that specifies the type of text selection that is
@@ -208,7 +208,7 @@ class IUIAutomationTextPattern extends IUnknown implements ComInterface {
     }
     final result$ = supportedTextSelection.value;
     free(supportedTextSelection);
-    return SupportedTextSelection(result$);
+    return .new(result$);
   }
 
   @override

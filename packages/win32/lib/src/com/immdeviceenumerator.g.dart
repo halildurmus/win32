@@ -43,7 +43,7 @@ final IID_IMMDeviceEnumerator = GUID.fromComponents(
   0xa95664d2,
   0x9614,
   0x4f35,
-  Uint8List.fromList(const [0xa7, 0x46, 0xde, 0x8d, 0xb6, 0x36, 0x17, 0xe6]),
+  .fromList(const [0xa7, 0x46, 0xde, 0x8d, 0xb6, 0x36, 0x17, 0xe6]),
 );
 
 /// Provides methods for enumerating multimedia device resources.
@@ -116,7 +116,7 @@ class IMMDeviceEnumerator extends IUnknown implements ComInterface {
     final result$ = ppDevices.value;
     free(ppDevices);
     if (result$.isNull) return null;
-    return IMMDeviceCollection(result$);
+    return .new(result$);
   }
 
   /// Retrieves the default audio endpoint for the specified data-flow direction
@@ -138,7 +138,7 @@ class IMMDeviceEnumerator extends IUnknown implements ComInterface {
     final result$ = ppEndpoint.value;
     free(ppEndpoint);
     if (result$.isNull) return null;
-    return IMMDevice(result$);
+    return .new(result$);
   }
 
   /// Retrieves an audio endpoint device that is identified by an endpoint ID
@@ -158,7 +158,7 @@ class IMMDeviceEnumerator extends IUnknown implements ComInterface {
     final result$ = ppDevice.value;
     free(ppDevice);
     if (result$.isNull) return null;
-    return IMMDevice(result$);
+    return .new(result$);
   }
 
   /// Registers a client's notification callback interface.

@@ -40,7 +40,7 @@ final IID_IProvideClassInfo = GUID.fromComponents(
   0xb196b283,
   0xbab4,
   0x101a,
-  Uint8List.fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
+  .fromList(const [0xb6, 0x9c, 0x0, 0xaa, 0x0, 0x34, 0x1d, 0x7]),
 );
 
 /// Provides access to the type information for an object's coclass entry in its
@@ -96,7 +96,7 @@ class IProvideClassInfo extends IUnknown implements ComInterface {
     final result$ = ppTI.value;
     free(ppTI);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   @override

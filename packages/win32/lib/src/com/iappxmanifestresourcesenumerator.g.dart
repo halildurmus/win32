@@ -39,7 +39,7 @@ final IID_IAppxManifestResourcesEnumerator = GUID.fromComponents(
   0xde4dfbbd,
   0x881a,
   0x48bb,
-  Uint8List.fromList(const [0x85, 0x8c, 0xd6, 0xf2, 0xba, 0xea, 0xe6, 0xed]),
+  .fromList(const [0x85, 0x8c, 0xd6, 0xf2, 0xba, 0xea, 0xe6, 0xed]),
 );
 
 /// Enumerates the resources defined in the package manifest.
@@ -95,7 +95,7 @@ class IAppxManifestResourcesEnumerator extends IUnknown
     }
     final result$ = resource.value;
     free(resource);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a resource at the current position of the

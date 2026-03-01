@@ -41,7 +41,7 @@ final IID_ISpObjectToken = GUID.fromComponents(
   0x14056589,
   0xe16c,
   0x11d2,
-  Uint8List.fromList(const [0xbb, 0x90, 0x0, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0]),
+  .fromList(const [0xbb, 0x90, 0x0, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0]),
 );
 
 /// {@category com}
@@ -153,7 +153,7 @@ class ISpObjectToken extends ISpDataKey implements ComInterface {
     }
     final result$ = ppszCoMemTokenId.value;
     free(ppszCoMemTokenId);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -167,7 +167,7 @@ class ISpObjectToken extends ISpDataKey implements ComInterface {
     final result$ = ppTokenCategory.value;
     free(ppTokenCategory);
     if (result$.isNull) return null;
-    return ISpObjectTokenCategory(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -214,7 +214,7 @@ class ISpObjectToken extends ISpDataKey implements ComInterface {
     }
     final result$ = ppszFilePath.value;
     free(ppszFilePath);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

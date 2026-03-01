@@ -87,7 +87,7 @@ Win32Result<bool> BluetoothDisplayDeviceProperties(
     hwndParent ?? nullptr,
     pbtdi,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables Bluetooth device selection.
@@ -100,7 +100,7 @@ Win32Result<bool> BluetoothSelectDevices(
   Pointer<BLUETOOTH_SELECT_DEVICE_PARAMS> pbtsdp,
 ) {
   final result_ = BluetoothSelectDevices_Wrapper(pbtsdp);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Frees resources associated with a previous call to BluetoothSelectDevices.

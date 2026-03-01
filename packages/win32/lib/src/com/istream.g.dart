@@ -42,7 +42,7 @@ final IID_IStream = GUID.fromComponents(
   0xc,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Lets you read and write data to stream objects.
@@ -239,7 +239,7 @@ class IStream extends ISequentialStream implements ComInterface {
     final result$ = ppstm.value;
     free(ppstm);
     if (result$.isNull) return null;
-    return IStream(result$);
+    return .new(result$);
   }
 
   @override

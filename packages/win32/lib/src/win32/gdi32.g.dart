@@ -262,7 +262,7 @@ Win32Result<bool> BitBlt(
     y1,
     rop,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Cancels any pending operation on the specified device context (DC).
@@ -525,7 +525,7 @@ Win32Result<HBITMAP> CreateDIBSection(
     hSection ?? nullptr,
     offset,
   );
-  return Win32Result(value: HBITMAP(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an elliptical region.

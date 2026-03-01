@@ -40,7 +40,7 @@ final IID_IShellItemResources = GUID.fromComponents(
   0xff5693be,
   0x2ce0,
   0x4d48,
-  Uint8List.fromList(const [0xb5, 0xc5, 0x40, 0x81, 0x7d, 0x1a, 0xcd, 0xb9]),
+  .fromList(const [0xb5, 0xc5, 0x40, 0x81, 0x7d, 0x1a, 0xcd, 0xb9]),
 );
 
 /// Exposes methods to manipulate and query Shell item resources.
@@ -212,7 +212,7 @@ class IShellItemResources extends IUnknown implements ComInterface {
     }
     final result$ = ppszDescription.value;
     free(ppszDescription);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets a resource enumerator object.
@@ -231,7 +231,7 @@ class IShellItemResources extends IUnknown implements ComInterface {
     final result$ = ppenumr.value;
     free(ppenumr);
     if (result$.isNull) return null;
-    return IEnumResources(result$);
+    return .new(result$);
   }
 
   /// Retrieves whether an item supports a specified resource.

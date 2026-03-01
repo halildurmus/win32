@@ -41,7 +41,7 @@ final IID_IFileOpenDialog = GUID.fromComponents(
   0xd57c7288,
   0xd4ad,
   0x4768,
-  Uint8List.fromList(const [0xbe, 0x2, 0x9d, 0x96, 0x95, 0x32, 0xd9, 0x60]),
+  .fromList(const [0xbe, 0x2, 0x9d, 0x96, 0x95, 0x32, 0xd9, 0x60]),
 );
 
 /// Extends the IFileDialog interface by adding methods specific to the open
@@ -96,7 +96,7 @@ class IFileOpenDialog extends IFileDialog implements ComInterface {
     final result$ = ppenum.value;
     free(ppenum);
     if (result$.isNull) return null;
-    return IShellItemArray(result$);
+    return .new(result$);
   }
 
   /// Gets the currently selected items in the dialog.
@@ -118,7 +118,7 @@ class IFileOpenDialog extends IFileDialog implements ComInterface {
     final result$ = ppsai.value;
     free(ppsai);
     if (result$.isNull) return null;
-    return IShellItemArray(result$);
+    return .new(result$);
   }
 
   @override

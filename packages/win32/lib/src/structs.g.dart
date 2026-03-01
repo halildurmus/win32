@@ -7,7 +7,6 @@
 // ignore_for_file: unused_field
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
@@ -46,7 +45,7 @@ base class ACCEL extends Struct {
   @Uint16()
   external int cmd;
 
-  ACCEL_VIRT_FLAGS get fVirt => ACCEL_VIRT_FLAGS(_fVirt);
+  ACCEL_VIRT_FLAGS get fVirt => .new(_fVirt);
   set fVirt(ACCEL_VIRT_FLAGS value) => _fVirt = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -131,32 +130,32 @@ base class ACTCTX extends Struct {
 
   /// Null-terminated string specifying the path of the manifest file or PE
   /// image to be used to create the activation context.
-  PWSTR get lpSource => PWSTR(_lpSource);
+  PWSTR get lpSource => .new(_lpSource);
 
   set lpSource(PWSTR value) => _lpSource = value;
 
   /// The base directory in which to perform private assembly probing if
   /// assemblies in the activation context are not present in the system-wide
   /// store.
-  PWSTR get lpAssemblyDirectory => PWSTR(_lpAssemblyDirectory);
+  PWSTR get lpAssemblyDirectory => .new(_lpAssemblyDirectory);
 
   set lpAssemblyDirectory(PWSTR value) => _lpAssemblyDirectory = value;
 
   /// Pointer to a null-terminated string that contains the resource name to be
   /// loaded from the PE specified in <b>hModule</b> or <b>lpSource</b>.
-  PWSTR get lpResourceName => PWSTR(_lpResourceName);
+  PWSTR get lpResourceName => .new(_lpResourceName);
 
   set lpResourceName(PWSTR value) => _lpResourceName = value;
 
   /// The name of the current application.
-  PWSTR get lpApplicationName => PWSTR(_lpApplicationName);
+  PWSTR get lpApplicationName => .new(_lpApplicationName);
 
   set lpApplicationName(PWSTR value) => _lpApplicationName = value;
 
   /// Use this member rather than <b>lpSource</b> if you have already loaded a
   /// DLL and wish to use it to create activation contexts rather than using a
   /// path in <b>lpSource</b>.
-  HMODULE get hModule => HMODULE(_hModule);
+  HMODULE get hModule => .new(_hModule);
 
   set hModule(HMODULE value) => _hModule = value;
 
@@ -185,7 +184,7 @@ base class ADDJOB_INFO_1 extends Struct {
 
   /// Pointer to a null-terminated string that contains the path and file name
   /// that the application can use to store the print job.
-  PWSTR get Path => PWSTR(_Path);
+  PWSTR get Path => .new(_Path);
 
   set Path(PWSTR value) => _Path = value;
 
@@ -237,7 +236,7 @@ base class ADDRINFO extends Struct {
   external Pointer<ADDRINFO> ai_next;
 
   /// The canonical name for the host.
-  PWSTR get ai_canonname => PWSTR(_ai_canonname);
+  PWSTR get ai_canonname => .new(_ai_canonname);
 
   set ai_canonname(PWSTR value) => _ai_canonname = value;
 
@@ -320,7 +319,7 @@ base class APPX_PACKAGE_SETTINGS extends Struct {
   set forceZip32(bool value) => _forceZip32 = value ? TRUE : FALSE;
 
   /// The hash algorithm URI to use for the block map of the package.
-  IUri? get hashMethod => _hashMethod.isNull ? null : IUri(_hashMethod);
+  IUri? get hashMethod => _hashMethod.isNull ? null : .new(_hashMethod);
 
   set hashMethod(IUri? value) => _hashMethod = value?.ptr ?? nullptr;
 
@@ -390,7 +389,7 @@ base class ASSEMBLYMETADATA extends Struct {
   @Uint32()
   external int ulOS;
 
-  PWSTR get szLocale => PWSTR(_szLocale);
+  PWSTR get szLocale => .new(_szLocale);
   set szLocale(PWSTR value) => _szLocale = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -406,14 +405,14 @@ final ApplicationActivationManager = GUID.fromComponents(
   0x45ba127d,
   0x10a8,
   0x46ea,
-  Uint8List.fromList(const [0x8a, 0xb7, 0x56, 0xea, 0x90, 0x78, 0x94, 0x3c]),
+  .fromList(const [0x8a, 0xb7, 0x56, 0xea, 0x90, 0x78, 0x94, 0x3c]),
 );
 
 final AppxFactory = GUID.fromComponents(
   0x5842a140,
   0xff9f,
   0x4166,
-  Uint8List.fromList(const [0x8f, 0x5c, 0x62, 0xf5, 0xb7, 0xb0, 0xc7, 0x81]),
+  .fromList(const [0x8f, 0x5c, 0x62, 0xf5, 0xb7, 0xb0, 0xc7, 0x81]),
 );
 
 /// Used to set the parameters that describe the properties of the client's
@@ -444,10 +443,10 @@ base class AudioClientProperties extends Struct {
   set bIsOffload(bool value) => _bIsOffload = value ? TRUE : FALSE;
 
   /// An enumeration that is used to specify the category of the audio stream.
-  AUDIO_STREAM_CATEGORY get eCategory => AUDIO_STREAM_CATEGORY(_eCategory);
+  AUDIO_STREAM_CATEGORY get eCategory => .new(_eCategory);
 
   set eCategory(AUDIO_STREAM_CATEGORY value) => _eCategory = value;
-  AUDCLNT_STREAMOPTIONS get Options => AUDCLNT_STREAMOPTIONS(_Options);
+  AUDCLNT_STREAMOPTIONS get Options => .new(_Options);
   set Options(AUDCLNT_STREAMOPTIONS value) => _Options = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -478,7 +477,7 @@ sealed class BINDPTR extends Union {
   /// The <a
   /// href="https://docs.microsoft.com/previous-versions/windows/desktop/api/oaidl/nn-oaidl-itypecomp">ITypeComp</a>
   /// that binds the pointer.
-  ITypeComp? get lptcomp => _lptcomp.isNull ? null : ITypeComp(_lptcomp);
+  ITypeComp? get lptcomp => _lptcomp.isNull ? null : .new(_lptcomp);
 
   set lptcomp(ITypeComp? value) => _lptcomp = value?.ptr ?? nullptr;
 
@@ -807,7 +806,7 @@ base class BITMAPV5HEADER extends Struct {
   @Uint32()
   external int _bV5Reserved;
 
-  BI_COMPRESSION get bV5Compression => BI_COMPRESSION(_bV5Compression);
+  BI_COMPRESSION get bV5Compression => .new(_bV5Compression);
   set bV5Compression(BI_COMPRESSION value) => _bV5Compression = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -937,8 +936,7 @@ base class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_authentication_method">BLUETOOTH_AUTHENTICATION_METHOD</a>
   /// enumeration that defines the supported authentication method.
-  BLUETOOTH_AUTHENTICATION_METHOD get authMethod =>
-      BLUETOOTH_AUTHENTICATION_METHOD(_authMethod);
+  BLUETOOTH_AUTHENTICATION_METHOD get authMethod => .new(_authMethod);
 
   set authMethod(BLUETOOTH_AUTHENTICATION_METHOD value) => _authMethod = value;
 
@@ -1012,7 +1010,7 @@ base class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   /// enumeration that defines the authentication method utilized by the
   /// Bluetooth device.
   BLUETOOTH_AUTHENTICATION_METHOD get authenticationMethod =>
-      BLUETOOTH_AUTHENTICATION_METHOD(_authenticationMethod);
+      .new(_authenticationMethod);
 
   set authenticationMethod(BLUETOOTH_AUTHENTICATION_METHOD value) =>
       _authenticationMethod = value;
@@ -1021,8 +1019,7 @@ base class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   /// href="https://docs.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_io_capability">BLUETOOTH_IO_CAPABILITY</a>
   /// enumeration that defines the input/output capabilities of the Bluetooth
   /// device.
-  BLUETOOTH_IO_CAPABILITY get ioCapability =>
-      BLUETOOTH_IO_CAPABILITY(_ioCapability);
+  BLUETOOTH_IO_CAPABILITY get ioCapability => .new(_ioCapability);
 
   set ioCapability(BLUETOOTH_IO_CAPABILITY value) => _ioCapability = value;
 
@@ -1030,7 +1027,7 @@ base class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
   /// href="https://docs.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_authentication_requirements">BLUETOOTH_AUTHENTICATION_REQUIREMENTS</a>
   /// specifies the 'Man in the Middle' protection required for authentication.
   BLUETOOTH_AUTHENTICATION_REQUIREMENTS get authenticationRequirements =>
-      BLUETOOTH_AUTHENTICATION_REQUIREMENTS(_authenticationRequirements);
+      .new(_authenticationRequirements);
 
   set authenticationRequirements(BLUETOOTH_AUTHENTICATION_REQUIREMENTS value) =>
       _authenticationRequirements = value;
@@ -1086,7 +1083,7 @@ base class BLUETOOTH_COD_PAIRS extends Struct {
   external Pointer<Utf16> _pcszDescription;
 
   /// Descriptive string of the mask.
-  PWSTR get pcszDescription => PWSTR(_pcszDescription);
+  PWSTR get pcszDescription => .new(_pcszDescription);
 
   set pcszDescription(PWSTR value) => _pcszDescription = value;
 
@@ -1209,7 +1206,7 @@ base class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   set fIssueInquiry(bool value) => _fIssueInquiry = value ? TRUE : FALSE;
 
   /// A handle for the radio on which to perform the inquiry.
-  HANDLE get hRadio => HANDLE(_hRadio);
+  HANDLE get hRadio => .new(_hRadio);
 
   set hRadio(HANDLE value) => _hRadio = value;
 
@@ -1496,12 +1493,12 @@ base class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
   external Pointer<BLUETOOTH_DEVICE_INFO> pDevices;
 
   /// Sets the information text when not <b>NULL</b>.
-  PWSTR get pszInfo => PWSTR(_pszInfo);
+  PWSTR get pszInfo => .new(_pszInfo);
 
   set pszInfo(PWSTR value) => _pszInfo = value;
 
   /// Handle to the parent window.
-  HWND get hwndParent => HWND(_hwndParent);
+  HWND get hwndParent => .new(_hwndParent);
 
   set hwndParent(HWND value) => _hwndParent = value;
 
@@ -1587,25 +1584,25 @@ base class BROWSEINFO extends Struct {
   external int iImage;
 
   /// A handle to the owner window for the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// Pointer to a buffer to receive the display name of the folder selected by
   /// the user.
-  PWSTR get pszDisplayName => PWSTR(_pszDisplayName);
+  PWSTR get pszDisplayName => .new(_pszDisplayName);
 
   set pszDisplayName(PWSTR value) => _pszDisplayName = value;
 
   /// Pointer to a null-terminated string that is displayed above the tree view
   /// control in the dialog box.
-  PWSTR get lpszTitle => PWSTR(_lpszTitle);
+  PWSTR get lpszTitle => .new(_lpszTitle);
 
   set lpszTitle(PWSTR value) => _lpszTitle = value;
 
   /// An application-defined value that the dialog box passes to the callback
   /// function, if one is specified in <b>lpfn</b>.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
@@ -1637,12 +1634,12 @@ base class BSMINFO extends Struct {
   external LUID luid;
 
   /// A desktop handle to the window specified by <b>hwnd</b>.
-  HDESK get hdesk => HDESK(_hdesk);
+  HDESK get hdesk => .new(_hdesk);
 
   set hdesk(HDESK value) => _hdesk = value;
 
   /// A handle to the window that denied the request.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
@@ -1931,8 +1928,7 @@ base class BTH_LE_GATT_DESCRIPTOR extends Struct {
   external int AttributeHandle;
 
   /// The type of the Bluetooth LE GATT descriptor.
-  BTH_LE_GATT_DESCRIPTOR_TYPE get DescriptorType =>
-      BTH_LE_GATT_DESCRIPTOR_TYPE(_DescriptorType);
+  BTH_LE_GATT_DESCRIPTOR_TYPE get DescriptorType => .new(_DescriptorType);
 
   set DescriptorType(BTH_LE_GATT_DESCRIPTOR_TYPE value) =>
       _DescriptorType = value;
@@ -1971,8 +1967,7 @@ base class BTH_LE_GATT_DESCRIPTOR_VALUE extends Struct {
   external Array<Uint8> Data;
 
   /// The type of the descriptor value.
-  BTH_LE_GATT_DESCRIPTOR_TYPE get DescriptorType =>
-      BTH_LE_GATT_DESCRIPTOR_TYPE(_DescriptorType);
+  BTH_LE_GATT_DESCRIPTOR_TYPE get DescriptorType => .new(_DescriptorType);
 
   set DescriptorType(BTH_LE_GATT_DESCRIPTOR_TYPE value) =>
       _DescriptorType = value;
@@ -2497,7 +2492,7 @@ base class CAC extends Struct {
 
   external Pointer<Utf8> _pElems;
 
-  PSTR get pElems => PSTR(_pElems);
+  PSTR get pElems => .new(_pElems);
   set pElems(PSTR value) => _pElems = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -2535,7 +2530,7 @@ base class CACHE_DESCRIPTOR extends Struct {
   external int _Type;
 
   /// The cache type.
-  PROCESSOR_CACHE_TYPE get Type => PROCESSOR_CACHE_TYPE(_Type);
+  PROCESSOR_CACHE_TYPE get Type => .new(_Type);
 
   set Type(PROCESSOR_CACHE_TYPE value) => _Type = value;
 
@@ -2856,7 +2851,7 @@ base class CBTACTIVATESTRUCT extends Struct {
   set fMouse(bool value) => _fMouse = value ? TRUE : FALSE;
 
   /// A handle to the active window.
-  HWND get hWndActive => HWND(_hWndActive);
+  HWND get hWndActive => .new(_hWndActive);
 
   set hWndActive(HWND value) => _hWndActive = value;
 
@@ -2885,7 +2880,7 @@ base class CBT_CREATEWND extends Struct {
 
   /// A handle to the window whose position in the Z order precedes that of the
   /// window being created.
-  HWND get hwndInsertAfter => HWND(_hwndInsertAfter);
+  HWND get hwndInsertAfter => .new(_hwndInsertAfter);
 
   set hwndInsertAfter(HWND value) => _hwndInsertAfter = value;
 
@@ -2923,8 +2918,7 @@ base class CERT_CONTEXT extends Struct {
   external Pointer _hCertStore;
 
   /// Type of encoding used.
-  CERT_QUERY_ENCODING_TYPE get dwCertEncodingType =>
-      CERT_QUERY_ENCODING_TYPE(_dwCertEncodingType);
+  CERT_QUERY_ENCODING_TYPE get dwCertEncodingType => .new(_dwCertEncodingType);
 
   set dwCertEncodingType(CERT_QUERY_ENCODING_TYPE value) =>
       _dwCertEncodingType = value;
@@ -2933,7 +2927,7 @@ base class CERT_CONTEXT extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/SecGloss/c-gly">certificate
   /// store</a> that contains the certificate <a
   /// href="https://docs.microsoft.com/windows/desktop/SecGloss/c-gly">context</a>.
-  HCERTSTORE get hCertStore => HCERTSTORE(_hCertStore);
+  HCERTSTORE get hCertStore => .new(_hCertStore);
 
   set hCertStore(HCERTSTORE value) => _hCertStore = value;
 
@@ -2965,7 +2959,7 @@ base class CERT_EXTENSION extends Struct {
   /// <a href="https://docs.microsoft.com/windows/desktop/SecGloss/o-gly">Object
   /// identifier</a> (OID) that specifies the structure of the extension data
   /// contained in the <b>Value</b> member.
-  PSTR get pszObjId => PSTR(_pszObjId);
+  PSTR get pszObjId => .new(_pszObjId);
 
   set pszObjId(PSTR value) => _pszObjId = value;
 
@@ -3086,7 +3080,7 @@ base class CHANGEFILTERSTRUCT extends Struct {
   @Uint32()
   external int _ExtStatus;
 
-  MSGFLTINFO_STATUS get ExtStatus => MSGFLTINFO_STATUS(_ExtStatus);
+  MSGFLTINFO_STATUS get ExtStatus => .new(_ExtStatus);
   set ExtStatus(MSGFLTINFO_STATUS value) => _ExtStatus = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -3135,7 +3129,7 @@ sealed class CHAR_INFO_0 extends Union {
   @Int8()
   external int _AsciiChar;
 
-  CHAR get AsciiChar => CHAR(_AsciiChar);
+  CHAR get AsciiChar => .new(_AsciiChar);
   set AsciiChar(CHAR value) => _AsciiChar = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -3189,38 +3183,38 @@ base class CHOOSECOLOR extends Struct {
   external Pointer<Utf16> _lpTemplateName;
 
   /// A handle to the window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// If the <b>CC_ENABLETEMPLATEHANDLE</b> flag is set in the <b>Flags</b>
   /// member, <b>hInstance</b> is a handle to a memory object containing a
   /// dialog box template.
-  HWND get hInstance => HWND(_hInstance);
+  HWND get hInstance => .new(_hInstance);
 
   set hInstance(HWND value) => _hInstance = value;
 
   /// If the <b>CC_RGBINIT</b> flag is set, <b>rgbResult</b> specifies the color
   /// initially selected when the dialog box is created.
-  COLORREF get rgbResult => COLORREF(_rgbResult);
+  COLORREF get rgbResult => .new(_rgbResult);
 
   set rgbResult(COLORREF value) => _rgbResult = value;
 
   /// A set of bit flags that you can use to initialize the <b>Color</b> dialog
   /// box.
-  CHOOSECOLOR_FLAGS get Flags => CHOOSECOLOR_FLAGS(_Flags);
+  CHOOSECOLOR_FLAGS get Flags => .new(_Flags);
 
   set Flags(CHOOSECOLOR_FLAGS value) => _Flags = value;
 
   /// Application-defined data that the system passes to the hook procedure
   /// identified by the <b>lpfnHook</b> member.
-  LPARAM get lCustData => LPARAM(_lCustData);
+  LPARAM get lCustData => .new(_lCustData);
 
   set lCustData(LPARAM value) => _lCustData = value;
 
   /// The name of the dialog box template resource in the module identified by
   /// the <b>hInstance</b> member.
-  PWSTR get lpTemplateName => PWSTR(_lpTemplateName);
+  PWSTR get lpTemplateName => .new(_lpTemplateName);
 
   set lpTemplateName(PWSTR value) => _lpTemplateName = value;
 
@@ -3290,49 +3284,49 @@ base class CHOOSEFONT extends Struct {
   external int nSizeMax;
 
   /// A handle to the window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// This member is ignored by the <a
   /// href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/ms646914(v=vs.85)">ChooseFont</a>
   /// function.
-  HDC get hDC => HDC(_hDC);
+  HDC get hDC => .new(_hDC);
 
   set hDC(HDC value) => _hDC = value;
-  CHOOSEFONT_FLAGS get Flags => CHOOSEFONT_FLAGS(_Flags);
+  CHOOSEFONT_FLAGS get Flags => .new(_Flags);
   set Flags(CHOOSEFONT_FLAGS value) => _Flags = value;
 
   /// If the <b>CF_EFFECTS</b> flag is set, <b>rgbColors</b> specifies the
   /// initial text color.
-  COLORREF get rgbColors => COLORREF(_rgbColors);
+  COLORREF get rgbColors => .new(_rgbColors);
 
   set rgbColors(COLORREF value) => _rgbColors = value;
 
   /// Application-defined data that the system passes to the hook procedure
   /// identified by the <b>lpfnHook</b> member.
-  LPARAM get lCustData => LPARAM(_lCustData);
+  LPARAM get lCustData => .new(_lCustData);
 
   set lCustData(LPARAM value) => _lCustData = value;
 
   /// The name of the dialog box template resource in the module identified by
   /// the <b>hInstance</b> member.
-  PWSTR get lpTemplateName => PWSTR(_lpTemplateName);
+  PWSTR get lpTemplateName => .new(_lpTemplateName);
 
   set lpTemplateName(PWSTR value) => _lpTemplateName = value;
 
   /// If the <b>CF_ENABLETEMPLATEHANDLE</b> flag is set in the <b>Flags</b>
   /// member, <b>hInstance</b> is a handle to a memory object containing a
   /// dialog box template.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// The style data.
-  PWSTR get lpszStyle => PWSTR(_lpszStyle);
+  PWSTR get lpszStyle => .new(_lpszStyle);
 
   set lpszStyle(PWSTR value) => _lpszStyle = value;
-  CHOOSEFONT_FONT_TYPE get nFontType => CHOOSEFONT_FONT_TYPE(_nFontType);
+  CHOOSEFONT_FONT_TYPE get nFontType => .new(_nFontType);
   set nFontType(CHOOSEFONT_FONT_TYPE value) => _nFontType = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -3404,9 +3398,9 @@ base class CLIENT_ID extends Struct {
   external Pointer _UniqueProcess;
   external Pointer _UniqueThread;
 
-  HANDLE get UniqueProcess => HANDLE(_UniqueProcess);
+  HANDLE get UniqueProcess => .new(_UniqueProcess);
   set UniqueProcess(HANDLE value) => _UniqueProcess = value;
-  HANDLE get UniqueThread => HANDLE(_UniqueThread);
+  HANDLE get UniqueThread => .new(_UniqueThread);
   set UniqueThread(HANDLE value) => _UniqueThread = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -3524,12 +3518,12 @@ base class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> _pszSpec;
 
   /// A pointer to a buffer that contains the friendly name of the filter.
-  PWSTR get pszName => PWSTR(_pszName);
+  PWSTR get pszName => .new(_pszName);
 
   set pszName(PWSTR value) => _pszName = value;
 
   /// A pointer to a buffer that contains the filter pattern.
-  PWSTR get pszSpec => PWSTR(_pszSpec);
+  PWSTR get pszSpec => .new(_pszSpec);
 
   set pszSpec(PWSTR value) => _pszSpec = value;
 
@@ -3676,8 +3670,7 @@ base class COMMPROP extends Struct {
 
   /// A bitmask indicating the stop bit and parity settings that can be
   /// selected.
-  COMMPROP_STOP_PARITY get wSettableStopParity =>
-      COMMPROP_STOP_PARITY(_wSettableStopParity);
+  COMMPROP_STOP_PARITY get wSettableStopParity => .new(_wSettableStopParity);
 
   set wSettableStopParity(COMMPROP_STOP_PARITY value) =>
       _wSettableStopParity = value;
@@ -3815,7 +3808,7 @@ base class CONNECTDATA extends Struct {
   /// A pointer to the <a
   /// href="https://docs.microsoft.com/windows/desktop/api/unknwn/nn-unknwn-iunknown">IUnknown</a>
   /// interface on a connected advisory sink.
-  IUnknown? get pUnk => _pUnk.isNull ? null : IUnknown(_pUnk);
+  IUnknown? get pUnk => _pUnk.isNull ? null : .new(_pUnk);
 
   set pUnk(IUnknown? value) => _pUnk = value?.ptr ?? nullptr;
 
@@ -3924,8 +3917,7 @@ base class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   /// The attributes of the characters written to a screen buffer by the
   /// `WriteFile` and `WriteConsole` functions, or echoed to a screen buffer by
   /// the `ReadFile` and `ReadConsole` functions.
-  CONSOLE_CHARACTER_ATTRIBUTES get wAttributes =>
-      CONSOLE_CHARACTER_ATTRIBUTES(_wAttributes);
+  CONSOLE_CHARACTER_ATTRIBUTES get wAttributes => .new(_wAttributes);
 
   set wAttributes(CONSOLE_CHARACTER_ATTRIBUTES value) => _wAttributes = value;
 
@@ -4060,7 +4052,7 @@ base class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
   external Pointer _hTemplateFile;
 
   /// A valid handle to a template file with the **GENERIC_READ** access right.
-  HANDLE get hTemplateFile => HANDLE(_hTemplateFile);
+  HANDLE get hTemplateFile => .new(_hTemplateFile);
 
   set hTemplateFile(HANDLE value) => _hTemplateFile = value;
 
@@ -4118,38 +4110,38 @@ base class CREATESTRUCT extends Struct {
   external int _dwExStyle;
 
   /// A handle to the module that owns the new window.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// A handle to the menu to be used by the new window.
-  HMENU get hMenu => HMENU(_hMenu);
+  HMENU get hMenu => .new(_hMenu);
 
   set hMenu(HMENU value) => _hMenu = value;
 
   /// A handle to the parent window, if the window is a child window.
-  HWND get hwndParent => HWND(_hwndParent);
+  HWND get hwndParent => .new(_hwndParent);
 
   set hwndParent(HWND value) => _hwndParent = value;
 
   /// The style for the new window.
-  WINDOW_STYLE get style => WINDOW_STYLE(_style);
+  WINDOW_STYLE get style => .new(_style);
 
   set style(WINDOW_STYLE value) => _style = value;
 
   /// The name of the new window.
-  PWSTR get lpszName => PWSTR(_lpszName);
+  PWSTR get lpszName => .new(_lpszName);
 
   set lpszName(PWSTR value) => _lpszName = value;
 
   /// A pointer to a null-terminated string or an atom that specifies the class
   /// name of the new window.
-  PWSTR get lpszClass => PWSTR(_lpszClass);
+  PWSTR get lpszClass => .new(_lpszClass);
 
   set lpszClass(PWSTR value) => _lpszClass = value;
 
   /// The extended window style for the new window.
-  WINDOW_EX_STYLE get dwExStyle => WINDOW_EX_STYLE(_dwExStyle);
+  WINDOW_EX_STYLE get dwExStyle => .new(_dwExStyle);
 
   set dwExStyle(WINDOW_EX_STYLE value) => _dwExStyle = value;
 
@@ -4204,37 +4196,37 @@ base class CREDENTIAL extends Struct {
   external Pointer<Utf16> _UserName;
 
   /// A bit member that identifies characteristics of the credential.
-  CRED_FLAGS get Flags => CRED_FLAGS(_Flags);
+  CRED_FLAGS get Flags => .new(_Flags);
 
   set Flags(CRED_FLAGS value) => _Flags = value;
 
   /// The type of the credential.
-  CRED_TYPE get Type => CRED_TYPE(_Type);
+  CRED_TYPE get Type => .new(_Type);
 
   set Type(CRED_TYPE value) => _Type = value;
 
   /// The name of the credential.
-  PWSTR get TargetName => PWSTR(_TargetName);
+  PWSTR get TargetName => .new(_TargetName);
 
   set TargetName(PWSTR value) => _TargetName = value;
 
   /// A string comment from the user that describes this credential.
-  PWSTR get Comment => PWSTR(_Comment);
+  PWSTR get Comment => .new(_Comment);
 
   set Comment(PWSTR value) => _Comment = value;
 
   /// Defines the persistence of this credential.
-  CRED_PERSIST get Persist => CRED_PERSIST(_Persist);
+  CRED_PERSIST get Persist => .new(_Persist);
 
   set Persist(CRED_PERSIST value) => _Persist = value;
 
   /// Alias for the <b>TargetName</b> member.
-  PWSTR get TargetAlias => PWSTR(_TargetAlias);
+  PWSTR get TargetAlias => .new(_TargetAlias);
 
   set TargetAlias(PWSTR value) => _TargetAlias = value;
 
   /// The user name of the account used to connect to <b>TargetName</b>.
-  PWSTR get UserName => PWSTR(_UserName);
+  PWSTR get UserName => .new(_UserName);
 
   set UserName(PWSTR value) => _UserName = value;
 
@@ -4271,7 +4263,7 @@ base class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 
   /// Name of the application-specific attribute.
-  PWSTR get Keyword => PWSTR(_Keyword);
+  PWSTR get Keyword => .new(_Keyword);
 
   set Keyword(PWSTR value) => _Keyword = value;
 
@@ -4307,12 +4299,12 @@ base class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
   external Pointer<Utf16> _szPrompt;
 
   /// Window handle to the parent window.
-  HWND get hwndApp => HWND(_hwndApp);
+  HWND get hwndApp => .new(_hwndApp);
 
   set hwndApp(HWND value) => _hwndApp = value;
 
   /// A string containing the text of a prompt to be displayed.
-  PWSTR get szPrompt => PWSTR(_szPrompt);
+  PWSTR get szPrompt => .new(_szPrompt);
 
   set szPrompt(PWSTR value) => _szPrompt = value;
 
@@ -4340,7 +4332,7 @@ base class CRYPT_ALGORITHM_IDENTIFIER extends Struct {
   /// that provides encoded algorithm-specific parameters.
   external CRYPT_INTEGER_BLOB Parameters;
 
-  PSTR get pszObjId => PSTR(_pszObjId);
+  PSTR get pszObjId => .new(_pszObjId);
   set pszObjId(PSTR value) => _pszObjId = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -4411,14 +4403,14 @@ final CUIAutomation = GUID.fromComponents(
   0xff48dba4,
   0x60ef,
   0x4201,
-  Uint8List.fromList(const [0xaa, 0x87, 0x54, 0x10, 0x3e, 0xef, 0x59, 0x4e]),
+  .fromList(const [0xaa, 0x87, 0x54, 0x10, 0x3e, 0xef, 0x59, 0x4e]),
 );
 
 final CUIAutomation8 = GUID.fromComponents(
   0xe22ad333,
   0xb25f,
   0x460c,
-  Uint8List.fromList(const [0x83, 0xd0, 0x5, 0x81, 0x10, 0x73, 0x95, 0xc9]),
+  .fromList(const [0x83, 0xd0, 0x5, 0x81, 0x10, 0x73, 0x95, 0xc9]),
 );
 
 /// Contains global cursor information.
@@ -4440,11 +4432,11 @@ base class CURSORINFO extends Struct {
   /// A structure that receives the screen coordinates of the cursor.
   external POINT ptScreenPos;
 
-  CURSORINFO_FLAGS get flags => CURSORINFO_FLAGS(_flags);
+  CURSORINFO_FLAGS get flags => .new(_flags);
   set flags(CURSORINFO_FLAGS value) => _flags = value;
 
   /// A handle to the cursor.
-  HCURSOR get hCursor => HCURSOR(_hCursor);
+  HCURSOR get hCursor => .new(_hCursor);
 
   set hCursor(HCURSOR value) => _hCursor = value;
 
@@ -4482,23 +4474,23 @@ base class CWPRETSTRUCT extends Struct {
 
   /// The return value of the window procedure that processed the message
   /// specified by the <b>message</b> value.
-  LRESULT get lResult => LRESULT(_lResult);
+  LRESULT get lResult => .new(_lResult);
 
   set lResult(LRESULT value) => _lResult = value;
 
   /// Additional information about the message.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
   /// Additional information about the message.
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
 
   set wParam(WPARAM value) => _wParam = value;
 
   /// A handle to the window that processed the message specified by the
   /// <b>message</b> value.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
@@ -4532,17 +4524,17 @@ base class CWPSTRUCT extends Struct {
   external Pointer _hwnd;
 
   /// Additional information about the message.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
   /// Additional information about the message.
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
 
   set wParam(WPARAM value) => _wParam = value;
 
   /// A handle to the window to receive the message.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
@@ -4688,34 +4680,34 @@ base class DCB extends Struct {
   set fAbortOnError(int value) => bitfield = bitfield.setBits(14, 1, value);
   int get fDummy2 => bitfield.getBits(15, 17);
   set fDummy2(int value) => bitfield = bitfield.setBits(15, 17, value);
-  DCB_PARITY get Parity => DCB_PARITY(_Parity);
+  DCB_PARITY get Parity => .new(_Parity);
   set Parity(DCB_PARITY value) => _Parity = value;
-  DCB_STOP_BITS get StopBits => DCB_STOP_BITS(_StopBits);
+  DCB_STOP_BITS get StopBits => .new(_StopBits);
   set StopBits(DCB_STOP_BITS value) => _StopBits = value;
 
   /// The value of the XON character for both transmission and reception.
-  CHAR get XonChar => CHAR(_XonChar);
+  CHAR get XonChar => .new(_XonChar);
 
   set XonChar(CHAR value) => _XonChar = value;
 
   /// The value of the XOFF character for both transmission and reception.
-  CHAR get XoffChar => CHAR(_XoffChar);
+  CHAR get XoffChar => .new(_XoffChar);
 
   set XoffChar(CHAR value) => _XoffChar = value;
 
   /// The value of the character used to replace bytes received with a parity
   /// error.
-  CHAR get ErrorChar => CHAR(_ErrorChar);
+  CHAR get ErrorChar => .new(_ErrorChar);
 
   set ErrorChar(CHAR value) => _ErrorChar = value;
 
   /// The value of the character used to signal the end of data.
-  CHAR get EofChar => CHAR(_EofChar);
+  CHAR get EofChar => .new(_EofChar);
 
   set EofChar(CHAR value) => _EofChar = value;
 
   /// The value of the character used to signal an event.
-  CHAR get EvtChar => CHAR(_EvtChar);
+  CHAR get EvtChar => .new(_EvtChar);
 
   set EvtChar(CHAR value) => _EvtChar = value;
 
@@ -4760,7 +4752,7 @@ base class DEBUGHOOKINFO extends Struct {
   /// <a
   /// href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/ms644978(v=vs.85)">DebugProc</a>
   /// callback function.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
@@ -4768,7 +4760,7 @@ base class DEBUGHOOKINFO extends Struct {
   /// <a
   /// href="https://docs.microsoft.com/previous-versions/windows/desktop/legacy/ms644978(v=vs.85)">DebugProc</a>
   /// callback function.
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
 
   set wParam(WPARAM value) => _wParam = value;
 
@@ -5056,24 +5048,23 @@ base class DEVMODE extends Struct {
 
   /// Specifies bit flags identifying which of the following DEVMODEW members
   /// are in use.
-  DEVMODE_FIELD_FLAGS get dmFields => DEVMODE_FIELD_FLAGS(_dmFields);
+  DEVMODE_FIELD_FLAGS get dmFields => .new(_dmFields);
 
   set dmFields(DEVMODE_FIELD_FLAGS value) => _dmFields = value;
 
   /// For printers, specifies whether a color printer should print color or
   /// monochrome.
-  DEVMODE_COLOR get dmColor => DEVMODE_COLOR(_dmColor);
+  DEVMODE_COLOR get dmColor => .new(_dmColor);
 
   set dmColor(DEVMODE_COLOR value) => _dmColor = value;
-  DEVMODE_DUPLEX get dmDuplex => DEVMODE_DUPLEX(_dmDuplex);
+  DEVMODE_DUPLEX get dmDuplex => .new(_dmDuplex);
   set dmDuplex(DEVMODE_DUPLEX value) => _dmDuplex = value;
 
   /// For printers, specifies how TrueType fonts should be printed.
-  DEVMODE_TRUETYPE_OPTION get dmTTOption =>
-      DEVMODE_TRUETYPE_OPTION(_dmTTOption);
+  DEVMODE_TRUETYPE_OPTION get dmTTOption => .new(_dmTTOption);
 
   set dmTTOption(DEVMODE_TRUETYPE_OPTION value) => _dmTTOption = value;
-  DEVMODE_COLLATE get dmCollate => DEVMODE_COLLATE(_dmCollate);
+  DEVMODE_COLLATE get dmCollate => .new(_dmCollate);
   set dmCollate(DEVMODE_COLLATE value) => _dmCollate = value;
 
   /// For printers, specifies the name of the form to use; such as "Letter" or
@@ -5182,11 +5173,11 @@ sealed class DEVMODE_0_1 extends Struct {
   external int _dmDisplayFixedOutput;
 
   DEVMODE_DISPLAY_ORIENTATION get dmDisplayOrientation =>
-      DEVMODE_DISPLAY_ORIENTATION(_dmDisplayOrientation);
+      .new(_dmDisplayOrientation);
   set dmDisplayOrientation(DEVMODE_DISPLAY_ORIENTATION value) =>
       _dmDisplayOrientation = value;
   DEVMODE_DISPLAY_FIXED_OUTPUT get dmDisplayFixedOutput =>
-      DEVMODE_DISPLAY_FIXED_OUTPUT(_dmDisplayFixedOutput);
+      .new(_dmDisplayFixedOutput);
   set dmDisplayFixedOutput(DEVMODE_DISPLAY_FIXED_OUTPUT value) =>
       _dmDisplayFixedOutput = value;
 
@@ -5309,8 +5300,7 @@ base class DEV_BROADCAST_HDR extends Struct {
   @Uint32()
   external int dbch_reserved;
 
-  DEV_BROADCAST_HDR_DEVICE_TYPE get dbch_devicetype =>
-      DEV_BROADCAST_HDR_DEVICE_TYPE(_dbch_devicetype);
+  DEV_BROADCAST_HDR_DEVICE_TYPE get dbch_devicetype => .new(_dbch_devicetype);
   set dbch_devicetype(DEV_BROADCAST_HDR_DEVICE_TYPE value) =>
       _dbch_devicetype = value;
 
@@ -5348,8 +5338,7 @@ base class DEV_BROADCAST_VOLUME extends Struct {
   @Uint16()
   external int _dbcv_flags;
 
-  DEV_BROADCAST_VOLUME_FLAGS get dbcv_flags =>
-      DEV_BROADCAST_VOLUME_FLAGS(_dbcv_flags);
+  DEV_BROADCAST_VOLUME_FLAGS get dbcv_flags => .new(_dbcv_flags);
   set dbcv_flags(DEV_BROADCAST_VOLUME_FLAGS value) => _dbcv_flags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -5394,7 +5383,7 @@ base class DIBSECTION extends Struct {
   /// Contains a handle to the file mapping object that the <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-createdibsection">CreateDIBSection</a>
   /// function used to create the DIB.
-  HANDLE get dshSection => HANDLE(_dshSection);
+  HANDLE get dshSection => .new(_dshSection);
 
   set dshSection(HANDLE value) => _dshSection = value;
 
@@ -5462,7 +5451,7 @@ base class DISK_GEOMETRY extends Struct {
   external int BytesPerSector;
 
   /// The type of media.
-  MEDIA_TYPE get MediaType => MEDIA_TYPE(_MediaType);
+  MEDIA_TYPE get MediaType => .new(_MediaType);
 
   set MediaType(MEDIA_TYPE value) => _MediaType = value;
 
@@ -5582,8 +5571,7 @@ base class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/api/wingdi/ne-wingdi-displayconfig_device_info_type">DISPLAYCONFIG_DEVICE_INFO_TYPE</a>
   /// enumerated value that determines the type of device information to
   /// retrieve or set.
-  DISPLAYCONFIG_DEVICE_INFO_TYPE get type =>
-      DISPLAYCONFIG_DEVICE_INFO_TYPE(_type);
+  DISPLAYCONFIG_DEVICE_INFO_TYPE get type => .new(_type);
 
   set type(DISPLAYCONFIG_DEVICE_INFO_TYPE value) => _type = value;
 
@@ -5620,8 +5608,7 @@ base class DISPLAYCONFIG_MODE_INFO extends Struct {
 
   /// A value that indicates whether the <b>DISPLAYCONFIG_MODE_INFO</b>
   /// structure represents source or target mode information.
-  DISPLAYCONFIG_MODE_INFO_TYPE get infoType =>
-      DISPLAYCONFIG_MODE_INFO_TYPE(_infoType);
+  DISPLAYCONFIG_MODE_INFO_TYPE get infoType => .new(_infoType);
 
   set infoType(DISPLAYCONFIG_MODE_INFO_TYPE value) => _infoType = value;
 
@@ -5822,24 +5809,24 @@ base class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
 
   /// The target's connector type.
   DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY get outputTechnology =>
-      DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY(_outputTechnology);
+      .new(_outputTechnology);
 
   set outputTechnology(DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY value) =>
       _outputTechnology = value;
 
   /// A value that specifies the rotation of the target.
-  DISPLAYCONFIG_ROTATION get rotation => DISPLAYCONFIG_ROTATION(_rotation);
+  DISPLAYCONFIG_ROTATION get rotation => .new(_rotation);
 
   set rotation(DISPLAYCONFIG_ROTATION value) => _rotation = value;
 
   /// A value that specifies how the source image is scaled to the target.
-  DISPLAYCONFIG_SCALING get scaling => DISPLAYCONFIG_SCALING(_scaling);
+  DISPLAYCONFIG_SCALING get scaling => .new(_scaling);
 
   set scaling(DISPLAYCONFIG_SCALING value) => _scaling = value;
 
   /// A value that specifies the scan-line ordering of the output on the target.
   DISPLAYCONFIG_SCANLINE_ORDERING get scanLineOrdering =>
-      DISPLAYCONFIG_SCANLINE_ORDERING(_scanLineOrdering);
+      .new(_scanLineOrdering);
 
   set scanLineOrdering(DISPLAYCONFIG_SCANLINE_ORDERING value) =>
       _scanLineOrdering = value;
@@ -5970,8 +5957,7 @@ base class DISPLAYCONFIG_SOURCE_MODE extends Struct {
   /// A value from the <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wingdi/ne-wingdi-displayconfig_pixelformat">DISPLAYCONFIG_PIXELFORMAT</a>
   /// enumeration that specifies the pixel format of the source mode.
-  DISPLAYCONFIG_PIXELFORMAT get pixelFormat =>
-      DISPLAYCONFIG_PIXELFORMAT(_pixelFormat);
+  DISPLAYCONFIG_PIXELFORMAT get pixelFormat => .new(_pixelFormat);
 
   set pixelFormat(DISPLAYCONFIG_PIXELFORMAT value) => _pixelFormat = value;
 
@@ -6039,7 +6025,7 @@ base class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
   /// The scan-line ordering (for example, progressive or interlaced) of the
   /// video signal.
   DISPLAYCONFIG_SCANLINE_ORDERING get scanLineOrdering =>
-      DISPLAYCONFIG_SCANLINE_ORDERING(_scanLineOrdering);
+      .new(_scanLineOrdering);
 
   set scanLineOrdering(DISPLAYCONFIG_SCANLINE_ORDERING value) =>
       _scanLineOrdering = value;
@@ -6153,8 +6139,7 @@ base class DISPLAY_DEVICE extends Struct {
   set DeviceString(String value) => _DeviceString.setString(value);
 
   /// Device state flags.
-  DISPLAY_DEVICE_STATE_FLAGS get StateFlags =>
-      DISPLAY_DEVICE_STATE_FLAGS(_StateFlags);
+  DISPLAY_DEVICE_STATE_FLAGS get StateFlags => .new(_StateFlags);
 
   set StateFlags(DISPLAY_DEVICE_STATE_FLAGS value) => _StateFlags = value;
   String get DeviceID => _DeviceID.toDartString();
@@ -6349,19 +6334,19 @@ base class DOC_INFO_1 extends Struct {
 
   /// Pointer to a null-terminated string that specifies the name of the
   /// document.
-  PWSTR get pDocName => PWSTR(_pDocName);
+  PWSTR get pDocName => .new(_pDocName);
 
   set pDocName(PWSTR value) => _pDocName = value;
 
   /// Pointer to a null-terminated string that specifies the name of an output
   /// file.
-  PWSTR get pOutputFile => PWSTR(_pOutputFile);
+  PWSTR get pOutputFile => .new(_pOutputFile);
 
   set pOutputFile(PWSTR value) => _pOutputFile = value;
 
   /// Pointer to a null-terminated string that identifies the type of data used
   /// to record the document.
-  PWSTR get pDatatype => PWSTR(_pDatatype);
+  PWSTR get pDatatype => .new(_pDatatype);
 
   set pDatatype(PWSTR value) => _pDatatype = value;
 
@@ -6390,13 +6375,12 @@ base class DOT11_AUTH_CIPHER_PAIR extends Struct {
 
   /// An authentication algorithm that uses a `DOT11_AUTH_ALGORITHM` enumerated
   /// type.
-  DOT11_AUTH_ALGORITHM get AuthAlgoId => DOT11_AUTH_ALGORITHM(_AuthAlgoId);
+  DOT11_AUTH_ALGORITHM get AuthAlgoId => .new(_AuthAlgoId);
 
   set AuthAlgoId(DOT11_AUTH_ALGORITHM value) => _AuthAlgoId = value;
 
   /// A cipher algorithm that uses a `DOT11_CIPHER_ALGORITHM` enumerated type.
-  DOT11_CIPHER_ALGORITHM get CipherAlgoId =>
-      DOT11_CIPHER_ALGORITHM(_CipherAlgoId);
+  DOT11_CIPHER_ALGORITHM get CipherAlgoId => .new(_CipherAlgoId);
 
   set CipherAlgoId(DOT11_CIPHER_ALGORITHM value) => _CipherAlgoId = value;
 
@@ -6459,7 +6443,7 @@ base class DOT11_NETWORK extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that indicates the BSS type of the network.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
@@ -6644,53 +6628,53 @@ base class DSREG_JOIN_INFO extends Struct {
   external Pointer<DSREG_USER_INFO> pUserInfo;
 
   /// An enumeration value that specifies the type of the join.
-  DSREG_JOIN_TYPE get joinType => DSREG_JOIN_TYPE(_joinType);
+  DSREG_JOIN_TYPE get joinType => .new(_joinType);
 
   set joinType(DSREG_JOIN_TYPE value) => _joinType = value;
 
   /// The identifier of the device.
-  PWSTR get pszDeviceId => PWSTR(_pszDeviceId);
+  PWSTR get pszDeviceId => .new(_pszDeviceId);
 
   set pszDeviceId(PWSTR value) => _pszDeviceId = value;
 
   /// A string that represents Azure Active Directory (Azure AD).
-  PWSTR get pszIdpDomain => PWSTR(_pszIdpDomain);
+  PWSTR get pszIdpDomain => .new(_pszIdpDomain);
 
   set pszIdpDomain(PWSTR value) => _pszIdpDomain = value;
 
   /// The identifier of the joined Azure AD tenant.
-  PWSTR get pszTenantId => PWSTR(_pszTenantId);
+  PWSTR get pszTenantId => .new(_pszTenantId);
 
   set pszTenantId(PWSTR value) => _pszTenantId = value;
 
   /// The email address for the joined account.
-  PWSTR get pszJoinUserEmail => PWSTR(_pszJoinUserEmail);
+  PWSTR get pszJoinUserEmail => .new(_pszJoinUserEmail);
 
   set pszJoinUserEmail(PWSTR value) => _pszJoinUserEmail = value;
 
   /// The display name for the joined account.
-  PWSTR get pszTenantDisplayName => PWSTR(_pszTenantDisplayName);
+  PWSTR get pszTenantDisplayName => .new(_pszTenantDisplayName);
 
   set pszTenantDisplayName(PWSTR value) => _pszTenantDisplayName = value;
 
   /// The URL to use to enroll in the Mobile Device Management (MDM) service.
-  PWSTR get pszMdmEnrollmentUrl => PWSTR(_pszMdmEnrollmentUrl);
+  PWSTR get pszMdmEnrollmentUrl => .new(_pszMdmEnrollmentUrl);
 
   set pszMdmEnrollmentUrl(PWSTR value) => _pszMdmEnrollmentUrl = value;
 
   /// The URL that provides information about the terms of use for the MDM
   /// service.
-  PWSTR get pszMdmTermsOfUseUrl => PWSTR(_pszMdmTermsOfUseUrl);
+  PWSTR get pszMdmTermsOfUseUrl => .new(_pszMdmTermsOfUseUrl);
 
   set pszMdmTermsOfUseUrl(PWSTR value) => _pszMdmTermsOfUseUrl = value;
 
   /// The URL that provides information about compliance for the MDM service.
-  PWSTR get pszMdmComplianceUrl => PWSTR(_pszMdmComplianceUrl);
+  PWSTR get pszMdmComplianceUrl => .new(_pszMdmComplianceUrl);
 
   set pszMdmComplianceUrl(PWSTR value) => _pszMdmComplianceUrl = value;
 
   /// The URL for synchronizing user settings.
-  PWSTR get pszUserSettingSyncUrl => PWSTR(_pszUserSettingSyncUrl);
+  PWSTR get pszUserSettingSyncUrl => .new(_pszUserSettingSyncUrl);
 
   set pszUserSettingSyncUrl(PWSTR value) => _pszUserSettingSyncUrl = value;
 
@@ -6716,18 +6700,18 @@ base class DSREG_USER_INFO extends Struct {
   external Pointer<Utf16> _pszUserKeyName;
 
   /// The email address of the user.
-  PWSTR get pszUserEmail => PWSTR(_pszUserEmail);
+  PWSTR get pszUserEmail => .new(_pszUserEmail);
 
   set pszUserEmail(PWSTR value) => _pszUserEmail = value;
 
   /// The identifier of the Microsoft Passport key that is provisioned for the
   /// user.
-  PWSTR get pszUserKeyId => PWSTR(_pszUserKeyId);
+  PWSTR get pszUserKeyId => .new(_pszUserKeyId);
 
   set pszUserKeyId(PWSTR value) => _pszUserKeyId = value;
 
   /// The name of the Microsoft Passport key that is provisioned for the user.
-  PWSTR get pszUserKeyName => PWSTR(_pszUserKeyName);
+  PWSTR get pszUserKeyName => .new(_pszUserKeyName);
 
   set pszUserKeyName(PWSTR value) => _pszUserKeyName = value;
 
@@ -6833,22 +6817,22 @@ base class DTTOPTS extends Struct {
   /// A combination of flags that specify whether certain values of the
   /// <b>DTTOPTS</b> structure have been specified, and how to interpret these
   /// values.
-  DTTOPTS_FLAGS get dwFlags => DTTOPTS_FLAGS(_dwFlags);
+  DTTOPTS_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(DTTOPTS_FLAGS value) => _dwFlags = value;
 
   /// Specifies the color of the text that will be drawn.
-  COLORREF get crText => COLORREF(_crText);
+  COLORREF get crText => .new(_crText);
 
   set crText(COLORREF value) => _crText = value;
 
   /// Specifies the color of the outline that will be drawn around the text.
-  COLORREF get crBorder => COLORREF(_crBorder);
+  COLORREF get crBorder => .new(_crBorder);
 
   set crBorder(COLORREF value) => _crBorder = value;
 
   /// Specifies the color of the shadow that will be drawn behind the text.
-  COLORREF get crShadow => COLORREF(_crShadow);
+  COLORREF get crShadow => .new(_crShadow);
 
   set crShadow(COLORREF value) => _crShadow = value;
 
@@ -6859,7 +6843,7 @@ base class DTTOPTS extends Struct {
 
   /// Parameter for callback back function specified by
   /// <b>pfnDrawTextCallback</b>.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
@@ -6904,7 +6888,7 @@ base class DWM_BLURBEHIND extends Struct {
   set fEnable(bool value) => _fEnable = value ? TRUE : FALSE;
 
   /// The region within the client area where the blur behind will be applied.
-  HRGN get hRgnBlur => HRGN(_hRgnBlur);
+  HRGN get hRgnBlur => .new(_hRgnBlur);
 
   set hRgnBlur(HRGN value) => _hRgnBlur = value;
 
@@ -6928,7 +6912,7 @@ final DesktopWallpaper = GUID.fromComponents(
   0xc2cf3110,
   0x460e,
   0x4fc1,
-  Uint8List.fromList(const [0xb9, 0xd0, 0x8a, 0x1c, 0xc, 0x9c, 0xc4, 0xbd]),
+  .fromList(const [0xb9, 0xd0, 0x8a, 0x1c, 0xc, 0x9c, 0xc4, 0xbd]),
 );
 
 /// Contains type, identification, and author information about an EAP method.
@@ -7125,13 +7109,13 @@ base class ENUM_SERVICE_STATUS extends Struct {
   external SERVICE_STATUS ServiceStatus;
 
   /// The name of a service in the service control manager database.
-  PWSTR get lpServiceName => PWSTR(_lpServiceName);
+  PWSTR get lpServiceName => .new(_lpServiceName);
 
   set lpServiceName(PWSTR value) => _lpServiceName = value;
 
   /// A display name that can be used by service control programs, such as
   /// Services in Control Panel, to identify the service.
-  PWSTR get lpDisplayName => PWSTR(_lpDisplayName);
+  PWSTR get lpDisplayName => .new(_lpDisplayName);
 
   set lpDisplayName(PWSTR value) => _lpDisplayName = value;
 
@@ -7163,13 +7147,13 @@ base class ENUM_SERVICE_STATUS_PROCESS extends Struct {
   external SERVICE_STATUS_PROCESS ServiceStatusProcess;
 
   /// The name of a service in the service control manager database.
-  PWSTR get lpServiceName => PWSTR(_lpServiceName);
+  PWSTR get lpServiceName => .new(_lpServiceName);
 
   set lpServiceName(PWSTR value) => _lpServiceName = value;
 
   /// A display name that can be used by service control programs, such as
   /// Services in Control Panel, to identify the service.
-  PWSTR get lpDisplayName => PWSTR(_lpDisplayName);
+  PWSTR get lpDisplayName => .new(_lpDisplayName);
 
   set lpDisplayName(PWSTR value) => _lpDisplayName = value;
 
@@ -7213,7 +7197,7 @@ base class EVENTMSG extends Struct {
   external Pointer _hwnd;
 
   /// A handle to the window to which the message was posted.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
@@ -7255,22 +7239,22 @@ base class EVT_RPC_LOGIN extends Struct {
   external int Flags;
 
   /// The name of the remote computer to connect to.
-  PWSTR get Server => PWSTR(_Server);
+  PWSTR get Server => .new(_Server);
 
   set Server(PWSTR value) => _Server = value;
 
   /// The user name to use to connect to the remote computer.
-  PWSTR get User => PWSTR(_User);
+  PWSTR get User => .new(_User);
 
   set User(PWSTR value) => _User = value;
 
   /// The domain to which the user account belongs.
-  PWSTR get Domain => PWSTR(_Domain);
+  PWSTR get Domain => .new(_Domain);
 
   set Domain(PWSTR value) => _Domain = value;
 
   /// The password for the user account.
-  PWSTR get Password => PWSTR(_Password);
+  PWSTR get Password => .new(_Password);
 
   set Password(PWSTR value) => _Password = value;
 
@@ -7384,15 +7368,15 @@ sealed class EVT_VARIANT_0 extends Union {
 
   bool get BooleanVal => _BooleanVal != FALSE;
   set BooleanVal(bool value) => _BooleanVal = value ? TRUE : FALSE;
-  PWSTR get StringVal => PWSTR(_StringVal);
+  PWSTR get StringVal => .new(_StringVal);
   set StringVal(PWSTR value) => _StringVal = value;
-  PSTR get AnsiStringVal => PSTR(_AnsiStringVal);
+  PSTR get AnsiStringVal => .new(_AnsiStringVal);
   set AnsiStringVal(PSTR value) => _AnsiStringVal = value;
-  PSID get SidVal => PSID(_SidVal);
+  PSID get SidVal => .new(_SidVal);
   set SidVal(PSID value) => _SidVal = value;
-  EVT_HANDLE get EvtHandleVal => EVT_HANDLE(_EvtHandleVal);
+  EVT_HANDLE get EvtHandleVal => .new(_EvtHandleVal);
   set EvtHandleVal(EVT_HANDLE value) => _EvtHandleVal = value;
-  PWSTR get XmlVal => PWSTR(_XmlVal);
+  PWSTR get XmlVal => .new(_XmlVal);
   set XmlVal(PWSTR value) => _XmlVal = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -7526,17 +7510,17 @@ base class EXCEPINFO extends Struct {
   external int scode;
 
   /// The name of the exception source.
-  BSTR get bstrSource => BSTR(_bstrSource);
+  BSTR get bstrSource => .new(_bstrSource);
 
   set bstrSource(BSTR value) => _bstrSource = value;
 
   /// The exception description to display.
-  BSTR get bstrDescription => BSTR(_bstrDescription);
+  BSTR get bstrDescription => .new(_bstrDescription);
 
   set bstrDescription(BSTR value) => _bstrDescription = value;
 
   /// The fully qualified help file path.
-  BSTR get bstrHelpFile => BSTR(_bstrHelpFile);
+  BSTR get bstrHelpFile => .new(_bstrHelpFile);
 
   set bstrHelpFile(BSTR value) => _bstrHelpFile = value;
 
@@ -7559,9 +7543,9 @@ base class ExtendedProperty extends Struct {
   external Pointer<Utf16> _PropertyName;
   external Pointer<Utf16> _PropertyValue;
 
-  BSTR get PropertyName => BSTR(_PropertyName);
+  BSTR get PropertyName => .new(_PropertyName);
   set PropertyName(BSTR value) => _PropertyName = value;
-  BSTR get PropertyValue => BSTR(_PropertyValue);
+  BSTR get PropertyValue => .new(_PropertyValue);
   set PropertyValue(BSTR value) => _PropertyValue = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -7705,40 +7689,40 @@ base class FINDREPLACE extends Struct {
   external Pointer<Utf16> _lpTemplateName;
 
   /// A handle to the window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// If the <b>FR_ENABLETEMPLATEHANDLE</b> flag is set in the <b>Flags</b>,
   /// <b>hInstance</b> is a handle to a memory object containing a dialog box
   /// template.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
-  FINDREPLACE_FLAGS get Flags => FINDREPLACE_FLAGS(_Flags);
+  FINDREPLACE_FLAGS get Flags => .new(_Flags);
   set Flags(FINDREPLACE_FLAGS value) => _Flags = value;
 
   /// The search string that the user typed in the <b>Find What</b> edit
   /// control.
-  PWSTR get lpstrFindWhat => PWSTR(_lpstrFindWhat);
+  PWSTR get lpstrFindWhat => .new(_lpstrFindWhat);
 
   set lpstrFindWhat(PWSTR value) => _lpstrFindWhat = value;
 
   /// The replacement string that the user typed in the <b>Replace With</b> edit
   /// control.
-  PWSTR get lpstrReplaceWith => PWSTR(_lpstrReplaceWith);
+  PWSTR get lpstrReplaceWith => .new(_lpstrReplaceWith);
 
   set lpstrReplaceWith(PWSTR value) => _lpstrReplaceWith = value;
 
   /// Application-defined data that the system passes to the hook procedure
   /// identified by the <b>lpfnHook</b> member.
-  LPARAM get lCustData => LPARAM(_lCustData);
+  LPARAM get lCustData => .new(_lCustData);
 
   set lCustData(LPARAM value) => _lCustData = value;
 
   /// The name of the dialog box template resource in the module identified by
   /// the <b>hInstance</b> member.
-  PWSTR get lpTemplateName => PWSTR(_lpTemplateName);
+  PWSTR get lpTemplateName => .new(_lpTemplateName);
 
   set lpTemplateName(PWSTR value) => _lpTemplateName = value;
 
@@ -7827,22 +7811,22 @@ base class FUNCDESC extends Struct {
   external int _wFuncFlags;
 
   /// Indicates the type of function (virtual, static, or dispatch-only).
-  FUNCKIND get funckind => FUNCKIND(_funckind);
+  FUNCKIND get funckind => .new(_funckind);
 
   set funckind(FUNCKIND value) => _funckind = value;
 
   /// The invocation type.
-  INVOKEKIND get invkind => INVOKEKIND(_invkind);
+  INVOKEKIND get invkind => .new(_invkind);
 
   set invkind(INVOKEKIND value) => _invkind = value;
 
   /// The calling convention.
-  CALLCONV get callconv => CALLCONV(_callconv);
+  CALLCONV get callconv => .new(_callconv);
 
   set callconv(CALLCONV value) => _callconv = value;
 
   /// The function flags.
-  FUNCFLAGS get wFuncFlags => FUNCFLAGS(_wFuncFlags);
+  FUNCFLAGS get wFuncFlags => .new(_wFuncFlags);
 
   set wFuncFlags(FUNCFLAGS value) => _wFuncFlags = value;
 
@@ -7859,14 +7843,14 @@ final FileOpenDialog = GUID.fromComponents(
   0xdc1c5a9c,
   0xe88a,
   0x4dde,
-  Uint8List.fromList(const [0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7]),
+  .fromList(const [0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7]),
 );
 
 final FileSaveDialog = GUID.fromComponents(
   0xc0b4e2f3,
   0xba21,
   0x4773,
-  Uint8List.fromList(const [0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b]),
+  .fromList(const [0x8d, 0xba, 0x33, 0x5e, 0xc9, 0x46, 0xeb, 0x8b]),
 );
 
 /// Gets and sets the configuration for enabling gesture messages and the type
@@ -7890,7 +7874,7 @@ base class GESTURECONFIG extends Struct {
 
   /// The identifier for the type of configuration that will have messages
   /// enabled or disabled.
-  GESTURECONFIG_ID get dwID => GESTURECONFIG_ID(_dwID);
+  GESTURECONFIG_ID get dwID => .new(_dwID);
 
   set dwID(GESTURECONFIG_ID value) => _dwID = value;
 
@@ -7946,7 +7930,7 @@ base class GESTUREINFO extends Struct {
   external int cbExtraArgs;
 
   /// A handle to the window that is targeted by this gesture.
-  HWND get hwndTarget => HWND(_hwndTarget);
+  HWND get hwndTarget => .new(_hwndTarget);
 
   set hwndTarget(HWND value) => _hwndTarget = value;
 
@@ -7986,7 +7970,7 @@ base class GESTURENOTIFYSTRUCT extends Struct {
   external int dwInstanceID;
 
   /// The target window for the gesture notification.
-  HWND get hwndTarget => HWND(_hwndTarget);
+  HWND get hwndTarget => .new(_hwndTarget);
 
   set hwndTarget(HWND value) => _hwndTarget = value;
 
@@ -8004,7 +7988,7 @@ final GUID_NULL = GUID.fromComponents(
   0x0,
   0x0,
   0x0,
-  Uint8List.fromList(const [0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]),
+  .fromList(const [0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0]),
 );
 
 /// Contains information about a GUI thread.
@@ -8032,36 +8016,36 @@ base class GUITHREADINFO extends Struct {
   /// window specified by the <b>hwndCaret</b> member.
   external RECT rcCaret;
 
-  GUITHREADINFO_FLAGS get flags => GUITHREADINFO_FLAGS(_flags);
+  GUITHREADINFO_FLAGS get flags => .new(_flags);
   set flags(GUITHREADINFO_FLAGS value) => _flags = value;
 
   /// A handle to the active window within the thread.
-  HWND get hwndActive => HWND(_hwndActive);
+  HWND get hwndActive => .new(_hwndActive);
 
   set hwndActive(HWND value) => _hwndActive = value;
 
   /// A handle to the window that has the keyboard focus.
-  HWND get hwndFocus => HWND(_hwndFocus);
+  HWND get hwndFocus => .new(_hwndFocus);
 
   set hwndFocus(HWND value) => _hwndFocus = value;
 
   /// A handle to the window that has captured the mouse.
-  HWND get hwndCapture => HWND(_hwndCapture);
+  HWND get hwndCapture => .new(_hwndCapture);
 
   set hwndCapture(HWND value) => _hwndCapture = value;
 
   /// A handle to the window that owns any active menus.
-  HWND get hwndMenuOwner => HWND(_hwndMenuOwner);
+  HWND get hwndMenuOwner => .new(_hwndMenuOwner);
 
   set hwndMenuOwner(HWND value) => _hwndMenuOwner = value;
 
   /// A handle to the window in a move or size loop.
-  HWND get hwndMoveSize => HWND(_hwndMoveSize);
+  HWND get hwndMoveSize => .new(_hwndMoveSize);
 
   set hwndMoveSize(HWND value) => _hwndMoveSize = value;
 
   /// A handle to the window that is displaying the caret.
-  HWND get hwndCaret => HWND(_hwndCaret);
+  HWND get hwndCaret => .new(_hwndCaret);
 
   set hwndCaret(HWND value) => _hwndCaret = value;
 
@@ -8479,7 +8463,7 @@ base class HOSTENT extends Struct {
   external Pointer<Pointer<Int8>> h_addr_list;
 
   /// The official name of the host (PC).
-  PSTR get h_name => PSTR(_h_name);
+  PSTR get h_name => .new(_h_name);
 
   set h_name(PSTR value) => _h_name = value;
 
@@ -8671,13 +8655,13 @@ base class ICONINFO extends Struct {
 
   /// A handle to the icon monochrome mask <a
   /// href="https://docs.microsoft.com/windows/win32/gdi/bitmaps">bitmap</a>.
-  HBITMAP get hbmMask => HBITMAP(_hbmMask);
+  HBITMAP get hbmMask => .new(_hbmMask);
 
   set hbmMask(HBITMAP value) => _hbmMask = value;
 
   /// A handle to the icon color <a
   /// href="https://docs.microsoft.com/windows/win32/gdi/bitmaps">bitmap</a>.
-  HBITMAP get hbmColor => HBITMAP(_hbmColor);
+  HBITMAP get hbmColor => .new(_hbmColor);
 
   set hbmColor(HBITMAP value) => _hbmColor = value;
 
@@ -8734,13 +8718,13 @@ base class ICONINFOEX extends Struct {
 
   /// A handle to the icon monochrome mask <a
   /// href="https://docs.microsoft.com/windows/win32/gdi/bitmaps">bitmap</a>.
-  HBITMAP get hbmMask => HBITMAP(_hbmMask);
+  HBITMAP get hbmMask => .new(_hbmMask);
 
   set hbmMask(HBITMAP value) => _hbmMask = value;
 
   /// A handle to the icon color <a
   /// href="https://docs.microsoft.com/windows/win32/gdi/bitmaps">bitmap</a>.
-  HBITMAP get hbmColor => HBITMAP(_hbmColor);
+  HBITMAP get hbmColor => .new(_hbmColor);
 
   set hbmColor(HBITMAP value) => _hbmColor = value;
 
@@ -8771,7 +8755,7 @@ base class IDLDESC extends Struct {
   @Uint16()
   external int _wIDLFlags;
 
-  IDLFLAGS get wIDLFlags => IDLFLAGS(_wIDLFlags);
+  IDLFLAGS get wIDLFlags => .new(_wIDLFlags);
   set wIDLFlags(IDLFLAGS value) => _wIDLFlags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -8800,7 +8784,7 @@ base class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
   external int _dwICC;
 
-  INITCOMMONCONTROLSEX_ICC get dwICC => INITCOMMONCONTROLSEX_ICC(_dwICC);
+  INITCOMMONCONTROLSEX_ICC get dwICC => .new(_dwICC);
   set dwICC(INITCOMMONCONTROLSEX_ICC value) => _dwICC = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -8839,7 +8823,7 @@ base class INPUT extends Struct {
 
   external INPUT_0 Anonymous;
 
-  INPUT_TYPE get type => INPUT_TYPE(_type);
+  INPUT_TYPE get type => .new(_type);
   set type(INPUT_TYPE value) => _type = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -9314,45 +9298,43 @@ base class IP_ADAPTER_ADDRESSES_LH extends Struct {
 
   /// An array of characters that contains the name of the adapter with which
   /// these addresses are associated.
-  PSTR get AdapterName => PSTR(_AdapterName);
+  PSTR get AdapterName => .new(_AdapterName);
 
   set AdapterName(PSTR value) => _AdapterName = value;
 
   /// The Domain Name System (DNS) suffix associated with this adapter.
-  PWSTR get DnsSuffix => PWSTR(_DnsSuffix);
+  PWSTR get DnsSuffix => .new(_DnsSuffix);
 
   set DnsSuffix(PWSTR value) => _DnsSuffix = value;
 
   /// A description for the adapter.
-  PWSTR get Description => PWSTR(_Description);
+  PWSTR get Description => .new(_Description);
 
   set Description(PWSTR value) => _Description = value;
 
   /// A user-friendly name for the adapter.
-  PWSTR get FriendlyName => PWSTR(_FriendlyName);
+  PWSTR get FriendlyName => .new(_FriendlyName);
 
   set FriendlyName(PWSTR value) => _FriendlyName = value;
 
   /// The operational status for the interface as defined in RFC 2863.
-  IF_OPER_STATUS get OperStatus => IF_OPER_STATUS(_OperStatus);
+  IF_OPER_STATUS get OperStatus => .new(_OperStatus);
 
   set OperStatus(IF_OPER_STATUS value) => _OperStatus = value;
 
   /// The routing compartment ID for the adapter address.
-  NET_IF_COMPARTMENT_ID get CompartmentId =>
-      NET_IF_COMPARTMENT_ID(_CompartmentId);
+  NET_IF_COMPARTMENT_ID get CompartmentId => .new(_CompartmentId);
 
   set CompartmentId(NET_IF_COMPARTMENT_ID value) => _CompartmentId = value;
 
   /// The interface connection type for the adapter address.
-  NET_IF_CONNECTION_TYPE get ConnectionType =>
-      NET_IF_CONNECTION_TYPE(_ConnectionType);
+  NET_IF_CONNECTION_TYPE get ConnectionType => .new(_ConnectionType);
 
   set ConnectionType(NET_IF_CONNECTION_TYPE value) => _ConnectionType = value;
 
   /// The encapsulation method used by a tunnel if the adapter address is a
   /// tunnel.
-  TUNNEL_TYPE get TunnelType => TUNNEL_TYPE(_TunnelType);
+  TUNNEL_TYPE get TunnelType => .new(_TunnelType);
 
   set TunnelType(TUNNEL_TYPE value) => _TunnelType = value;
 
@@ -10000,17 +9982,17 @@ base class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
   external int OnLinkPrefixLength;
 
   /// The prefix or network part of IP the address.
-  NL_PREFIX_ORIGIN get PrefixOrigin => NL_PREFIX_ORIGIN(_PrefixOrigin);
+  NL_PREFIX_ORIGIN get PrefixOrigin => .new(_PrefixOrigin);
 
   set PrefixOrigin(NL_PREFIX_ORIGIN value) => _PrefixOrigin = value;
 
   /// The suffix or host part of the IP address.
-  NL_SUFFIX_ORIGIN get SuffixOrigin => NL_SUFFIX_ORIGIN(_SuffixOrigin);
+  NL_SUFFIX_ORIGIN get SuffixOrigin => .new(_SuffixOrigin);
 
   set SuffixOrigin(NL_SUFFIX_ORIGIN value) => _SuffixOrigin = value;
 
   /// The duplicate address detection (DAD) state.
-  NL_DAD_STATE get DadState => NL_DAD_STATE(_DadState);
+  NL_DAD_STATE get DadState => .new(_DadState);
 
   set DadState(NL_DAD_STATE value) => _DadState = value;
 
@@ -10321,11 +10303,10 @@ base class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
 
   /// The NT device name for the volume to which you want to apply the policy
   /// for the I/O rate.
-  PWSTR get VolumeName => PWSTR(_VolumeName);
+  PWSTR get VolumeName => .new(_VolumeName);
 
   set VolumeName(PWSTR value) => _VolumeName = value;
-  JOB_OBJECT_IO_RATE_CONTROL_FLAGS get ControlFlags =>
-      JOB_OBJECT_IO_RATE_CONTROL_FLAGS(_ControlFlags);
+  JOB_OBJECT_IO_RATE_CONTROL_FLAGS get ControlFlags => .new(_ControlFlags);
   set ControlFlags(JOB_OBJECT_IO_RATE_CONTROL_FLAGS value) =>
       _ControlFlags = value;
 
@@ -10385,37 +10366,37 @@ base class JOB_INFO_1 extends Struct {
 
   /// A pointer to a null-terminated string that specifies the name of the
   /// printer for which the job is spooled.
-  PWSTR get pPrinterName => PWSTR(_pPrinterName);
+  PWSTR get pPrinterName => .new(_pPrinterName);
 
   set pPrinterName(PWSTR value) => _pPrinterName = value;
 
   /// A pointer to a null-terminated string that specifies the name of the
   /// machine that created the print job.
-  PWSTR get pMachineName => PWSTR(_pMachineName);
+  PWSTR get pMachineName => .new(_pMachineName);
 
   set pMachineName(PWSTR value) => _pMachineName = value;
 
   /// A pointer to a null-terminated string that specifies the name of the user
   /// that owns the print job.
-  PWSTR get pUserName => PWSTR(_pUserName);
+  PWSTR get pUserName => .new(_pUserName);
 
   set pUserName(PWSTR value) => _pUserName = value;
 
   /// A pointer to a null-terminated string that specifies the name of the print
   /// job (for example, "MS-WORD: Review.doc").
-  PWSTR get pDocument => PWSTR(_pDocument);
+  PWSTR get pDocument => .new(_pDocument);
 
   set pDocument(PWSTR value) => _pDocument = value;
 
   /// A pointer to a null-terminated string that specifies the type of data used
   /// to record the print job.
-  PWSTR get pDatatype => PWSTR(_pDatatype);
+  PWSTR get pDatatype => .new(_pDatatype);
 
   set pDatatype(PWSTR value) => _pDatatype = value;
 
   /// A pointer to a null-terminated string that specifies the status of the
   /// print job.
-  PWSTR get pStatus => PWSTR(_pStatus);
+  PWSTR get pStatus => .new(_pStatus);
 
   set pStatus(PWSTR value) => _pStatus = value;
 
@@ -10460,7 +10441,7 @@ base class KBDLLHOOKSTRUCT extends Struct {
 
   /// The extended-key flag, event-injected flags, context code, and
   /// transition-state flag.
-  KBDLLHOOKSTRUCT_FLAGS get flags => KBDLLHOOKSTRUCT_FLAGS(_flags);
+  KBDLLHOOKSTRUCT_FLAGS get flags => .new(_flags);
 
   set flags(KBDLLHOOKSTRUCT_FLAGS value) => _flags = value;
 
@@ -10501,10 +10482,10 @@ base class KEYBDINPUT extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/inputdev/virtual-key-codes">virtual-key
   /// code</a>.
-  VIRTUAL_KEY get wVk => VIRTUAL_KEY(_wVk);
+  VIRTUAL_KEY get wVk => .new(_wVk);
 
   set wVk(VIRTUAL_KEY value) => _wVk = value;
-  KEYBD_EVENT_FLAGS get dwFlags => KEYBD_EVENT_FLAGS(_dwFlags);
+  KEYBD_EVENT_FLAGS get dwFlags => .new(_dwFlags);
   set dwFlags(KEYBD_EVENT_FLAGS value) => _dwFlags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -10569,7 +10550,7 @@ sealed class KEY_EVENT_RECORD_0 extends Union {
   @Int8()
   external int _AsciiChar;
 
-  CHAR get AsciiChar => CHAR(_AsciiChar);
+  CHAR get AsciiChar => .new(_AsciiChar);
   set AsciiChar(CHAR value) => _AsciiChar = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -10632,50 +10613,50 @@ base class KNOWNFOLDER_DEFINITION extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/api/shobjidl_core/ne-shobjidl_core-kf_category">KF_CATEGORY</a>
   /// constants that classifies the folder as virtual, fixed, common, or
   /// per-user.
-  KF_CATEGORY get category => KF_CATEGORY(_category);
+  KF_CATEGORY get category => .new(_category);
 
   set category(KF_CATEGORY value) => _category = value;
 
   /// A pointer to the non-localized, canonical name for the known folder,
   /// stored as a null-terminated Unicode string.
-  PWSTR get pszName => PWSTR(_pszName);
+  PWSTR get pszName => .new(_pszName);
 
   set pszName(PWSTR value) => _pszName = value;
 
   /// A pointer to a short description of the known folder, stored as a
   /// null-terminated Unicode string.
-  PWSTR get pszDescription => PWSTR(_pszDescription);
+  PWSTR get pszDescription => .new(_pszDescription);
 
   set pszDescription(PWSTR value) => _pszDescription = value;
 
   /// Optional.
-  PWSTR get pszRelativePath => PWSTR(_pszRelativePath);
+  PWSTR get pszRelativePath => .new(_pszRelativePath);
 
   set pszRelativePath(PWSTR value) => _pszRelativePath = value;
 
   /// A pointer to the Shell namespace folder path of the folder, stored as a
   /// null-terminated Unicode string.
-  PWSTR get pszParsingName => PWSTR(_pszParsingName);
+  PWSTR get pszParsingName => .new(_pszParsingName);
 
   set pszParsingName(PWSTR value) => _pszParsingName = value;
 
   /// Optional.
-  PWSTR get pszTooltip => PWSTR(_pszTooltip);
+  PWSTR get pszTooltip => .new(_pszTooltip);
 
   set pszTooltip(PWSTR value) => _pszTooltip = value;
 
   /// Optional.
-  PWSTR get pszLocalizedName => PWSTR(_pszLocalizedName);
+  PWSTR get pszLocalizedName => .new(_pszLocalizedName);
 
   set pszLocalizedName(PWSTR value) => _pszLocalizedName = value;
 
   /// Optional.
-  PWSTR get pszIcon => PWSTR(_pszIcon);
+  PWSTR get pszIcon => .new(_pszIcon);
 
   set pszIcon(PWSTR value) => _pszIcon = value;
 
   /// Optional.
-  PWSTR get pszSecurity => PWSTR(_pszSecurity);
+  PWSTR get pszSecurity => .new(_pszSecurity);
 
   set pszSecurity(PWSTR value) => _pszSecurity = value;
 
@@ -10693,7 +10674,7 @@ final KnownFolderManager = GUID.fromComponents(
   0x4df0c730,
   0xdf9d,
   0x4ae3,
-  Uint8List.fromList(const [0x91, 0x53, 0xaa, 0x6b, 0x82, 0xe9, 0x79, 0x5a]),
+  .fromList(const [0x91, 0x53, 0xaa, 0x6b, 0x82, 0xe9, 0x79, 0x5a]),
 );
 
 /// Used by the IHV Extensions DLL to send notifications to any service or
@@ -10717,8 +10698,7 @@ base class L2_NOTIFICATION_DATA extends Struct {
 
   external Pointer pData;
 
-  WLAN_NOTIFICATION_SOURCES get NotificationSource =>
-      WLAN_NOTIFICATION_SOURCES(_NotificationSource);
+  WLAN_NOTIFICATION_SOURCES get NotificationSource => .new(_NotificationSource);
   set NotificationSource(WLAN_NOTIFICATION_SOURCES value) =>
       _NotificationSource = value;
 
@@ -10776,12 +10756,12 @@ base class LOGBRUSH extends Struct {
   external int lbHatch;
 
   /// The brush style.
-  BRUSH_STYLE get lbStyle => BRUSH_STYLE(_lbStyle);
+  BRUSH_STYLE get lbStyle => .new(_lbStyle);
 
   set lbStyle(BRUSH_STYLE value) => _lbStyle = value;
 
   /// The color in which the brush is to be drawn.
-  COLORREF get lbColor => COLORREF(_lbColor);
+  COLORREF get lbColor => .new(_lbColor);
 
   set lbColor(COLORREF value) => _lbColor = value;
 
@@ -10855,16 +10835,14 @@ base class LOGFONT extends Struct {
   external Array<Uint16> _lfFaceName;
 
   /// Specifies the character set.
-  FONT_CHARSET get lfCharSet => FONT_CHARSET(_lfCharSet);
+  FONT_CHARSET get lfCharSet => .new(_lfCharSet);
 
   set lfCharSet(FONT_CHARSET value) => _lfCharSet = value;
-  FONT_OUTPUT_PRECISION get lfOutPrecision =>
-      FONT_OUTPUT_PRECISION(_lfOutPrecision);
+  FONT_OUTPUT_PRECISION get lfOutPrecision => .new(_lfOutPrecision);
   set lfOutPrecision(FONT_OUTPUT_PRECISION value) => _lfOutPrecision = value;
-  FONT_CLIP_PRECISION get lfClipPrecision =>
-      FONT_CLIP_PRECISION(_lfClipPrecision);
+  FONT_CLIP_PRECISION get lfClipPrecision => .new(_lfClipPrecision);
   set lfClipPrecision(FONT_CLIP_PRECISION value) => _lfClipPrecision = value;
-  FONT_QUALITY get lfQuality => FONT_QUALITY(_lfQuality);
+  FONT_QUALITY get lfQuality => .new(_lfQuality);
   set lfQuality(FONT_QUALITY value) => _lfQuality = value;
 
   /// Specifies a string that specifies the typeface name of the font.
@@ -11083,17 +11061,17 @@ base class MCI_OPEN_PARMS extends Struct {
   external Pointer<Utf16> _lpstrAlias;
 
   /// Name or constant identifier of the device type.
-  PWSTR get lpstrDeviceType => PWSTR(_lpstrDeviceType);
+  PWSTR get lpstrDeviceType => .new(_lpstrDeviceType);
 
   set lpstrDeviceType(PWSTR value) => _lpstrDeviceType = value;
 
   /// Device element (often a path).
-  PWSTR get lpstrElementName => PWSTR(_lpstrElementName);
+  PWSTR get lpstrElementName => .new(_lpstrElementName);
 
   set lpstrElementName(PWSTR value) => _lpstrElementName = value;
 
   /// Optional device alias.
-  PWSTR get lpstrAlias => PWSTR(_lpstrAlias);
+  PWSTR get lpstrAlias => .new(_lpstrAlias);
 
   set lpstrAlias(PWSTR value) => _lpstrAlias = value;
 
@@ -11288,21 +11266,20 @@ base class MEMORY_BASIC_INFORMATION extends Struct {
   external int _Type;
 
   /// The memory protection option when the region was initially allocated.
-  PAGE_PROTECTION_FLAGS get AllocationProtect =>
-      PAGE_PROTECTION_FLAGS(_AllocationProtect);
+  PAGE_PROTECTION_FLAGS get AllocationProtect => .new(_AllocationProtect);
 
   set AllocationProtect(PAGE_PROTECTION_FLAGS value) =>
       _AllocationProtect = value;
-  VIRTUAL_ALLOCATION_TYPE get State => VIRTUAL_ALLOCATION_TYPE(_State);
+  VIRTUAL_ALLOCATION_TYPE get State => .new(_State);
   set State(VIRTUAL_ALLOCATION_TYPE value) => _State = value;
 
   /// The access protection of the pages in the region.
-  PAGE_PROTECTION_FLAGS get Protect => PAGE_PROTECTION_FLAGS(_Protect);
+  PAGE_PROTECTION_FLAGS get Protect => .new(_Protect);
 
   set Protect(PAGE_PROTECTION_FLAGS value) => _Protect = value;
 
   /// The type of pages in the region.
-  PAGE_TYPE get Type => PAGE_TYPE(_Type);
+  PAGE_TYPE get Type => .new(_Type);
 
   set Type(PAGE_TYPE value) => _Type = value;
 
@@ -11343,12 +11320,12 @@ base class MENUBARINFO extends Struct {
   external int bitfield;
 
   /// A handle to the menu bar or popup menu.
-  HMENU get hMenu => HMENU(_hMenu);
+  HMENU get hMenu => .new(_hMenu);
 
   set hMenu(HMENU value) => _hMenu = value;
 
   /// A handle to the submenu.
-  HWND get hwndMenu => HWND(_hwndMenu);
+  HWND get hwndMenu => .new(_hwndMenu);
 
   set hwndMenu(HWND value) => _hwndMenu = value;
   int get fBarFocused => bitfield.getBits(0, 1);
@@ -11398,13 +11375,13 @@ base class MENUINFO extends Struct {
   @IntPtr()
   external int dwMenuData;
 
-  MENUINFO_MASK get fMask => MENUINFO_MASK(_fMask);
+  MENUINFO_MASK get fMask => .new(_fMask);
   set fMask(MENUINFO_MASK value) => _fMask = value;
-  MENUINFO_STYLE get dwStyle => MENUINFO_STYLE(_dwStyle);
+  MENUINFO_STYLE get dwStyle => .new(_dwStyle);
   set dwStyle(MENUINFO_STYLE value) => _dwStyle = value;
 
   /// A handle to the brush to be used for the menu's background.
-  HBRUSH get hbrBack => HBRUSH(_hbrBack);
+  HBRUSH get hbrBack => .new(_hbrBack);
 
   set hbrBack(HBRUSH value) => _hbrBack = value;
 
@@ -11458,39 +11435,39 @@ base class MENUITEMINFO extends Struct {
 
   external Pointer _hbmpItem;
 
-  MENU_ITEM_MASK get fMask => MENU_ITEM_MASK(_fMask);
+  MENU_ITEM_MASK get fMask => .new(_fMask);
   set fMask(MENU_ITEM_MASK value) => _fMask = value;
-  MENU_ITEM_TYPE get fType => MENU_ITEM_TYPE(_fType);
+  MENU_ITEM_TYPE get fType => .new(_fType);
   set fType(MENU_ITEM_TYPE value) => _fType = value;
 
   /// The menu item state.
-  MENU_ITEM_STATE get fState => MENU_ITEM_STATE(_fState);
+  MENU_ITEM_STATE get fState => .new(_fState);
 
   set fState(MENU_ITEM_STATE value) => _fState = value;
 
   /// A handle to the drop-down menu or submenu associated with the menu item.
-  HMENU get hSubMenu => HMENU(_hSubMenu);
+  HMENU get hSubMenu => .new(_hSubMenu);
 
   set hSubMenu(HMENU value) => _hSubMenu = value;
 
   /// A handle to the bitmap to display next to the item if it is selected.
-  HBITMAP get hbmpChecked => HBITMAP(_hbmpChecked);
+  HBITMAP get hbmpChecked => .new(_hbmpChecked);
 
   set hbmpChecked(HBITMAP value) => _hbmpChecked = value;
 
   /// A handle to the bitmap to display next to the item if it is not selected.
-  HBITMAP get hbmpUnchecked => HBITMAP(_hbmpUnchecked);
+  HBITMAP get hbmpUnchecked => .new(_hbmpUnchecked);
 
   set hbmpUnchecked(HBITMAP value) => _hbmpUnchecked = value;
 
   /// The contents of the menu item.
-  PWSTR get dwTypeData => PWSTR(_dwTypeData);
+  PWSTR get dwTypeData => .new(_dwTypeData);
 
   set dwTypeData(PWSTR value) => _dwTypeData = value;
 
   /// A handle to the bitmap to be displayed, or it can be one of the values in
   /// the following table.
-  HBITMAP get hbmpItem => HBITMAP(_hbmpItem);
+  HBITMAP get hbmpItem => .new(_hbmpItem);
 
   set hbmpItem(HBITMAP value) => _hbmpItem = value;
 
@@ -11612,7 +11589,7 @@ base class METAFILEPICT extends Struct {
   external Pointer _hMF;
 
   /// A handle to a memory metafile.
-  HMETAFILE get hMF => HMETAFILE(_hMF);
+  HMETAFILE get hMF => .new(_hMF);
 
   set hMF(HMETAFILE value) => _hMF = value;
 
@@ -11700,7 +11677,7 @@ base class MIDIHDR extends Struct {
   external Array<IntPtr> _dwReserved;
 
   /// Pointer to MIDI data.
-  PSTR get lpData => PSTR(_lpData);
+  PSTR get lpData => .new(_lpData);
 
   set lpData(PSTR value) => _lpData = value;
 
@@ -11933,7 +11910,7 @@ final MMDeviceEnumerator = GUID.fromComponents(
   0xbcde0395,
   0xe52f,
   0x467c,
-  Uint8List.fromList(const [0x8e, 0x3d, 0xc4, 0x57, 0x92, 0x91, 0x69, 0x2e]),
+  .fromList(const [0x8e, 0x3d, 0xc4, 0x57, 0x92, 0x91, 0x69, 0x2e]),
 );
 
 /// {@category struct}
@@ -12154,15 +12131,12 @@ base class MODEMDEVCAPS extends Struct {
   @Array.variableWithVariableDimension(1)
   external Array<Uint8> abVariablePortion;
 
-  MODEMDEVCAPS_DIAL_OPTIONS get dwDialOptions =>
-      MODEMDEVCAPS_DIAL_OPTIONS(_dwDialOptions);
+  MODEMDEVCAPS_DIAL_OPTIONS get dwDialOptions => .new(_dwDialOptions);
   set dwDialOptions(MODEMDEVCAPS_DIAL_OPTIONS value) => _dwDialOptions = value;
-  MODEMDEVCAPS_SPEAKER_VOLUME get dwSpeakerVolume =>
-      MODEMDEVCAPS_SPEAKER_VOLUME(_dwSpeakerVolume);
+  MODEMDEVCAPS_SPEAKER_VOLUME get dwSpeakerVolume => .new(_dwSpeakerVolume);
   set dwSpeakerVolume(MODEMDEVCAPS_SPEAKER_VOLUME value) =>
       _dwSpeakerVolume = value;
-  MODEMDEVCAPS_SPEAKER_MODE get dwSpeakerMode =>
-      MODEMDEVCAPS_SPEAKER_MODE(_dwSpeakerMode);
+  MODEMDEVCAPS_SPEAKER_MODE get dwSpeakerMode => .new(_dwSpeakerMode);
   set dwSpeakerMode(MODEMDEVCAPS_SPEAKER_MODE value) => _dwSpeakerMode = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -12233,11 +12207,9 @@ base class MODEMSETTINGS extends Struct {
   @Array.variableWithVariableDimension(1)
   external Array<Uint8> abVariablePortion;
 
-  MODEM_SPEAKER_VOLUME get dwSpeakerVolume =>
-      MODEM_SPEAKER_VOLUME(_dwSpeakerVolume);
+  MODEM_SPEAKER_VOLUME get dwSpeakerVolume => .new(_dwSpeakerVolume);
   set dwSpeakerVolume(MODEM_SPEAKER_VOLUME value) => _dwSpeakerVolume = value;
-  MODEMSETTINGS_SPEAKER_MODE get dwSpeakerMode =>
-      MODEMSETTINGS_SPEAKER_MODE(_dwSpeakerMode);
+  MODEMSETTINGS_SPEAKER_MODE get dwSpeakerMode => .new(_dwSpeakerMode);
   set dwSpeakerMode(MODEMSETTINGS_SPEAKER_MODE value) => _dwSpeakerMode = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -12274,7 +12246,7 @@ base class MODLOAD_DATA extends Struct {
   @Uint32()
   external int flags;
 
-  MODLOAD_DATA_TYPE get ssig => MODLOAD_DATA_TYPE(_ssig);
+  MODLOAD_DATA_TYPE get ssig => .new(_ssig);
   set ssig(MODLOAD_DATA_TYPE value) => _ssig = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -12401,7 +12373,7 @@ base class MOUSEHOOKSTRUCT extends Struct {
 
   /// A handle to the window that will receive the mouse message corresponding
   /// to the mouse event.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
@@ -12476,7 +12448,7 @@ base class MOUSEINPUT extends Struct {
   @IntPtr()
   external int dwExtraInfo;
 
-  MOUSE_EVENT_FLAGS get dwFlags => MOUSE_EVENT_FLAGS(_dwFlags);
+  MOUSE_EVENT_FLAGS get dwFlags => .new(_dwFlags);
   set dwFlags(MOUSE_EVENT_FLAGS value) => _dwFlags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -12580,17 +12552,17 @@ base class MSG extends Struct {
   external POINT pt;
 
   /// A handle to the window whose window procedure receives the message.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
   /// Additional information about the message.
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
 
   set wParam(WPARAM value) => _wParam = value;
 
   /// Additional information about the message.
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
 
   set lParam(LPARAM value) => _lParam = value;
 
@@ -12860,7 +12832,7 @@ base class NEWTEXTMETRIC extends Struct {
   external int ntmAvgWidth;
 
   /// The pitch and family of the selected font.
-  TMPF_FLAGS get tmPitchAndFamily => TMPF_FLAGS(_tmPitchAndFamily);
+  TMPF_FLAGS get tmPitchAndFamily => .new(_tmPitchAndFamily);
 
   set tmPitchAndFamily(TMPF_FLAGS value) => _tmPitchAndFamily = value;
 
@@ -12902,7 +12874,7 @@ base class NLM_SIMULATED_PROFILE_INFO extends Struct {
   set ProfileName(String value) => _ProfileName.setString(value);
 
   /// The network cost.
-  NLM_CONNECTION_COST get cost => NLM_CONNECTION_COST(_cost);
+  NLM_CONNECTION_COST get cost => .new(_cost);
 
   set cost(NLM_CONNECTION_COST value) => _cost = value;
 
@@ -13050,14 +13022,14 @@ base class NOTIFYICONDATA extends Struct {
 
   /// A handle to the window that receives notifications associated with an icon
   /// in the notification area.
-  HWND get hWnd => HWND(_hWnd);
+  HWND get hWnd => .new(_hWnd);
 
   set hWnd(HWND value) => _hWnd = value;
-  NOTIFY_ICON_DATA_FLAGS get uFlags => NOTIFY_ICON_DATA_FLAGS(_uFlags);
+  NOTIFY_ICON_DATA_FLAGS get uFlags => .new(_uFlags);
   set uFlags(NOTIFY_ICON_DATA_FLAGS value) => _uFlags = value;
 
   /// A handle to the icon to be added, modified, or deleted.
-  HICON get hIcon => HICON(_hIcon);
+  HICON get hIcon => .new(_hIcon);
 
   set hIcon(HICON value) => _hIcon = value;
 
@@ -13065,18 +13037,17 @@ base class NOTIFYICONDATA extends Struct {
   String get szTip => _szTip.toDartString();
 
   set szTip(String value) => _szTip.setString(value);
-  NOTIFY_ICON_STATE get dwState => NOTIFY_ICON_STATE(_dwState);
+  NOTIFY_ICON_STATE get dwState => .new(_dwState);
   set dwState(NOTIFY_ICON_STATE value) => _dwState = value;
-  NOTIFY_ICON_STATE get dwStateMask => NOTIFY_ICON_STATE(_dwStateMask);
+  NOTIFY_ICON_STATE get dwStateMask => .new(_dwStateMask);
   set dwStateMask(NOTIFY_ICON_STATE value) => _dwStateMask = value;
   String get szInfo => _szInfo.toDartString();
   set szInfo(String value) => _szInfo.setString(value);
   String get szInfoTitle => _szInfoTitle.toDartString();
   set szInfoTitle(String value) => _szInfoTitle.setString(value);
-  NOTIFY_ICON_INFOTIP_FLAGS get dwInfoFlags =>
-      NOTIFY_ICON_INFOTIP_FLAGS(_dwInfoFlags);
+  NOTIFY_ICON_INFOTIP_FLAGS get dwInfoFlags => .new(_dwInfoFlags);
   set dwInfoFlags(NOTIFY_ICON_INFOTIP_FLAGS value) => _dwInfoFlags = value;
-  HICON get hBalloonIcon => HICON(_hBalloonIcon);
+  HICON get hBalloonIcon => .new(_hBalloonIcon);
   set hBalloonIcon(HICON value) => _hBalloonIcon = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -13116,7 +13087,7 @@ final NetworkListManager = GUID.fromComponents(
   0xdcb00c01,
   0x570f,
   0x4a9b,
-  Uint8List.fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
+  .fromList(const [0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b]),
 );
 
 /// Contains the information that the GetOpenCardName function uses to
@@ -13218,34 +13189,34 @@ base class OPENCARDNAME extends Struct {
   external int hCardHandle;
 
   /// The window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// A pointer to a buffer that contains null-terminated group name strings.
-  PWSTR get lpstrGroupNames => PWSTR(_lpstrGroupNames);
+  PWSTR get lpstrGroupNames => .new(_lpstrGroupNames);
 
   set lpstrGroupNames(PWSTR value) => _lpstrGroupNames = value;
 
   /// A pointer to a buffer that contains null-terminated card name strings.
-  PWSTR get lpstrCardNames => PWSTR(_lpstrCardNames);
+  PWSTR get lpstrCardNames => .new(_lpstrCardNames);
 
   set lpstrCardNames(PWSTR value) => _lpstrCardNames = value;
 
   /// If the card is located, the <b>lpstrRdr</b> buffer contains the name of
   /// the reader that contains the located card.
-  PWSTR get lpstrRdr => PWSTR(_lpstrRdr);
+  PWSTR get lpstrRdr => .new(_lpstrRdr);
 
   set lpstrRdr(PWSTR value) => _lpstrRdr = value;
 
   /// If the card is located, the <b>lpstrCard</b> buffer contains the name of
   /// the located card.
-  PWSTR get lpstrCard => PWSTR(_lpstrCard);
+  PWSTR get lpstrCard => .new(_lpstrCard);
 
   set lpstrCard(PWSTR value) => _lpstrCard = value;
 
   /// A pointer to a string to be placed in the title bar of the dialog box.
-  PWSTR get lpstrTitle => PWSTR(_lpstrTitle);
+  PWSTR get lpstrTitle => .new(_lpstrTitle);
 
   set lpstrTitle(PWSTR value) => _lpstrTitle = value;
 
@@ -13335,12 +13306,12 @@ base class OPENCARDNAME_EX extends Struct {
   external int hCardHandle;
 
   /// The window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// A pointer to a string to be placed in the title bar of the dialog box.
-  PWSTR get lpstrTitle => PWSTR(_lpstrTitle);
+  PWSTR get lpstrTitle => .new(_lpstrTitle);
 
   set lpstrTitle(PWSTR value) => _lpstrTitle = value;
 
@@ -13348,24 +13319,24 @@ base class OPENCARDNAME_EX extends Struct {
   /// the <a
   /// href="https://docs.microsoft.com/windows/desktop/SecGloss/s-gly">smart
   /// card</a>.
-  PWSTR get lpstrSearchDesc => PWSTR(_lpstrSearchDesc);
+  PWSTR get lpstrSearchDesc => .new(_lpstrSearchDesc);
 
   set lpstrSearchDesc(PWSTR value) => _lpstrSearchDesc = value;
 
   /// A handle to an icon (32 x 32 pixels).
-  HICON get hIcon => HICON(_hIcon);
+  HICON get hIcon => .new(_hIcon);
 
   set hIcon(HICON value) => _hIcon = value;
 
   /// If the card is located, the <b>lpstrRdr</b> buffer contains the name of
   /// the reader that contains the located card.
-  PWSTR get lpstrRdr => PWSTR(_lpstrRdr);
+  PWSTR get lpstrRdr => .new(_lpstrRdr);
 
   set lpstrRdr(PWSTR value) => _lpstrRdr = value;
 
   /// If the card is located, the <i>lpstrCard</i> buffer contains the name of
   /// the located card.
-  PWSTR get lpstrCard => PWSTR(_lpstrCard);
+  PWSTR get lpstrCard => .new(_lpstrCard);
 
   set lpstrCard(PWSTR value) => _lpstrCard = value;
 
@@ -13436,12 +13407,12 @@ base class OPENCARD_SEARCH_CRITERIA extends Struct {
   external int dwPreferredProtocols;
 
   /// A pointer to a buffer containing null-terminated group name strings.
-  PWSTR get lpstrGroupNames => PWSTR(_lpstrGroupNames);
+  PWSTR get lpstrGroupNames => .new(_lpstrGroupNames);
 
   set lpstrGroupNames(PWSTR value) => _lpstrGroupNames = value;
 
   /// A pointer to a buffer that contains null-terminated card name strings.
-  PWSTR get lpstrCardNames => PWSTR(_lpstrCardNames);
+  PWSTR get lpstrCardNames => .new(_lpstrCardNames);
 
   set lpstrCardNames(PWSTR value) => _lpstrCardNames = value;
 
@@ -13532,73 +13503,73 @@ base class OPENFILENAME extends Struct {
   external int _FlagsEx;
 
   /// A handle to the window that owns the dialog box.
-  HWND get hwndOwner => HWND(_hwndOwner);
+  HWND get hwndOwner => .new(_hwndOwner);
 
   set hwndOwner(HWND value) => _hwndOwner = value;
 
   /// If the <b>OFN_ENABLETEMPLATEHANDLE</b> flag is set in the <b>Flags</b>
   /// member, <b>hInstance</b> is a handle to a memory object containing a
   /// dialog box template.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// A buffer containing pairs of null-terminated filter strings.
-  PWSTR get lpstrFilter => PWSTR(_lpstrFilter);
+  PWSTR get lpstrFilter => .new(_lpstrFilter);
 
   set lpstrFilter(PWSTR value) => _lpstrFilter = value;
 
   /// A static buffer that contains a pair of null-terminated filter strings for
   /// preserving the filter pattern chosen by the user.
-  PWSTR get lpstrCustomFilter => PWSTR(_lpstrCustomFilter);
+  PWSTR get lpstrCustomFilter => .new(_lpstrCustomFilter);
 
   set lpstrCustomFilter(PWSTR value) => _lpstrCustomFilter = value;
 
   /// The file name used to initialize the <b>File Name</b> edit control.
-  PWSTR get lpstrFile => PWSTR(_lpstrFile);
+  PWSTR get lpstrFile => .new(_lpstrFile);
 
   set lpstrFile(PWSTR value) => _lpstrFile = value;
 
   /// The file name and extension (without path information) of the selected
   /// file.
-  PWSTR get lpstrFileTitle => PWSTR(_lpstrFileTitle);
+  PWSTR get lpstrFileTitle => .new(_lpstrFileTitle);
 
   set lpstrFileTitle(PWSTR value) => _lpstrFileTitle = value;
 
   /// The initial directory.
-  PWSTR get lpstrInitialDir => PWSTR(_lpstrInitialDir);
+  PWSTR get lpstrInitialDir => .new(_lpstrInitialDir);
 
   set lpstrInitialDir(PWSTR value) => _lpstrInitialDir = value;
 
   /// A string to be placed in the title bar of the dialog box.
-  PWSTR get lpstrTitle => PWSTR(_lpstrTitle);
+  PWSTR get lpstrTitle => .new(_lpstrTitle);
 
   set lpstrTitle(PWSTR value) => _lpstrTitle = value;
 
   /// A set of bit flags you can use to initialize the dialog box.
-  OPEN_FILENAME_FLAGS get Flags => OPEN_FILENAME_FLAGS(_Flags);
+  OPEN_FILENAME_FLAGS get Flags => .new(_Flags);
 
   set Flags(OPEN_FILENAME_FLAGS value) => _Flags = value;
 
   /// The default extension.
-  PWSTR get lpstrDefExt => PWSTR(_lpstrDefExt);
+  PWSTR get lpstrDefExt => .new(_lpstrDefExt);
 
   set lpstrDefExt(PWSTR value) => _lpstrDefExt = value;
 
   /// Application-defined data that the system passes to the hook procedure
   /// identified by the <b>lpfnHook</b> member.
-  LPARAM get lCustData => LPARAM(_lCustData);
+  LPARAM get lCustData => .new(_lCustData);
 
   set lCustData(LPARAM value) => _lCustData = value;
 
   /// The name of the dialog template resource in the module identified by the
   /// <b>hInstance</b> member.
-  PWSTR get lpTemplateName => PWSTR(_lpTemplateName);
+  PWSTR get lpTemplateName => .new(_lpTemplateName);
 
   set lpTemplateName(PWSTR value) => _lpTemplateName = value;
 
   /// A set of bit flags you can use to initialize the dialog box.
-  OPEN_FILENAME_FLAGS_EX get FlagsEx => OPEN_FILENAME_FLAGS_EX(_FlagsEx);
+  OPEN_FILENAME_FLAGS_EX get FlagsEx => .new(_FlagsEx);
 
   set FlagsEx(OPEN_FILENAME_FLAGS_EX value) => _FlagsEx = value;
 
@@ -13766,7 +13737,7 @@ base class OVERLAPPED extends Struct {
 
   /// A handle to the event that will be set to a signaled state by the system
   /// when the operation has completed.
-  HANDLE get hEvent => HANDLE(_hEvent);
+  HANDLE get hEvent => .new(_hEvent);
 
   set hEvent(HANDLE value) => _hEvent = value;
 
@@ -13890,7 +13861,7 @@ base class PAINTSTRUCT extends Struct {
   external Array<Uint8> _rgbReserved;
 
   /// A handle to the display DC to be used for painting.
-  HDC get hdc => HDC(_hdc);
+  HDC get hdc => .new(_hdc);
 
   set hdc(HDC value) => _hdc = value;
 
@@ -13966,7 +13937,7 @@ base class PARAMDESC extends Struct {
   external int _wParamFlags;
 
   /// The parameter flags.
-  PARAMFLAGS get wParamFlags => PARAMFLAGS(_wParamFlags);
+  PARAMFLAGS get wParamFlags => .new(_wParamFlags);
 
   set wParamFlags(PARAMFLAGS value) => _wParamFlags = value;
 
@@ -14092,7 +14063,7 @@ base class PHYSICAL_MONITOR extends Struct {
   external Array<Uint16> _szPhysicalMonitorDescription;
 
   /// Handle to the physical monitor.
-  HANDLE get hPhysicalMonitor => HANDLE(_hPhysicalMonitor);
+  HANDLE get hPhysicalMonitor => .new(_hPhysicalMonitor);
 
   set hPhysicalMonitor(HANDLE value) => _hPhysicalMonitor = value;
 
@@ -14204,25 +14175,25 @@ base class POINTER_INFO extends Struct {
   /// A value from the <a
   /// href="https://docs.microsoft.com/windows/win32/api/winuser/ne-winuser-tagpointer_input_type">POINTER_INPUT_TYPE</a>
   /// enumeration that specifies the pointer type.
-  POINTER_INPUT_TYPE get pointerType => POINTER_INPUT_TYPE(_pointerType);
+  POINTER_INPUT_TYPE get pointerType => .new(_pointerType);
 
   set pointerType(POINTER_INPUT_TYPE value) => _pointerType = value;
 
   /// May be any reasonable combination of flags from the <a
   /// href="https://docs.microsoft.com/windows/win32/inputmsg/pointer-flags-contants">Pointer
   /// Flags</a> constants.
-  POINTER_FLAGS get pointerFlags => POINTER_FLAGS(_pointerFlags);
+  POINTER_FLAGS get pointerFlags => .new(_pointerFlags);
 
   set pointerFlags(POINTER_FLAGS value) => _pointerFlags = value;
 
   /// Handle to the source device that can be used in calls to the raw input
   /// device API and the digitizer device API.
-  HANDLE get sourceDevice => HANDLE(_sourceDevice);
+  HANDLE get sourceDevice => .new(_sourceDevice);
 
   set sourceDevice(HANDLE value) => _sourceDevice = value;
 
   /// Window to which this message was targeted.
-  HWND get hwndTarget => HWND(_hwndTarget);
+  HWND get hwndTarget => .new(_hwndTarget);
 
   set hwndTarget(HWND value) => _hwndTarget = value;
 
@@ -14230,8 +14201,7 @@ base class POINTER_INFO extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/api/winuser/ne-winuser-pointer_button_change_type">POINTER_BUTTON_CHANGE_TYPE</a>
   /// enumeration that specifies the change in button state between this input
   /// and the previous input.
-  POINTER_BUTTON_CHANGE_TYPE get ButtonChangeType =>
-      POINTER_BUTTON_CHANGE_TYPE(_ButtonChangeType);
+  POINTER_BUTTON_CHANGE_TYPE get ButtonChangeType => .new(_ButtonChangeType);
 
   set ButtonChangeType(POINTER_BUTTON_CHANGE_TYPE value) =>
       _ButtonChangeType = value;
@@ -14422,7 +14392,7 @@ base class POLYTEXT extends Struct {
   /// Pointer to a string of text to be drawn by the <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wingdi/nf-wingdi-polytextouta">PolyTextOut</a>
   /// function.
-  PWSTR get lpstr => PWSTR(_lpstr);
+  PWSTR get lpstr => .new(_lpstr);
 
   set lpstr(PWSTR value) => _lpstr = value;
 
@@ -14446,7 +14416,7 @@ base class PORT_INFO_1 extends Struct {
 
   /// Pointer to a null-terminated string that identifies a supported printer
   /// port (for example, "LPT1:").
-  PWSTR get pName => PWSTR(_pName);
+  PWSTR get pName => .new(_pName);
 
   set pName(PWSTR value) => _pName = value;
 
@@ -14479,20 +14449,20 @@ base class PORT_INFO_2 extends Struct {
 
   /// Pointer to a null-terminated string that identifies a supported printer
   /// port (for example, "LPT1:").
-  PWSTR get pPortName => PWSTR(_pPortName);
+  PWSTR get pPortName => .new(_pPortName);
 
   set pPortName(PWSTR value) => _pPortName = value;
 
   /// Pointer to a null-terminated string that identifies an installed monitor
   /// (for example, "PJL monitor").
-  PWSTR get pMonitorName => PWSTR(_pMonitorName);
+  PWSTR get pMonitorName => .new(_pMonitorName);
 
   set pMonitorName(PWSTR value) => _pMonitorName = value;
 
   /// Pointer to a null-terminated string that describes the port in more detail
   /// (for example, if **pPortName** is "LPT1:", **pDescription** is "printer
   /// port").
-  PWSTR get pDescription => PWSTR(_pDescription);
+  PWSTR get pDescription => .new(_pDescription);
 
   set pDescription(PWSTR value) => _pDescription = value;
 
@@ -14553,13 +14523,12 @@ base class PRINTER_DEFAULTS extends Struct {
 
   /// Pointer to a null-terminated string that specifies the default data type
   /// for a printer.
-  PWSTR get pDatatype => PWSTR(_pDatatype);
+  PWSTR get pDatatype => .new(_pDatatype);
 
   set pDatatype(PWSTR value) => _pDatatype = value;
 
   /// Specifies desired access rights for a printer.
-  PRINTER_ACCESS_RIGHTS get DesiredAccess =>
-      PRINTER_ACCESS_RIGHTS(_DesiredAccess);
+  PRINTER_ACCESS_RIGHTS get DesiredAccess => .new(_DesiredAccess);
 
   set DesiredAccess(PRINTER_ACCESS_RIGHTS value) => _DesiredAccess = value;
 
@@ -14601,19 +14570,19 @@ base class PRINTER_INFO_1 extends Struct {
 
   /// Pointer to a null-terminated string that describes the contents of the
   /// structure.
-  PWSTR get pDescription => PWSTR(_pDescription);
+  PWSTR get pDescription => .new(_pDescription);
 
   set pDescription(PWSTR value) => _pDescription = value;
 
   /// Pointer to a null-terminated string that names the contents of the
   /// structure.
-  PWSTR get pName => PWSTR(_pName);
+  PWSTR get pName => .new(_pName);
 
   set pName(PWSTR value) => _pName = value;
 
   /// Pointer to a null-terminated string that contains additional data
   /// describing the structure.
-  PWSTR get pComment => PWSTR(_pComment);
+  PWSTR get pComment => .new(_pComment);
 
   set pComment(PWSTR value) => _pComment = value;
 
@@ -14686,73 +14655,72 @@ base class PRINTER_INFO_2 extends Struct {
 
   /// A pointer to a null-terminated string identifying the server that controls
   /// the printer.
-  PWSTR get pServerName => PWSTR(_pServerName);
+  PWSTR get pServerName => .new(_pServerName);
 
   set pServerName(PWSTR value) => _pServerName = value;
 
   /// A pointer to a null-terminated string that specifies the name of the
   /// printer.
-  PWSTR get pPrinterName => PWSTR(_pPrinterName);
+  PWSTR get pPrinterName => .new(_pPrinterName);
 
   set pPrinterName(PWSTR value) => _pPrinterName = value;
 
   /// A pointer to a null-terminated string that identifies the share point for
   /// the printer.
-  PWSTR get pShareName => PWSTR(_pShareName);
+  PWSTR get pShareName => .new(_pShareName);
 
   set pShareName(PWSTR value) => _pShareName = value;
 
   /// A pointer to a null-terminated string that identifies the port(s) used to
   /// transmit data to the printer.
-  PWSTR get pPortName => PWSTR(_pPortName);
+  PWSTR get pPortName => .new(_pPortName);
 
   set pPortName(PWSTR value) => _pPortName = value;
 
   /// A pointer to a null-terminated string that specifies the name of the
   /// printer driver.
-  PWSTR get pDriverName => PWSTR(_pDriverName);
+  PWSTR get pDriverName => .new(_pDriverName);
 
   set pDriverName(PWSTR value) => _pDriverName = value;
 
   /// A pointer to a null-terminated string that provides a brief description of
   /// the printer.
-  PWSTR get pComment => PWSTR(_pComment);
+  PWSTR get pComment => .new(_pComment);
 
   set pComment(PWSTR value) => _pComment = value;
 
   /// A pointer to a null-terminated string that specifies the physical location
   /// of the printer (for example, "Bldg.
-  PWSTR get pLocation => PWSTR(_pLocation);
+  PWSTR get pLocation => .new(_pLocation);
 
   set pLocation(PWSTR value) => _pLocation = value;
 
   /// A pointer to a null-terminated string that specifies the name of the file
   /// used to create the separator page.
-  PWSTR get pSepFile => PWSTR(_pSepFile);
+  PWSTR get pSepFile => .new(_pSepFile);
 
   set pSepFile(PWSTR value) => _pSepFile = value;
 
   /// A pointer to a null-terminated string that specifies the name of the print
   /// processor used by the printer.
-  PWSTR get pPrintProcessor => PWSTR(_pPrintProcessor);
+  PWSTR get pPrintProcessor => .new(_pPrintProcessor);
 
   set pPrintProcessor(PWSTR value) => _pPrintProcessor = value;
 
   /// A pointer to a null-terminated string that specifies the data type used to
   /// record the print job.
-  PWSTR get pDatatype => PWSTR(_pDatatype);
+  PWSTR get pDatatype => .new(_pDatatype);
 
   set pDatatype(PWSTR value) => _pDatatype = value;
 
   /// A pointer to a null-terminated string that specifies the default
   /// print-processor parameters.
-  PWSTR get pParameters => PWSTR(_pParameters);
+  PWSTR get pParameters => .new(_pParameters);
 
   set pParameters(PWSTR value) => _pParameters = value;
 
   /// A pointer to a `SECURITY_DESCRIPTOR` structure for the printer.
-  PSECURITY_DESCRIPTOR get pSecurityDescriptor =>
-      PSECURITY_DESCRIPTOR(_pSecurityDescriptor);
+  PSECURITY_DESCRIPTOR get pSecurityDescriptor => .new(_pSecurityDescriptor);
 
   set pSecurityDescriptor(PSECURITY_DESCRIPTOR value) =>
       _pSecurityDescriptor = value;
@@ -14777,8 +14745,7 @@ base class PRINTER_INFO_3 extends Struct {
 
   /// Pointer to a `SECURITY_DESCRIPTOR` structure that specifies a printer's
   /// security information.
-  PSECURITY_DESCRIPTOR get pSecurityDescriptor =>
-      PSECURITY_DESCRIPTOR(_pSecurityDescriptor);
+  PSECURITY_DESCRIPTOR get pSecurityDescriptor => .new(_pSecurityDescriptor);
 
   set pSecurityDescriptor(PSECURITY_DESCRIPTOR value) =>
       _pSecurityDescriptor = value;
@@ -14811,12 +14778,12 @@ base class PRINTER_INFO_4 extends Struct {
 
   /// Pointer to a null-terminated string that specifies the name of the printer
   /// (local or remote).
-  PWSTR get pPrinterName => PWSTR(_pPrinterName);
+  PWSTR get pPrinterName => .new(_pPrinterName);
 
   set pPrinterName(PWSTR value) => _pPrinterName = value;
 
   /// Pointer to a null-terminated string that is the name of the server.
-  PWSTR get pServerName => PWSTR(_pServerName);
+  PWSTR get pServerName => .new(_pServerName);
 
   set pServerName(PWSTR value) => _pServerName = value;
 
@@ -14853,13 +14820,13 @@ base class PRINTER_INFO_5 extends Struct {
 
   /// A pointer to a null-terminated string that specifies the name of the
   /// printer.
-  PWSTR get pPrinterName => PWSTR(_pPrinterName);
+  PWSTR get pPrinterName => .new(_pPrinterName);
 
   set pPrinterName(PWSTR value) => _pPrinterName = value;
 
   /// A pointer to a null-terminated string that identifies the port(s) used to
   /// transmit data to the printer.
-  PWSTR get pPortName => PWSTR(_pPortName);
+  PWSTR get pPortName => .new(_pPortName);
 
   set pPortName(PWSTR value) => _pPortName = value;
 
@@ -15030,7 +14997,7 @@ base class PRINTER_OPTIONS extends Struct {
 
   /// A set of `PRINTER_OPTION_FLAGS` that specifies how the handle to a printer
   /// returned by `OpenPrinter2` will be used by other functions.
-  PRINTER_OPTION_FLAGS get dwFlags => PRINTER_OPTION_FLAGS(_dwFlags);
+  PRINTER_OPTION_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(PRINTER_OPTION_FLAGS value) => _dwFlags = value;
 
@@ -15062,7 +15029,7 @@ base class PRINT_EXECUTION_DATA extends Struct {
 
   /// The `PRINT_EXECUTION_CONTEXT` value that represents the current execution
   /// context of the printer driver.
-  PRINT_EXECUTION_CONTEXT get context => PRINT_EXECUTION_CONTEXT(_context);
+  PRINT_EXECUTION_CONTEXT get context => .new(_context);
 
   set context(PRINT_EXECUTION_CONTEXT value) => _context = value;
 
@@ -15155,7 +15122,7 @@ sealed class PROCESS_HEAP_ENTRY_0_0 extends Struct {
   @Array(3)
   external Array<Uint32> _dwReserved;
 
-  HANDLE get hMem => HANDLE(_hMem);
+  HANDLE get hMem => .new(_hMem);
   set hMem(HANDLE value) => _hMem = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -15229,12 +15196,12 @@ base class PROCESS_INFORMATION extends Struct {
   external int dwThreadId;
 
   /// A handle to the newly created process.
-  HANDLE get hProcess => HANDLE(_hProcess);
+  HANDLE get hProcess => .new(_hProcess);
 
   set hProcess(HANDLE value) => _hProcess = value;
 
   /// A handle to the primary thread of the newly created process.
-  HANDLE get hThread => HANDLE(_hThread);
+  HANDLE get hThread => .new(_hThread);
 
   set hThread(HANDLE value) => _hThread = value;
 
@@ -15345,7 +15312,7 @@ base class PROPSPEC extends Struct {
 
   external PROPSPEC_0 Anonymous;
 
-  PROPSPEC_KIND get ulKind => PROPSPEC_KIND(_ulKind);
+  PROPSPEC_KIND get ulKind => .new(_ulKind);
   set ulKind(PROPSPEC_KIND value) => _ulKind = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -15364,7 +15331,7 @@ sealed class PROPSPEC_0 extends Union {
 
   external Pointer<Utf16> _lpwstr;
 
-  PWSTR get lpwstr => PWSTR(_lpwstr);
+  PWSTR get lpwstr => .new(_lpwstr);
   set lpwstr(PWSTR value) => _lpwstr = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -15439,7 +15406,7 @@ sealed class PROPVARIANT_0_0 extends Struct {
 
   external PROPVARIANT_0_0_0 Anonymous;
 
-  VARENUM get vt => VARENUM(_vt);
+  VARENUM get vt => .new(_vt);
   set vt(VARENUM value) => _vt = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -15568,25 +15535,25 @@ sealed class PROPVARIANT_0_0_0 extends Union {
   external Pointer<Pointer<SAFEARRAY>> pparray;
   external Pointer<PROPVARIANT> pvarVal;
 
-  CHAR get cVal => CHAR(_cVal);
+  CHAR get cVal => .new(_cVal);
   set cVal(CHAR value) => _cVal = value;
   bool get boolVal => _boolVal != FALSE;
   set boolVal(bool value) => _boolVal = value ? VARIANT_TRUE : FALSE;
-  BSTR get bstrVal => BSTR(_bstrVal);
+  BSTR get bstrVal => .new(_bstrVal);
   set bstrVal(BSTR value) => _bstrVal = value;
-  PSTR get pszVal => PSTR(_pszVal);
+  PSTR get pszVal => .new(_pszVal);
   set pszVal(PSTR value) => _pszVal = value;
-  PWSTR get pwszVal => PWSTR(_pwszVal);
+  PWSTR get pwszVal => .new(_pwszVal);
   set pwszVal(PWSTR value) => _pwszVal = value;
-  IUnknown? get punkVal => _punkVal.isNull ? null : IUnknown(_punkVal);
+  IUnknown? get punkVal => _punkVal.isNull ? null : .new(_punkVal);
   set punkVal(IUnknown? value) => _punkVal = value?.ptr ?? nullptr;
-  IDispatch? get pdispVal => _pdispVal.isNull ? null : IDispatch(_pdispVal);
+  IDispatch? get pdispVal => _pdispVal.isNull ? null : .new(_pdispVal);
   set pdispVal(IDispatch? value) => _pdispVal = value?.ptr ?? nullptr;
-  IStream? get pStream => _pStream.isNull ? null : IStream(_pStream);
+  IStream? get pStream => _pStream.isNull ? null : .new(_pStream);
   set pStream(IStream? value) => _pStream = value?.ptr ?? nullptr;
-  IStorage? get pStorage => _pStorage.isNull ? null : IStorage(_pStorage);
+  IStorage? get pStorage => _pStorage.isNull ? null : .new(_pStorage);
   set pStorage(IStorage? value) => _pStorage = value?.ptr ?? nullptr;
-  PSTR get pcVal => PSTR(_pcVal);
+  PSTR get pcVal => .new(_pcVal);
   set pcVal(PSTR value) => _pcVal = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -15808,7 +15775,7 @@ base class PROTOENT extends Struct {
   external int p_proto;
 
   /// Official name of the protocol.
-  PSTR get p_name => PSTR(_p_name);
+  PSTR get p_name => .new(_p_name);
 
   set p_name(PSTR value) => _p_name = value;
 
@@ -15834,28 +15801,28 @@ final PortableDeviceKeyCollection = GUID.fromComponents(
   0xde2d022d,
   0x2480,
   0x43be,
-  Uint8List.fromList(const [0x97, 0xf0, 0xd1, 0xfa, 0x2c, 0xf9, 0x8f, 0x4f]),
+  .fromList(const [0x97, 0xf0, 0xd1, 0xfa, 0x2c, 0xf9, 0x8f, 0x4f]),
 );
 
 final PortableDevicePropVariantCollection = GUID.fromComponents(
   0x8a99e2f,
   0x6d6d,
   0x4b80,
-  Uint8List.fromList(const [0xaf, 0x5a, 0xba, 0xf2, 0xbc, 0xbe, 0x4c, 0xb9]),
+  .fromList(const [0xaf, 0x5a, 0xba, 0xf2, 0xbc, 0xbe, 0x4c, 0xb9]),
 );
 
 final PortableDeviceValues = GUID.fromComponents(
   0xc15d503,
   0xd017,
   0x47ce,
-  Uint8List.fromList(const [0x90, 0x16, 0x7b, 0x3f, 0x97, 0x87, 0x21, 0xcc]),
+  .fromList(const [0x90, 0x16, 0x7b, 0x3f, 0x97, 0x87, 0x21, 0xcc]),
 );
 
 final PortableDeviceValuesCollection = GUID.fromComponents(
   0x3882134d,
   0x14cf,
   0x4220,
-  Uint8List.fromList(const [0x9c, 0xb4, 0x43, 0x5f, 0x86, 0xd8, 0x3f, 0x60]),
+  .fromList(const [0x9c, 0xb4, 0x43, 0x5f, 0x86, 0xd8, 0x3f, 0x60]),
 );
 
 /// Contains configuration information for an installed service.
@@ -15888,39 +15855,39 @@ base class QUERY_SERVICE_CONFIG extends Struct {
   external Pointer<Utf16> _lpServiceStartName;
   external Pointer<Utf16> _lpDisplayName;
 
-  ENUM_SERVICE_TYPE get dwServiceType => ENUM_SERVICE_TYPE(_dwServiceType);
+  ENUM_SERVICE_TYPE get dwServiceType => .new(_dwServiceType);
   set dwServiceType(ENUM_SERVICE_TYPE value) => _dwServiceType = value;
-  SERVICE_START_TYPE get dwStartType => SERVICE_START_TYPE(_dwStartType);
+  SERVICE_START_TYPE get dwStartType => .new(_dwStartType);
   set dwStartType(SERVICE_START_TYPE value) => _dwStartType = value;
-  SERVICE_ERROR get dwErrorControl => SERVICE_ERROR(_dwErrorControl);
+  SERVICE_ERROR get dwErrorControl => .new(_dwErrorControl);
   set dwErrorControl(SERVICE_ERROR value) => _dwErrorControl = value;
 
   /// The fully qualified path to the service binary file.
-  PWSTR get lpBinaryPathName => PWSTR(_lpBinaryPathName);
+  PWSTR get lpBinaryPathName => .new(_lpBinaryPathName);
 
   set lpBinaryPathName(PWSTR value) => _lpBinaryPathName = value;
 
   /// The name of the load ordering group to which this service belongs.
-  PWSTR get lpLoadOrderGroup => PWSTR(_lpLoadOrderGroup);
+  PWSTR get lpLoadOrderGroup => .new(_lpLoadOrderGroup);
 
   set lpLoadOrderGroup(PWSTR value) => _lpLoadOrderGroup = value;
 
   /// A pointer to an array of null-separated names of services or load ordering
   /// groups that must start before this service.
-  PWSTR get lpDependencies => PWSTR(_lpDependencies);
+  PWSTR get lpDependencies => .new(_lpDependencies);
 
   set lpDependencies(PWSTR value) => _lpDependencies = value;
 
   /// If the service type is <b>SERVICE_WIN32_OWN_PROCESS</b> or
   /// <b>SERVICE_WIN32_SHARE_PROCESS</b>, this member is the name of the account
   /// that the service process will be logged on as when it runs.
-  PWSTR get lpServiceStartName => PWSTR(_lpServiceStartName);
+  PWSTR get lpServiceStartName => .new(_lpServiceStartName);
 
   set lpServiceStartName(PWSTR value) => _lpServiceStartName = value;
 
   /// The display name to be used by service control programs to identify the
   /// service.
-  PWSTR get lpDisplayName => PWSTR(_lpDisplayName);
+  PWSTR get lpDisplayName => .new(_lpDisplayName);
 
   set lpDisplayName(PWSTR value) => _lpDisplayName = value;
 
@@ -15955,7 +15922,7 @@ base class QUERY_SERVICE_LOCK_STATUS extends Struct {
   external int dwLockDuration;
 
   /// The name of the user who acquired the lock.
-  PWSTR get lpLockOwner => PWSTR(_lpLockOwner);
+  PWSTR get lpLockOwner => .new(_lpLockOwner);
 
   set lpLockOwner(PWSTR value) => _lpLockOwner = value;
 
@@ -16062,11 +16029,11 @@ base class RAWINPUTDEVICE extends Struct {
 
   external Pointer _hwndTarget;
 
-  RAWINPUTDEVICE_FLAGS get dwFlags => RAWINPUTDEVICE_FLAGS(_dwFlags);
+  RAWINPUTDEVICE_FLAGS get dwFlags => .new(_dwFlags);
   set dwFlags(RAWINPUTDEVICE_FLAGS value) => _dwFlags = value;
 
   /// A handle to the target window.
-  HWND get hwndTarget => HWND(_hwndTarget);
+  HWND get hwndTarget => .new(_hwndTarget);
 
   set hwndTarget(HWND value) => _hwndTarget = value;
 
@@ -16092,10 +16059,10 @@ base class RAWINPUTDEVICELIST extends Struct {
   external int _dwType;
 
   /// A handle to the raw input device.
-  HANDLE get hDevice => HANDLE(_hDevice);
+  HANDLE get hDevice => .new(_hDevice);
 
   set hDevice(HANDLE value) => _hDevice = value;
-  RID_DEVICE_INFO_TYPE get dwType => RID_DEVICE_INFO_TYPE(_dwType);
+  RID_DEVICE_INFO_TYPE get dwType => .new(_dwType);
   set dwType(RID_DEVICE_INFO_TYPE value) => _dwType = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -16128,12 +16095,12 @@ base class RAWINPUTHEADER extends Struct {
   external int _wParam;
 
   /// A handle to the device generating the raw input data.
-  HANDLE get hDevice => HANDLE(_hDevice);
+  HANDLE get hDevice => .new(_hDevice);
 
   set hDevice(HANDLE value) => _hDevice = value;
 
   /// The value passed in the <i>wParam</i> parameter of the `WM_INPUT` message.
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
 
   set wParam(WPARAM value) => _wParam = value;
 
@@ -16215,7 +16182,7 @@ base class RAWMOUSE extends Struct {
   external int ulExtraInformation;
 
   /// The mouse state.
-  MOUSE_STATE get usFlags => MOUSE_STATE(_usFlags);
+  MOUSE_STATE get usFlags => .new(_usFlags);
 
   set usFlags(MOUSE_STATE value) => _usFlags = value;
 
@@ -16413,7 +16380,7 @@ base class SAFEARRAY extends Struct {
   external Array<SAFEARRAYBOUND> rgsabound;
 
   /// Flags.
-  ADVANCED_FEATURE_FLAGS get fFeatures => ADVANCED_FEATURE_FLAGS(_fFeatures);
+  ADVANCED_FEATURE_FLAGS get fFeatures => .new(_fFeatures);
 
   set fFeatures(ADVANCED_FEATURE_FLAGS value) => _fFeatures = value;
 
@@ -16530,12 +16497,12 @@ base class SCARD_READERSTATE extends Struct {
   external Array<Uint8> rgbAtr;
 
   /// A pointer to the name of the reader being monitored.
-  PWSTR get szReader => PWSTR(_szReader);
+  PWSTR get szReader => .new(_szReader);
 
   set szReader(PWSTR value) => _szReader = value;
-  SCARD_STATE get dwCurrentState => SCARD_STATE(_dwCurrentState);
+  SCARD_STATE get dwCurrentState => .new(_dwCurrentState);
   set dwCurrentState(SCARD_STATE value) => _dwCurrentState = value;
-  SCARD_STATE get dwEventState => SCARD_STATE(_dwEventState);
+  SCARD_STATE get dwEventState => .new(_dwEventState);
   set dwEventState(SCARD_STATE value) => _dwEventState = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -16628,7 +16595,7 @@ base class SCROLLINFO extends Struct {
   @Int32()
   external int nTrackPos;
 
-  SCROLLINFO_MASK get fMask => SCROLLINFO_MASK(_fMask);
+  SCROLLINFO_MASK get fMask => .new(_fMask);
   set fMask(SCROLLINFO_MASK value) => _fMask = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -16654,7 +16621,7 @@ base class SC_ACTION extends Struct {
   @Uint32()
   external int Delay;
 
-  SC_ACTION_TYPE get Type => SC_ACTION_TYPE(_Type);
+  SC_ACTION_TYPE get Type => .new(_Type);
   set Type(SC_ACTION_TYPE value) => _Type = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -16694,13 +16661,13 @@ base class SDP_ELEMENT_DATA extends Struct {
   external SDP_ELEMENT_DATA_0 data;
 
   /// Enumeration of SDP element types.
-  SDP_TYPE get type => SDP_TYPE(_type);
+  SDP_TYPE get type => .new(_type);
 
   set type(SDP_TYPE value) => _type = value;
 
   /// Specific type of SDP element, used to further specify generic element
   /// types.
-  SDP_SPECIFICTYPE get specificType => SDP_SPECIFICTYPE(_specificType);
+  SDP_SPECIFICTYPE get specificType => .new(_specificType);
 
   set specificType(SDP_SPECIFICTYPE value) => _specificType = value;
 
@@ -16759,7 +16726,7 @@ sealed class SDP_ELEMENT_DATA_0 extends Union {
   external SDP_ELEMENT_DATA_0_2 sequence;
   external SDP_ELEMENT_DATA_0_3 alternative;
 
-  CHAR get int8 => CHAR(_int8);
+  CHAR get int8 => .new(_int8);
   set int8(CHAR value) => _int8 = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -17030,12 +16997,11 @@ base class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Sacl;
   external Pointer<ACL> Dacl;
 
-  SECURITY_DESCRIPTOR_CONTROL get Control =>
-      SECURITY_DESCRIPTOR_CONTROL(_Control);
+  SECURITY_DESCRIPTOR_CONTROL get Control => .new(_Control);
   set Control(SECURITY_DESCRIPTOR_CONTROL value) => _Control = value;
-  PSID get Owner => PSID(_Owner);
+  PSID get Owner => .new(_Owner);
   set Owner(PSID value) => _Owner = value;
-  PSID get Group => PSID(_Group);
+  PSID get Group => .new(_Group);
   set Group(PSID value) => _Group = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -17068,12 +17034,12 @@ base class SERVENT extends Struct {
   external int s_port;
 
   /// The official name of the service.
-  PSTR get s_name => PSTR(_s_name);
+  PSTR get s_name => .new(_s_name);
 
   set s_name(PSTR value) => _s_name = value;
 
   /// The name of the protocol to use when contacting the service.
-  PSTR get s_proto => PSTR(_s_proto);
+  PSTR get s_proto => .new(_s_proto);
 
   set s_proto(PSTR value) => _s_proto = value;
 
@@ -17105,7 +17071,7 @@ base class SERVICE_CONTROL_STATUS_REASON_PARAMS extends Struct {
 
   /// An optional string that provides additional information about the service
   /// stop.
-  PWSTR get pszComment => PWSTR(_pszComment);
+  PWSTR get pszComment => .new(_pszComment);
 
   set pszComment(PWSTR value) => _pszComment = value;
 
@@ -17156,7 +17122,7 @@ base class SERVICE_DESCRIPTION extends Struct {
   external Pointer<Utf16> _lpDescription;
 
   /// The description of the service.
-  PWSTR get lpDescription => PWSTR(_lpDescription);
+  PWSTR get lpDescription => .new(_lpDescription);
 
   set lpDescription(PWSTR value) => _lpDescription = value;
 
@@ -17200,7 +17166,7 @@ base class SERVICE_FAILURE_ACTIONS extends Struct {
 
   /// The message to be broadcast to server users before rebooting in response
   /// to the <b>SC_ACTION_REBOOT</b> service controller action.
-  PWSTR get lpRebootMsg => PWSTR(_lpRebootMsg);
+  PWSTR get lpRebootMsg => .new(_lpRebootMsg);
 
   set lpRebootMsg(PWSTR value) => _lpRebootMsg = value;
 
@@ -17208,7 +17174,7 @@ base class SERVICE_FAILURE_ACTIONS extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa">CreateProcess</a>
   /// function to execute in response to the <b>SC_ACTION_RUN_COMMAND</b>
   /// service controller action.
-  PWSTR get lpCommand => PWSTR(_lpCommand);
+  PWSTR get lpCommand => .new(_lpCommand);
 
   set lpCommand(PWSTR value) => _lpCommand = value;
 
@@ -17313,7 +17279,7 @@ base class SERVICE_NOTIFY_2 extends Struct {
   /// notification is <b>SERVICE_NOTIFY_CREATED</b> or
   /// <b>SERVICE_NOTIFY_DELETED</b>, this member is valid and it is a
   /// <b>MULTI_SZ</b> string that contains one or more service names.
-  PWSTR get pszServiceNames => PWSTR(_pszServiceNames);
+  PWSTR get pszServiceNames => .new(_pszServiceNames);
 
   set pszServiceNames(PWSTR value) => _pszServiceNames = value;
 
@@ -17386,7 +17352,7 @@ base class SERVICE_REQUIRED_PRIVILEGES_INFO extends Struct {
   external Pointer<Utf16> _pmszRequiredPrivileges;
 
   /// A multi-string that specifies the privileges.
-  PWSTR get pmszRequiredPrivileges => PWSTR(_pmszRequiredPrivileges);
+  PWSTR get pmszRequiredPrivileges => .new(_pmszRequiredPrivileges);
 
   set pmszRequiredPrivileges(PWSTR value) => _pmszRequiredPrivileges = value;
 
@@ -17461,10 +17427,9 @@ base class SERVICE_STATUS extends Struct {
   @Uint32()
   external int dwWaitHint;
 
-  ENUM_SERVICE_TYPE get dwServiceType => ENUM_SERVICE_TYPE(_dwServiceType);
+  ENUM_SERVICE_TYPE get dwServiceType => .new(_dwServiceType);
   set dwServiceType(ENUM_SERVICE_TYPE value) => _dwServiceType = value;
-  SERVICE_STATUS_CURRENT_STATE get dwCurrentState =>
-      SERVICE_STATUS_CURRENT_STATE(_dwCurrentState);
+  SERVICE_STATUS_CURRENT_STATE get dwCurrentState => .new(_dwCurrentState);
   set dwCurrentState(SERVICE_STATUS_CURRENT_STATE value) =>
       _dwCurrentState = value;
 
@@ -17535,14 +17500,12 @@ base class SERVICE_STATUS_PROCESS extends Struct {
   @Uint32()
   external int _dwServiceFlags;
 
-  ENUM_SERVICE_TYPE get dwServiceType => ENUM_SERVICE_TYPE(_dwServiceType);
+  ENUM_SERVICE_TYPE get dwServiceType => .new(_dwServiceType);
   set dwServiceType(ENUM_SERVICE_TYPE value) => _dwServiceType = value;
-  SERVICE_STATUS_CURRENT_STATE get dwCurrentState =>
-      SERVICE_STATUS_CURRENT_STATE(_dwCurrentState);
+  SERVICE_STATUS_CURRENT_STATE get dwCurrentState => .new(_dwCurrentState);
   set dwCurrentState(SERVICE_STATUS_CURRENT_STATE value) =>
       _dwCurrentState = value;
-  SERVICE_RUNS_IN_PROCESS get dwServiceFlags =>
-      SERVICE_RUNS_IN_PROCESS(_dwServiceFlags);
+  SERVICE_RUNS_IN_PROCESS get dwServiceFlags => .new(_dwServiceFlags);
   set dwServiceFlags(SERVICE_RUNS_IN_PROCESS value) => _dwServiceFlags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -17573,7 +17536,7 @@ base class SERVICE_TABLE_ENTRY extends Struct {
   external Pointer<NativeFunction<LPSERVICE_MAIN_FUNCTION>> lpServiceProc;
 
   /// The name of a service to be run in this service process.
-  PWSTR get lpServiceName => PWSTR(_lpServiceName);
+  PWSTR get lpServiceName => .new(_lpServiceName);
 
   set lpServiceName(PWSTR value) => _lpServiceName = value;
 
@@ -17641,10 +17604,9 @@ base class SERVICE_TRIGGER extends Struct {
   /// structures that contain trigger-specific data.
   external Pointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM> pDataItems;
 
-  SERVICE_TRIGGER_TYPE get dwTriggerType =>
-      SERVICE_TRIGGER_TYPE(_dwTriggerType);
+  SERVICE_TRIGGER_TYPE get dwTriggerType => .new(_dwTriggerType);
   set dwTriggerType(SERVICE_TRIGGER_TYPE value) => _dwTriggerType = value;
-  SERVICE_TRIGGER_ACTION get dwAction => SERVICE_TRIGGER_ACTION(_dwAction);
+  SERVICE_TRIGGER_ACTION get dwAction => .new(_dwAction);
   set dwAction(SERVICE_TRIGGER_ACTION value) => _dwAction = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -17707,7 +17669,7 @@ base class SERVICE_TRIGGER_SPECIFIC_DATA_ITEM extends Struct {
   external Pointer<Uint8> pData;
 
   SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE get dwDataType =>
-      SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE(_dwDataType);
+      .new(_dwDataType);
   set dwDataType(SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE value) =>
       _dwDataType = value;
 
@@ -17764,13 +17726,13 @@ base class SHELLEXECUTEINFO extends Struct {
   external Pointer _hProcess;
 
   /// Optional.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
   /// A string, referred to as a <i>verb</i>, that specifies the action to be
   /// performed.
-  PWSTR get lpVerb => PWSTR(_lpVerb);
+  PWSTR get lpVerb => .new(_lpVerb);
 
   set lpVerb(PWSTR value) => _lpVerb = value;
 
@@ -17778,40 +17740,40 @@ base class SHELLEXECUTEINFO extends Struct {
   /// file or object on which <a
   /// href="https://docs.microsoft.com/windows/desktop/api/shellapi/nf-shellapi-shellexecuteexa">ShellExecuteEx</a>
   /// will perform the action specified by the <b>lpVerb</b> parameter.
-  PWSTR get lpFile => PWSTR(_lpFile);
+  PWSTR get lpFile => .new(_lpFile);
 
   set lpFile(PWSTR value) => _lpFile = value;
 
   /// Optional.
-  PWSTR get lpParameters => PWSTR(_lpParameters);
+  PWSTR get lpParameters => .new(_lpParameters);
 
   set lpParameters(PWSTR value) => _lpParameters = value;
 
   /// Optional.
-  PWSTR get lpDirectory => PWSTR(_lpDirectory);
+  PWSTR get lpDirectory => .new(_lpDirectory);
 
   set lpDirectory(PWSTR value) => _lpDirectory = value;
 
   /// If SEE_MASK_NOCLOSEPROCESS is set and the <a
   /// href="https://docs.microsoft.com/windows/desktop/api/shellapi/nf-shellapi-shellexecuteexa">ShellExecuteEx</a>
   /// call succeeds, it sets this member to a value greater than 32.
-  HINSTANCE get hInstApp => HINSTANCE(_hInstApp);
+  HINSTANCE get hInstApp => .new(_hInstApp);
 
   set hInstApp(HINSTANCE value) => _hInstApp = value;
 
   /// The address of a null-terminated string that specifies one of the
   /// following: - A ProgId.
-  PWSTR get lpClass => PWSTR(_lpClass);
+  PWSTR get lpClass => .new(_lpClass);
 
   set lpClass(PWSTR value) => _lpClass = value;
 
   /// A handle to the registry key for the file type.
-  HKEY get hkeyClass => HKEY(_hkeyClass);
+  HKEY get hkeyClass => .new(_hkeyClass);
 
   set hkeyClass(HKEY value) => _hkeyClass = value;
 
   /// A handle to the newly started application.
-  HANDLE get hProcess => HANDLE(_hProcess);
+  HANDLE get hProcess => .new(_hProcess);
 
   set hProcess(HANDLE value) => _hProcess = value;
 
@@ -17829,9 +17791,9 @@ sealed class SHELLEXECUTEINFO_0 extends Union {
   external Pointer _hIcon;
   external Pointer _hMonitor;
 
-  HANDLE get hIcon => HANDLE(_hIcon);
+  HANDLE get hIcon => .new(_hIcon);
   set hIcon(HANDLE value) => _hIcon = value;
-  HANDLE get hMonitor => HANDLE(_hMonitor);
+  HANDLE get hMonitor => .new(_hMonitor);
   set hMonitor(HANDLE value) => _hMonitor = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -17903,7 +17865,7 @@ base class SHFILEINFO extends Struct {
   external Array<Uint16> _szTypeName;
 
   /// A handle to the icon that represents the file.
-  HICON get hIcon => HICON(_hIcon);
+  HICON get hIcon => .new(_hIcon);
 
   set hIcon(HICON value) => _hIcon = value;
 
@@ -17959,19 +17921,19 @@ base class SHFILEOPSTRUCT extends Struct {
 
   /// A window handle to the dialog box to display information about the status
   /// of the file operation.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
   /// <b>Note</b> This string must be double-null terminated.</div> <div> </div>
   /// A pointer to one or more source file names.
-  PWSTR get pFrom => PWSTR(_pFrom);
+  PWSTR get pFrom => .new(_pFrom);
 
   set pFrom(PWSTR value) => _pFrom = value;
 
   /// <b>Note</b> This string must be double-null terminated.</div> <div> </div>
   /// A pointer to the destination file or directory name.
-  PWSTR get pTo => PWSTR(_pTo);
+  PWSTR get pTo => .new(_pTo);
 
   set pTo(PWSTR value) => _pTo = value;
 
@@ -17983,7 +17945,7 @@ base class SHFILEOPSTRUCT extends Struct {
       _fAnyOperationsAborted = value ? TRUE : FALSE;
 
   /// A pointer to the title of a progress dialog box.
-  PWSTR get lpszProgressTitle => PWSTR(_lpszProgressTitle);
+  PWSTR get lpszProgressTitle => .new(_lpszProgressTitle);
 
   set lpszProgressTitle(PWSTR value) => _lpszProgressTitle = value;
 
@@ -18140,7 +18102,7 @@ base class SOCKADDR extends Struct {
   @Array(14)
   external Array<Int8> sa_data;
 
-  ADDRESS_FAMILY get sa_family => ADDRESS_FAMILY(_sa_family);
+  ADDRESS_FAMILY get sa_family => .new(_sa_family);
   set sa_family(ADDRESS_FAMILY value) => _sa_family = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -18243,7 +18205,7 @@ base class SOLE_AUTHENTICATION_SERVICE extends Struct {
   external int _hr;
 
   /// The principal name to be used with the authentication service.
-  PWSTR get pPrincipalName => PWSTR(_pPrincipalName);
+  PWSTR get pPrincipalName => .new(_pPrincipalName);
 
   set pPrincipalName(PWSTR value) => _pPrincipalName = value;
 
@@ -18251,7 +18213,7 @@ base class SOLE_AUTHENTICATION_SERVICE extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/api/combaseapi/nf-combaseapi-coinitializesecurity">CoInitializeSecurity</a>,
   /// set on return to indicate the status of the call to register the
   /// authentication services.
-  HRESULT get hr => HRESULT(_hr);
+  HRESULT get hr => .new(_hr);
 
   set hr(HRESULT value) => _hr = value;
 
@@ -18286,9 +18248,9 @@ base class SPEVENT extends Struct {
   set eEventId(int value) => bitfield = bitfield.setBits(0, 16, value);
   int get elParamType => bitfield.getBits(16, 16);
   set elParamType(int value) => bitfield = bitfield.setBits(16, 16, value);
-  WPARAM get wParam => WPARAM(_wParam);
+  WPARAM get wParam => .new(_wParam);
   set wParam(WPARAM value) => _wParam = value;
-  LPARAM get lParam => LPARAM(_lParam);
+  LPARAM get lParam => .new(_lParam);
   set lParam(LPARAM value) => _lParam = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -18361,9 +18323,9 @@ base class SPVOICESTATUS extends Struct {
   @Uint32()
   external int _dwReserved2;
 
-  HRESULT get hrLastResult => HRESULT(_hrLastResult);
+  HRESULT get hrLastResult => .new(_hrLastResult);
   set hrLastResult(HRESULT value) => _hrLastResult = value;
-  SPVISEMES get VisemeId => SPVISEMES(_VisemeId);
+  SPVISEMES get VisemeId => .new(_VisemeId);
   set VisemeId(SPVISEMES value) => _VisemeId = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -18555,36 +18517,36 @@ base class STARTUPINFO extends Struct {
 
   /// The name of the desktop, or the name of both the desktop and window
   /// station for this process.
-  PWSTR get lpDesktop => PWSTR(_lpDesktop);
+  PWSTR get lpDesktop => .new(_lpDesktop);
 
   set lpDesktop(PWSTR value) => _lpDesktop = value;
 
   /// For console processes, this is the title displayed in the title bar if a
   /// new console window is created.
-  PWSTR get lpTitle => PWSTR(_lpTitle);
+  PWSTR get lpTitle => .new(_lpTitle);
 
   set lpTitle(PWSTR value) => _lpTitle = value;
 
   /// A bitfield that determines whether certain.
-  STARTUPINFOW_FLAGS get dwFlags => STARTUPINFOW_FLAGS(_dwFlags);
+  STARTUPINFOW_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(STARTUPINFOW_FLAGS value) => _dwFlags = value;
 
   /// If <b>dwFlags</b> specifies STARTF_USESTDHANDLES, this member is the
   /// standard input handle for the process.
-  HANDLE get hStdInput => HANDLE(_hStdInput);
+  HANDLE get hStdInput => .new(_hStdInput);
 
   set hStdInput(HANDLE value) => _hStdInput = value;
 
   /// If <b>dwFlags</b> specifies STARTF_USESTDHANDLES, this member is the
   /// standard output handle for the process.
-  HANDLE get hStdOutput => HANDLE(_hStdOutput);
+  HANDLE get hStdOutput => .new(_hStdOutput);
 
   set hStdOutput(HANDLE value) => _hStdOutput = value;
 
   /// If <b>dwFlags</b> specifies STARTF_USESTDHANDLES, this member is the
   /// standard error handle for the process.
-  HANDLE get hStdError => HANDLE(_hStdError);
+  HANDLE get hStdError => .new(_hStdError);
 
   set hStdError(HANDLE value) => _hStdError = value;
 
@@ -18613,8 +18575,7 @@ base class STARTUPINFOEX extends Struct {
   external Pointer _lpAttributeList;
 
   /// An attribute list.
-  LPPROC_THREAD_ATTRIBUTE_LIST get lpAttributeList =>
-      LPPROC_THREAD_ATTRIBUTE_LIST(_lpAttributeList);
+  LPPROC_THREAD_ATTRIBUTE_LIST get lpAttributeList => .new(_lpAttributeList);
 
   set lpAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST value) =>
       _lpAttributeList = value;
@@ -18694,12 +18655,12 @@ base class STATPROPSTG extends Struct {
 
   /// A wide-character null-terminated Unicode string that contains the optional
   /// string name associated with the property.
-  PWSTR get lpwstrName => PWSTR(_lpwstrName);
+  PWSTR get lpwstrName => .new(_lpwstrName);
 
   set lpwstrName(PWSTR value) => _lpwstrName = value;
 
   /// The property type.
-  VARENUM get vt => VARENUM(_vt);
+  VARENUM get vt => .new(_vt);
 
   set vt(VARENUM value) => _vt = value;
 
@@ -18762,18 +18723,18 @@ base class STATSTG extends Struct {
 
   /// A pointer to a <b>NULL</b>-terminated Unicode string that contains the
   /// name.
-  PWSTR get pwcsName => PWSTR(_pwcsName);
+  PWSTR get pwcsName => .new(_pwcsName);
 
   set pwcsName(PWSTR value) => _pwcsName = value;
 
   /// Indicates the access mode specified when the object was opened.
-  STGM get grfMode => STGM(_grfMode);
+  STGM get grfMode => .new(_grfMode);
 
   set grfMode(STGM value) => _grfMode = value;
 
   /// Indicates the types of region locking supported by the stream or byte
   /// array.
-  LOCKTYPE get grfLocksSupported => LOCKTYPE(_grfLocksSupported);
+  LOCKTYPE get grfLocksSupported => .new(_grfLocksSupported);
 
   set grfLocksSupported(LOCKTYPE value) => _grfLocksSupported = value;
 
@@ -18848,7 +18809,7 @@ sealed class STRRET_0 extends Union {
   @Array(260)
   external Array<Uint8> cStr;
 
-  PWSTR get pOleStr => PWSTR(_pOleStr);
+  PWSTR get pOleStr => .new(_pOleStr);
   set pOleStr(PWSTR value) => _pOleStr = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -18958,7 +18919,7 @@ base class SYMBOL_INFO extends Struct {
   @Array.variableWithVariableDimension(1)
   external Array<Uint16> _Name;
 
-  SYMBOL_INFO_FLAGS get Flags => SYMBOL_INFO_FLAGS(_Flags);
+  SYMBOL_INFO_FLAGS get Flags => .new(_Flags);
   set Flags(SYMBOL_INFO_FLAGS value) => _Flags = value;
 
   /// The name of the symbol.
@@ -19252,7 +19213,7 @@ sealed class SYSTEM_INFO_0_0 extends Struct {
   external int _wReserved;
 
   PROCESSOR_ARCHITECTURE get wProcessorArchitecture =>
-      PROCESSOR_ARCHITECTURE(_wProcessorArchitecture);
+      .new(_wProcessorArchitecture);
   set wProcessorArchitecture(PROCESSOR_ARCHITECTURE value) =>
       _wProcessorArchitecture = value;
 
@@ -19307,8 +19268,7 @@ base class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
 
   /// The relationship between the processors identified by the value of the
   /// <b>ProcessorMask</b> member.
-  LOGICAL_PROCESSOR_RELATIONSHIP get Relationship =>
-      LOGICAL_PROCESSOR_RELATIONSHIP(_Relationship);
+  LOGICAL_PROCESSOR_RELATIONSHIP get Relationship => .new(_Relationship);
 
   set Relationship(LOGICAL_PROCESSOR_RELATIONSHIP value) =>
       _Relationship = value;
@@ -19579,7 +19539,7 @@ base class SYSTEM_PROCESS_INFORMATION extends Struct {
   @Array(6)
   external Array<Int64> _Reserved7;
 
-  HANDLE get UniqueProcessId => HANDLE(_UniqueProcessId);
+  HANDLE get UniqueProcessId => .new(_UniqueProcessId);
   set UniqueProcessId(HANDLE value) => _UniqueProcessId = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -19748,77 +19708,77 @@ final Sensor = GUID.fromComponents(
   0xe97ced00,
   0x523a,
   0x4133,
-  Uint8List.fromList(const [0xbf, 0x6f, 0xd3, 0xa2, 0xda, 0xe7, 0xf6, 0xba]),
+  .fromList(const [0xbf, 0x6f, 0xd3, 0xa2, 0xda, 0xe7, 0xf6, 0xba]),
 );
 
 final SensorCollection = GUID.fromComponents(
   0x79c43adb,
   0xa429,
   0x469f,
-  Uint8List.fromList(const [0xaa, 0x39, 0x2f, 0x2b, 0x74, 0xb7, 0x59, 0x37]),
+  .fromList(const [0xaa, 0x39, 0x2f, 0x2b, 0x74, 0xb7, 0x59, 0x37]),
 );
 
 final SensorDataReport = GUID.fromComponents(
   0x4ea9d6ef,
   0x694b,
   0x4218,
-  Uint8List.fromList(const [0x88, 0x16, 0xcc, 0xda, 0x8d, 0xa7, 0x4b, 0xba]),
+  .fromList(const [0x88, 0x16, 0xcc, 0xda, 0x8d, 0xa7, 0x4b, 0xba]),
 );
 
 final SensorManager = GUID.fromComponents(
   0x77a1c827,
   0xfcd2,
   0x4689,
-  Uint8List.fromList(const [0x89, 0x15, 0x9d, 0x61, 0x3c, 0xc5, 0xfa, 0x3e]),
+  .fromList(const [0x89, 0x15, 0x9d, 0x61, 0x3c, 0xc5, 0xfa, 0x3e]),
 );
 
 final ShellItem = GUID.fromComponents(
   0x9ac9fbe1,
   0xe0a2,
   0x4ad6,
-  Uint8List.fromList(const [0xb4, 0xee, 0xe2, 0x12, 0x1, 0x3e, 0xa9, 0x17]),
+  .fromList(const [0xb4, 0xee, 0xe2, 0x12, 0x1, 0x3e, 0xa9, 0x17]),
 );
 
 final ShellLink = GUID.fromComponents(
   0x21401,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 final SpDataKey = GUID.fromComponents(
   0xd9f6ee60,
   0x58c9,
   0x458b,
-  Uint8List.fromList(const [0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c]),
+  .fromList(const [0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c]),
 );
 
 final SpObjectToken = GUID.fromComponents(
   0xef411752,
   0x3736,
   0x4cb4,
-  Uint8List.fromList(const [0x9c, 0x8c, 0x8e, 0xf4, 0xcc, 0xb5, 0x8e, 0xfe]),
+  .fromList(const [0x9c, 0x8c, 0x8e, 0xf4, 0xcc, 0xb5, 0x8e, 0xfe]),
 );
 
 final SpObjectTokenCategory = GUID.fromComponents(
   0xa910187f,
   0xc7a,
   0x45ac,
-  Uint8List.fromList(const [0x92, 0xcc, 0x59, 0xed, 0xaf, 0xb7, 0x7b, 0x53]),
+  .fromList(const [0x92, 0xcc, 0x59, 0xed, 0xaf, 0xb7, 0x7b, 0x53]),
 );
 
 final SpVoice = GUID.fromComponents(
   0x96749377,
   0x3391,
   0x11d2,
-  Uint8List.fromList(const [0x9e, 0xe3, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
+  .fromList(const [0x9e, 0xe3, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
 );
 
 final SpellCheckerFactory = GUID.fromComponents(
   0x7ab36653,
   0x1796,
   0x484b,
-  Uint8List.fromList(const [0xbd, 0xfa, 0xe7, 0x4f, 0x1d, 0xb7, 0xc1, 0xdc]),
+  .fromList(const [0xbd, 0xfa, 0xe7, 0x4f, 0x1d, 0xb7, 0xc1, 0xdc]),
 );
 
 /// Contains information used to display a task dialog.
@@ -19898,7 +19858,7 @@ base class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 
   /// Handle to the parent window.
-  HWND get hwndParent => HWND(_hwndParent);
+  HWND get hwndParent => .new(_hwndParent);
 
   set hwndParent(HWND value) => _hwndParent = value;
 
@@ -19908,64 +19868,63 @@ base class TASKDIALOGCONFIG extends Struct {
   /// <b>pszMainInstruction</b>, <b>pszContent</b>, <b>pszVerificationText</b>,
   /// <b>pszExpandedInformation</b>, <b>pszExpandedControlText</b>,
   /// <b>pszCollapsedControlText</b> or <b>pszFooter</b> members.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// Specifies the behavior of the task dialog.
-  TASKDIALOG_FLAGS get dwFlags => TASKDIALOG_FLAGS(_dwFlags);
+  TASKDIALOG_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(TASKDIALOG_FLAGS value) => _dwFlags = value;
 
   /// Specifies the push buttons displayed in the task dialog.
-  TASKDIALOG_COMMON_BUTTON_FLAGS get dwCommonButtons =>
-      TASKDIALOG_COMMON_BUTTON_FLAGS(_dwCommonButtons);
+  TASKDIALOG_COMMON_BUTTON_FLAGS get dwCommonButtons => .new(_dwCommonButtons);
 
   set dwCommonButtons(TASKDIALOG_COMMON_BUTTON_FLAGS value) =>
       _dwCommonButtons = value;
 
   /// Pointer that references the string to be used for the task dialog title.
-  PWSTR get pszWindowTitle => PWSTR(_pszWindowTitle);
+  PWSTR get pszWindowTitle => .new(_pszWindowTitle);
 
   set pszWindowTitle(PWSTR value) => _pszWindowTitle = value;
 
   /// Pointer that references the string to be used for the main instruction.
-  PWSTR get pszMainInstruction => PWSTR(_pszMainInstruction);
+  PWSTR get pszMainInstruction => .new(_pszMainInstruction);
 
   set pszMainInstruction(PWSTR value) => _pszMainInstruction = value;
 
   /// Pointer that references the string to be used for the dialog's primary
   /// content.
-  PWSTR get pszContent => PWSTR(_pszContent);
+  PWSTR get pszContent => .new(_pszContent);
 
   set pszContent(PWSTR value) => _pszContent = value;
 
   /// Pointer that references the string to be used to label the verification
   /// checkbox.
-  PWSTR get pszVerificationText => PWSTR(_pszVerificationText);
+  PWSTR get pszVerificationText => .new(_pszVerificationText);
 
   set pszVerificationText(PWSTR value) => _pszVerificationText = value;
 
   /// Pointer that references the string to be used for displaying additional
   /// information.
-  PWSTR get pszExpandedInformation => PWSTR(_pszExpandedInformation);
+  PWSTR get pszExpandedInformation => .new(_pszExpandedInformation);
 
   set pszExpandedInformation(PWSTR value) => _pszExpandedInformation = value;
 
   /// Pointer that references the string to be used to label the button for
   /// collapsing the expandable information.
-  PWSTR get pszExpandedControlText => PWSTR(_pszExpandedControlText);
+  PWSTR get pszExpandedControlText => .new(_pszExpandedControlText);
 
   set pszExpandedControlText(PWSTR value) => _pszExpandedControlText = value;
 
   /// Pointer that references the string to be used to label the button for
   /// expanding the expandable information.
-  PWSTR get pszCollapsedControlText => PWSTR(_pszCollapsedControlText);
+  PWSTR get pszCollapsedControlText => .new(_pszCollapsedControlText);
 
   set pszCollapsedControlText(PWSTR value) => _pszCollapsedControlText = value;
 
   /// Pointer to the string to be used in the footer area of the task dialog.
-  PWSTR get pszFooter => PWSTR(_pszFooter);
+  PWSTR get pszFooter => .new(_pszFooter);
 
   set pszFooter(PWSTR value) => _pszFooter = value;
 
@@ -19984,9 +19943,9 @@ sealed class TASKDIALOGCONFIG_0 extends Union {
   external Pointer _hMainIcon;
   external Pointer<Utf16> _pszMainIcon;
 
-  HICON get hMainIcon => HICON(_hMainIcon);
+  HICON get hMainIcon => .new(_hMainIcon);
   set hMainIcon(HICON value) => _hMainIcon = value;
-  PWSTR get pszMainIcon => PWSTR(_pszMainIcon);
+  PWSTR get pszMainIcon => .new(_pszMainIcon);
   set pszMainIcon(PWSTR value) => _pszMainIcon = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -20012,9 +19971,9 @@ sealed class TASKDIALOGCONFIG_1 extends Union {
   external Pointer _hFooterIcon;
   external Pointer<Utf16> _pszFooterIcon;
 
-  HICON get hFooterIcon => HICON(_hFooterIcon);
+  HICON get hFooterIcon => .new(_hFooterIcon);
   set hFooterIcon(HICON value) => _hFooterIcon = value;
-  PWSTR get pszFooterIcon => PWSTR(_pszFooterIcon);
+  PWSTR get pszFooterIcon => .new(_pszFooterIcon);
   set pszFooterIcon(PWSTR value) => _pszFooterIcon = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -20051,7 +20010,7 @@ base class TASKDIALOG_BUTTON extends Struct {
   external Pointer<Utf16> _pszButtonText;
 
   /// Pointer that references the string to be used to label the button.
-  PWSTR get pszButtonText => PWSTR(_pszButtonText);
+  PWSTR get pszButtonText => .new(_pszButtonText);
 
   set pszButtonText(PWSTR value) => _pszButtonText = value;
 
@@ -20159,7 +20118,7 @@ base class TEXTMETRIC extends Struct {
 
   /// Specifies information about the pitch, the technology, and the family of a
   /// physical font.
-  TMPF_FLAGS get tmPitchAndFamily => TMPF_FLAGS(_tmPitchAndFamily);
+  TMPF_FLAGS get tmPitchAndFamily => .new(_tmPitchAndFamily);
 
   set tmPitchAndFamily(TMPF_FLAGS value) => _tmPitchAndFamily = value;
 
@@ -20292,7 +20251,7 @@ base class TLIBATTR extends Struct {
   external int wLibFlags;
 
   /// The target hardware platform.
-  SYSKIND get syskind => SYSKIND(_syskind);
+  SYSKIND get syskind => .new(_syskind);
 
   set syskind(SYSKIND value) => _syskind = value;
 
@@ -20318,7 +20277,7 @@ base class TOKEN_APPCONTAINER_INFORMATION extends Struct {
   /// The <a
   /// href="https://docs.microsoft.com/windows/desktop/SecGloss/s-gly">security
   /// identifier</a> (SID) of the app container.
-  PSID get TokenAppContainer => PSID(_TokenAppContainer);
+  PSID get TokenAppContainer => .new(_TokenAppContainer);
 
   set TokenAppContainer(PSID value) => _TokenAppContainer = value;
 
@@ -20399,19 +20358,19 @@ base class TOUCHINPUT extends Struct {
   external int cyContact;
 
   /// A device handle for the source input device.
-  HANDLE get hSource => HANDLE(_hSource);
+  HANDLE get hSource => .new(_hSource);
 
   set hSource(HANDLE value) => _hSource = value;
 
   /// A set of bit flags that specify various aspects of touch point press,
   /// release, and motion.
-  TOUCHEVENTF_FLAGS get dwFlags => TOUCHEVENTF_FLAGS(_dwFlags);
+  TOUCHEVENTF_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(TOUCHEVENTF_FLAGS value) => _dwFlags = value;
 
   /// A set of bit flags that specify which of the optional fields in the
   /// structure contain valid values.
-  TOUCHINPUTMASKF_MASK get dwMask => TOUCHINPUTMASKF_MASK(_dwMask);
+  TOUCHINPUTMASKF_MASK get dwMask => .new(_dwMask);
 
   set dwMask(TOUCHINPUTMASKF_MASK value) => _dwMask = value;
 
@@ -20557,12 +20516,12 @@ base class TYPEATTR extends Struct {
   external IDLDESC idldescType;
 
   /// Reserved.
-  PWSTR get lpstrSchema => PWSTR(_lpstrSchema);
+  PWSTR get lpstrSchema => .new(_lpstrSchema);
 
   set lpstrSchema(PWSTR value) => _lpstrSchema = value;
 
   /// The kind of type.
-  TYPEKIND get typekind => TYPEKIND(_typekind);
+  TYPEKIND get typekind => .new(_typekind);
 
   set typekind(TYPEKIND value) => _typekind = value;
 
@@ -20589,7 +20548,7 @@ base class TYPEDESC extends Struct {
   external int _vt;
 
   /// The variant type.
-  VARENUM get vt => VARENUM(_vt);
+  VARENUM get vt => .new(_vt);
 
   set vt(VARENUM value) => _vt = value;
 
@@ -20649,7 +20608,7 @@ base class UNICODE_STRING extends Struct {
   external Pointer<Utf16> _Buffer;
 
   /// Pointer to a wide-character string.
-  PWSTR get Buffer => PWSTR(_Buffer);
+  PWSTR get Buffer => .new(_Buffer);
 
   set Buffer(PWSTR value) => _Buffer = value;
 
@@ -20728,21 +20687,20 @@ base class UPDATELAYEREDWINDOWINFO extends Struct {
   external Pointer<RECT> prcDirty;
 
   /// A handle to a DC for the screen.
-  HDC get hdcDst => HDC(_hdcDst);
+  HDC get hdcDst => .new(_hdcDst);
 
   set hdcDst(HDC value) => _hdcDst = value;
 
   /// A handle to the DC for the surface that defines the layered window.
-  HDC get hdcSrc => HDC(_hdcSrc);
+  HDC get hdcSrc => .new(_hdcSrc);
 
   set hdcSrc(HDC value) => _hdcSrc = value;
 
   /// The color key to be used when composing the layered window.
-  COLORREF get crKey => COLORREF(_crKey);
+  COLORREF get crKey => .new(_crKey);
 
   set crKey(COLORREF value) => _crKey = value;
-  UPDATE_LAYERED_WINDOW_FLAGS get dwFlags =>
-      UPDATE_LAYERED_WINDOW_FLAGS(_dwFlags);
+  UPDATE_LAYERED_WINDOW_FLAGS get dwFlags => .new(_dwFlags);
   set dwFlags(UPDATE_LAYERED_WINDOW_FLAGS value) => _dwFlags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -20863,12 +20821,12 @@ base class VALENT extends Struct {
   external int _ve_type;
 
   /// The name of the value to be retrieved.
-  PWSTR get ve_valuename => PWSTR(_ve_valuename);
+  PWSTR get ve_valuename => .new(_ve_valuename);
 
   set ve_valuename(PWSTR value) => _ve_valuename = value;
 
   /// The type of data pointed to by <b>ve_valueptr</b>.
-  REG_VALUE_TYPE get ve_type => REG_VALUE_TYPE(_ve_type);
+  REG_VALUE_TYPE get ve_type => .new(_ve_type);
 
   set ve_type(REG_VALUE_TYPE value) => _ve_type = value;
 
@@ -20905,17 +20863,17 @@ base class VARDESC extends Struct {
   external int _varkind;
 
   /// Reserved.
-  PWSTR get lpstrSchema => PWSTR(_lpstrSchema);
+  PWSTR get lpstrSchema => .new(_lpstrSchema);
 
   set lpstrSchema(PWSTR value) => _lpstrSchema = value;
 
   /// The variable flags.
-  VARFLAGS get wVarFlags => VARFLAGS(_wVarFlags);
+  VARFLAGS get wVarFlags => .new(_wVarFlags);
 
   set wVarFlags(VARFLAGS value) => _wVarFlags = value;
 
   /// The variable type.
-  VARKIND get varkind => VARKIND(_varkind);
+  VARKIND get varkind => .new(_varkind);
 
   set varkind(VARKIND value) => _varkind = value;
 
@@ -21009,7 +20967,7 @@ sealed class VARIANT_0_0 extends Struct {
 
   external VARIANT_0_0_0 Anonymous;
 
-  VARENUM get vt => VARENUM(_vt);
+  VARENUM get vt => .new(_vt);
   set vt(VARENUM value) => _vt = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -21114,15 +21072,15 @@ sealed class VARIANT_0_0_0 extends Union {
 
   bool get boolVal => _boolVal != FALSE;
   set boolVal(bool value) => _boolVal = value ? VARIANT_TRUE : FALSE;
-  BSTR get bstrVal => BSTR(_bstrVal);
+  BSTR get bstrVal => .new(_bstrVal);
   set bstrVal(BSTR value) => _bstrVal = value;
-  IUnknown? get punkVal => _punkVal.isNull ? null : IUnknown(_punkVal);
+  IUnknown? get punkVal => _punkVal.isNull ? null : .new(_punkVal);
   set punkVal(IUnknown? value) => _punkVal = value?.ptr ?? nullptr;
-  IDispatch? get pdispVal => _pdispVal.isNull ? null : IDispatch(_pdispVal);
+  IDispatch? get pdispVal => _pdispVal.isNull ? null : .new(_pdispVal);
   set pdispVal(IDispatch? value) => _pdispVal = value?.ptr ?? nullptr;
-  CHAR get cVal => CHAR(_cVal);
+  CHAR get cVal => .new(_cVal);
   set cVal(CHAR value) => _cVal = value;
-  PSTR get pcVal => PSTR(_pcVal);
+  PSTR get pcVal => .new(_pcVal);
   set pcVal(PSTR value) => _pcVal = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -21259,7 +21217,7 @@ sealed class VARIANT_0_0_0_0 extends Struct {
   external Pointer pvRecord;
   external VTablePointer _pRecInfo;
 
-  IRecordInfo? get pRecInfo => _pRecInfo.isNull ? null : IRecordInfo(_pRecInfo);
+  IRecordInfo? get pRecInfo => _pRecInfo.isNull ? null : .new(_pRecInfo);
   set pRecInfo(IRecordInfo? value) => _pRecInfo = value?.ptr ?? nullptr;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -21288,7 +21246,7 @@ base class VERSIONEDSTREAM extends Struct {
   external GUID guidVersion;
   external VTablePointer _pStream;
 
-  IStream? get pStream => _pStream.isNull ? null : IStream(_pStream);
+  IStream? get pStream => _pStream.isNull ? null : .new(_pStream);
   set pStream(IStream? value) => _pStream = value?.ptr ?? nullptr;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -21388,18 +21346,15 @@ base class VS_FIXEDFILEINFO extends Struct {
   @Uint32()
   external int dwFileDateLS;
 
-  VS_FIXEDFILEINFO_FILE_FLAGS get dwFileFlags =>
-      VS_FIXEDFILEINFO_FILE_FLAGS(_dwFileFlags);
+  VS_FIXEDFILEINFO_FILE_FLAGS get dwFileFlags => .new(_dwFileFlags);
   set dwFileFlags(VS_FIXEDFILEINFO_FILE_FLAGS value) => _dwFileFlags = value;
-  VS_FIXEDFILEINFO_FILE_OS get dwFileOS => VS_FIXEDFILEINFO_FILE_OS(_dwFileOS);
+  VS_FIXEDFILEINFO_FILE_OS get dwFileOS => .new(_dwFileOS);
   set dwFileOS(VS_FIXEDFILEINFO_FILE_OS value) => _dwFileOS = value;
-  VS_FIXEDFILEINFO_FILE_TYPE get dwFileType =>
-      VS_FIXEDFILEINFO_FILE_TYPE(_dwFileType);
+  VS_FIXEDFILEINFO_FILE_TYPE get dwFileType => .new(_dwFileType);
   set dwFileType(VS_FIXEDFILEINFO_FILE_TYPE value) => _dwFileType = value;
 
   /// The function of the file.
-  VS_FIXEDFILEINFO_FILE_SUBTYPE get dwFileSubtype =>
-      VS_FIXEDFILEINFO_FILE_SUBTYPE(_dwFileSubtype);
+  VS_FIXEDFILEINFO_FILE_SUBTYPE get dwFileSubtype => .new(_dwFileSubtype);
 
   set dwFileSubtype(VS_FIXEDFILEINFO_FILE_SUBTYPE value) =>
       _dwFileSubtype = value;
@@ -21421,7 +21376,7 @@ final VirtualDesktopManager = GUID.fromComponents(
   0xaa509086,
   0x5ca9,
   0x4c25,
-  Uint8List.fromList(const [0x8f, 0x95, 0x58, 0x9d, 0x3c, 0x7, 0xb4, 0x8a]),
+  .fromList(const [0x8f, 0x95, 0x58, 0x9d, 0x3c, 0x7, 0xb4, 0x8a]),
 );
 
 /// Defines the format of waveform-audio data.
@@ -21573,7 +21528,7 @@ base class WAVEHDR extends Struct {
   external int reserved;
 
   /// Pointer to the waveform buffer.
-  PSTR get lpData => PSTR(_lpData);
+  PSTR get lpData => .new(_lpData);
 
   set lpData(PSTR value) => _lpData = value;
 
@@ -21834,12 +21789,12 @@ base class WINDOWINFO extends Struct {
   external int wCreatorVersion;
 
   /// The window styles.
-  WINDOW_STYLE get dwStyle => WINDOW_STYLE(_dwStyle);
+  WINDOW_STYLE get dwStyle => .new(_dwStyle);
 
   set dwStyle(WINDOW_STYLE value) => _dwStyle = value;
 
   /// The extended window styles.
-  WINDOW_EX_STYLE get dwExStyle => WINDOW_EX_STYLE(_dwExStyle);
+  WINDOW_EX_STYLE get dwExStyle => .new(_dwExStyle);
 
   set dwExStyle(WINDOW_EX_STYLE value) => _dwExStyle = value;
 
@@ -21880,11 +21835,11 @@ base class WINDOWPLACEMENT extends Struct {
   /// The window's coordinates when the window is in the restored position.
   external RECT rcNormalPosition;
 
-  WINDOWPLACEMENT_FLAGS get flags => WINDOWPLACEMENT_FLAGS(_flags);
+  WINDOWPLACEMENT_FLAGS get flags => .new(_flags);
   set flags(WINDOWPLACEMENT_FLAGS value) => _flags = value;
 
   /// The current show state of the window.
-  SHOW_WINDOW_CMD get showCmd => SHOW_WINDOW_CMD(_showCmd);
+  SHOW_WINDOW_CMD get showCmd => .new(_showCmd);
 
   set showCmd(SHOW_WINDOW_CMD value) => _showCmd = value;
 
@@ -21927,15 +21882,15 @@ base class WINDOWPOS extends Struct {
   external int _flags;
 
   /// A handle to the window.
-  HWND get hwnd => HWND(_hwnd);
+  HWND get hwnd => .new(_hwnd);
 
   set hwnd(HWND value) => _hwnd = value;
 
   /// The position of the window in Z order (front-to-back position).
-  HWND get hwndInsertAfter => HWND(_hwndInsertAfter);
+  HWND get hwndInsertAfter => .new(_hwndInsertAfter);
 
   set hwndInsertAfter(HWND value) => _hwndInsertAfter = value;
-  SET_WINDOW_POS_FLAGS get flags => SET_WINDOW_POS_FLAGS(_flags);
+  SET_WINDOW_POS_FLAGS get flags => .new(_flags);
   set flags(SET_WINDOW_POS_FLAGS value) => _flags = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -22011,14 +21966,14 @@ base class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that specifies whether the network is infrastructure or ad hoc.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-phy-type">DOT11_PHY_TYPE</a>
   /// value that indicates the physical type of the association.
-  DOT11_PHY_TYPE get dot11PhyType => DOT11_PHY_TYPE(_dot11PhyType);
+  DOT11_PHY_TYPE get dot11PhyType => .new(_dot11PhyType);
 
   set dot11PhyType(DOT11_PHY_TYPE value) => _dot11PhyType = value;
 
@@ -22129,7 +22084,7 @@ base class WLAN_AVAILABLE_NETWORK extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that specifies whether the network is infrastructure or ad hoc.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
@@ -22155,7 +22110,7 @@ base class WLAN_AVAILABLE_NETWORK extends Struct {
   /// value that indicates the default authentication algorithm used to join
   /// this network for the first time.
   DOT11_AUTH_ALGORITHM get dot11DefaultAuthAlgorithm =>
-      DOT11_AUTH_ALGORITHM(_dot11DefaultAuthAlgorithm);
+      .new(_dot11DefaultAuthAlgorithm);
 
   set dot11DefaultAuthAlgorithm(DOT11_AUTH_ALGORITHM value) =>
       _dot11DefaultAuthAlgorithm = value;
@@ -22165,7 +22120,7 @@ base class WLAN_AVAILABLE_NETWORK extends Struct {
   /// value that indicates the default cipher algorithm to be used when joining
   /// this network.
   DOT11_CIPHER_ALGORITHM get dot11DefaultCipherAlgorithm =>
-      DOT11_CIPHER_ALGORITHM(_dot11DefaultCipherAlgorithm);
+      .new(_dot11DefaultCipherAlgorithm);
 
   set dot11DefaultCipherAlgorithm(DOT11_CIPHER_ALGORITHM value) =>
       _dot11DefaultCipherAlgorithm = value;
@@ -22291,12 +22246,12 @@ base class WLAN_BSS_ENTRY extends Struct {
   external int ulIeSize;
 
   /// The BSS network type.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
   /// The PHY type for this network.
-  DOT11_PHY_TYPE get dot11BssPhyType => DOT11_PHY_TYPE(_dot11BssPhyType);
+  DOT11_PHY_TYPE get dot11BssPhyType => .new(_dot11BssPhyType);
 
   set dot11BssPhyType(DOT11_PHY_TYPE value) => _dot11BssPhyType = value;
 
@@ -22372,15 +22327,14 @@ base class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_interface_state-r1">WLAN_INTERFACE_STATE</a>
   /// value that indicates the state of the interface.
-  WLAN_INTERFACE_STATE get isState => WLAN_INTERFACE_STATE(_isState);
+  WLAN_INTERFACE_STATE get isState => .new(_isState);
 
   set isState(WLAN_INTERFACE_STATE value) => _isState = value;
 
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wlanapi/ne-wlanapi-wlan_connection_mode">WLAN_CONNECTION_MODE</a>
   /// value that indicates the mode of the connection.
-  WLAN_CONNECTION_MODE get wlanConnectionMode =>
-      WLAN_CONNECTION_MODE(_wlanConnectionMode);
+  WLAN_CONNECTION_MODE get wlanConnectionMode => .new(_wlanConnectionMode);
 
   set wlanConnectionMode(WLAN_CONNECTION_MODE value) =>
       _wlanConnectionMode = value;
@@ -22437,8 +22391,7 @@ base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wlanapi/ne-wlanapi-wlan_connection_mode">WLAN_CONNECTION_MODE</a>
   /// value that specifies the mode of the connection.
-  WLAN_CONNECTION_MODE get wlanConnectionMode =>
-      WLAN_CONNECTION_MODE(_wlanConnectionMode);
+  WLAN_CONNECTION_MODE get wlanConnectionMode => .new(_wlanConnectionMode);
 
   set wlanConnectionMode(WLAN_CONNECTION_MODE value) =>
       _wlanConnectionMode = value;
@@ -22451,7 +22404,7 @@ base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that indicates the BSS network type.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
@@ -22462,8 +22415,7 @@ base class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
 
   /// A set of flags that provide additional information for the network
   /// connection.
-  WLAN_CONNECTION_NOTIFICATION_FLAGS get dwFlags =>
-      WLAN_CONNECTION_NOTIFICATION_FLAGS(_dwFlags);
+  WLAN_CONNECTION_NOTIFICATION_FLAGS get dwFlags => .new(_dwFlags);
 
   set dwFlags(WLAN_CONNECTION_NOTIFICATION_FLAGS value) => _dwFlags = value;
 
@@ -22515,21 +22467,20 @@ base class WLAN_CONNECTION_PARAMETERS extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wlanapi/ne-wlanapi-wlan_connection_mode">WLAN_CONNECTION_MODE</a>
   /// value that specifies the mode of connection.
-  WLAN_CONNECTION_MODE get wlanConnectionMode =>
-      WLAN_CONNECTION_MODE(_wlanConnectionMode);
+  WLAN_CONNECTION_MODE get wlanConnectionMode => .new(_wlanConnectionMode);
 
   set wlanConnectionMode(WLAN_CONNECTION_MODE value) =>
       _wlanConnectionMode = value;
 
   /// Specifies the profile being used for the connection.
-  PWSTR get strProfile => PWSTR(_strProfile);
+  PWSTR get strProfile => .new(_strProfile);
 
   set strProfile(PWSTR value) => _strProfile = value;
 
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that indicates the BSS type of the network.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
@@ -22676,7 +22627,7 @@ base class WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE extends Struct {
 
   /// The reason for the network state change for the data peer.
   WLAN_HOSTED_NETWORK_REASON get PeerStateChangeReason =>
-      WLAN_HOSTED_NETWORK_REASON(_PeerStateChangeReason);
+      .new(_PeerStateChangeReason);
 
   set PeerStateChangeReason(WLAN_HOSTED_NETWORK_REASON value) =>
       _PeerStateChangeReason = value;
@@ -22707,8 +22658,7 @@ base class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
   external int _PeerAuthState;
 
   /// The current authentication state of this peer.
-  WLAN_HOSTED_NETWORK_PEER_AUTH_STATE get PeerAuthState =>
-      WLAN_HOSTED_NETWORK_PEER_AUTH_STATE(_PeerAuthState);
+  WLAN_HOSTED_NETWORK_PEER_AUTH_STATE get PeerAuthState => .new(_PeerAuthState);
 
   set PeerAuthState(WLAN_HOSTED_NETWORK_PEER_AUTH_STATE value) =>
       _PeerAuthState = value;
@@ -22738,14 +22688,14 @@ base class WLAN_HOSTED_NETWORK_RADIO_STATE extends Struct {
 
   /// The software radio state of the wireless Hosted Network.
   DOT11_RADIO_STATE get dot11SoftwareRadioState =>
-      DOT11_RADIO_STATE(_dot11SoftwareRadioState);
+      .new(_dot11SoftwareRadioState);
 
   set dot11SoftwareRadioState(DOT11_RADIO_STATE value) =>
       _dot11SoftwareRadioState = value;
 
   /// The hardware radio state of the wireless Hosted Network.
   DOT11_RADIO_STATE get dot11HardwareRadioState =>
-      DOT11_RADIO_STATE(_dot11HardwareRadioState);
+      .new(_dot11HardwareRadioState);
 
   set dot11HardwareRadioState(DOT11_RADIO_STATE value) =>
       _dot11HardwareRadioState = value;
@@ -22775,14 +22725,12 @@ base class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
   external int _dot11CipherAlgo;
 
   /// The authentication algorithm used by the wireless Hosted Network.
-  DOT11_AUTH_ALGORITHM get dot11AuthAlgo =>
-      DOT11_AUTH_ALGORITHM(_dot11AuthAlgo);
+  DOT11_AUTH_ALGORITHM get dot11AuthAlgo => .new(_dot11AuthAlgo);
 
   set dot11AuthAlgo(DOT11_AUTH_ALGORITHM value) => _dot11AuthAlgo = value;
 
   /// The cipher algorithm used by the wireless Hosted Network.
-  DOT11_CIPHER_ALGORITHM get dot11CipherAlgo =>
-      DOT11_CIPHER_ALGORITHM(_dot11CipherAlgo);
+  DOT11_CIPHER_ALGORITHM get dot11CipherAlgo => .new(_dot11CipherAlgo);
 
   set dot11CipherAlgo(DOT11_CIPHER_ALGORITHM value) => _dot11CipherAlgo = value;
 
@@ -22814,20 +22762,17 @@ base class WLAN_HOSTED_NETWORK_STATE_CHANGE extends Struct {
   external int _StateChangeReason;
 
   /// The previous network state on the wireless Hosted Network.
-  WLAN_HOSTED_NETWORK_STATE get OldState =>
-      WLAN_HOSTED_NETWORK_STATE(_OldState);
+  WLAN_HOSTED_NETWORK_STATE get OldState => .new(_OldState);
 
   set OldState(WLAN_HOSTED_NETWORK_STATE value) => _OldState = value;
 
   /// The current network state on the wireless Hosted Network.
-  WLAN_HOSTED_NETWORK_STATE get NewState =>
-      WLAN_HOSTED_NETWORK_STATE(_NewState);
+  WLAN_HOSTED_NETWORK_STATE get NewState => .new(_NewState);
 
   set NewState(WLAN_HOSTED_NETWORK_STATE value) => _NewState = value;
 
   /// The reason for the network state change.
-  WLAN_HOSTED_NETWORK_REASON get StateChangeReason =>
-      WLAN_HOSTED_NETWORK_REASON(_StateChangeReason);
+  WLAN_HOSTED_NETWORK_REASON get StateChangeReason => .new(_StateChangeReason);
 
   set StateChangeReason(WLAN_HOSTED_NETWORK_REASON value) =>
       _StateChangeReason = value;
@@ -22880,15 +22825,14 @@ base class WLAN_HOSTED_NETWORK_STATUS extends Struct {
   external Array<WLAN_HOSTED_NETWORK_PEER_STATE> PeerList;
 
   /// The current state of the wireless Hosted Network.
-  WLAN_HOSTED_NETWORK_STATE get HostedNetworkState =>
-      WLAN_HOSTED_NETWORK_STATE(_HostedNetworkState);
+  WLAN_HOSTED_NETWORK_STATE get HostedNetworkState => .new(_HostedNetworkState);
 
   set HostedNetworkState(WLAN_HOSTED_NETWORK_STATE value) =>
       _HostedNetworkState = value;
 
   /// The physical type of the network interface used by wireless Hosted
   /// Network.
-  DOT11_PHY_TYPE get dot11PhyType => DOT11_PHY_TYPE(_dot11PhyType);
+  DOT11_PHY_TYPE get dot11PhyType => .new(_dot11PhyType);
 
   set dot11PhyType(DOT11_PHY_TYPE value) => _dot11PhyType = value;
 
@@ -22937,7 +22881,7 @@ base class WLAN_INTERFACE_CAPABILITY extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wlanapi/ne-wlanapi-wlan_interface_type">WLAN_INTERFACE_TYPE</a>
   /// value that indicates the type of the interface.
-  WLAN_INTERFACE_TYPE get interfaceType => WLAN_INTERFACE_TYPE(_interfaceType);
+  WLAN_INTERFACE_TYPE get interfaceType => .new(_interfaceType);
 
   set interfaceType(WLAN_INTERFACE_TYPE value) => _interfaceType = value;
 
@@ -22981,7 +22925,7 @@ base class WLAN_INTERFACE_INFO extends Struct {
   /// Contains a <a
   /// href="https://docs.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_interface_state-r1">WLAN_INTERFACE_STATE</a>
   /// value that indicates the current state of the interface.
-  WLAN_INTERFACE_STATE get isState => WLAN_INTERFACE_STATE(_isState);
+  WLAN_INTERFACE_STATE get isState => .new(_isState);
 
   set isState(WLAN_INTERFACE_STATE value) => _isState = value;
 
@@ -23143,8 +23087,7 @@ base class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/api/wlanapi/ne-wlanapi-wlan_connection_mode">WLAN_CONNECTION_MODE</a>
   /// value that specifies the mode of the connection.
-  WLAN_CONNECTION_MODE get wlanConnectionMode =>
-      WLAN_CONNECTION_MODE(_wlanConnectionMode);
+  WLAN_CONNECTION_MODE get wlanConnectionMode => .new(_wlanConnectionMode);
 
   set wlanConnectionMode(WLAN_CONNECTION_MODE value) =>
       _wlanConnectionMode = value;
@@ -23157,7 +23100,7 @@ base class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-bss-type">DOT11_BSS_TYPE</a>
   /// value that indicates the BSS network type.
-  DOT11_BSS_TYPE get dot11BssType => DOT11_BSS_TYPE(_dot11BssType);
+  DOT11_BSS_TYPE get dot11BssType => .new(_dot11BssType);
 
   set dot11BssType(DOT11_BSS_TYPE value) => _dot11BssType = value;
 
@@ -23313,7 +23256,7 @@ base class WLAN_PHY_RADIO_STATE extends Struct {
   /// href="https://docs.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-dot11_radio_state-r1">DOT11_RADIO_STATE</a>
   /// value that indicates the software radio state.
   DOT11_RADIO_STATE get dot11SoftwareRadioState =>
-      DOT11_RADIO_STATE(_dot11SoftwareRadioState);
+      .new(_dot11SoftwareRadioState);
 
   set dot11SoftwareRadioState(DOT11_RADIO_STATE value) =>
       _dot11SoftwareRadioState = value;
@@ -23322,7 +23265,7 @@ base class WLAN_PHY_RADIO_STATE extends Struct {
   /// href="https://docs.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-dot11_radio_state-r1">DOT11_RADIO_STATE</a>
   /// value that indicates the hardware radio state.
   DOT11_RADIO_STATE get dot11HardwareRadioState =>
-      DOT11_RADIO_STATE(_dot11HardwareRadioState);
+      .new(_dot11HardwareRadioState);
 
   set dot11HardwareRadioState(DOT11_RADIO_STATE value) =>
       _dot11HardwareRadioState = value;
@@ -23552,8 +23495,7 @@ base class WLAN_SECURITY_ATTRIBUTES extends Struct {
   /// A <a
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-auth-algorithm">DOT11_AUTH_ALGORITHM</a>
   /// value that identifies the authentication algorithm.
-  DOT11_AUTH_ALGORITHM get dot11AuthAlgorithm =>
-      DOT11_AUTH_ALGORITHM(_dot11AuthAlgorithm);
+  DOT11_AUTH_ALGORITHM get dot11AuthAlgorithm => .new(_dot11AuthAlgorithm);
 
   set dot11AuthAlgorithm(DOT11_AUTH_ALGORITHM value) =>
       _dot11AuthAlgorithm = value;
@@ -23562,7 +23504,7 @@ base class WLAN_SECURITY_ATTRIBUTES extends Struct {
   /// href="https://docs.microsoft.com/windows/desktop/NativeWiFi/dot11-cipher-algorithm">DOT11_CIPHER_ALGORITHM</a>
   /// value that identifies the cipher algorithm.
   DOT11_CIPHER_ALGORITHM get dot11CipherAlgorithm =>
-      DOT11_CIPHER_ALGORITHM(_dot11CipherAlgorithm);
+      .new(_dot11CipherAlgorithm);
 
   set dot11CipherAlgorithm(DOT11_CIPHER_ALGORITHM value) =>
       _dot11CipherAlgorithm = value;
@@ -23655,38 +23597,38 @@ base class WNDCLASS extends Struct {
   external Pointer<Utf16> _lpszClassName;
 
   /// The class style(s).
-  WNDCLASS_STYLES get style => WNDCLASS_STYLES(_style);
+  WNDCLASS_STYLES get style => .new(_style);
 
   set style(WNDCLASS_STYLES value) => _style = value;
 
   /// A handle to the instance that contains the window procedure for the class.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// A handle to the class icon.
-  HICON get hIcon => HICON(_hIcon);
+  HICON get hIcon => .new(_hIcon);
 
   set hIcon(HICON value) => _hIcon = value;
 
   /// A handle to the class cursor.
-  HCURSOR get hCursor => HCURSOR(_hCursor);
+  HCURSOR get hCursor => .new(_hCursor);
 
   set hCursor(HCURSOR value) => _hCursor = value;
 
   /// A handle to the class background brush.
-  HBRUSH get hbrBackground => HBRUSH(_hbrBackground);
+  HBRUSH get hbrBackground => .new(_hbrBackground);
 
   set hbrBackground(HBRUSH value) => _hbrBackground = value;
 
   /// The resource name of the class menu, as the name appears in the resource
   /// file.
-  PWSTR get lpszMenuName => PWSTR(_lpszMenuName);
+  PWSTR get lpszMenuName => .new(_lpszMenuName);
 
   set lpszMenuName(PWSTR value) => _lpszMenuName = value;
 
   /// A pointer to a null-terminated string or is an atom.
-  PWSTR get lpszClassName => PWSTR(_lpszClassName);
+  PWSTR get lpszClassName => .new(_lpszClassName);
 
   set lpszClassName(PWSTR value) => _lpszClassName = value;
 
@@ -23734,43 +23676,43 @@ base class WNDCLASSEX extends Struct {
   external Pointer _hIconSm;
 
   /// The class style(s).
-  WNDCLASS_STYLES get style => WNDCLASS_STYLES(_style);
+  WNDCLASS_STYLES get style => .new(_style);
 
   set style(WNDCLASS_STYLES value) => _style = value;
 
   /// A handle to the instance that contains the window procedure for the class.
-  HINSTANCE get hInstance => HINSTANCE(_hInstance);
+  HINSTANCE get hInstance => .new(_hInstance);
 
   set hInstance(HINSTANCE value) => _hInstance = value;
 
   /// A handle to the class icon.
-  HICON get hIcon => HICON(_hIcon);
+  HICON get hIcon => .new(_hIcon);
 
   set hIcon(HICON value) => _hIcon = value;
 
   /// A handle to the class cursor.
-  HCURSOR get hCursor => HCURSOR(_hCursor);
+  HCURSOR get hCursor => .new(_hCursor);
 
   set hCursor(HCURSOR value) => _hCursor = value;
 
   /// A handle to the class background brush.
-  HBRUSH get hbrBackground => HBRUSH(_hbrBackground);
+  HBRUSH get hbrBackground => .new(_hbrBackground);
 
   set hbrBackground(HBRUSH value) => _hbrBackground = value;
 
   /// Pointer to a null-terminated character string that specifies the resource
   /// name of the class menu, as the name appears in the resource file.
-  PWSTR get lpszMenuName => PWSTR(_lpszMenuName);
+  PWSTR get lpszMenuName => .new(_lpszMenuName);
 
   set lpszMenuName(PWSTR value) => _lpszMenuName = value;
 
   /// A pointer to a null-terminated string or is an atom.
-  PWSTR get lpszClassName => PWSTR(_lpszClassName);
+  PWSTR get lpszClassName => .new(_lpszClassName);
 
   set lpszClassName(PWSTR value) => _lpszClassName = value;
 
   /// A handle to a small icon that is associated with the window class.
-  HICON get hIconSm => HICON(_hIconSm);
+  HICON get hIconSm => .new(_hIconSm);
 
   set hIconSm(HICON value) => _hIconSm = value;
 
@@ -23818,7 +23760,7 @@ final WbemClassObject = GUID.fromComponents(
   0x9a653086,
   0x174f,
   0x11d2,
-  Uint8List.fromList(const [0xb5, 0xf9, 0x0, 0x10, 0x4b, 0x70, 0x3e, 0xfd]),
+  .fromList(const [0xb5, 0xf9, 0x0, 0x10, 0x4b, 0x70, 0x3e, 0xfd]),
 );
 
 /// Used to communicate additional context information to providers when
@@ -23833,14 +23775,14 @@ final WbemContext = GUID.fromComponents(
   0x674b6698,
   0xee92,
   0x11d0,
-  Uint8List.fromList(const [0xad, 0x71, 0x0, 0xc0, 0x4f, 0xd8, 0xfd, 0xff]),
+  .fromList(const [0xad, 0x71, 0x0, 0xc0, 0x4f, 0xd8, 0xfd, 0xff]),
 );
 
 final WbemLocator = GUID.fromComponents(
   0x4590f811,
   0x1d3a,
   0x11d0,
-  Uint8List.fromList(const [0x89, 0x1f, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
+  .fromList(const [0x89, 0x1f, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
 );
 
 /// Provides an entry point through which refreshable objects such as
@@ -23852,7 +23794,7 @@ final WbemRefresher = GUID.fromComponents(
   0xc71566f2,
   0x561e,
   0x11d1,
-  Uint8List.fromList(const [0xad, 0x87, 0x0, 0xc0, 0x4f, 0xd8, 0xfd, 0xff]),
+  .fromList(const [0xad, 0x87, 0x0, 0xc0, 0x4f, 0xd8, 0xfd, 0xff]),
 );
 
 /// This topic provides information about using the WinHTTP WinHttpRequest COM
@@ -23864,7 +23806,7 @@ final WinHttpRequest = GUID.fromComponents(
   0x2087c2f4,
   0x2cef,
   0x4953,
-  Uint8List.fromList(const [0xa8, 0xab, 0x66, 0x77, 0x9b, 0x67, 0x4, 0x95]),
+  .fromList(const [0xa8, 0xab, 0x66, 0x77, 0x9b, 0x67, 0x4, 0x95]),
 );
 
 /// Specifies a world-space to page-space transformation.
@@ -23916,9 +23858,9 @@ base class XINPUT_BATTERY_INFORMATION extends Struct {
   @Uint8()
   external int _BatteryLevel;
 
-  BATTERY_TYPE get BatteryType => BATTERY_TYPE(_BatteryType);
+  BATTERY_TYPE get BatteryType => .new(_BatteryType);
   set BatteryType(BATTERY_TYPE value) => _BatteryType = value;
-  BATTERY_LEVEL get BatteryLevel => BATTERY_LEVEL(_BatteryLevel);
+  BATTERY_LEVEL get BatteryLevel => .new(_BatteryLevel);
   set BatteryLevel(BATTERY_LEVEL value) => _BatteryLevel = value;
 
   /// Allocates native memory and copies the contents of this struct into it.
@@ -23961,16 +23903,16 @@ base class XINPUT_CAPABILITIES extends Struct {
   /// resolutions.
   external XINPUT_VIBRATION Vibration;
 
-  XINPUT_DEVTYPE get Type => XINPUT_DEVTYPE(_Type);
+  XINPUT_DEVTYPE get Type => .new(_Type);
   set Type(XINPUT_DEVTYPE value) => _Type = value;
 
   /// Subtype of the game controller.
-  XINPUT_DEVSUBTYPE get SubType => XINPUT_DEVSUBTYPE(_SubType);
+  XINPUT_DEVSUBTYPE get SubType => .new(_SubType);
 
   set SubType(XINPUT_DEVSUBTYPE value) => _SubType = value;
 
   /// Features of the controller.
-  XINPUT_CAPABILITIES_FLAGS get Flags => XINPUT_CAPABILITIES_FLAGS(_Flags);
+  XINPUT_CAPABILITIES_FLAGS get Flags => .new(_Flags);
 
   set Flags(XINPUT_CAPABILITIES_FLAGS value) => _Flags = value;
 
@@ -24019,8 +23961,7 @@ base class XINPUT_GAMEPAD extends Struct {
   external int sThumbRY;
 
   /// Bitmask of the device digital buttons, as follows.
-  XINPUT_GAMEPAD_BUTTON_FLAGS get wButtons =>
-      XINPUT_GAMEPAD_BUTTON_FLAGS(_wButtons);
+  XINPUT_GAMEPAD_BUTTON_FLAGS get wButtons => .new(_wButtons);
 
   set wButtons(XINPUT_GAMEPAD_BUTTON_FLAGS value) => _wButtons = value;
 
@@ -24059,12 +24000,12 @@ base class XINPUT_KEYSTROKE extends Struct {
   external int HidCode;
 
   /// Virtual-key code of the key, button, or stick movement.
-  XINPUT_VIRTUAL_KEY get VirtualKey => XINPUT_VIRTUAL_KEY(_VirtualKey);
+  XINPUT_VIRTUAL_KEY get VirtualKey => .new(_VirtualKey);
 
   set VirtualKey(XINPUT_VIRTUAL_KEY value) => _VirtualKey = value;
 
   /// Flags that indicate the keyboard state at the time of the input event.
-  XINPUT_KEYSTROKE_FLAGS get Flags => XINPUT_KEYSTROKE_FLAGS(_Flags);
+  XINPUT_KEYSTROKE_FLAGS get Flags => .new(_Flags);
 
   set Flags(XINPUT_KEYSTROKE_FLAGS value) => _Flags = value;
 

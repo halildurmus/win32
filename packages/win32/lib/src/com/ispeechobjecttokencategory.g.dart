@@ -43,7 +43,7 @@ final IID_ISpeechObjectTokenCategory = GUID.fromComponents(
   0xca7eac50,
   0x2d01,
   0x4145,
-  Uint8List.fromList(const [0x86, 0xd4, 0x5a, 0xe7, 0xd7, 0xf, 0x44, 0x69]),
+  .fromList(const [0x86, 0xd4, 0x5a, 0xe7, 0xd7, 0xf, 0x44, 0x69]),
 );
 
 /// {@category com}
@@ -100,7 +100,7 @@ class ISpeechObjectTokenCategory extends IDispatch implements ComInterface {
     }
     final result$ = id.value;
     free(id);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   set default$(BSTR tokenId) {
@@ -117,7 +117,7 @@ class ISpeechObjectTokenCategory extends IDispatch implements ComInterface {
     }
     final result$ = tokenId.value;
     free(tokenId);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -140,7 +140,7 @@ class ISpeechObjectTokenCategory extends IDispatch implements ComInterface {
     final result$ = dataKey.value;
     free(dataKey);
     if (result$.isNull) return null;
-    return ISpeechDataKey(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -159,7 +159,7 @@ class ISpeechObjectTokenCategory extends IDispatch implements ComInterface {
     final result$ = tokens.value;
     free(tokens);
     if (result$.isNull) return null;
-    return ISpeechObjectTokens(result$);
+    return .new(result$);
   }
 
   @override

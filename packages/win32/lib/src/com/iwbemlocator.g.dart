@@ -41,7 +41,7 @@ final IID_IWbemLocator = GUID.fromComponents(
   0xdc12a687,
   0x737f,
   0x11cf,
-  Uint8List.fromList(const [0x88, 0x4d, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
+  .fromList(const [0x88, 0x4d, 0x0, 0xaa, 0x0, 0x4b, 0x2e, 0x24]),
 );
 
 /// Use the IWbemLocator interface to obtain the initial namespace pointer to
@@ -120,7 +120,7 @@ class IWbemLocator extends IUnknown implements ComInterface {
     final result$ = ppNamespace.value;
     free(ppNamespace);
     if (result$.isNull) return null;
-    return IWbemServices(result$);
+    return .new(result$);
   }
 
   @override

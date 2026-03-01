@@ -40,7 +40,7 @@ final IID_IUIAutomationProxyFactoryMapping = GUID.fromComponents(
   0x9e31e18,
   0x872d,
   0x4873,
-  Uint8List.fromList(const [0x93, 0xd1, 0x1e, 0x54, 0x1e, 0xc1, 0x33, 0xfd]),
+  .fromList(const [0x93, 0xd1, 0x1e, 0x54, 0x1e, 0xc1, 0x33, 0xfd]),
 );
 
 /// Exposes properties and methods for a table of proxy factories.
@@ -153,7 +153,7 @@ class IUIAutomationProxyFactoryMapping extends IUnknown
     final result$ = entry.value;
     free(entry);
     if (result$.isNull) return null;
-    return IUIAutomationProxyFactoryEntry(result$);
+    return .new(result$);
   }
 
   /// Sets the table of proxy factories.

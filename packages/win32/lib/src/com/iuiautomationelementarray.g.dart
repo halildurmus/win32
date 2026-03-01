@@ -40,7 +40,7 @@ final IID_IUIAutomationElementArray = GUID.fromComponents(
   0x14314595,
   0xb4bc,
   0x4055,
-  Uint8List.fromList(const [0x95, 0xf2, 0x58, 0xf2, 0xe4, 0x2c, 0x98, 0x55]),
+  .fromList(const [0x95, 0xf2, 0x58, 0xf2, 0xe4, 0x2c, 0x98, 0x55]),
 );
 
 /// Represents a collection of UI Automation elements.
@@ -110,7 +110,7 @@ class IUIAutomationElementArray extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

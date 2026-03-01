@@ -42,7 +42,7 @@ final IID_IRawElementProviderSimple = GUID.fromComponents(
   0xd6dd68d1,
   0x86fd,
   0x4332,
-  Uint8List.fromList(const [0x86, 0x66, 0x9a, 0xbe, 0xde, 0xa2, 0xd2, 0x4c]),
+  .fromList(const [0x86, 0x66, 0x9a, 0xbe, 0xde, 0xa2, 0xd2, 0x4c]),
 );
 
 /// Defines methods and properties that expose simple UI elements.
@@ -100,7 +100,7 @@ class IRawElementProviderSimple extends IUnknown implements ComInterface {
     }
     final result$ = pRetVal.value;
     free(pRetVal);
-    return ProviderOptions(result$);
+    return .new(result$);
   }
 
   /// Retrieves a pointer to an object that provides support for a control
@@ -120,7 +120,7 @@ class IRawElementProviderSimple extends IUnknown implements ComInterface {
     final result$ = pRetVal.value;
     free(pRetVal);
     if (result$.isNull) return null;
-    return IUnknown(result$);
+    return .new(result$);
   }
 
   /// Retrieves the value of a property supported by the Microsoft UI Automation
@@ -154,7 +154,7 @@ class IRawElementProviderSimple extends IUnknown implements ComInterface {
     final result$ = pRetVal.value;
     free(pRetVal);
     if (result$.isNull) return null;
-    return IRawElementProviderSimple(result$);
+    return .new(result$);
   }
 
   @override

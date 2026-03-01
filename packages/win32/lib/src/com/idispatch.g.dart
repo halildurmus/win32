@@ -42,7 +42,7 @@ final IID_IDispatch = GUID.fromComponents(
   0x20400,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Exposes objects, methods and properties to programming tools and other
@@ -139,7 +139,7 @@ class IDispatch extends IUnknown implements ComInterface {
     final result$ = ppTInfo.value;
     free(ppTInfo);
     if (result$.isNull) return null;
-    return ITypeInfo(result$);
+    return .new(result$);
   }
 
   /// Maps a single member and an optional set of argument names to a

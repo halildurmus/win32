@@ -39,7 +39,7 @@ final IID_IAppxManifestDeviceCapabilitiesEnumerator = GUID.fromComponents(
   0x30204541,
   0x427b,
   0x4a1c,
-  Uint8List.fromList(const [0xba, 0xcf, 0x65, 0x5b, 0xf4, 0x63, 0xa5, 0x40]),
+  .fromList(const [0xba, 0xcf, 0x65, 0x5b, 0xf4, 0x63, 0xa5, 0x40]),
 );
 
 /// Enumerates the device capabilities defined in the package manifest.
@@ -97,7 +97,7 @@ class IAppxManifestDeviceCapabilitiesEnumerator extends IUnknown
     }
     final result$ = deviceCapability.value;
     free(deviceCapability);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is a device capability at the current position of

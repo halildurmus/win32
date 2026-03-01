@@ -53,7 +53,7 @@ IInspectable? RoActivateInstance(HSTRING activatableClassId) {
   final result$ = instance.value;
   free(instance);
   if (result$.isNull) return null;
-  return IInspectable(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer, Pointer<VTablePointer>)>(

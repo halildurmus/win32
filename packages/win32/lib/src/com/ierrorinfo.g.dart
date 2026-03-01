@@ -39,7 +39,7 @@ final IID_IErrorInfo = GUID.fromComponents(
   0x1cf2b120,
   0x547d,
   0x101b,
-  Uint8List.fromList(const [0x8e, 0x65, 0x8, 0x0, 0x2b, 0x2b, 0xd1, 0x19]),
+  .fromList(const [0x8e, 0x65, 0x8, 0x0, 0x2b, 0x2b, 0xd1, 0x19]),
 );
 
 /// Provides detailed contextual error information.
@@ -117,7 +117,7 @@ class IErrorInfo extends IUnknown implements ComInterface {
     }
     final result$ = pBstrSource.value;
     free(pBstrSource);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Returns a textual description of the error.
@@ -135,7 +135,7 @@ class IErrorInfo extends IUnknown implements ComInterface {
     }
     final result$ = pBstrDescription.value;
     free(pBstrDescription);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Returns the path of the Help file that describes the error.
@@ -153,7 +153,7 @@ class IErrorInfo extends IUnknown implements ComInterface {
     }
     final result$ = pBstrHelpFile.value;
     free(pBstrHelpFile);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   /// Returns the Help context identifier (ID) for the error.

@@ -42,7 +42,7 @@ final IID_ISensorDataReport = GUID.fromComponents(
   0xab9df9b,
   0xc4b5,
   0x4796,
-  Uint8List.fromList(const [0x88, 0x98, 0x4, 0x70, 0x70, 0x6a, 0x2e, 0x1d]),
+  .fromList(const [0x88, 0x98, 0x4, 0x70, 0x70, 0x6a, 0x2e, 0x1d]),
 );
 
 /// Represents a sensor data report.
@@ -138,7 +138,7 @@ class ISensorDataReport extends IUnknown implements ComInterface {
     final result$ = ppValues.value;
     free(ppValues);
     if (result$.isNull) return null;
-    return IPortableDeviceValues(result$);
+    return .new(result$);
   }
 
   @override

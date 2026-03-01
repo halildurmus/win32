@@ -42,7 +42,7 @@ final IID_IUIAutomationTreeWalker = GUID.fromComponents(
   0x4042c624,
   0x389c,
   0x4afc,
-  Uint8List.fromList(const [0xa6, 0x30, 0x9d, 0xf8, 0x54, 0xa5, 0x41, 0xfc]),
+  .fromList(const [0xa6, 0x30, 0x9d, 0xf8, 0x54, 0xa5, 0x41, 0xfc]),
 );
 
 /// Exposes properties and methods that UI Automation client applications use to
@@ -173,7 +173,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = parent.value;
     free(parent);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the first child element of the specified UI Automation element.
@@ -194,7 +194,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = first.value;
     free(first);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the last child element of the specified UI Automation element.
@@ -215,7 +215,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = last.value;
     free(last);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the next sibling element of the specified UI Automation element.
@@ -236,7 +236,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = next.value;
     free(next);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the previous sibling element of the specified UI Automation
@@ -260,7 +260,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = previous.value;
     free(previous);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the ancestor element nearest to the specified Microsoft UI
@@ -282,7 +282,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = normalized.value;
     free(normalized);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the parent element of the specified UI Automation element, and
@@ -312,7 +312,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = parent.value;
     free(parent);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the first child element of the specified UI Automation element,
@@ -342,7 +342,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = first.value;
     free(first);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the last child element of the specified UI Automation element,
@@ -372,7 +372,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = last.value;
     free(last);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the next sibling element of the specified UI Automation element,
@@ -402,7 +402,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = next.value;
     free(next);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the previous sibling element of the specified UI Automation
@@ -432,7 +432,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = previous.value;
     free(previous);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the ancestor element nearest to the specified Microsoft UI
@@ -463,7 +463,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = normalized.value;
     free(normalized);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Retrieves the condition that defines the view of the UI Automation tree.
@@ -480,7 +480,7 @@ class IUIAutomationTreeWalker extends IUnknown implements ComInterface {
     final result$ = condition.value;
     free(condition);
     if (result$.isNull) return null;
-    return IUIAutomationCondition(result$);
+    return .new(result$);
   }
 
   @override

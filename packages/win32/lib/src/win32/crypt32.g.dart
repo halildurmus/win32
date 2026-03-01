@@ -57,7 +57,7 @@ Win32Result<bool> CryptProtectData(
     dwFlags,
     pDataOut,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Encrypts memory to prevent others from viewing sensitive information in your
@@ -73,7 +73,7 @@ Win32Result<bool> CryptProtectMemory(
   int dwFlags,
 ) {
   final result_ = CryptProtectMemory_Wrapper(pDataIn, cbDataIn, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Decrypts and does an integrity check of the data in a DATA_BLOB structure.
@@ -99,7 +99,7 @@ Win32Result<bool> CryptUnprotectData(
     dwFlags,
     pDataOut,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Decrypts memory that was encrypted using the CryptProtectMemory function.
@@ -114,7 +114,7 @@ Win32Result<bool> CryptUnprotectMemory(
   int dwFlags,
 ) {
   final result_ = CryptUnprotectMemory_Wrapper(pDataIn, cbDataIn, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Migrates the current user's master keys after the user's security identifier
@@ -138,5 +138,5 @@ Win32Result<bool> CryptUpdateProtectedState(
     pdwSuccessCount ?? nullptr,
     pdwFailureCount ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

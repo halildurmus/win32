@@ -40,7 +40,7 @@ final IID_IAppxManifestApplicationsEnumerator = GUID.fromComponents(
   0x9eb8a55a,
   0xf04b,
   0x4d0d,
-  Uint8List.fromList(const [0x80, 0x8d, 0x68, 0x61, 0x85, 0xd4, 0x84, 0x7a]),
+  .fromList(const [0x80, 0x8d, 0x68, 0x61, 0x85, 0xd4, 0x84, 0x7a]),
 );
 
 /// Enumerates the applications defined in the package manifest.
@@ -97,7 +97,7 @@ class IAppxManifestApplicationsEnumerator extends IUnknown
     final result$ = application.value;
     free(application);
     if (result$.isNull) return null;
-    return IAppxManifestApplication(result$);
+    return .new(result$);
   }
 
   /// Determines whether there is an application at the current position of the

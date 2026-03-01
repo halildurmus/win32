@@ -40,7 +40,7 @@ final IID_IAppxManifestQualifiedResource = GUID.fromComponents(
   0x3b53a497,
   0x3c5c,
   0x48d1,
-  Uint8List.fromList(const [0x9e, 0xa3, 0xbb, 0x7e, 0xac, 0x8c, 0xd7, 0xd4]),
+  .fromList(const [0x9e, 0xa3, 0xbb, 0x7e, 0xac, 0x8c, 0xd7, 0xd4]),
 );
 
 /// {@category com}
@@ -87,7 +87,7 @@ class IAppxManifestQualifiedResource extends IUnknown implements ComInterface {
     }
     final result$ = language.value;
     free(language);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -113,7 +113,7 @@ class IAppxManifestQualifiedResource extends IUnknown implements ComInterface {
     }
     final result$ = dxFeatureLevel.value;
     free(dxFeatureLevel);
-    return DX_FEATURE_LEVEL(result$);
+    return .new(result$);
   }
 
   @override

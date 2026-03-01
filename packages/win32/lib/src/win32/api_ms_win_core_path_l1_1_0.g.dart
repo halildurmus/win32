@@ -53,7 +53,7 @@ PWSTR PathAllocCanonicalize(PCWSTR pszPathIn, PATHCCH_OPTIONS dwFlags) {
   }
   final result$ = ppszPathOut.value;
   free(ppszPathOut);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer<Pointer<Utf16>>)>(
@@ -93,7 +93,7 @@ PWSTR PathAllocCombine(
   }
   final result$ = ppszPathOut.value;
   free(ppszPathOut);
-  return PWSTR(result$);
+  return .new(result$);
 }
 
 @Native<

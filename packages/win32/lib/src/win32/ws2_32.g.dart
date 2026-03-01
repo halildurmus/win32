@@ -47,7 +47,7 @@ Win32Result<SOCKET> accept(
   Pointer<Int32>? addrlen,
 ) {
   final result_ = accept_Wrapper(s, addr ?? nullptr, addrlen ?? nullptr);
-  return Win32Result(value: SOCKET(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }
 
 /// Associates a local address with a socket.
@@ -58,7 +58,7 @@ Win32Result<SOCKET> accept(
 /// {@category winsock}
 Win32Result<int> bind(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
   final result_ = bind_Wrapper(s, name, namelen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Closes an existing socket.
@@ -69,7 +69,7 @@ Win32Result<int> bind(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
 /// {@category winsock}
 Win32Result<int> closesocket(SOCKET s) {
   final result_ = closesocket_Wrapper(s);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Establishes a connection to a specified socket.
@@ -80,7 +80,7 @@ Win32Result<int> closesocket(SOCKET s) {
 /// {@category winsock}
 Win32Result<int> connect(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
   final result_ = connect_Wrapper(s, name, namelen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Provides protocol-independent translation from a Unicode host name to an
@@ -126,7 +126,7 @@ external int _GetAddrInfo(
 /// {@category winsock}
 Win32Result<int> gethostname(PSTR name, int namelen) {
   final result_ = gethostname_Wrapper(name, namelen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Provides protocol-independent name resolution from an address to an ANSI
@@ -154,7 +154,7 @@ Win32Result<int> getnameinfo(
     serviceBufferSize,
     flags,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the address of the peer to which a socket is connected.
@@ -169,7 +169,7 @@ Win32Result<int> getpeername(
   Pointer<Int32> namelen,
 ) {
   final result_ = getpeername_Wrapper(s, name, namelen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the protocol information corresponding to a protocol name.
@@ -180,7 +180,7 @@ Win32Result<int> getpeername(
 /// {@category winsock}
 Win32Result<Pointer<PROTOENT>> getprotobyname(PCSTR name) {
   final result_ = getprotobyname_Wrapper(name);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Retrieves protocol information corresponding to a protocol number.
@@ -191,7 +191,7 @@ Win32Result<Pointer<PROTOENT>> getprotobyname(PCSTR name) {
 /// {@category winsock}
 Win32Result<Pointer<PROTOENT>> getprotobynumber(int number) {
   final result_ = getprotobynumber_Wrapper(number);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Retrieves service information corresponding to a service name and protocol.
@@ -202,7 +202,7 @@ Win32Result<Pointer<PROTOENT>> getprotobynumber(int number) {
 /// {@category winsock}
 Win32Result<Pointer<SERVENT>> getservbyname(PCSTR name, PCSTR? proto) {
   final result_ = getservbyname_Wrapper(name, proto ?? nullptr);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Retrieves service information corresponding to a port and protocol.
@@ -213,7 +213,7 @@ Win32Result<Pointer<SERVENT>> getservbyname(PCSTR name, PCSTR? proto) {
 /// {@category winsock}
 Win32Result<Pointer<SERVENT>> getservbyport(int port, PCSTR? proto) {
   final result_ = getservbyport_Wrapper(port, proto ?? nullptr);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Retrieves the local name for a socket.
@@ -228,7 +228,7 @@ Win32Result<int> getsockname(
   Pointer<Int32> namelen,
 ) {
   final result_ = getsockname_Wrapper(s, name, namelen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves a socket option.
@@ -245,7 +245,7 @@ Win32Result<int> getsockopt(
   Pointer<Int32> optlen,
 ) {
   final result_ = getsockopt_Wrapper(s, level, optname, optval, optlen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Converts a u_long from host to TCP/IP network byte order (which is
@@ -257,7 +257,7 @@ Win32Result<int> getsockopt(
 /// {@category winsock}
 Win32Result<int> htonl(int hostlong) {
   final result_ = htonl_Wrapper(hostlong);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Converts a u_short from host to TCP/IP network byte order (which is
@@ -269,7 +269,7 @@ Win32Result<int> htonl(int hostlong) {
 /// {@category winsock}
 Win32Result<int> htons(int hostshort) {
   final result_ = htons_Wrapper(hostshort);
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Converts an IPv4 or IPv6 Internet network address into a string in Internet
@@ -288,10 +288,7 @@ Win32Result<PCSTR> inet_ntop(
   int stringBufSize,
 ) {
   final result_ = inet_ntop_Wrapper(family, pAddr, pStringBuf, stringBufSize);
-  return Win32Result(
-    value: PCSTR(result_.value.ptr.cast()),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr.cast()), error: result_.error);
 }
 
 /// Controls the I/O mode of a socket.
@@ -302,7 +299,7 @@ Win32Result<PCSTR> inet_ntop(
 /// {@category winsock}
 Win32Result<int> ioctlsocket(SOCKET s, int cmd, Pointer<Uint32> argp) {
   final result_ = ioctlsocket_Wrapper(s, cmd, argp);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Places a socket in a state in which it is listening for an incoming
@@ -314,7 +311,7 @@ Win32Result<int> ioctlsocket(SOCKET s, int cmd, Pointer<Uint32> argp) {
 /// {@category winsock}
 Win32Result<int> listen(SOCKET s, int backlog) {
   final result_ = listen_Wrapper(s, backlog);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Converts a u_long from TCP/IP network order to host byte order, which is
@@ -326,7 +323,7 @@ Win32Result<int> listen(SOCKET s, int backlog) {
 /// {@category winsock}
 Win32Result<int> ntohl(int netlong) {
   final result_ = ntohl_Wrapper(netlong);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Converts a u_short from TCP/IP network byte order to host byte order, which
@@ -338,7 +335,7 @@ Win32Result<int> ntohl(int netlong) {
 /// {@category winsock}
 Win32Result<int> ntohs(int netshort) {
   final result_ = ntohs_Wrapper(netshort);
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Receives data from a connected socket or a bound connectionless socket.
@@ -349,7 +346,7 @@ Win32Result<int> ntohs(int netshort) {
 /// {@category winsock}
 Win32Result<int> recv(SOCKET s, PSTR buf, int len, SEND_RECV_FLAGS flags) {
   final result_ = recv_Wrapper(s, buf, len, flags);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Receives a datagram and stores the source address.
@@ -374,7 +371,7 @@ Win32Result<int> recvfrom(
     from ?? nullptr,
     fromlen ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Determines the status of one or more sockets, waiting if necessary, to
@@ -398,7 +395,7 @@ Win32Result<int> select(
     exceptfds ?? nullptr,
     timeout ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sends data on a connected socket.
@@ -409,7 +406,7 @@ Win32Result<int> select(
 /// {@category winsock}
 Win32Result<int> send(SOCKET s, PCSTR buf, int len, SEND_RECV_FLAGS flags) {
   final result_ = send_Wrapper(s, buf, len, flags);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Sends data to a specific destination.
@@ -427,7 +424,7 @@ Win32Result<int> sendto(
   int tolen,
 ) {
   final result_ = sendto_Wrapper(s, buf, len, flags, to, tolen);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Disables sends or receives on a socket.
@@ -438,7 +435,7 @@ Win32Result<int> sendto(
 /// {@category winsock}
 Win32Result<int> shutdown(SOCKET s, WINSOCK_SHUTDOWN_HOW how) {
   final result_ = shutdown_Wrapper(s, how);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Creates a socket that is bound to a specific transport service provider.
@@ -449,5 +446,5 @@ Win32Result<int> shutdown(SOCKET s, WINSOCK_SHUTDOWN_HOW how) {
 /// {@category winsock}
 Win32Result<SOCKET> socket(int af, WINSOCK_SOCKET_TYPE type, int protocol) {
   final result_ = socket_Wrapper(af, type, protocol);
-  return Win32Result(value: SOCKET(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_.value.i64), error: result_.error);
 }

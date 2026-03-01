@@ -43,7 +43,7 @@ final IID_IAudioSessionManager2 = GUID.fromComponents(
   0x77aa99a0,
   0x1bd6,
   0x484f,
-  Uint8List.fromList(const [0x8b, 0xc7, 0x2c, 0x65, 0x4c, 0x9a, 0x9b, 0x6f]),
+  .fromList(const [0x8b, 0xc7, 0x2c, 0x65, 0x4c, 0x9a, 0x9b, 0x6f]),
 );
 
 /// Enables an application to manage submixes for the audio device.
@@ -111,7 +111,7 @@ class IAudioSessionManager2 extends IAudioSessionManager
     final result$ = sessionEnum.value;
     free(sessionEnum);
     if (result$.isNull) return null;
-    return IAudioSessionEnumerator(result$);
+    return .new(result$);
   }
 
   /// Registers the application to receive a notification when a session is

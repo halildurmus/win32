@@ -41,7 +41,7 @@ final IID_IEnumVARIANT = GUID.fromComponents(
   0x20404,
   0x0,
   0x0,
-  Uint8List.fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
+  .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
 /// Provides a method for enumerating a collection of variants, including
@@ -124,7 +124,7 @@ class IEnumVARIANT extends IUnknown implements ComInterface {
     final result$ = ppEnum.value;
     free(ppEnum);
     if (result$.isNull) return null;
-    return IEnumVARIANT(result$);
+    return .new(result$);
   }
 
   @override

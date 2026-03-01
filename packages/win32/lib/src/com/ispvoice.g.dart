@@ -44,7 +44,7 @@ final IID_ISpVoice = GUID.fromComponents(
   0x6c44df74,
   0x72b9,
   0x4992,
-  Uint8List.fromList(const [0xa1, 0xec, 0xef, 0x99, 0x6e, 0x4, 0x22, 0xd4]),
+  .fromList(const [0xa1, 0xec, 0xef, 0x99, 0x6e, 0x4, 0x22, 0xd4]),
 );
 
 /// Enables an application to perform text synthesis operations.
@@ -183,7 +183,7 @@ class ISpVoice extends ISpEventSource implements ComInterface {
     final result$ = ppObjectToken.value;
     free(ppObjectToken);
     if (result$.isNull) return null;
-    return ISpObjectToken(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -197,7 +197,7 @@ class ISpVoice extends ISpEventSource implements ComInterface {
     final result$ = ppStream.value;
     free(ppStream);
     if (result$.isNull) return null;
-    return ISpStreamFormat(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.
@@ -232,7 +232,7 @@ class ISpVoice extends ISpEventSource implements ComInterface {
     final result$ = ppToken.value;
     free(ppToken);
     if (result$.isNull) return null;
-    return ISpObjectToken(result$);
+    return .new(result$);
   }
 
   /// Throws a [WindowsException] on failure.

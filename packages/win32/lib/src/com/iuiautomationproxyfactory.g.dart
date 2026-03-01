@@ -40,7 +40,7 @@ final IID_IUIAutomationProxyFactory = GUID.fromComponents(
   0x85b94ecd,
   0x849d,
   0x42b6,
-  Uint8List.fromList(const [0xb9, 0x4d, 0xd6, 0xdb, 0x23, 0xfd, 0xf5, 0xa4]),
+  .fromList(const [0xb9, 0x4d, 0xd6, 0xdb, 0x23, 0xfd, 0xf5, 0xa4]),
 );
 
 /// Exposes properties and methods of an object that creates a Microsoft UI
@@ -105,7 +105,7 @@ class IUIAutomationProxyFactory extends IUnknown implements ComInterface {
     final result$ = provider.value;
     free(provider);
     if (result$.isNull) return null;
-    return IRawElementProviderSimple(result$);
+    return .new(result$);
   }
 
   /// Retrieves the identifier of the proxy factory.
@@ -121,7 +121,7 @@ class IUIAutomationProxyFactory extends IUnknown implements ComInterface {
     }
     final result$ = factoryId.value;
     free(factoryId);
-    return BSTR(result$);
+    return .new(result$);
   }
 
   @override

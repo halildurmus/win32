@@ -43,7 +43,7 @@ import '../win32_result.dart';
 IStream? SHCreateMemStream(Pointer<Uint8>? pInit, int cbInit) {
   final result = _SHCreateMemStream(pInit ?? nullptr, cbInit);
   if (result.isNull) return null;
-  return IStream(result);
+  return .new(result);
 }
 
 @Native<VTablePointer Function(Pointer<Uint8>, Uint32)>(

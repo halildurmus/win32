@@ -46,7 +46,7 @@ final IID_IUIAutomationElement7 = GUID.fromComponents(
   0x204e8572,
   0xcfc3,
   0x4c11,
-  Uint8List.fromList(const [0xb0, 0xc8, 0x7d, 0xa7, 0x42, 0x7, 0x50, 0xb7]),
+  .fromList(const [0xb0, 0xc8, 0x7d, 0xa7, 0x42, 0x7, 0x50, 0xb7]),
 );
 
 /// Extends the IUIAutomationElement6 interface.
@@ -158,7 +158,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Find all matching elements in the specified order.
@@ -191,7 +191,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Finds the first matching element in the specified order, but also caches
@@ -227,7 +227,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   /// Finds all matching elements in the specified order, but also caches their
@@ -263,7 +263,7 @@ class IUIAutomationElement7 extends IUIAutomationElement6
     final result$ = found.value;
     free(found);
     if (result$.isNull) return null;
-    return IUIAutomationElementArray(result$);
+    return .new(result$);
   }
 
   /// Gets metadata from the UI Automation element that indicates how the

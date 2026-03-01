@@ -44,7 +44,6 @@ const constantFileHeader = '''
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'guid.dart';
 import 'hresult.dart';
@@ -141,7 +140,6 @@ const structFileHeader = '''
 // ignore_for_file: unused_field
 
 import 'dart:ffi';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';

@@ -44,7 +44,7 @@ import '../win32_result.dart';
 /// {@category kernel32}
 Win32Result<bool> ActivateActCtx(HANDLE? hActCtx, Pointer<IntPtr> lpCookie) {
   final result_ = ActivateActCtx_Wrapper(hActCtx ?? nullptr, lpCookie);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds a directory to the process DLL search path.
@@ -55,7 +55,7 @@ Win32Result<bool> ActivateActCtx(HANDLE? hActCtx, Pointer<IntPtr> lpCookie) {
 /// {@category kernel32}
 Win32Result<Pointer> AddDllDirectory(PCWSTR newDirectory) {
   final result_ = AddDllDirectory_Wrapper(newDirectory);
-  return Win32Result(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_.value.ptr, error: result_.error);
 }
 
 /// Increments the reference count of the specified activation context.
@@ -78,7 +78,7 @@ external void _AddRefActCtx(Pointer hActCtx);
 /// {@category kernel32}
 Win32Result<bool> AllocConsole() {
   final result_ = AllocConsole_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the file I/O functions are using the ANSI or OEM
@@ -102,7 +102,7 @@ external int _AreFileApisANSI();
 /// {@category kernel32}
 Win32Result<bool> AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess) {
   final result_ = AssignProcessToJobObject_Wrapper(hJob, hProcess);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Attaches the calling process to the console of the specified process.
@@ -113,7 +113,7 @@ Win32Result<bool> AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess) {
 /// {@category kernel32}
 Win32Result<bool> AttachConsole(int dwProcessId) {
   final result_ = AttachConsole_Wrapper(dwProcessId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Generates simple tones on the speaker.
@@ -124,7 +124,7 @@ Win32Result<bool> AttachConsole(int dwProcessId) {
 /// {@category kernel32}
 Win32Result<bool> Beep(int dwFreq, int dwDuration) {
   final result_ = Beep_Wrapper(dwFreq, dwDuration);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a handle that can be used by the UpdateResource function to add,
@@ -142,7 +142,7 @@ Win32Result<HANDLE> BeginUpdateResource(
     pFileName,
     bDeleteExistingResources ? TRUE : FALSE,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Fills a specified DCB structure with values specified in a device-control
@@ -154,7 +154,7 @@ Win32Result<HANDLE> BeginUpdateResource(
 /// {@category kernel32}
 Win32Result<bool> BuildCommDCB(PCWSTR lpDef, Pointer<DCB> lpDCB) {
   final result_ = BuildCommDCBW_Wrapper(lpDef, lpDCB);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Translates a device-definition string into appropriate device-control block
@@ -174,7 +174,7 @@ Win32Result<bool> BuildCommDCBAndTimeouts(
     lpDCB,
     lpCommTimeouts,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Connects to a message-type pipe (and waits if an instance of the pipe is not
@@ -235,7 +235,7 @@ external int _CallNamedPipe(
 /// {@category kernel32}
 Win32Result<bool> CancelIo(HANDLE hFile) {
   final result_ = CancelIo_Wrapper(hFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Marks any outstanding I/O operations for the specified file handle.
@@ -249,7 +249,7 @@ Win32Result<bool> CancelIo(HANDLE hFile) {
 /// {@category kernel32}
 Win32Result<bool> CancelIoEx(HANDLE hFile, Pointer<OVERLAPPED>? lpOverlapped) {
   final result_ = CancelIoEx_Wrapper(hFile, lpOverlapped ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Marks pending synchronous I/O operations that are issued by the specified
@@ -261,7 +261,7 @@ Win32Result<bool> CancelIoEx(HANDLE hFile, Pointer<OVERLAPPED>? lpOverlapped) {
 /// {@category kernel32}
 Win32Result<bool> CancelSynchronousIo(HANDLE hThread) {
   final result_ = CancelSynchronousIo_Wrapper(hThread);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the specified process is being debugged.
@@ -278,7 +278,7 @@ Win32Result<bool> CheckRemoteDebuggerPresent(
     hProcess,
     pbDebuggerPresent,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Restores character transmission for a specified communications device and
@@ -290,7 +290,7 @@ Win32Result<bool> CheckRemoteDebuggerPresent(
 /// {@category kernel32}
 Win32Result<bool> ClearCommBreak(HANDLE hFile) {
   final result_ = ClearCommBreak_Wrapper(hFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about a communications error and reports the current
@@ -310,7 +310,7 @@ Win32Result<bool> ClearCommError(
     lpErrors ?? nullptr,
     lpStat ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes an open object handle.
@@ -321,7 +321,7 @@ Win32Result<bool> ClearCommError(
 /// {@category kernel32}
 Win32Result<bool> CloseHandle(HANDLE hObject) {
   final result_ = CloseHandle_Wrapper(hObject);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a pseudoconsole from the given handle.
@@ -348,7 +348,7 @@ Win32Result<bool> CommConfigDialog(
   Pointer<COMMCONFIG> lpCC,
 ) {
   final result_ = CommConfigDialogW_Wrapper(lpszName, hWnd ?? nullptr, lpCC);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables a named pipe server process to wait for a client process to connect
@@ -363,7 +363,7 @@ Win32Result<bool> ConnectNamedPipe(
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
   final result_ = ConnectNamedPipe_Wrapper(hNamedPipe, lpOverlapped ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables a debugger to continue a thread that previously reported a debugging
@@ -383,7 +383,7 @@ Win32Result<bool> ContinueDebugEvent(
     dwThreadId,
     dwContinueStatus,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies an existing file to a new file.
@@ -402,7 +402,7 @@ Win32Result<bool> CopyFile(
     lpNewFileName,
     bFailIfExists ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies an existing file to a new file, notifying the application of its
@@ -428,7 +428,7 @@ Win32Result<bool> CopyFileEx(
     pbCancel ?? nullptr,
     dwCopyFlags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates an activation context.
@@ -439,7 +439,7 @@ Win32Result<bool> CopyFileEx(
 /// {@category kernel32}
 Win32Result<HANDLE> CreateActCtx(Pointer<ACTCTX> pActCtx) {
   final result_ = CreateActCtxW_Wrapper(pActCtx);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a screen buffer for the Windows Console.
@@ -461,7 +461,7 @@ Win32Result<HANDLE> CreateConsoleScreenBuffer(
     dwFlags,
     nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a new directory.
@@ -478,7 +478,7 @@ Win32Result<bool> CreateDirectory(
     lpPathName,
     lpSecurityAttributes ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates or opens a named or unnamed event object.
@@ -499,7 +499,7 @@ Win32Result<HANDLE> CreateEvent(
     bInitialState ? TRUE : FALSE,
     lpName ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates or opens a named or unnamed event object and returns a handle to the
@@ -521,7 +521,7 @@ Win32Result<HANDLE> CreateEventEx(
     dwFlags,
     dwDesiredAccess,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates or opens a file or I/O device.
@@ -552,7 +552,7 @@ Win32Result<HANDLE> CreateFile(
     dwFlagsAndAttributes,
     hTemplateFile ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates or opens a file or I/O device.
@@ -575,7 +575,7 @@ Win32Result<HANDLE> CreateFile2(
     dwCreationDisposition,
     pCreateExParams ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an input/output (I/O) completion port and associates it with a
@@ -598,7 +598,7 @@ Win32Result<HANDLE> CreateIoCompletionPort(
     completionKey,
     numberOfConcurrentThreads,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates or opens a job object.
@@ -615,7 +615,7 @@ Win32Result<HANDLE> CreateJobObject(
     lpJobAttributes ?? nullptr,
     lpName ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an instance of a named pipe and returns a handle for subsequent pipe
@@ -690,7 +690,7 @@ Win32Result<bool> CreatePipe(
     lpPipeAttributes ?? nullptr,
     nSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a new process and its primary thread.
@@ -725,7 +725,7 @@ Win32Result<bool> CreateProcess(
     lpStartupInfo,
     lpProcessInformation,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Allocates a new pseudoconsole for the calling process.
@@ -752,7 +752,7 @@ HPCON CreatePseudoConsole(
   }
   final result$ = phPC.value;
   free(phPC);
-  return HPCON(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(COORD, Pointer, Pointer, Uint32, Pointer<IntPtr>)>(
@@ -790,7 +790,7 @@ Win32Result<HANDLE> CreateRemoteThread(
     dwCreationFlags,
     lpThreadId ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a thread that runs in the virtual address space of another process
@@ -821,7 +821,7 @@ Win32Result<HANDLE> CreateRemoteThreadEx(
     lpAttributeList ?? nullptr,
     lpThreadId ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates a symbolic link.
@@ -840,7 +840,7 @@ Win32Result<bool> CreateSymbolicLink(
     lpTargetFileName,
     dwFlags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a thread to execute within the virtual address space of the calling
@@ -866,7 +866,7 @@ Win32Result<HANDLE> CreateThread(
     dwCreationFlags,
     lpThreadId ?? nullptr,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Deactivates the activation context corresponding to the specified cookie.
@@ -877,7 +877,7 @@ Win32Result<HANDLE> CreateThread(
 /// {@category kernel32}
 Win32Result<bool> DeactivateActCtx(int dwFlags, int ulCookie) {
   final result_ = DeactivateActCtx_Wrapper(dwFlags, ulCookie);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Causes a breakpoint exception to occur in the current process.
@@ -906,7 +906,7 @@ external void _DebugBreak();
 /// {@category kernel32}
 Win32Result<bool> DebugBreakProcess(HANDLE process) {
   final result_ = DebugBreakProcess_Wrapper(process);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the action to be performed when the calling thread exits.
@@ -917,7 +917,7 @@ Win32Result<bool> DebugBreakProcess(HANDLE process) {
 /// {@category kernel32}
 Win32Result<bool> DebugSetProcessKillOnExit(bool killOnExit) {
   final result_ = DebugSetProcessKillOnExit_Wrapper(killOnExit ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Defines, redefines, or deletes MS-DOS device names.
@@ -936,7 +936,7 @@ Win32Result<bool> DefineDosDevice(
     lpDeviceName,
     lpTargetPath ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Deletes an existing file.
@@ -947,7 +947,7 @@ Win32Result<bool> DefineDosDevice(
 /// {@category kernel32}
 Win32Result<bool> DeleteFile(PCWSTR lpFileName) {
   final result_ = DeleteFileW_Wrapper(lpFileName);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Deletes the specified list of attributes for process and thread creation.
@@ -972,7 +972,7 @@ external void _DeleteProcThreadAttributeList(Pointer lpAttributeList);
 /// {@category kernel32}
 Win32Result<bool> DeleteVolumeMountPoint(PCWSTR lpszVolumeMountPoint) {
   final result_ = DeleteVolumeMountPointW_Wrapper(lpszVolumeMountPoint);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sends a control code directly to a specified device driver, causing the
@@ -1002,7 +1002,7 @@ Win32Result<bool> DeviceIoControl(
     lpBytesReturned ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the
@@ -1014,7 +1014,7 @@ Win32Result<bool> DeviceIoControl(
 /// {@category kernel32}
 Win32Result<bool> DisableThreadLibraryCalls(HMODULE hLibModule) {
   final result_ = DisableThreadLibraryCalls_Wrapper(hLibModule);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Disconnects the server end of a named pipe instance from a client process.
@@ -1025,7 +1025,7 @@ Win32Result<bool> DisableThreadLibraryCalls(HMODULE hLibModule) {
 /// {@category kernel32}
 Win32Result<bool> DisconnectNamedPipe(HANDLE hNamedPipe) {
   final result_ = DisconnectNamedPipe_Wrapper(hNamedPipe);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Converts a DNS-style host name to a NetBIOS-style computer name.
@@ -1044,7 +1044,7 @@ Win32Result<bool> DnsHostnameToComputerName(
     computerName ?? nullptr,
     nSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Converts MS-DOS date and time values to a file time.
@@ -1059,7 +1059,7 @@ Win32Result<bool> DosDateTimeToFileTime(
   Pointer<FILETIME> lpFileTime,
 ) {
   final result_ = DosDateTimeToFileTime_Wrapper(wFatDate, wFatTime, lpFileTime);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Duplicates an object handle.
@@ -1086,7 +1086,7 @@ Win32Result<bool> DuplicateHandle(
     bInheritHandle ? TRUE : FALSE,
     dwOptions,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Commits or discards changes made prior to a call to UpdateResource.
@@ -1097,7 +1097,7 @@ Win32Result<bool> DuplicateHandle(
 /// {@category kernel32}
 Win32Result<bool> EndUpdateResource(HANDLE hUpdate, bool fDiscard) {
   final result_ = EndUpdateResourceW_Wrapper(hUpdate, fDiscard ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates resources of a specified type within a binary module.
@@ -1146,7 +1146,7 @@ Win32Result<bool> EnumResourceTypes(
     lpEnumFunc,
     lParam,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates all system firmware tables of the specified type.
@@ -1165,7 +1165,7 @@ Win32Result<int> EnumSystemFirmwareTables(
     pFirmwareTableEnumBuffer ?? nullptr,
     bufferSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Directs the specified communications device to perform an extended function.
@@ -1179,7 +1179,7 @@ Win32Result<bool> EscapeCommFunction(
   ESCAPE_COMM_FUNCTION dwFunc,
 ) {
   final result_ = EscapeCommFunction_Wrapper(hFile, dwFunc);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Ends the calling process and all its threads.
@@ -1222,7 +1222,7 @@ Win32Result<bool> FileTimeToDosDateTime(
     lpFatDate,
     lpFatTime,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Converts a file time to system time format.
@@ -1238,7 +1238,7 @@ Win32Result<bool> FileTimeToSystemTime(
   Pointer<SYSTEMTIME> lpSystemTime,
 ) {
   final result_ = FileTimeToSystemTime_Wrapper(lpFileTime, lpSystemTime);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the character attributes for a specified number of character cells,
@@ -1262,7 +1262,7 @@ Win32Result<bool> FillConsoleOutputAttribute(
     dwWriteCoord,
     lpNumberOfAttrsWritten,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Writes a character to the console screen buffer a specified number of times,
@@ -1286,7 +1286,7 @@ Win32Result<bool> FillConsoleOutputCharacter(
     dwWriteCoord,
     lpNumberOfCharsWritten,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a file search handle opened by the FindFirstFile, FindFirstFileEx,
@@ -1299,7 +1299,7 @@ Win32Result<bool> FillConsoleOutputCharacter(
 /// {@category kernel32}
 Win32Result<bool> FindClose(HANDLE hFindFile) {
   final result_ = FindClose_Wrapper(hFindFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Stops change notification handle monitoring.
@@ -1310,7 +1310,7 @@ Win32Result<bool> FindClose(HANDLE hFindFile) {
 /// {@category kernel32}
 Win32Result<bool> FindCloseChangeNotification(HANDLE hChangeHandle) {
   final result_ = FindCloseChangeNotification_Wrapper(hChangeHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a change notification handle and sets up initial change notification
@@ -1330,7 +1330,7 @@ Win32Result<HANDLE> FindFirstChangeNotification(
     bWatchSubtree ? TRUE : FALSE,
     dwNotifyFilter,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Searches a directory for a file or subdirectory with a name that matches a
@@ -1345,7 +1345,7 @@ Win32Result<HANDLE> FindFirstFile(
   Pointer<WIN32_FIND_DATA> lpFindFileData,
 ) {
   final result_ = FindFirstFileW_Wrapper(lpFileName, lpFindFileData);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Searches a directory for a file or subdirectory with a name and attributes
@@ -1370,7 +1370,7 @@ Win32Result<HANDLE> FindFirstFileEx(
     nullptr,
     dwAdditionalFlags,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Creates an enumeration of all the hard links to the specified file.
@@ -1394,7 +1394,7 @@ Win32Result<HANDLE> FindFirstFileName(
     stringLength,
     linkName,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Enumerates the first stream with a ::$DATA stream type in the specified file
@@ -1415,7 +1415,7 @@ Win32Result<HANDLE> FindFirstStream(
     lpFindStreamData,
     NULL,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves the name of a volume on a computer.
@@ -1426,7 +1426,7 @@ Win32Result<HANDLE> FindFirstStream(
 /// {@category kernel32}
 Win32Result<HANDLE> FindFirstVolume(PWSTR lpszVolumeName, int cchBufferLength) {
   final result_ = FindFirstVolumeW_Wrapper(lpszVolumeName, cchBufferLength);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Requests that the operating system signal a change notification handle the
@@ -1438,7 +1438,7 @@ Win32Result<HANDLE> FindFirstVolume(PWSTR lpszVolumeName, int cchBufferLength) {
 /// {@category kernel32}
 Win32Result<bool> FindNextChangeNotification(HANDLE hChangeHandle) {
   final result_ = FindNextChangeNotification_Wrapper(hChangeHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Continues a file search from a previous call to the FindFirstFile,
@@ -1453,7 +1453,7 @@ Win32Result<bool> FindNextFile(
   Pointer<WIN32_FIND_DATA> lpFindFileData,
 ) {
   final result_ = FindNextFileW_Wrapper(hFindFile, lpFindFileData);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Continues enumerating the hard links to a file using the handle returned by
@@ -1473,7 +1473,7 @@ Win32Result<bool> FindNextFileName(
     stringLength,
     linkName,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Continues a stream search started by a previous call to the FindFirstStreamW
@@ -1485,7 +1485,7 @@ Win32Result<bool> FindNextFileName(
 /// {@category kernel32}
 Win32Result<bool> FindNextStream(HANDLE hFindStream, Pointer lpFindStreamData) {
   final result_ = FindNextStreamW_Wrapper(hFindStream, lpFindStreamData);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Continues a volume search started by a call to the FindFirstVolume function.
@@ -1504,7 +1504,7 @@ Win32Result<bool> FindNextVolume(
     lpszVolumeName,
     cchBufferLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Finds the packages with the specified family name for the current user.
@@ -1522,7 +1522,7 @@ WIN32_ERROR FindPackagesByPackageFamily(
   Pointer<Uint32> bufferLength,
   PWSTR? buffer,
   Pointer<Uint32>? packageProperties,
-) => WIN32_ERROR(
+) => .new(
   _FindPackagesByPackageFamily(
     packageFamilyName,
     packageFilters,
@@ -1623,7 +1623,7 @@ Win32Result<int> FindStringOrdinal(
     cchValue,
     bIgnoreCase ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Closes the specified volume search handle.
@@ -1634,7 +1634,7 @@ Win32Result<int> FindStringOrdinal(
 /// {@category kernel32}
 Win32Result<bool> FindVolumeClose(HANDLE hFindVolume) {
   final result_ = FindVolumeClose_Wrapper(hFindVolume);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Flushes the console input buffer.
@@ -1647,7 +1647,7 @@ Win32Result<bool> FindVolumeClose(HANDLE hFindVolume) {
 /// {@category kernel32}
 Win32Result<bool> FlushConsoleInputBuffer(HANDLE hConsoleInput) {
   final result_ = FlushConsoleInputBuffer_Wrapper(hConsoleInput);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Flushes the buffers of a specified file and causes all buffered data to be
@@ -1659,7 +1659,7 @@ Win32Result<bool> FlushConsoleInputBuffer(HANDLE hConsoleInput) {
 /// {@category kernel32}
 Win32Result<bool> FlushFileBuffers(HANDLE hFile) {
   final result_ = FlushFileBuffers_Wrapper(hFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Formats a message string.
@@ -1686,7 +1686,7 @@ Win32Result<int> FormatMessage(
     nSize,
     arguments ?? nullptr,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Detaches the calling process from its console.
@@ -1697,7 +1697,7 @@ Win32Result<int> FormatMessage(
 /// {@category kernel32}
 Win32Result<bool> FreeConsole() {
   final result_ = FreeConsole_Wrapper();
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Frees the loaded dynamic-link library (DLL) module and, if necessary,
@@ -1709,7 +1709,7 @@ Win32Result<bool> FreeConsole() {
 /// {@category kernel32}
 Win32Result<bool> FreeLibrary(HMODULE hLibModule) {
   final result_ = FreeLibrary_Wrapper(hLibModule);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Decrements the reference count of a loaded dynamic-link library (DLL) by
@@ -1750,7 +1750,7 @@ external void _FreeMemoryJobObject(Pointer buffer);
 /// {@category kernel32}
 Win32Result<int> GetActiveProcessorCount(int groupNumber) {
   final result_ = GetActiveProcessorCount_Wrapper(groupNumber);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Returns the number of active processor groups in the system.
@@ -1777,7 +1777,7 @@ Win32Result<bool> GetBinaryType(
   Pointer<Uint32> lpBinaryType,
 ) {
   final result_ = GetBinaryTypeW_Wrapper(lpApplicationName, lpBinaryType);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the command-line string for the current process.
@@ -1804,7 +1804,7 @@ Win32Result<bool> GetCommConfig(
   Pointer<Uint32> lpdwSize,
 ) {
   final result_ = GetCommConfig_Wrapper(hCommDev, lpCC ?? nullptr, lpdwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the value of the event mask for a specified communications device.
@@ -1815,7 +1815,7 @@ Win32Result<bool> GetCommConfig(
 /// {@category kernel32}
 Win32Result<bool> GetCommMask(HANDLE hFile, Pointer<Uint32> lpEvtMask) {
   final result_ = GetCommMask_Wrapper(hFile, lpEvtMask);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the modem control-register values.
@@ -1829,7 +1829,7 @@ Win32Result<bool> GetCommModemStatus(
   Pointer<Uint32> lpModemStat,
 ) {
   final result_ = GetCommModemStatus_Wrapper(hFile, lpModemStat);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the communications properties for a specified
@@ -1844,7 +1844,7 @@ Win32Result<bool> GetCommProperties(
   Pointer<COMMPROP> lpCommProp,
 ) {
   final result_ = GetCommProperties_Wrapper(hFile, lpCommProp);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current control settings for a specified communications
@@ -1856,7 +1856,7 @@ Win32Result<bool> GetCommProperties(
 /// {@category kernel32}
 Win32Result<bool> GetCommState(HANDLE hFile, Pointer<DCB> lpDCB) {
   final result_ = GetCommState_Wrapper(hFile, lpDCB);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the time-out parameters for all read and write operations on a
@@ -1871,7 +1871,7 @@ Win32Result<bool> GetCommTimeouts(
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
 ) {
   final result_ = GetCommTimeouts_Wrapper(hFile, lpCommTimeouts);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the actual number of bytes of disk storage used to store a
@@ -1889,7 +1889,7 @@ Win32Result<int> GetCompressedFileSize(
     lpFileName,
     lpFileSizeHigh ?? nullptr,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the NetBIOS name of the local computer.
@@ -1903,7 +1903,7 @@ Win32Result<int> GetCompressedFileSize(
 /// {@category kernel32}
 Win32Result<bool> GetComputerName(PWSTR? lpBuffer, Pointer<Uint32> nSize) {
   final result_ = GetComputerNameW_Wrapper(lpBuffer ?? nullptr, nSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a NetBIOS or DNS name associated with the local computer.
@@ -1925,7 +1925,7 @@ Win32Result<bool> GetComputerNameEx(
     lpBuffer ?? nullptr,
     nSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the input code page used by the console associated with the
@@ -1937,7 +1937,7 @@ Win32Result<bool> GetComputerNameEx(
 /// {@category kernel32}
 Win32Result<int> GetConsoleCP() {
   final result_ = GetConsoleCP_Wrapper();
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the size and visibility of the cursor for the
@@ -1955,7 +1955,7 @@ Win32Result<bool> GetConsoleCursorInfo(
     hConsoleOutput,
     lpConsoleCursorInfo,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current input mode of a console's input buffer or the current
@@ -1970,7 +1970,7 @@ Win32Result<bool> GetConsoleMode(
   Pointer<Uint32> lpMode,
 ) {
   final result_ = GetConsoleMode_Wrapper(hConsoleHandle, lpMode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the output code page used by the console associated with the
@@ -1982,7 +1982,7 @@ Win32Result<bool> GetConsoleMode(
 /// {@category kernel32}
 Win32Result<int> GetConsoleOutputCP() {
   final result_ = GetConsoleOutputCP_Wrapper();
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the specified console screen buffer.
@@ -1999,7 +1999,7 @@ Win32Result<bool> GetConsoleScreenBufferInfo(
     hConsoleOutput,
     lpConsoleScreenBufferInfo,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the current console selection.
@@ -2012,7 +2012,7 @@ Win32Result<bool> GetConsoleSelectionInfo(
   Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo,
 ) {
   final result_ = GetConsoleSelectionInfo_Wrapper(lpConsoleSelectionInfo);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the title and size of the title for the current console window.
@@ -2023,7 +2023,7 @@ Win32Result<bool> GetConsoleSelectionInfo(
 /// {@category kernel32}
 Win32Result<int> GetConsoleTitle(PWSTR lpConsoleTitle, int nSize) {
   final result_ = GetConsoleTitleW_Wrapper(lpConsoleTitle, nSize);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the window handle used by the console associated with the calling
@@ -2047,7 +2047,7 @@ external Pointer _GetConsoleWindow();
 /// {@category kernel32}
 Win32Result<bool> GetCurrentActCtx(Pointer<Pointer> lphActCtx) {
   final result_ = GetCurrentActCtx_Wrapper(lphActCtx);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current directory for the current process.
@@ -2073,7 +2073,7 @@ external int _GetCurrentDirectory(int nBufferLength, Pointer<Utf16> lpBuffer);
 WIN32_ERROR GetCurrentPackageFullName(
   Pointer<Uint32> packageFullNameLength,
   PWSTR? packageFullName,
-) => WIN32_ERROR(
+) => .new(
   _GetCurrentPackageFullName(packageFullNameLength, packageFullName ?? nullptr),
 );
 
@@ -2158,7 +2158,7 @@ Win32Result<bool> GetDefaultCommConfig(
   Pointer<Uint32> lpdwSize,
 ) {
   final result_ = GetDefaultCommConfigW_Wrapper(lpszName, lpCC, lpdwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the specified disk, including the amount of free
@@ -2182,7 +2182,7 @@ Win32Result<bool> GetDiskFreeSpace(
     lpNumberOfFreeClusters ?? nullptr,
     lpTotalNumberOfClusters ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the amount of space that is available on a disk
@@ -2206,7 +2206,7 @@ Win32Result<bool> GetDiskFreeSpaceEx(
     lpTotalNumberOfBytes ?? nullptr,
     lpTotalNumberOfFreeBytes ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the application-specific portion of the search path used to locate
@@ -2218,7 +2218,7 @@ Win32Result<bool> GetDiskFreeSpaceEx(
 /// {@category kernel32}
 Win32Result<int> GetDllDirectory(int nBufferLength, PWSTR? lpBuffer) {
   final result_ = GetDllDirectoryW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or
@@ -2252,7 +2252,7 @@ Win32Result<int> GetEnvironmentVariable(
     lpBuffer ?? nullptr,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the termination status of the specified process.
@@ -2266,7 +2266,7 @@ Win32Result<bool> GetExitCodeProcess(
   Pointer<Uint32> lpExitCode,
 ) {
   final result_ = GetExitCodeProcess_Wrapper(hProcess, lpExitCode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves file system attributes for a specified file or directory.
@@ -2277,7 +2277,7 @@ Win32Result<bool> GetExitCodeProcess(
 /// {@category kernel32}
 Win32Result<int> GetFileAttributes(PCWSTR lpFileName) {
   final result_ = GetFileAttributesW_Wrapper(lpFileName);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves attributes for a specified file or directory.
@@ -2296,7 +2296,7 @@ Win32Result<bool> GetFileAttributesEx(
     fInfoLevelId,
     lpFileInformation,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves file information for the specified file.
@@ -2310,7 +2310,7 @@ Win32Result<bool> GetFileInformationByHandle(
   Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation,
 ) {
   final result_ = GetFileInformationByHandle_Wrapper(hFile, lpFileInformation);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the size of the specified file, in bytes.
@@ -2321,7 +2321,7 @@ Win32Result<bool> GetFileInformationByHandle(
 /// {@category kernel32}
 Win32Result<int> GetFileSize(HANDLE hFile, Pointer<Uint32>? lpFileSizeHigh) {
   final result_ = GetFileSize_Wrapper(hFile, lpFileSizeHigh ?? nullptr);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the size of the specified file.
@@ -2332,7 +2332,7 @@ Win32Result<int> GetFileSize(HANDLE hFile, Pointer<Uint32>? lpFileSizeHigh) {
 /// {@category kernel32}
 Win32Result<bool> GetFileSizeEx(HANDLE hFile, Pointer<Int64> lpFileSize) {
   final result_ = GetFileSizeEx_Wrapper(hFile, lpFileSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the file type of the specified file.
@@ -2343,7 +2343,7 @@ Win32Result<bool> GetFileSizeEx(HANDLE hFile, Pointer<Int64> lpFileSize) {
 /// {@category kernel32}
 Win32Result<FILE_TYPE> GetFileType(HANDLE hFile) {
   final result_ = GetFileType_Wrapper(hFile);
-  return Win32Result(value: FILE_TYPE(result_.value.u32), error: result_.error);
+  return .new(value: .new(result_.value.u32), error: result_.error);
 }
 
 /// Retrieves the final path for the specified file.
@@ -2364,7 +2364,7 @@ Win32Result<int> GetFinalPathNameByHandle(
     cchFilePath,
     dwFlags,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the full path and file name of the specified file.
@@ -2385,7 +2385,7 @@ Win32Result<int> GetFullPathName(
     lpBuffer ?? nullptr,
     lpFilePart ?? nullptr,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves certain properties of an object handle.
@@ -2399,7 +2399,7 @@ Win32Result<bool> GetHandleInformation(
   Pointer<Uint32> lpdwFlags,
 ) {
   final result_ = GetHandleInformation_Wrapper(hObject, lpdwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the size of the largest possible console window, based on the
@@ -2411,7 +2411,7 @@ Win32Result<bool> GetHandleInformation(
 /// {@category kernel32}
 Win32Result<COORD> GetLargestConsoleWindowSize(HANDLE hConsoleOutput) {
   final result_ = GetLargestConsoleWindowSize_Wrapper(hConsoleOutput);
-  return Win32Result(value: result_.value.coord, error: result_.error);
+  return .new(value: result_.value.coord, error: result_.error);
 }
 
 /// Retrieves the calling thread's last-error code value.
@@ -2421,7 +2421,7 @@ Win32Result<COORD> GetLargestConsoleWindowSize(HANDLE hConsoleOutput) {
 ///
 /// {@category kernel32}
 @pragma('vm:prefer-inline')
-WIN32_ERROR GetLastError() => WIN32_ERROR(_GetLastError());
+WIN32_ERROR GetLastError() => .new(_GetLastError());
 
 @Native<Uint32 Function()>(symbol: 'GetLastError')
 external int _GetLastError();
@@ -2450,7 +2450,7 @@ Win32Result<int> GetLocaleInfoEx(
     lpLCData ?? nullptr,
     cchData,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the current local date and time.
@@ -2474,7 +2474,7 @@ external void _GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime);
 /// {@category kernel32}
 Win32Result<int> GetLogicalDrives() {
   final result_ = GetLogicalDrives_Wrapper();
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Fills a buffer with strings that specify valid drives in the system.
@@ -2488,7 +2488,7 @@ Win32Result<int> GetLogicalDriveStrings(int nBufferLength, PWSTR? lpBuffer) {
     nBufferLength,
     lpBuffer ?? nullptr,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about logical processors and related hardware.
@@ -2505,7 +2505,7 @@ Win32Result<bool> GetLogicalProcessorInformation(
     buffer ?? nullptr,
     returnedLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Converts the specified path to its long form.
@@ -2524,7 +2524,7 @@ Win32Result<int> GetLongPathName(
     lpszLongPath ?? nullptr,
     cchBuffer,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Queries if the specified architecture is supported on the current system,
@@ -2547,7 +2547,7 @@ MACHINE_ATTRIBUTES GetMachineTypeAttributes(int machine) {
   }
   final result$ = machineTypeAttributes.value;
   free(machineTypeAttributes);
-  return MACHINE_ATTRIBUTES(result$);
+  return .new(result$);
 }
 
 @Native<Int32 Function(Uint16, Pointer<Int32>)>(
@@ -2567,7 +2567,7 @@ external int _GetMachineTypeAttributes(
 /// {@category kernel32}
 Win32Result<int> GetMaximumProcessorCount(int groupNumber) {
   final result_ = GetMaximumProcessorCount_Wrapper(groupNumber);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Returns the maximum number of processor groups that the system can have.
@@ -2601,7 +2601,7 @@ Win32Result<int> GetModuleFileName(
     lpFilename,
     nSize,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves a module handle for the specified module.
@@ -2614,7 +2614,7 @@ Win32Result<int> GetModuleFileName(
 /// {@category kernel32}
 Win32Result<HMODULE> GetModuleHandle(PCWSTR? lpModuleName) {
   final result_ = GetModuleHandleW_Wrapper(lpModuleName ?? nullptr);
-  return Win32Result(value: HMODULE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a module handle for the specified module and increments the
@@ -2637,7 +2637,7 @@ Win32Result<bool> GetModuleHandleEx(
     lpModuleName ?? nullptr,
     phModule,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the client computer name for the specified named pipe.
@@ -2679,7 +2679,7 @@ Win32Result<bool> GetNamedPipeClientProcessId(
   Pointer<Uint32> clientProcessId,
 ) {
   final result_ = GetNamedPipeClientProcessId_Wrapper(pipe, clientProcessId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the client session identifier for the specified named pipe.
@@ -2693,7 +2693,7 @@ Win32Result<bool> GetNamedPipeClientSessionId(
   Pointer<Uint32> clientSessionId,
 ) {
   final result_ = GetNamedPipeClientSessionId_Wrapper(pipe, clientSessionId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about a specified named pipe.
@@ -2764,7 +2764,7 @@ Win32Result<bool> GetNamedPipeInfo(
     lpInBufferSize ?? nullptr,
     lpMaxInstances ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the current system to an application running
@@ -2795,7 +2795,7 @@ Win32Result<bool> GetNumberOfConsoleInputEvents(
     hConsoleInput,
     lpNumberOfEvents,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the results of an overlapped operation on the specified file,
@@ -2817,7 +2817,7 @@ Win32Result<bool> GetOverlappedResult(
     lpNumberOfBytesTransferred,
     bWait ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the results of an overlapped operation on the specified file,
@@ -2843,7 +2843,7 @@ Win32Result<bool> GetOverlappedResultEx(
     dwMilliseconds,
     bAlertable ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the amount of RAM that is physically installed on the computer.
@@ -2858,7 +2858,7 @@ Win32Result<bool> GetPhysicallyInstalledSystemMemory(
   final result_ = GetPhysicallyInstalledSystemMemory_Wrapper(
     totalMemoryInKilobytes,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the address of an exported function or variable from the specified
@@ -2870,7 +2870,7 @@ Win32Result<bool> GetPhysicallyInstalledSystemMemory(
 /// {@category kernel32}
 Win32Result<FARPROC> GetProcAddress(HMODULE hModule, PCSTR lpProcName) {
   final result_ = GetProcAddress_Wrapper(hModule, lpProcName);
-  return Win32Result(value: result_.value.ptr.cast(), error: result_.error);
+  return .new(value: result_.value.ptr.cast(), error: result_.error);
 }
 
 /// Retrieves a handle to the default heap of the calling process.
@@ -2881,7 +2881,7 @@ Win32Result<FARPROC> GetProcAddress(HMODULE hModule, PCSTR lpProcName) {
 /// {@category kernel32}
 Win32Result<HANDLE> GetProcessHeap() {
   final result_ = GetProcessHeap_Wrapper();
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Returns the number of active heaps and retrieves handles to all of the
@@ -2896,7 +2896,7 @@ Win32Result<int> GetProcessHeaps(
   Pointer<Pointer> processHeaps,
 ) {
   final result_ = GetProcessHeaps_Wrapper(numberOfHeaps, processHeaps);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the process identifier of the specified process.
@@ -2907,7 +2907,7 @@ Win32Result<int> GetProcessHeaps(
 /// {@category kernel32}
 Win32Result<int> GetProcessId(HANDLE process) {
   final result_ = GetProcessId_Wrapper(process);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the shutdown parameters for the currently calling process.
@@ -2921,7 +2921,7 @@ Win32Result<bool> GetProcessShutdownParameters(
   Pointer<Uint32> lpdwFlags,
 ) {
   final result_ = GetProcessShutdownParameters_Wrapper(lpdwLevel, lpdwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves timing information for the specified process.
@@ -2944,7 +2944,7 @@ Win32Result<bool> GetProcessTimes(
     lpKernelTime,
     lpUserTime,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the major and minor version numbers of the system on which the
@@ -2956,7 +2956,7 @@ Win32Result<bool> GetProcessTimes(
 /// {@category kernel32}
 Win32Result<int> GetProcessVersion(int processId) {
   final result_ = GetProcessVersion_Wrapper(processId);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the minimum and maximum working set sizes of the specified
@@ -2976,7 +2976,7 @@ Win32Result<bool> GetProcessWorkingSetSize(
     lpMinimumWorkingSetSize,
     lpMaximumWorkingSetSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the product type for the operating system on the local computer,
@@ -3036,7 +3036,7 @@ Win32Result<bool> GetQueuedCompletionStatus(
     lpOverlapped,
     dwMilliseconds,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves multiple completion port entries simultaneously.
@@ -3061,7 +3061,7 @@ Win32Result<bool> GetQueuedCompletionStatusEx(
     dwMilliseconds,
     fAlertable ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the short path form of the specified path.
@@ -3080,7 +3080,7 @@ Win32Result<int> GetShortPathName(
     lpszShortPath ?? nullptr,
     cchBuffer,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the contents of the STARTUPINFO structure that was specified when
@@ -3106,7 +3106,7 @@ external void _GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo);
 /// {@category kernel32}
 Win32Result<HANDLE> GetStdHandle(STD_HANDLE nStdHandle) {
   final result_ = GetStdHandle_Wrapper(nStdHandle);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Returns the language identifier for the system locale.
@@ -3138,7 +3138,7 @@ Win32Result<int> GetSystemDefaultLocaleName(
     lpLocaleName,
     cchLocaleName,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves the path of the system directory.
@@ -3149,7 +3149,7 @@ Win32Result<int> GetSystemDefaultLocaleName(
 /// {@category kernel32}
 Win32Result<int> GetSystemDirectory(PWSTR? lpBuffer, int uSize) {
   final result_ = GetSystemDirectoryW_Wrapper(lpBuffer ?? nullptr, uSize);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves information about the current system.
@@ -3179,7 +3179,7 @@ Win32Result<bool> GetSystemPowerStatus(
   Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus,
 ) {
   final result_ = GetSystemPowerStatus_Wrapper(lpSystemPowerStatus);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current system date and time in Coordinated Universal Time
@@ -3213,7 +3213,7 @@ Win32Result<bool> GetSystemTimeAdjustment(
     lpTimeIncrement,
     lpTimeAdjustmentDisabled,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves system timing information.
@@ -3235,7 +3235,7 @@ Win32Result<bool> GetSystemTimes(
     lpKernelTime ?? nullptr,
     lpUserTime ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a name for a temporary file.
@@ -3259,7 +3259,7 @@ Win32Result<int> GetTempFileName(
     uUnique,
     lpTempFileName,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the path of the directory designated for temporary files.
@@ -3270,7 +3270,7 @@ Win32Result<int> GetTempFileName(
 /// {@category kernel32}
 Win32Result<int> GetTempPath(int nBufferLength, PWSTR? lpBuffer) {
   final result_ = GetTempPathW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the path of the directory designated for temporary files, based on
@@ -3295,7 +3295,7 @@ external int _GetTempPath2(int bufferLength, Pointer<Utf16> buffer);
 /// {@category kernel32}
 Win32Result<int> GetThreadId(HANDLE thread) {
   final result_ = GetThreadId_Wrapper(thread);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Returns the locale identifier of the current locale for the calling thread.
@@ -3333,7 +3333,7 @@ Win32Result<bool> GetThreadTimes(
     lpKernelTime,
     lpUserTime,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Returns the language identifier of the first user interface language for the
@@ -3404,7 +3404,7 @@ Win32Result<int> GetUserDefaultLocaleName(
   int cchLocaleName,
 ) {
   final result_ = GetUserDefaultLocaleName_Wrapper(lpLocaleName, cchLocaleName);
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Retrieves information about the file system and volume associated with the
@@ -3434,7 +3434,7 @@ Win32Result<bool> GetVolumeInformation(
     lpFileSystemNameBuffer ?? nullptr,
     nFileSystemNameSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the file system and volume associated with the
@@ -3464,7 +3464,7 @@ Win32Result<bool> GetVolumeInformationByHandle(
     lpFileSystemNameBuffer ?? nullptr,
     nFileSystemNameSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a volume GUID path for the volume that is associated with the
@@ -3485,7 +3485,7 @@ Win32Result<bool> GetVolumeNameForVolumeMountPoint(
     lpszVolumeName,
     cchBufferLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the volume mount point where the specified path is mounted.
@@ -3504,7 +3504,7 @@ Win32Result<bool> GetVolumePathName(
     lpszVolumePathName,
     cchBufferLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a list of drive letters and mounted folder paths for the specified
@@ -3526,7 +3526,7 @@ Win32Result<bool> GetVolumePathNamesForVolumeName(
     cchBufferLength,
     lpcchReturnLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Allocates the specified number of bytes from the heap.
@@ -3537,7 +3537,7 @@ Win32Result<bool> GetVolumePathNamesForVolumeName(
 /// {@category kernel32}
 Win32Result<HGLOBAL> GlobalAlloc(GLOBAL_ALLOC_FLAGS uFlags, int dwBytes) {
   final result_ = GlobalAlloc_Wrapper(uFlags, dwBytes);
-  return Win32Result(value: HGLOBAL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Frees the specified global memory object and invalidates its handle.
@@ -3548,7 +3548,7 @@ Win32Result<HGLOBAL> GlobalAlloc(GLOBAL_ALLOC_FLAGS uFlags, int dwBytes) {
 /// {@category kernel32}
 Win32Result<HGLOBAL> GlobalFree(HGLOBAL? hMem) {
   final result_ = GlobalFree_Wrapper(hMem ?? nullptr);
-  return Win32Result(value: HGLOBAL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Locks a global memory object and returns a pointer to the first byte of the
@@ -3560,7 +3560,7 @@ Win32Result<HGLOBAL> GlobalFree(HGLOBAL? hMem) {
 /// {@category kernel32}
 Win32Result<Pointer> GlobalLock(HGLOBAL hMem) {
   final result_ = GlobalLock_Wrapper(hMem);
-  return Win32Result(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_.value.ptr, error: result_.error);
 }
 
 /// Retrieves information about the system's current usage of both physical and
@@ -3572,7 +3572,7 @@ Win32Result<Pointer> GlobalLock(HGLOBAL hMem) {
 /// {@category kernel32}
 Win32Result<bool> GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) {
   final result_ = GlobalMemoryStatusEx_Wrapper(lpBuffer);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current size of the specified global memory object, in bytes.
@@ -3583,7 +3583,7 @@ Win32Result<bool> GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) {
 /// {@category kernel32}
 Win32Result<int> GlobalSize(HGLOBAL hMem) {
   final result_ = GlobalSize_Wrapper(hMem);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Decrements the lock count associated with a memory object that was allocated
@@ -3595,7 +3595,7 @@ Win32Result<int> GlobalSize(HGLOBAL hMem) {
 /// {@category kernel32}
 Win32Result<bool> GlobalUnlock(HGLOBAL hMem) {
   final result_ = GlobalUnlock_Wrapper(hMem);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Allocates a block of memory from a heap.
@@ -3624,7 +3624,7 @@ external Pointer _HeapAlloc(Pointer hHeap, int dwFlags, int dwBytes);
 /// {@category kernel32}
 Win32Result<int> HeapCompact(HANDLE hHeap, HEAP_FLAGS dwFlags) {
   final result_ = HeapCompact_Wrapper(hHeap, dwFlags);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Creates a private heap object that can be used by the calling process.
@@ -3642,7 +3642,7 @@ Win32Result<HANDLE> HeapCreate(
   int dwMaximumSize,
 ) {
   final result_ = HeapCreate_Wrapper(flOptions, dwInitialSize, dwMaximumSize);
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Destroys the specified heap object.
@@ -3656,7 +3656,7 @@ Win32Result<HANDLE> HeapCreate(
 /// {@category kernel32}
 Win32Result<bool> HeapDestroy(HANDLE hHeap) {
   final result_ = HeapDestroy_Wrapper(hHeap);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc
@@ -3668,7 +3668,7 @@ Win32Result<bool> HeapDestroy(HANDLE hHeap) {
 /// {@category kernel32}
 Win32Result<bool> HeapFree(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) {
   final result_ = HeapFree_Wrapper(hHeap, dwFlags, lpMem ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Attempts to acquire the critical section object, or lock, that is associated
@@ -3680,7 +3680,7 @@ Win32Result<bool> HeapFree(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) {
 /// {@category kernel32}
 Win32Result<bool> HeapLock(HANDLE hHeap) {
   final result_ = HeapLock_Wrapper(hHeap);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about the specified heap.
@@ -3703,7 +3703,7 @@ Win32Result<bool> HeapQueryInformation(
     heapInformationLength,
     returnLength ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reallocates a block of memory from a heap.
@@ -3751,7 +3751,7 @@ Win32Result<bool> HeapSetInformation(
     heapInformation ?? nullptr,
     heapInformationLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the size of a memory block allocated from a heap by the HeapAlloc
@@ -3777,7 +3777,7 @@ external int _HeapSize(Pointer hHeap, int dwFlags, Pointer lpMem);
 /// {@category kernel32}
 Win32Result<bool> HeapUnlock(HANDLE hHeap) {
   final result_ = HeapUnlock_Wrapper(hHeap);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Validates the specified heap.
@@ -3805,7 +3805,7 @@ external int _HeapValidate(Pointer hHeap, int dwFlags, Pointer lpMem);
 /// {@category kernel32}
 Win32Result<bool> HeapWalk(HANDLE hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) {
   final result_ = HeapWalk_Wrapper(hHeap, lpEntry);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Initializes the specified list of attributes for process and thread
@@ -3826,7 +3826,7 @@ Win32Result<bool> InitializeProcThreadAttributeList(
     NULL,
     lpSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the calling process is being debugged by a user-mode
@@ -3850,7 +3850,7 @@ external int _IsDebuggerPresent();
 /// {@category kernel32}
 Win32Result<bool> IsNativeVhdBoot(Pointer<Int32> nativeVhdBoot) {
   final result_ = IsNativeVhdBoot_Wrapper(nativeVhdBoot);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines whether the process is running in the specified job.
@@ -3869,7 +3869,7 @@ Win32Result<bool> IsProcessInJob(
     jobHandle ?? nullptr,
     result,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Determines the current state of the computer.
@@ -3919,7 +3919,7 @@ Win32Result<bool> IsWow64Process2(
     pProcessMachine,
     pNativeMachine ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Loads the specified module into the address space of the calling process.
@@ -3930,7 +3930,7 @@ Win32Result<bool> IsWow64Process2(
 /// {@category kernel32}
 Win32Result<HMODULE> LoadLibrary(PCWSTR lpLibFileName) {
   final result_ = LoadLibraryW_Wrapper(lpLibFileName);
-  return Win32Result(value: HMODULE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified module into the address space of the calling process.
@@ -3944,7 +3944,7 @@ Win32Result<HMODULE> LoadLibraryEx(
   LOAD_LIBRARY_FLAGS dwFlags,
 ) {
   final result_ = LoadLibraryExW_Wrapper(lpLibFileName, nullptr, dwFlags);
-  return Win32Result(value: HMODULE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Retrieves a handle that can be used to obtain a pointer to the first byte of
@@ -3956,7 +3956,7 @@ Win32Result<HMODULE> LoadLibraryEx(
 /// {@category kernel32}
 Win32Result<HGLOBAL> LoadResource(HMODULE? hModule, HRSRC hResInfo) {
   final result_ = LoadResource_Wrapper(hModule ?? nullptr, hResInfo);
-  return Win32Result(value: HGLOBAL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Allocates the specified number of bytes from the heap.
@@ -3967,7 +3967,7 @@ Win32Result<HGLOBAL> LoadResource(HMODULE? hModule, HRSRC hResInfo) {
 /// {@category kernel32}
 Win32Result<HLOCAL> LocalAlloc(LOCAL_ALLOC_FLAGS uFlags, int uBytes) {
   final result_ = LocalAlloc_Wrapper(uFlags, uBytes);
-  return Win32Result(value: HLOCAL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Frees the specified local memory object and invalidates its handle.
@@ -3978,7 +3978,7 @@ Win32Result<HLOCAL> LocalAlloc(LOCAL_ALLOC_FLAGS uFlags, int uBytes) {
 /// {@category kernel32}
 Win32Result<HLOCAL> LocalFree(HLOCAL? hMem) {
   final result_ = LocalFree_Wrapper(hMem ?? nullptr);
-  return Win32Result(value: HLOCAL(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Locks the specified file for exclusive access by the calling process.
@@ -4001,7 +4001,7 @@ Win32Result<bool> LockFile(
     nNumberOfBytesToLockLow,
     nNumberOfBytesToLockHigh,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Locks the specified file for exclusive access by the calling process.
@@ -4028,7 +4028,7 @@ Win32Result<bool> LockFileEx(
     nNumberOfBytesToLockHigh,
     lpOverlapped,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a pointer to the specified resource in memory.
@@ -4051,7 +4051,7 @@ external Pointer _LockResource(Pointer hResData);
 /// {@category kernel32}
 Win32Result<bool> MoveFile(PCWSTR lpExistingFileName, PCWSTR lpNewFileName) {
   final result_ = MoveFileW_Wrapper(lpExistingFileName, lpNewFileName);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Moves an existing file or directory, including its children, with various
@@ -4071,7 +4071,7 @@ Win32Result<bool> MoveFileEx(
     lpNewFileName ?? nullptr,
     dwFlags,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Opens an existing named event object.
@@ -4090,7 +4090,7 @@ Win32Result<HANDLE> OpenEvent(
     bInheritHandle ? TRUE : FALSE,
     lpName,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Opens an existing job object.
@@ -4109,7 +4109,7 @@ Win32Result<HANDLE> OpenJobObject(
     bInheritHandle ? TRUE : FALSE,
     lpName,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Opens an existing local process object.
@@ -4128,7 +4128,7 @@ Win32Result<HANDLE> OpenProcess(
     bInheritHandle ? TRUE : FALSE,
     dwProcessId,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Sends a string to the debugger for display.
@@ -4155,7 +4155,7 @@ WIN32_ERROR PackageFamilyNameFromFullName(
   PCWSTR packageFullName,
   Pointer<Uint32> packageFamilyNameLength,
   PWSTR? packageFamilyName,
-) => WIN32_ERROR(
+) => .new(
   _PackageFamilyNameFromFullName(
     packageFullName,
     packageFamilyNameLength,
@@ -4191,7 +4191,7 @@ Win32Result<bool> PeekConsoleInput(
     nLength,
     lpNumberOfEventsRead,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Copies data from a named or anonymous pipe into a buffer without removing it
@@ -4217,7 +4217,7 @@ Win32Result<bool> PeekNamedPipe(
     lpTotalBytesAvail ?? nullptr,
     lpBytesLeftThisMessage ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Posts an I/O completion packet to an I/O completion port.
@@ -4238,7 +4238,7 @@ Win32Result<bool> PostQueuedCompletionStatus(
     dwCompletionKey,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the Remote Desktop Services session associated with a specified
@@ -4253,7 +4253,7 @@ Win32Result<bool> ProcessIdToSessionId(
   Pointer<Uint32> pSessionId,
 ) {
   final result_ = ProcessIdToSessionId_Wrapper(dwProcessId, pSessionId);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Discards all characters from the output or input buffer of a specified
@@ -4267,7 +4267,7 @@ Win32Result<bool> ProcessIdToSessionId(
 /// {@category kernel32}
 Win32Result<bool> PurgeComm(HANDLE hFile, PURGE_COMM_FLAGS dwFlags) {
   final result_ = PurgeComm_Wrapper(hFile, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about MS-DOS device names.
@@ -4286,7 +4286,7 @@ Win32Result<int> QueryDosDevice(
     lpTargetPath ?? nullptr,
     ucchMax,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the full name of the executable image for the specified process.
@@ -4307,7 +4307,7 @@ Win32Result<bool> QueryFullProcessImageName(
     lpExeName,
     lpdwSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves limit and job state information from the job object.
@@ -4330,7 +4330,7 @@ Win32Result<bool> QueryInformationJobObject(
     cbJobObjectInformationLength,
     lpReturnLength ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Gets information about the control of the I/O rate for a job object.
@@ -4351,7 +4351,7 @@ Win32Result<int> QueryIoRateControlInformationJobObject(
     infoBlocks,
     infoBlockCount,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Retrieves the current value of the performance counter, which is a high
@@ -4364,7 +4364,7 @@ Win32Result<int> QueryIoRateControlInformationJobObject(
 /// {@category kernel32}
 Win32Result<bool> QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) {
   final result_ = QueryPerformanceCounter_Wrapper(lpPerformanceCount);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the frequency of the performance counter.
@@ -4375,7 +4375,7 @@ Win32Result<bool> QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) {
 /// {@category kernel32}
 Win32Result<bool> QueryPerformanceFrequency(Pointer<Int64> lpFrequency) {
   final result_ = QueryPerformanceFrequency_Wrapper(lpFrequency);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads character input from the console input buffer and removes it from the
@@ -4399,7 +4399,7 @@ Win32Result<bool> ReadConsole(
     lpNumberOfCharsRead,
     pInputControl ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads data from a console input buffer and removes it from the buffer.
@@ -4420,7 +4420,7 @@ Win32Result<bool> ReadConsoleInput(
     nLength,
     lpNumberOfEventsRead,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads data from the specified file or input/output (I/O) device.
@@ -4446,7 +4446,7 @@ Win32Result<bool> ReadFile(
     lpNumberOfBytesRead ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads data from the specified file or input/output (I/O) device.
@@ -4473,7 +4473,7 @@ Win32Result<bool> ReadFileEx(
     lpOverlapped,
     lpCompletionRoutine,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads data from a file and stores it in an array of buffers.
@@ -4495,7 +4495,7 @@ Win32Result<bool> ReadFileScatter(
     nullptr,
     lpOverlapped,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reads data from an area of memory in a specified process.
@@ -4520,7 +4520,7 @@ Win32Result<bool> ReadProcessMemory(
     nSize,
     lpNumberOfBytesRead ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Decrements the reference count of the specified activation context.
@@ -4543,7 +4543,7 @@ external void _ReleaseActCtx(Pointer hActCtx);
 /// {@category kernel32}
 Win32Result<bool> RemoveDirectory(PCWSTR lpPathName) {
   final result_ = RemoveDirectoryW_Wrapper(lpPathName);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Removes a directory that was added to the process DLL search path by using
@@ -4555,7 +4555,7 @@ Win32Result<bool> RemoveDirectory(PCWSTR lpPathName) {
 /// {@category kernel32}
 Win32Result<bool> RemoveDllDirectory(Pointer cookie) {
   final result_ = RemoveDllDirectory_Wrapper(cookie);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Reopens the specified file system object with different access rights,
@@ -4577,7 +4577,7 @@ Win32Result<HANDLE> ReOpenFile(
     dwShareMode,
     dwFlagsAndAttributes,
   );
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Sets the specified event object to the nonsignaled state.
@@ -4588,7 +4588,7 @@ Win32Result<HANDLE> ReOpenFile(
 /// {@category kernel32}
 Win32Result<bool> ResetEvent(HANDLE hEvent) {
   final result_ = ResetEvent_Wrapper(hEvent);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
@@ -4628,7 +4628,7 @@ Win32Result<bool> ScrollConsoleScreenBuffer(
     dwDestinationOrigin,
     lpFill,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Suspends character transmission for a specified communications device and
@@ -4641,7 +4641,7 @@ Win32Result<bool> ScrollConsoleScreenBuffer(
 /// {@category kernel32}
 Win32Result<bool> SetCommBreak(HANDLE hFile) {
   final result_ = SetCommBreak_Wrapper(hFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the current configuration of a communications device.
@@ -4656,7 +4656,7 @@ Win32Result<bool> SetCommConfig(
   int dwSize,
 ) {
   final result_ = SetCommConfig_Wrapper(hCommDev, lpCC, dwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Specifies a set of events to be monitored for a communications device.
@@ -4667,7 +4667,7 @@ Win32Result<bool> SetCommConfig(
 /// {@category kernel32}
 Win32Result<bool> SetCommMask(HANDLE hFile, COMM_EVENT_MASK dwEvtMask) {
   final result_ = SetCommMask_Wrapper(hFile, dwEvtMask);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Configures a communications device according to the specifications in a
@@ -4682,7 +4682,7 @@ Win32Result<bool> SetCommMask(HANDLE hFile, COMM_EVENT_MASK dwEvtMask) {
 /// {@category kernel32}
 Win32Result<bool> SetCommState(HANDLE hFile, Pointer<DCB> lpDCB) {
   final result_ = SetCommState_Wrapper(hFile, lpDCB);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the time-out parameters for all read and write operations on a
@@ -4697,7 +4697,7 @@ Win32Result<bool> SetCommTimeouts(
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
 ) {
   final result_ = SetCommTimeouts_Wrapper(hFile, lpCommTimeouts);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds or removes an application-defined HandlerRoutine function from the list
@@ -4715,7 +4715,7 @@ Win32Result<bool> SetConsoleCtrlHandler(
     handlerRoutine ?? nullptr,
     add ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the size and visibility of the cursor for the specified console screen
@@ -4733,7 +4733,7 @@ Win32Result<bool> SetConsoleCursorInfo(
     hConsoleOutput,
     lpConsoleCursorInfo,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the cursor position in the specified console screen buffer.
@@ -4750,7 +4750,7 @@ Win32Result<bool> SetConsoleCursorPosition(
     hConsoleOutput,
     dwCursorPosition,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the display mode of the specified console screen buffer.
@@ -4769,7 +4769,7 @@ Win32Result<bool> SetConsoleDisplayMode(
     dwFlags,
     lpNewScreenBufferDimensions ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the input mode of a console's input buffer or the output mode of a
@@ -4781,7 +4781,7 @@ Win32Result<bool> SetConsoleDisplayMode(
 /// {@category kernel32}
 Win32Result<bool> SetConsoleMode(HANDLE hConsoleHandle, CONSOLE_MODE dwMode) {
   final result_ = SetConsoleMode_Wrapper(hConsoleHandle, dwMode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the attributes of characters written to the console screen buffer by
@@ -4797,7 +4797,7 @@ Win32Result<bool> SetConsoleTextAttribute(
   CONSOLE_CHARACTER_ATTRIBUTES wAttributes,
 ) {
   final result_ = SetConsoleTextAttribute_Wrapper(hConsoleOutput, wAttributes);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the current size and position of a console screen buffer's window.
@@ -4816,7 +4816,7 @@ Win32Result<bool> SetConsoleWindowInfo(
     bAbsolute ? TRUE : FALSE,
     lpConsoleWindow,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes the current directory for the current process.
@@ -4844,7 +4844,7 @@ Win32Result<bool> SetDefaultCommConfig(
   int dwSize,
 ) {
   final result_ = SetDefaultCommConfigW_Wrapper(lpszName, lpCC, dwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Specifies a default set of directories to search when the calling process
@@ -4859,7 +4859,7 @@ Win32Result<bool> SetDefaultCommConfig(
 /// {@category kernel32}
 Win32Result<bool> SetDefaultDllDirectories(LOAD_LIBRARY_FLAGS directoryFlags) {
   final result_ = SetDefaultDllDirectories_Wrapper(directoryFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the physical file size for the specified file to the current position
@@ -4871,7 +4871,7 @@ Win32Result<bool> SetDefaultDllDirectories(LOAD_LIBRARY_FLAGS directoryFlags) {
 /// {@category kernel32}
 Win32Result<bool> SetEndOfFile(HANDLE hFile) {
   final result_ = SetEndOfFile_Wrapper(hFile);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the contents of the specified environment variable for the current
@@ -4883,7 +4883,7 @@ Win32Result<bool> SetEndOfFile(HANDLE hFile) {
 /// {@category kernel32}
 Win32Result<bool> SetEnvironmentVariable(PCWSTR lpName, PCWSTR? lpValue) {
   final result_ = SetEnvironmentVariableW_Wrapper(lpName, lpValue ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Controls whether the system will handle the specified types of serious
@@ -4895,7 +4895,7 @@ Win32Result<bool> SetEnvironmentVariable(PCWSTR lpName, PCWSTR? lpValue) {
 /// {@category kernel32}
 @pragma('vm:prefer-inline')
 THREAD_ERROR_MODE SetErrorMode(THREAD_ERROR_MODE uMode) =>
-    THREAD_ERROR_MODE(_SetErrorMode(uMode));
+    .new(_SetErrorMode(uMode));
 
 @Native<Uint32 Function(Uint32)>(symbol: 'SetErrorMode')
 external int _SetErrorMode(int uMode);
@@ -4908,7 +4908,7 @@ external int _SetErrorMode(int uMode);
 /// {@category kernel32}
 Win32Result<bool> SetEvent(HANDLE hEvent) {
   final result_ = SetEvent_Wrapper(hEvent);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Causes the file I/O functions to use the ANSI character set code page for
@@ -4948,7 +4948,7 @@ Win32Result<bool> SetFileAttributes(
   FILE_FLAGS_AND_ATTRIBUTES dwFileAttributes,
 ) {
   final result_ = SetFileAttributesW_Wrapper(lpFileName, dwFileAttributes);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the file information for the specified file.
@@ -4969,7 +4969,7 @@ Win32Result<bool> SetFileInformationByHandle(
     lpFileInformation,
     dwBufferSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Associates a virtual address range with the specified file handle.
@@ -4988,7 +4988,7 @@ Win32Result<bool> SetFileIoOverlappedRange(
     overlappedRangeStart,
     length,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Moves the file pointer of the specified file.
@@ -5009,7 +5009,7 @@ Win32Result<int> SetFilePointer(
     lpDistanceToMoveHigh ?? nullptr,
     dwMoveMethod,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Moves the file pointer of the specified file.
@@ -5030,7 +5030,7 @@ Win32Result<bool> SetFilePointerEx(
     lpNewFilePointer ?? nullptr,
     dwMoveMethod,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the short name for the specified file.
@@ -5041,7 +5041,7 @@ Win32Result<bool> SetFilePointerEx(
 /// {@category kernel32}
 Win32Result<bool> SetFileShortName(HANDLE hFile, PCWSTR lpShortName) {
   final result_ = SetFileShortNameW_Wrapper(hFile, lpShortName);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the date and time that the specified file or directory was created,
@@ -5063,7 +5063,7 @@ Win32Result<bool> SetFileTime(
     lpLastAccessTime ?? nullptr,
     lpLastWriteTime ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the valid data length of the specified file.
@@ -5076,7 +5076,7 @@ Win32Result<bool> SetFileTime(
 /// {@category kernel32}
 Win32Result<bool> SetFileValidData(HANDLE hFile, int validDataLength) {
   final result_ = SetFileValidData_Wrapper(hFile, validDataLength);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the value of the specified firmware environment variable.
@@ -5097,7 +5097,7 @@ Win32Result<bool> SetFirmwareEnvironmentVariable(
     pValue ?? nullptr,
     nSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the value of the specified firmware environment variable and the
@@ -5121,7 +5121,7 @@ Win32Result<bool> SetFirmwareEnvironmentVariableEx(
     nSize,
     dwAttributes,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets certain properties of an object handle.
@@ -5136,7 +5136,7 @@ Win32Result<bool> SetHandleInformation(
   HANDLE_FLAGS dwFlags,
 ) {
   final result_ = SetHandleInformation_Wrapper(hObject, dwMask, dwFlags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets limits for a job object.
@@ -5157,7 +5157,7 @@ Win32Result<bool> SetInformationJobObject(
     lpJobObjectInformation,
     cbJobObjectInformationLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets I/O limits on a job object.
@@ -5174,7 +5174,7 @@ Win32Result<int> SetIoRateControlInformationJobObject(
     hJob,
     ioRateControlInfo,
   );
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Sets the last-error code for the calling thread.
@@ -5211,7 +5211,7 @@ Win32Result<bool> SetNamedPipeHandleState(
     lpMaxCollectionCount ?? nullptr,
     lpCollectDataTimeout ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets a processor affinity mask for the threads of the specified process.
@@ -5228,7 +5228,7 @@ Win32Result<bool> SetProcessAffinityMask(
     hProcess,
     dwProcessAffinityMask,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Disables or enables the ability of the system to temporarily boost the
@@ -5246,7 +5246,7 @@ Win32Result<bool> SetProcessPriorityBoost(
     hProcess,
     bDisablePriorityBoost ? TRUE : FALSE,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the minimum and maximum working set sizes for the specified process.
@@ -5265,7 +5265,7 @@ Win32Result<bool> SetProcessWorkingSetSize(
     dwMinimumWorkingSetSize,
     dwMaximumWorkingSetSize,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the handle for the specified standard device (standard input, standard
@@ -5277,7 +5277,7 @@ Win32Result<bool> SetProcessWorkingSetSize(
 /// {@category kernel32}
 Win32Result<bool> SetStdHandle(STD_HANDLE nStdHandle, HANDLE hHandle) {
   final result_ = SetStdHandle_Wrapper(nStdHandle, hHandle);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets a processor affinity mask for the specified thread.
@@ -5291,7 +5291,7 @@ Win32Result<int> SetThreadAffinityMask(
   int dwThreadAffinityMask,
 ) {
   final result_ = SetThreadAffinityMask_Wrapper(hThread, dwThreadAffinityMask);
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Controls whether the system will handle the specified types of serious
@@ -5306,7 +5306,7 @@ Win32Result<bool> SetThreadErrorMode(
   Pointer<Uint32>? lpOldMode,
 ) {
   final result_ = SetThreadErrorMode_Wrapper(dwNewMode, lpOldMode ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables an application to inform the system that it is in use, thereby
@@ -5319,7 +5319,7 @@ Win32Result<bool> SetThreadErrorMode(
 /// {@category kernel32}
 @pragma('vm:prefer-inline')
 EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags) =>
-    EXECUTION_STATE(_SetThreadExecutionState(esFlags));
+    .new(_SetThreadExecutionState(esFlags));
 
 @Native<Uint32 Function(Uint32)>(symbol: 'SetThreadExecutionState')
 external int _SetThreadExecutionState(int esFlags);
@@ -5332,7 +5332,7 @@ external int _SetThreadExecutionState(int esFlags);
 /// {@category kernel32}
 Win32Result<int> SetThreadUILanguage(int langId) {
   final result_ = SetThreadUILanguage_Wrapper(langId);
-  return Win32Result(value: result_.value.u16, error: result_.error);
+  return .new(value: result_.value.u16, error: result_.error);
 }
 
 /// Initializes the communications parameters for a specified communications
@@ -5344,7 +5344,7 @@ Win32Result<int> SetThreadUILanguage(int langId) {
 /// {@category kernel32}
 Win32Result<bool> SetupComm(HANDLE hFile, int dwInQueue, int dwOutQueue) {
   final result_ = SetupComm_Wrapper(hFile, dwInQueue, dwOutQueue);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sets the label of a file system volume.
@@ -5358,7 +5358,7 @@ Win32Result<bool> SetVolumeLabel(PCWSTR? lpRootPathName, PCWSTR? lpVolumeName) {
     lpRootPathName ?? nullptr,
     lpVolumeName ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the size, in bytes, of the specified resource.
@@ -5369,7 +5369,7 @@ Win32Result<bool> SetVolumeLabel(PCWSTR? lpRootPathName, PCWSTR? lpVolumeName) {
 /// {@category kernel32}
 Win32Result<int> SizeofResource(HMODULE? hModule, HRSRC hResInfo) {
   final result_ = SizeofResource_Wrapper(hModule ?? nullptr, hResInfo);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Suspends the execution of the current thread until the time-out interval
@@ -5411,7 +5411,7 @@ Win32Result<bool> SystemTimeToFileTime(
   Pointer<FILETIME> lpFileTime,
 ) {
   final result_ = SystemTimeToFileTime_Wrapper(lpSystemTime, lpFileTime);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Terminates all processes currently associated with the job.
@@ -5422,7 +5422,7 @@ Win32Result<bool> SystemTimeToFileTime(
 /// {@category kernel32}
 Win32Result<bool> TerminateJobObject(HANDLE hJob, int uExitCode) {
   final result_ = TerminateJobObject_Wrapper(hJob, uExitCode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Terminates the specified process and all of its threads.
@@ -5433,7 +5433,7 @@ Win32Result<bool> TerminateJobObject(HANDLE hJob, int uExitCode) {
 /// {@category kernel32}
 Win32Result<bool> TerminateProcess(HANDLE hProcess, int uExitCode) {
   final result_ = TerminateProcess_Wrapper(hProcess, uExitCode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Terminates a thread.
@@ -5444,7 +5444,7 @@ Win32Result<bool> TerminateProcess(HANDLE hProcess, int uExitCode) {
 /// {@category kernel32}
 Win32Result<bool> TerminateThread(HANDLE hThread, int dwExitCode) {
   final result_ = TerminateThread_Wrapper(hThread, dwExitCode);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Combines the functions that write a message to and read a message from the
@@ -5472,7 +5472,7 @@ Win32Result<bool> TransactNamedPipe(
     lpBytesRead,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Transmits a specified character ahead of any pending data in the output
@@ -5484,7 +5484,7 @@ Win32Result<bool> TransactNamedPipe(
 /// {@category kernel32}
 Win32Result<bool> TransmitCommChar(HANDLE hFile, CHAR cChar) {
   final result_ = TransmitCommChar_Wrapper(hFile, cChar);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unlocks a region in an open file.
@@ -5507,7 +5507,7 @@ Win32Result<bool> UnlockFile(
     nNumberOfBytesToUnlockLow,
     nNumberOfBytesToUnlockHigh,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Unlocks a region in the specified file.
@@ -5531,7 +5531,7 @@ Win32Result<bool> UnlockFileEx(
     nNumberOfBytesToUnlockHigh,
     lpOverlapped,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Updates the specified attribute in a list of attributes for process and
@@ -5559,7 +5559,7 @@ Win32Result<bool> UpdateProcThreadAttribute(
     lpPreviousValue ?? nullptr,
     lpReturnSize ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Adds, deletes, or replaces a resource in a portable executable (PE) file.
@@ -5584,7 +5584,7 @@ Win32Result<bool> UpdateResource(
     lpData ?? nullptr,
     cb,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Compares a set of operating system version requirements to the corresponding
@@ -5604,7 +5604,7 @@ Win32Result<bool> VerifyVersionInfo(
     dwTypeMask,
     dwlConditionMask,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a description string for the language associated with a specified
@@ -5663,7 +5663,7 @@ Win32Result<Pointer> VirtualAlloc(
     flAllocationType,
     flProtect,
   );
-  return Win32Result(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_.value.ptr, error: result_.error);
 }
 
 /// Reserves, commits, or changes the state of a region of memory within the
@@ -5689,7 +5689,7 @@ Win32Result<Pointer> VirtualAllocEx(
     flAllocationType,
     flProtect,
   );
-  return Win32Result(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_.value.ptr, error: result_.error);
 }
 
 /// Releases, decommits, or releases and decommits a region of pages within the
@@ -5705,7 +5705,7 @@ Win32Result<bool> VirtualFree(
   VIRTUAL_FREE_TYPE dwFreeType,
 ) {
   final result_ = VirtualFree_Wrapper(lpAddress, dwSize, dwFreeType);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Releases, decommits, or releases and decommits a region of memory within the
@@ -5727,7 +5727,7 @@ Win32Result<bool> VirtualFreeEx(
     dwSize,
     dwFreeType,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Locks the specified region of the process's virtual address space into
@@ -5740,7 +5740,7 @@ Win32Result<bool> VirtualFreeEx(
 /// {@category kernel32}
 Win32Result<bool> VirtualLock(Pointer lpAddress, int dwSize) {
   final result_ = VirtualLock_Wrapper(lpAddress, dwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes the protection on a region of committed pages in the virtual address
@@ -5762,7 +5762,7 @@ Win32Result<bool> VirtualProtect(
     flNewProtect,
     lpflOldProtect,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Changes the protection on a region of committed pages in the virtual address
@@ -5786,7 +5786,7 @@ Win32Result<bool> VirtualProtectEx(
     flNewProtect,
     lpflOldProtect,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves information about a range of pages in the virtual address space of
@@ -5806,7 +5806,7 @@ Win32Result<int> VirtualQuery(
     lpBuffer,
     dwLength,
   );
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Retrieves information about a range of pages within the virtual address
@@ -5828,7 +5828,7 @@ Win32Result<int> VirtualQueryEx(
     lpBuffer,
     dwLength,
   );
-  return Win32Result(value: result_.value.i64, error: result_.error);
+  return .new(value: result_.value.i64, error: result_.error);
 }
 
 /// Unlocks a specified range of pages in the virtual address space of a
@@ -5841,7 +5841,7 @@ Win32Result<int> VirtualQueryEx(
 /// {@category kernel32}
 Win32Result<bool> VirtualUnlock(Pointer lpAddress, int dwSize) {
   final result_ = VirtualUnlock_Wrapper(lpAddress, dwSize);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Waits for an event to occur for a specified communications device.
@@ -5863,7 +5863,7 @@ Win32Result<bool> WaitCommEvent(
     lpEvtMask,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Waits until one or all of the specified objects are in the signaled state or
@@ -5885,10 +5885,7 @@ Win32Result<WAIT_EVENT> WaitForMultipleObjects(
     bWaitAll ? TRUE : FALSE,
     dwMilliseconds,
   );
-  return Win32Result(
-    value: WAIT_EVENT(result_.value.u32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.u32), error: result_.error);
 }
 
 /// Waits until the specified object is in the signaled state or the time-out
@@ -5903,10 +5900,7 @@ Win32Result<WAIT_EVENT> WaitForSingleObject(
   int dwMilliseconds,
 ) {
   final result_ = WaitForSingleObject_Wrapper(hHandle, dwMilliseconds);
-  return Win32Result(
-    value: WAIT_EVENT(result_.value.u32),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.u32), error: result_.error);
 }
 
 /// Maps a UTF-16 (wide character) string to a new character string.
@@ -5935,7 +5929,7 @@ Win32Result<int> WideCharToMultiByte(
     lpDefaultChar ?? nullptr,
     lpUsedDefaultChar ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32, error: result_.error);
+  return .new(value: result_.value.i32, error: result_.error);
 }
 
 /// Suspends the specified WOW64 thread.
@@ -5946,7 +5940,7 @@ Win32Result<int> WideCharToMultiByte(
 /// {@category kernel32}
 Win32Result<int> Wow64SuspendThread(HANDLE hThread) {
   final result_ = Wow64SuspendThread_Wrapper(hThread);
-  return Win32Result(value: result_.value.u32, error: result_.error);
+  return .new(value: result_.value.u32, error: result_.error);
 }
 
 /// Writes a character string to a console screen buffer beginning at the
@@ -5969,7 +5963,7 @@ Win32Result<bool> WriteConsole(
     lpNumberOfCharsWritten ?? nullptr,
     nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Writes data to the specified file or input/output (I/O) device.
@@ -5992,7 +5986,7 @@ Win32Result<bool> WriteFile(
     lpNumberOfBytesWritten ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Writes data to the specified file or input/output (I/O) device.
@@ -6019,7 +6013,7 @@ Win32Result<bool> WriteFileEx(
     lpOverlapped,
     lpCompletionRoutine,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves data from an array of buffers and writes the data to a file.
@@ -6041,7 +6035,7 @@ Win32Result<bool> WriteFileGather(
     nullptr,
     lpOverlapped,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Writes data to an area of memory in a specified process.
@@ -6066,5 +6060,5 @@ Win32Result<bool> WriteProcessMemory(
     nSize,
     lpNumberOfBytesWritten ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

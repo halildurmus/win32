@@ -45,7 +45,7 @@ import '../win32_result.dart';
 /// {@category winscard}
 Win32Result<HANDLE> SCardAccessStartedEvent() {
   final result_ = SCardAccessStartedEvent_Wrapper();
-  return Win32Result(value: HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Adds a reader to a reader group.

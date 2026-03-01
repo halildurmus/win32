@@ -40,7 +40,7 @@ final IID_IUIAutomationSpreadsheetPattern = GUID.fromComponents(
   0x7517a7c8,
   0xfaae,
   0x4de9,
-  Uint8List.fromList(const [0x9f, 0x8, 0x29, 0xb9, 0x1e, 0x85, 0x95, 0xc1]),
+  .fromList(const [0x9f, 0x8, 0x29, 0xb9, 0x1e, 0x85, 0x95, 0xc1]),
 );
 
 /// Enables a client application to access the items (cells) in a spreadsheet.
@@ -93,7 +93,7 @@ class IUIAutomationSpreadsheetPattern extends IUnknown implements ComInterface {
     final result$ = element.value;
     free(element);
     if (result$.isNull) return null;
-    return IUIAutomationElement(result$);
+    return .new(result$);
   }
 
   @override

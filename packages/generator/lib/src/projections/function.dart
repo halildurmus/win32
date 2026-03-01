@@ -394,9 +394,9 @@ base class FunctionProjection extends Projection with ProjectionMixin {
         return cb.Block.of([
           cb.declareFinal('result_').assign(ffiCall).statement,
           cb
-              .refer('Win32Result')
+              .refer('.new')
               .newInstance(const [], {
-                'value': cb.refer(originalReturnType.publicType).newInstance([
+                'value': cb.refer('.new').newInstance([
                   cb
                       .refer('result_')
                       .property('value')
@@ -409,9 +409,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
         ]);
       }
 
-      return cb.refer(originalReturnType.publicType).newInstance([
-        ffiCall,
-      ]).statement;
+      return cb.refer('.new').newInstance([ffiCall]).statement;
     }
 
     if (originalReturnType.publicType == 'RPC_STATUS' ||
@@ -438,12 +436,12 @@ base class FunctionProjection extends Projection with ProjectionMixin {
       return cb.Block.of([
         cb.declareFinal('result_').assign(ffiCall).statement,
         cb
-            .refer('Win32Result')
+            .refer('.new')
             .newInstance(const [], {
               'value': needsCasting
                   ? originalReturnType.isString ||
                             originalReturnType.isWrapperStruct
-                        ? cb.refer(originalReturnType.publicType).newInstance([
+                        ? cb.refer('.new').newInstance([
                             cb
                                 .refer('result_')
                                 .property('value')
@@ -459,7 +457,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
                               .call(const [])
                   : originalReturnType.isString ||
                         originalReturnType.isWrapperStruct
-                  ? cb.refer(originalReturnType.publicType).newInstance([
+                  ? cb.refer('.new').newInstance([
                       cb
                           .refer('result_')
                           .property('value')
@@ -609,11 +607,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
             .statement,
         cb.refer('free').call([cb.refer(parameter.name)]).statement,
         if (isNullable) const .new(r'if (result$.isNull) return null;'),
-        cb
-            .refer(type.publicType)
-            .newInstance([cb.refer(r'result$')])
-            .returned
-            .statement,
+        cb.refer('.new').newInstance([cb.refer(r'result$')]).returned.statement,
       ];
     }
 
@@ -644,7 +638,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
       return cb.Block.of([
         cb.declareFinal('result_').assign(ffiCall).statement,
         cb
-            .refer('Win32Result')
+            .refer('.new')
             .newInstance(const [], {
               'value': cb
                   .refer('result_')
@@ -664,11 +658,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   cb.Code _generateReturnInterfaceFunctionBody() => cb.Block.of([
     cb.declareFinal('result').assign(ffiCall).statement,
     const .new('if (result.isNull) return null;'),
-    cb
-        .refer(originalReturnType.publicType)
-        .newInstance([cb.refer('result')])
-        .returned
-        .statement,
+    cb.refer('.new').newInstance([cb.refer('result')]).returned.statement,
   ]);
 
   cb.Code _allocateMemoryForReturnValue(ParameterProjection parameter) {

@@ -43,7 +43,7 @@ final IID_ISpellChecker = GUID.fromComponents(
   0xb6fd0b71,
   0xe2bc,
   0x4653,
-  Uint8List.fromList(const [0x8d, 0x5, 0xf1, 0x97, 0xe4, 0x12, 0x77, 0xb]),
+  .fromList(const [0x8d, 0x5, 0xf1, 0x97, 0xe4, 0x12, 0x77, 0xb]),
 );
 
 /// Represents a particular spell checker for a particular language.
@@ -126,7 +126,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Checks the spelling of the supplied text and returns a collection of
@@ -146,7 +146,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumSpellingError(result$);
+    return .new(result$);
   }
 
   /// Retrieves spelling suggestions for the supplied text.
@@ -165,7 +165,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   /// Treats the provided word as though it were part of the original
@@ -237,7 +237,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   /// Gets the identifier for this spell checker.
@@ -253,7 +253,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets text, suitable to display to the user, that describes this spell
@@ -270,7 +270,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Adds an event handler (ISpellCheckerChangedEventHandler) for the
@@ -324,7 +324,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IOptionDescription(result$);
+    return .new(result$);
   }
 
   /// Checks the spelling of the supplied text in a more thorough manner than
@@ -344,7 +344,7 @@ class ISpellChecker extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumSpellingError(result$);
+    return .new(result$);
   }
 
   @override

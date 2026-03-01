@@ -39,7 +39,7 @@ final IID_IAppxManifestProperties = GUID.fromComponents(
   0x3faf64d,
   0xf26f,
   0x4b2c,
-  Uint8List.fromList(const [0xaa, 0xf7, 0x8f, 0xe7, 0x78, 0x9b, 0x8b, 0xca]),
+  .fromList(const [0xaa, 0xf7, 0x8f, 0xe7, 0x78, 0x9b, 0x8b, 0xca]),
 );
 
 /// Provides read-only access to the properties section of a package manifest.
@@ -112,7 +112,7 @@ class IAppxManifestProperties extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   @override

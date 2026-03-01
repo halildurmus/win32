@@ -166,7 +166,7 @@ HANDLE WslLaunch(
   }
   final result$ = process.value;
   free(process);
-  return HANDLE(result$);
+  return .new(result$);
 }
 
 @Native<

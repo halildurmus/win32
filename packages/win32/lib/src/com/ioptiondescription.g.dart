@@ -40,7 +40,7 @@ final IID_IOptionDescription = GUID.fromComponents(
   0x432e5f85,
   0x35cf,
   0x4606,
-  Uint8List.fromList(const [0xa8, 0x1, 0x6f, 0x70, 0x27, 0x7e, 0x1d, 0x7a]),
+  .fromList(const [0xa8, 0x1, 0x6f, 0x70, 0x27, 0x7e, 0x1d, 0x7a]),
 );
 
 /// Represents the description of a spell checker option.
@@ -92,7 +92,7 @@ class IOptionDescription extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the heading for the spell checker option.
@@ -108,7 +108,7 @@ class IOptionDescription extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Get the description of the spell checker option.
@@ -124,7 +124,7 @@ class IOptionDescription extends IUnknown implements ComInterface {
     }
     final result$ = value.value;
     free(value);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the label enumerator for the spell checker option.
@@ -141,7 +141,7 @@ class IOptionDescription extends IUnknown implements ComInterface {
     final result$ = value.value;
     free(value);
     if (result$.isNull) return null;
-    return IEnumString(result$);
+    return .new(result$);
   }
 
   @override

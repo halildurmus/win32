@@ -52,7 +52,7 @@ Win32Result<bool> ChangeServiceConfig2(
     dwInfoLevel,
     lpInfo ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a handle to a service control manager or service object.
@@ -63,7 +63,7 @@ Win32Result<bool> ChangeServiceConfig2(
 /// {@category advapi32}
 Win32Result<bool> CloseServiceHandle(SC_HANDLE hSCObject) {
   final result_ = CloseServiceHandle_Wrapper(hSCObject);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a trace processing session that was created with OpenTrace.
@@ -74,7 +74,7 @@ Win32Result<bool> CloseServiceHandle(SC_HANDLE hSCObject) {
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR CloseTrace(PROCESSTRACE_HANDLE traceHandle) =>
-    WIN32_ERROR(_CloseTrace(traceHandle));
+    .new(_CloseTrace(traceHandle));
 
 @Native<Uint32 Function(Uint64)>(symbol: 'CloseTrace')
 external int _CloseTrace(int traceHandle);
@@ -91,7 +91,7 @@ Win32Result<bool> ControlService(
   Pointer<SERVICE_STATUS> lpServiceStatus,
 ) {
   final result_ = ControlService_Wrapper(hService, dwControl, lpServiceStatus);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Sends a control code to a service.
@@ -112,7 +112,7 @@ Win32Result<bool> ControlServiceEx(
     dwInfoLevel,
     pControlParams,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Deletes a credential from the user's credential set.
@@ -123,7 +123,7 @@ Win32Result<bool> ControlServiceEx(
 /// {@category advapi32}
 Win32Result<bool> CredDelete(PCWSTR targetName, CRED_TYPE type) {
   final result_ = CredDeleteW_Wrapper(targetName, type, NULL);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Frees a buffer returned by any of the credentials management functions.
@@ -150,7 +150,7 @@ Win32Result<bool> CredRead(
   Pointer<Pointer<CREDENTIAL>> credential,
 ) {
   final result_ = CredReadW_Wrapper(targetName, type, NULL, credential);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Creates a new credential or modifies an existing credential in the user's
@@ -162,7 +162,7 @@ Win32Result<bool> CredRead(
 /// {@category advapi32}
 Win32Result<bool> CredWrite(Pointer<CREDENTIAL> credential, int flags) {
   final result_ = CredWriteW_Wrapper(credential, flags);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Decrypts an encrypted file or directory.
@@ -173,7 +173,7 @@ Win32Result<bool> CredWrite(Pointer<CREDENTIAL> credential, int flags) {
 /// {@category advapi32}
 Win32Result<bool> DecryptFile(PCWSTR lpFileName) {
   final result_ = DecryptFileW_Wrapper(lpFileName, NULL);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Marks the specified service for deletion from the service control manager
@@ -185,7 +185,7 @@ Win32Result<bool> DecryptFile(PCWSTR lpFileName) {
 /// {@category advapi32}
 Win32Result<bool> DeleteService(SC_HANDLE hService) {
   final result_ = DeleteService_Wrapper(hService);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Encrypts a file or directory.
@@ -196,7 +196,7 @@ Win32Result<bool> DeleteService(SC_HANDLE hService) {
 /// {@category advapi32}
 Win32Result<bool> EncryptFile(PCWSTR lpFileName) {
   final result_ = EncryptFileW_Wrapper(lpFileName);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the name and status of each service that depends on the specified
@@ -222,7 +222,7 @@ Win32Result<bool> EnumDependentServices(
     pcbBytesNeeded,
     lpServicesReturned,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates services in the specified service control manager database.
@@ -253,7 +253,7 @@ Win32Result<bool> EnumServicesStatus(
     lpServicesReturned,
     lpResumeHandle ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enumerates services in the specified service control manager database.
@@ -289,7 +289,7 @@ Win32Result<bool> EnumServicesStatusEx(
     lpResumeHandle ?? nullptr,
     pszGroupName ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the encryption status of the specified file.
@@ -303,7 +303,7 @@ Win32Result<bool> FileEncryptionStatus(
   Pointer<Uint32> lpStatus,
 ) {
   final result_ = FileEncryptionStatusW_Wrapper(lpFileName, lpStatus);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the display name of the specified service.
@@ -324,7 +324,7 @@ Win32Result<bool> GetServiceDisplayName(
     lpDisplayName ?? nullptr,
     lpcchBuffer,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the service name of the specified service.
@@ -345,7 +345,7 @@ Win32Result<bool> GetServiceKeyName(
     lpServiceName ?? nullptr,
     lpcchBuffer,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a specified type of information about an access token.
@@ -371,7 +371,7 @@ Win32Result<bool> GetTokenInformation(
     tokenInformationLength,
     returnLength,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the name of the user associated with the current thread.
@@ -382,7 +382,7 @@ Win32Result<bool> GetTokenInformation(
 /// {@category advapi32}
 Win32Result<bool> GetUserName(PWSTR? lpBuffer, Pointer<Uint32> pcbBuffer) {
   final result_ = GetUserNameW_Wrapper(lpBuffer ?? nullptr, pcbBuffer);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Initiates a shutdown and restart of the specified computer, and restarts any
@@ -428,7 +428,7 @@ external int _InitiateShutdown(
 /// {@category advapi32}
 Win32Result<bool> NotifyBootConfigStatus(bool bootAcceptable) {
   final result_ = NotifyBootConfigStatus_Wrapper(bootAcceptable ? TRUE : FALSE);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Enables an application to receive notification when the specified service is
@@ -470,7 +470,7 @@ Win32Result<bool> OpenProcessToken(
     desiredAccess,
     tokenHandle,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Establishes a connection to the service control manager on the specified
@@ -490,7 +490,7 @@ Win32Result<SC_HANDLE> OpenSCManager(
     lpDatabaseName ?? nullptr,
     dwDesiredAccess,
   );
-  return Win32Result(value: SC_HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Opens an existing service.
@@ -509,7 +509,7 @@ Win32Result<SC_HANDLE> OpenService(
     lpServiceName,
     dwDesiredAccess,
   );
-  return Win32Result(value: SC_HANDLE(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Opens the access token associated with a thread.
@@ -530,7 +530,7 @@ Win32Result<bool> OpenThreadToken(
     openAsSelf ? TRUE : FALSE,
     tokenHandle,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the configuration parameters of the specified service.
@@ -551,7 +551,7 @@ Win32Result<bool> QueryServiceConfig(
     cbBufSize,
     pcbBytesNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the optional configuration parameters of the specified service.
@@ -574,7 +574,7 @@ Win32Result<bool> QueryServiceConfig2(
     cbBufSize,
     pcbBytesNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves dynamic information related to the current service start.
@@ -593,7 +593,7 @@ Win32Result<bool> QueryServiceDynamicInformation(
     dwInfoLevel,
     ppDynamicInfo,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves a copy of the security descriptor associated with a service
@@ -617,7 +617,7 @@ Win32Result<bool> QueryServiceObjectSecurity(
     cbBufSize,
     pcbBytesNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current status of the specified service.
@@ -631,7 +631,7 @@ Win32Result<bool> QueryServiceStatus(
   Pointer<SERVICE_STATUS> lpServiceStatus,
 ) {
   final result_ = QueryServiceStatus_Wrapper(hService, lpServiceStatus);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Retrieves the current status of the specified service based on the specified
@@ -655,7 +655,7 @@ Win32Result<bool> QueryServiceStatusEx(
     cbBufSize,
     pcbBytesNeeded,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Closes a handle to the specified registry key.
@@ -665,7 +665,7 @@ Win32Result<bool> QueryServiceStatusEx(
 ///
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
-WIN32_ERROR RegCloseKey(HKEY hKey) => WIN32_ERROR(_RegCloseKey(hKey));
+WIN32_ERROR RegCloseKey(HKEY hKey) => .new(_RegCloseKey(hKey));
 
 @Native<Uint32 Function(Pointer)>(symbol: 'RegCloseKey')
 external int _RegCloseKey(Pointer hKey);
@@ -681,8 +681,7 @@ WIN32_ERROR RegConnectRegistry(
   PCWSTR? lpMachineName,
   HKEY hKey,
   Pointer<Pointer> phkResult,
-) =>
-    WIN32_ERROR(_RegConnectRegistry(lpMachineName ?? nullptr, hKey, phkResult));
+) => .new(_RegConnectRegistry(lpMachineName ?? nullptr, hKey, phkResult));
 
 @Native<Uint32 Function(Pointer<Utf16>, Pointer, Pointer<Pointer>)>(
   symbol: 'RegConnectRegistryW',
@@ -702,7 +701,7 @@ external int _RegConnectRegistry(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegCopyTree(HKEY hKeySrc, PCWSTR? lpSubKey, HKEY hKeyDest) =>
-    WIN32_ERROR(_RegCopyTree(hKeySrc, lpSubKey ?? nullptr, hKeyDest));
+    .new(_RegCopyTree(hKeySrc, lpSubKey ?? nullptr, hKeyDest));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer)>(
   symbol: 'RegCopyTreeW',
@@ -726,7 +725,7 @@ WIN32_ERROR RegCreateKey(
   HKEY hKey,
   PCWSTR? lpSubKey,
   Pointer<Pointer> phkResult,
-) => WIN32_ERROR(_RegCreateKey(hKey, lpSubKey ?? nullptr, phkResult));
+) => .new(_RegCreateKey(hKey, lpSubKey ?? nullptr, phkResult));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)>(
   symbol: 'RegCreateKeyW',
@@ -756,7 +755,7 @@ WIN32_ERROR RegCreateKeyEx(
   Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
   Pointer<Pointer> phkResult,
   Pointer<Uint32>? lpdwDisposition,
-) => WIN32_ERROR(
+) => .new(
   _RegCreateKeyEx(
     hKey,
     lpSubKey,
@@ -812,7 +811,7 @@ WIN32_ERROR RegCreateKeyTransacted(
   Pointer<Pointer> phkResult,
   Pointer<Uint32>? lpdwDisposition,
   HANDLE hTransaction,
-) => WIN32_ERROR(
+) => .new(
   _RegCreateKeyTransacted(
     hKey,
     lpSubKey,
@@ -865,7 +864,7 @@ external int _RegCreateKeyTransacted(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDeleteKey(HKEY hKey, PCWSTR lpSubKey) =>
-    WIN32_ERROR(_RegDeleteKey(hKey, lpSubKey));
+    .new(_RegDeleteKey(hKey, lpSubKey));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteKeyW')
 external int _RegDeleteKey(Pointer hKey, Pointer<Utf16> lpSubKey);
@@ -879,7 +878,7 @@ external int _RegDeleteKey(Pointer hKey, Pointer<Utf16> lpSubKey);
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDeleteKeyEx(HKEY hKey, PCWSTR lpSubKey, int samDesired) =>
-    WIN32_ERROR(_RegDeleteKeyEx(hKey, lpSubKey, samDesired, NULL));
+    .new(_RegDeleteKeyEx(hKey, lpSubKey, samDesired, NULL));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32)>(
   symbol: 'RegDeleteKeyExW',
@@ -904,7 +903,7 @@ WIN32_ERROR RegDeleteKeyTransacted(
   PCWSTR lpSubKey,
   int samDesired,
   HANDLE hTransaction,
-) => WIN32_ERROR(
+) => .new(
   _RegDeleteKeyTransacted(
     hKey,
     lpSubKey,
@@ -938,9 +937,8 @@ WIN32_ERROR RegDeleteKeyValue(
   HKEY hKey,
   PCWSTR? lpSubKey,
   PCWSTR? lpValueName,
-) => WIN32_ERROR(
-  _RegDeleteKeyValue(hKey, lpSubKey ?? nullptr, lpValueName ?? nullptr),
-);
+) =>
+    .new(_RegDeleteKeyValue(hKey, lpSubKey ?? nullptr, lpValueName ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
   symbol: 'RegDeleteKeyValueW',
@@ -959,7 +957,7 @@ external int _RegDeleteKeyValue(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDeleteTree(HKEY hKey, PCWSTR? lpSubKey) =>
-    WIN32_ERROR(_RegDeleteTree(hKey, lpSubKey ?? nullptr));
+    .new(_RegDeleteTree(hKey, lpSubKey ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteTreeW')
 external int _RegDeleteTree(Pointer hKey, Pointer<Utf16> lpSubKey);
@@ -972,7 +970,7 @@ external int _RegDeleteTree(Pointer hKey, Pointer<Utf16> lpSubKey);
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDeleteValue(HKEY hKey, PCWSTR? lpValueName) =>
-    WIN32_ERROR(_RegDeleteValue(hKey, lpValueName ?? nullptr));
+    .new(_RegDeleteValue(hKey, lpValueName ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteValueW')
 external int _RegDeleteValue(Pointer hKey, Pointer<Utf16> lpValueName);
@@ -985,8 +983,7 @@ external int _RegDeleteValue(Pointer hKey, Pointer<Utf16> lpValueName);
 ///
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
-WIN32_ERROR RegDisablePredefinedCache() =>
-    WIN32_ERROR(_RegDisablePredefinedCache());
+WIN32_ERROR RegDisablePredefinedCache() => .new(_RegDisablePredefinedCache());
 
 @Native<Uint32 Function()>(symbol: 'RegDisablePredefinedCache')
 external int _RegDisablePredefinedCache();
@@ -1000,7 +997,7 @@ external int _RegDisablePredefinedCache();
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDisablePredefinedCacheEx() =>
-    WIN32_ERROR(_RegDisablePredefinedCacheEx());
+    .new(_RegDisablePredefinedCacheEx());
 
 @Native<Uint32 Function()>(symbol: 'RegDisablePredefinedCacheEx')
 external int _RegDisablePredefinedCacheEx();
@@ -1015,7 +1012,7 @@ external int _RegDisablePredefinedCacheEx();
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegDisableReflectionKey(HKEY hBase) =>
-    WIN32_ERROR(_RegDisableReflectionKey(hBase));
+    .new(_RegDisableReflectionKey(hBase));
 
 @Native<Uint32 Function(Pointer)>(symbol: 'RegDisableReflectionKey')
 external int _RegDisableReflectionKey(Pointer hBase);
@@ -1030,7 +1027,7 @@ external int _RegDisableReflectionKey(Pointer hBase);
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegEnableReflectionKey(HKEY hBase) =>
-    WIN32_ERROR(_RegEnableReflectionKey(hBase));
+    .new(_RegEnableReflectionKey(hBase));
 
 @Native<Uint32 Function(Pointer)>(symbol: 'RegEnableReflectionKey')
 external int _RegEnableReflectionKey(Pointer hBase);
@@ -1043,7 +1040,7 @@ external int _RegEnableReflectionKey(Pointer hBase);
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegEnumKey(HKEY hKey, int dwIndex, PWSTR? lpName, int cchName) =>
-    WIN32_ERROR(_RegEnumKey(hKey, dwIndex, lpName ?? nullptr, cchName));
+    .new(_RegEnumKey(hKey, dwIndex, lpName ?? nullptr, cchName));
 
 @Native<Uint32 Function(Pointer, Uint32, Pointer<Utf16>, Uint32)>(
   symbol: 'RegEnumKeyW',
@@ -1072,7 +1069,7 @@ WIN32_ERROR RegEnumKeyEx(
   PWSTR? lpClass,
   Pointer<Uint32>? lpcchClass,
   Pointer<FILETIME>? lpftLastWriteTime,
-) => WIN32_ERROR(
+) => .new(
   _RegEnumKeyEx(
     hKey,
     dwIndex,
@@ -1126,7 +1123,7 @@ WIN32_ERROR RegEnumValue(
   Pointer<Uint32>? lpType,
   Pointer<Uint8>? lpData,
   Pointer<Uint32>? lpcbData,
-) => WIN32_ERROR(
+) => .new(
   _RegEnumValue(
     hKey,
     dwIndex,
@@ -1170,7 +1167,7 @@ external int _RegEnumValue(
 ///
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
-WIN32_ERROR RegFlushKey(HKEY hKey) => WIN32_ERROR(_RegFlushKey(hKey));
+WIN32_ERROR RegFlushKey(HKEY hKey) => .new(_RegFlushKey(hKey));
 
 @Native<Uint32 Function(Pointer)>(symbol: 'RegFlushKey')
 external int _RegFlushKey(Pointer hKey);
@@ -1190,7 +1187,7 @@ WIN32_ERROR RegGetValue(
   Pointer<Uint32>? pdwType,
   Pointer? pvData,
   Pointer<Uint32>? pcbData,
-) => WIN32_ERROR(
+) => .new(
   _RegGetValue(
     hkey,
     lpSubKey ?? nullptr,
@@ -1237,10 +1234,7 @@ Win32Result<SERVICE_STATUS_HANDLE> RegisterServiceCtrlHandler(
     lpServiceName,
     lpHandlerProc,
   );
-  return Win32Result(
-    value: SERVICE_STATUS_HANDLE(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Registers a function to handle extended service control requests.
@@ -1259,10 +1253,7 @@ Win32Result<SERVICE_STATUS_HANDLE> RegisterServiceCtrlHandlerEx(
     lpHandlerProc,
     lpContext ?? nullptr,
   );
-  return Win32Result(
-    value: SERVICE_STATUS_HANDLE(result_.value.ptr),
-    error: result_.error,
-  );
+  return .new(value: .new(result_.value.ptr), error: result_.error);
 }
 
 /// Loads the specified registry hive as an application hive.
@@ -1277,8 +1268,7 @@ WIN32_ERROR RegLoadAppKey(
   Pointer<Pointer> phkResult,
   int samDesired,
   int dwOptions,
-) =>
-    WIN32_ERROR(_RegLoadAppKey(lpFile, phkResult, samDesired, dwOptions, NULL));
+) => .new(_RegLoadAppKey(lpFile, phkResult, samDesired, dwOptions, NULL));
 
 @Native<
   Uint32 Function(Pointer<Utf16>, Pointer<Pointer>, Uint32, Uint32, Uint32)
@@ -1300,7 +1290,7 @@ external int _RegLoadAppKey(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegLoadKey(HKEY hKey, PCWSTR? lpSubKey, PCWSTR lpFile) =>
-    WIN32_ERROR(_RegLoadKey(hKey, lpSubKey ?? nullptr, lpFile));
+    .new(_RegLoadKey(hKey, lpSubKey ?? nullptr, lpFile));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
   symbol: 'RegLoadKeyW',
@@ -1326,7 +1316,7 @@ WIN32_ERROR RegLoadMUIString(
   Pointer<Uint32>? pcbData,
   int flags,
   PCWSTR? pszDirectory,
-) => WIN32_ERROR(
+) => .new(
   _RegLoadMUIString(
     hKey,
     pszValue ?? nullptr,
@@ -1373,7 +1363,7 @@ WIN32_ERROR RegNotifyChangeKeyValue(
   REG_NOTIFY_FILTER dwNotifyFilter,
   HANDLE? hEvent,
   bool fAsynchronous,
-) => WIN32_ERROR(
+) => .new(
   _RegNotifyChangeKeyValue(
     hKey,
     bWatchSubtree ? TRUE : FALSE,
@@ -1403,7 +1393,7 @@ external int _RegNotifyChangeKeyValue(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegOpenCurrentUser(int samDesired, Pointer<Pointer> phkResult) =>
-    WIN32_ERROR(_RegOpenCurrentUser(samDesired, phkResult));
+    .new(_RegOpenCurrentUser(samDesired, phkResult));
 
 @Native<Uint32 Function(Uint32, Pointer<Pointer>)>(symbol: 'RegOpenCurrentUser')
 external int _RegOpenCurrentUser(int samDesired, Pointer<Pointer> phkResult);
@@ -1419,7 +1409,7 @@ WIN32_ERROR RegOpenKey(
   HKEY hKey,
   PCWSTR? lpSubKey,
   Pointer<Pointer> phkResult,
-) => WIN32_ERROR(_RegOpenKey(hKey, lpSubKey ?? nullptr, phkResult));
+) => .new(_RegOpenKey(hKey, lpSubKey ?? nullptr, phkResult));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)>(
   symbol: 'RegOpenKeyW',
@@ -1445,7 +1435,7 @@ WIN32_ERROR RegOpenKeyEx(
   int? ulOptions,
   REG_SAM_FLAGS samDesired,
   Pointer<Pointer> phkResult,
-) => WIN32_ERROR(
+) => .new(
   _RegOpenKeyEx(
     hKey,
     lpSubKey ?? nullptr,
@@ -1480,7 +1470,7 @@ WIN32_ERROR RegOpenKeyTransacted(
   REG_SAM_FLAGS samDesired,
   Pointer<Pointer> phkResult,
   HANDLE hTransaction,
-) => WIN32_ERROR(
+) => .new(
   _RegOpenKeyTransacted(
     hKey,
     lpSubKey ?? nullptr,
@@ -1526,7 +1516,7 @@ WIN32_ERROR RegOpenUserClassesRoot(
   HANDLE hToken,
   int samDesired,
   Pointer<Pointer> phkResult,
-) => WIN32_ERROR(_RegOpenUserClassesRoot(hToken, NULL, samDesired, phkResult));
+) => .new(_RegOpenUserClassesRoot(hToken, NULL, samDesired, phkResult));
 
 @Native<Uint32 Function(Pointer, Uint32, Uint32, Pointer<Pointer>)>(
   symbol: 'RegOpenUserClassesRoot',
@@ -1546,7 +1536,7 @@ external int _RegOpenUserClassesRoot(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegOverridePredefKey(HKEY hKey, HKEY? hNewHKey) =>
-    WIN32_ERROR(_RegOverridePredefKey(hKey, hNewHKey ?? nullptr));
+    .new(_RegOverridePredefKey(hKey, hNewHKey ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer)>(symbol: 'RegOverridePredefKey')
 external int _RegOverridePredefKey(Pointer hKey, Pointer hNewHKey);
@@ -1570,7 +1560,7 @@ WIN32_ERROR RegQueryInfoKey(
   Pointer<Uint32>? lpcbMaxValueLen,
   Pointer<Uint32>? lpcbSecurityDescriptor,
   Pointer<FILETIME>? lpftLastWriteTime,
-) => WIN32_ERROR(
+) => .new(
   _RegQueryInfoKey(
     hKey,
     lpClass ?? nullptr,
@@ -1632,7 +1622,7 @@ WIN32_ERROR RegQueryMultipleValues(
   int num_vals,
   PWSTR? lpValueBuf,
   Pointer<Uint32>? ldwTotsize,
-) => WIN32_ERROR(
+) => .new(
   _RegQueryMultipleValues(
     hKey,
     val_list,
@@ -1670,7 +1660,7 @@ external int _RegQueryMultipleValues(
 WIN32_ERROR RegQueryReflectionKey(
   HKEY hBase,
   Pointer<Int32> bIsReflectionDisabled,
-) => WIN32_ERROR(_RegQueryReflectionKey(hBase, bIsReflectionDisabled));
+) => .new(_RegQueryReflectionKey(hBase, bIsReflectionDisabled));
 
 @Native<Uint32 Function(Pointer, Pointer<Int32>)>(
   symbol: 'RegQueryReflectionKey',
@@ -1695,7 +1685,7 @@ WIN32_ERROR RegQueryValue(
   PCWSTR? lpSubKey,
   PWSTR? lpData,
   Pointer<Int32>? lpcbData,
-) => WIN32_ERROR(
+) => .new(
   _RegQueryValue(
     hKey,
     lpSubKey ?? nullptr,
@@ -1728,7 +1718,7 @@ WIN32_ERROR RegQueryValueEx(
   Pointer<Uint32>? lpType,
   Pointer<Uint8>? lpData,
   Pointer<Uint32>? lpcbData,
-) => WIN32_ERROR(
+) => .new(
   _RegQueryValueEx(
     hKey,
     lpValueName ?? nullptr,
@@ -1769,7 +1759,7 @@ WIN32_ERROR RegRenameKey(
   HKEY hKey,
   PCWSTR? lpSubKeyName,
   PCWSTR lpNewKeyName,
-) => WIN32_ERROR(_RegRenameKey(hKey, lpSubKeyName ?? nullptr, lpNewKeyName));
+) => .new(_RegRenameKey(hKey, lpSubKeyName ?? nullptr, lpNewKeyName));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
   symbol: 'RegRenameKey',
@@ -1794,9 +1784,7 @@ WIN32_ERROR RegReplaceKey(
   PCWSTR? lpSubKey,
   PCWSTR lpNewFile,
   PCWSTR lpOldFile,
-) => WIN32_ERROR(
-  _RegReplaceKey(hKey, lpSubKey ?? nullptr, lpNewFile, lpOldFile),
-);
+) => .new(_RegReplaceKey(hKey, lpSubKey ?? nullptr, lpNewFile, lpOldFile));
 
 @Native<
   Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>)
@@ -1823,7 +1811,7 @@ WIN32_ERROR RegRestoreKey(
   HKEY hKey,
   PCWSTR lpFile,
   REG_RESTORE_KEY_FLAGS dwFlags,
-) => WIN32_ERROR(_RegRestoreKey(hKey, lpFile, dwFlags));
+) => .new(_RegRestoreKey(hKey, lpFile, dwFlags));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Uint32)>(
   symbol: 'RegRestoreKeyW',
@@ -1842,7 +1830,7 @@ WIN32_ERROR RegSaveKey(
   HKEY hKey,
   PCWSTR lpFile,
   Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
-) => WIN32_ERROR(_RegSaveKey(hKey, lpFile, lpSecurityAttributes ?? nullptr));
+) => .new(_RegSaveKey(hKey, lpFile, lpSecurityAttributes ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>)>(
   symbol: 'RegSaveKeyW',
@@ -1866,9 +1854,7 @@ WIN32_ERROR RegSaveKeyEx(
   PCWSTR lpFile,
   Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
   REG_SAVE_FORMAT flags,
-) => WIN32_ERROR(
-  _RegSaveKeyEx(hKey, lpFile, lpSecurityAttributes ?? nullptr, flags),
-);
+) => .new(_RegSaveKeyEx(hKey, lpFile, lpSecurityAttributes ?? nullptr, flags));
 
 @Native<
   Uint32 Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>, Uint32)
@@ -1895,7 +1881,7 @@ WIN32_ERROR RegSetKeyValue(
   int dwType,
   Pointer? lpData,
   int cbData,
-) => WIN32_ERROR(
+) => .new(
   _RegSetKeyValue(
     hKey,
     lpSubKey ?? nullptr,
@@ -1940,7 +1926,7 @@ WIN32_ERROR RegSetValue(
   REG_VALUE_TYPE dwType,
   PCWSTR? lpData,
   int cbData,
-) => WIN32_ERROR(
+) => .new(
   _RegSetValue(hKey, lpSubKey ?? nullptr, dwType, lpData ?? nullptr, cbData),
 );
 
@@ -1968,7 +1954,7 @@ WIN32_ERROR RegSetValueEx(
   REG_VALUE_TYPE dwType,
   Pointer<Uint8>? lpData,
   int cbData,
-) => WIN32_ERROR(
+) => .new(
   _RegSetValueEx(
     hKey,
     lpValueName ?? nullptr,
@@ -2006,7 +1992,7 @@ external int _RegSetValueEx(
 /// {@category advapi32}
 @pragma('vm:prefer-inline')
 WIN32_ERROR RegUnLoadKey(HKEY hKey, PCWSTR? lpSubKey) =>
-    WIN32_ERROR(_RegUnLoadKey(hKey, lpSubKey ?? nullptr));
+    .new(_RegUnLoadKey(hKey, lpSubKey ?? nullptr));
 
 @Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegUnLoadKeyW')
 external int _RegUnLoadKey(Pointer hKey, Pointer<Utf16> lpSubKey);
@@ -2027,7 +2013,7 @@ Win32Result<bool> SetServiceObjectSecurity(
     dwSecurityInformation,
     lpSecurityDescriptor,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Updates the service control manager's status information for the calling
@@ -2042,7 +2028,7 @@ Win32Result<bool> SetServiceStatus(
   Pointer<SERVICE_STATUS> lpServiceStatus,
 ) {
   final result_ = SetServiceStatus_Wrapper(hServiceStatus, lpServiceStatus);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Assigns an impersonation token to a thread.
@@ -2055,7 +2041,7 @@ Win32Result<bool> SetServiceStatus(
 /// {@category advapi32}
 Win32Result<bool> SetThreadToken(Pointer<Pointer>? thread, HANDLE? token) {
   final result_ = SetThreadToken_Wrapper(thread ?? nullptr, token ?? nullptr);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Starts a service.
@@ -2074,7 +2060,7 @@ Win32Result<bool> StartService(
     dwNumServiceArgs,
     lpServiceArgVectors ?? nullptr,
   );
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }
 
 /// Connects the main thread of a service process to the service control
@@ -2089,5 +2075,5 @@ Win32Result<bool> StartServiceCtrlDispatcher(
   Pointer<SERVICE_TABLE_ENTRY> lpServiceStartTable,
 ) {
   final result_ = StartServiceCtrlDispatcherW_Wrapper(lpServiceStartTable);
-  return Win32Result(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_.value.i32 != FALSE, error: result_.error);
 }

@@ -40,7 +40,7 @@ final IID_IMMDeviceCollection = GUID.fromComponents(
   0xbd7a1be,
   0x7a1a,
   0x44db,
-  Uint8List.fromList(const [0x83, 0x97, 0xcc, 0x53, 0x92, 0x38, 0x7b, 0x5e]),
+  .fromList(const [0x83, 0x97, 0xcc, 0x53, 0x92, 0x38, 0x7b, 0x5e]),
 );
 
 /// Represents a collection of multimedia device resources.
@@ -111,7 +111,7 @@ class IMMDeviceCollection extends IUnknown implements ComInterface {
     final result$ = ppDevice.value;
     free(ppDevice);
     if (result$.isNull) return null;
-    return IMMDevice(result$);
+    return .new(result$);
   }
 
   @override

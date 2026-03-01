@@ -39,7 +39,7 @@ final IID_IAppxManifestTargetDeviceFamily = GUID.fromComponents(
   0x9091b09b,
   0xc8d5,
   0x4f31,
-  Uint8List.fromList(const [0x86, 0x87, 0xa3, 0x38, 0x25, 0x9f, 0xae, 0xfb]),
+  .fromList(const [0x86, 0x87, 0xa3, 0x38, 0x25, 0x9f, 0xae, 0xfb]),
 );
 
 /// Retrieves information about the target device family from the
@@ -97,7 +97,7 @@ class IAppxManifestTargetDeviceFamily extends IUnknown implements ComInterface {
     }
     final result$ = name.value;
     free(name);
-    return PWSTR(result$);
+    return .new(result$);
   }
 
   /// Gets the minimum version of the target device family from the
