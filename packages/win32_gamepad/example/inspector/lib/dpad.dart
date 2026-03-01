@@ -14,27 +14,15 @@ class DpadIcon extends StatelessWidget {
     // (FluentIcons seems to be missing some directions).
     const arrowIcon = Icon(FluentIcons.up);
     return switch (direction) {
-      Direction.west => Transform.rotate(angle: pi * 6 / 4, child: arrowIcon),
-      Direction.northwest => Transform.rotate(
-        angle: pi * 7 / 4,
-        child: arrowIcon,
-      ),
-      Direction.north => Transform.rotate(angle: 0, child: arrowIcon),
-      Direction.northeast => Transform.rotate(
-        angle: pi * 1 / 4,
-        child: arrowIcon,
-      ),
-      Direction.east => Transform.rotate(angle: pi * 2 / 4, child: arrowIcon),
-      Direction.southeast => Transform.rotate(
-        angle: pi * 3 / 4,
-        child: arrowIcon,
-      ),
-      Direction.south => Transform.rotate(angle: pi, child: arrowIcon),
-      Direction.southwest => Transform.rotate(
-        angle: pi * 5 / 4,
-        child: arrowIcon,
-      ),
-      Direction.center => const Icon(FluentIcons.location_outline),
+      .west => Transform.rotate(angle: pi * 6 / 4, child: arrowIcon),
+      .northwest => Transform.rotate(angle: pi * 7 / 4, child: arrowIcon),
+      .north => Transform.rotate(angle: 0, child: arrowIcon),
+      .northeast => Transform.rotate(angle: pi * 1 / 4, child: arrowIcon),
+      .east => Transform.rotate(angle: pi * 2 / 4, child: arrowIcon),
+      .southeast => Transform.rotate(angle: pi * 3 / 4, child: arrowIcon),
+      .south => Transform.rotate(angle: pi, child: arrowIcon),
+      .southwest => Transform.rotate(angle: pi * 5 / 4, child: arrowIcon),
+      .center => const Icon(FluentIcons.location_outline),
     };
   }
 }

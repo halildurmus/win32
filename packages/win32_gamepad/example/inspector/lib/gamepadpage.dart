@@ -57,17 +57,16 @@ class GamepadStatusView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode =
-        context.findAncestorWidgetOfExactType<FluentApp>()?.themeMode ==
-        ThemeMode.dark;
+        context.findAncestorWidgetOfExactType<FluentApp>()?.themeMode == .dark;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      padding: const .symmetric(vertical: 16, horizontal: 24),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           GamepadConnectedView(gamepad: gamepad, controller: controller),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const .symmetric(vertical: 20),
             child: Wrap(
               spacing: 20,
               children: [

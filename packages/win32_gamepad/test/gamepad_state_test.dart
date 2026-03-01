@@ -13,7 +13,7 @@ void main() {
       check(state.leftThumbstickY).equals(0);
       check(state.rightThumbstickX).equals(0);
       check(state.rightThumbstickY).equals(0);
-      check(state.dpadDirection).equals(Direction.center);
+      check(state.dpadDirection).equals(.center);
       check(state.dpadUp).isFalse();
       check(state.dpadDown).isFalse();
       check(state.dpadLeft).isFalse();

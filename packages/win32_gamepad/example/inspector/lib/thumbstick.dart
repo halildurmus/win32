@@ -18,7 +18,7 @@ class ThumbstickView extends StatelessWidget {
       painter: ThumbstickPainter(
         x,
         y,
-        backgroundColor: themeMode == ThemeMode.light
+        backgroundColor: themeMode == .light
             ? Colors.grey[20]
             : Colors.grey[160],
       ),
@@ -58,18 +58,15 @@ class ThumbstickPainter extends CustomPainter {
     final boundingBox = Paint()
       ..color = boundingBoxColor ?? Colors.blue
       ..strokeWidth = border / 6
-      ..style = PaintingStyle.stroke;
+      ..style = .stroke;
     final positionPaint = Paint()
       ..color = thumbstickPositionColor ?? Colors.blue
       ..strokeWidth = border / 4
-      ..style = PaintingStyle.fill;
+      ..style = .fill;
 
     canvas
       ..drawRect(rect, Paint()..color = backgroundColor ?? Colors.white)
-      ..drawRect(
-        Rect.fromLTWH(border, border, boxLength, boxLength),
-        boundingBox,
-      )
+      ..drawRect(.fromLTWH(border, border, boxLength, boxLength), boundingBox)
       ..drawCircle(offset, border / 4, positionPaint);
   }
 

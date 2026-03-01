@@ -18,7 +18,7 @@ class GamepadApp extends StatelessWidget {
   Widget build(BuildContext context) => FluentApp(
     title: appTitle,
     themeMode: WindowsSystemConfiguration.isDarkMode ? .dark : .light,
-    darkTheme: FluentThemeData(brightness: .dark),
+    darkTheme: .new(brightness: .dark),
     home: const InspectorPage(),
   );
 }
@@ -47,10 +47,10 @@ class InspectorPageState extends State<InspectorPage> {
       header: const SizedBox(
         height: kOneLineTileHeight,
         child: FlutterLogo(
-          style: FlutterLogoStyle.horizontal,
+          style: .horizontal,
           size: 80,
           textColor: Colors.white,
-          duration: Duration.zero,
+          duration: .zero,
         ),
       ),
       size: const .new(openMaxWidth: 200),

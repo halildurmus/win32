@@ -23,7 +23,7 @@ class GamepadBatteryInfo {
         final dwResult = WIN32_ERROR(
           XInputGetBatteryInformation(
             controller,
-            deviceType == GamepadDeviceType.controller
+            deviceType == .controller
                 ? BATTERY_DEVTYPE_GAMEPAD
                 : BATTERY_DEVTYPE_HEADSET,
             pBatteryInformation,
