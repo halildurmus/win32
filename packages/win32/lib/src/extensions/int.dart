@@ -64,7 +64,7 @@ extension IntToHexConversion on int {
     var hex = '';
     final base = BigInt.from(16);
 
-    while (n > BigInt.zero) {
+    while (n > .zero) {
       hex = _hexLookupTable[(n % base).toInt()] + hex;
       n = n ~/ base;
     }

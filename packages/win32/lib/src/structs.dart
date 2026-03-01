@@ -22,7 +22,7 @@ base class ACCENT_POLICY extends Struct {
 
   /// Background effect.
   @pragma('vm:prefer-inline')
-  ACCENT_STATE get AccentState => ACCENT_STATE(_AccentState);
+  ACCENT_STATE get AccentState => .new(_AccentState);
   @pragma('vm:prefer-inline')
   set AccentState(ACCENT_STATE value) => _AccentState = value;
 
@@ -67,7 +67,7 @@ base class WINDOWCOMPOSITIONATTRIBDATA extends Struct {
   /// This field specifies which attribute to get or set, and the [pvData]
   /// member points to an object containing the attribute value.
   @pragma('vm:prefer-inline')
-  WINDOWCOMPOSITIONATTRIB get Attrib => WINDOWCOMPOSITIONATTRIB(_Attrib);
+  WINDOWCOMPOSITIONATTRIB get Attrib => .new(_Attrib);
   @pragma('vm:prefer-inline')
   set Attrib(WINDOWCOMPOSITIONATTRIB value) => _Attrib = value;
 

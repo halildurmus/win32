@@ -46,7 +46,7 @@ extension type const PCSTR(Pointer<Utf8> _) implements Pointer<Utf8> {
     pcstr
         .asTypedList(length + 1)
         .setAll(0, cast<BYTE>().asTypedList(length + 1));
-    return PCSTR(pcstr.cast());
+    return .new(pcstr.cast());
   }
 
   /// Converts this [PCSTR] to a Dart [String].

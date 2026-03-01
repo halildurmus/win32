@@ -3,7 +3,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'extensions/pointer.dart';
-import 'pcwstr.dart';
 import 'types.dart';
 import 'win32/oleaut32.g.dart';
 
@@ -42,15 +41,14 @@ extension type const BSTR(Pointer<Utf16> _) implements Pointer<Utf16> {
   /// This is equivalent to calling `SysAllocString` with the contents of this
   /// string.
   BSTR copy() {
-    final bstr = SysAllocString(PCWSTR(this));
+    final bstr = SysAllocString(.new(this));
     if (bstr.isNull) throw StateError('Failed to allocate memory for BSTR.');
-    return BSTR(bstr);
+    return .new(bstr);
   }
 
   /// Converts this `BSTR` to a Dart string.
   ///
   /// Any embedded NUL characters are preserved in the resulting Dart string.
   @pragma('vm:prefer-inline')
-  String toDartString() =>
-      String.fromCharCodes(cast<WCHAR>().asTypedList(length));
+  String toDartString() => .fromCharCodes(cast<WCHAR>().asTypedList(length));
 }

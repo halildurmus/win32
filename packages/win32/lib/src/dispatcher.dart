@@ -62,10 +62,7 @@ final class Dispatcher {
   /// ```dart
   /// final dispatcher = Dispatcher.fromCLSID(WinHttpRequest);
   /// ```
-  factory Dispatcher.fromCLSID(GUID rclsid) {
-    final dispatch = createInstance<IDispatch>(rclsid);
-    return Dispatcher(dispatch);
-  }
+  factory Dispatcher.fromCLSID(GUID rclsid) => .new(createInstance(rclsid));
 
   /// Creates a [Dispatcher] from a ProgID (e.g., `Shell.Application`).
   ///
@@ -82,8 +79,7 @@ final class Dispatcher {
   factory Dispatcher.fromProgID(String progID) => using((arena) {
     final lpszProgID = arena.pcwstr(progID);
     final rclsid = arena.using(CLSIDFromProgID(lpszProgID), free);
-    final dispatch = CoCreateInstance<IDispatch>(rclsid, null, CLSCTX_ALL);
-    return Dispatcher(dispatch);
+    return .new(CoCreateInstance(rclsid, null, CLSCTX_ALL));
   });
 
   /// The underlying [IDispatch] interface.
@@ -168,7 +164,7 @@ final class Dispatcher {
       } else if (value is Pointer<VARIANT>) {
         rgvarg = value;
       } else {
-        variantArg = Variant.from(value);
+        variantArg = .from(value);
         rgvarg = variantArg;
       }
 

@@ -159,7 +159,7 @@ extension ArenaExtension on Arena {
   ///
   /// The buffer is owned by the arena and freed automatically when the arena
   /// is disposed.
-  PSTR pstrBuffer([int length = 1]) => PSTR(allocate<BYTE>(length).cast());
+  PSTR pstrBuffer([int length = 1]) => .new(allocate<BYTE>(length).cast());
 
   /// Creates a null-terminated UTF-16 string ([PWSTR]) from a Dart string
   /// whose lifetime is bound to this [Arena].
@@ -187,5 +187,5 @@ extension ArenaExtension on Arena {
   /// });
   /// ```
   PWSTR pwstrBuffer([int length = 1]) =>
-      PWSTR(allocate<WCHAR>(length * 2).cast());
+      .new(allocate<WCHAR>(length * 2).cast());
 }

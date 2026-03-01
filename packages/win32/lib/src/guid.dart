@@ -112,12 +112,12 @@ base class GUID extends Struct {
     }
 
     try {
-      Data1 = int.parse(cleanedGUID.substring(0, 8), radix: 16);
-      Data2 = int.parse(cleanedGUID.substring(8, 12), radix: 16);
-      Data3 = int.parse(cleanedGUID.substring(12, 16), radix: 16);
+      Data1 = .parse(cleanedGUID.substring(0, 8), radix: 16);
+      Data2 = .parse(cleanedGUID.substring(8, 12), radix: 16);
+      Data3 = .parse(cleanedGUID.substring(12, 16), radix: 16);
       final array = Data4;
       for (var i = 0; i < 8; i++) {
-        array[i] = int.parse(
+        array[i] = .parse(
           cleanedGUID.substring(16 + i * 2, 18 + i * 2),
           radix: 16,
         );
@@ -157,7 +157,7 @@ base class GUID extends Struct {
   /// responsible for freeing it, unless a scoped allocator (such as [Arena])
   /// is used, in which case the allocator manages the lifetime.
   Pointer<GUID> toNative({Allocator allocator = adaptiveCalloc}) =>
-      allocator<GUID>()..ref = this;
+      allocator()..ref = this;
 
   /// Returns the canonical string representation of this GUID.
   ///

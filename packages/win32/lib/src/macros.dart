@@ -152,15 +152,14 @@ int HIWORD(int l) => (l >> 16) & 0xffff;
 //
 // #define HRESULT_FROM_NT(x) ((HRESULT) ((x) | FACILITY_NT_BIT))
 @pragma('vm:prefer-inline')
-HRESULT HRESULT_FROM_NT(NTSTATUS x) =>
-    HRESULT((x | FACILITY_NT_BIT).toSigned(32));
+HRESULT HRESULT_FROM_NT(NTSTATUS x) => .new((x | FACILITY_NT_BIT).toSigned(32));
 
 /// Maps a system error code to an [HRESULT] value.
 //
 // #define __HRESULT_FROM_WIN32(x) ((HRESULT)(x) <= 0 ? ((HRESULT)(x)) :
 //       ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_WIN32 << 16) | 0x80000000)))
 @pragma('vm:prefer-inline')
-HRESULT HRESULT_FROM_WIN32(WIN32_ERROR x) => HRESULT(
+HRESULT HRESULT_FROM_WIN32(WIN32_ERROR x) => .new(
   (x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
       .toSigned(32),
 );

@@ -7,7 +7,6 @@ import 'exception.dart';
 import 'extensions/arena.dart';
 import 'extensions/pointer.dart';
 import 'ntstatus.dart';
-import 'pwstr.dart';
 import 'structs.g.dart';
 import 'win32/kernel32.g.dart';
 import 'win32_error.dart';
@@ -135,7 +134,7 @@ extension type const HRESULT._(int code) implements int {
       module,
       code,
       0,
-      PWSTR(lpBuffer.cast()),
+      .new(lpBuffer.cast()),
       0,
       nullptr,
     ).value;

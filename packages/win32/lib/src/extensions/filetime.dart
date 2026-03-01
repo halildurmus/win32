@@ -64,7 +64,7 @@ extension FILETIMEToDurationConversion on FILETIME {
   @pragma('vm:prefer-inline')
   Duration toDuration() {
     final ticks = _combineHighLow(dwHighDateTime, dwLowDateTime);
-    return Duration(microseconds: ticks ~/ _ticksPerMicrosecond);
+    return .new(microseconds: ticks ~/ _ticksPerMicrosecond);
   }
 }
 

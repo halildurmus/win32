@@ -44,7 +44,7 @@ extension StringExtension on String {
     final bstr = SysAllocStringLen(null, length);
     if (bstr.isNull) throw StateError('Failed to allocate memory for BSTR.');
     bstr.cast<WCHAR>().asTypedList(length).setAll(0, codeUnits);
-    return BSTR(bstr);
+    return .new(bstr);
   }
 
   /// Converts this Dart string to a WinRT [HSTRING].
@@ -92,7 +92,7 @@ extension StringExtension on String {
       pcstr[i] = codeUnitAt(i) & 0xFF;
     }
     pcstr[length] = 0;
-    return PCSTR(pcstr.cast());
+    return .new(pcstr.cast());
   }
 
   /// Converts this Dart string to a null-terminated UTF-16 string ([PCWSTR]).
@@ -117,7 +117,7 @@ extension StringExtension on String {
     final pcwstr = allocator<WCHAR>(length + 1);
     final buffer = pcwstr.asTypedList(length + 1)..setAll(0, units);
     buffer[length] = 0;
-    return PCWSTR(pcwstr.cast());
+    return .new(pcwstr.cast());
   }
 
   /// Converts this Dart string to a null-terminated string of 8-bit
@@ -143,7 +143,7 @@ extension StringExtension on String {
       pstr[i] = codeUnitAt(i) & 0xFF;
     }
     pstr[length] = 0;
-    return PSTR(pstr.cast());
+    return .new(pstr.cast());
   }
 
   /// Converts this Dart string to a null-terminated UTF-16 string ([PWSTR]).
@@ -168,7 +168,7 @@ extension StringExtension on String {
     final pwstr = allocator<WCHAR>(length + 1);
     final buffer = pwstr.asTypedList(length + 1)..setAll(0, units);
     buffer[length] = 0;
-    return PWSTR(pwstr.cast());
+    return .new(pwstr.cast());
   }
 }
 
@@ -217,7 +217,7 @@ extension StringListExtension on List<String> {
     }
 
     buffer[index] = 0; // Final NUL terminator.
-    return PCWSTR(buffer.cast());
+    return .new(buffer.cast());
   }
 
   /// Converts this list into a double-NUL-terminated UTF-16 string block.
@@ -253,6 +253,6 @@ extension StringListExtension on List<String> {
     }
 
     buffer[index] = 0; // Final NUL terminator.
-    return PWSTR(buffer.cast());
+    return .new(buffer.cast());
   }
 }

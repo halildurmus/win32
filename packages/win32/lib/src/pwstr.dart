@@ -45,7 +45,7 @@ extension type const PWSTR(Pointer<Utf16> _) implements Pointer<Utf16> {
     pwstr
         .asTypedList(length + 1)
         .setAll(0, cast<WCHAR>().asTypedList(length + 1));
-    return PWSTR(pwstr.cast());
+    return .new(pwstr.cast());
   }
 
   /// Writes the given Dart [string] into this buffer as UTF-16 code units.
@@ -83,9 +83,7 @@ extension type const PWSTR(Pointer<Utf16> _) implements Pointer<Utf16> {
   /// If [length] is omitted, decoding stops at the first terminating NUL.
   String toDartString({int? length}) {
     if (length != null) RangeError.checkNotNegative(length, 'length');
-    return String.fromCharCodes(
-      cast<WCHAR>().asTypedList(length ?? this.length),
-    );
+    return .fromCharCodes(cast<WCHAR>().asTypedList(length ?? this.length));
   }
 
   /// Decodes a double-NUL-terminated UTF-16 string array.

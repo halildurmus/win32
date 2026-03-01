@@ -24,29 +24,9 @@ extension SYSTEMTIMEToDateTimeConversion on SYSTEMTIME {
   /// Set [isUtc] to `false` **only** when the value is known to represent
   /// local time (e.g., results from `GetLocalTime` or
   /// `SystemTimeToTzSpecificLocalTime`).
-  DateTime toDateTime({bool isUtc = true}) {
-    if (isUtc) {
-      return DateTime.utc(
-        wYear,
-        wMonth,
-        wDay,
-        wHour,
-        wMinute,
-        wSecond,
-        wMilliseconds,
-      );
-    }
-
-    return DateTime(
-      wYear,
-      wMonth,
-      wDay,
-      wHour,
-      wMinute,
-      wSecond,
-      wMilliseconds,
-    );
-  }
+  DateTime toDateTime({bool isUtc = true}) => isUtc
+      ? .utc(wYear, wMonth, wDay, wHour, wMinute, wSecond, wMilliseconds)
+      : .new(wYear, wMonth, wDay, wHour, wMinute, wSecond, wMilliseconds);
 }
 
 /// Extensions for converting Dart [DateTime] values to native [SYSTEMTIME]

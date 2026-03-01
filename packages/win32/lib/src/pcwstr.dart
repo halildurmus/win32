@@ -45,7 +45,7 @@ extension type const PCWSTR(Pointer<Utf16> _) implements Pointer<Utf16> {
     pcwstr
         .asTypedList(length + 1)
         .setAll(0, cast<WCHAR>().asTypedList(length + 1));
-    return PCWSTR(pcwstr.cast());
+    return .new(pcwstr.cast());
   }
 
   /// Converts this [PCWSTR] to a Dart string.

@@ -100,7 +100,7 @@ void initApp(
         final arg = szArgList[i].toDartString();
         args.add(arg);
       }
-      final Win32Result(:value, :error) = LocalFree(HLOCAL(szArgList));
+      final Win32Result(:value, :error) = LocalFree(.new(szArgList));
       assert(value.isNull, 'LocalFree failed with ${error.toHRESULT()}');
     }
 
@@ -109,10 +109,10 @@ void initApp(
     GetStartupInfo(lpStartupInfo);
 
     winMain(
-      HINSTANCE(hInstance),
+      .new(hInstance),
       args,
       lpStartupInfo.ref.dwFlags & STARTF_USESHOWWINDOW == STARTF_USESHOWWINDOW
-          ? SHOW_WINDOW_CMD(lpStartupInfo.ref.wShowWindow)
+          ? .new(lpStartupInfo.ref.wShowWindow)
           : SW_SHOWDEFAULT,
     );
   });
@@ -219,4 +219,4 @@ void registerHighDPISupport() {
 /// free(buffer);
 /// ```
 PWSTR wsalloc([int length = 1, Allocator allocator = adaptiveCalloc]) =>
-    PWSTR(allocator<WCHAR>(length * 2).cast());
+    .new(allocator<WCHAR>(length * 2).cast());

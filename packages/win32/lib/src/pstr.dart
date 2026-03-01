@@ -46,7 +46,7 @@ extension type const PSTR(Pointer<Utf8> _) implements Pointer<Utf8> {
     pstr
         .asTypedList(length + 1)
         .setAll(0, cast<BYTE>().asTypedList(length + 1));
-    return PSTR(pstr.cast());
+    return .new(pstr.cast());
   }
 
   /// Writes [string] into this buffer as ANSI-encoded bytes.

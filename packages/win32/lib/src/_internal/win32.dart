@@ -42,7 +42,7 @@ final class NativeWin32Result extends Struct {
   external NativeWin32ResultValue value;
 
   /// The captured Win32 error code on the native side.
-  WIN32_ERROR get error => WIN32_ERROR(_error);
+  WIN32_ERROR get error => .new(_error);
 }
 
 @Native(symbol: 'CoTaskMemFree')
