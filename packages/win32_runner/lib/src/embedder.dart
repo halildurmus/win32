@@ -23,7 +23,7 @@ class FlutterEmbedder {
   ) {
     // Load the Windows engine
     final library = DynamicLibrary.open(flutterLibrary);
-    flutter = FlutterEngineLibrary(library);
+    flutter = .new(library);
 
     // SymInitialize has already been called when Dart starts. When we invoke
     // the engine, it's called again, which leads to a "Failed to init

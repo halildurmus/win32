@@ -44,12 +44,12 @@ class Window {
       wc.ref
         ..hbrBackground = .new(GetStockObject(WHITE_BRUSH))
         ..hCursor = LoadCursor(null, IDC_ARROW).value
-        ..hInstance = hInstance ?? HINSTANCE(GetModuleHandle(null).value)
+        ..hInstance = hInstance ?? .new(GetModuleHandle(null).value)
         ..lpfnWndProc = windowProc
         ..lpszClassName = .new(classNamePtr)
         ..style = CS_HREDRAW | CS_VREDRAW;
       if (iconPathPtr != null) {
-        wc.ref.hIcon = HICON(
+        wc.ref.hIcon = .new(
           LoadImage(
             null,
             iconPathPtr,
@@ -87,7 +87,7 @@ class Window {
         null, // Additional application data
       );
       if (hwnd.isNull) throw WindowsException(error.toHRESULT());
-      return Window(hwnd);
+      return .new(hwnd);
     });
   }
 
