@@ -17,6 +17,8 @@ final class RegistryChangeEvent {
   const RegistryChangeEvent();
 }
 
+const _event = RegistryChangeEvent();
+
 /// Watches a registry key and produces a stream of change notifications.
 ///
 /// This class provides an asynchronous, isolate-backed monitor for Windows
@@ -104,7 +106,7 @@ final class RegistryChangeMonitor {
           ready.complete();
 
         case _Changed():
-          if (_running) _controller.add(const RegistryChangeEvent());
+          if (_running) _controller.add(_event);
 
         case _Failure(:final error):
           if (!ready.isCompleted) ready.completeError(error);

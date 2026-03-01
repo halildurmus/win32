@@ -122,7 +122,7 @@ sealed class BaseRegistryKey {
 
       if (result != ERROR_SUCCESS) throw WindowsException(result.toHRESULT());
 
-      return RegistryKey(.new(handle.value));
+      return .new(.new(handle.value));
     });
   }
 
@@ -257,7 +257,7 @@ sealed class BaseRegistryKey {
           throw WindowsException(result.toHRESULT());
         }
 
-        result = RegDeleteValue(hkey, PCWSTR(name));
+        result = RegDeleteValue(hkey, .new(name));
         if (result != ERROR_SUCCESS) throw WindowsException(result.toHRESULT());
       }
     });
@@ -274,7 +274,7 @@ sealed class BaseRegistryKey {
     using((arena) {
       final result = RegRenameKey(
         hkey,
-        PCWSTR(subkey == null ? nullptr : arena.pcwstr(subkey)),
+        .new(subkey == null ? nullptr : arena.pcwstr(subkey)),
         arena.pcwstr(newName),
       );
       if (result != ERROR_SUCCESS) throw WindowsException(result.toHRESULT());
@@ -523,10 +523,7 @@ sealed class BaseRegistryKey {
     final len = arena<DWORD>();
     final result = RegQueryValueEx(hkey, arena.pcwstr(name), type, null, len);
     if (result != ERROR_SUCCESS) throw WindowsException(result.toHRESULT());
-    return (
-      type: RegistryValueType.fromRaw(.new(type.value)),
-      length: len.value,
-    );
+    return (type: .fromRaw(.new(type.value)), length: len.value);
   });
 
   /// Internal value retrieval implementation.

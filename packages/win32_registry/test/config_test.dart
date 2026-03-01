@@ -6,19 +6,16 @@ void main() {
   group('RegistryOpenConfig', () {
     test('uses correct default values', () {
       const config = RegistryOpenConfig();
-      check(config.access).equals(RegistryAccess.read);
+      check(config.access).equals(.read);
       check(config.create).isFalse();
-      check(config.options).equals(RegistryOpenOptions.nonVolatile);
+      check(config.options).equals(.nonVolatile);
       check(config.transaction).isNull();
     });
 
     test('copyWith updates only specified fields', () {
       const original = RegistryOpenConfig();
-      final updated = original.copyWith(
-        access: RegistryAccess.write,
-        create: true,
-      );
-      check(updated.access).equals(RegistryAccess.write);
+      final updated = original.copyWith(access: .write, create: true);
+      check(updated.access).equals(.write);
       check(updated.create).isTrue();
       // unchanged fields
       check(updated.options).equals(original.options);

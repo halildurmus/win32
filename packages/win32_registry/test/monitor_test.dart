@@ -67,14 +67,14 @@ void main() {
 
       await awaitChange(
         events,
-        () => key.setValue('IntValue', const RegistryValue.dword(1234)),
+        () => key.setValue('IntValue', const .dword(1234)),
       );
       check(received.length).equals(2);
 
       var subkeyFired = false;
       addTearDown(events.listen((_) => subkeyFired = true).cancel);
       subkey.setValue('SubValue', stringValue);
-      await Future.delayed(const Duration(milliseconds: 20));
+      await Future.delayed(const .new(milliseconds: 20));
       check(subkeyFired).equals(expectSubkeyEvent);
     }
 
@@ -96,7 +96,7 @@ void main() {
         addTearDown(monitor.events.listen((_) => emitted = true).cancel);
 
         key.setValue('StringValue', stringValue);
-        await Future.delayed(const Duration(milliseconds: 100));
+        await Future.delayed(const .new(milliseconds: 100));
 
         check(emitted).isFalse();
       });

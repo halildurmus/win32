@@ -27,6 +27,5 @@ final class RegistryAccess {
   static const all = RegistryAccess(KEY_ALL_ACCESS);
 
   /// Combines this access rights bitmask with [other].
-  RegistryAccess operator |(RegistryAccess other) =>
-      RegistryAccess(value | other.value);
+  RegistryAccess operator |(RegistryAccess other) => .new(value | other.value);
 }

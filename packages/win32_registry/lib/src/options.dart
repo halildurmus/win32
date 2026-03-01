@@ -40,5 +40,5 @@ final class RegistryOpenOptions {
 
   /// Combines this options bitmask set with [other].
   RegistryOpenOptions operator |(RegistryOpenOptions other) =>
-      RegistryOpenOptions(value | other.value);
+      .new(value | other.value);
 }

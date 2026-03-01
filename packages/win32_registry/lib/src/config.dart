@@ -44,7 +44,7 @@ final class RegistryOpenConfig {
     bool? create,
     RegistryOpenOptions? options,
     Transaction? transaction,
-  }) => RegistryOpenConfig(
+  }) => .new(
     access: access ?? this.access,
     create: create ?? this.create,
     options: options ?? this.options,
