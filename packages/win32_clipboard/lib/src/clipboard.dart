@@ -144,6 +144,6 @@ abstract final class Clipboard {
     if (formatId == 0) {
       throw ClipboardException('Failed to register clipboard format: $name');
     }
-    return ClipboardFormat(formatId, name);
+    return .new(formatId, name);
   });
 }

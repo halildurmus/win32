@@ -40,7 +40,7 @@ const standardFormats = <int, String>{
 ClipboardFormat getClipboardFormat(int formatId) {
   final name =
       _getClipboardFormatName(formatId) ?? _getPredefinedFormatName(formatId);
-  return ClipboardFormat(formatId, name ?? 'N/A');
+  return .new(formatId, name ?? 'N/A');
 }
 
 String? _getClipboardFormatName(int formatId) => using((arena) {
@@ -94,19 +94,19 @@ FileListData? getFileListData() => _getData(ClipboardFormat.fileList, (ptr) {
 
   for (var i = 0; i < numberOfFiles; i++) {
     final requiredSize = DragQueryFile(.new(ptr), i, null, 0);
-    if (requiredSize == 0) return const FileListData([]);
+    if (requiredSize == 0) return const .new([]);
 
     final buffer = wsalloc(requiredSize + 1);
     if (DragQueryFile(.new(ptr), i, buffer, requiredSize + 1) == 0) {
       free(buffer);
-      return const FileListData([]);
+      return const .new([]);
     }
 
     files[i] = buffer.toDartString(length: requiredSize);
     free(buffer);
   }
 
-  return FileListData(files);
+  return .new(files);
 });
 
 @internal
@@ -116,14 +116,14 @@ PointerData? getPointerData(ClipboardFormat format) => _getData(format, (ptr) {
   // Copy the data to a new memory location to prevent it from being freed
   // when the lock is released.
   newPtr.asTypedList(size).setAll(0, ptr.cast<Uint8>().asTypedList(size));
-  return PointerData(newPtr, size, format);
+  return .new(newPtr, size, format);
 });
 
 @internal
 UnicodeTextData? getUnicodeTextData() => _getData(
   ClipboardFormat.unicodeText,
-  (ptr) => UnicodeTextData(
-    String.fromCharCodes(
+  (ptr) => .new(
+    .fromCharCodes(
       ptr.cast<Uint16>().asTypedList((GlobalSize(.new(ptr)).value ~/ 2) - 1),
     ),
   ),

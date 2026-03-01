@@ -20,6 +20,8 @@ final class ClipboardChangeEvent {
   const ClipboardChangeEvent();
 }
 
+const _event = ClipboardChangeEvent();
+
 /// Watches the clipboard and produces a stream of change notifications.
 ///
 /// This class provides an asynchronous, isolate-backed monitor for Windows
@@ -127,7 +129,7 @@ final class ClipboardChangeMonitor {
           ready.complete();
 
         case _Changed():
-          if (_running) _controller.add(const ClipboardChangeEvent());
+          if (_running) _controller.add(_event);
 
         case _Failure(:final error):
           if (!ready.isCompleted) ready.completeError(error);
@@ -171,7 +173,7 @@ final class ClipboardChangeMonitor {
     }
 
     if (_exitSignal case final exit? when !exit.isCompleted) {
-      await exit.future.timeout(const Duration(seconds: 2));
+      await exit.future.timeout(const .new(seconds: 2));
     }
 
     await _cleanup();

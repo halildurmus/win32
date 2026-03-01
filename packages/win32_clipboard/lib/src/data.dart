@@ -25,7 +25,7 @@ sealed class ClipboardData {
 
 /// File list data (CF_HDROP).
 final class FileListData extends ClipboardData {
-  const FileListData(this.files) : super._(ClipboardFormat.fileList);
+  const FileListData(this.files) : super._(.fileList);
 
   /// The list of files in this clipboard data.
   final List<String> files;
@@ -75,7 +75,7 @@ final class PointerData extends ClipboardData {
 
 /// Unicode text data (CF_UNICODETEXT).
 final class UnicodeTextData extends ClipboardData {
-  const UnicodeTextData(this.text) : super._(ClipboardFormat.unicodeText);
+  const UnicodeTextData(this.text) : super._(.unicodeText);
 
   /// The Unicode encoded text in this clipboard data.
   final String text;
