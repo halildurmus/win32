@@ -71,7 +71,7 @@ final class Allocation {
       );
     }
 
-    return Allocation(
+    return .new(
       address: address,
       size: size,
       type: type,

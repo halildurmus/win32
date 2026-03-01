@@ -130,7 +130,7 @@ final class DiagnosticCallocAllocator implements TrackingAllocator {
 
     final stack = formatStackTrace(StackTrace.current.toString());
     LeakTracker._registerAllocation(
-      Allocation(
+      .new(
         address: result.address,
         size: byteCount,
         type: '$T',
@@ -194,7 +194,7 @@ final class DiagnosticMallocAllocator implements TrackingAllocator {
 
     final stack = formatStackTrace(StackTrace.current.toString());
     LeakTracker._registerAllocation(
-      Allocation(
+      .new(
         address: result.address,
         size: byteCount,
         type: '$T',

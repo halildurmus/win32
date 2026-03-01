@@ -26,8 +26,8 @@ void main() {
       addTearDown(() {
         if (file.existsSync()) file.deleteSync();
       });
-      final leaks = [
-        Allocation(
+      final leaks = <Allocation>[
+        .new(
           size: 10,
           address: 1,
           type: 'T',
@@ -70,21 +70,15 @@ void main() {
     });
 
     test('prints leak summary and sorts by size desc', () {
-      final leaks = [
-        Allocation(
+      final leaks = <Allocation>[
+        .new(
           size: 10,
           address: 1,
           type: 'Small',
           timestamp: .now(),
           stack: 'a',
         ),
-        Allocation(
-          size: 100,
-          address: 2,
-          type: 'Big',
-          timestamp: .now(),
-          stack: 'b',
-        ),
+        .new(size: 100, address: 2, type: 'Big', timestamp: .now(), stack: 'b'),
       ];
 
       final output = captureStdout(() => const PrintEmitter().emit(leaks));
@@ -98,8 +92,8 @@ void main() {
     });
 
     test('prints stack lines', () {
-      final leaks = [
-        Allocation(
+      final leaks = <Allocation>[
+        .new(
           size: 1,
           address: 1,
           type: 'T',
