@@ -61,19 +61,19 @@ final class VersionManager {
   final Map<NuGetPackage, String> _versions;
 
   /// Returns an unmodifiable view of the stored package versions.
-  Map<NuGetPackage, String> get versions => Map.unmodifiable(_versions);
+  Map<NuGetPackage, String> get versions => .unmodifiable(_versions);
 
   /// Returns the version of the [NuGetPackage.wdk] package.
-  String get wdk => _getVersion(NuGetPackage.wdk);
+  String get wdk => _getVersion(.wdk);
 
   /// Returns the version of the [NuGetPackage.win32] package.
-  String get win32 => _getVersion(NuGetPackage.win32);
+  String get win32 => _getVersion(.win32);
 
   /// Returns the version of the [NuGetPackage.win32Docs] package.
-  String get win32Docs => _getVersion(NuGetPackage.win32Docs);
+  String get win32Docs => _getVersion(.win32Docs);
 
   /// Returns the version of the [NuGetPackage.winrt] package.
-  String get winrt => _getVersion(NuGetPackage.winrt);
+  String get winrt => _getVersion(.winrt);
 
   /// Returns the version of the specified [package].
   String? operator [](NuGetPackage package) => _getVersion(package);
@@ -141,7 +141,7 @@ final class VersionManager {
     if (path != null) return path;
 
     final resolved = Isolate.resolvePackageUriSync(
-      Uri.parse('package:generator/src/versions.dart'),
+      .parse('package:generator/src/versions.dart'),
     );
     if (resolved != null) return resolved.toFilePath();
 
@@ -151,10 +151,10 @@ final class VersionManager {
   /// Mapping of constant names in the file to their corresponding
   /// [NuGetPackage].
   static const Map<String, NuGetPackage> _constantToPackage = {
-    'wdkMetadataVersion': NuGetPackage.wdk,
-    'win32MetadataVersion': NuGetPackage.win32,
-    'win32DocsVersion': NuGetPackage.win32Docs,
-    'winrtMetadataVersion': NuGetPackage.winrt,
+    'wdkMetadataVersion': .wdk,
+    'win32MetadataVersion': .win32,
+    'win32DocsVersion': .win32Docs,
+    'winrtMetadataVersion': .winrt,
   };
 
   /// Regular expression pattern to extract version strings.

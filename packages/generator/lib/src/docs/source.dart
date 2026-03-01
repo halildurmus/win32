@@ -25,8 +25,8 @@ final class NuGetDocsSource implements DocsSource {
     required this.version,
     LocalStorageManager? localStorageManager,
     NuGetClient? nugetClient,
-  }) : localStorageManager = localStorageManager ?? LocalStorageManager(),
-       nugetClient = nugetClient ?? NuGetClient();
+  }) : localStorageManager = localStorageManager ?? .new(),
+       nugetClient = nugetClient ?? .new();
 
   final String version;
   final LocalStorageManager localStorageManager;
@@ -67,9 +67,7 @@ final class NuGetDocsSource implements DocsSource {
 
     // Cast and transform the decoded data to a map of API details.
     final rawData = Map<String, List<dynamic>>.from(decoded);
-    return rawData.map(
-      (key, value) => MapEntry(key, ApiDetails.fromList(key, value)),
-    );
+    return rawData.map((key, value) => MapEntry(key, .fromList(key, value)));
   }
 }
 

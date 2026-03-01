@@ -133,36 +133,34 @@ extension MethodDefExtension on winmd.MethodDef {
   /// interpreted.
   ReturnHint get hint {
     if (hasAttribute(Win32Attribute.canReturnMultipleSuccessValues)) {
-      return ReturnHint.none;
+      return .none;
     }
 
     final outParameters = params.where((p) => p.isOutParam).toFixedList();
 
     return switch (returnType) {
-      BOOLType() || BOOLEANType() => ReturnHint.returnBoolean,
-      GUIDType() => ReturnHint.returnStruct,
+      BOOLType() || BOOLEANType() => .returnBoolean,
+      GUIDType() => .returnStruct,
       HRESULTType() when isQuery != null =>
-        isQuery!.object.isOptional
-            ? ReturnHint.queryOptional
-            : ReturnHint.query,
+        isQuery!.object.isOptional ? .queryOptional : .query,
       HRESULTType() =>
         (outParameters.length == 1 &&
                         params.last.index == outParameters[0].index
                     ? outParameters[0]
                     : params.first)
                 .isRetVal
-            ? ReturnHint.resultValue
-            : ReturnHint.resultVoid,
+            ? .resultValue
+            : .resultVoid,
       TypeDefType(
         typeDef: winmd.TypeDef(
           category: winmd.TypeCategory.struct,
           isWrapperStruct: false,
         ),
       ) =>
-        ReturnHint.returnStruct,
-      TypeDefType(isInterface: true) => ReturnHint.returnValue,
-      VoidType() => ReturnHint.returnVoid,
-      _ => ReturnHint.none,
+        .returnStruct,
+      TypeDefType(isInterface: true) => .returnValue,
+      VoidType() => .returnVoid,
+      _ => .none,
     };
   }
 
@@ -188,9 +186,7 @@ extension MethodDefExtension on winmd.MethodDef {
     if (parameters.length < 2) return null;
 
     final guidIdx = parameters.lastIndexWhere(
-      (p) =>
-          p.type == const InteropType.constPointer(GUIDType(), 1) &&
-          !p.isOutParam,
+      (p) => p.type == const .constPointer(GUIDType(), 1) && !p.isOutParam,
     );
     if (guidIdx == -1) return null;
     final guid = parameters[guidIdx];
@@ -198,7 +194,7 @@ extension MethodDefExtension on winmd.MethodDef {
     final object = parameters
         .where(
           (p) =>
-              p.type == const InteropType.mutablePointer(VoidType(), 2) &&
+              p.type == const .mutablePointer(VoidType(), 2) &&
               p.hasAttribute(Win32Attribute.comOutPtr),
         )
         .singleOrNull;

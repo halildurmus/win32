@@ -51,7 +51,7 @@ void testDynamicLibrary(
       libraryName,
       functionsToGenerate.values.toFixedList(),
     );
-    projection(DynamicLibraryProjection(methods[0].module!, methods));
+    projection(.new(methods[0].module!, methods));
   });
 }
 
@@ -66,8 +66,6 @@ void testDynamicLibraryTest(
       libraryName,
       functions,
     );
-    projection(
-      DynamicLibraryTestProjection(methods[0].module!, methods, functions),
-    );
+    projection(.new(methods[0].module!, methods, functions));
   });
 }

@@ -12,7 +12,7 @@ void main() {
       check(projection.originalName).equals('NtQueryObject');
       check(projection.wrapperName).equals('_NtQueryObject');
       check(projection.library).equals('ntdll');
-      check(projection.hint).equals(ReturnHint.none);
+      check(projection.hint).equals(.none);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('NTSTATUS');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -49,7 +49,7 @@ void main() {
       check(projection.originalName).equals('midiConnect');
       check(projection.wrapperName).equals('_midiConnect');
       check(projection.library).equals('winmm');
-      check(projection.hint).equals(ReturnHint.none);
+      check(projection.hint).equals(.none);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('int');
       check(
@@ -74,7 +74,7 @@ void main() {
       check(projection.originalName).equals('CoCreateInstanceEx');
       check(projection.wrapperName).equals('_CoCreateInstanceEx');
       check(projection.library).equals('ole32');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -115,7 +115,7 @@ void main() {
       check(projection.originalName).equals('CoInitializeEx');
       check(projection.wrapperName).equals('_CoInitializeEx');
       check(projection.library).equals('ole32');
-      check(projection.hint).equals(ReturnHint.none);
+      check(projection.hint).equals(.none);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('HRESULT');
       check(
@@ -140,7 +140,7 @@ void main() {
       check(projection.originalName).equals('WindowsConcatString');
       check(projection.wrapperName).equals('_WindowsConcatString');
       check(projection.library).equals('api_ms_win_core_winrt_string_l1_1_0');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('HSTRING');
       check(
@@ -165,7 +165,7 @@ void main() {
       check(projection.originalName).equals('ChooseFontW');
       check(projection.wrapperName).equals('_ChooseFont');
       check(projection.library).equals('comdlg32');
-      check(projection.hint).equals(ReturnHint.returnBoolean);
+      check(projection.hint).equals(.returnBoolean);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('bool');
       check(
@@ -194,6 +194,6 @@ void testFunction(
 ) {
   test(functionName, () {
     final function = WindowsMetadata.findFunctionByName(functionName);
-    projection(FunctionProjection(function));
+    projection(.new(function));
   });
 }

@@ -68,7 +68,7 @@ final class LocalStorageManager {
     return directory.path;
   }
 
-  Directory get _storageDirectory => Directory(path);
+  Directory get _storageDirectory => .new(path);
 
   /// Locates an existing package directory by [package] and [version].
   ///

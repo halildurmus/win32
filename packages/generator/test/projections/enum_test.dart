@@ -54,6 +54,6 @@ void main() {
 void testEnum(String enumName, void Function(EnumProjection) projection) {
   test(enumName, () {
     final typeDef = WindowsMetadata.findTypeDefByName(enumName);
-    projection(EnumProjection(typeDef));
+    projection(.new(typeDef));
   });
 }

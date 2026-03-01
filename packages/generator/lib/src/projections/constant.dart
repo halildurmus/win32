@@ -23,7 +23,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
     : assert(field.isStatic, '${field.name} is not a constant.'),
       name = field.name.safeIdentifier,
       originalName = field.name,
-      type = ConstantType.fromField(field);
+      type = .fromField(field);
 
   /// The name of the constant converted to safe Dart identifier.
   final String name;
@@ -44,12 +44,12 @@ final class ConstantProjection extends Projection with ProjectionMixin {
   cb.Spec generate() {
     logger.finest('Generating $debugName...');
     return switch (type) {
-      ConstantType.devPropKey => _generateDevPropKey(),
-      ConstantType.double$ => _generateField(
+      .devPropKey => _generateDevPropKey(),
+      .double$ => _generateField(
         assignment: cb.literalNum(field.constant!.valueAsDouble!).code,
       ),
-      ConstantType.guid => _generateGuid(),
-      ConstantType.handle => _generateField(
+      .guid => _generateGuid(),
+      .handle => _generateField(
         assignment: field.type.isWrapperStruct
             ? cb.refer(field.type.publicType).call([
                 cb.refer('Pointer').property('fromAddress').call([
@@ -59,32 +59,32 @@ final class ConstantProjection extends Projection with ProjectionMixin {
             : cb.refer('Pointer').property('fromAddress').call([
                 cb.literalNum(field.constant!.valueAsInt!),
               ]).code,
-        modifier: cb.FieldModifier.final$,
+        modifier: .final$,
       ),
-      ConstantType.int$ => _generateField(
+      .int$ => _generateField(
         assignment: cb.literalNum(field.constant!.valueAsInt!).code,
       ),
-      ConstantType.srwLock => _generateSrwLock(),
-      ConstantType.pcstr => _generateField(
+      .srwLock => _generateSrwLock(),
+      .pcstr => _generateField(
         assignment: cb.refer('PCSTR').call([
           cb.refer('Pointer').property('fromAddress').call([
             cb.literalNum(field.constant!.valueAsInt!),
           ]),
         ]).code,
-        modifier: cb.FieldModifier.final$,
+        modifier: .final$,
       ),
-      ConstantType.pcwstr => _generateField(
+      .pcwstr => _generateField(
         assignment: cb.refer('PCWSTR').call([
           cb.refer('Pointer').property('fromAddress').call([
             cb.literalNum(field.constant!.valueAsInt!),
           ]),
         ]).code,
-        modifier: cb.FieldModifier.final$,
+        modifier: .final$,
       ),
-      ConstantType.propertyKey => _generatePropertyKey(),
-      ConstantType.sidIdentifierAuthority => _generateSidIdentifierAuthority(),
-      ConstantType.signedInt => _generateSignedInt(),
-      ConstantType.string => _generateField(
+      .propertyKey => _generatePropertyKey(),
+      .sidIdentifierAuthority => _generateSidIdentifierAuthority(),
+      .signedInt => _generateSignedInt(),
+      .string => _generateField(
         assignment: cb
             .literalString(
               (field.constant!.valueAsString!).escapeSpecialChars(),
@@ -106,7 +106,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
         .toFixedList();
     final pid = int.parse(attrValue.substring(attrValue.indexOf('}, ') + 3));
     return _generateField(
-      modifier: cb.FieldModifier.final$,
+      modifier: .final$,
       type: cb.refer('DEVPROPKEY'),
       assignment: cb
           .refer('Struct')
@@ -131,7 +131,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
         .map((p) => p.valueAsInt!)
         .toFixedList();
     return _generateField(
-      modifier: cb.FieldModifier.final$,
+      modifier: .final$,
       assignment: cb
           .refer('GUID')
           .property('fromComponents')
@@ -147,7 +147,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
         .valueAsString!;
     final address = int.parse(attrValue);
     return _generateField(
-      modifier: cb.FieldModifier.final$,
+      modifier: .final$,
       type: cb.refer('Pointer'),
       assignment: cb.refer('Pointer').property('fromAddress').call([
         cb.literalNum(address),
@@ -167,7 +167,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
         .toFixedList();
     final pid = int.parse(attrValue.substring(attrValue.indexOf('}, ') + 3));
     return _generateField(
-      modifier: cb.FieldModifier.final$,
+      modifier: .final$,
       type: cb.refer('PROPERTYKEY'),
       assignment: cb
           .refer('Struct')
@@ -196,7 +196,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
         .map(int.parse)
         .toFixedList();
     return _generateField(
-      modifier: cb.FieldModifier.final$,
+      modifier: .final$,
       type: cb.refer('SID_IDENTIFIER_AUTHORITY'),
       assignment: cb
           .refer('Struct')
@@ -220,7 +220,7 @@ final class ConstantProjection extends Projection with ProjectionMixin {
     final hexValue = value.toHexString();
     return _generateField(
       additionalDocs: ['Represents the $type value `$hexValue` (`$value`).'],
-      assignment: cb.Code(
+      assignment: .new(
         value.isNegative
             ? '$type($hexValue - 0x100000000)'
             : '$type($hexValue)',
@@ -232,8 +232,8 @@ final class ConstantProjection extends Projection with ProjectionMixin {
     required cb.Code assignment,
     cb.Reference? type,
     List<String> additionalDocs = const [],
-    cb.FieldModifier modifier = cb.FieldModifier.constant,
-  }) => cb.Field(
+    cb.FieldModifier modifier = .constant,
+  }) => .new(
     (b) => b
       ..docs.addAll(
         generateApiDocs(apiDetails, row: field, additionalDocs: additionalDocs),
@@ -265,18 +265,16 @@ enum ConstantType {
 
   /// Determines the constant type from the given [field].
   factory ConstantType.fromField(winmd.Field field) {
-    if (field.hasAttribute(Win32Attribute.guid)) return ConstantType.guid;
+    if (field.hasAttribute(Win32Attribute.guid)) return guid;
 
     if (field.hasAttribute(Win32Attribute.constant)) {
       final structName =
           (field.signature as winmd.NamedType).typeName.name.lastComponent;
       return switch (structName) {
-        'DEVPROPKEY' => ConstantType.devPropKey,
-        'CONDITION_VARIABLE' ||
-        'INIT_ONCE' ||
-        'SRWLOCK' => ConstantType.srwLock,
-        'PROPERTYKEY' => ConstantType.propertyKey,
-        'SID_IDENTIFIER_AUTHORITY' => ConstantType.sidIdentifierAuthority,
+        'DEVPROPKEY' => devPropKey,
+        'CONDITION_VARIABLE' || 'INIT_ONCE' || 'SRWLOCK' => srwLock,
+        'PROPERTYKEY' => propertyKey,
+        'SID_IDENTIFIER_AUTHORITY' => sidIdentifierAuthority,
         _ => throw UnimplementedError(
           'Unknown type "$structName" for field "$field".',
         ),
@@ -284,7 +282,7 @@ enum ConstantType {
     }
 
     if (field.isLiteral) {
-      if (field.type.isVoidPtr) return ConstantType.handle;
+      if (field.type.isVoidPtr) return handle;
 
       if (field.type case TypeDefType(
         isWrapperStruct: true,
@@ -292,25 +290,25 @@ enum ConstantType {
           fields: [winmd.Field(type: InteropType(isPointer: true))],
         ),
       )) {
-        return ConstantType.handle;
+        return handle;
       }
 
       switch (field.type) {
         case HRESULTType():
         case NTSTATUSType():
         case RPC_STATUSType():
-          return ConstantType.signedInt;
+          return signedInt;
         case PSTRType():
-          return ConstantType.pcstr;
+          return pcstr;
         case PWSTRType():
-          return ConstantType.pcwstr;
+          return pcwstr;
         default:
       }
 
       switch (field.constant!.value!) {
         case winmd.Float32Value():
         case winmd.Float64Value():
-          return ConstantType.double$;
+          return double$;
 
         case winmd.Int8Value():
         case winmd.Uint8Value():
@@ -320,11 +318,11 @@ enum ConstantType {
         case winmd.Uint32Value():
         case winmd.Int64Value():
         case winmd.Uint64Value():
-          return ConstantType.int$;
+          return int$;
 
         case winmd.Utf8StringValue():
         case winmd.Utf16StringValue():
-          return ConstantType.string;
+          return string;
 
         default:
       }

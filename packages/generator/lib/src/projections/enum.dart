@@ -17,10 +17,7 @@ import '../windows_metadata.dart';
 final class EnumProjection extends Projection with ProjectionMixin {
   /// Creates an instance of this class for the given Win32 enum [typeDef].
   EnumProjection(this.typeDef, {super.formatCode})
-    : assert(
-        typeDef.category == TypeCategory.enum$,
-        '${typeDef.name} is not an enum.',
-      ),
+    : assert(typeDef.category == .enum$, '${typeDef.name} is not an enum.'),
       isBitwiseEnum = typeDef.isBitwiseEnum,
       name = typeDef.safeTypeName,
       originalName = typeDef.name;
@@ -49,7 +46,7 @@ final class EnumProjection extends Projection with ProjectionMixin {
         (field) => cb.Field(
           (b) => b
             ..docs.addAll(generateApiDocs(apiDetails, row: field))
-            ..modifier = cb.FieldModifier.constant
+            ..modifier = .constant
             ..name = field.name.safeIdentifier
             ..assignment = cb.refer(name).newInstance([
               cb.literalNum(field.constant!.valueAsInt!),
@@ -67,7 +64,7 @@ final class EnumProjection extends Projection with ProjectionMixin {
   ];
 
   @override
-  cb.Library generate() => cb.Library(
+  cb.Library generate() => .new(
     (b) => b.body.addAll([
       if (originalName != 'RPC_STATUS' && originalName != 'WIN32_ERROR')
         cb.ExtensionType(
@@ -97,30 +94,30 @@ final class EnumProjection extends Projection with ProjectionMixin {
       ..returns = cb.refer('bool')
       ..name = 'has'
       ..requiredParameters.add(
-        cb.Parameter(
+        .new(
           (b) => b
             ..type = cb.refer(name)
             ..name = 'other',
         ),
       )
       ..lambda = true
-      ..body = const cb.Code('_ & other._ == other._;'),
+      ..body = const .new('_ & other._ == other._;'),
   );
 
   /// Generates a method for the given bitwise [operator] (e.g., `&`, `|`).
-  cb.Method _generateBitwiseOperator(String operator) => cb.Method(
+  cb.Method _generateBitwiseOperator(String operator) => .new(
     (b) => b
       ..returns = cb.refer(name)
       ..name = 'operator $operator'
       ..requiredParameters.add(
-        cb.Parameter(
+        .new(
           (b) => b
             ..type = cb.refer('int')
             ..name = 'other',
         ),
       )
       ..lambda = true
-      ..body = cb.Code('$name(_ $operator other);'),
+      ..body = .new('$name(_ $operator other);'),
   );
 
   @override

@@ -135,7 +135,7 @@ Expected format: Identifier followed by a "|" character.''');
 
   GoldenType get goldenType {
     final dirName = path.split(RegExp(r'[/\\]')).reversed.skip(1).first;
-    return GoldenType.fromDirectoryName(dirName);
+    return .fromDirectoryName(dirName);
   }
 }
 
@@ -200,7 +200,7 @@ void main(List<String> args) async {
   Logger.root
     ..level = logLevel
     ..onRecord.listen((record) {
-      if (record.level >= Level.WARNING) {
+      if (record.level >= .WARNING) {
         io.stderr.writeln(record.message);
       } else {
         io.stdout.writeln(record.message);
@@ -233,25 +233,25 @@ void main(List<String> args) async {
   for (final file in goldenFiles) {
     logger.finest('⏳ Processing ${file.goldenType}/${file.fileName}...');
     switch (file.goldenType) {
-      case GoldenType.callback:
+      case .callback:
         updateGolden(file, CallbackProjection.new);
-      case GoldenType.constant:
+      case .constant:
         updateConstantGolden(file);
-      case GoldenType.dynamicLibrary:
+      case .dynamicLibrary:
         updateDynamicLibraryGolden(functionsToGenerate, file);
-      case GoldenType.dynamicLibraryTest:
+      case .dynamicLibraryTest:
         updateDynamicLibraryTestGolden(functionsToGenerate, file);
-      case GoldenType.enum_:
+      case .enum_:
         updateGolden(file, EnumProjection.new);
-      case GoldenType.function:
+      case .function:
         updateFunctionGolden(file);
-      case GoldenType.interface:
+      case .interface:
         updateGolden(file, ComInterfaceProjection.new);
-      case GoldenType.method:
+      case .method:
         updateMethodGolden(file);
-      case GoldenType.property:
+      case .property:
         updatePropertyGolden(file);
-      case GoldenType.struct:
+      case .struct:
         updateGolden(file, StructProjection.new);
     }
   }

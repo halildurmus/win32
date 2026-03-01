@@ -98,9 +98,8 @@ base class FunctionProjection extends Projection with ProjectionMixin {
 
   /// Whether the return type of the method is _nullable_.
   bool get isNullable =>
-      (hint == ReturnHint.returnValue && originalReturnType.isInterface) ||
-      (hint == ReturnHint.resultValue &&
-          parameters.last.type.deref().isInterface);
+      (hint == .returnValue && originalReturnType.isInterface) ||
+      (hint == .resultValue && parameters.last.type.deref().isInterface);
 
   /// The list of projected parameters for the method.
   List<ParameterProjection> get parameters =>
@@ -129,7 +128,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   cb.FunctionType _buildPrototype(
     String returnType,
     List<cb.Reference> parameters,
-  ) => cb.FunctionType(
+  ) => .new(
     (b) => b
       ..returnType = cb.refer(returnType)
       ..requiredParameters.addAll(parameters),
@@ -141,17 +140,17 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     final excludedIndices = <int>{};
 
     switch (hint) {
-      case ReturnHint.query:
+      case .query:
         final (guid: _, :guidIdx, object: _, :objectIdx) = method.isQuery!;
         // Exclude the two parameters ('Guid* riid' and 'void** ppv').
         excludedIndices.addAll([guidIdx, objectIdx]);
 
-      case ReturnHint.queryOptional:
+      case .queryOptional:
         final (guid: _, :guidIdx, object: _, :objectIdx) = method.isQuery!;
         // Exclude the guid parameter ('Guid* riid').
         excludedIndices.addAll([guidIdx]);
 
-      case ReturnHint.resultValue:
+      case .resultValue:
         // Exclude the last parameter.
         excludedIndices.add(parameters.length - 1);
 
@@ -175,7 +174,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library(
+    return .new(
       (b) => b.body.addAll([
         generateMethod(),
         if (!method.supportsLastError) generateNativeFunction(),
@@ -183,7 +182,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     );
   }
 
-  cb.Method generateNativeFunction() => cb.Method(
+  cb.Method generateNativeFunction() => .new(
     (b) => b
       ..annotations.add(
         cb
@@ -202,7 +201,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
       ..name = name.privatize()
       ..requiredParameters.addAll(
         parameters.map(
-          (p) => cb.Parameter(
+          (p) => .new(
             (b) => b
               ..type = p.dartProjection
               ..name = p.name,
@@ -214,19 +213,17 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   /// The return type of the method.
   cb.Reference get returnType {
     final typeReference = switch (hint) {
-      ReturnHint.none || ReturnHint.returnValue => cb.refer(
+      .none || .returnValue => cb.refer(
         // If the return type is an interface, return the interface type as a
         // nullable type.
         originalReturnType.isInterface
             ? originalReturnType.publicType.nullable()
             : originalReturnType.publicType,
       ),
-      ReturnHint.returnStruct => cb.refer(originalReturnType.publicType),
-      ReturnHint.query => cb.refer('T'),
-      ReturnHint.queryOptional ||
-      ReturnHint.resultVoid ||
-      ReturnHint.returnVoid => cb.refer('void'),
-      ReturnHint.resultValue => switch (parameters.last.type) {
+      .returnStruct => cb.refer(originalReturnType.publicType),
+      .query => cb.refer('T'),
+      .queryOptional || .resultVoid || .returnVoid => cb.refer('void'),
+      .resultValue => switch (parameters.last.type) {
         // If the type is a pointer to a struct (but not a wrapper struct), don't
         // dereference it (e.g., return `Pointer<GUID>` instead of `GUID`).
         // Most Win32 APIs takes structs parameters by reference, so returning the
@@ -243,7 +240,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
               ? cb.refer(t.deref().publicType.nullable())
               : cb.refer(t.deref().publicType),
       },
-      ReturnHint.returnBoolean => cb.refer('bool'),
+      .returnBoolean => cb.refer('bool'),
     };
 
     if (method.supportsLastError) {
@@ -261,17 +258,15 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     }
     return switch (hint) {
       // Simple cases where inlining is preferred.
-      ReturnHint.none ||
-      ReturnHint.resultVoid ||
-      ReturnHint.returnBoolean ||
-      ReturnHint.returnStruct ||
-      ReturnHint.returnValue ||
-      ReturnHint.returnVoid => true,
+      .none ||
+      .resultVoid ||
+      .returnBoolean ||
+      .returnStruct ||
+      .returnValue ||
+      .returnVoid => true,
 
       // More complex cases where inlining is avoided.
-      ReturnHint.query ||
-      ReturnHint.queryOptional ||
-      ReturnHint.resultValue => false,
+      .query || .queryOptional || .resultValue => false,
     };
   }
 
@@ -280,7 +275,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
 
     if (originalReturnType case TypeDefType(
       typeDef: TypeDef(
-        category: TypeCategory.struct,
+        category: .struct,
         fields: [Field(type: InteropType(:final isPointer))],
         isWrapperStruct: true,
       ),
@@ -289,7 +284,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     }
 
     if (originalReturnType case TypeDefType(
-      typeDef: TypeDef(category: TypeCategory.struct, isWrapperStruct: false),
+      typeDef: TypeDef(category: .struct, isWrapperStruct: false),
     )) {
       return originalReturnType.cType.toLowerCase();
     }
@@ -311,7 +306,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     };
   }
 
-  cb.Method generateMethod() => cb.Method(
+  cb.Method generateMethod() => .new(
     (b) => b
       ..docs.addAll(
         generateApiDocs(
@@ -352,23 +347,23 @@ base class FunctionProjection extends Projection with ProjectionMixin {
       ..lambda =
           (!method.supportsLastError || returnType.symbol == 'WIN32_ERROR') &&
           !isNullable &&
-          hint != ReturnHint.query &&
-          hint != ReturnHint.queryOptional &&
-          hint != ReturnHint.resultValue &&
-          hint != ReturnHint.resultVoid
+          hint != .query &&
+          hint != .queryOptional &&
+          hint != .resultValue &&
+          hint != .resultVoid
       ..body = generateFunctionBody(),
   );
 
   cb.Code generateFunctionBody() => switch (hint) {
-    ReturnHint.none ||
-    ReturnHint.returnStruct ||
-    ReturnHint.returnValue ||
-    ReturnHint.returnVoid => _generateDefaultFunctionBody(),
-    ReturnHint.query => _generateQueryFunctionBody(),
-    ReturnHint.queryOptional => _generateQueryOptionalFunctionBody(),
-    ReturnHint.resultValue => _generateResultValueFunctionBody(),
-    ReturnHint.resultVoid => _generateResultVoidFunctionBody(),
-    ReturnHint.returnBoolean => _generateReturnBooleanFunctionBody(),
+    .none ||
+    .returnStruct ||
+    .returnValue ||
+    .returnVoid => _generateDefaultFunctionBody(),
+    .query => _generateQueryFunctionBody(),
+    .queryOptional => _generateQueryOptionalFunctionBody(),
+    .resultValue => _generateResultValueFunctionBody(),
+    .resultVoid => _generateResultVoidFunctionBody(),
+    .returnBoolean => _generateReturnBooleanFunctionBody(),
   };
 
   cb.Code _generateDefaultFunctionBody() {
@@ -513,14 +508,14 @@ base class FunctionProjection extends Projection with ProjectionMixin {
           .assign(cb.refer('HRESULT').newInstance([ffiCall]))
           .statement,
       cb.refer('free').call([cb.refer(guid.name)]).statement,
-      const cb.Code(r'if (hr$.isError) {'),
+      const .new(r'if (hr$.isError) {'),
       cb.refer('free').call([cb.refer(object.name)]).statement,
       cb
           .refer('WindowsException')
           .newInstance([cb.refer(r'hr$')])
           .thrown
           .statement,
-      const cb.Code('}'),
+      const .new('}'),
       cb
           .declareFinal('result')
           .assign(
@@ -565,7 +560,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
           .assign(cb.refer('HRESULT').newInstance([ffiCall]))
           .statement,
       cb.refer('free').call([cb.refer(guid.name)]).statement,
-      const cb.Code(r'if (hr$.isError) throw WindowsException(hr$);'),
+      const .new(r'if (hr$.isError) throw WindowsException(hr$);'),
     ]);
   }
 
@@ -577,14 +572,14 @@ base class FunctionProjection extends Projection with ProjectionMixin {
           .declareFinal(r'hr$')
           .assign(cb.refer('HRESULT').newInstance([ffiCall]))
           .statement,
-      const cb.Code(r'if (hr$.isError) {'),
+      const .new(r'if (hr$.isError) {'),
       cb.refer('free').call([cb.refer(parameter.name)]).statement,
       cb
           .refer('WindowsException')
           .newInstance([cb.refer(r'hr$')])
           .thrown
           .statement,
-      const cb.Code('}'),
+      const .new('}'),
       ..._generateResultHandlingCode(parameter),
     ]);
   }
@@ -613,7 +608,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
             .assign(cb.refer(parameter.name).property('value'))
             .statement,
         cb.refer('free').call([cb.refer(parameter.name)]).statement,
-        if (isNullable) const cb.Code(r'if (result$.isNull) return null;'),
+        if (isNullable) const .new(r'if (result$.isNull) return null;'),
         cb
             .refer(type.publicType)
             .newInstance([cb.refer(r'result$')])
@@ -641,7 +636,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
         .declareFinal(r'hr$')
         .assign(cb.refer('HRESULT').newInstance([ffiCall]))
         .statement,
-    const cb.Code(r'if (hr$.isError) throw WindowsException(hr$);'),
+    const .new(r'if (hr$.isError) throw WindowsException(hr$);'),
   ]);
 
   cb.Code _generateReturnBooleanFunctionBody() {
@@ -668,7 +663,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
 
   cb.Code _generateReturnInterfaceFunctionBody() => cb.Block.of([
     cb.declareFinal('result').assign(ffiCall).statement,
-    const cb.Code('if (result.isNull) return null;'),
+    const .new('if (result.isNull) return null;'),
     cb
         .refer(originalReturnType.publicType)
         .newInstance([cb.refer('result')])

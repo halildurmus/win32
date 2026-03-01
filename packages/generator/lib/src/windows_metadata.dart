@@ -1,7 +1,6 @@
 import 'dart:collection';
 
-import 'package:winmd/windows_metadata.dart'
-    show WindowsMetadataLoader, WindowsMetadataPackage, WindowsMetadataVersions;
+import 'package:winmd/windows_metadata.dart' show WindowsMetadataLoader;
 import 'package:winmd/winmd.dart';
 
 import 'docs/docs.dart';
@@ -59,12 +58,8 @@ abstract final class WindowsMetadata {
   }) async {
     final (index, docs) = await (
       WindowsMetadataLoader().loadMultipleMetadata(
-        packages: const [
-          WindowsMetadataPackage.wdk,
-          WindowsMetadataPackage.win32,
-          WindowsMetadataPackage.winrt,
-        ],
-        versions: WindowsMetadataVersions(
+        packages: const [.wdk, .win32, .winrt],
+        versions: .new(
           wdk: wdkMetadataVersion,
           win32: win32MetadataVersion,
           winrt: winrtMetadataVersion,
@@ -86,7 +81,7 @@ abstract final class WindowsMetadata {
     ).wait;
     _docs = docs;
     _index = index;
-    _lookup = MetadataLookup(index);
+    _lookup = .new(index);
     return (index, docs);
   }
 
@@ -164,7 +159,7 @@ abstract final class WindowsMetadata {
   static TypeDef findTypeDef(
     String namespace,
     String name, {
-    PreferredArchitecture preferredArchitecture = PreferredArchitecture.x64,
+    PreferredArchitecture preferredArchitecture = .x64,
   }) {
     final typeDefs = lookup.findTypes(namespace, name).toFixedList();
     if (typeDefs.length == 1) return typeDefs[0];
@@ -173,9 +168,9 @@ abstract final class WindowsMetadata {
     return typeDefs.where((td) {
           final Architecture(:arm64, :x64, :x86) = td.supportedArchitectures;
           return switch (preferredArchitecture) {
-            PreferredArchitecture.arm64 => arm64,
-            PreferredArchitecture.x64 => x64,
-            PreferredArchitecture.x86 => x86,
+            .arm64 => arm64,
+            .x64 => x64,
+            .x86 => x86,
           };
         }).firstOrNull ??
         (throw GeneratorException(
@@ -187,7 +182,7 @@ abstract final class WindowsMetadata {
   @pragma('vm:prefer-inline')
   static TypeDef findTypeDefByName(
     String name, {
-    PreferredArchitecture preferredArchitecture = PreferredArchitecture.x64,
+    PreferredArchitecture preferredArchitecture = .x64,
   }) {
     final typeDefs = lookup.findTypesByName(name).toFixedList();
     if (typeDefs.length == 1) return typeDefs[0];
@@ -196,9 +191,9 @@ abstract final class WindowsMetadata {
     return typeDefs.where((td) {
           final Architecture(:arm64, :x64, :x86) = td.supportedArchitectures;
           return switch (preferredArchitecture) {
-            PreferredArchitecture.arm64 => arm64,
-            PreferredArchitecture.x64 => x64,
-            PreferredArchitecture.x86 => x86,
+            .arm64 => arm64,
+            .x64 => x64,
+            .x86 => x86,
           };
         }).firstOrNull ??
         (throw GeneratorException(

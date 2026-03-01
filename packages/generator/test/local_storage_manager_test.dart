@@ -17,7 +17,7 @@ void main() {
       tempDir = Directory.systemTemp.createTempSync(
         'generator_local_storage_manager_test',
       );
-      storageManager = LocalStorageManager(storagePath: tempDir.path);
+      storageManager = .new(storagePath: tempDir.path);
     });
 
     tearDown(() {
@@ -102,7 +102,7 @@ void main() {
   });
 }
 
-const NuGetPackage dummyPackage = NuGetPackage.win32Docs;
+const NuGetPackage dummyPackage = .win32Docs;
 const version = '1.0.0';
 
 /// A helper to create a dummy ZIP archive containing an "apidocs.msgpack" file.
@@ -110,7 +110,7 @@ Uint8List createDummyZip() {
   final archive = Archive();
   final msgpackContent = [0x01, 0x02, 0x03, 0x04]; // Dummy content.
   archive.addFile(
-    ArchiveFile('apidocs.msgpack', msgpackContent.length, msgpackContent),
+    .new('apidocs.msgpack', msgpackContent.length, msgpackContent),
   );
-  return Uint8List.fromList(ZipEncoder().encode(archive));
+  return .fromList(ZipEncoder().encode(archive));
 }

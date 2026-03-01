@@ -548,11 +548,11 @@ final class DartEmitter extends cb.DartEmitter {
     if (spec.late) output.write('late ');
     if (spec.external) output.write('external ');
     switch (spec.modifier) {
-      case cb.FieldModifier.var$:
+      case .var$:
         if (spec.type == null) output.write('var ');
-      case cb.FieldModifier.final$:
+      case .final$:
         output.write('final ');
-      case cb.FieldModifier.constant:
+      case .constant:
         output.write('const ');
     }
     if (spec.type != null) {
@@ -562,7 +562,7 @@ final class DartEmitter extends cb.DartEmitter {
     output.write(spec.name);
     if (spec.assignment != null) {
       output.write(' = ');
-      startConstCode(spec.modifier == cb.FieldModifier.constant, () {
+      startConstCode(spec.modifier == .constant, () {
         spec.assignment!.accept(this, output);
       });
     }
@@ -770,12 +770,12 @@ final class DartEmitter extends cb.DartEmitter {
       spec.returns!.accept(this, output);
       output.write(' ');
     }
-    if (spec.type == cb.MethodType.getter) {
+    if (spec.type == .getter) {
       output
         ..write('get ')
         ..write(spec.name);
     } else {
-      if (spec.type == cb.MethodType.setter) output.write('set ');
+      if (spec.type == .setter) output.write('set ');
       if (spec.name != null) output.write(spec.name);
       visitTypeParameters(spec.types.map((r) => r.type), output);
       output.write('(');
@@ -801,11 +801,11 @@ final class DartEmitter extends cb.DartEmitter {
     if (spec.body != null) {
       if (spec.modifier != null) {
         switch (spec.modifier!) {
-          case cb.MethodModifier.async:
+          case .async:
             output.write(' async ');
-          case cb.MethodModifier.asyncStar:
+          case .asyncStar:
             output.write(' async* ');
-          case cb.MethodModifier.syncStar:
+          case .syncStar:
             output.write(' sync* ');
         }
       }
@@ -982,8 +982,8 @@ bool _newLineBetween(bool ordered, cb.Directive a, cb.Directive? b) {
   if (a.type != b.type) return true;
 
   // Within exports, don't put in extra blank lines
-  if (a.type == cb.DirectiveType.export) {
-    assert(b.type == cb.DirectiveType.export, 'Expected export directive');
+  if (a.type == .export) {
+    assert(b.type == .export, 'Expected export directive');
     return false;
   }
 

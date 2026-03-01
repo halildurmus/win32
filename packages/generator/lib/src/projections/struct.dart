@@ -19,9 +19,8 @@ final class StructProjection extends Projection with ProjectionMixin {
   /// Creates an instance of this class for a [typeDef].
   StructProjection(this.typeDef, {super.formatCode})
     : assert(
-        typeDef.category == winmd.TypeCategory.struct ||
-            (typeDef.category == winmd.TypeCategory.class$ &&
-                typeDef.guid != null),
+        typeDef.category == .struct ||
+            (typeDef.category == .class$ && typeDef.guid != null),
         '${typeDef.name} is not a struct.',
       ),
       name = typeDef.safeTypeName,
@@ -91,7 +90,7 @@ final class StructProjection extends Projection with ProjectionMixin {
     };
   }
 
-  cb.Library _generateGuidConstant() => cb.Library((b) {
+  cb.Library _generateGuidConstant() => .new((b) {
     final guidParams = typeDef
         .findAttribute(Win32Attribute.guid)
         .fixedArgs
@@ -101,7 +100,7 @@ final class StructProjection extends Projection with ProjectionMixin {
       cb.Field(
         (b) => b
           ..docs.addAll(generateApiDocs(apiDetails, row: typeDef))
-          ..modifier = cb.FieldModifier.final$
+          ..modifier = .final$
           ..name = name
           ..assignment = cb
               .refer('GUID')
@@ -121,14 +120,14 @@ final class StructProjection extends Projection with ProjectionMixin {
       ffiType = 'Pointer<Utf8>';
     }
 
-    return cb.Library(
+    return .new(
       (b) => b.body.add(
         cb.ExtensionType((b) {
           final additionalDocs = <String>[];
           FunctionProjection? freeFunctionProjection;
           if (typeDef.isHandle) {
             if (typeDef.freeFunction case final freeFunction?) {
-              freeFunctionProjection = FunctionProjection(freeFunction);
+              freeFunctionProjection = .new(freeFunction);
               additionalDocs.add(
                 'The handle must be closed using the '
                 '[${freeFunctionProjection.name}] function.',
@@ -151,14 +150,14 @@ final class StructProjection extends Projection with ProjectionMixin {
             ..constant = true
             ..name = name
             ..implements.add(cb.refer(ffiType))
-            ..representationDeclaration = cb.RepresentationDeclaration((b) {
+            ..representationDeclaration = .new((b) {
               b
                 ..declaredRepresentationType = cb.refer(ffiType)
                 ..name = '_';
             })
             ..methods.addAll([
               if (typeDef.invalidHandleValues.isNotEmpty)
-                cb.Method(
+                .new(
                   (b) => b
                     ..docs.add(
                       'Whether this handle is valid (i.e., not one of the '
@@ -167,7 +166,7 @@ final class StructProjection extends Projection with ProjectionMixin {
                     ..name = 'isValid'
                     ..returns = cb.refer('bool')
                     ..lambda = true
-                    ..type = cb.MethodType.getter
+                    ..type = .getter
                     ..body = typeDef.invalidHandleValues
                         .map(
                           (v) => cb
@@ -185,7 +184,7 @@ final class StructProjection extends Projection with ProjectionMixin {
                         .code,
                 ),
               if (freeFunctionProjection case final freeFunctionProjection?)
-                cb.Method(
+                .new(
                   (b) => b
                     ..docs.add('Closes the handle.')
                     ..name = 'close'
@@ -208,7 +207,7 @@ final class StructProjection extends Projection with ProjectionMixin {
   }
 
   /// Generates the class and extensions for the struct.
-  cb.Library _generateStructLibrary() => cb.Library(
+  cb.Library _generateStructLibrary() => .new(
     (b) => b.body.addAll([
       _generateStructClass(),
       if (needsPropertyAccessors) _generateExtension(),
@@ -217,7 +216,7 @@ final class StructProjection extends Projection with ProjectionMixin {
   );
 
   /// Generates the class for the struct.
-  cb.Class _generateStructClass() => cb.Class((b) {
+  cb.Class _generateStructClass() => .new((b) {
     b
       ..docs.addAll(
         generateApiDocs(
@@ -231,9 +230,7 @@ final class StructProjection extends Projection with ProjectionMixin {
           cb.refer('Packed').call([cb.literalNum(packingAlignment)]),
       ])
       ..sealed = typeDef.isNested || typeDef.isUnion
-      ..modifier = !typeDef.isNested && !typeDef.isUnion
-          ? cb.ClassModifier.base
-          : null
+      ..modifier = !typeDef.isNested && !typeDef.isUnion ? .base : null
       ..name = name
       ..extend = baseType;
 
@@ -247,7 +244,7 @@ final class StructProjection extends Projection with ProjectionMixin {
     b.methods.add(_generateToNativeMethod());
   });
 
-  cb.Method _generateToNativeMethod() => cb.Method(
+  cb.Method _generateToNativeMethod() => .new(
     (b) => b
       ..docs.addAll([
         'Allocates native memory and copies the contents of this struct into it.',
@@ -258,7 +255,7 @@ final class StructProjection extends Projection with ProjectionMixin {
       ..returns = cb.refer('Pointer<$name>')
       ..name = 'toNative'
       ..optionalParameters.add(
-        cb.Parameter(
+        .new(
           (b) => b
             ..named = true
             ..name = 'allocator'
@@ -276,7 +273,7 @@ final class StructProjection extends Projection with ProjectionMixin {
   );
 
   /// Generates extension methods for accessing nested struct fields.
-  cb.Extension _generateExtension() => cb.Extension(
+  cb.Extension _generateExtension() => .new(
     (b) => b
       ..name = '${name}_Extension'
       ..on = cb.refer(typeDef.rootType.safeTypeName)
@@ -319,20 +316,20 @@ final class StructProjection extends Projection with ProjectionMixin {
     String name,
     String instanceName,
   ) => [
-    cb.Method(
+    .new(
       (b) => b
         ..returns = cb.refer(type)
-        ..type = cb.MethodType.getter
+        ..type = .getter
         ..name = name
         ..lambda = true
         ..body = cb.refer('this').property(instanceName).statement,
     ),
-    cb.Method(
+    .new(
       (b) => b
-        ..type = cb.MethodType.setter
+        ..type = .setter
         ..name = name
         ..requiredParameters.add(
-          cb.Parameter(
+          .new(
             (b) => b
               ..type = cb.refer(type)
               ..name = 'value',
@@ -497,7 +494,7 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
   }
 
   /// Creates a field for the struct.
-  cb.Field _generateField(List<String> docs) => cb.Field(
+  cb.Field _generateField(List<String> docs) => .new(
     (b) => b
       ..docs.addAll([
         if (field.isStructSize)
@@ -534,10 +531,10 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
     for (final NativeBitFieldAttribute(name: bitFieldName, :offset, :length)
         in field.bitFields) {
       methods.addAll([
-        cb.Method(
+        .new(
           (b) => b
             ..returns = cb.refer(type)
-            ..type = cb.MethodType.getter
+            ..type = .getter
             ..name = bitFieldName
             ..lambda = true
             ..body = cb.refer(name).property('getBits').call([
@@ -545,12 +542,12 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
               cb.literalNum(length),
             ]).code,
         ),
-        cb.Method(
+        .new(
           (b) => b
-            ..type = cb.MethodType.setter
+            ..type = .setter
             ..name = bitFieldName
             ..requiredParameters.add(
-              cb.Parameter(
+              .new(
                 (b) => b
                   ..type = cb.refer(type)
                   ..name = 'value',
@@ -581,11 +578,11 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
       _ => false,
     };
     return [
-      cb.Method(
+      .new(
         (b) => b
           ..docs.addAll(docs)
           ..returns = cb.refer(type)
-          ..type = cb.MethodType.getter
+          ..type = .getter
           ..name = name
           ..lambda = true
           ..body = cb
@@ -593,12 +590,12 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
               .notEqualTo(cb.refer('FALSE'))
               .code,
       ),
-      cb.Method(
+      .new(
         (b) => b
-          ..type = cb.MethodType.setter
+          ..type = .setter
           ..name = name
           ..requiredParameters.add(
-            cb.Parameter(
+            .new(
               (b) => b
                 ..type = cb.refer(type)
                 ..name = 'value',
@@ -622,11 +619,11 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
 
   /// Generates getter and setter methods for char array fields.
   List<cb.Method> _generateCharArrayAccessors(List<String> docs) => [
-    cb.Method(
+    .new(
       (b) => b
         ..docs.addAll(docs)
         ..returns = cb.refer(type)
-        ..type = cb.MethodType.getter
+        ..type = .getter
         ..name = name
         ..lambda = true
         ..body = cb
@@ -635,12 +632,12 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
             .call(const [])
             .code,
     ),
-    cb.Method(
+    .new(
       (b) => b
-        ..type = cb.MethodType.setter
+        ..type = .setter
         ..name = name
         ..requiredParameters.add(
-          cb.Parameter(
+          .new(
             (b) => b
               ..type = cb.refer('String')
               ..name = 'value',
@@ -656,21 +653,21 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
   /// Generates getter and setter methods for enum, string, and wrapper struct
   /// fields.
   List<cb.Method> _generateGenericAccessors(List<String> docs) => [
-    cb.Method(
+    .new(
       (b) => b
         ..docs.addAll(docs)
         ..returns = cb.refer(type)
-        ..type = cb.MethodType.getter
+        ..type = .getter
         ..name = name
         ..lambda = true
         ..body = cb.refer(type).newInstance([cb.refer(name.privatize())]).code,
     ),
-    cb.Method(
+    .new(
       (b) => b
-        ..type = cb.MethodType.setter
+        ..type = .setter
         ..name = name
         ..requiredParameters.add(
-          cb.Parameter(
+          .new(
             (b) => b
               ..type = cb.refer(type)
               ..name = 'value',
@@ -683,11 +680,11 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
 
   /// Generates getter and setter methods for interface fields.
   List<cb.Method> _generateInterfaceAccessors(List<String> docs) => [
-    cb.Method(
+    .new(
       (b) => b
         ..docs.addAll(docs)
         ..returns = cb.refer(type)
-        ..type = cb.MethodType.getter
+        ..type = .getter
         ..name = name
         ..lambda = true
         ..body = cb
@@ -701,12 +698,12 @@ final class StructFieldProjection extends Projection with ProjectionMixin {
             )
             .code,
     ),
-    cb.Method(
+    .new(
       (b) => b
-        ..type = cb.MethodType.setter
+        ..type = .setter
         ..name = name
         ..requiredParameters.add(
-          cb.Parameter(
+          .new(
             (b) => b
               ..type = cb.refer(type)
               ..name = 'value',

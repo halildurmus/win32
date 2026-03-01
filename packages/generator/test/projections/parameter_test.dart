@@ -179,7 +179,7 @@ void testFunctionParameter(
   test('$functionName.$parameterName', () {
     final function = WindowsMetadata.findFunctionByName(functionName);
     final parameter = function.findParameter(parameterName);
-    projection(ParameterProjection(parameter));
+    projection(.new(parameter));
   });
 }
 
@@ -194,6 +194,6 @@ void testMethodParameter(
     final typeDef = WindowsMetadata.findTypeDefByName(parent);
     final method = typeDef.findMethod(methodName);
     final parameter = method.findParameter(parameterName);
-    projection(ParameterProjection(parameter));
+    projection(.new(parameter));
   });
 }

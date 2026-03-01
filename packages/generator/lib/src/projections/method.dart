@@ -61,10 +61,10 @@ base class ComMethodProjection extends FunctionProjection {
   @override
   String? get category => null;
 
-  cb.Field get functionLookup => cb.Field(
+  cb.Field get functionLookup => .new(
     (b) => b
       ..late = true
-      ..modifier = cb.FieldModifier.final$
+      ..modifier = .final$
       ..name = '${method.uniqueName}Fn'.privatize()
       ..assignment = cb
           .refer('_vtable')
@@ -81,7 +81,7 @@ base class ComMethodProjection extends FunctionProjection {
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library((b) => b.body.add(generateMethod()));
+    return .new((b) => b.body.add(generateMethod()));
   }
 
   @override

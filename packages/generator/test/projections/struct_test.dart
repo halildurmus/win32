@@ -327,7 +327,7 @@ void main() {
 void testStruct(String structName, void Function(StructProjection) projection) {
   test(structName, () {
     final typeDef = WindowsMetadata.findTypeDefByName(structName);
-    projection(StructProjection(typeDef));
+    projection(.new(typeDef));
   });
 }
 
@@ -340,6 +340,6 @@ void testStructField(
   test('$structName.$fieldName', () {
     final typeDef = WindowsMetadata.findTypeDefByName(structName);
     final field = typeDef.findField(fieldName);
-    projection(StructFieldProjection(field));
+    projection(.new(field));
   });
 }

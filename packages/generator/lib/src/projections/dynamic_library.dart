@@ -38,10 +38,9 @@ final class DynamicLibraryProjection extends Projection {
   /// Returns the appropriate import for the provided [typeDef].
   String? getImportForTypeDef(winmd.TypeDef typeDef) =>
       switch (typeDef.category) {
-        winmd.TypeCategory.delegate => '../callbacks.g.dart',
-        winmd.TypeCategory.enum$ => '../enums.g.dart',
-        winmd.TypeCategory.interface =>
-          '../com/${typeDef.nameWithoutEncoding.safeFilename}',
+        .delegate => '../callbacks.g.dart',
+        .enum$ => '../enums.g.dart',
+        .interface => '../com/${typeDef.nameWithoutEncoding.safeFilename}',
         _ => null,
       };
 
@@ -181,7 +180,7 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library(
+    return .new(
       (b) => b
         ..directives.addAll(imports)
         ..body.addAll([
@@ -190,9 +189,9 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
               ..name = 'main'
               ..body = cb.Block.of([
                 cb.Block.of([
-                  cb.Code("group('$name', () {"),
+                  .new("group('$name', () {"),
                   ...methods.map(_generateTest),
-                  const cb.Code('});'),
+                  const .new('});'),
                 ]),
               ]),
           ),
@@ -224,14 +223,14 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
     // TaskDialog APIs).
     if (function.originalName.startsWith('TaskDialog')) {
       logger.finest('Skipping test for ${method.name}...');
-      return cb.Block.of(const []);
+      return .of(const []);
     }
 
     logger.finest('Generating test for ${method.name}...');
     final projection = FunctionProjection(method);
     final minVersion = function.minimumWindowsVersion;
-    return cb.Block.of([
-      cb.Code(
+    return .of([
+      .new(
         "test('${projection.name} can be instantiated', "
         // Skip the test if the minimum Windows version requirement is not met.
         "${minVersion > 0 ? 'skip: $minVersion > windowsBuildNumber, ' : ''}"
@@ -244,7 +243,7 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
           .property('isA')
           .call(const [], const {}, [cb.refer('Function')])
           .statement,
-      const cb.Code('});'),
+      const .new('});'),
     ]);
   }
 

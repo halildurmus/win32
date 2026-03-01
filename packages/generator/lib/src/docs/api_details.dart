@@ -40,7 +40,7 @@ final class ApiDetails {
       final Map<dynamic, dynamic> fields,
       final String? returnValue,
     ]) {
-      return ApiDetails(
+      return .new(
         apiName: apiName,
         description: description,
         fields: fields.cast(),

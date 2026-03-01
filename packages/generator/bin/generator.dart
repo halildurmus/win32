@@ -927,7 +927,7 @@ Future<Map<NuGetPackage, String>> getLatestPackageVersions(
         .map(
           (package) => client.getLatestPackageVersion(
             package.packageId,
-            includePrerelease: package != NuGetPackage.winrt,
+            includePrerelease: package != .winrt,
           ),
         )
         .wait;
@@ -1008,7 +1008,7 @@ const unicodeSuffixedFunctions = <String>{''');
   final unicodeSuffixedTypeDefs = SplayTreeSet<String>();
   final typeDefs = WindowsMetadata.typeDefs.toFixedList();
   for (final typeDef in typeDefs) {
-    if (typeDef.flags.has(winmd.TypeAttributes.windowsRuntime)) continue;
+    if (typeDef.flags.has(.windowsRuntime)) continue;
 
     if (pattern.hasMatch(typeDef.name) && !typeDef.isUnicode) {
       final hasAnsiVariant = typeDefs.any(
@@ -1160,7 +1160,7 @@ void main(List<String> args) async {
   Logger.root
     ..level = logLevel
     ..onRecord.listen((record) {
-      if (record.level >= Level.WARNING) {
+      if (record.level >= .WARNING) {
         io.stderr.writeln(record.message);
       } else {
         io.stdout.writeln(record.message);

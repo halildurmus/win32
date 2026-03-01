@@ -12,7 +12,7 @@ void main() {
       check(projection.name).equals('languageTag');
       check(projection.originalName).equals('get_LanguageTag');
       check(projection.wrapperName).equals('_get_LanguageTagFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('PWSTR');
       check(
@@ -31,7 +31,7 @@ void main() {
       check(projection.name).equals('newEnum');
       check(projection.originalName).equals('get__NewEnum');
       check(projection.wrapperName).equals('_get__NewEnumFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IEnumVARIANT?');
       check(
@@ -50,7 +50,7 @@ void main() {
       check(projection.name).equals('isConnected');
       check(projection.originalName).equals('get_IsConnected');
       check(projection.wrapperName).equals('_get_IsConnectedFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('bool');
       check(
@@ -69,7 +69,7 @@ void main() {
       check(projection.name).equals('responseBody');
       check(projection.originalName).equals('get_ResponseBody');
       check(projection.wrapperName).equals('_get_ResponseBodyFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('Pointer<VARIANT>');
       check(
@@ -88,7 +88,7 @@ void main() {
       check(projection.name).equals(r'runtimeType$');
       check(projection.originalName).equals('get_RuntimeType');
       check(projection.wrapperName).equals(r'_get_RuntimeType$Fn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('PACKMAN_RUNTIME');
       check(
@@ -109,7 +109,7 @@ void main() {
       check(projection.name).equals('currentValue');
       check(projection.originalName).equals('get_CurrentValue');
       check(projection.wrapperName).equals('_get_CurrentValueFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('double');
       check(
@@ -130,7 +130,7 @@ void main() {
       check(projection.originalName).equals('put_Volume');
       check(projection.name).equals('volume');
       check(projection.wrapperName).equals('_put_VolumeFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(
@@ -153,7 +153,7 @@ void main() {
       check(projection.name).equals('description');
       check(projection.originalName).equals('put_Description');
       check(projection.wrapperName).equals('_put_DescriptionFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(
@@ -178,7 +178,7 @@ void main() {
       check(projection.name).equals('treeFilter');
       check(projection.originalName).equals('put_TreeFilter');
       check(projection.wrapperName).equals('_put_TreeFilterFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(
@@ -208,7 +208,7 @@ void testGetProperty(
   test('$parent.$propertyName', () {
     final typeDef = WindowsMetadata.findTypeDefByName(parent);
     final method = typeDef.findMethod(propertyName);
-    projection(ComGetPropertyProjection(method));
+    projection(.new(method));
   });
 }
 
@@ -221,6 +221,6 @@ void testSetProperty(
   test('$parent.$propertyName', () {
     final typeDef = WindowsMetadata.findTypeDefByName(parent);
     final method = typeDef.findMethod(propertyName);
-    projection(ComSetPropertyProjection(method));
+    projection(.new(method));
   });
 }

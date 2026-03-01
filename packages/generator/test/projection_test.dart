@@ -18,7 +18,7 @@ class TestProjection extends Projection with ProjectionMixin {
       ..docs.addAll(docs)
       ..name = 'FONTENUMPROC'
       ..definition = const cb.CodeExpression(
-        cb.Code(
+        .new(
           'Int32 Function(Pointer<LOGFONT> param0, '
           'Pointer<TEXTMETRIC> param1, '
           'Uint32 param2, '

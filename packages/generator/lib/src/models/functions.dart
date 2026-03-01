@@ -71,9 +71,7 @@ SplayTreeMap<String, Win32Function> loadFunctionsFromJson([String? path]) {
   );
 
   for (final api in decodedJson.keys) {
-    functions[api] = Win32Function.fromJson(
-      decodedJson[api] as Map<String, dynamic>,
-    );
+    functions[api] = .fromJson(decodedJson[api] as Map<String, dynamic>);
   }
 
   return functions;

@@ -75,6 +75,6 @@ void testCallback(
 ) {
   test(callbackName, () {
     final typeDef = WindowsMetadata.findTypeDefByName(callbackName);
-    projection(CallbackProjection(typeDef));
+    projection(.new(typeDef));
   });
 }

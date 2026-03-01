@@ -41,7 +41,7 @@ extension FieldExtension on winmd.Field {
         in bitFieldAttributes) {
       // Skip reserved bit fields.
       if (bitFieldName.contains(RegExp('[Rr]eserved'))) continue;
-      bitFields.add(NativeBitFieldAttribute(bitFieldName, offset, length));
+      bitFields.add(.new(bitFieldName, offset, length));
     }
 
     return bitFields;
@@ -144,7 +144,7 @@ extension FieldExtension on winmd.Field {
         namespace,
         associatedEnumName,
       );
-      return InteropType.primitiveOrEnum(resolvedType, TypeDefType(typeDef));
+      return .primitiveOrEnum(resolvedType, .new(typeDef));
     }
 
     return resolvedType;
@@ -159,8 +159,8 @@ extension FieldExtension on winmd.Field {
     winmd.MetadataType type,
   ) {
     if (type case winmd.NamedType(:final typeName)) {
-      return InteropType.remap(typeName) ??
-          InteropType.typeDef(_resolveTypeName(index, parent, typeName));
+      return .remap(typeName) ??
+          .typeDef(_resolveTypeName(index, parent, typeName));
     }
 
     return _resolvedTypes.putIfAbsent(type, () {
@@ -169,17 +169,18 @@ extension FieldExtension on winmd.Field {
       }
 
       return switch (type) {
-        winmd.FixedArrayType(:final element, :final length) =>
-          InteropType.array(_resolveType(index, parent, element), length),
+        winmd.FixedArrayType(:final element, :final length) => .array(
+          _resolveType(index, parent, element),
+          length,
+        ),
 
-        winmd.ConstPointerType(:final pointee, :final depth) =>
-          InteropType.constPointer(_resolveType(index, parent, pointee), depth),
+        winmd.ConstPointerType(:final pointee, :final depth) => .constPointer(
+          _resolveType(index, parent, pointee),
+          depth,
+        ),
 
         winmd.MutablePointerType(:final pointee, :final depth) =>
-          InteropType.mutablePointer(
-            _resolveType(index, parent, pointee),
-            depth,
-          ),
+          .mutablePointer(_resolveType(index, parent, pointee), depth),
 
         _ => throw GeneratorException('Unsupported type: $type'),
       };

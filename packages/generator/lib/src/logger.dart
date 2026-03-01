@@ -4,15 +4,15 @@ import 'package:logging/logging.dart';
 final logger = Logger('generator');
 
 Level getLogLevel(String level) => switch (level) {
-  'all' => Level.ALL,
-  'finest' => Level.FINEST,
-  'finer' => Level.FINER,
-  'fine' => Level.FINE,
-  'config' => Level.CONFIG,
-  'info' => Level.INFO,
-  'warning' => Level.WARNING,
-  'severe' => Level.SEVERE,
-  'shout' => Level.SHOUT,
-  'off' => Level.OFF,
-  _ => Level.INFO,
+  'all' => .ALL,
+  'finest' => .FINEST,
+  'finer' => .FINER,
+  'fine' => .FINE,
+  'config' => .CONFIG,
+  'info' => .INFO,
+  'warning' => .WARNING,
+  'severe' => .SEVERE,
+  'shout' => .SHOUT,
+  'off' => .OFF,
+  _ => .INFO,
 };

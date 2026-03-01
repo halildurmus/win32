@@ -95,7 +95,7 @@ final class ParameterProjection {
   /// `Pointer<Int32>? value`).
   cb.Parameter generate() {
     logger.finest('Generating $debugName...');
-    return cb.Parameter(
+    return .new(
       (b) => b
         ..name = name
         ..type = dartType,

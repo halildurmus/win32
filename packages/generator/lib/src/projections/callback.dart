@@ -19,7 +19,7 @@ final class CallbackProjection extends Projection with ProjectionMixin {
   /// Creates an instance of this class for the given Win32 delegate [typeDef].
   CallbackProjection(this.typeDef, {super.formatCode})
     : assert(
-        typeDef.category == TypeCategory.delegate &&
+        typeDef.category == .delegate &&
             typeDef.tryFindMethod('Invoke') != null,
         '${typeDef.name} is not a callback.',
       ),
@@ -83,7 +83,7 @@ final class CallbackProjection extends Projection with ProjectionMixin {
   cb.Expression _generateCallbackDefinition() {
     if (returnType.symbol == 'Pointer') return cb.refer('Pointer');
     return cb.CodeExpression(
-      cb.Code(
+      .new(
         '${returnType.symbol} Function('
         '${parameters.map((p) => '${p.type!.symbol} ${p.name}').join(', ')})',
       ),

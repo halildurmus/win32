@@ -32,13 +32,13 @@ base class ComGetPropertyProjection extends ComMethodProjection
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library(
+    return .new(
       (b) => b.body.add(
         cb.Method(
           (b) => b
             ..docs.addAll(generateApiDocs(apiDetails, row: method))
             ..returns = returnType
-            ..type = cb.MethodType.getter
+            ..type = .getter
             ..name = name
             ..body = generateFunctionBody(),
         ),
@@ -69,11 +69,11 @@ base class ComSetPropertyProjection extends ComMethodProjection
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library(
+    return .new(
       (b) => b.body.add(
         cb.Method(
           (b) => b
-            ..type = cb.MethodType.setter
+            ..type = .setter
             ..name = name
             ..requiredParameters.add(parameter.generate())
             ..body = _generateSetterBody(),
@@ -87,7 +87,7 @@ base class ComSetPropertyProjection extends ComMethodProjection
         .declareFinal(r'hr$')
         .assign(cb.refer('HRESULT').newInstance([ffiCall]))
         .statement,
-    const cb.Code(r'if (hr$.isError) throw WindowsException(hr$);'),
+    const .new(r'if (hr$.isError) throw WindowsException(hr$);'),
   ]);
 
   @override

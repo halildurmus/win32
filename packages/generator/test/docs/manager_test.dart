@@ -6,23 +6,20 @@ void main() {
   group('DocsManager', () {
     test('load combines documentation from multiple sources', () async {
       // Create documentation maps for a normal source and a predefined source.
-      const normalDocs = {
-        'normal_key': ApiDetails(
-          apiName: 'normal_doc',
-          description: 'normal_doc',
-        ),
+      const normalDocs = <String, ApiDetails>{
+        'normal_key': .new(apiName: 'normal_doc', description: 'normal_doc'),
         // In a conflict, the predefined documentation should override.
-        'conflict': ApiDetails(
+        'conflict': .new(
           apiName: 'normal_conflict',
           description: 'normal_conflict',
         ),
       };
-      const predefinedDocs = {
-        'pre_key': ApiDetails(
+      const predefinedDocs = <String, ApiDetails>{
+        'pre_key': .new(
           apiName: 'predefined_doc',
           description: 'predefined_doc',
         ),
-        'conflict': ApiDetails(
+        'conflict': .new(
           apiName: 'predefined_conflict',
           description: 'predefined_conflict',
         ),
@@ -39,18 +36,15 @@ void main() {
 
       // When looking up by identifier, predefined docs take precedence.
       check(docsManager.documentationFromIdentifier('pre_key')).equals(
-        const ApiDetails(
-          apiName: 'predefined_doc',
-          description: 'predefined_doc',
-        ),
+        const .new(apiName: 'predefined_doc', description: 'predefined_doc'),
       );
       // Normal documentation is returned if no predefined doc exists.
-      check(docsManager.documentationFromIdentifier('normal_key')).equals(
-        const ApiDetails(apiName: 'normal_doc', description: 'normal_doc'),
-      );
+      check(
+        docsManager.documentationFromIdentifier('normal_key'),
+      ).equals(const .new(apiName: 'normal_doc', description: 'normal_doc'));
       // In a key conflict, the predefined version wins.
       check(docsManager.documentationFromIdentifier('conflict')).equals(
-        const ApiDetails(
+        const .new(
           apiName: 'predefined_conflict',
           description: 'predefined_conflict',
         ),
@@ -64,10 +58,7 @@ void main() {
       () async {
         const sources = [
           FakeDocsSource({
-            'some_key': ApiDetails(
-              apiName: 'some_doc',
-              description: 'some_doc',
-            ),
+            'some_key': .new(apiName: 'some_doc', description: 'some_doc'),
           }),
         ];
         final docsManager = await DocsManager.load(sources);

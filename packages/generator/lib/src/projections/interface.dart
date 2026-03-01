@@ -23,7 +23,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
   /// Constructs a [ComInterfaceProjection] for a COM interface.
   ComInterfaceProjection(this.typeDef)
     : assert(
-        typeDef.category == winmd.TypeCategory.interface,
+        typeDef.category == .interface,
         '${typeDef.name} is not an interface.',
       ),
       name = typeDef.safeIdentifier,
@@ -94,10 +94,9 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
   /// Returns the appropriate import for the provided [typeDef].
   String? getImportForTypeDef(winmd.TypeDef typeDef) =>
       switch (typeDef.category) {
-        winmd.TypeCategory.delegate => '../callbacks.g.dart',
-        winmd.TypeCategory.enum$ => '../enums.g.dart',
-        winmd.TypeCategory.interface =>
-          typeDef.nameWithoutEncoding.safeFilename,
+        .delegate => '../callbacks.g.dart',
+        .enum$ => '../enums.g.dart',
+        .interface => typeDef.nameWithoutEncoding.safeFilename,
         _ => null,
       };
 
@@ -180,7 +179,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
   @override
   cb.Library generate() {
     logger.finest('Generating $debugName...');
-    return cb.Library(
+    return .new(
       (b) => b
         ..directives.addAll(imports)
         ..body.addAll([
@@ -196,7 +195,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
 
   cb.Field _generateGuidConstant(String name, String guid) {
     cb.Expression hexExpression(int value) =>
-        cb.CodeExpression(cb.Code('0x${value.toRadixString(16)}'));
+        cb.CodeExpression(.new('0x${value.toRadixString(16)}'));
 
     final cleanedGUID = guid.replaceAll(RegExp('[{}-]'), '');
     final data1 = int.parse(cleanedGUID.substring(0, 8), radix: 16);
@@ -214,10 +213,10 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       data4.substring(14, 16),
     ].map((e) => int.parse('0x$e')).toFixedList();
 
-    return cb.Field(
+    return .new(
       (b) => b
         ..docs.add('@nodoc')
-        ..modifier = cb.FieldModifier.final$
+        ..modifier = .final$
         ..name = name
         ..assignment = cb.refer('GUID').property('fromComponents').call([
           hexExpression(data1),
@@ -231,7 +230,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
   }
 
   /// Generates the Dart class representing the COM interface.
-  cb.Class _generateClass() => cb.Class(
+  cb.Class _generateClass() => .new(
     (b) => b
       ..docs.addAll(generateApiDocs(apiDetails, row: typeDef, category: 'com'))
       ..name = name
@@ -251,7 +250,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
   /// Generates the constructor(s) for the COM interface.
   List<cb.Constructor> _generateConstructors() => [
     if (inheritsFrom == null)
-      cb.Constructor(
+      .new(
         (b) => b
           ..docs.addAll([
             'Creates a new instance of [$name] from a [VTablePointer].',
@@ -260,21 +259,21 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
                 'assertion error is thrown.',
           ])
           ..requiredParameters.add(
-            cb.Parameter(
+            .new(
               (b) => b
                 ..name = 'ptr'
                 ..toThis = true,
             ),
           )
           ..initializers.add(
-            const cb.Code(
+            const .new(
               "assert(ptr != nullptr, \"Pointer must not be 'nullptr'.\")",
             ),
           )
           ..initializers.add(_initializeVtblField()),
       )
     else
-      cb.Constructor(
+      .new(
         (b) => b
           ..docs.addAll([
             'Creates a new instance of [$name] from a [VTablePointer].',
@@ -283,7 +282,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
                 'assertion error is thrown.',
           ])
           ..requiredParameters.add(
-            cb.Parameter(
+            .new(
               (b) => b
                 ..name = 'ptr'
                 ..toSuper = true,
@@ -310,7 +309,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       .code;
 
   /// Generates the factory constructor, if applicable.
-  cb.Constructor _generateFactoryConstructor() => cb.Constructor(
+  cb.Constructor _generateFactoryConstructor() => .new(
     (b) => b
       ..annotations.add(generatePreferInlineAnnotation())
       ..docs.addAll([
@@ -323,7 +322,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       ..factory = true
       ..name = 'from'
       ..requiredParameters.add(
-        cb.Parameter(
+        .new(
           (b) => b
             ..name = 'interface'
             ..type = cb.refer('IUnknown'),
@@ -339,22 +338,22 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
 
   List<cb.Field> _generateClassFields() => [
     if (inheritsFrom == null)
-      cb.Field(
+      .new(
         (b) => b
-          ..modifier = cb.FieldModifier.final$
+          ..modifier = .final$
           ..type = cb.refer('VTablePointer')
           ..name = 'ptr',
       ),
     if (hasMethods)
-      cb.Field(
+      .new(
         (b) => b
-          ..modifier = cb.FieldModifier.final$
+          ..modifier = .final$
           ..type = cb.refer('${name}Vtbl')
           ..name = '_vtable',
       ),
   ];
 
-  cb.Method _generateToStringMethod() => cb.Method(
+  cb.Method _generateToStringMethod() => .new(
     (b) => b
       ..annotations.add(cb.refer('override'))
       ..returns = cb.refer('String')
@@ -363,15 +362,15 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       ..body = cb.literalString('$name(ptr: \$ptr)').code,
   );
 
-  cb.Class _generateVtblStruct() => cb.Class(
+  cb.Class _generateVtblStruct() => .new(
     (b) => b
       ..docs.add('@nodoc')
-      ..modifier = cb.ClassModifier.base
+      ..modifier = .base
       ..name = '${name}Vtbl'
       ..extend = cb.refer('Struct')
       ..fields.addAll([
         if (inheritsFrom != null)
-          cb.Field(
+          .new(
             (b) => b
               ..external = true
               ..type = cb.refer('${inheritsFrom!.symbol}Vtbl')
@@ -387,7 +386,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       r'VTablePointer this$',
       ...method.parameters.map((p) => '${p.type.ffiType} ${p.name}'),
     ].join(', ');
-    return cb.Field(
+    return .new(
       (b) => b
         ..external = true
         ..type = cb.refer(
@@ -397,19 +396,19 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
     );
   }
 
-  cb.Class _generateCompanionClass() => cb.Class(
+  cb.Class _generateCompanionClass() => .new(
     (b) => b
       ..annotations.add(cb.refer('internal'))
-      ..modifier = cb.ClassModifier.final$
+      ..modifier = .final$
       ..name = '${name}Companion'
       ..extend = cb.TypeReference(
         (b) => b
           ..symbol = 'ComCompanion'
           ..types.add(cb.refer(name)),
       )
-      ..constructors.add(cb.Constructor((b) => b..constant = true))
+      ..constructors.add(.new((b) => b..constant = true))
       ..methods.addAll([
-        cb.Method(
+        .new(
           (b) => b
             ..annotations.addAll([
               generatePreferInlineAnnotation(),
@@ -420,18 +419,18 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
                 ..returnType = cb.refer(name)
                 ..requiredParameters.add(cb.refer('VTablePointer')),
             )
-            ..type = cb.MethodType.getter
+            ..type = .getter
             ..name = 'fromPointer'
             ..lambda = true
             ..body = cb.refer(name).property('new').code,
         ),
-        cb.Method(
+        .new(
           (b) => b
             ..annotations.addAll([
               generatePreferInlineAnnotation(),
               cb.refer('override'),
             ])
-            ..type = cb.MethodType.getter
+            ..type = .getter
             ..returns = cb.refer('GUID')
             ..name = 'iid'
             ..lambda = true
@@ -440,7 +439,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       ]),
   );
 
-  cb.Method _generateRefCountMethod() => cb.Method(
+  cb.Method _generateRefCountMethod() => .new(
     (b) => b
       ..docs.addAll([
         'Returns the current reference count of the [object].',
@@ -449,7 +448,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
       ..returns = cb.refer('int')
       ..name = 'refCount'
       ..requiredParameters.add(
-        cb.Parameter(
+        .new(
           (b) => b
             ..type = cb.refer('IUnknown')
             ..name = 'object',

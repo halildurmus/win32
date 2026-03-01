@@ -51,10 +51,10 @@ const winrtMetadataVersion = '10.0.26100.1742';
 
     test('updates versions correctly', () {
       manager
-        ..updateVersion(NuGetPackage.wdk, '0.13.26-experimental')
-        ..updateVersion(NuGetPackage.win32, '63.0.32-preview')
-        ..updateVersion(NuGetPackage.win32Docs, '0.1.43-alpha')
-        ..updateVersion(NuGetPackage.winrt, '10.0.26100.1743')
+        ..updateVersion(.wdk, '0.13.26-experimental')
+        ..updateVersion(.win32, '63.0.32-preview')
+        ..updateVersion(.win32Docs, '0.1.43-alpha')
+        ..updateVersion(.winrt, '10.0.26100.1743')
         ..save();
 
       check(manager.wdk).equals('0.13.26-experimental');

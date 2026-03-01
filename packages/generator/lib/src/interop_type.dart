@@ -30,8 +30,8 @@ sealed class InteropType {
   /// Creates a [InteropType] based on a [winmd.MetadataType].
   factory InteropType.fromMetadataType(winmd.MetadataType type) {
     if (type case winmd.NamedType(:final typeName)) {
-      return InteropType.remap(typeName) ??
-          InteropType.typeDef(
+      return .remap(typeName) ??
+          .typeDef(
             WindowsMetadata.findTypeDef(typeName.namespace, typeName.name),
           );
     }
@@ -40,20 +40,18 @@ sealed class InteropType {
       if (fromPrimitiveType(type) case final primitive?) return primitive;
 
       return switch (type) {
-        winmd.FixedArrayType(:final element, :final length) =>
-          InteropType.array(InteropType.fromMetadataType(element), length),
+        winmd.FixedArrayType(:final element, :final length) => .array(
+          InteropType.fromMetadataType(element),
+          length,
+        ),
 
-        winmd.ConstPointerType(:final pointee, :final depth) =>
-          InteropType.constPointer(
-            InteropType.fromMetadataType(pointee),
-            depth,
-          ),
+        winmd.ConstPointerType(:final pointee, :final depth) => .constPointer(
+          InteropType.fromMetadataType(pointee),
+          depth,
+        ),
 
         winmd.MutablePointerType(:final pointee, :final depth) =>
-          InteropType.mutablePointer(
-            InteropType.fromMetadataType(pointee),
-            depth,
-          ),
+          .mutablePointer(InteropType.fromMetadataType(pointee), depth),
 
         _ => throw GeneratorException('Unsupported type: $type'),
       };
@@ -266,15 +264,10 @@ sealed class InteropType {
     StringType() => 'HSTRING',
     WIN32_ERRORType() => 'WIN32_ERROR',
     TypeDefType(:final typeDef) => switch (typeDef) {
-      winmd.TypeDef(category: winmd.TypeCategory.class$) ||
-      winmd.TypeDef(category: winmd.TypeCategory.enum$) ||
-      winmd.TypeDef(
-        category: winmd.TypeCategory.interface,
-      ) => typeDef.safeTypeName,
-      winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
-        isWrapperStruct: true,
-      ) =>
+      winmd.TypeDef(category: .class$) ||
+      winmd.TypeDef(category: .enum$) ||
+      winmd.TypeDef(category: .interface) => typeDef.safeTypeName,
+      winmd.TypeDef(category: .struct, isWrapperStruct: true) =>
         typeDef.safeTypeName,
       _ => dartType,
     },
@@ -309,20 +302,17 @@ sealed class InteropType {
     StringType() => 'Pointer',
     TypeDefType(:final typeDef) => switch (typeDef) {
       winmd.TypeDef(
-        category: winmd.TypeCategory.enum$,
+        category: .enum$,
         fields: [winmd.Field(type: InteropType(:final dartType)), ...],
       ) =>
         dartType,
       winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
+        category: .struct,
         fields: [winmd.Field(type: InteropType(:final dartType))],
         isWrapperStruct: true,
       ) =>
         dartType,
-      winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
-        isWrapperStruct: false,
-      ) =>
+      winmd.TypeDef(category: .struct, isWrapperStruct: false) =>
         typeDef.safeTypeName,
       _ => ffiType,
     },
@@ -374,10 +364,10 @@ sealed class InteropType {
     StringType() => 'Pointer',
     VARIANTType() => 'VARIANT',
     TypeDefType(:final typeDef) => switch (typeDef) {
-      winmd.TypeDef(category: winmd.TypeCategory.class$) ||
-      winmd.TypeDef(category: winmd.TypeCategory.interface) => 'VTablePointer',
+      winmd.TypeDef(category: .class$) ||
+      winmd.TypeDef(category: .interface) => 'VTablePointer',
       winmd.TypeDef(
-        category: winmd.TypeCategory.delegate,
+        category: .delegate,
         methods: [
           _,
           winmd.MethodDef(name: 'Invoke', params: [winmd.Param(sequence: 0)]),
@@ -385,20 +375,16 @@ sealed class InteropType {
       ) =>
         typeDef.safeTypeName,
       winmd.TypeDef(
-        category: winmd.TypeCategory.delegate,
+        category: .delegate,
         methods: [_, winmd.MethodDef(name: 'Invoke')],
       ) =>
         'Pointer<NativeFunction<${typeDef.safeTypeName}>>',
       winmd.TypeDef(
-        category: winmd.TypeCategory.enum$,
+        category: .enum$,
         fields: [winmd.Field(type: InteropType(:final ffiType)), ...],
       ) =>
         ffiType,
-      winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
-        :final isWrapperStruct,
-        :final fields,
-      ) =>
+      winmd.TypeDef(category: .struct, :final isWrapperStruct, :final fields) =>
         !isWrapperStruct ? typeDef.safeTypeName : fields[0].type.ffiType,
       _ => throw StateError('Unsupported typeDef: $typeDef'),
     },
@@ -471,20 +457,14 @@ sealed class InteropType {
     IUnknownType() ||
     ObjectType() ||
     TypeDefType(
-      typeDef: winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
-        isWrapperStruct: true,
-      ),
+      typeDef: winmd.TypeDef(category: .struct, isWrapperStruct: true),
     ) => true,
     _ => false,
   };
 
   /// Whether the [InteropType] is a _delegate_ type.
   bool get isDelegate => switch (this) {
-    TypeDefType(
-      typeDef: winmd.TypeDef(category: winmd.TypeCategory.delegate),
-    ) =>
-      true,
+    TypeDefType(typeDef: winmd.TypeDef(category: .delegate)) => true,
     _ => false,
   };
 
@@ -499,8 +479,7 @@ sealed class InteropType {
   bool get isEnum => switch (this) {
     PrimitiveOrEnumType(:final enum$) => enum$.typeDef.isEnum,
     RPC_STATUSType() || WIN32_ERRORType() => true,
-    TypeDefType(typeDef: winmd.TypeDef(category: winmd.TypeCategory.enum$)) =>
-      true,
+    TypeDefType(typeDef: winmd.TypeDef(category: .enum$)) => true,
     _ => false,
   };
 
@@ -515,9 +494,7 @@ sealed class InteropType {
   bool get isInterface => switch (this) {
     IUnknownType() ||
     ObjectType() ||
-    TypeDefType(
-      typeDef: winmd.TypeDef(category: winmd.TypeCategory.interface),
-    ) => true,
+    TypeDefType(typeDef: winmd.TypeDef(category: .interface)) => true,
     _ => false,
   };
 
@@ -587,8 +564,8 @@ sealed class InteropType {
     ConstPointerType() ||
     MutablePointerType() => true,
     TypeDefType(typeDef: winmd.TypeDef(:final category)) => switch (category) {
-      winmd.TypeCategory.delegate || winmd.TypeCategory.enum$ => true,
-      winmd.TypeCategory.struct => isWrapperStruct,
+      .delegate || .enum$ => true,
+      .struct => isWrapperStruct,
       _ => false,
     },
     _ => false,
@@ -655,8 +632,7 @@ sealed class InteropType {
     StringType() ||
     VARIANTType() ||
     VARIANT_BOOLType() => true,
-    TypeDefType(typeDef: winmd.TypeDef(category: winmd.TypeCategory.struct)) =>
-      true,
+    TypeDefType(typeDef: winmd.TypeDef(category: .struct)) => true,
     _ => false,
   };
 
@@ -705,10 +681,7 @@ sealed class InteropType {
     StringType() ||
     VARIANT_BOOLType() => true,
     TypeDefType(
-      typeDef: winmd.TypeDef(
-        category: winmd.TypeCategory.struct,
-        isWrapperStruct: true,
-      ),
+      typeDef: winmd.TypeDef(category: .struct, isWrapperStruct: true),
     ) =>
       true,
     _ => false,

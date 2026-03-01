@@ -50,6 +50,6 @@ void testInterface(
 ) {
   test(interfaceName, () {
     final typeDef = WindowsMetadata.findTypeDefByName(interfaceName);
-    projection(ComInterfaceProjection(typeDef));
+    projection(.new(typeDef));
   });
 }

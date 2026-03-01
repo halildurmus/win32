@@ -12,7 +12,7 @@ void main() {
       check(projection.name).equals('createCustomRenderingParams');
       check(projection.originalName).equals('CreateCustomRenderingParams');
       check(projection.wrapperName).equals('_CreateCustomRenderingParamsFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IDWriteRenderingParams?');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -51,7 +51,7 @@ void main() {
       check(projection.name).equals('createCustomRenderingParams2');
       check(projection.originalName).equals('CreateCustomRenderingParams');
       check(projection.wrapperName).equals('_CreateCustomRenderingParams2Fn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IDWriteRenderingParams1?');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -92,7 +92,7 @@ void main() {
       check(projection.name).equals('createCustomRenderingParams3');
       check(projection.originalName).equals('CreateCustomRenderingParams');
       check(projection.wrapperName).equals('_CreateCustomRenderingParams3Fn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isTrue();
       check(projection.returnType.symbol).equals('IDWriteRenderingParams2?');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -135,7 +135,7 @@ void main() {
       check(projection.name).equals('speak');
       check(projection.originalName).equals('Speak');
       check(projection.wrapperName).equals('_SpeakFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -167,7 +167,7 @@ void main() {
       check(projection.name).equals('show');
       check(projection.originalName).equals('Show');
       check(projection.wrapperName).equals('_ShowFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(
@@ -190,7 +190,7 @@ void main() {
       check(projection.name).equals('parseDisplayName');
       check(projection.originalName).equals('ParseDisplayName');
       check(projection.wrapperName).equals('_ParseDisplayNameFn');
-      check(projection.hint).equals(ReturnHint.resultVoid);
+      check(projection.hint).equals(.resultVoid);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('void');
       check(projection.nativePrototype.accept(DartEmitter()).toString()).equals(
@@ -231,7 +231,7 @@ void main() {
       check(projection.name).equals('toUtf16String');
       check(projection.originalName).equals('ToString');
       check(projection.wrapperName).equals('_ToUtf16StringFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('BSTR');
       check(
@@ -250,7 +250,7 @@ void main() {
       check(projection.name).equals('toUtf16String');
       check(projection.originalName).equals('toString');
       check(projection.wrapperName).equals('_toUtf16StringFn');
-      check(projection.hint).equals(ReturnHint.resultValue);
+      check(projection.hint).equals(.resultValue);
       check(projection.isNullable).isFalse();
       check(projection.returnType.symbol).equals('BSTR');
       check(
@@ -276,6 +276,6 @@ void testMethod(
   test('$parent.$methodName', () {
     final typeDef = WindowsMetadata.findTypeDefByName(parent);
     final method = typeDef.findMethod(methodName);
-    projection(ComMethodProjection(method));
+    projection(.new(method));
   });
 }

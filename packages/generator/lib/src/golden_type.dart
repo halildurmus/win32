@@ -18,13 +18,13 @@ enum GoldenType {
   final String directoryName;
 
   static GoldenType fromDirectoryName(String directoryName) =>
-      GoldenType.values.firstWhere(
+      values.firstWhere(
         (type) => type.directoryName == directoryName,
         orElse: () => throw ArgumentError.value(
           directoryName,
           'directoryName',
           'Invalid directory name. Supported values: '
-              '${GoldenType.values.map((e) => e.directoryName).join(', ')}',
+              '${values.map((e) => e.directoryName).join(', ')}',
         ),
       );
 

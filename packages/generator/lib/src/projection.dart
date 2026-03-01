@@ -196,7 +196,7 @@ mixin ProjectionMixin on Projection {
     }
 
     cb.Expression generateHexExpression(int value) =>
-        cb.CodeExpression(cb.Code('0x${value.toRadixString(16)}'));
+        cb.CodeExpression(.new('0x${value.toRadixString(16)}'));
 
     return [
       ...guidParams.take(3).map(generateHexExpression),

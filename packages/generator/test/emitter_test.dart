@@ -7,7 +7,7 @@ import 'package:test/scaffolding.dart';
 String createField(List<String> docs) => cb.Field(
   (b) => b
     ..docs.addAll(docs)
-    ..modifier = cb.FieldModifier.constant
+    ..modifier = .constant
     ..name = 'f'
     ..assignment = cb.literalTrue.code,
 ).accept(DartEmitter()).toString();
@@ -20,7 +20,7 @@ String createFieldInsideClass(List<String> docs) {
         cb.Field(
           (b) => b
             ..docs.addAll(docs)
-            ..modifier = cb.FieldModifier.constant
+            ..modifier = .constant
             ..name = 'f'
             ..assignment = cb.literalTrue.code,
         ),

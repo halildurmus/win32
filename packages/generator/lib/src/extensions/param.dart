@@ -20,10 +20,10 @@ extension ParamExtension on winmd.Param {
       if (param.index != index) {
         // Length parameters must be input-only.
         if (type.isByteSize && !param.isOutParam && !param.type.isPointer) {
-          return ParamHint.relativeByteLengthArray(value);
+          return .relativeByteLengthArray(value);
         }
 
-        return ParamHint.relativePointerArray(value);
+        return .relativePointerArray(value);
       }
     }
 
@@ -38,31 +38,29 @@ extension ParamExtension on winmd.Param {
         if (param.index != index) {
           // Length parameters must be input-only.
           if (!param.isOutParam && !param.type.isPointer) {
-            return ParamHint.relativeLengthArray(value);
+            return .relativeLengthArray(value);
           }
 
-          return ParamHint.relativePointerArray(value);
+          return .relativePointerArray(value);
         }
       }
 
       if (value case winmd.Int32Value(:final value) when name == 'CountConst') {
-        return ParamHint.fixedArray(value);
+        return .fixedArray(value);
       }
     }
 
     if (isConvertible) return const ParamHintIntoParameter();
-    if (type.isCopyable && (isOptional || isReserved)) {
-      return const ParamHintOptional();
-    }
+    if (type.isCopyable && (isOptional || isReserved)) return .optional;
 
     if (type.isPrimitive &&
         (!type.isPointer || (type.tryDeref()?.isCopyable ?? false))) {
-      return const ParamHintValueType();
+      return .valueType;
     }
 
-    if (type.isCopyable) return const ParamHintBlittable();
+    if (type.isCopyable) return .blittable;
 
-    return ParamHint.none;
+    return .none;
   }
 
   /// Whether the parameter is a COM output pointer.
@@ -123,7 +121,7 @@ extension ParamExtension on winmd.Param {
       if (enumName case final name?) {
         final namespace = parent.parent.namespace;
         final typeDef = WindowsMetadata.findTypeDef(namespace, name);
-        result = InteropType.primitiveOrEnum(result, TypeDefType(typeDef));
+        result = .primitiveOrEnum(result, TypeDefType(typeDef));
       }
     }
 

@@ -14,12 +14,9 @@ import 'string.dart';
 extension TypeDefExtension on winmd.TypeDef {
   /// The memory alignment of the typeDef.
   int get alignment => switch (category) {
-    winmd.TypeCategory.attribute ||
-    winmd.TypeCategory.class$ ||
-    winmd.TypeCategory.delegate ||
-    winmd.TypeCategory.interface => 8,
-    winmd.TypeCategory.enum$ => fields.first.type.alignment,
-    winmd.TypeCategory.struct =>
+    .attribute || .class$ || .delegate || .interface => 8,
+    .enum$ => fields.first.type.alignment,
+    .struct =>
       fields
           .map((f) => f.type.alignment)
           .fold(1, (max, size) => size > max ? size : max),
@@ -111,15 +108,14 @@ extension TypeDefExtension on winmd.TypeDef {
 
   /// Whether the typeDef can be directly copied.
   bool get isCopyable => switch (category) {
-    winmd.TypeCategory.delegate || winmd.TypeCategory.enum$ => true,
-    winmd.TypeCategory.struct when name != 'VARIANT' && name != 'PROPVARIANT' =>
-      true,
+    .delegate || .enum$ => true,
+    .struct when name != 'VARIANT' && name != 'PROPVARIANT' => true,
     _ => false,
   };
 
-  bool get isDelegate => category == winmd.TypeCategory.delegate;
+  bool get isDelegate => category == .delegate;
 
-  bool get isEnum => category == winmd.TypeCategory.enum$;
+  bool get isEnum => category == .enum$;
 
   /// Whether the typeDef is a handle type, that is, a struct with a single
   /// field called `Value` of some primitive type (e.g., `HKEY`).
@@ -132,21 +128,19 @@ extension TypeDefExtension on winmd.TypeDef {
     return false;
   }
 
-  bool get isInterface => category == winmd.TypeCategory.interface;
+  bool get isInterface => category == .interface;
 
   /// Whether the typeDef is marked as obsolete.
   bool get isObsolete => hasAttribute(SystemAttribute.obsolete);
 
   /// Whether the typeDef is considered primitive.
   bool get isPrimitive => switch (category) {
-    winmd.TypeCategory.attribute || winmd.TypeCategory.class$ => false,
-    winmd.TypeCategory.delegate ||
-    winmd.TypeCategory.interface ||
-    winmd.TypeCategory.enum$ => true,
-    winmd.TypeCategory.struct => isWrapperStruct,
+    .attribute || .class$ => false,
+    .delegate || .interface || .enum$ => true,
+    .struct => isWrapperStruct,
   };
 
-  bool get isStruct => category == winmd.TypeCategory.struct;
+  bool get isStruct => category == .struct;
 
   bool get isUnion =>
       isStruct &&
@@ -224,16 +218,13 @@ extension TypeDefExtension on winmd.TypeDef {
 
   /// The memory size of the typeDef.
   int get size => switch (category) {
-    winmd.TypeCategory.attribute ||
-    winmd.TypeCategory.class$ ||
-    winmd.TypeCategory.delegate ||
-    winmd.TypeCategory.interface => 8,
-    winmd.TypeCategory.enum$ => fields[0].type.size,
-    winmd.TypeCategory.struct when typeLayout == winmd.TypeLayout.explicit =>
+    .attribute || .class$ || .delegate || .interface => 8,
+    .enum$ => fields[0].type.size,
+    .struct when typeLayout == .explicit =>
       fields
           .map((f) => f.type.size)
           .fold(1, (max, size) => size > max ? size : max),
-    winmd.TypeCategory.struct => fields.map((f) => f.type).fold(0, (sum, type) {
+    .struct => fields.map((f) => f.type).fold(0, (sum, type) {
       final InteropType(:alignment, :size) = type;
       return ((sum + (alignment - 1)) & ~(alignment - 1)) + size;
     }),
@@ -244,15 +235,15 @@ extension TypeDefExtension on winmd.TypeDef {
     final arch = tryFindAttribute('SupportedArchitectureAttribute');
     // By default, this attribute is missing and it is assumed that types
     // support all valid platform architectures.
-    if (arch == null) return Architecture.all();
+    if (arch == null) return .all();
 
     if (arch.fixedArgs case [
       winmd.FixedArg(value: winmd.Int32Value(:final value)),
     ]) {
-      return Architecture(value);
+      return .new(value);
     }
 
-    return Architecture.all();
+    return .all();
   }
 }
 
@@ -263,7 +254,7 @@ final class Architecture {
 
   /// Returns an [Architecture] object that represents all supported
   /// architectures.
-  factory Architecture.all() => const Architecture(_arm64 | _x64 | _x86);
+  factory Architecture.all() => const .new(_arm64 | _x64 | _x86);
 
   final int _value;
 
