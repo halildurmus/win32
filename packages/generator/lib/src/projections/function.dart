@@ -541,7 +541,6 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   cb.Code _generateQueryOptionalFunctionBody() {
     final (guid: _, :guidIdx, object: _, :objectIdx) = method.isQuery!;
     final guid = parameters[guidIdx];
-    final object = parameters[objectIdx];
     return cb.Block.of([
       cb
           .declareFinal('companion')
@@ -553,13 +552,19 @@ base class FunctionProjection extends Projection with ProjectionMixin {
           .statement,
       cb
           .declareFinal(guid.name)
-          .assign(cb.refer('companion').property('iid'))
+          .assign(
+            cb
+                .refer('companion')
+                .property('iid')
+                .property('toNative')
+                .call(const []),
+          )
           .statement,
-      _allocateMemoryForReturnValue(object),
       cb
           .declareFinal(r'hr$')
           .assign(cb.refer('HRESULT').newInstance([ffiCall]))
           .statement,
+      cb.refer('free').call([cb.refer(guid.name)]).statement,
       const cb.Code(r'if (hr$.isError) throw WindowsException(hr$);'),
     ]);
   }
