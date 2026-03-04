@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
 import 'package:path/path.dart' as p;
 
-import '../logger.dart';
 import '../mdmerge.dart';
 import '../reader/metadata_index.dart';
 import '../reader/metadata_reader.dart';
@@ -22,11 +22,27 @@ import 'package.dart';
 /// - **WinRT** – Windows Runtime APIs
 final class WindowsMetadataLoader {
   /// Creates a new instance of [WindowsMetadataLoader] with an optional
-  /// [LocalStorageManager].
-  WindowsMetadataLoader({LocalStorageManager? localStorageManager})
-    : _localStorageManager = localStorageManager ?? .new();
+  /// [LocalStorageManager] and [Logger].
+  factory WindowsMetadataLoader({
+    LocalStorageManager? localStorageManager,
+    Logger? logger,
+  }) {
+    logger ??= _createDefaultLogger();
+    localStorageManager ??= LocalStorageManager();
+    return WindowsMetadataLoader._(
+      localStorageManager: localStorageManager,
+      logger: logger,
+    );
+  }
+
+  WindowsMetadataLoader._({
+    required LocalStorageManager localStorageManager,
+    required Logger logger,
+  }) : _localStorageManager = localStorageManager,
+       _logger = logger;
 
   final LocalStorageManager _localStorageManager;
+  final Logger _logger;
 
   /// Loads the Windows Driver Kit (WDK) metadata into a [MetadataIndex].
   ///
@@ -109,13 +125,13 @@ final class WindowsMetadataLoader {
     String? version,
   ) async {
     final WindowsMetadataPackage(:packageId, :assetName) = package;
-    winmdLogger.fine('Resolving metadata path for "$assetName"...');
+    _logger.fine('Resolving metadata path for "$assetName"...');
 
     // Try user-specified version from local cache.
     if (version != null) {
       final cached = _tryFindCachedMetadataPath(package, version);
       if (cached != null) {
-        winmdLogger.fine(
+        _logger.fine(
           'Using cached metadata for "$packageId" version "$version".',
         );
         return cached;
@@ -132,14 +148,14 @@ final class WindowsMetadataLoader {
             includePrerelease: package.allowPrerelease,
           );
 
-      winmdLogger.fine(
+      _logger.fine(
         'Resolved latest version of "$packageId": "$resolvedVersion"',
       );
 
       // Try resolved version from local cache.
       final cached = _tryFindCachedMetadataPath(package, resolvedVersion);
       if (cached != null) {
-        winmdLogger.fine(
+        _logger.fine(
           'Using cached metadata for "$packageId" version "$resolvedVersion".',
         );
         return cached;
@@ -153,7 +169,7 @@ final class WindowsMetadataLoader {
           packageId,
           version: resolvedVersion,
         ),
-        logger: winmdLogger,
+        logger: _logger,
       );
 
       final metadataFile = File(p.join(packageDirectory, assetName));
@@ -161,11 +177,11 @@ final class WindowsMetadataLoader {
       // For WinRT, merge metadata if necessary.
       if (package == .winrt && !metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
-        winmdLogger.info('Merging WinRT metadata files...');
+        _logger.info('Merging WinRT metadata files...');
         final mergeTimer = Stopwatch()..start();
         mdmerge(inputPaths: [metadataPath], outputPath: metadataFile.path);
         mergeTimer.stop();
-        winmdLogger.info(
+        _logger.info(
           'Merge completed in '
           'in ${(mergeTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
           'seconds.',
@@ -220,4 +236,23 @@ extension on WindowsMetadataPackage {
   /// Whether _pre-release_ versions should be considered when resolving
   /// versions.
   bool get allowPrerelease => this != .winrt;
+}
+
+/// Creates a default logger that logs to stdout and stderr.
+Logger _createDefaultLogger() {
+  final logger = Logger.detached('winmd')..level = .INFO;
+  logger.onRecord.listen((record) {
+    if (record.level >= .WARNING) {
+      stderr.writeln(record.message);
+    } else {
+      stdout.writeln(record.message);
+    }
+    if (record.error != null) {
+      stderr.writeln(record.error);
+    }
+    if (record.stackTrace != null) {
+      stderr.writeln(record.stackTrace);
+    }
+  });
+  return logger;
 }

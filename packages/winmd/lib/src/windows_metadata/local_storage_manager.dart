@@ -99,13 +99,14 @@ final class LocalStorageManager {
     final downloadTimer = Stopwatch()..start();
     final archiveBytes = await downloadFunction();
     downloadTimer.stop();
-    logger?.info(
-      'Download complete: '
-      '${(archiveBytes.lengthInBytes / (1024 * 1024)).toStringAsFixed(1)} MB '
-      'in ${(downloadTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
-      'seconds.',
-    );
-    logger?.info('Extracting archive...');
+    logger
+      ?..info(
+        'Download complete: '
+        '${(archiveBytes.lengthInBytes / (1024 * 1024)).toStringAsFixed(1)} MB '
+        'in ${(downloadTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
+        'seconds.',
+      )
+      ..info('Extracting archive...');
     final extractionTimer = Stopwatch()..start();
     final archive = ZipDecoder().decodeBytes(archiveBytes);
     await extractArchiveToDisk(archive, packagePath);
