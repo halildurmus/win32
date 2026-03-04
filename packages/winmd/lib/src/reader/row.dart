@@ -53,7 +53,8 @@ import 'table/type_spec.dart';
 abstract base class Row {
   /// Creates a new instance of [Row] with the provided metadata index, reader
   /// index, and index.
-  const Row(this.metadataIndex, this.readerIndex, this.index);
+  Row(this.metadataIndex, this.readerIndex, this.index)
+    : reader = metadataIndex.readers[readerIndex];
 
   /// The metadata index for the current row.
   final MetadataIndex metadataIndex;
@@ -64,6 +65,9 @@ abstract base class Row {
   /// The index of the row within the metadata table, starting from zero.
   final int index;
 
+  /// The metadata reader for this row.
+  final MetadataReader reader;
+
   /// The metadata table associated with this row.
   MetadataTable get table;
 
@@ -73,16 +77,12 @@ abstract base class Row {
 
   /// Retrieves the [RowCompanion] associated with the specified [T].
   @internal
+  @pragma('vm:prefer-inline')
   static RowCompanion<T> companion<T extends Row>() {
     final companion = _companions[T];
     if (companion == null) throw StateError('No companion found for $T.');
     return companion as RowCompanion<T>;
   }
-
-  /// Retrieves the [MetadataReader] for the current row based on the
-  /// [readerIndex].
-  @pragma('vm:prefer-inline')
-  MetadataReader get reader => metadataIndex.readers[readerIndex];
 
   /// Reads a [Blob] from the specified [column].
   ///

@@ -50,7 +50,7 @@ import 'table/type_spec.dart';
 final class MetadataIndex {
   /// Creates a [MetadataIndex] from a single [MetadataReader].
   factory MetadataIndex.fromReader(MetadataReader reader) =>
-      MetadataIndex.fromReaders([reader]);
+      .fromReaders([reader]);
 
   /// Creates a [MetadataIndex] from a list of [MetadataReader]s.
   ///
@@ -58,15 +58,16 @@ final class MetadataIndex {
   /// for type definitions and nested types. If multiple readers are provided,
   /// they are indexed by order of appearance.
   factory MetadataIndex.fromReaders(List<MetadataReader> readers) {
-    final namespaceToTypeMap =
-        HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>();
-    final nestedTypeMap = HashMap<_ReaderAndTypeDefIndex, List<int>>();
+    final namespaceToTypeMap = HashMap<String, HashMap<String, List<int>>>();
+    final nestedTypeMap = HashMap<int, List<int>>();
     const nestedClassTable = MetadataTable.nestedClass;
     const typeDefTable = MetadataTable.typeDef;
 
     for (var readerIndex = 0; readerIndex < readers.length; readerIndex++) {
       final reader = readers[readerIndex];
       final tableStream = reader.tableStream;
+      // Pre-compute the reader base so we avoid a shift per entry.
+      final packedReaderBase = readerIndex << 32;
 
       for (final typeDefIndex in tableStream.typeDef) {
         final namespace = reader.readString(typeDefIndex, typeDefTable, 2);
@@ -78,14 +79,14 @@ final class MetadataIndex {
         namespaceToTypeMap
             .putIfAbsent(namespace, HashMap.new)
             .putIfAbsent(name, () => [])
-            .add(.new(readerIndex, typeDefIndex));
+            .add(packedReaderBase | typeDefIndex);
       }
 
       for (final nestedClass in tableStream.nestedClass) {
         final inner = reader.readUint(nestedClass, nestedClassTable, 0) - 1;
         final outer = reader.readUint(nestedClass, nestedClassTable, 1) - 1;
         nestedTypeMap
-            .putIfAbsent(.new(readerIndex, outer), () => [])
+            .putIfAbsent(packedReaderBase | outer, () => [])
             .add(inner);
       }
     }
@@ -106,14 +107,13 @@ final class MetadataIndex {
   /// The list of metadata readers contributing to this index.
   final List<MetadataReader> readers;
 
-  final HashMap<String, HashMap<String, List<_ReaderAndTypeDefIndex>>>
-  _namespaceToTypeMap;
-  final HashMap<_ReaderAndTypeDefIndex, List<int>> _nestedTypeMap;
+  final HashMap<String, HashMap<String, List<int>>> _namespaceToTypeMap;
+  final HashMap<int, List<int>> _nestedTypeMap;
 
   /// Enumerates all [TypeDef]s available in this index.
   Iterable<TypeDef> get allTypes => _namespaceToTypeMap.values.expand(
     (namespace) => namespace.values.expand(
-      (types) => types.map((e) => .new(this, e.readerIndex, e.typeDefIndex)),
+      (types) => types.map((e) => .new(this, e >> 32, e & 0xFFFFFFFF)),
     ),
   );
 
@@ -127,22 +127,25 @@ final class MetadataIndex {
     return e.value.entries.expand((e) {
       final name = e.key;
       return e.value.map(
-        (e) => (namespace, name, .new(this, e.readerIndex, e.typeDefIndex)),
+        (e) => (namespace, name, .new(this, e >> 32, e & 0xFFFFFFFF)),
       );
     });
   });
 
   /// Enumerates the nested types defined under the given [parent] type.
-  Iterable<TypeDef> nestedTypes(TypeDef parent) =>
-      _nestedTypeMap[_ReaderAndTypeDefIndex(parent.readerIndex, parent.index)]
-          ?.map((index) => .new(this, parent.readerIndex, index)) ??
-      const Iterable.empty();
+  Iterable<TypeDef> nestedTypes(TypeDef parent) {
+    final key = (parent.readerIndex << 32) | parent.index;
+    return _nestedTypeMap[key]?.map(
+          (index) => .new(this, parent.readerIndex, index),
+        ) ??
+        const .empty();
+  }
 
   /// Enumerates all [TypeDef] instances matching the given [namespace] and
   /// [name].
   Iterable<TypeDef> findTypes(String namespace, String name) =>
       _namespaceToTypeMap[namespace]?[name]?.map(
-        (e) => .new(this, e.readerIndex, e.typeDefIndex),
+        (e) => .new(this, e >> 32, e & 0xFFFFFFFF),
       ) ??
       const .empty();
 
@@ -152,13 +155,14 @@ final class MetadataIndex {
   /// - No types are found for the specified namespace and name.
   /// - More than one type is found, indicating ambiguity.
   TypeDef findSingleType(String namespace, String name) {
-    final types = findTypes(namespace, name).toList(growable: false);
-    if (types.isEmpty) {
+    final list = _namespaceToTypeMap[namespace]?[name];
+    if (list == null || list.isEmpty) {
       throw WinmdException('Type not found: $namespace.$name');
-    } else if (types.length > 1) {
+    } else if (list.length > 1) {
       throw WinmdException('More than one type found: $namespace.$name');
     }
-    return types[0];
+    final e = list[0];
+    return .new(this, e >> 32, e & 0xFFFFFFFF);
   }
 
   /// Attempts to find a single [TypeDef] matching the given [namespace] and
@@ -166,9 +170,10 @@ final class MetadataIndex {
   ///
   /// Returns `null` if no types are found, or more than one type is found.
   TypeDef? tryFindSingleType(String namespace, String name) {
-    final types = findTypes(namespace, name).toList(growable: false);
-    if (types.isEmpty || types.length > 1) return null;
-    return types[0];
+    final list = _namespaceToTypeMap[namespace]?[name];
+    if (list == null || list.isEmpty || list.length > 1) return null;
+    final e = list[0];
+    return .new(this, e >> 32, e & 0xFFFFFFFF);
   }
 
   /// Enumerates all [Assembly] entries across all readers.
@@ -386,21 +391,4 @@ final class MetadataIndex {
   String toString() =>
       'MetadataIndex(readers: ${readers.length}, '
       'namespaces: ${_namespaceToTypeMap.length})';
-}
-
-final class _ReaderAndTypeDefIndex {
-  const _ReaderAndTypeDefIndex(this.readerIndex, this.typeDefIndex);
-
-  final int readerIndex;
-  final int typeDefIndex;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is _ReaderAndTypeDefIndex &&
-          readerIndex == other.readerIndex &&
-          typeDefIndex == other.typeDefIndex;
-
-  @override
-  int get hashCode => Object.hash(readerIndex, typeDefIndex);
 }

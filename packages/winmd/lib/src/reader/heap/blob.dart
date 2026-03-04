@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:typed_data';
 
 import '../../compressed_integer.dart';
@@ -6,23 +7,22 @@ import 'metadata_heap.dart';
 /// Provides indexed access to the `#Blob` heap in a metadata file.
 final class BlobHeap extends MetadataHeap {
   /// Creates a [BlobHeap] from the provided binary [data].
-  const BlobHeap(super.data);
+  BlobHeap(super.data);
+
+  final _cache = HashMap<int, Uint8List>();
 
   /// The number of blobs in the heap.
-  int get count {
-    var count = 0;
+  late final int count = () {
+    var n = 0;
     var offset = 0;
-
     while (offset < data.length) {
       try {
         final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
         final totalSize = bytesRead + value;
         final nextOffset = offset + totalSize;
         if (totalSize == 0 || nextOffset > data.length) break;
-        count++;
+        n++;
         offset = nextOffset;
-
-        // Skip padded zeroes.
         while (offset < data.length && data[offset] == 0) {
           offset++;
         }
@@ -30,9 +30,8 @@ final class BlobHeap extends MetadataHeap {
         break;
       }
     }
-
-    return count;
-  }
+    return n;
+  }();
 
   /// Enumerates all blobs in the heap.
   Iterable<Uint8List> get blobs sync* {
@@ -64,7 +63,14 @@ final class BlobHeap extends MetadataHeap {
       offset >= 0 && offset < data.length,
       'Offset $offset out of bounds.',
     );
+    if (_cache[offset] case final cached?) return cached;
     final CompressedInteger(:value, :bytesRead) = .decode(data, offset);
-    return .sublistView(data, offset + bytesRead, offset + value + bytesRead);
+    final blob = Uint8List.sublistView(
+      data,
+      offset + bytesRead,
+      offset + value + bytesRead,
+    );
+    _cache[offset] = blob;
+    return blob;
   }
 }
