@@ -108,7 +108,7 @@ final class LocalStorageManager {
     logger?.info('Extracting archive...');
     final extractionTimer = Stopwatch()..start();
     final archive = ZipDecoder().decodeBytes(archiveBytes);
-    extractArchiveToDiskSync(archive, packagePath);
+    await extractArchiveToDisk(archive, packagePath);
     extractionTimer.stop();
     logger?.info(
       'Extraction completed in '

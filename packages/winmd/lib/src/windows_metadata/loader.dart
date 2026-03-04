@@ -87,9 +87,10 @@ final class WindowsMetadataLoader {
         return _resolveMetadataPath(package, version);
       }),
     );
-    final readers = resolvedPaths
-        .map((p) => MetadataReader.read(File(p).readAsBytesSync()))
-        .toList();
+    final bytesList = await Future.wait(
+      resolvedPaths.map((path) => File(path).readAsBytes()),
+    );
+    final readers = bytesList.map(MetadataReader.read).toList();
     return .fromReaders(readers);
   }
 
@@ -98,7 +99,7 @@ final class WindowsMetadataLoader {
     String? version,
   }) async {
     final path = await _resolveMetadataPath(package, version);
-    final bytes = File(path).readAsBytesSync();
+    final bytes = await File(path).readAsBytes();
     final reader = MetadataReader.read(bytes);
     return .fromReader(reader);
   }
