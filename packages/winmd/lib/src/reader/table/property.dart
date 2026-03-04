@@ -57,17 +57,13 @@ final class Property extends Row with HasCustomAttributes {
 
   /// The getter method of the property, if present.
   late final MethodDef? getter = methodSemantics
-      .where(
-        (semantics) => semantics.semantics == MethodSemanticsAttributes.getter,
-      )
+      .where((semantics) => semantics.semantics == .getter)
       .map((semantics) => semantics.method)
       .firstOrNull;
 
   /// The setter method of the property, if present.
   late final MethodDef? setter = methodSemantics
-      .where(
-        (semantics) => semantics.semantics == MethodSemanticsAttributes.setter,
-      )
+      .where((semantics) => semantics.semantics == .setter)
       .map((semantics) => semantics.method)
       .firstOrNull;
 

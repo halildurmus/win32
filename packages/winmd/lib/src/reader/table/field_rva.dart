@@ -28,7 +28,7 @@ final class FieldRVA extends Row {
   late final int rva = readUint32(0);
 
   /// The associated field that has an explicit RVA.
-  late final Field field = readRow<Field>(1);
+  late final Field field = readRow(1);
 
   @override
   String toString() => 'FieldRVA(rva: $rva, field: $field)';

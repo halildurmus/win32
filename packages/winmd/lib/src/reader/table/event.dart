@@ -3,7 +3,6 @@ import 'package:meta/meta.dart';
 import '../../attributes.dart';
 import '../../common.dart';
 import '../../metadata_type.dart';
-import '../../type_name.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -43,10 +42,10 @@ final class Event extends Row with HasCustomAttributes {
     if (readUint(2) == 0) return null;
     return switch (decode<TypeDefOrRef>(2)) {
       TypeDefOrRefTypeDef(:final value) => NamedClassType(
-        TypeName(value.namespace, value.name),
+        .new(value.namespace, value.name),
       ),
       TypeDefOrRefTypeRef(:final value) => NamedClassType(
-        TypeName(value.namespace, value.name),
+        .new(value.namespace, value.name),
       ),
       TypeDefOrRefTypeSpec(:final value) => value.signature as NamedClassType,
     };
@@ -61,24 +60,17 @@ final class Event extends Row with HasCustomAttributes {
 
   /// The `add_` method of the event.
   late final MethodDef add = methodSemantics
-      .firstWhere(
-        (semantics) => semantics.semantics == MethodSemanticsAttributes.addOn,
-      )
+      .firstWhere((semantics) => semantics.semantics == .addOn)
       .method;
 
   /// The `remove_` method of the event.
   late final MethodDef remove = methodSemantics
-      .firstWhere(
-        (semantics) =>
-            semantics.semantics == MethodSemanticsAttributes.removeOn,
-      )
+      .firstWhere((semantics) => semantics.semantics == .removeOn)
       .method;
 
   /// The `raise_` method of the event, if present.
   late final MethodDef? raise = methodSemantics
-      .where(
-        (semantics) => semantics.semantics == MethodSemanticsAttributes.fire,
-      )
+      .where((semantics) => semantics.semantics == .fire)
       .map((semantics) => semantics.method)
       .firstOrNull;
 

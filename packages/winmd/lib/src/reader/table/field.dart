@@ -36,8 +36,7 @@ final class Field extends Row with HasCustomAttributes {
   late final flags = FieldAttributes(readUint16(0));
 
   /// The access level (visibility) of the field.
-  late final FieldAccess fieldAccess =
-      FieldAccess.values[flags & FieldAttributes.fieldAccessMask];
+  late final FieldAccess fieldAccess = .values[flags & .fieldAccessMask];
 
   /// The name of the field.
   late final String name = readString(1);
@@ -64,7 +63,7 @@ final class Field extends Row with HasCustomAttributes {
   ).firstOrNull;
 
   /// The [TypeDef] that owns this field.
-  late final TypeDef parent = getParentRow<TypeDef>(4);
+  late final TypeDef parent = getParentRow(4);
 
   @override
   String toString() =>

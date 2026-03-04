@@ -51,7 +51,7 @@ final class Constant extends Row {
   }();
 
   /// The entity that this constant value belongs to.
-  late final HasConstant parent = decode<HasConstant>(1);
+  late final HasConstant parent = decode(1);
 
   /// The constant value, interpreted according to [type].
   late final MetadataValue? value = () {

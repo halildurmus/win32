@@ -37,8 +37,8 @@ final class ManifestResource extends Row with HasCustomAttributes {
   /// The visibility of the resource.
   late final ManifestResourceVisibility resourceVisibility = switch (flags &
       ManifestResourceAttributes.visibilityMask) {
-    ManifestResourceAttributes.public => ManifestResourceVisibility.public,
-    ManifestResourceAttributes.private => ManifestResourceVisibility.private,
+    ManifestResourceAttributes.public => .public,
+    ManifestResourceAttributes.private => .private,
     _ => throw WinmdException(
       'Unknown resource visibility: '
       '${flags & ManifestResourceAttributes.visibilityMask}',

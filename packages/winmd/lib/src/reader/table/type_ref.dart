@@ -27,7 +27,7 @@ final class TypeRef extends Row with HasCustomAttributes {
 
   /// The resolution scope of the referenced type, indicating the context or
   /// scope in which the type is defined.
-  late final ResolutionScope scope = decode<ResolutionScope>(0);
+  late final ResolutionScope scope = decode(0);
 
   /// The name of the referenced type.
   late final String name = readString(1);

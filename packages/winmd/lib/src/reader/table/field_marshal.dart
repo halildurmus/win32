@@ -25,7 +25,7 @@ final class FieldMarshal extends Row {
   int get token => (MetadataTableId.fieldMarshal << 24) | index;
 
   /// The entity being marshaled.
-  late final HasFieldMarshal parent = decode<HasFieldMarshal>(0);
+  late final HasFieldMarshal parent = decode(0);
 
   /// The native marshaling rules for the associated [parent].
   late final MarshallingDescriptor nativeType = readBlob(

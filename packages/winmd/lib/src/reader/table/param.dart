@@ -53,7 +53,7 @@ final class Param extends Row with HasCustomAttributes {
   ).firstOrNull;
 
   /// The [MethodDef] that owns this parameter.
-  late final MethodDef parent = getParentRow<MethodDef>(5);
+  late final MethodDef parent = getParentRow(5);
 
   @override
   String toString() => name.isEmpty

@@ -27,7 +27,7 @@ final class MemberRef extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.memberRef << 24) | index;
 
   /// The type that contains the referenced member.
-  late final MemberRefParent parent = decode<MemberRefParent>(0);
+  late final MemberRefParent parent = decode(0);
 
   /// The name of the referenced member.
   late final String name = readString(1);

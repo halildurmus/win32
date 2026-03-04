@@ -32,34 +32,33 @@ final class ImplMap extends Row {
   late final flags = PInvokeAttributes(readUint16(0));
 
   /// The character set used when marshaling strings for the unmanaged call.
-  late final CharSet charSet = switch (flags & PInvokeAttributes.charSetMask) {
-    PInvokeAttributes.charSetAnsi => CharSet.ansi,
-    PInvokeAttributes.charSetUnicode => CharSet.unicode,
-    PInvokeAttributes.charSetAuto => CharSet.auto,
-    _ => CharSet.notSpecified,
+  late final CharSet charSet = switch (flags & .charSetMask) {
+    .charSetAnsi => .ansi,
+    .charSetUnicode => .unicode,
+    .charSetAuto => .auto,
+    _ => .notSpecified,
   };
 
   /// The calling convention used by the unmanaged function.
-  late final CallConv callConv = switch (flags &
-      PInvokeAttributes.callConvMask) {
-    PInvokeAttributes.callConvPlatformApi => CallConv.platformApi,
-    PInvokeAttributes.callConvCdecl => CallConv.cdecl,
-    PInvokeAttributes.callConvStdCall => CallConv.stdcall,
-    PInvokeAttributes.callConvThisCall => CallConv.thiscall,
-    PInvokeAttributes.callConvFastCall => CallConv.fastcall,
+  late final CallConv callConv = switch (flags & .callConvMask) {
+    .callConvPlatformApi => .platformApi,
+    .callConvCdecl => .cdecl,
+    .callConvStdCall => .stdcall,
+    .callConvThisCall => .thiscall,
+    .callConvFastCall => .fastcall,
     _ => throw WinmdException(
-      'Unknown calling convention: ${flags & PInvokeAttributes.callConvMask}',
+      'Unknown calling convention: ${flags & .callConvMask}',
     ),
   };
 
   /// The managed member that is forwarded to an unmanaged implementation.
-  late final MemberForwarded memberForwarded = decode<MemberForwarded>(1);
+  late final MemberForwarded memberForwarded = decode(1);
 
   /// The name of the unmanaged function being imported.
   late final String importName = readString(2);
 
   /// The external module that contains the unmanaged function.
-  late final ModuleRef importScope = readRow<ModuleRef>(3);
+  late final ModuleRef importScope = readRow(3);
 
   @override
   String toString() => 'ImplMap(importName: $importName)';

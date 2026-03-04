@@ -43,13 +43,11 @@ final class MethodDef extends Row with HasCustomAttributes {
   late final implFlags = MethodImplAttributes(readUint16(1));
 
   /// The code type associated with the method.
-  late final CodeType codeType =
-      CodeType.values[implFlags & MethodImplAttributes.codeTypeMask];
+  late final CodeType codeType = .values[implFlags & .codeTypeMask];
 
   /// Indicates whether the method is managed (`true`) or unmanaged (`false`).
-  late final bool isManaged = switch (implFlags &
-      MethodImplAttributes.managedMask) {
-    MethodImplAttributes.unmanaged => false,
+  late final bool isManaged = switch (implFlags & .managedMask) {
+    .unmanaged => false,
     _ => true,
   };
 
@@ -58,16 +56,14 @@ final class MethodDef extends Row with HasCustomAttributes {
   late final flags = MethodAttributes(readUint16(2));
 
   /// The access level of the method (e.g., public, private, etc.).
-  late final MemberAccess memberAccess =
-      MemberAccess.values[flags & MethodAttributes.memberAccessMask];
+  late final MemberAccess memberAccess = .values[flags & .memberAccessMask];
 
   /// The vtable layout of the method.
-  late final VTableLayout vTableLayout = switch (flags &
-      MethodAttributes.vtableLayoutMask) {
-    MethodAttributes.reuseSlot => VTableLayout.reuseSlot,
-    MethodAttributes.newSlot => VTableLayout.newSlot,
+  late final VTableLayout vTableLayout = switch (flags & .vtableLayoutMask) {
+    .reuseSlot => .reuseSlot,
+    .newSlot => .newSlot,
     _ => throw WinmdException(
-      'Unknown vtable layout: ${flags & MethodAttributes.vtableLayoutMask}',
+      'Unknown vtable layout: ${flags & .vtableLayoutMask}',
     ),
   };
 
@@ -97,7 +93,7 @@ final class MethodDef extends Row with HasCustomAttributes {
   ).firstOrNull;
 
   /// The type that owns this method.
-  late final TypeDef parent = getParentRow<TypeDef>(5);
+  late final TypeDef parent = getParentRow(5);
 
   @override
   String toString() => 'MethodDef(name: $name, params: $params)';

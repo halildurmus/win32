@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 import '../../common.dart';
 import '../../metadata_type.dart';
-import '../../type_name.dart';
 import '../codes.dart';
 import '../has_custom_attributes.dart';
 import '../metadata_index.dart';
@@ -28,15 +27,15 @@ final class InterfaceImpl extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.interfaceImpl << 24) | index;
 
   /// The type that implements the interface.
-  late final TypeDef class$ = readRow<TypeDef>(0);
+  late final TypeDef class$ = readRow(0);
 
   /// Returns the interface type implemented by [class$].
   late final NamedClassType interface = switch (decode<TypeDefOrRef>(1)) {
     TypeDefOrRefTypeDef(:final value) => NamedClassType(
-      TypeName(value.namespace, value.name),
+      .new(value.namespace, value.name),
     ),
     TypeDefOrRefTypeRef(:final value) => NamedClassType(
-      TypeName(value.namespace, value.name),
+      .new(value.namespace, value.name),
     ),
     TypeDefOrRefTypeSpec(:final value) => value.signature as NamedClassType,
   };

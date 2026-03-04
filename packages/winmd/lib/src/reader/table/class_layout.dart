@@ -34,7 +34,7 @@ final class ClassLayout extends Row {
   late final int classSize = readUint32(1);
 
   /// The [TypeDef] representing the class whose layout is specified.
-  late final TypeDef parent = readRow<TypeDef>(2);
+  late final TypeDef parent = readRow(2);
 
   @override
   String toString() =>

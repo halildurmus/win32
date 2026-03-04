@@ -642,7 +642,7 @@ void main() async {
 
     test('readInt64 reads correct value', () {
       const value = 9223372036854775807;
-      final bytes = ByteData(8)..setInt64(0, value, Endian.little);
+      final bytes = ByteData(8)..setInt64(0, value, .little);
       final blob = createBlob(bytes.buffer.asUint8List());
       check(blob.readInt64()).equals(value);
       check(blob.isEmpty).isTrue();
@@ -650,7 +650,7 @@ void main() async {
 
     test('readUint64 reads correct value', () {
       final value = BigInt.parse('18446744073709551615');
-      final bytes = ByteData(8)..setUint64(0, value.toInt(), Endian.little);
+      final bytes = ByteData(8)..setUint64(0, value.toInt(), .little);
       final blob = createBlob(bytes.buffer.asUint8List());
       check(blob.readUint64()).equals(value.toInt());
       check(blob.isEmpty).isTrue();
@@ -658,13 +658,13 @@ void main() async {
 
     test('readFloat32 reads correctly', () {
       const value = 3.14;
-      final bytes = ByteData(4)..setFloat32(0, value, Endian.little);
+      final bytes = ByteData(4)..setFloat32(0, value, .little);
       final blob = createBlob(bytes.buffer.asUint8List());
       check(blob.readFloat32()).isCloseTo(value, 1e-6);
     });
     test('readFloat64 reads correct value', () {
       const value = 3.141592653589793;
-      final bytes = ByteData(8)..setFloat64(0, value, Endian.little);
+      final bytes = ByteData(8)..setFloat64(0, value, .little);
       final blob = createBlob(bytes.buffer.asUint8List());
       check(blob.readFloat64()).equals(value);
       check(blob.isEmpty).isTrue();

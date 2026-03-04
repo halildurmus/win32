@@ -26,7 +26,7 @@ final class MethodSpec extends Row with HasCustomAttributes {
   int get token => (MetadataTableId.methodSpec << 24) | index;
 
   /// The method that is being specialized.
-  late final MethodDefOrRef method = decode<MethodDefOrRef>(0);
+  late final MethodDefOrRef method = decode(0);
 
   /// The list of instantiated types for a generic method.
   late final List<MetadataType> instantiation = readBlob(

@@ -30,7 +30,7 @@ final class FieldLayout extends Row {
   late final int offset = readUint32(0);
 
   /// The [Field] to which this layout information applies.
-  late final Field field = readRow<Field>(1);
+  late final Field field = readRow(1);
 
   @override
   String toString() => 'FieldLayout(offset: $offset, field: $field)';

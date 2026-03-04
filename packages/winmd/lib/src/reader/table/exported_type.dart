@@ -45,7 +45,7 @@ final class ExportedType extends Row with HasCustomAttributes {
   late final String namespace = readString(3);
 
   /// The source of the exported type.
-  late final Implementation implementation = decode<Implementation>(4);
+  late final Implementation implementation = decode(4);
 }
 
 @internal

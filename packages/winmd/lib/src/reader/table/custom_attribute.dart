@@ -46,7 +46,7 @@ final class CustomAttribute extends Row {
 
       // Parse fixed args.
       fixedArgs = UnmodifiableListView([
-        for (final type in types) FixedArg(_readValue(blob, type)),
+        for (final type in types) .new(_readValue(blob, type)),
       ]);
 
       // Parse named args.
@@ -68,10 +68,10 @@ final class CustomAttribute extends Row {
             final enumName = blob.readUtf8();
             final enumValue = blob.readInt32();
             final value = AttributeEnumValue(name, enumValue);
-            args.add(NamedArg(name: enumName, value: value));
+            args.add(.new(name: enumName, value: value));
           } else {
             final value = _readValue(blob, type);
-            args.add(NamedArg(name: name, value: value));
+            args.add(.new(name: name, value: value));
           }
         }
         namedArgs = UnmodifiableListView(args);
@@ -122,10 +122,10 @@ final class CustomAttribute extends Row {
   late final List<NamedArg> namedArgs;
 
   /// The entity to which this attribute is applied.
-  late final HasCustomAttribute parent = decode<HasCustomAttribute>(0);
+  late final HasCustomAttribute parent = decode(0);
 
   /// The constructor method used to instantiate the attribute.
-  late final CustomAttributeType type = decode<CustomAttributeType>(1);
+  late final CustomAttributeType type = decode(1);
 
   /// The name of the attribute.
   late final String name = switch (type.parent) {

@@ -45,45 +45,40 @@ final class TypeDef extends Row with HasCustomAttributes {
   late final flags = TypeAttributes(readUint32(0));
 
   /// The visibility of the type.
-  late final TypeVisibility typeVisibility =
-      TypeVisibility.values[flags & TypeAttributes.visibilityMask];
+  late final TypeVisibility typeVisibility = .values[flags & .visibilityMask];
 
   /// Whether the type is nested, i.e., defined under another type.
   late final bool isNested = switch (typeVisibility) {
-    TypeVisibility.notPublic || TypeVisibility.public => false,
+    .notPublic || .public => false,
     _ => true,
   };
 
   /// The layout of the type.
-  late final TypeLayout typeLayout = switch (flags &
-      TypeAttributes.layoutMask) {
-    TypeAttributes.autoLayout => TypeLayout.auto,
-    TypeAttributes.sequentialLayout => TypeLayout.sequential,
-    TypeAttributes.explicitLayout => TypeLayout.explicit,
-    _ => throw WinmdException(
-      'Unknown type layout: ${flags & TypeAttributes.layoutMask}',
-    ),
+  late final TypeLayout typeLayout = switch (flags & .layoutMask) {
+    .autoLayout => .auto,
+    .sequentialLayout => .sequential,
+    .explicitLayout => .explicit,
+    _ => throw WinmdException('Unknown type layout: ${flags & .layoutMask}'),
   };
 
   /// The semantics of the type.
   late final TypeSemantics typeSemantics = switch (flags &
-      TypeAttributes.classSemanticsMask) {
-    TypeAttributes.class$ => TypeSemantics.class$,
-    TypeAttributes.interface => TypeSemantics.interface,
+      .classSemanticsMask) {
+    .class$ => .class$,
+    .interface => .interface,
     _ => throw WinmdException(
-      'Unknown type semantics: ${flags & TypeAttributes.classSemanticsMask}',
+      'Unknown type semantics: ${flags & .classSemanticsMask}',
     ),
   };
 
   /// The string format used by the type.
-  late final StringFormat stringFormat = switch (flags &
-      TypeAttributes.stringFormatMask) {
-    TypeAttributes.ansiClass => StringFormat.ansi,
-    TypeAttributes.unicodeClass => StringFormat.unicode,
-    TypeAttributes.autoClass => StringFormat.auto,
-    TypeAttributes.customFormatClass => StringFormat.custom,
+  late final StringFormat stringFormat = switch (flags & .stringFormatMask) {
+    .ansiClass => .ansi,
+    .unicodeClass => .unicode,
+    .autoClass => .auto,
+    .customFormatClass => .custom,
     _ => throw WinmdException(
-      'Unknown string format: ${flags & TypeAttributes.stringFormatMask}',
+      'Unknown string format: ${flags & .stringFormatMask}',
     ),
   };
 
@@ -133,20 +128,12 @@ final class TypeDef extends Row with HasCustomAttributes {
   late final List<Event> events = () {
     final eventIndex = index + 1;
     final eventMapRow = reader.tableStream.eventMap
-        .where(
-          (row) =>
-              reader.readUint(row, MetadataTable.eventMap, 0) == eventIndex,
-        )
+        .where((row) => reader.readUint(row, .eventMap, 0) == eventIndex)
         .firstOrNull;
     if (eventMapRow == null) return const <Event>[];
 
     final companion = Row.companion<Event>();
-    final rows = reader.getList(
-      eventMapRow,
-      MetadataTable.eventMap,
-      1,
-      MetadataTable.event,
-    );
+    final rows = reader.getList(eventMapRow, .eventMap, 1, .event);
     return rows
         .map(
           (index) => companion.constructor(metadataIndex, readerIndex, index),
@@ -187,21 +174,12 @@ final class TypeDef extends Row with HasCustomAttributes {
   late final List<Property> properties = () {
     final propertyIndex = index + 1;
     final propertyMapRow = reader.tableStream.propertyMap
-        .where(
-          (row) =>
-              reader.readUint(row, MetadataTable.propertyMap, 0) ==
-              propertyIndex,
-        )
+        .where((row) => reader.readUint(row, .propertyMap, 0) == propertyIndex)
         .firstOrNull;
     if (propertyMapRow == null) return const <Property>[];
 
     final companion = Row.companion<Property>();
-    final rows = reader.getList(
-      propertyMapRow,
-      MetadataTable.propertyMap,
-      1,
-      MetadataTable.property,
-    );
+    final rows = reader.getList(propertyMapRow, .propertyMap, 1, .property);
     return rows
         .map(
           (index) => companion.constructor(metadataIndex, readerIndex, index),
