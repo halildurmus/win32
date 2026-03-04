@@ -24,7 +24,10 @@ import 'metadata_index.dart';
 final class Blob {
   /// Constructs a [Blob] with the specified [metadataIndex], [readerIndex],
   /// and byte [slice].
-  Blob(this.metadataIndex, this.readerIndex, this.slice);
+  Blob(this.metadataIndex, this.readerIndex, Uint8List slice)
+    : _slice = slice,
+      _byteData = slice.buffer.asByteData(),
+      _baseOffset = slice.offsetInBytes;
 
   /// The metadata index that provides contextual information for interpreting
   /// the blob.
@@ -33,22 +36,27 @@ final class Blob {
   /// The index of the reader in the [metadataIndex].
   final int readerIndex;
 
+  final Uint8List _slice;
+  final ByteData _byteData;
+  final int _baseOffset;
+  var _pos = 0;
+
   /// The slice of raw byte data that represents the contents of the blob.
-  Uint8List slice;
+  Uint8List get slice => .sublistView(_slice, _pos);
 
   /// Whether the blob is fully read (i.e., the [slice] is empty).
   @pragma('vm:prefer-inline')
-  bool get isEmpty => slice.isEmpty;
+  bool get isEmpty => _pos >= _slice.length;
 
   /// The current length of the [slice], i.e., the number of remaining bytes to
   /// read.
   @pragma('vm:prefer-inline')
-  int get length => slice.length;
+  int get length => _slice.length - _pos;
 
   /// Allows direct access to the elements in the [slice] by index, similar to
   /// a list.
   @pragma('vm:prefer-inline')
-  int operator [](int index) => slice[index];
+  int operator [](int index) => _slice[_pos + index];
 
   /// Decodes a value of type [T] using the provided decoder function.
   T decode<T extends CodedIndex>() {
@@ -63,9 +71,18 @@ final class Blob {
   /// `true`.
   /// Otherwise, it returns `false` and leaves the [slice] unchanged.
   bool tryRead(int expected) {
-    final CompressedInteger(:value, :bytesRead) = .decode(slice);
+    if (expected < 0x80) {
+      // Fast path: all common element-type tokens (BYREF, VOID, SZARRAY, PTR,
+      // CMOD_OPT, CMOD_REQD, ...) are < 0x80 and encode as a single byte.
+      if (_slice[_pos] == expected) {
+        _pos++;
+        return true;
+      }
+      return false;
+    }
+    final CompressedInteger(:value, :bytesRead) = .decode(_slice, _pos);
     if (value == expected) {
-      _offset(bytesRead);
+      _pos += bytesRead;
       return true;
     }
     return false;
@@ -127,7 +144,9 @@ final class Blob {
 
   /// Reads either a `FieldSig` or a `MethodRefSig` from the blob.
   MemberRefSignature readMemberRefSignature() {
-    if (slice[0] == CallingConvention.FIELD) return FieldSig(readFieldSig());
+    if (_slice[_pos] == CallingConvention.FIELD) {
+      return FieldSig(readFieldSig());
+    }
     return readMethodRefSig();
   }
 
@@ -187,16 +206,18 @@ final class Blob {
 
   /// Reads modifier tokens and decodes them into a list of [TypeDefOrRef].
   List<TypeDefOrRef> readModifiers() {
-    final mods = <TypeDefOrRef>[];
-    while (true) {
-      final CompressedInteger(:value, :bytesRead) = .decode(slice);
-      if (value != ELEMENT_TYPE_CMOD_OPT && value != ELEMENT_TYPE_CMOD_REQD) {
-        break;
-      } else {
-        _offset(bytesRead);
-        mods.add(.decode(metadataIndex, readerIndex, readCompressed()));
-      }
+    // Fast path: the vast majority of signatures have no modifiers.
+    // CMOD_REQD (31) and CMOD_OPT (32) are both < 0x80 → encoded as 1 byte.
+    final byte = _slice[_pos];
+    if (byte != ELEMENT_TYPE_CMOD_OPT && byte != ELEMENT_TYPE_CMOD_REQD) {
+      return const [];
     }
+    final mods = <TypeDefOrRef>[];
+    do {
+      _pos++; // consume the 1-byte CMOD tag
+      mods.add(.decode(metadataIndex, readerIndex, readCompressed()));
+    } while (_slice[_pos] == ELEMENT_TYPE_CMOD_OPT ||
+        _slice[_pos] == ELEMENT_TYPE_CMOD_REQD);
     return UnmodifiableListView(mods);
   }
 
@@ -223,7 +244,7 @@ final class Blob {
 
   /// Reads either a `LocalVarSig` or a `StandAloneMethodSig` from the blob.
   StandAloneSignature readStandAloneSignature() {
-    if (slice[0] == CallingConvention.LOCAL_SIG) {
+    if (_slice[_pos] == CallingConvention.LOCAL_SIG) {
       final prolog = readUint8();
       assert(
         prolog == CallingConvention.LOCAL_SIG,
@@ -380,8 +401,8 @@ final class Blob {
 
   /// Reads a compressed integer from the blob.
   int readCompressed() {
-    final CompressedInteger(:value, :bytesRead) = .decode(slice);
-    _offset(bytesRead);
+    final CompressedInteger(:value, :bytesRead) = .decode(_slice, _pos);
+    _pos += bytesRead;
     return value;
   }
 
@@ -394,133 +415,104 @@ final class Blob {
 
   /// Reads a signed 8-bit integer.
   int readInt8() {
-    final value = slice.buffer.asByteData().getInt8(slice.offsetInBytes);
-    _offset(1);
+    final value = _byteData.getInt8(_baseOffset + _pos);
+    _pos++;
     return value;
   }
 
   /// Reads an unsigned 8-bit integer.
   int readUint8() {
-    final value = slice[0];
-    _offset(1);
+    final value = _slice[_pos];
+    _pos++;
     return value;
   }
 
   /// Reads a signed 16-bit integer.
   int readInt16() {
-    final value = slice.buffer.asByteData().getInt16(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(2);
+    final value = _byteData.getInt16(_baseOffset + _pos, .little);
+    _pos += 2;
     return value;
   }
 
   /// Reads an unsigned 16-bit integer.
   int readUint16() {
-    final value = slice.buffer.asByteData().getUint16(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(2);
+    final value = _byteData.getUint16(_baseOffset + _pos, .little);
+    _pos += 2;
     return value;
   }
 
   /// Reads a signed 32-bit integer.
   int readInt32() {
-    final value = slice.buffer.asByteData().getInt32(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(4);
+    final value = _byteData.getInt32(_baseOffset + _pos, .little);
+    _pos += 4;
     return value;
   }
 
   /// Reads an unsigned 32-bit integer.
   int readUint32() {
-    final value = slice.buffer.asByteData().getUint32(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(4);
+    final value = _byteData.getUint32(_baseOffset + _pos, .little);
+    _pos += 4;
     return value;
   }
 
   /// Reads a signed 64-bit integer.
   int readInt64() {
-    final value = slice.buffer.asByteData().getInt64(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(8);
+    final value = _byteData.getInt64(_baseOffset + _pos, .little);
+    _pos += 8;
     return value;
   }
 
   /// Reads an unsigned 64-bit integer.
   int readUint64() {
-    final value = slice.buffer.asByteData().getUint64(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(8);
+    final value = _byteData.getUint64(_baseOffset + _pos, .little);
+    _pos += 8;
     return value;
   }
 
   /// Reads a 32-bit floating point number.
   double readFloat32() {
-    final value = slice.buffer.asByteData().getFloat32(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(4);
+    final value = _byteData.getFloat32(_baseOffset + _pos, .little);
+    _pos += 4;
     return value;
   }
 
   /// Reads a 64-bit floating point number.
   double readFloat64() {
-    final value = slice.buffer.asByteData().getFloat64(
-      slice.offsetInBytes,
-      .little,
-    );
-    _offset(8);
+    final value = _byteData.getFloat64(_baseOffset + _pos, .little);
+    _pos += 8;
     return value;
   }
 
   /// Reads a UTF-8 encoded string.
   String readUtf8() {
     final length = readCompressed();
-    final stringBytes = Uint8List.sublistView(slice, 0, length);
+    final stringBytes = Uint8List.sublistView(_slice, _pos, _pos + length);
     final value = utf8.decode(stringBytes);
-    _offset(length);
+    _pos += length;
     return value;
   }
 
   /// Reads a UTF-16 encoded string.
   String readUtf16() {
-    final stringLength = length ~/ 2;
+    final totalBytes = _slice.length - _pos;
+    final stringLength = totalBytes ~/ 2;
     final Uint16List stringBytes;
-    if (slice.offsetInBytes.isEven) {
+    if ((_baseOffset + _pos).isEven) {
       // If aligned, directly use asUint16List for efficiency.
-      stringBytes = slice.buffer.asUint16List(
-        slice.offsetInBytes,
+      stringBytes = _slice.buffer.asUint16List(
+        _baseOffset + _pos,
         stringLength,
       );
     } else {
       // If unaligned, manually decode UTF-16.
       stringBytes = .new(stringLength);
       for (var i = 0; i < stringLength; i++) {
-        final low = slice[i * 2];
-        final high = slice[i * 2 + 1];
-        stringBytes[i] = low | (high << 8);
+        stringBytes[i] = _slice[_pos + i * 2] | (_slice[_pos + i * 2 + 1] << 8);
       }
     }
-    _offset(length);
+    _pos += totalBytes;
     return .fromCharCodes(stringBytes);
   }
-
-  /// Updates the slice to a view that skips the first [offset] bytes.
-  @pragma('vm:prefer-inline')
-  void _offset(int offset) => slice = .sublistView(slice, offset);
 
   @override
   String toString() => slice.toString();

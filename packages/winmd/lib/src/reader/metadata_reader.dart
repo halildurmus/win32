@@ -587,17 +587,20 @@ final class MetadataReader {
     );
   }
 
-  const MetadataReader._(
+  MetadataReader._(
     this.data,
     this.blobHeap,
     this.guidHeap,
     this.stringHeap,
     this.tableStream,
     this.userStringHeap,
-  );
+  ) : _byteData = .sublistView(data);
 
   /// The raw metadata binary data.
   final Uint8List data;
+
+  /// A [ByteData] view on a range of elements of [data].
+  final ByteData _byteData;
 
   /// The heap containing blobs.
   final BlobHeap blobHeap;
@@ -636,16 +639,18 @@ final class MetadataReader {
   String readString(int row, MetadataTable table, int column) =>
       stringHeap[readUint(row, table, column)];
 
-  /// Reads an unsigned integer from the specified [row] and [column] of [table].
+  /// Reads an unsigned integer from the specified [row] and [column] of
+  /// [table].
+  @pragma('vm:prefer-inline')
   int readUint(int row, MetadataTable table, int column) {
     final table$ = tableStream[table];
     final column$ = table$.columns[column];
     final offset = table$.offset + row * table$.width + column$.offset;
     return switch (column$.width) {
-      1 => data.readUint8(offset),
-      2 => data.readUint16(offset),
-      4 => data.readUint32(offset),
-      8 => data.readUint64(offset),
+      1 => _byteData.getUint8(offset),
+      2 => _byteData.getUint16(offset, .little),
+      4 => _byteData.getUint32(offset, .little),
+      8 => _byteData.getUint64(offset, .little),
       _ => throw WinmdException('Invalid column width: ${column$.width}'),
     };
   }
@@ -654,25 +659,34 @@ final class MetadataReader {
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint8(int row, MetadataTable table, int column, [int offset = 0]) =>
-      data.readUint8(_calculateOffset(row, table, column) + offset);
+      _byteData.getUint8(_calculateOffset(row, table, column) + offset);
 
   /// Reads an unsigned 16-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint16(int row, MetadataTable table, int column, [int offset = 0]) =>
-      data.readUint16(_calculateOffset(row, table, column) + offset);
+      _byteData.getUint16(
+        _calculateOffset(row, table, column) + offset,
+        .little,
+      );
 
   /// Reads an unsigned 32-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint32(int row, MetadataTable table, int column, [int offset = 0]) =>
-      data.readUint32(_calculateOffset(row, table, column) + offset);
+      _byteData.getUint32(
+        _calculateOffset(row, table, column) + offset,
+        .little,
+      );
 
   /// Reads an unsigned 64-bit integer from the specified [row] and [column] of
   /// [table], with an optional [offset].
   @pragma('vm:prefer-inline')
   int readUint64(int row, MetadataTable table, int column, [int offset = 0]) =>
-      data.readUint64(_calculateOffset(row, table, column) + offset);
+      _byteData.getUint64(
+        _calculateOffset(row, table, column) + offset,
+        .little,
+      );
 
   /// Calculates the byte offset for the specified [row], [table], and [column].
   @pragma('vm:prefer-inline')
@@ -684,12 +698,29 @@ final class MetadataReader {
 
   /// Returns an iterable of rows where the specified [column] matches [value].
   Iterable<int> getEqualRange(MetadataTable table, int column, int value) {
+    final table$ = tableStream[table];
+    final column$ = table$.columns[column];
+    final tableOffset = table$.offset;
+    final rowWidth = table$.width;
+    final colOffset = column$.offset;
+    final colWidth = column$.width;
+
+    int readAt(int row) {
+      final byteOffset = tableOffset + row * rowWidth + colOffset;
+      return switch (colWidth) {
+        1 => _byteData.getUint8(byteOffset),
+        2 => _byteData.getUint16(byteOffset, .little),
+        4 => _byteData.getUint32(byteOffset, .little),
+        _ => _byteData.getUint64(byteOffset, .little),
+      };
+    }
+
     var first = 0;
-    var last = tableStream[table].rows;
+    var last = table$.rows;
 
     while (first < last) {
       final middle = first + (last - first) ~/ 2;
-      final middleValue = readUint(middle, table, column);
+      final middleValue = readAt(middle);
 
       if (middleValue < value) {
         first = middle + 1;
@@ -734,11 +765,24 @@ final class MetadataReader {
     int column,
     int value,
   ) {
+    final table$ = tableStream[table];
+    final column$ = table$.columns[column];
+    final tableOffset = table$.offset;
+    final rowWidth = table$.width;
+    final colOffset = column$.offset;
+    final colWidth = column$.width;
     var low = first;
     var high = last;
     while (low < high) {
       final middle = low + (high - low) ~/ 2;
-      if (readUint(middle, table, column) < value) {
+      final byteOffset = tableOffset + middle * rowWidth + colOffset;
+      final midVal = switch (colWidth) {
+        1 => _byteData.getUint8(byteOffset),
+        2 => _byteData.getUint16(byteOffset, .little),
+        4 => _byteData.getUint32(byteOffset, .little),
+        _ => _byteData.getUint64(byteOffset, .little),
+      };
+      if (midVal < value) {
         low = middle + 1;
       } else {
         high = middle;
@@ -755,11 +799,24 @@ final class MetadataReader {
     int column,
     int value,
   ) {
+    final table$ = tableStream[table];
+    final column$ = table$.columns[column];
+    final tableOffset = table$.offset;
+    final rowWidth = table$.width;
+    final colOffset = column$.offset;
+    final colWidth = column$.width;
     var low = first;
     var high = last;
     while (low < high) {
       final middle = low + (high - low) ~/ 2;
-      if (value < readUint(middle, table, column)) {
+      final byteOffset = tableOffset + middle * rowWidth + colOffset;
+      final midVal = switch (colWidth) {
+        1 => _byteData.getUint8(byteOffset),
+        2 => _byteData.getUint16(byteOffset, .little),
+        4 => _byteData.getUint32(byteOffset, .little),
+        _ => _byteData.getUint64(byteOffset, .little),
+      };
+      if (value < midVal) {
         high = middle;
       } else {
         low = middle + 1;

@@ -9,16 +9,11 @@ extension Uint8ListExtension on Uint8List {
   ///
   /// The resulting string is returned.
   String readString(int offset) {
-    final buffer = StringBuffer();
-    var i = 0;
-
-    // Read the array until the null terminator is encountered.
-    while (true) {
-      final char = this[offset + i];
-      if (char == 0) return buffer.toString();
-      buffer.writeCharCode(char);
-      i++;
+    var end = offset;
+    while (this[end] != 0) {
+      end++;
     }
+    return .fromCharCodes(this, offset, end);
   }
 
   /// Reads an unsigned 8-bit integer at the given [offset].

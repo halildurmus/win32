@@ -1,37 +1,34 @@
+import 'dart:collection';
+
 import 'metadata_heap.dart';
 
 /// Provides indexed access to the `#Strings` heap in a metadata file.
 final class StringHeap extends MetadataHeap {
   /// Creates a [StringHeap] from the provided binary [data].
-  const StringHeap(super.data);
+  StringHeap(super.data);
+
+  final _cache = HashMap<int, String>();
 
   /// The number of strings in the heap.
-  int get count {
-    var count = 0;
+  late final int count = () {
+    var n = 0;
     var offset = 0;
-
     while (offset < data.length) {
       while (offset < data.length && data[offset] != 0) {
         offset++;
       }
-
-      // Found a null terminator → valid string
       if (offset < data.length) {
-        count++;
-        offset++; // Skip null terminator
+        n++;
+        offset++;
       } else {
-        // If no null terminator, likely corrupted or incomplete
         break;
       }
-
-      // Skip padded zeroes
       while (offset < data.length && data[offset] == 0) {
         offset++;
       }
     }
-
-    return count;
-  }
+    return n;
+  }();
 
   /// Enumerates all strings in the heap.
   Iterable<String> get strings sync* {
@@ -47,8 +44,8 @@ final class StringHeap extends MetadataHeap {
 
       if (offset >= data.length) break;
 
-      // Extract the string from the start to the null terminator.
-      yield this[start];
+      // Decode inline (avoids a second null-terminator scan via operator[]).
+      yield .fromCharCodes(data, start, offset);
 
       offset++; // Skip null terminator.
 
@@ -65,15 +62,16 @@ final class StringHeap extends MetadataHeap {
       offset >= 0 && offset < data.length,
       'Offset $offset out of bounds.',
     );
-    final buffer = StringBuffer();
-    var i = 0;
+    if (_cache[offset] case final cached?) return cached;
 
-    // Read the array until the null terminator is encountered.
-    while (true) {
-      final char = data[offset + i];
-      if (char == 0) return buffer.toString();
-      buffer.writeCharCode(char);
-      i++;
+    // Find the null terminator.
+    var end = offset;
+    while (data[end] != 0) {
+      end++;
     }
+
+    final string = String.fromCharCodes(data, offset, end);
+    _cache[offset] = string;
+    return string;
   }
 }

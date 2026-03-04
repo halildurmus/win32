@@ -13,6 +13,10 @@ base mixin HasCustomAttributes on Row {
     HasCustomAttribute(this).encode(),
   ).toList(growable: false);
 
+  late final Map<String, CustomAttribute> _attributeMap = {
+    for (final attribute in attributes) attribute.name: attribute,
+  };
+
   /// Retrieves the first argument of the custom attribute with the given
   /// [attributeName], if it is a string.
   ///
@@ -29,20 +33,19 @@ base mixin HasCustomAttributes on Row {
     return null;
   }
 
-  /// Finds the first [CustomAttribute] with the specified [name].
+  /// Finds a custom attribute with the specified [name].
   ///
   /// Throws a [WinmdException] if no matching attribute is found.
   CustomAttribute findAttribute(String name) =>
-      attributes.where((attr) => attr.name == name).firstOrNull ??
+      _attributeMap[name] ??
       (throw WinmdException('Attribute not found: $name'));
 
-  /// Attempts to find the first [CustomAttribute] with the specified [name].
+  /// Attempts to find a custom attribute with the specified [name].
   ///
   /// Returns `null` if no matching attribute is found.
-  CustomAttribute? tryFindAttribute(String name) =>
-      attributes.where((attr) => attr.name == name).firstOrNull;
+  CustomAttribute? tryFindAttribute(String name) => _attributeMap[name];
 
-  /// Determines whether an attribute with the specified [name] is attached to
-  /// this row.
-  bool hasAttribute(String name) => tryFindAttribute(name) != null;
+  /// Determines whether a custom attribute with the specified [name] is
+  /// attached to this row.
+  bool hasAttribute(String name) => _attributeMap.containsKey(name);
 }
