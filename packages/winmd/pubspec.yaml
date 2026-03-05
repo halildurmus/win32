@@ -25,6 +25,7 @@ resolution: workspace
 
 dependencies:
   archive: ^4.0.9
+  cli_util: ^0.4.2
   ffi: ^2.2.0
   logging: ^1.3.0
   meta: ^1.17.0

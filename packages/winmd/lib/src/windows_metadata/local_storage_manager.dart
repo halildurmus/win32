@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:archive/archive_io.dart';
+import 'package:cli_util/cli_logging.dart' as cli_logging;
 import 'package:ffi/ffi.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;
@@ -82,40 +83,29 @@ final class LocalStorageManager {
   /// - Checks if the package exists locally.
   /// - If absent, downloads the package via [downloadFunction].
   /// - Extracts the archive contents into a new directory.
-  /// - Optionally logs progress if a [logger] is provided.
   ///
   /// Returns the absolute package directory path.
   Future<String> getPackageDirectory(
     WindowsMetadataPackage package,
     String version,
     Future<Uint8List> Function() downloadFunction, {
-    Logger? logger,
+    @Deprecated('No replacement') Logger? logger,
   }) async {
     final packagePath = _packagePath(package, version);
     final metadataPath = p.join(packagePath, package.assetName);
     if (File(metadataPath).existsSync()) return packagePath;
     Directory(packagePath).createSync(recursive: true);
-    logger?.info('Downloading "$package" version "$version"...');
-    final downloadTimer = Stopwatch()..start();
+    final ansi = cli_logging.Ansi(stdout.supportsAnsiEscapes);
+    final logger = cli_logging.Logger.standard(ansi: ansi);
+    var progress = logger.progress(
+      '${ansi.bold}Downloading NuGet package "$package" (v$version)${ansi.none}',
+    );
     final archiveBytes = await downloadFunction();
-    downloadTimer.stop();
-    logger
-      ?..info(
-        'Download complete: '
-        '${(archiveBytes.lengthInBytes / (1024 * 1024)).toStringAsFixed(1)} MB '
-        'in ${(downloadTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
-        'seconds.',
-      )
-      ..info('Extracting archive...');
-    final extractionTimer = Stopwatch()..start();
+    progress.finish(showTiming: true);
+    progress = logger.progress('${ansi.bold}Extracting archive${ansi.none}');
     final archive = ZipDecoder().decodeBytes(archiveBytes);
     await extractArchiveToDisk(archive, packagePath);
-    extractionTimer.stop();
-    logger?.info(
-      'Extraction completed in '
-      '${(extractionTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
-      'seconds.',
-    );
+    progress.finish(showTiming: true);
     return packagePath;
   }
 

@@ -907,9 +907,7 @@ Future<void> checkForNewMetadataVersions({bool updateVersions = false}) async {
       }
     }
   } catch (e) {
-    logger
-      ..severe('❌ Failed to check for new metadata versions.')
-      ..severe(e);
+    logger.severe('❌ Failed to check for new metadata versions: $e');
   }
 }
 

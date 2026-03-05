@@ -42,7 +42,7 @@ dependencies:
   path: ^1.9.1
 
   # Windows metadata for automatically generating API signatures.
-  winmd: ^7.0.0
+  winmd: ^7.0.2
 
   # For parsing YAML files.
   yaml: ^3.1.3

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cli_util/cli_logging.dart' as cli_logging;
 import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
 import 'package:path/path.dart' as p;
@@ -169,7 +170,6 @@ final class WindowsMetadataLoader {
           packageId,
           version: resolvedVersion,
         ),
-        logger: _logger,
       );
 
       final metadataFile = File(p.join(packageDirectory, assetName));
@@ -177,15 +177,13 @@ final class WindowsMetadataLoader {
       // For WinRT, merge metadata if necessary.
       if (package == .winrt && !metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
-        _logger.info('Merging WinRT metadata files...');
-        final mergeTimer = Stopwatch()..start();
-        mdmerge(inputPaths: [metadataPath], outputPath: metadataFile.path);
-        mergeTimer.stop();
-        _logger.info(
-          'Merge completed in '
-          'in ${(mergeTimer.elapsedMilliseconds / 1000.0).toStringAsFixed(1)} '
-          'seconds.',
+        final ansi = cli_logging.Ansi(stdout.supportsAnsiEscapes);
+        final logger = cli_logging.Logger.standard(ansi: ansi);
+        final progress = logger.progress(
+          '${ansi.bold}Merging WinRT metadata files${ansi.none}',
         );
+        mdmerge(inputPaths: [metadataPath], outputPath: metadataFile.path);
+        progress.finish(showTiming: true);
       }
 
       return metadataFile.path;
