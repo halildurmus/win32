@@ -100,13 +100,47 @@ final class LocalStorageManager {
     var progress = logger.progress(
       '${ansi.bold}Downloading NuGet package "$package" (v$version)${ansi.none}',
     );
-    final archiveBytes = await downloadFunction();
+    final archiveBytes = await _downloadPackage(
+      downloadFunction,
+      logger: logger,
+    );
     progress.finish(showTiming: true);
     progress = logger.progress('${ansi.bold}Extracting archive${ansi.none}');
     final archive = ZipDecoder().decodeBytes(archiveBytes);
     await extractArchiveToDisk(archive, packagePath);
     progress.finish(showTiming: true);
     return packagePath;
+  }
+
+  Future<Uint8List> _downloadPackage(
+    Future<Uint8List> Function() downloadFunction, {
+    required cli_logging.Logger logger,
+    int maxAttempts = 5,
+  }) async {
+    Object? lastError;
+    StackTrace? lastStackTrace;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        if (attempt > 1) {
+          logger.stdout(
+            'Retrying download (attempt $attempt of $maxAttempts)...',
+          );
+        }
+        return await downloadFunction();
+      } catch (error, stackTrace) {
+        lastError = error;
+        lastStackTrace = stackTrace;
+        if (attempt == maxAttempts) break;
+        logger.stderr(
+          'Failed to download package '
+          '(attempt $attempt of $maxAttempts): $error',
+        );
+        await Future.delayed(.new(milliseconds: 250 * attempt));
+      }
+    }
+
+    Error.throwWithStackTrace(lastError!, lastStackTrace!);
   }
 
   /// Lists all locally cached package directories.

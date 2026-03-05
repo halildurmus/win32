@@ -81,6 +81,49 @@ void main() {
       check(paths.first).contains('microsoft.windows.sdk.win32metadata@1.0.0');
     });
 
+    test(
+      'getPackageDirectory retries on transient failure and eventually succeeds',
+      () async {
+        var callCount = 0;
+
+        // Fail on the first two attempts, succeed on the third.
+        final packagePath = await storageManager.getPackageDirectory(
+          dummyPackage,
+          version,
+          () async {
+            callCount++;
+            if (callCount < 3) throw Exception('transient network error');
+            return createDummyZip();
+          },
+        );
+
+        check(callCount).equals(3);
+        check(File(p.join(packagePath, 'Windows.Win32.winmd')).existsSync())
+            .isTrue();
+      },
+    );
+
+    test(
+      'getPackageDirectory throws after exhausting all retry attempts',
+      () async {
+        var callCount = 0;
+
+        await check(
+          storageManager.getPackageDirectory(
+            dummyPackage,
+            version,
+            () async {
+              callCount++;
+              throw Exception('persistent network error');
+            },
+          ),
+        ).throws<Exception>();
+
+        // 5 is the default maxAttempts inside _downloadPackage.
+        check(callCount).equals(5);
+      },
+    );
+
     test('clear deletes all package directories', () async {
       // Download (and extract) the package.
       await storageManager.getPackageDirectory(
