@@ -98,8 +98,9 @@ void main() {
         );
 
         check(callCount).equals(3);
-        check(File(p.join(packagePath, 'Windows.Win32.winmd')).existsSync())
-            .isTrue();
+        check(
+          File(p.join(packagePath, 'Windows.Win32.winmd')).existsSync(),
+        ).isTrue();
       },
     );
 
@@ -109,14 +110,10 @@ void main() {
         var callCount = 0;
 
         await check(
-          storageManager.getPackageDirectory(
-            dummyPackage,
-            version,
-            () async {
-              callCount++;
-              throw Exception('persistent network error');
-            },
-          ),
+          storageManager.getPackageDirectory(dummyPackage, version, () async {
+            callCount++;
+            throw Exception('persistent network error');
+          }),
         ).throws<Exception>();
 
         // 5 is the default maxAttempts inside _downloadPackage.
