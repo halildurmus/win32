@@ -42,7 +42,7 @@ void compareGolden(String identifier, String fileName, Projection projection) {
 
   check(
     projectionString,
-    because: '\nTo regenerate the goldens, run: dart tools/update_goldens.dart',
+    because: '\nTo regenerate the goldens, run: melos run update-goldens',
   ).equals(golden);
 }
 

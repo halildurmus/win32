@@ -16,5 +16,56 @@ dev_dependencies:
   ffi_leak_tracker: ^0.1.0
   halildurmus_hooks: ^0.1.1
   halildurmus_lints: ^2.0.0
+  melos: ^7.4.0
   path: ^1.9.1
   win32: ^6.0.0
+
+melos:
+  categories:
+    examples:
+      - examples/*
+      - packages/filepicker_windows/example/wallpaper
+      - packages/win32_gamepad/example/inspector
+    packages:
+      - packages/*
+
+  ide:
+    intellij:
+      enabled: false
+
+  scripts:
+    lint:all:
+      steps:
+        - analyze
+        - format
+      description: Run all static analysis checks.
+
+    analyze:
+      exec: dart analyze .
+      description: Run `dart analyze` for all packages.
+
+    generate:
+      run: melos exec --scope="generator" -- dart run bin/generator.dart
+      description: Generate Windows API bindings for package:win32.
+
+    test:select:
+      exec: dart test -j 1
+      packageFilters:
+        dirExists: test
+      description: Run `dart test` for selected packages.
+
+    test:generator:
+      run: melos exec --scope="generator" -- dart test -j 1
+      description: Run all Dart tests in package:generator.
+
+    test:win32:
+      run: melos exec --scope="win32" -- dart test -j 1
+      description: Run all Dart tests in package:win32.
+
+    test:
+      run: melos exec -c 1 --category="packages" -- dart test -j 1
+      description: Run all Dart tests in this project.
+
+    update-goldens:
+      run: melos exec --scope="generator" -- dart run bin/update_goldens.dart
+      description: Update all golden test files in package:generator
