@@ -41,7 +41,6 @@ jobs:
       codecov_flags: ffi_leak_tracker
       flutter_channel: ${{ matrix.sdk }}
       format_directories: example lib test
-      randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}-latest
       working_directory: packages/ffi_leak_tracker
     secrets:

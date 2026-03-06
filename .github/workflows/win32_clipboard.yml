@@ -52,7 +52,6 @@ jobs:
       concurrency: '1'
       flutter_channel: ${{ matrix.sdk }}
       format_directories: lib test
-      randomize_execution_order_of_tests: true
       runs_on: ${{ matrix.os }}
       working_directory: packages/win32_clipboard
     secrets:

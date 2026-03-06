@@ -41,6 +41,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 ### ⚙️ Requirements
 
 - [Dart](https://dart.dev) version `3.11` or higher
+- [Melos](https://pub.dev/packages/melos) for managing the monorepo
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
@@ -62,9 +63,11 @@ git clone https://github.com/<your-username>/win32.git
 
 ### 📦 Installing Dependencies
 
-Navigate to the project directory and install dependencies:
+Navigate to the project directory and first activate `package:melos` globally,
+then install the dependencies:
 
 ```cmd title="Terminal"
+dart pub global activate melos
 dart pub get
 ```
 
@@ -82,24 +85,11 @@ before commits.
 
 ### 🧪 Running Tests
 
-To run tests for the `package:win32`, follow these steps:
+To run tests for the `package:win32`, run the following command:
 
-1. Navigate to the package directory:
-
-   ```cmd title="Terminal"
-   cd packages\win32
-   ```
-
-2. Run the tests with the following command:
-
-   ```cmd title="Terminal"
-   dart test -j 1 --test-randomize-ordering-seed=random
-   ```
-
-   - `-j 1`: Runs tests sequentially, increasing the likelihood of detecting
-     segmentation faults or similar test failures.
-   - `--test-randomize-ordering-seed=random`: Randomizes the test execution
-     order to identify unintended dependencies between tests.
+```cmd title="Terminal"
+melos run test:win32
+```
 
 _We require tests for each feature or bug fix. If you're unsure how to write_
 _tests for your changes, feel free to ask on the relevant GitHub issue page._
@@ -139,19 +129,19 @@ If you want to contribute to the `package:win32` itself, follow the steps below:
 - To create a new API, _don't_ edit the main library files themselves; these get
   **overwritten**. Instead, edit the
   [win32_functions.json][win32_functions_json_link] file and run the
-  `tools\generate.dart` script to update the library files:
+  `melos run generate` command to generate the library files:
 
   ```cmd title="Terminal"
-  dart tools\generate.dart
+  melos run generate
   ```
 
 - Constants can be **auto-generated** by including them in the
   [win32_constants.json][win32_constants_json_link] file and running the
-  `tools\generate.dart` script, which will generate the corresponding Dart
+  `melos run generate` command, which will generate the corresponding Dart
   files.
 - Structs can be **auto-generated** by including them in the
   [win32_structs.json][win32_structs_json_link] file and running the
-  `tools\generate.dart` script, which will generate the corresponding Dart
+  `melos run generate` command, which will generate the corresponding Dart
   files.
 - There are plenty of good existing patterns to build off in these locations;
   try to mirror an existing function if you can for consistency!
@@ -161,8 +151,8 @@ If you want to contribute to the `package:win32` itself, follow the steps below:
 ### COM APIs
 
 Begin by editing the [com_types.json][com_types_json_link] file, specifying the
-desired COM interface, and then run the `tools\generate.dart` script to generate
-the relevant class in the `packages\win32\lib\src\com` directory.
+desired COM interface, and then run the `melos run generate` command to generate
+the relevant classes in the `packages\win32\lib\src\com` directory.
 
 [com_types_json_link]: https://github.com/halildurmus/win32/tree/main/packages/generator/data/com_types.json
 [credwritea_link]: https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritea

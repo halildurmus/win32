@@ -8,7 +8,6 @@ on:
       - packages/generator/bin/**
       - packages/generator/lib/**
       - packages/generator/pubspec.yaml
-      - tools/generate.dart
   push:
     branches: [main]
     paths:
@@ -17,7 +16,6 @@ on:
       - packages/generator/bin/**
       - packages/generator/lib/**
       - packages/generator/pubspec.yaml
-      - tools/generate.dart
 
 jobs:
   build:
@@ -34,11 +32,14 @@ jobs:
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
 
+      - name: 📦 Activate Melos
+        uses: bluefireteam/melos-action@v3
+
       - name: 📦 Install Workspace Dependencies
         run: dart pub get
 
       - name: 🚀 Run Code Generation
-        run: dart run tools\generate.dart
+        run: melos run generate
 
       - name: 🔍 Verify Code Generation
         run: git diff --exit-code
