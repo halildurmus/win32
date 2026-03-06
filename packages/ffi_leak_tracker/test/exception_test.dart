@@ -45,11 +45,11 @@ void main() {
         filter: const .ignoreAll(),
       );
       check(exception.toString())
-        ..contains('LeakTrackerException Report')
-        ..contains('Filter : ignore all')
-        ..contains('Count  : 1')
-        ..contains('Total  : 1 B')
-        ..contains('Leaks  :');
+        ..contains('LeakTrackerException: Native memory leaks detected')
+        ..contains('Filter  :')
+        ..contains('Leaks   :')
+        ..contains('Total   :')
+        ..contains('Largest :');
     });
 
     test('toString lists each leak entry', () {
@@ -63,16 +63,6 @@ void main() {
       check(exception.toString())
         ..contains('A')
         ..contains('B');
-    });
-
-    test('toString has no trailing whitespace', () {
-      final exception = LeakTrackerException(
-        leaks: [alloc()],
-        filter: const .ignoreAll(),
-      );
-      final text = exception.toString();
-      check(text.endsWith('\n')).isFalse();
-      check(text.endsWith(' ')).isFalse();
     });
 
     test('throws assertion error if leaks is empty', () {

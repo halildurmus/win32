@@ -76,93 +76,37 @@ final class PrintEmitter implements LeaksEmitter {
     final buffer = StringBuffer();
 
     if (leaks.isEmpty) {
-      _writeHeader(buffer);
-      buffer.writeln('Status : ${_status(false)}');
+      buffer.writeln(green(bold('✓ No native memory leaks detected')));
       return stdout.write(buffer.toString());
     }
 
-    final list = [...leaks]..sort((a, b) => b.size.compareTo(a.size));
-    final total = list.fold(0, (s, e) => s + e.size);
+    final sorted = [...leaks]..sort((a, b) => b.size.compareTo(a.size));
+    final totalBytes = sorted.fold(0, (s, e) => s + e.size);
+    final rule = dim('─' * 40);
 
-    _writeHeader(buffer);
     buffer
-      ..writeln('Status  : ${_status(true)}')
-      ..writeln('Count   : ${list.length}')
-      ..writeln('Total   : ${formatBytes(total)}')
-      ..writeln('Largest : ${formatBytes(list.first.size)}')
-      ..writeln();
+      ..writeln(red(bold('✗ Native memory leaks detected')))
+      ..writeln('Leaks   : ${yellow(bold('${sorted.length}'))}')
+      ..writeln('Total   : ${red(bold(formatBytes(totalBytes)))}')
+      ..writeln('Largest : ${red(bold(formatBytes(sorted.first.size)))}')
+      ..writeln(rule);
 
-    for (var i = 0; i < list.length; i++) {
-      final a = list[i];
+    for (final (i, leak) in sorted.indexed) {
       buffer
         ..writeln(
-          _ansi(
-            _bold + _yellow,
-            '#${i + 1}  ${a.type}  (${formatBytes(a.size)})',
-          ),
+          yellow('Leak #${i + 1} - ${leak.type} (${formatBytes(leak.size)})'),
         )
-        ..writeln(_ansi(_dim, '─' * 36))
-        ..writeln('Address   : ${_ansi(_cyan, formatAddress(a.address))}')
-        ..writeln('Timestamp : ${_ansi(_blue, a.timestamp.toIso8601String())}')
-        ..writeln('Stack     :');
+        ..writeln('  address   : ${cyan(formatAddress(leak.address))}')
+        ..writeln('  timestamp : ${blue(leak.timestamp.toIso8601String())}')
+        ..writeln('  stack     :');
 
-      for (final line in a.stack.trimRight().split('\n')) {
-        buffer.writeln('  ${_ansi(_dim, line)}');
+      for (final line in leak.stack.trimRight().split('\n')) {
+        buffer.writeln('    ${dim(line)}');
       }
 
-      buffer.writeln();
+      buffer.writeln(rule);
     }
 
     stdout.write(buffer.toString());
   }
-
-  /// Writes the report header.
-  void _writeHeader(StringBuffer buffer) {
-    const title = 'Native Memory Leak Analysis';
-    buffer
-      ..writeln(_ansi(_bold + _white, title))
-      ..writeln(_ansi(_gray, '─' * title.length));
-  }
-
-  /// Returns a colored status string indicating whether leaks exist.
-  String _status(bool hasLeaks) => hasLeaks
-      ? _ansi(_bold + _red, '✗ LEAKS DETECTED')
-      : _ansi(_bold + _green, '✓ NO LEAKS DETECTED');
-
-  /// Applies ANSI styling to [text] if supported by the terminal.
-  String _ansi(String style, String text) =>
-      _ansiSupported ? '$style$text$_reset' : text;
-
-  /// Whether ANSI escape sequences are supported by stdout.
-  static final bool _ansiSupported = stdout.supportsAnsiEscapes;
-
-  /// ANSI reset code.
-  static const _reset = '\x1B[0m';
-
-  /// ANSI bold style.
-  static const _bold = '\x1B[1m';
-
-  /// ANSI dim style.
-  static const _dim = '\x1B[2m';
-
-  /// ANSI RGB red color.
-  static const _red = '\x1B[38;2;238;75;43m';
-
-  /// ANSI RGB green color.
-  static const _green = '\x1B[38;2;170;255;0m';
-
-  /// ANSI RGB yellow color.
-  static const _yellow = '\x1B[38;2;255;234;0m';
-
-  /// ANSI RGB cyan color.
-  static const _cyan = '\x1B[38;2;0;255;255m';
-
-  /// ANSI RGB blue color.
-  static const _blue = '\x1B[38;2;0;150;255m';
-
-  /// ANSI gray color.
-  static const _gray = '\x1B[38;2;170;170;170m';
-
-  /// ANSI bright white color.
-  static const _white = '\x1B[1;97m';
 }

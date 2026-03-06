@@ -41,24 +41,34 @@ final class LeakTrackerException implements Exception {
 
   @override
   String toString() {
-    const title = 'LeakTrackerException Report';
-    final buffer = StringBuffer()
-      ..writeln(title)
-      ..writeln('═' * title.length)
-      ..writeln()
-      ..writeln('Filter : $filter')
-      ..writeln('Count  : $count')
-      ..writeln('Total  : ${formatBytes(totalBytes)}')
-      ..writeln('Leaks  :')
-      ..writeln();
+    const title = 'LeakTrackerException: Native memory leaks detected';
+    final sorted = [...leaks]..sort((a, b) => b.size.compareTo(a.size));
+    final rule = '─' * 40;
 
-    for (final leak in leaks) {
+    final buffer = StringBuffer()
+      ..writeln(red(bold(title)))
+      ..writeln('Filter  : ${bold('$filter')}')
+      ..writeln('Leaks   : ${yellow(bold('${sorted.length}'))}')
+      ..writeln('Total   : ${red(bold(formatBytes(totalBytes)))}')
+      ..writeln('Largest : ${red(bold(formatBytes(sorted.first.size)))}')
+      ..writeln(rule);
+
+    for (final (i, leak) in sorted.indexed) {
       buffer
-        ..writeln(leak)
-        ..writeln();
+        ..writeln(
+          yellow('Leak #${i + 1} - ${leak.type} (${formatBytes(leak.size)})'),
+        )
+        ..writeln('  address   : ${cyan(formatAddress(leak.address))}')
+        ..writeln('  timestamp : ${blue(leak.timestamp.toIso8601String())}')
+        ..writeln('  stack     :');
+
+      for (final line in leak.stack.trimRight().split('\n')) {
+        buffer.writeln('    ${dim(line)}');
+      }
+
+      buffer.writeln(rule);
     }
 
-    buffer.writeln('━━━━━━━━━━━━ End of Report ━━━━━━━━━━━━');
-    return buffer.toString().trimRight();
+    return buffer.toString();
   }
 }

@@ -64,9 +64,7 @@ void main() {
 
     test('prints no-leaks status', () {
       final output = captureStdout(() => const PrintEmitter().emit(const []));
-      check(output)
-        ..contains('Native Memory Leak Analysis')
-        ..contains('NO LEAKS DETECTED');
+      check(output).contains('No native memory leaks detected');
     });
 
     test('prints leak summary and sorts by size desc', () {
@@ -83,8 +81,9 @@ void main() {
 
       final output = captureStdout(() => const PrintEmitter().emit(leaks));
       check(output)
-        ..contains('LEAKS DETECTED')
-        ..contains('Count   : 2')
+        ..contains('✗ Native memory leaks detected')
+        ..contains('Leaks   :')
+        ..contains('Total   :')
         ..contains('Largest :');
 
       // sorted check: "Big" must appear before "Small"

@@ -119,11 +119,12 @@ final class Allocation {
   @override
   String toString() =>
       '''
-━━━━━━━━━━━━ Allocation ━━━━━━━━━━━━
-Address   : ${formatAddress(address)}
-Type      : $type
-Size      : ${formatBytes(size)}
-Timestamp : ${timestamp.toIso8601String()}
-Stack:
-${indent(stack, 2)}''';
+Allocation(
+  address   : ${formatAddress(address)}
+  type      : $type
+  size      : ${formatBytes(size)}
+  timestamp : ${timestamp.toIso8601String()}
+  stack     :
+${indent(stack, 4)}
+)''';
 }

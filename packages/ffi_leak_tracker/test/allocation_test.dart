@@ -102,12 +102,15 @@ void main() {
           stack: 'trace-line',
         );
         final string = allocation.toString();
-        check(string)
-          ..contains('━━━━━━━━━━━━ Allocation ━━━━━━━━━━━━')
-          ..contains('0x0000abcd')
-          ..contains('MyType')
-          ..contains('64 B')
-          ..contains('trace-line');
+        check(string).equals('''
+Allocation(
+  address   : 0x0000abcd
+  type      : MyType
+  size      : 64 B
+  timestamp : 2024-05-01T12:00:00.000Z
+  stack     :
+    trace-line
+)''');
       });
     });
   });
