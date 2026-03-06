@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([["9505"],{65123(e){e.exports=JSON.parse('{"metadata":{"permalink":"/changelog/page/7","page":7,"postsPerPage":20,"totalPages":7,"totalCount":131,"previousPage":"/changelog/page/6","blogDescription":"Keep yourself up-to-date about new features in every release","blogTitle":"win32 Changelog"}}')}}]);
