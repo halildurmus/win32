@@ -95,17 +95,18 @@ final class LocalStorageManager {
     final metadataPath = p.join(packagePath, package.assetName);
     if (File(metadataPath).existsSync()) return packagePath;
     Directory(packagePath).createSync(recursive: true);
-    final ansi = cli_logging.Ansi(stdout.supportsAnsiEscapes);
-    final logger = cli_logging.Logger.standard(ansi: ansi);
+    final logger = cli_logging.Logger.standard(
+      ansi: .new(stdout.supportsAnsiEscapes),
+    );
     var progress = logger.progress(
-      '${ansi.bold}Downloading NuGet package "$package" (v$version)${ansi.none}',
+      'Downloading NuGet package "$package" (v$version)',
     );
     final archiveBytes = await _downloadPackage(
       downloadFunction,
       logger: logger,
     );
     progress.finish(showTiming: true);
-    progress = logger.progress('${ansi.bold}Extracting archive${ansi.none}');
+    progress = logger.progress('Extracting $package.$version.nupkg');
     final archive = ZipDecoder().decodeBytes(archiveBytes);
     await extractArchiveToDisk(archive, packagePath);
     progress.finish(showTiming: true);

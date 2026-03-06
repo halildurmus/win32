@@ -177,11 +177,10 @@ final class WindowsMetadataLoader {
       // For WinRT, merge metadata if necessary.
       if (package == .winrt && !metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
-        final ansi = cli_logging.Ansi(stdout.supportsAnsiEscapes);
-        final logger = cli_logging.Logger.standard(ansi: ansi);
-        final progress = logger.progress(
-          '${ansi.bold}Merging WinRT metadata files${ansi.none}',
+        final logger = cli_logging.Logger.standard(
+          ansi: .new(stdout.supportsAnsiEscapes),
         );
+        final progress = logger.progress('Merging WinRT metadata files');
         mdmerge(inputPaths: [metadataPath], outputPath: metadataFile.path);
         progress.finish(showTiming: true);
       }

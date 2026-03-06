@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.1.0] - 2026-03-06
+
+### 🚀 Features
+
+- Add retry logic for Windows Metadata downloads, retrying up to 5 attempts on
+  failure
+
+### ⚡ Performance
+
+- Optimize the metadata reader for improved throughput
+
+### 🧹 Refactor
+
+- Replace the global `winmdLogger` (now deprecated) with a constructor-injected
+  `Logger` for better testability and flexibility
+- Improve console output formatting
+
+### 🎨 Styling
+
+- Apply Dart dot shorthand syntax across the codebase
+
+[7.1.0]: https://github.com/halildurmus/win32/compare/winmd-v7.0.2..winmd-v7.1.0
+
 ## [7.0.2] - 2026-02-27
 
 ### 🏠 Repository
