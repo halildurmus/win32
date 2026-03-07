@@ -1,35 +1,16 @@
-import 'dart:io';
-
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../versions.dart';
+import '../shared_setup.dart';
 
-void main() async {
-  late Directory tempDir;
-  late LocalStorageManager localStorageManager;
-  late WindowsMetadataLoader metadataLoader;
+void main() {
   late MetadataIndex win32Index;
   late MetadataIndex winrtIndex;
 
   setUpAll(() async {
-    tempDir = Directory.systemTemp.createTempSync('winmd_metadata_index_test');
-    localStorageManager = .new(storagePath: tempDir.path);
-    metadataLoader = .new(localStorageManager: localStorageManager);
-
-    win32Index = await metadataLoader.loadWin32Metadata(
-      version: win32MetadataVersion,
-    );
-    winrtIndex = await metadataLoader.loadWinrtMetadata(
-      version: winrtMetadataVersion,
-    );
-  });
-
-  tearDownAll(() {
-    localStorageManager.clear();
-    tempDir.deleteSync();
+    win32Index = await fixtures.loadWin32Metadata();
+    winrtIndex = await fixtures.loadWinrtMetadata();
   });
 
   group('MetadataIndex', () {

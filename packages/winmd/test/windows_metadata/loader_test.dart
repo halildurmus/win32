@@ -8,8 +8,22 @@ import '../versions.dart';
 
 void main() {
   group('WindowsMetadataLoader', () {
+    late Directory tempDir;
+    late LocalStorageManager localStorageManager;
+    late WindowsMetadataLoader metadataLoader;
+
+    setUpAll(() {
+      tempDir = Directory.systemTemp.createTempSync('winmd_loader_test');
+      localStorageManager = .new(storagePath: tempDir.path);
+      metadataLoader = .new(localStorageManager: localStorageManager);
+    });
+
+    tearDownAll(() {
+      localStorageManager.clear();
+      tempDir.deleteSync();
+    });
+
     test('can load WDK metadata', () async {
-      final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadWdkMetadata(
         version: wdkMetadataVersion,
       );
@@ -21,7 +35,6 @@ void main() {
     });
 
     test('can load Win32 metadata', () async {
-      final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadWin32Metadata(
         version: win32MetadataVersion,
       );
@@ -33,7 +46,6 @@ void main() {
     });
 
     test('can load WinRT metadata', () async {
-      final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadWinrtMetadata(
         version: winrtMetadataVersion,
       );
@@ -43,9 +55,8 @@ void main() {
     });
 
     test('can load all metadata together', () async {
-      final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadAllMetadata(
-        versions: const WindowsMetadataVersions(
+        versions: const .new(
           wdk: wdkMetadataVersion,
           win32: win32MetadataVersion,
           winrt: winrtMetadataVersion,
@@ -55,10 +66,22 @@ void main() {
       check(index.readers[0].moduleName).equals('Windows.Wdk.winmd');
       check(index.readers[1].moduleName).equals('Windows.Win32.winmd');
       check(index.readers[2].moduleName).equals('Windows.winmd');
+      check(localStorageManager.findPackageDirectory(.wdk, wdkMetadataVersion))
+          .isNotNull()
+          .endsWith('microsoft.windows.wdk.win32metadata@$wdkMetadataVersion');
+      check(
+        localStorageManager.findPackageDirectory(.win32, win32MetadataVersion),
+      ).isNotNull().endsWith(
+        'microsoft.windows.sdk.win32metadata@$win32MetadataVersion',
+      );
+      check(
+        localStorageManager.findPackageDirectory(.winrt, winrtMetadataVersion),
+      ).isNotNull().endsWith(
+        'microsoft.windows.sdk.contracts@$winrtMetadataVersion',
+      );
     });
 
     test('can load multiple metadata selectively', () async {
-      final metadataLoader = WindowsMetadataLoader();
       final index = await metadataLoader.loadMultipleMetadata(
         packages: [.wdk, .win32],
         versions: const .new(
@@ -72,81 +95,9 @@ void main() {
     });
 
     test('loadMultipleMetadata throws if no packages are provided', () async {
-      final metadataLoader = WindowsMetadataLoader();
       await check(
         metadataLoader.loadMultipleMetadata(packages: []),
       ).throws<ArgumentError>();
-    });
-
-    test(
-      'loads Win32 metadata at the specified version into custom storage',
-      () async {
-        final tempDir = Directory.systemTemp.createTempSync(
-          'winmd_loader_test',
-        );
-        final localStorageManager = LocalStorageManager(
-          storagePath: tempDir.path,
-        );
-        final metadataLoader = WindowsMetadataLoader(
-          localStorageManager: localStorageManager,
-        );
-        try {
-          await metadataLoader.loadWin32Metadata(version: win32MetadataVersion);
-          check(
-            localStorageManager.findPackageDirectory(
-              .win32,
-              win32MetadataVersion,
-            ),
-          ).isNotNull().endsWith(
-            'microsoft.windows.sdk.win32metadata@$win32MetadataVersion',
-          );
-        } finally {
-          localStorageManager.clear();
-          tempDir.deleteSync();
-        }
-      },
-    );
-
-    test('respects explicit versions for each package', () async {
-      final tempDir = Directory.systemTemp.createTempSync('winmd_loader_test');
-      final localStorageManager = LocalStorageManager(
-        storagePath: tempDir.path,
-      );
-      final metadataLoader = WindowsMetadataLoader(
-        localStorageManager: localStorageManager,
-      );
-      const versions = WindowsMetadataVersions(
-        wdk: wdkMetadataVersion,
-        win32: win32MetadataVersion,
-        winrt: winrtMetadataVersion,
-      );
-      try {
-        await metadataLoader.loadAllMetadata(versions: versions);
-        check(
-          localStorageManager.findPackageDirectory(.wdk, wdkMetadataVersion),
-        ).isNotNull().endsWith(
-          'microsoft.windows.wdk.win32metadata@$wdkMetadataVersion',
-        );
-        check(
-          localStorageManager.findPackageDirectory(
-            .win32,
-            win32MetadataVersion,
-          ),
-        ).isNotNull().endsWith(
-          'microsoft.windows.sdk.win32metadata@$win32MetadataVersion',
-        );
-        check(
-          localStorageManager.findPackageDirectory(
-            .winrt,
-            winrtMetadataVersion,
-          ),
-        ).isNotNull().endsWith(
-          'microsoft.windows.sdk.contracts@$winrtMetadataVersion',
-        );
-      } finally {
-        localStorageManager.clear();
-        tempDir.deleteSync();
-      }
     });
   });
 }

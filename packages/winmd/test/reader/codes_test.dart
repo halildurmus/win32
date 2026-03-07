@@ -1,18 +1,15 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../versions.dart';
+import '../shared_setup.dart';
 
-void main() async {
-  final index = await WindowsMetadataLoader().loadMultipleMetadata(
-    packages: [.win32, .winrt],
-    versions: const .new(
-      win32: win32MetadataVersion,
-      winrt: winrtMetadataVersion,
-    ),
-  );
+void main() {
+  late MetadataIndex index;
+
+  setUpAll(() async {
+    index = await fixtures.loadWin32AndWinrtMetadata();
+  });
 
   group('CodedIndex', () {
     group('CustomAttributeType', () {

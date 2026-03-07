@@ -30,7 +30,7 @@ void main() {
             0x00112233,
             0x4455,
             0x6677,
-            Uint8List.fromList([
+            .fromList([
               0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, //
             ]),
           ),
@@ -40,7 +40,7 @@ void main() {
             0xffffffff,
             0xffff,
             0xffff,
-            Uint8List.fromList([
+            .fromList([
               0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, //
             ]),
           ),
@@ -69,7 +69,7 @@ void main() {
       final heap = GuidHeap(Uint8List(16));
       check(heap.guids)
         ..length.equals(1)
-        ..first.equals(Guid.zero());
+        ..first.equals(.zero());
       check(() => heap[1]).throws().isA<RangeError>();
     });
   });

@@ -17,7 +17,7 @@ void main() {
 
     setUpAll(() async {
       packageTempDir = io.Directory.systemTemp.createTempSync(
-        'winmd_mdmerge_pkg_',
+        'winmd_mdmerge_pkg',
       );
       final localStorageManager = LocalStorageManager(
         storagePath: packageTempDir.path,
@@ -46,7 +46,7 @@ void main() {
     late io.Directory tempDir;
 
     setUp(() {
-      tempDir = io.Directory.systemTemp.createTempSync('winmd_mdmerge_');
+      tempDir = io.Directory.systemTemp.createTempSync('winmd_mdmerge');
     });
 
     tearDown(() {

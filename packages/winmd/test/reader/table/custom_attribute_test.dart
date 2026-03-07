@@ -1,16 +1,15 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../versions.dart';
+import '../../shared_setup.dart';
 
-void main() async {
-  final metadata = MetadataLookup(
-    await WindowsMetadataLoader().loadWin32Metadata(
-      version: win32MetadataVersion,
-    ),
-  );
+void main() {
+  late MetadataLookup metadata;
+
+  setUpAll(() async {
+    metadata = .new(await fixtures.loadWin32Metadata());
+  });
 
   group('CustomAttribute', () {
     test('GuidAttribute', () {

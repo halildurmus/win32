@@ -2,19 +2,16 @@ import 'dart:typed_data';
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../versions.dart';
+import '../shared_setup.dart';
 
-void main() async {
-  final index = await WindowsMetadataLoader().loadMultipleMetadata(
-    packages: [WindowsMetadataPackage.win32, WindowsMetadataPackage.winrt],
-    versions: const WindowsMetadataVersions(
-      win32: win32MetadataVersion,
-      winrt: winrtMetadataVersion,
-    ),
-  );
+void main() {
+  late MetadataIndex index;
+
+  setUpAll(() async {
+    index = await fixtures.loadWin32AndWinrtMetadata();
+  });
 
   Blob createBlob(List<int> bytes, {int readerIndex = 0}) =>
       Blob(index, readerIndex, Uint8List.fromList(bytes));
