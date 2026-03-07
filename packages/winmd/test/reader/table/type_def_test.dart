@@ -1,14 +1,15 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../versions.dart';
+import '../../shared_setup.dart';
 
-void main() async {
-  final metadata = MetadataLookup(
-    await WindowsMetadataLoader().loadAllMetadata(versions: metadataVersions),
-  );
+void main() {
+  late MetadataLookup metadata;
+
+  setUpAll(() async {
+    metadata = .new(await fixtures.loadAllMetadata());
+  });
 
   group('TypeDef', () {
     test('Windows.Foundation.Collections.StringMap', () {
@@ -432,10 +433,14 @@ void main() async {
 
   group('TypeDefExtension', () {
     group('findEvent', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Foundation.Collections',
-        'StringMap',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Foundation.Collections',
+          'StringMap',
+        );
+      });
 
       test('returns matching event if found', () {
         final event = typeDef.findEvent('MapChanged');
@@ -450,10 +455,14 @@ void main() async {
     });
 
     group('tryFindEvent', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Foundation.Collections',
-        'StringMap',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Foundation.Collections',
+          'StringMap',
+        );
+      });
 
       test('returns matching event if found', () {
         final event = typeDef.tryFindEvent('MapChanged');
@@ -468,10 +477,14 @@ void main() async {
     });
 
     group('findField', () {
-      final typeDef = metadata.index.findSingleType(
-        'Windows.Win32.System.WinRT',
-        'RO_INIT_TYPE',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.index.findSingleType(
+          'Windows.Win32.System.WinRT',
+          'RO_INIT_TYPE',
+        );
+      });
 
       test('returns matching field if found', () {
         final field = typeDef.findField('RO_INIT_MULTITHREADED');
@@ -489,10 +502,14 @@ void main() async {
     });
 
     group('tryFindField', () {
-      final typeDef = metadata.index.findSingleType(
-        'Windows.Win32.System.WinRT',
-        'RO_INIT_TYPE',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.index.findSingleType(
+          'Windows.Win32.System.WinRT',
+          'RO_INIT_TYPE',
+        );
+      });
 
       test('returns matching field if found', () {
         final field = typeDef.tryFindField('RO_INIT_SINGLETHREADED');
@@ -507,10 +524,14 @@ void main() async {
     });
 
     group('findMethod', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Win32.System.WinRT',
-        'IInspectable',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Win32.System.WinRT',
+          'IInspectable',
+        );
+      });
 
       test('returns matching method if found', () {
         final method = typeDef.findMethod('GetIids');
@@ -525,10 +546,14 @@ void main() async {
     });
 
     group('tryFindMethod', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Win32.System.WinRT',
-        'IInspectable',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Win32.System.WinRT',
+          'IInspectable',
+        );
+      });
 
       test('returns matching method if found', () {
         final method = typeDef.tryFindMethod('GetTrustLevel');
@@ -543,10 +568,14 @@ void main() async {
     });
 
     group('findProperty', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Foundation.Collections',
-        'StringMap',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Foundation.Collections',
+          'StringMap',
+        );
+      });
 
       test('returns matching property if found', () {
         final property = typeDef.findProperty('Size');
@@ -561,10 +590,14 @@ void main() async {
     });
 
     group('tryFindProperty', () {
-      final typeDef = metadata.findSingleType(
-        'Windows.Foundation.Collections',
-        'StringMap',
-      );
+      late TypeDef typeDef;
+
+      setUpAll(() {
+        typeDef = metadata.findSingleType(
+          'Windows.Foundation.Collections',
+          'StringMap',
+        );
+      });
 
       test('returns matching property if found', () {
         final property = typeDef.tryFindProperty('Size');

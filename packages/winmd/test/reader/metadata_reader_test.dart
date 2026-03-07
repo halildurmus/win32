@@ -2,15 +2,18 @@ import 'dart:typed_data';
 
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
+import 'package:winmd/winmd.dart';
 
-import '../versions.dart';
+import '../shared_setup.dart';
 
-void main() async {
-  final win32Index = await WindowsMetadataLoader().loadWin32Metadata(
-    version: win32MetadataVersion,
-  );
-  final win32Reader = win32Index.readers.first;
+void main() {
+  late MetadataIndex win32Index;
+  late MetadataReader win32Reader;
+
+  setUpAll(() async {
+    win32Index = await fixtures.loadWin32Metadata();
+    win32Reader = win32Index.readers.first;
+  });
 
   group('MetadataReader', () {
     test('moduleName', () {

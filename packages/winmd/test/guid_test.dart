@@ -129,9 +129,7 @@ void main() {
         0x00112233,
         0x4455,
         0x6677,
-        Uint8List.fromList([
-          0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, //
-        ]),
+        .fromList([0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff]),
       );
       check(guid.isZero).isFalse();
       check(guid.toString()).equals('00112233-4455-6677-8899-aabbccddeeff');

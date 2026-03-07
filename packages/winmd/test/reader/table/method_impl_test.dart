@@ -1,14 +1,15 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../versions.dart';
+import '../../shared_setup.dart';
 
-void main() async {
-  final index = await WindowsMetadataLoader().loadWinrtMetadata(
-    version: winrtMetadataVersion,
-  );
+void main() {
+  late MetadataIndex index;
+
+  setUpAll(() async {
+    index = await fixtures.loadWinrtMetadata();
+  });
 
   group('MethodImpl', () {
     test('Calendar.Clone', () {

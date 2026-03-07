@@ -52,12 +52,10 @@ void main() {
 
     test('equality: not equal if name or namespace differs', () {
       const typeName = TypeName('System', 'Guid');
+      check(typeName).not((it) => it.equals(const .new('System', 'Object')));
       check(
         typeName,
-      ).not((it) => it.equals(const TypeName('System', 'Object')));
-      check(
-        typeName,
-      ).not((it) => it.equals(const TypeName('Windows.Foundation', 'Point')));
+      ).not((it) => it.equals(const .new('Windows.Foundation', 'Point')));
     });
   });
 }

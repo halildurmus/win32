@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cli_util/cli_logging.dart' as cli_logging;
 import 'package:logging/logging.dart';
 import 'package:nuget/nuget.dart';
 import 'package:path/path.dart' as p;
@@ -144,10 +143,7 @@ final class WindowsMetadataLoader {
       // Resolve latest version.
       final resolvedVersion =
           version ??
-          await nugetClient.getLatestPackageVersion(
-            packageId,
-            includePrerelease: package.allowPrerelease,
-          );
+          await _resolveVersion(nugetClient, package, logger: _logger);
 
       _logger.fine(
         'Resolved latest version of "$packageId": "$resolvedVersion"',
@@ -177,18 +173,52 @@ final class WindowsMetadataLoader {
       // For WinRT, merge metadata if necessary.
       if (package == .winrt && !metadataFile.existsSync()) {
         final metadataPath = p.join(packageDirectory, 'ref', 'netstandard2.0');
-        final logger = cli_logging.Logger.standard(
-          ansi: .new(stdout.supportsAnsiEscapes),
-        );
-        final progress = logger.progress('Merging WinRT metadata files');
         mdmerge(inputPaths: [metadataPath], outputPath: metadataFile.path);
-        progress.finish(showTiming: true);
       }
 
       return metadataFile.path;
     } finally {
       nugetClient.close();
     }
+  }
+
+  Future<String> _resolveVersion(
+    NuGetClient nugetClient,
+    WindowsMetadataPackage package, {
+    required Logger logger,
+    int maxAttempts = 5,
+  }) async {
+    Object? lastError;
+    StackTrace? lastStackTrace;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        if (attempt == 1) {
+          logger.fine('Resolving the latest version of "$package"...');
+        } else {
+          logger.fine(
+            'Retrying to resolve the latest version of "$package" '
+            '(attempt $attempt of $maxAttempts)...',
+          );
+        }
+        final WindowsMetadataPackage(:packageId, :allowPrerelease) = package;
+        return await nugetClient.getLatestPackageVersion(
+          packageId,
+          includePrerelease: allowPrerelease,
+        );
+      } catch (error, stackTrace) {
+        lastError = error;
+        lastStackTrace = stackTrace;
+        if (attempt == maxAttempts) break;
+        logger.warning(
+          'Failed to resolve the latest version of "$package" '
+          '(attempt $attempt of $maxAttempts): $error',
+        );
+        await Future.delayed(.new(milliseconds: 250 * attempt));
+      }
+    }
+
+    Error.throwWithStackTrace(lastError!, lastStackTrace!);
   }
 
   String? _tryFindCachedMetadataPath(

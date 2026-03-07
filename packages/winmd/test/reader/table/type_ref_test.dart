@@ -1,14 +1,15 @@
 import 'package:checks/checks.dart';
 import 'package:test/scaffolding.dart';
-import 'package:winmd/windows_metadata.dart';
 import 'package:winmd/winmd.dart';
 
-import '../../versions.dart';
+import '../../shared_setup.dart';
 
-void main() async {
-  final metadata = MetadataLookup(
-    await WindowsMetadataLoader().loadAllMetadata(versions: metadataVersions),
-  );
+void main() {
+  late MetadataLookup metadata;
+
+  setUpAll(() async {
+    metadata = .new(await fixtures.loadAllMetadata());
+  });
 
   group('TypeRef', () {
     test('System.Attribute', () {

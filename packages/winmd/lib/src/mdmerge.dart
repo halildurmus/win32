@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cli_util/cli_logging.dart' as cli_logging;
 import 'package:path/path.dart' as p;
 
 import 'exception.dart';
@@ -43,6 +44,12 @@ void mdmerge({required List<String> inputPaths, required String outputPath}) {
   }
 
   final readers = _expandInput(inputPaths);
+  final logger = cli_logging.Logger.standard(
+    ansi: .new(stdout.supportsAnsiEscapes),
+  );
+  final progress = logger.progress(
+    'Merging ${readers.length} .winmd files into "${p.basename(outputPath)}"',
+  );
   final index = MetadataIndex.fromReaders(readers);
   final writer = MetadataWriter(name: p.basename(outputPath));
   final types = _sortTypes(index.allTypes);
@@ -50,6 +57,7 @@ void mdmerge({required List<String> inputPaths, required String outputPath}) {
     _writeType(writer, index, typeDef, null);
   }
   File(outputPath).writeAsBytesSync(writer.toBytes());
+  progress.finish(showTiming: true);
 }
 
 /// Sorts the [types] by namespace and name for consistent ordering.
