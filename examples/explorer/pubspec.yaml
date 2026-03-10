@@ -11,7 +11,7 @@ dependencies:
   ffi_leak_tracker: ^0.1.0
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^10.12.0
+  font_awesome_flutter: ^11.0.0
   menubar:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git
