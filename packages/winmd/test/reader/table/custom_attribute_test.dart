@@ -8,10 +8,50 @@ void main() {
   late MetadataLookup metadata;
 
   setUpAll(() async {
-    metadata = .new(await fixtures.loadWin32Metadata());
+    metadata = .new(await fixtures.loadWin32AndWinrtMetadata());
   });
 
   group('CustomAttribute', () {
+    test('DualApiPartitionAttribute', () {
+      final typeDef = metadata.findSingleType(
+        'Windows.Networking.Sockets',
+        'DatagramSocket',
+      );
+      final attribute = typeDef.findAttribute('DualApiPartitionAttribute');
+      check(attribute.parent).isA<HasCustomAttributeTypeDef>();
+      final parent = attribute.parent as HasCustomAttributeTypeDef;
+      check(parent.value.name).equals('DatagramSocket');
+      check(attribute.type).isA<CustomAttributeTypeMemberRef>();
+      final type = attribute.type as CustomAttributeTypeMemberRef;
+      check(type.value.name).equals('.ctor');
+      check(attribute.fixedArgs).isEmpty();
+      check(attribute.namedArgs.length).equals(1);
+      check(attribute.namedArgs[0].name).equals('version');
+      check(attribute.namedArgs[0].value).equals(const Uint32Value(100794368));
+      check(attribute.name).equals('DualApiPartitionAttribute');
+    });
+
+    test('GCPressureAttribute', () {
+      final typeDef = metadata.findSingleType('Windows.Media', 'VideoFrame');
+      final attribute = typeDef.findAttribute('GCPressureAttribute');
+      check(attribute.parent).isA<HasCustomAttributeTypeDef>();
+      final parent = attribute.parent as HasCustomAttributeTypeDef;
+      check(parent.value.name).equals('VideoFrame');
+      check(attribute.type).isA<CustomAttributeTypeMemberRef>();
+      final type = attribute.type as CustomAttributeTypeMemberRef;
+      check(type.value.name).equals('.ctor');
+      check(attribute.fixedArgs).isEmpty();
+      check(attribute.namedArgs.length).equals(1);
+      check(attribute.namedArgs[0].name).equals('amount');
+      check(attribute.namedArgs[0].value).equals(
+        const AttributeEnumValue(
+          'Windows.Foundation.Metadata.GCPressureAmount',
+          2,
+        ),
+      );
+      check(attribute.name).equals('GCPressureAttribute');
+    });
+
     test('GuidAttribute', () {
       final field = metadata.findConstant(
         'Windows.Win32.UI.Shell',
