@@ -1,4 +1,4 @@
-name: win32_explorer
+name: explorer
 publish_to: none
 
 environment:

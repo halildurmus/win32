@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.1] - 2026-04-11
+
+### 📦 Dependencies
+
+- Lower minimum Dart SDK to 3.10
+
+[6.0.1]: https://github.com/halildurmus/win32/compare/win32-v6.0.0..win32-v6.0.1
+
 ## [6.0.0] - 2026-02-22
 
 ### 🔄 Breaking Changes
