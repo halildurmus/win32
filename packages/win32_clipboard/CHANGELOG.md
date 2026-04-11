@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.3] - 2026-04-11
+
+### 📦 Dependencies
+
+- Lower minimum Dart SDK to 3.10.
+
+[2.0.3]: https://github.com/halildurmus/win32_clipboard/compare/win32_clipboard-v2.0.2..win32_clipboard-v2.0.3
+
 ## [2.0.2] - 2026-02-27
 
 ### 🏠 Repository
