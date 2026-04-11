@@ -25,7 +25,7 @@ final class GenericParam implements Row {
     required this.number,
     required this.owner,
     required this.name,
-    this.flags = const GenericParamAttributes(0),
+    this.flags = GenericParamAttributes.none,
   });
 
   final int number;

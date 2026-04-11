@@ -40,7 +40,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.11` or higher
+- [Dart](https://dart.dev) version `3.10` or higher
 - [Melos](https://pub.dev/packages/melos) for managing the monorepo
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks

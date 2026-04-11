@@ -26,7 +26,7 @@ final class ImplMap implements Row {
     required this.memberForwarded,
     required this.importName,
     required this.importScope,
-    this.mappingFlags = const PInvokeAttributes(0),
+    this.mappingFlags = PInvokeAttributes.charSetNotSpec,
   });
 
   final PInvokeAttributes mappingFlags;

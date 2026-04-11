@@ -28,8 +28,8 @@ final class MethodDef implements Row {
     required this.name,
     required this.signature,
     required this.paramList,
-    this.implFlags = const MethodImplAttributes(0),
-    this.flags = const MethodAttributes(0),
+    this.implFlags = MethodImplAttributes.il,
+    this.flags = MethodAttributes.compilerControlled,
   });
 
   final int rva;

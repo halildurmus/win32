@@ -29,7 +29,7 @@ final class TypeDef implements Row {
     required this.extends$,
     required this.fieldList,
     required this.methodList,
-    this.flags = const TypeAttributes(0),
+    this.flags = TypeAttributes.notPublic,
     this.namespace = const StringIndex(0),
   });
 
