@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.2] - 2026-04-11
+
+### 📦 Dependencies
+
+- Lower minimum Dart SDK to 3.10.
+
+[3.0.2]: https://github.com/halildurmus/filepicker_windows/compare/filepicker_windows-v3.0.1..filepicker_windows-v3.0.2
+
 ## [3.0.1] - 2026-02-27
 
 ### 🏠 Repository
