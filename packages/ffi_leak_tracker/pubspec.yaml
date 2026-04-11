@@ -1,6 +1,6 @@
 name: ffi_leak_tracker
 description: Allocation tracking and leak detection for Dart FFI code.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/halildurmus/win32/tree/main/packages/ffi_leak_tracker
 issue_tracker: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20ffi_leak_tracker%22
 documentation: https://win32.pub/docs/advanced/leak-tracking
@@ -17,9 +17,9 @@ environment:
 resolution: workspace
 
 dependencies:
-  ffi: ^2.2.0
+  ffi: ^2.1.4
 
 dev_dependencies:
   checks: ^0.3.1
   halildurmus_lints: ^1.1.0
-  test: ^1.29.0
+  test: ^1.27.0
