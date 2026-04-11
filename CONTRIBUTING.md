@@ -10,7 +10,7 @@ documentation, and more).
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.11` or higher
+- [Dart](https://dart.dev) version `3.10` or higher
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 

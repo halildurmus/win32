@@ -305,7 +305,7 @@ final class MetadataWriter {
   FieldIndex writeField({
     required String name,
     required MetadataType signature,
-    FieldAttributes flags = const .new(0),
+    FieldAttributes flags = FieldAttributes.compilerControlled,
   }) {
     final table = _tableStream[.field];
     final index = FieldIndex(table.length);
@@ -325,7 +325,7 @@ final class MetadataWriter {
     required String name,
     required Implementation implementation,
     String? namespace,
-    TypeAttributes flags = const .new(0),
+    TypeAttributes flags = TypeAttributes.notPublic,
   }) {
     final table = _tableStream[.exportedType];
     final index = ExportedTypeIndex(table.length);
@@ -368,7 +368,7 @@ final class MetadataWriter {
   FileIndex writeFile({
     required String name,
     required Uint8List hashValue,
-    FileAttributes flags = const .new(0),
+    FileAttributes flags = FileAttributes.containsMetadata,
   }) {
     final table = _tableStream[.file];
     final index = FileIndex(table.length);
@@ -387,7 +387,7 @@ final class MetadataWriter {
     required int number,
     required TypeOrMethodDef owner,
     required String name,
-    GenericParamAttributes flags = const .new(0),
+    GenericParamAttributes flags = GenericParamAttributes.none,
     TypeDefOrRef? constraint,
   }) {
     final genericParam = GenericParam(
@@ -407,7 +407,7 @@ final class MetadataWriter {
     required MethodDefIndex method,
     required String importName,
     required String importScope,
-    PInvokeAttributes flags = const .new(0),
+    PInvokeAttributes flags = PInvokeAttributes.charSetNotSpec,
   }) {
     final scope = writeModuleRef(name: importScope);
     _tableStream[.implMap].add(
@@ -479,8 +479,8 @@ final class MetadataWriter {
   MethodDefIndex writeMethodDef({
     required String name,
     int rva = 0,
-    MethodImplAttributes implFlags = const .new(0),
-    MethodAttributes flags = const .new(0),
+    MethodImplAttributes implFlags = MethodImplAttributes.il,
+    MethodAttributes flags = MethodAttributes.compilerControlled,
     MethodSignature signature = const .new(),
   }) {
     final table = _tableStream[.methodDef];
@@ -642,7 +642,7 @@ final class MetadataWriter {
   TypeDefIndex writeTypeDef({
     required String namespace,
     required String name,
-    TypeAttributes flags = const .new(0),
+    TypeAttributes flags = TypeAttributes.notPublic,
     TypeDefOrRef extends$ = .none,
   }) {
     // Track root namespaces like "Windows.Foundation".

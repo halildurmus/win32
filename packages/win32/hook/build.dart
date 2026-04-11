@@ -65,7 +65,7 @@ Logger createDefaultLogger() {
 void main(List<String> args) async {
   await build(args, (input, output) async {
     if (!input.config.buildCodeAssets) return;
-    if (input.config.code.targetOS != OS.windows) return;
+    if (input.config.code.targetOS != .windows) return;
 
     final packageName = input.packageName;
     final cbuilder = CBuilder.library(
@@ -79,7 +79,7 @@ void main(List<String> args) async {
     String normalizeDynamicLibraryName(String library) =>
         library.replaceAll('-', '_').split('.').first;
 
-    CodeAsset createCodeAsset(String library) => CodeAsset(
+    CodeAsset createCodeAsset(String library) => .new(
       package: packageName,
       name: 'src/win32/${normalizeDynamicLibraryName(library)}.g.dart',
       linkMode: DynamicLoadingSystem(.file(library)),

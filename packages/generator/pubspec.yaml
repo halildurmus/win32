@@ -3,7 +3,7 @@ description: Generates Win32 and COM API projections from Windows Metadata.
 publish_to: none
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.10.0
 
 resolution: workspace
 
@@ -55,7 +55,7 @@ dev_dependencies:
   halildurmus_hooks: ^0.1.1
 
   # Help ensure that the code is well-written.
-  halildurmus_lints: ^2.0.0
+  halildurmus_lints: ^1.1.0
 
   # Running the test suite.
   test: ^1.29.0

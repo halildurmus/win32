@@ -2,7 +2,7 @@ name: inspector
 publish_to: none
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.10.0
 
 resolution: workspace
 
@@ -17,4 +17,4 @@ flutter:
   uses-material-design: true
 
 dev_dependencies:
-  halildurmus_lints: ^2.0.0
+  halildurmus_lints: ^1.1.0

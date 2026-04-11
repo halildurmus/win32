@@ -78,7 +78,7 @@ void main() {
       check(typeDef.namespace).isEmpty();
       check(typeDef.name).equals('<Module>');
       check(typeDef.extends$).isNull();
-      check(typeDef.flags).equals(const .new(0));
+      check(typeDef.flags).equals(TypeAttributes.notPublic);
     });
 
     test('Class', () {

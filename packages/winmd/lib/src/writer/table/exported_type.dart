@@ -27,7 +27,7 @@ final class ExportedType implements Row {
     required this.typeDefId,
     required this.typeName,
     required this.implementation,
-    this.flags = const TypeAttributes(0),
+    this.flags = TypeAttributes.notPublic,
     this.typeNamespace = const StringIndex(0),
   });
 

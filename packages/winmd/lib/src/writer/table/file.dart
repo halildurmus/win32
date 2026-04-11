@@ -22,7 +22,7 @@ final class File implements Row {
   const File({
     required this.name,
     required this.hashValue,
-    this.flags = const FileAttributes(0),
+    this.flags = FileAttributes.containsMetadata,
   });
 
   final FileAttributes flags;
