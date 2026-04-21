@@ -3,7 +3,8 @@
   // experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
-    "resolveJsonModule": true
+    "ignoreDeprecations": "6.0",
+    "resolveJsonModule": true,
+    "types": ["node"]
   }
 }

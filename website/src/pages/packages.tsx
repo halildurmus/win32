@@ -3,10 +3,10 @@ import {
   Package,
   communityPackages,
   packages,
-} from "@site/src/assets/packages";
-import { CommonFooter } from "@site/src/win32-theme/common-footer";
-import { CommonHeader } from "@site/src/win32-theme/common-header";
-import { CommonLayout } from "@site/src/win32-theme/common-layout";
+} from "../assets/packages";
+import { CommonFooter } from "../win32-theme/common-footer";
+import { CommonHeader } from "../win32-theme/common-header";
+import { CommonLayout } from "../win32-theme/common-layout";
 import clsx from "clsx";
 import React from "react";
 
@@ -147,7 +147,7 @@ const PackageList = ({ data }: { data: Package[] }) => {
 export default function Packages(): JSX.Element {
   return (
     <CommonLayout title="Packages">
-      <div className={clsx("win32-prose, pb-16")}>
+      <div className={clsx("win32-prose", "pb-16")}>
         <CommonHeader />
         <div className={clsx("max-w-[944px]", "mx-auto", "pt-16 px-4 sm:px-6")}>
           <div className={clsx("max-w-[624px]")}>

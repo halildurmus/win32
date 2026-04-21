@@ -1,5 +1,5 @@
-import { DartIcon } from "@site/src/win32-theme/icons/dart";
-import { FlutterIcon } from "@site/src/win32-theme/icons/flutter";
+import { DartIcon } from "../win32-theme/icons/dart";
+import { FlutterIcon } from "../win32-theme/icons/flutter";
 
 export type Package = {
   name: string;
@@ -123,7 +123,7 @@ export const communityPackages: Package[] = [
   {
     name: "package_info_plus",
     icon: FlutterIcon,
-    description: "Query <b>information about an <b>application package</b>.",
+    description: "Query information about an <b>application package</b>.",
     url: "https://pub.dev/packages/package_info_plus",
     installCommand: "flutter pub add package_info_plus",
     contributors: [

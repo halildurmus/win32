@@ -17,7 +17,7 @@ const config: Config = {
 
   future: {
     v4: true,
-    experimental_faster: true,
+    faster: true,
   },
 
   headTags: [
@@ -177,6 +177,11 @@ const config: Config = {
   ],
 
   scripts: [],
+
+  storage: {
+    type: "localStorage",
+    namespace: true,
+  },
 
   themeConfig: {
     algolia: {
