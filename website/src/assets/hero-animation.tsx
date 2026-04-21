@@ -1,7 +1,7 @@
-import { DartIcon } from "@site/src/win32-theme/icons/dart";
-import { FlutterIcon } from "@site/src/win32-theme/icons/flutter";
 import clsx from "clsx";
 import { SiWindows10, SiWindows11 } from "react-icons/si";
+import { DartIcon } from "../win32-theme/icons/dart";
+import { FlutterIcon } from "../win32-theme/icons/flutter";
 
 export type AnimationItem = {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;

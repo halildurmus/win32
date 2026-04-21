@@ -1,7 +1,7 @@
-import { CodeBlock } from "@site/src/theme/CodeBlock/base";
-import Tabs from "@site/src/win32-theme/common-tabs";
-import TabItem from "@theme/TabItem";
 import { FC, PropsWithChildren } from "react";
+import { CodeBlock } from "../theme/CodeBlock/base";
+import TabItem from "../theme/TabItem";
+import Tabs from "../theme/Tabs";
 
 type Props = {
   args?: string;

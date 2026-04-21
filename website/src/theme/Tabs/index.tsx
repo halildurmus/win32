@@ -1,10 +1,15 @@
+import { cloneElement, JSX } from "react";
+import clsx from "clsx";
+import { ThemeClassNames } from "@docusaurus/theme-common";
 import {
   useScrollPositionBlocker,
+  useTabsContextValue,
   useTabs,
+  sanitizeTabsChildren,
+  TabsProvider,
 } from "@docusaurus/theme-common/internal";
 import useIsBrowser from "@docusaurus/useIsBrowser";
-import clsx from "clsx";
-import { cloneElement } from "react";
+import type { Props } from "@theme/Tabs";
 
 function TabList({
   className,
@@ -15,10 +20,10 @@ function TabList({
   wrapContent = true,
   smallTabs = false,
 }) {
-  const tabRefs = [];
+  const tabRefs: any[] = [];
   const { blockElementScrollPositionUntilNextRender } =
     useScrollPositionBlocker();
-  const handleTabChange = (event) => {
+  const handleTabChange = (event: { currentTarget: any }) => {
     const newTab = event.currentTarget;
     const newTabIndex = tabRefs.indexOf(newTab);
     const newTabValue = tabValues[newTabIndex].value;
@@ -27,7 +32,7 @@ function TabList({
       selectValue(newTabValue);
     }
   };
-  const handleKeydown = (event) => {
+  const handleKeydown = (event: { key: any; currentTarget: any }) => {
     let focusElement = null;
     switch (event.key) {
       case "Enter": {
@@ -138,7 +143,24 @@ function TabContent({ lazy, children, selectedValue, smallTabs }) {
   );
 }
 
-function TabsComponent(props) {
+function TabsContainer(
+  props:
+    | (JSX.IntrinsicAttributes & {
+        className: any;
+        block: any;
+        selectedValue: any;
+        selectValue: any;
+        tabValues: any;
+        wrapContent?: boolean | undefined;
+        smallTabs?: boolean | undefined;
+      })
+    | (JSX.IntrinsicAttributes & {
+        lazy: any;
+        children: any;
+        selectedValue: any;
+        smallTabs: any;
+      }),
+) {
   const tabs = useTabs(props);
   const { wrapContent = true } = props;
   return (
@@ -158,14 +180,17 @@ function TabsComponent(props) {
   );
 }
 
-export default function CommonTabs(props) {
+export default function Tabs(props: Props): ReactNode {
   const isBrowser = useIsBrowser();
+  const value = useTabsContextValue(props);
   return (
-    <TabsComponent
+    <TabsProvider
+      value={value}
       // Remount tabs after hydration
       // Temporary fix for https://github.com/facebook/docusaurus/issues/5653
       key={String(isBrowser)}
-      {...props}
-    />
+    >
+      <TabsContainer {...props} />
+    </TabsProvider>
   );
 }

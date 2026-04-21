@@ -1,6 +1,5 @@
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
 import { PageMetadata } from "@docusaurus/theme-common";
-import { useKeyboardNavigation } from "@docusaurus/theme-common/internal";
 import ErrorPageContent from "@theme/ErrorPageContent";
 import LayoutProvider from "@theme/Layout/Provider";
 import SkipToContent from "@theme/SkipToContent";
@@ -16,7 +15,6 @@ type Props = {
 
 export const CommonLayout = (props: Props) => {
   const { children, title, description, className } = props;
-  useKeyboardNavigation();
 
   return (
     <LayoutProvider>
@@ -31,7 +29,9 @@ export const CommonLayout = (props: Props) => {
           className,
         )}
       >
-        <ErrorBoundary fallback={(params) => <ErrorPageContent {...params} />}>
+        <ErrorBoundary
+          fallback={(params: any) => <ErrorPageContent {...params} />}
+        >
           {children}
         </ErrorBoundary>
       </div>
