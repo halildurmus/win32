@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.0] - 2026-04-22
+
+### 🚀 Features
+
+- The build hook now downloads prebuilt binaries from GitHub release artifacts
+  instead of compiling from C source, eliminating the MSVC requirement for
+  users who don't have the necessary tools installed.
+
+  Users who prefer or require local compilation can opt out by setting the
+  `local_build` user-define to `true` in their `pubspec.yaml`:
+
+  ```yaml
+  hooks:
+    user_defines:
+      win32:
+        local_build: true
+  ```
+
+[6.1.0]: https://github.com/halildurmus/win32/compare/win32-v6.0.1..win32-v6.1.0
+
 ## [6.0.1] - 2026-04-11
 
 ### 📦 Dependencies

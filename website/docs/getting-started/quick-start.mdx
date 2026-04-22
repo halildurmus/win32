@@ -34,6 +34,24 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 ```
 
+:::note
+
+`package:win32` uses a [build hook][hooks] to bundle its native library with
+your application. By default, the hook downloads a prebuilt binary from the
+package's GitHub release artifacts — no C compiler required.
+
+If you prefer to compile the native library from source locally, you can set the
+`local_build` user-define to `true` in your `pubspec.yaml`:
+
+```yaml title="pubspec.yaml"
+hooks:
+  user_defines:
+    win32:
+      local_build: true
+```
+
+:::
+
 ## 🚀 Calling Your First Win32 API
 
 The [`Beep`][Beep] function is a good starting point — it takes a frequency in
@@ -64,6 +82,7 @@ higher-level abstractions that may cover your use case out of the box.
 
 [Beep]: https://learn.microsoft.com/windows/win32/api/utilapiset/nf-utilapiset-beep
 [dart:ffi]: https://api.dart.dev/stable/dart-ffi/dart-ffi-library.html
+[hooks]: https://dart.dev/tools/hooks
 [real-life examples]: https://win32.pub/examples
 [Functions]: /docs/core/functions
 [package:ffi]: https://pub.dev/packages/ffi
