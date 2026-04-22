@@ -1,0 +1,80 @@
+name: win32_prebuilt_assets
+
+permissions:
+  contents: write
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/win32_prebuilt_assets.yml
+      - packages/win32/hook/**
+      - packages/win32/lib/**
+      - packages/win32/src/**
+      - packages/win32/tool/**
+  push:
+    tags:
+      - win32-prebuilt-assets-*
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        working-directory: packages/win32
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v6
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+          cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 👷 Build Windows host
+        run: |
+          dart run tool/build.dart -owindows -aarm64
+          dart run tool/build.dart -owindows -ax64
+
+      - name: 📡 Upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: windows-host
+          path: packages/win32/.dart_tool/win32/**/*.dll
+          if-no-files-found: error
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/win32-prebuilt-assets')
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: packages/win32
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v6
+
+      - name: ⬇️ Download assets
+        uses: actions/download-artifact@v8
+        with:
+          merge-multiple: true
+          path: packages/win32/.dart_tool/win32/
+
+      - name: 🔍 Display structure of downloaded assets
+        run: ls -R .dart_tool/win32/
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: packages/win32/.dart_tool/win32/**
+          fail_on_unmatched_files: true
