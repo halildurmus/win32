@@ -39,6 +39,7 @@ Future<void> writeHashesFile(Map<String, String> assetHashes) async {
 // TO UPDATE, RUN:
 //
 // dart run tool/generate_asset_hashes.dart
+//
 ''')
     ..writeln()
     ..writeln('''
