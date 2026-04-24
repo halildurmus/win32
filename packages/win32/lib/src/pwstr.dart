@@ -64,6 +64,7 @@ extension type const PWSTR(Pointer<Utf16> _) implements Pointer<Utf16> {
   /// final buffer = wsalloc(20);
   /// final bytesWritten = buffer.setString("Hello");
   /// print(bytesWritten); // Outputs: 12 (5 UTF-16 code units + 2 NUL)
+  /// free(buffer);
   /// ```
   int setString(String string) {
     final units = string.codeUnits;

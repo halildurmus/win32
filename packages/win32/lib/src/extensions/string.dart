@@ -34,10 +34,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final bstr = arena.bstr('Hello');
-  ///   // Safe to pass to COM APIs within this scope.
-  /// });
+  /// final bstr = 'Hello'.toBstr();
+  /// // Use the BSTR with COM APIs.
+  /// SysFreeString(bstr); // Remember to free when done.
   /// ```
   BSTR toBstr() {
     final length = codeUnits.length;
@@ -57,10 +56,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final hstr = arena.hstring('Hello');
-  ///   // Use with WinRT APIs.
-  /// });
+  /// final hstring = 'Hello'.toHstring();
+  /// // Use the HSTRING with WinRT APIs.
+  /// WindowsDeleteString(hstring); // Remember to delete when done.
   /// ```
   ///
   /// Throws a [WindowsException] if string creation fails.
@@ -81,10 +79,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final name = arena.pcstr('kernel32.dll');
-  ///   // Use it with Win32 APIs.
-  /// });
+  /// final pcstr = 'Hello'.toPcstr();
+  /// // Use the PCSTR with Win32 APIs.
+  /// free(pcstr); // Remember to free when done.
   /// ```
   PCSTR toPcstr({Allocator allocator = adaptiveMalloc}) {
     final pcstr = allocator<BYTE>(length + 1);
@@ -106,10 +103,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final path = arena.pcwstr(r'C:\Windows');
-  ///   // Use it with Win32 APIs.
-  /// });
+  /// final pcwstr = 'Hello'.toPcwstr();
+  /// // Use the PCWSTR with Win32 APIs.
+  /// free(pcwstr); // Remember to free when done.
   /// ```
   PCWSTR toPcwstr({Allocator allocator = adaptiveMalloc}) {
     final units = codeUnits;
@@ -132,10 +128,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final name = arena.pstr('kernel32.dll');
-  ///   // Use it with Win32 APIs.
-  /// });
+  /// final pstr = 'Hello'.toPstr();
+  /// // Use the PSTR with Win32 APIs.
+  /// free(pstr); // Remember to free when done.
   /// ```
   PSTR toPstr({Allocator allocator = adaptiveMalloc}) {
     final pstr = allocator<BYTE>(length + 1);
@@ -157,10 +152,9 @@ extension StringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// using((arena) {
-  ///   final path = arena.pwstr(r'C:\Windows');
-  ///   // Use it with Win32 APIs.
-  /// });
+  /// final pwstr = 'Hello'.toPwstr();
+  /// // Use the PWSTR with Win32 APIs.
+  /// free(pwstr); // Remember to free when done.
   /// ```
   PWSTR toPwstr({Allocator allocator = adaptiveMalloc}) {
     final units = codeUnits;
@@ -192,10 +186,9 @@ extension StringListExtension on List<String> {
   /// Example:
   /// ```dart
   /// const strings = ['banana', 'strawberry', 'kiwi'];
-  /// using((arena) {
-  ///   final multiSz = strings.toPcwstr(allocator: arena);
-  ///   // Pass to registry or shell APIs
-  /// });
+  /// final multiSz = strings.toPcwstr();
+  /// // Pass to registry or shell APIs
+  /// free(multiSz); // Remember to free when done.
   /// ```
   PCWSTR toPcwstr({Allocator allocator = adaptiveMalloc}) {
     if (isEmpty) throw ArgumentError('The list must not be empty.');
@@ -228,10 +221,9 @@ extension StringListExtension on List<String> {
   /// Example:
   /// ```dart
   /// const strings = ['banana', 'strawberry', 'kiwi'];
-  /// using((arena) {
-  ///   final multiSz = strings.toPwstr(allocator: arena);
-  ///   // Pass to registry or shell APIs
-  /// });
+  /// final multiSz = strings.toPwstr();
+  /// // Pass to registry or shell APIs
+  /// free(multiSz); // Remember to free when done.
   /// ```
   PWSTR toPwstr({Allocator allocator = adaptiveMalloc}) {
     if (isEmpty) throw ArgumentError('The list must not be empty.');

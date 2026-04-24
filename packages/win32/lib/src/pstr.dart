@@ -63,6 +63,7 @@ extension type const PSTR(Pointer<Utf8> _) implements Pointer<Utf8> {
   /// final pstr = PSTR(buffer);
   /// final bytesWritten = pstr.setString("Hello");
   /// print(bytesWritten); // Outputs: 6 (5 characters + 1 NUL)
+  /// free(buffer);
   /// ```
   int setString(String string) {
     final length = string.length;

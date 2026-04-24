@@ -9,6 +9,9 @@ import 'win32/api_ms_win_core_winrt_string_l1_1_0.g.dart';
 /// `HSTRING` is an immutable, reference-counted UTF-16 string type used
 /// throughout the Windows Runtime (WinRT) API surface.
 ///
+/// Memory must be released using [WindowsDeleteString] when the string is no
+/// longer needed.
+///
 /// {@category winrt}
 extension type const HSTRING(Pointer _) implements Pointer {
   /// The length of this [HSTRING] in bytes.
