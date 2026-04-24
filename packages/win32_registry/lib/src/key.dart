@@ -49,6 +49,9 @@ sealed class BaseRegistryKey {
   ///
   /// Key paths are case-insensitive.
   ///
+  /// The returned key is owned by the caller and must be closed with
+  /// [RegistryKey.close] when no longer needed.
+  ///
   /// Throws a [WindowsException] if the operation fails.
   RegistryKey create(
     String path, {
@@ -64,6 +67,9 @@ sealed class BaseRegistryKey {
   /// creation behavior, registry options, and optional transaction context.
   ///
   /// Key paths are case-insensitive.
+  ///
+  /// The returned key is owned by the caller and must be closed with
+  /// [RegistryKey.close] when no longer needed.
   ///
   /// Throws a [WindowsException] if the operation fails.
   RegistryKey open(String path, {RegistryOpenConfig config = const .new()}) {
@@ -613,10 +619,14 @@ final class RegistryKey extends BaseRegistryKey {
   /// context.
   ///
   /// This differs from using [CURRENT_USER] because it resolves the hive
-  /// associated with the thread token rather than the process token.
+  /// associated with the thread token rather than the process token. This is
+  /// useful when the thread might be impersonating another user (e.g., through
+  /// "Run As" operations).
   ///
-  /// This is useful when the thread might be impersonating another user (e.g.,
-  /// through "Run As" operations).
+  /// The returned key is owned by the caller and must be closed with [close]
+  /// when no longer needed.
+  ///
+  /// Throws a [WindowsException] if the operation fails.
   factory RegistryKey.openCurrentUser([RegistryAccess access = .read]) =>
       using((arena) {
         final phKey = arena<Pointer>();
