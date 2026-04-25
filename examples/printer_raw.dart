@@ -6,6 +6,7 @@
 // Based on:
 // https://learn.microsoft.com/windows/win32/printdocs/sending-data-directly-to-a-printer
 
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -93,9 +94,10 @@ final class RawPrinter {
 
   void _write(Arena arena, PRINTER_HANDLE hPrinter, String data) {
     final bytesWritten = arena<DWORD>();
-    final buffer = arena.pcstr(data);
-    final result = WritePrinter(hPrinter, buffer, data.length, bytesWritten);
-    if (!result || bytesWritten.value != data.length) {
+    final bytes = utf8.encode(data);
+    final buffer = bytes.toNative(allocator: arena);
+    final result = WritePrinter(hPrinter, buffer, bytes.length, bytesWritten);
+    if (!result || bytesWritten.value != bytes.length) {
       throw Exception('WritePrinter failed.');
     }
   }
