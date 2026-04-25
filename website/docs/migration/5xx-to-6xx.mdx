@@ -338,7 +338,7 @@ error state is always preserved across the FFI boundary.
 -   final error = GetLastError(); // May be corrupted
 -   throw WindowsException(HRESULT_FROM_WIN32(error));
 - }
-+ final Win32Result(value: hWwnd, :error) = CreateWindowEx(...);
++ final Win32Result(value: hWnd, :error) = CreateWindowEx(...);
 + if (hWnd.isNull) throw WindowsException(error.toHRESULT());
 ```
 
