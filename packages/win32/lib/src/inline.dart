@@ -222,7 +222,7 @@ bool IsWindows8Point1OrGreater() => IsWindowsVersionOrGreater(
 /// <https://learn.microsoft.com/windows/win32/api/versionhelpers/nf-versionhelpers-iswindowsserver>.
 bool IsWindowsServer() {
   final osvi = adaptiveCalloc<OSVERSIONINFOEX>()
-    ..ref.wProductType = VER_NT_SERVER;
+    ..ref.wProductType = VER_NT_WORKSTATION;
   final dwlConditionMask = VerSetConditionMask(0, VER_PRODUCT_TYPE, VER_EQUAL);
   try {
     return VerifyVersionInfo(osvi, VER_PRODUCT_TYPE, dwlConditionMask).value;
