@@ -7,12 +7,10 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
-
 import 'constants.g.dart';
 import 'structs.dart';
 import 'structs.g.dart';
-import 'win32/ntdll.g.dart';
+import 'version.dart';
 
 /// Retrieves the current value of a specified Desktop Window Manager (DWM)
 /// attribute applied to a window.
@@ -58,38 +56,8 @@ external int _SetWindowCompositionAttribute(
   Pointer<WINDOWCOMPOSITIONATTRIBDATA> pwcad,
 );
 
-/// Whether the OS version is Windows 10 (build 19041) or greater.
-bool IsWindows10OrGreater() => using((arena) {
-  final osvi = arena<OSVERSIONINFO>()
-    ..ref.dwOSVersionInfoSize = sizeOf<OSVERSIONINFO>();
-  final status = RtlGetVersion(osvi);
-  if (status.isError) return false;
+/// Whether the OS version is Windows 10 or greater.
+bool IsWindows10OrGreater() => OsVersion.current >= OsVersion.win10;
 
-  if (osvi.ref case OSVERSIONINFO(
-    :final dwMajorVersion,
-    dwMinorVersion: 0,
-    :final dwBuildNumber,
-  ) when dwMajorVersion >= 10 && dwBuildNumber >= 19041) {
-    return true;
-  }
-
-  return false;
-});
-
-/// Whether the OS version is Windows 11 (build 22000) or greater.
-bool IsWindows11OrGreater() => using((arena) {
-  final osvi = arena<OSVERSIONINFO>()
-    ..ref.dwOSVersionInfoSize = sizeOf<OSVERSIONINFO>();
-  final status = RtlGetVersion(osvi);
-  if (status.isError) return false;
-
-  if (osvi.ref case OSVERSIONINFO(
-    :final dwMajorVersion,
-    dwMinorVersion: 0,
-    :final dwBuildNumber,
-  ) when dwMajorVersion >= 10 && dwBuildNumber >= 22000) {
-    return true;
-  }
-
-  return false;
-});
+/// Whether the OS version is Windows 11 or greater.
+bool IsWindows11OrGreater() => OsVersion.current >= OsVersion.win11;

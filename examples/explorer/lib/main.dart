@@ -39,7 +39,7 @@ class MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    showRoundedCornerSwitch = IsWindows11OrGreater();
+    showRoundedCornerSwitch = OsVersion.current >= .win11;
     super.initState();
   }
 
