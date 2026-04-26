@@ -38,6 +38,7 @@ pipes, and the registry.
 | [modules.dart]        | Enumerating loaded modules                        |
 | [pipe.dart]           | Named pipes and IPC                               |
 | [registry.dart]       | Querying and enumerating registry keys            |
+| [version.dart]        | Querying the running Windows version              |
 | [vt.dart]             | Virtual terminal (ANSI) sequences                 |
 | [wsl.dart]            | Accessing WSL instance information                |
 
@@ -51,6 +52,7 @@ pipes, and the registry.
 [modules.dart]: https://github.com/halildurmus/win32/blob/main/examples/modules.dart
 [pipe.dart]: https://github.com/halildurmus/win32/blob/main/examples/pipe.dart
 [registry.dart]: https://github.com/halildurmus/win32/blob/main/examples/registry.dart
+[version.dart]: https://github.com/halildurmus/win32/blob/main/examples/version.dart
 [vt.dart]: https://github.com/halildurmus/win32/blob/main/examples/vt.dart
 [wsl.dart]: https://github.com/halildurmus/win32/blob/main/examples/wsl.dart
 

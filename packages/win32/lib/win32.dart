@@ -75,5 +75,6 @@ export 'src/structs.g.dart';
 export 'src/types.dart';
 export 'src/utils.dart';
 export 'src/variant.dart';
+export 'src/version.dart';
 export 'src/win32_error.dart';
 export 'src/win32_result.dart';
