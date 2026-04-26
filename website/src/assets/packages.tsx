@@ -15,6 +15,15 @@ export type Contributor = {
   url: string;
 };
 
+const ffi_leak_tracker: Package = {
+  name: "ffi_leak_tracker",
+  icon: DartIcon,
+  description:
+    "<b>Allocation tracking and leak detection</b> for Dart FFI code.",
+  url: "https://pub.dev/packages/ffi_leak_tracker",
+  installCommand: "dart pub add ffi_leak_tracker",
+};
+
 const filepicker_windows: Package = {
   name: "filepicker_windows",
   icon: DartIcon,
@@ -69,6 +78,7 @@ const winmd: Package = {
 };
 
 export const packages: Package[] = [
+  ffi_leak_tracker,
   filepicker_windows,
   win32_clipboard,
   win32_gamepad,
