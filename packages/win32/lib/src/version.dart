@@ -244,12 +244,14 @@ final class OsVersion implements Comparable<OsVersion> {
   bool operator <(OsVersion other) => compareTo(other) < 0;
 
   @override
-  bool operator ==(Object other) =>
-      other is OsVersion &&
-      major == other.major &&
-      minor == other.minor &&
-      pack == other.pack &&
-      build == other.build;
+  bool operator ==(Object other) {
+    if (other is! OsVersion) return false;
+    if (identical(this, other)) return true;
+    return major == other.major &&
+        minor == other.minor &&
+        pack == other.pack &&
+        build == other.build;
+  }
 
   @override
   int get hashCode => Object.hash(major, minor, pack, build);
