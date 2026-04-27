@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iunknown.g.dart';
 import 'iuri.g.dart';
 
+/// `{a39ee748-6a27-4817-a6f2-13914bef5890}`.
+///
 /// @nodoc
 final IID_IUri = GUID.fromComponents(
   0xa39ee748,

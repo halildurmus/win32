@@ -36,6 +36,8 @@ import 'idispatch.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{7a1ef0d5-1581-4741-88e4-209a49f11a10}`.
+///
 /// @nodoc
 final IID_ISpeechWaveFormatEx = GUID.fromComponents(
   0x7a1ef0d5,

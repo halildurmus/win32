@@ -27,6 +27,8 @@ import '../types.dart';
 import '../utils.dart';
 import 'interface.g.dart';
 
+/// `{00000000-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IUnknown = GUID.fromComponents(
   0x0,

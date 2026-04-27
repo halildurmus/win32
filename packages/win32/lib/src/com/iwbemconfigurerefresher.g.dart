@@ -39,6 +39,8 @@ import 'iwbemhiperfenum.g.dart';
 import 'iwbemrefresher.g.dart';
 import 'iwbemservices.g.dart';
 
+/// `{49353c92-516b-11d1-aea6-00c04fb68820}`.
+///
 /// @nodoc
 final IID_IWbemConfigureRefresher = GUID.fromComponents(
   0x49353c92,

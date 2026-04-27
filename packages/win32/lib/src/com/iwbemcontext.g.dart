@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iunknown.g.dart';
 import 'iwbemcontext.g.dart';
 
+/// `{44aca674-e8fc-11d0-a07c-00c04fb68820}`.
+///
 /// @nodoc
 final IID_IWbemContext = GUID.fromComponents(
   0x44aca674,

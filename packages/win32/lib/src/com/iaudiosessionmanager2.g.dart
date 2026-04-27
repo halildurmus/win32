@@ -38,6 +38,8 @@ import 'iaudiovolumeducknotification.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f}`.
+///
 /// @nodoc
 final IID_IAudioSessionManager2 = GUID.fromComponents(
   0x77aa99a0,

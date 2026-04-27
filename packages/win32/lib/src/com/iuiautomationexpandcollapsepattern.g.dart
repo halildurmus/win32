@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{619be086-1f4e-4ee4-bafa-210128738730}`.
+///
 /// @nodoc
 final IID_IUIAutomationExpandCollapsePattern = GUID.fromComponents(
   0x619be086,

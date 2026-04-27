@@ -99,7 +99,13 @@ final class StructProjection extends Projection with ProjectionMixin {
     b.body.add(
       cb.Field(
         (b) => b
-          ..docs.addAll(generateApiDocs(apiDetails, row: typeDef))
+          ..docs.addAll(
+            generateApiDocs(
+              apiDetails,
+              row: typeDef,
+              additionalDocs: ['`${guidAsString(guidParams)}`.'],
+            ),
+          )
           ..modifier = .final$
           ..name = name
           ..assignment = cb

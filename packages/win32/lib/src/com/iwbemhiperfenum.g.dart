@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iunknown.g.dart';
 import 'iwbemobjectaccess.g.dart';
 
+/// `{2705c288-79ae-11d2-b348-00105a1f8177}`.
+///
 /// @nodoc
 final IID_IWbemHiPerfEnum = GUID.fromComponents(
   0x2705c288,

@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ishellitem.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2659b475-eeb8-48b7-8f07-b378810f48cf}`.
+///
 /// @nodoc
 final IID_IShellItemFilter = GUID.fromComponents(
   0x2659b475,

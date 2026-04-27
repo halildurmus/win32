@@ -39,6 +39,8 @@ import 'interface.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{beb94909-e451-438b-b5a7-d79e767b75d8}`.
+///
 /// @nodoc
 final IID_IAppxFactory = GUID.fromComponents(
   0xbeb94909,

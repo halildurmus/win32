@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{e6fdd21a-163f-4975-9c8c-a69f1ba37034}`.
+///
 /// @nodoc
 final IID_IFileDialogCustomize = GUID.fromComponents(
   0xe6fdd21a,

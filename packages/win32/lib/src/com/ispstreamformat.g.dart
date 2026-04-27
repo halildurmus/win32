@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bed530be-2606-4f4d-a1c0-54c5cda5566f}`.
+///
 /// @nodoc
 final IID_ISpStreamFormat = GUID.fromComponents(
   0xbed530be,

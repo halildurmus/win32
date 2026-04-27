@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ispeechobjecttoken.g.dart';
 import 'iunknown.g.dart';
 
+/// `{9285b776-2e7b-4bc0-b53e-580eb6fa967f}`.
+///
 /// @nodoc
 final IID_ISpeechObjectTokens = GUID.fromComponents(
   0x9285b776,

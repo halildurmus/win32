@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'irawelementprovidersimple.g.dart';
 import 'iunknown.g.dart';
 
+/// `{85b94ecd-849d-42b6-b94d-d6db23fdf5a4}`.
+///
 /// @nodoc
 final IID_IUIAutomationProxyFactory = GUID.fromComponents(
   0x85b94ecd,

@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{7991eec9-7e89-4d85-8390-6c703cec60c0}`.
+///
 /// @nodoc
 final IID_IMMNotificationClient = GUID.fromComponents(
   0x7991eec9,

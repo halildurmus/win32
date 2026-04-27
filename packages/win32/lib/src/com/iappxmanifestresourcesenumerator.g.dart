@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{de4dfbbd-881a-48bb-858c-d6f2baeae6ed}`.
+///
 /// @nodoc
 final IID_IAppxManifestResourcesEnumerator = GUID.fromComponents(
   0xde4dfbbd,

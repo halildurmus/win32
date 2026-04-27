@@ -35,6 +35,8 @@ import 'iaudiosessioncontrol.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bfb7ff88-7239-4fc9-8fa2-07c950be9c6d}`.
+///
 /// @nodoc
 final IID_IAudioSessionControl2 = GUID.fromComponents(
   0xbfb7ff88,

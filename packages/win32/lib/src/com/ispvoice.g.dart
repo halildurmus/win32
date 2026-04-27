@@ -39,6 +39,8 @@ import 'ispstreamformat.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6c44df74-72b9-4992-a1ec-ef996e0422d4}`.
+///
 /// @nodoc
 final IID_ISpVoice = GUID.fromComponents(
   0x6c44df74,

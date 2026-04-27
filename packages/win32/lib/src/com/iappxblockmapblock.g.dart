@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{75cf3930-3244-4fe0-a8c8-e0bcb270b889}`.
+///
 /// @nodoc
 final IID_IAppxBlockMapBlock = GUID.fromComponents(
   0x75cf3930,

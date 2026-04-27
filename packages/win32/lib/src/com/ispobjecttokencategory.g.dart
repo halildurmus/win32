@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'ispdatakey.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2d3d3845-39af-4850-bbf9-40b49780011d}`.
+///
 /// @nodoc
 final IID_ISpObjectTokenCategory = GUID.fromComponents(
   0x2d3d3845,

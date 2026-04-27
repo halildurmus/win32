@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'itypeinfo.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00020400-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IDispatch = GUID.fromComponents(
   0x20400,

@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ishellitemarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2e941141-7f97-4756-ba1d-9decde894a3d}`.
+///
 /// @nodoc
 final IID_IApplicationActivationManager = GUID.fromComponents(
   0x2e941141,

@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00000002-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IMalloc = GUID.fromComponents(
   0x2,

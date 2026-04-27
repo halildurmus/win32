@@ -36,6 +36,8 @@ import 'ipersist.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00000109-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IPersistStream = GUID.fromComponents(
   0x109,

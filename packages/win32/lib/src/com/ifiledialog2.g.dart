@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ishellitem.g.dart';
 import 'iunknown.g.dart';
 
+/// `{61744fc7-85b5-4791-a9b0-272276309b13}`.
+///
 /// @nodoc
 final IID_IFileDialog2 = GUID.fromComponents(
   0x61744fc7,

@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'isensor.g.dart';
 import 'iunknown.g.dart';
 
+/// `{9b3b0b86-266a-4aad-b21f-fde5501001b7}`.
+///
 /// @nodoc
 final IID_ISensorManagerEvents = GUID.fromComponents(
   0x9b3b0b86,

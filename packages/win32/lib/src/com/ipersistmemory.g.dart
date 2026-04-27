@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ipersist.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bd1ae5e0-a6ae-11ce-bd37-504200c10000}`.
+///
 /// @nodoc
 final IID_IPersistMemory = GUID.fromComponents(
   0xbd1ae5e0,

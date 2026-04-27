@@ -36,6 +36,8 @@ import 'idispatch.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{8be47b07-57f6-11d2-9eee-00c04f797396}`.
+///
 /// @nodoc
 final IID_ISpeechVoiceStatus = GUID.fromComponents(
   0x8be47b07,

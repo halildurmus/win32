@@ -36,6 +36,8 @@ import 'idispatch.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{618736e0-3c3d-11cf-810c-00aa00389b71}`.
+///
 /// @nodoc
 final IID_IAccessible = GUID.fromComponents(
   0x618736e0,

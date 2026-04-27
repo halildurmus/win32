@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{89b2e422-4f1b-4316-bcef-a44afea83eb3}`.
+///
 /// @nodoc
 final IID_IPortableDevicePropVariantCollection = GUID.fromComponents(
   0x89b2e422,

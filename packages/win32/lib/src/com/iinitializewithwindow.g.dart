@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{3e68d4bd-7135-4d10-8018-9fb6d9f33fa1}`.
+///
 /// @nodoc
 final IID_IInitializeWithWindow = GUID.fromComponents(
   0x3e68d4bd,

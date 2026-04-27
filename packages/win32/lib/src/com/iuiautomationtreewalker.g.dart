@@ -37,6 +37,8 @@ import 'iuiautomationcondition.g.dart';
 import 'iuiautomationelement.g.dart';
 import 'iunknown.g.dart';
 
+/// `{4042c624-389c-4afc-a630-9df854a541fc}`.
+///
 /// @nodoc
 final IID_IUIAutomationTreeWalker = GUID.fromComponents(
   0x4042c624,

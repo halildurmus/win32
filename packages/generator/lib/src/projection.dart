@@ -186,6 +186,34 @@ mixin ProjectionMixin on Projection {
     return docs;
   }
 
+  String guidAsString(List<int> guidParams) {
+    final buf = StringBuffer('{');
+
+    void writeHex(int value, int width) {
+      final s = value.toRadixString(16);
+      for (var i = s.length; i < width; i++) {
+        buf.write('0');
+      }
+      buf.write(s);
+    }
+
+    writeHex(guidParams[0], 8);
+    buf.write('-');
+    writeHex(guidParams[1], 4);
+    buf.write('-');
+    writeHex(guidParams[2], 4);
+    buf.write('-');
+    writeHex(guidParams[3], 2);
+    writeHex(guidParams[4], 2);
+    buf.write('-');
+    for (var i = 5; i < guidParams.length; i++) {
+      writeHex(guidParams[i], 2);
+    }
+    buf.write('}');
+
+    return buf.toString();
+  }
+
   List<cb.Expression> generateGuidParameters(List<int> guidParams) {
     if (guidParams.length != 11) {
       throw ArgumentError.value(

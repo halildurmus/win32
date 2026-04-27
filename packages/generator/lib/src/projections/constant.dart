@@ -125,17 +125,18 @@ final class ConstantProjection extends Projection with ProjectionMixin {
   }
 
   cb.Field _generateGuid() {
-    final guidComponents = field
+    final guidParams = field
         .findAttribute(Win32Attribute.guid)
         .fixedArgs
         .map((p) => p.valueAsInt!)
         .toFixedList();
     return _generateField(
+      additionalDocs: ['`${guidAsString(guidParams)}`.'],
       modifier: .final$,
       assignment: cb
           .refer('GUID')
           .property('fromComponents')
-          .call(generateGuidParameters(guidComponents))
+          .call(generateGuidParameters(guidParams))
           .code,
     );
   }

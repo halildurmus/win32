@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ispellingerror.g.dart';
 import 'iunknown.g.dart';
 
+/// `{803e3bd4-2828-4410-8290-418d1d73c762}`.
+///
 /// @nodoc
 final IID_IEnumSpellingError = GUID.fromComponents(
   0x803e3bd4,

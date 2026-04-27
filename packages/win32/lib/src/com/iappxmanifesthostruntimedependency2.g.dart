@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c26f23a8-ee10-4ad6-b898-2b4d7aebfe6a}`.
+///
 /// @nodoc
 final IID_IAppxManifestHostRuntimeDependency2 = GUID.fromComponents(
   0xc26f23a8,

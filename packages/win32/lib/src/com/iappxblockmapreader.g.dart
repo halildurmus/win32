@@ -38,6 +38,8 @@ import 'istream.g.dart';
 import 'iunknown.g.dart';
 import 'iuri.g.dart';
 
+/// `{5efec991-bca3-42d1-9ec2-e92d609ec22a}`.
+///
 /// @nodoc
 final IID_IAppxBlockMapReader = GUID.fromComponents(
   0x5efec991,

@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c}`.
+///
 /// @nodoc
 final IID_IAudioClockAdjustment = GUID.fromComponents(
   0xf6e4c0a0,

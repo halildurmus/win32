@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{87ce5498-68d6-44e5-9215-6da47ef883d8}`.
+///
 /// @nodoc
 final IID_ISimpleAudioVolume = GUID.fromComponents(
   0x87ce5498,

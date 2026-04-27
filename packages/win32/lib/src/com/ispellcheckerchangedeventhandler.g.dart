@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ispellchecker.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0b83a5b0-792f-4eab-9799-acf52c5ed08a}`.
+///
 /// @nodoc
 final IID_ISpellCheckerChangedEventHandler = GUID.fromComponents(
   0xb83a5b0,

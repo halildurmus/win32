@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'irawelementprovidersimple.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d6dd68d1-86fd-4332-8666-9abedea2d24c}`.
+///
 /// @nodoc
 final IID_IRawElementProviderSimple = GUID.fromComponents(
   0xd6dd68d1,

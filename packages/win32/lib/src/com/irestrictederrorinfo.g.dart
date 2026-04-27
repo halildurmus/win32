@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{82ba7092-4c88-427d-a7bc-16dd93feb67e}`.
+///
 /// @nodoc
 final IID_IRestrictedErrorInfo = GUID.fromComponents(
   0x82ba7092,

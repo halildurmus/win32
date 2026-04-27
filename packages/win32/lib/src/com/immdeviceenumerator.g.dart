@@ -38,6 +38,8 @@ import 'immnotificationclient.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{a95664d2-9614-4f35-a746-de8db63617e6}`.
+///
 /// @nodoc
 final IID_IMMDeviceEnumerator = GUID.fromComponents(
   0xa95664d2,

@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0c733a30-2a1c-11ce-ade5-00aa0044773d}`.
+///
 /// @nodoc
 final IID_ISequentialStream = GUID.fromComponents(
   0xc733a30,

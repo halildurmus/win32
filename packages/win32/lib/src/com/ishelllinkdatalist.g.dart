@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{45e2b4ae-b1c3-11d0-b92f-00a0c90312e1}`.
+///
 /// @nodoc
 final IID_IShellLinkDataList = GUID.fromComponents(
   0x45e2b4ae,

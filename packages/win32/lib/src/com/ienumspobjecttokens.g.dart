@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ispobjecttoken.g.dart';
 import 'iunknown.g.dart';
 
+/// `{06b64f9e-7fda-11d2-b4f2-00c04f797396}`.
+///
 /// @nodoc
 final IID_IEnumSpObjectTokens = GUID.fromComponents(
   0x6b64f9e,

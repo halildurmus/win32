@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iuiautomationelementarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{828055ad-355b-4435-86d5-3b51c14a9b1b}`.
+///
 /// @nodoc
 final IID_IUIAutomationLegacyIAccessiblePattern = GUID.fromComponents(
   0x828055ad,

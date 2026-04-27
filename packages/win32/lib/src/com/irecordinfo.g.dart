@@ -37,6 +37,8 @@ import 'irecordinfo.g.dart';
 import 'itypeinfo.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000002f-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IRecordInfo = GUID.fromComponents(
   0x2f,

@@ -35,6 +35,8 @@ import 'imetadatatables.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{badb5f70-58da-43a9-a1c6-d74819f19b15}`.
+///
 /// @nodoc
 final IID_IMetaDataTables2 = GUID.fromComponents(
   0xbadb5f70,

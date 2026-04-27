@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{dada2357-e0ad-492e-98db-dd61c53ba353}`.
+///
 /// @nodoc
 final IID_IPortableDeviceKeyCollection = GUID.fromComponents(
   0xdada2357,

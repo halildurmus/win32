@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{34deaca4-d3c0-4e3e-b312-e42625e3807e}`.
+///
 /// @nodoc
 final IID_IAppxManifestReader6 = GUID.fromComponents(
   0x34deaca4,

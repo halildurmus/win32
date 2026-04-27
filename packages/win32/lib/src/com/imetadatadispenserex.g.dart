@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'itypeinfo.g.dart';
 import 'iunknown.g.dart';
 
+/// `{31bcfce2-dafb-11d2-9f81-00c04f79a0a3}`.
+///
 /// @nodoc
 final IID_IMetaDataDispenserEx = GUID.fromComponents(
   0x31bcfce2,

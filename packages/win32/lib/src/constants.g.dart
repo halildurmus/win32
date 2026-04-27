@@ -251,6 +251,7 @@ const CLASS_E_NOAGGREGATION = HRESULT(0x80040110 - 0x100000000);
 /// Represents the HRESULT value `0x80040112` (`-2147221230`).
 const CLASS_E_NOTLICENSED = HRESULT(0x80040112 - 0x100000000);
 
+/// `{e5cb7a31-7512-11d2-89ce-0080c792e5d8}`.
 final CLSID_CorMetaDataDispenser = GUID.fromComponents(
   0xe5cb7a31,
   0x7512,
@@ -1494,6 +1495,7 @@ const FINDMSGSTRING = 'commdlg_FindReplace';
 
 const FOCUS_EVENT = 16;
 
+/// `{008ca0b1-55b4-4c56-b8a8-4de4b299d3be}`.
 final FOLDERID_AccountPictures = GUID.fromComponents(
   0x8ca0b1,
   0x55b4,
@@ -1501,6 +1503,7 @@ final FOLDERID_AccountPictures = GUID.fromComponents(
   .fromList(const [0xb8, 0xa8, 0x4d, 0xe4, 0xb2, 0x99, 0xd3, 0xbe]),
 );
 
+/// `{de61d971-5ebc-4f02-a3a9-6c82895e5c04}`.
 final FOLDERID_AddNewPrograms = GUID.fromComponents(
   0xde61d971,
   0x5ebc,
@@ -1508,6 +1511,7 @@ final FOLDERID_AddNewPrograms = GUID.fromComponents(
   .fromList(const [0xa3, 0xa9, 0x6c, 0x82, 0x89, 0x5e, 0x5c, 0x4]),
 );
 
+/// `{724ef170-a42d-4fef-9f26-b60e846fba4f}`.
 final FOLDERID_AdminTools = GUID.fromComponents(
   0x724ef170,
   0xa42d,
@@ -1515,6 +1519,7 @@ final FOLDERID_AdminTools = GUID.fromComponents(
   .fromList(const [0x9f, 0x26, 0xb6, 0xe, 0x84, 0x6f, 0xba, 0x4f]),
 );
 
+/// `{7ad67899-66af-43ba-9156-6aad42e6c596}`.
 final FOLDERID_AllAppMods = GUID.fromComponents(
   0x7ad67899,
   0x66af,
@@ -1522,6 +1527,7 @@ final FOLDERID_AllAppMods = GUID.fromComponents(
   .fromList(const [0x91, 0x56, 0x6a, 0xad, 0x42, 0xe6, 0xc5, 0x96]),
 );
 
+/// `{edc0fe71-98d8-4f4a-b920-c8dc133cb165}`.
 final FOLDERID_AppCaptures = GUID.fromComponents(
   0xedc0fe71,
   0x98d8,
@@ -1529,6 +1535,7 @@ final FOLDERID_AppCaptures = GUID.fromComponents(
   .fromList(const [0xb9, 0x20, 0xc8, 0xdc, 0x13, 0x3c, 0xb1, 0x65]),
 );
 
+/// `{b2c5e279-7add-439f-b28c-c41fe1bbf672}`.
 final FOLDERID_AppDataDesktop = GUID.fromComponents(
   0xb2c5e279,
   0x7add,
@@ -1536,6 +1543,7 @@ final FOLDERID_AppDataDesktop = GUID.fromComponents(
   .fromList(const [0xb2, 0x8c, 0xc4, 0x1f, 0xe1, 0xbb, 0xf6, 0x72]),
 );
 
+/// `{7be16610-1f7f-44ac-bff0-83e15f2ffca1}`.
 final FOLDERID_AppDataDocuments = GUID.fromComponents(
   0x7be16610,
   0x1f7f,
@@ -1543,6 +1551,7 @@ final FOLDERID_AppDataDocuments = GUID.fromComponents(
   .fromList(const [0xbf, 0xf0, 0x83, 0xe1, 0x5f, 0x2f, 0xfc, 0xa1]),
 );
 
+/// `{7cfbefbc-de1f-45aa-b843-a542ac536cc9}`.
 final FOLDERID_AppDataFavorites = GUID.fromComponents(
   0x7cfbefbc,
   0xde1f,
@@ -1550,6 +1559,7 @@ final FOLDERID_AppDataFavorites = GUID.fromComponents(
   .fromList(const [0xb8, 0x43, 0xa5, 0x42, 0xac, 0x53, 0x6c, 0xc9]),
 );
 
+/// `{559d40a3-a036-40fa-af61-84cb430a4d34}`.
 final FOLDERID_AppDataProgramData = GUID.fromComponents(
   0x559d40a3,
   0xa036,
@@ -1557,6 +1567,7 @@ final FOLDERID_AppDataProgramData = GUID.fromComponents(
   .fromList(const [0xaf, 0x61, 0x84, 0xcb, 0x43, 0xa, 0x4d, 0x34]),
 );
 
+/// `{a305ce99-f527-492b-8b1a-7e76fa98d6e4}`.
 final FOLDERID_AppUpdates = GUID.fromComponents(
   0xa305ce99,
   0xf527,
@@ -1564,6 +1575,7 @@ final FOLDERID_AppUpdates = GUID.fromComponents(
   .fromList(const [0x8b, 0x1a, 0x7e, 0x76, 0xfa, 0x98, 0xd6, 0xe4]),
 );
 
+/// `{a3918781-e5f2-4890-b3d9-a7e54332328c}`.
 final FOLDERID_ApplicationShortcuts = GUID.fromComponents(
   0xa3918781,
   0xe5f2,
@@ -1571,6 +1583,7 @@ final FOLDERID_ApplicationShortcuts = GUID.fromComponents(
   .fromList(const [0xb3, 0xd9, 0xa7, 0xe5, 0x43, 0x32, 0x32, 0x8c]),
 );
 
+/// `{1e87508d-89c2-42f0-8a7e-645a0f50ca58}`.
 final FOLDERID_AppsFolder = GUID.fromComponents(
   0x1e87508d,
   0x89c2,
@@ -1578,6 +1591,7 @@ final FOLDERID_AppsFolder = GUID.fromComponents(
   .fromList(const [0x8a, 0x7e, 0x64, 0x5a, 0xf, 0x50, 0xca, 0x58]),
 );
 
+/// `{9e52ab10-f80d-49df-acb8-4330f5687855}`.
 final FOLDERID_CDBurning = GUID.fromComponents(
   0x9e52ab10,
   0xf80d,
@@ -1585,6 +1599,7 @@ final FOLDERID_CDBurning = GUID.fromComponents(
   .fromList(const [0xac, 0xb8, 0x43, 0x30, 0xf5, 0x68, 0x78, 0x55]),
 );
 
+/// `{ab5fb87b-7ce2-4f83-915d-550846c9537b}`.
 final FOLDERID_CameraRoll = GUID.fromComponents(
   0xab5fb87b,
   0x7ce2,
@@ -1592,6 +1607,7 @@ final FOLDERID_CameraRoll = GUID.fromComponents(
   .fromList(const [0x91, 0x5d, 0x55, 0x8, 0x46, 0xc9, 0x53, 0x7b]),
 );
 
+/// `{2b20df75-1eda-4039-8097-38798227d5b7}`.
 final FOLDERID_CameraRollLibrary = GUID.fromComponents(
   0x2b20df75,
   0x1eda,
@@ -1599,6 +1615,7 @@ final FOLDERID_CameraRollLibrary = GUID.fromComponents(
   .fromList(const [0x80, 0x97, 0x38, 0x79, 0x82, 0x27, 0xd5, 0xb7]),
 );
 
+/// `{df7266ac-9274-4867-8d55-3bd661de872d}`.
 final FOLDERID_ChangeRemovePrograms = GUID.fromComponents(
   0xdf7266ac,
   0x9274,
@@ -1606,6 +1623,7 @@ final FOLDERID_ChangeRemovePrograms = GUID.fromComponents(
   .fromList(const [0x8d, 0x55, 0x3b, 0xd6, 0x61, 0xde, 0x87, 0x2d]),
 );
 
+/// `{d0384e7d-bac3-4797-8f14-cba229b392b5}`.
 final FOLDERID_CommonAdminTools = GUID.fromComponents(
   0xd0384e7d,
   0xbac3,
@@ -1613,6 +1631,7 @@ final FOLDERID_CommonAdminTools = GUID.fromComponents(
   .fromList(const [0x8f, 0x14, 0xcb, 0xa2, 0x29, 0xb3, 0x92, 0xb5]),
 );
 
+/// `{c1bae2d0-10df-4334-bedd-7aa20b227a9d}`.
 final FOLDERID_CommonOEMLinks = GUID.fromComponents(
   0xc1bae2d0,
   0x10df,
@@ -1620,6 +1639,7 @@ final FOLDERID_CommonOEMLinks = GUID.fromComponents(
   .fromList(const [0xbe, 0xdd, 0x7a, 0xa2, 0xb, 0x22, 0x7a, 0x9d]),
 );
 
+/// `{0139d44e-6afe-49f2-8690-3dafcae6ffb8}`.
 final FOLDERID_CommonPrograms = GUID.fromComponents(
   0x139d44e,
   0x6afe,
@@ -1627,6 +1647,7 @@ final FOLDERID_CommonPrograms = GUID.fromComponents(
   .fromList(const [0x86, 0x90, 0x3d, 0xaf, 0xca, 0xe6, 0xff, 0xb8]),
 );
 
+/// `{a4115719-d62e-491d-aa7c-e74b8be3b067}`.
 final FOLDERID_CommonStartMenu = GUID.fromComponents(
   0xa4115719,
   0xd62e,
@@ -1634,6 +1655,7 @@ final FOLDERID_CommonStartMenu = GUID.fromComponents(
   .fromList(const [0xaa, 0x7c, 0xe7, 0x4b, 0x8b, 0xe3, 0xb0, 0x67]),
 );
 
+/// `{a440879f-87a0-4f7d-b700-0207b966194a}`.
 final FOLDERID_CommonStartMenuPlaces = GUID.fromComponents(
   0xa440879f,
   0x87a0,
@@ -1641,6 +1663,7 @@ final FOLDERID_CommonStartMenuPlaces = GUID.fromComponents(
   .fromList(const [0xb7, 0x0, 0x2, 0x7, 0xb9, 0x66, 0x19, 0x4a]),
 );
 
+/// `{82a5ea35-d9cd-47c5-9629-e15d2f714e6e}`.
 final FOLDERID_CommonStartup = GUID.fromComponents(
   0x82a5ea35,
   0xd9cd,
@@ -1648,6 +1671,7 @@ final FOLDERID_CommonStartup = GUID.fromComponents(
   .fromList(const [0x96, 0x29, 0xe1, 0x5d, 0x2f, 0x71, 0x4e, 0x6e]),
 );
 
+/// `{b94237e7-57ac-4347-9151-b08c6c32d1f7}`.
 final FOLDERID_CommonTemplates = GUID.fromComponents(
   0xb94237e7,
   0x57ac,
@@ -1655,6 +1679,7 @@ final FOLDERID_CommonTemplates = GUID.fromComponents(
   .fromList(const [0x91, 0x51, 0xb0, 0x8c, 0x6c, 0x32, 0xd1, 0xf7]),
 );
 
+/// `{0ac0837c-bbf8-452a-850d-79d08e667ca7}`.
 final FOLDERID_ComputerFolder = GUID.fromComponents(
   0xac0837c,
   0xbbf8,
@@ -1662,6 +1687,7 @@ final FOLDERID_ComputerFolder = GUID.fromComponents(
   .fromList(const [0x85, 0xd, 0x79, 0xd0, 0x8e, 0x66, 0x7c, 0xa7]),
 );
 
+/// `{4bfefb45-347d-4006-a5be-ac0cb0567192}`.
 final FOLDERID_ConflictFolder = GUID.fromComponents(
   0x4bfefb45,
   0x347d,
@@ -1669,6 +1695,7 @@ final FOLDERID_ConflictFolder = GUID.fromComponents(
   .fromList(const [0xa5, 0xbe, 0xac, 0xc, 0xb0, 0x56, 0x71, 0x92]),
 );
 
+/// `{6f0cd92b-2e97-45d1-88ff-b0d186b8dedd}`.
 final FOLDERID_ConnectionsFolder = GUID.fromComponents(
   0x6f0cd92b,
   0x2e97,
@@ -1676,6 +1703,7 @@ final FOLDERID_ConnectionsFolder = GUID.fromComponents(
   .fromList(const [0x88, 0xff, 0xb0, 0xd1, 0x86, 0xb8, 0xde, 0xdd]),
 );
 
+/// `{56784854-c6cb-462b-8169-88e350acb882}`.
 final FOLDERID_Contacts = GUID.fromComponents(
   0x56784854,
   0xc6cb,
@@ -1683,6 +1711,7 @@ final FOLDERID_Contacts = GUID.fromComponents(
   .fromList(const [0x81, 0x69, 0x88, 0xe3, 0x50, 0xac, 0xb8, 0x82]),
 );
 
+/// `{82a74aeb-aeb4-465c-a014-d097ee346d63}`.
 final FOLDERID_ControlPanelFolder = GUID.fromComponents(
   0x82a74aeb,
   0xaeb4,
@@ -1690,6 +1719,7 @@ final FOLDERID_ControlPanelFolder = GUID.fromComponents(
   .fromList(const [0xa0, 0x14, 0xd0, 0x97, 0xee, 0x34, 0x6d, 0x63]),
 );
 
+/// `{2b0f765d-c0e9-4171-908e-08a611b84ff6}`.
 final FOLDERID_Cookies = GUID.fromComponents(
   0x2b0f765d,
   0xc0e9,
@@ -1697,6 +1727,7 @@ final FOLDERID_Cookies = GUID.fromComponents(
   .fromList(const [0x90, 0x8e, 0x8, 0xa6, 0x11, 0xb8, 0x4f, 0xf6]),
 );
 
+/// `{3db40b20-2a30-4dbe-917e-771dd21dd099}`.
 final FOLDERID_CurrentAppMods = GUID.fromComponents(
   0x3db40b20,
   0x2a30,
@@ -1704,6 +1735,7 @@ final FOLDERID_CurrentAppMods = GUID.fromComponents(
   .fromList(const [0x91, 0x7e, 0x77, 0x1d, 0xd2, 0x1d, 0xd0, 0x99]),
 );
 
+/// `{b4bfcc3a-db2c-424c-b029-7fe99a87c641}`.
 final FOLDERID_Desktop = GUID.fromComponents(
   0xb4bfcc3a,
   0xdb2c,
@@ -1711,6 +1743,7 @@ final FOLDERID_Desktop = GUID.fromComponents(
   .fromList(const [0xb0, 0x29, 0x7f, 0xe9, 0x9a, 0x87, 0xc6, 0x41]),
 );
 
+/// `{dbe8e08e-3053-4bbc-b183-2a7b2b191e59}`.
 final FOLDERID_DevelopmentFiles = GUID.fromComponents(
   0xdbe8e08e,
   0x3053,
@@ -1718,6 +1751,7 @@ final FOLDERID_DevelopmentFiles = GUID.fromComponents(
   .fromList(const [0xb1, 0x83, 0x2a, 0x7b, 0x2b, 0x19, 0x1e, 0x59]),
 );
 
+/// `{1c2ac1dc-4358-4b6c-9733-af21156576f0}`.
 final FOLDERID_Device = GUID.fromComponents(
   0x1c2ac1dc,
   0x4358,
@@ -1725,6 +1759,7 @@ final FOLDERID_Device = GUID.fromComponents(
   .fromList(const [0x97, 0x33, 0xaf, 0x21, 0x15, 0x65, 0x76, 0xf0]),
 );
 
+/// `{5ce4a5e9-e4eb-479d-b89f-130c02886155}`.
 final FOLDERID_DeviceMetadataStore = GUID.fromComponents(
   0x5ce4a5e9,
   0xe4eb,
@@ -1732,6 +1767,7 @@ final FOLDERID_DeviceMetadataStore = GUID.fromComponents(
   .fromList(const [0xb8, 0x9f, 0x13, 0xc, 0x2, 0x88, 0x61, 0x55]),
 );
 
+/// `{fdd39ad0-238f-46af-adb4-6c85480369c7}`.
 final FOLDERID_Documents = GUID.fromComponents(
   0xfdd39ad0,
   0x238f,
@@ -1739,6 +1775,7 @@ final FOLDERID_Documents = GUID.fromComponents(
   .fromList(const [0xad, 0xb4, 0x6c, 0x85, 0x48, 0x3, 0x69, 0xc7]),
 );
 
+/// `{7b0db17d-9cd2-4a93-9733-46cc89022e7c}`.
 final FOLDERID_DocumentsLibrary = GUID.fromComponents(
   0x7b0db17d,
   0x9cd2,
@@ -1746,6 +1783,7 @@ final FOLDERID_DocumentsLibrary = GUID.fromComponents(
   .fromList(const [0x97, 0x33, 0x46, 0xcc, 0x89, 0x2, 0x2e, 0x7c]),
 );
 
+/// `{374de290-123f-4565-9164-39c4925e467b}`.
 final FOLDERID_Downloads = GUID.fromComponents(
   0x374de290,
   0x123f,
@@ -1753,6 +1791,7 @@ final FOLDERID_Downloads = GUID.fromComponents(
   .fromList(const [0x91, 0x64, 0x39, 0xc4, 0x92, 0x5e, 0x46, 0x7b]),
 );
 
+/// `{1777f761-68ad-4d8a-87bd-30b759fa33dd}`.
 final FOLDERID_Favorites = GUID.fromComponents(
   0x1777f761,
   0x68ad,
@@ -1760,6 +1799,7 @@ final FOLDERID_Favorites = GUID.fromComponents(
   .fromList(const [0x87, 0xbd, 0x30, 0xb7, 0x59, 0xfa, 0x33, 0xdd]),
 );
 
+/// `{fd228cb7-ae11-4ae3-864c-16f3910ab8fe}`.
 final FOLDERID_Fonts = GUID.fromComponents(
   0xfd228cb7,
   0xae11,
@@ -1767,6 +1807,7 @@ final FOLDERID_Fonts = GUID.fromComponents(
   .fromList(const [0x86, 0x4c, 0x16, 0xf3, 0x91, 0xa, 0xb8, 0xfe]),
 );
 
+/// `{054fae61-4dd8-4787-80b6-090220c4b700}`.
 final FOLDERID_GameTasks = GUID.fromComponents(
   0x54fae61,
   0x4dd8,
@@ -1774,6 +1815,7 @@ final FOLDERID_GameTasks = GUID.fromComponents(
   .fromList(const [0x80, 0xb6, 0x9, 0x2, 0x20, 0xc4, 0xb7, 0x0]),
 );
 
+/// `{cac52c1a-b53d-4edc-92d7-6b2e8ac19434}`.
 final FOLDERID_Games = GUID.fromComponents(
   0xcac52c1a,
   0xb53d,
@@ -1781,6 +1823,7 @@ final FOLDERID_Games = GUID.fromComponents(
   .fromList(const [0x92, 0xd7, 0x6b, 0x2e, 0x8a, 0xc1, 0x94, 0x34]),
 );
 
+/// `{d9dc8a3b-b784-432e-a781-5a1130a75963}`.
 final FOLDERID_History = GUID.fromComponents(
   0xd9dc8a3b,
   0xb784,
@@ -1788,6 +1831,7 @@ final FOLDERID_History = GUID.fromComponents(
   .fromList(const [0xa7, 0x81, 0x5a, 0x11, 0x30, 0xa7, 0x59, 0x63]),
 );
 
+/// `{52528a6b-b9e3-4add-b60d-588c2dba842d}`.
 final FOLDERID_HomeGroup = GUID.fromComponents(
   0x52528a6b,
   0xb9e3,
@@ -1795,6 +1839,7 @@ final FOLDERID_HomeGroup = GUID.fromComponents(
   .fromList(const [0xb6, 0xd, 0x58, 0x8c, 0x2d, 0xba, 0x84, 0x2d]),
 );
 
+/// `{9b74b6a3-0dfd-4f11-9e78-5f7800f2e772}`.
 final FOLDERID_HomeGroupCurrentUser = GUID.fromComponents(
   0x9b74b6a3,
   0xdfd,
@@ -1802,6 +1847,7 @@ final FOLDERID_HomeGroupCurrentUser = GUID.fromComponents(
   .fromList(const [0x9e, 0x78, 0x5f, 0x78, 0x0, 0xf2, 0xe7, 0x72]),
 );
 
+/// `{bcb5256f-79f6-4cee-b725-dc34e402fd46}`.
 final FOLDERID_ImplicitAppShortcuts = GUID.fromComponents(
   0xbcb5256f,
   0x79f6,
@@ -1809,6 +1855,7 @@ final FOLDERID_ImplicitAppShortcuts = GUID.fromComponents(
   .fromList(const [0xb7, 0x25, 0xdc, 0x34, 0xe4, 0x2, 0xfd, 0x46]),
 );
 
+/// `{352481e8-33be-4251-ba85-6007caedcf9d}`.
 final FOLDERID_InternetCache = GUID.fromComponents(
   0x352481e8,
   0x33be,
@@ -1816,6 +1863,7 @@ final FOLDERID_InternetCache = GUID.fromComponents(
   .fromList(const [0xba, 0x85, 0x60, 0x7, 0xca, 0xed, 0xcf, 0x9d]),
 );
 
+/// `{4d9f7874-4e0c-4904-967b-40b0d20c3e4b}`.
 final FOLDERID_InternetFolder = GUID.fromComponents(
   0x4d9f7874,
   0x4e0c,
@@ -1823,6 +1871,7 @@ final FOLDERID_InternetFolder = GUID.fromComponents(
   .fromList(const [0x96, 0x7b, 0x40, 0xb0, 0xd2, 0xc, 0x3e, 0x4b]),
 );
 
+/// `{1b3ea5dc-b587-4786-b4ef-bd1dc332aeae}`.
 final FOLDERID_Libraries = GUID.fromComponents(
   0x1b3ea5dc,
   0xb587,
@@ -1830,6 +1879,7 @@ final FOLDERID_Libraries = GUID.fromComponents(
   .fromList(const [0xb4, 0xef, 0xbd, 0x1d, 0xc3, 0x32, 0xae, 0xae]),
 );
 
+/// `{bfb9d5e0-c6a9-404c-b2b2-ae6db6af4968}`.
 final FOLDERID_Links = GUID.fromComponents(
   0xbfb9d5e0,
   0xc6a9,
@@ -1837,6 +1887,7 @@ final FOLDERID_Links = GUID.fromComponents(
   .fromList(const [0xb2, 0xb2, 0xae, 0x6d, 0xb6, 0xaf, 0x49, 0x68]),
 );
 
+/// `{f1b32785-6fba-4fcf-9d55-7b8e7f157091}`.
 final FOLDERID_LocalAppData = GUID.fromComponents(
   0xf1b32785,
   0x6fba,
@@ -1844,6 +1895,7 @@ final FOLDERID_LocalAppData = GUID.fromComponents(
   .fromList(const [0x9d, 0x55, 0x7b, 0x8e, 0x7f, 0x15, 0x70, 0x91]),
 );
 
+/// `{a520a1a4-1780-4ff6-bd18-167343c5af16}`.
 final FOLDERID_LocalAppDataLow = GUID.fromComponents(
   0xa520a1a4,
   0x1780,
@@ -1851,6 +1903,7 @@ final FOLDERID_LocalAppDataLow = GUID.fromComponents(
   .fromList(const [0xbd, 0x18, 0x16, 0x73, 0x43, 0xc5, 0xaf, 0x16]),
 );
 
+/// `{f42ee2d3-909f-4907-8871-4c22fc0bf756}`.
 final FOLDERID_LocalDocuments = GUID.fromComponents(
   0xf42ee2d3,
   0x909f,
@@ -1858,6 +1911,7 @@ final FOLDERID_LocalDocuments = GUID.fromComponents(
   .fromList(const [0x88, 0x71, 0x4c, 0x22, 0xfc, 0xb, 0xf7, 0x56]),
 );
 
+/// `{7d83ee9b-2244-4e70-b1f5-5393042af1e4}`.
 final FOLDERID_LocalDownloads = GUID.fromComponents(
   0x7d83ee9b,
   0x2244,
@@ -1865,6 +1919,7 @@ final FOLDERID_LocalDownloads = GUID.fromComponents(
   .fromList(const [0xb1, 0xf5, 0x53, 0x93, 0x4, 0x2a, 0xf1, 0xe4]),
 );
 
+/// `{a0c69a99-21c8-4671-8703-7934162fcf1d}`.
 final FOLDERID_LocalMusic = GUID.fromComponents(
   0xa0c69a99,
   0x21c8,
@@ -1872,6 +1927,7 @@ final FOLDERID_LocalMusic = GUID.fromComponents(
   .fromList(const [0x87, 0x3, 0x79, 0x34, 0x16, 0x2f, 0xcf, 0x1d]),
 );
 
+/// `{0ddd015d-b06c-45d5-8c4c-f59713854639}`.
 final FOLDERID_LocalPictures = GUID.fromComponents(
   0xddd015d,
   0xb06c,
@@ -1879,6 +1935,7 @@ final FOLDERID_LocalPictures = GUID.fromComponents(
   .fromList(const [0x8c, 0x4c, 0xf5, 0x97, 0x13, 0x85, 0x46, 0x39]),
 );
 
+/// `{35286a68-3c57-41a1-bbb1-0eae73d76c95}`.
 final FOLDERID_LocalVideos = GUID.fromComponents(
   0x35286a68,
   0x3c57,
@@ -1886,6 +1943,7 @@ final FOLDERID_LocalVideos = GUID.fromComponents(
   .fromList(const [0xbb, 0xb1, 0xe, 0xae, 0x73, 0xd7, 0x6c, 0x95]),
 );
 
+/// `{2a00375e-224c-49de-b8d1-440df7ef3ddc}`.
 final FOLDERID_LocalizedResourcesDir = GUID.fromComponents(
   0x2a00375e,
   0x224c,
@@ -1893,6 +1951,7 @@ final FOLDERID_LocalizedResourcesDir = GUID.fromComponents(
   .fromList(const [0xb8, 0xd1, 0x44, 0xd, 0xf7, 0xef, 0x3d, 0xdc]),
 );
 
+/// `{4bd8d571-6d19-48d3-be97-422220080e43}`.
 final FOLDERID_Music = GUID.fromComponents(
   0x4bd8d571,
   0x6d19,
@@ -1900,6 +1959,7 @@ final FOLDERID_Music = GUID.fromComponents(
   .fromList(const [0xbe, 0x97, 0x42, 0x22, 0x20, 0x8, 0xe, 0x43]),
 );
 
+/// `{2112ab0a-c86a-4ffe-a368-0de96e47012e}`.
 final FOLDERID_MusicLibrary = GUID.fromComponents(
   0x2112ab0a,
   0xc86a,
@@ -1907,6 +1967,7 @@ final FOLDERID_MusicLibrary = GUID.fromComponents(
   .fromList(const [0xa3, 0x68, 0xd, 0xe9, 0x6e, 0x47, 0x1, 0x2e]),
 );
 
+/// `{c5abbf53-e17f-4121-8900-86626fc2c973}`.
 final FOLDERID_NetHood = GUID.fromComponents(
   0xc5abbf53,
   0xe17f,
@@ -1914,6 +1975,7 @@ final FOLDERID_NetHood = GUID.fromComponents(
   .fromList(const [0x89, 0x0, 0x86, 0x62, 0x6f, 0xc2, 0xc9, 0x73]),
 );
 
+/// `{d20beec4-5ca8-4905-ae3b-bf251ea09b53}`.
 final FOLDERID_NetworkFolder = GUID.fromComponents(
   0xd20beec4,
   0x5ca8,
@@ -1921,6 +1983,7 @@ final FOLDERID_NetworkFolder = GUID.fromComponents(
   .fromList(const [0xae, 0x3b, 0xbf, 0x25, 0x1e, 0xa0, 0x9b, 0x53]),
 );
 
+/// `{31c0dd25-9439-4f12-bf41-7ff4eda38722}`.
 final FOLDERID_Objects3D = GUID.fromComponents(
   0x31c0dd25,
   0x9439,
@@ -1928,6 +1991,7 @@ final FOLDERID_Objects3D = GUID.fromComponents(
   .fromList(const [0xbf, 0x41, 0x7f, 0xf4, 0xed, 0xa3, 0x87, 0x22]),
 );
 
+/// `{a52bba46-e9e1-435f-b3d9-28daa648c0f6}`.
 final FOLDERID_OneDrive = GUID.fromComponents(
   0xa52bba46,
   0xe9e1,
@@ -1935,6 +1999,7 @@ final FOLDERID_OneDrive = GUID.fromComponents(
   .fromList(const [0xb3, 0xd9, 0x28, 0xda, 0xa6, 0x48, 0xc0, 0xf6]),
 );
 
+/// `{2c36c0aa-5812-4b87-bfd0-4cd0dfb19b39}`.
 final FOLDERID_OriginalImages = GUID.fromComponents(
   0x2c36c0aa,
   0x5812,
@@ -1942,6 +2007,7 @@ final FOLDERID_OriginalImages = GUID.fromComponents(
   .fromList(const [0xbf, 0xd0, 0x4c, 0xd0, 0xdf, 0xb1, 0x9b, 0x39]),
 );
 
+/// `{69d2cf90-fc33-4fb7-9a0c-ebb0f0fcb43c}`.
 final FOLDERID_PhotoAlbums = GUID.fromComponents(
   0x69d2cf90,
   0xfc33,
@@ -1949,6 +2015,7 @@ final FOLDERID_PhotoAlbums = GUID.fromComponents(
   .fromList(const [0x9a, 0xc, 0xeb, 0xb0, 0xf0, 0xfc, 0xb4, 0x3c]),
 );
 
+/// `{33e28130-4e1e-4676-835a-98395c3bc3bb}`.
 final FOLDERID_Pictures = GUID.fromComponents(
   0x33e28130,
   0x4e1e,
@@ -1956,6 +2023,7 @@ final FOLDERID_Pictures = GUID.fromComponents(
   .fromList(const [0x83, 0x5a, 0x98, 0x39, 0x5c, 0x3b, 0xc3, 0xbb]),
 );
 
+/// `{a990ae9f-a03b-4e80-94bc-9912d7504104}`.
 final FOLDERID_PicturesLibrary = GUID.fromComponents(
   0xa990ae9f,
   0xa03b,
@@ -1963,6 +2031,7 @@ final FOLDERID_PicturesLibrary = GUID.fromComponents(
   .fromList(const [0x94, 0xbc, 0x99, 0x12, 0xd7, 0x50, 0x41, 0x4]),
 );
 
+/// `{de92c1c7-837f-4f69-a3bb-86e631204a23}`.
 final FOLDERID_Playlists = GUID.fromComponents(
   0xde92c1c7,
   0x837f,
@@ -1970,6 +2039,7 @@ final FOLDERID_Playlists = GUID.fromComponents(
   .fromList(const [0xa3, 0xbb, 0x86, 0xe6, 0x31, 0x20, 0x4a, 0x23]),
 );
 
+/// `{9274bd8d-cfd1-41c3-b35e-b13f55a758f4}`.
 final FOLDERID_PrintHood = GUID.fromComponents(
   0x9274bd8d,
   0xcfd1,
@@ -1977,6 +2047,7 @@ final FOLDERID_PrintHood = GUID.fromComponents(
   .fromList(const [0xb3, 0x5e, 0xb1, 0x3f, 0x55, 0xa7, 0x58, 0xf4]),
 );
 
+/// `{76fc4e2d-d6ad-4519-a663-37bd56068185}`.
 final FOLDERID_PrintersFolder = GUID.fromComponents(
   0x76fc4e2d,
   0xd6ad,
@@ -1984,6 +2055,7 @@ final FOLDERID_PrintersFolder = GUID.fromComponents(
   .fromList(const [0xa6, 0x63, 0x37, 0xbd, 0x56, 0x6, 0x81, 0x85]),
 );
 
+/// `{5e6c858f-0e22-4760-9afe-ea3317b67173}`.
 final FOLDERID_Profile = GUID.fromComponents(
   0x5e6c858f,
   0xe22,
@@ -1991,6 +2063,7 @@ final FOLDERID_Profile = GUID.fromComponents(
   .fromList(const [0x9a, 0xfe, 0xea, 0x33, 0x17, 0xb6, 0x71, 0x73]),
 );
 
+/// `{62ab5d82-fdc1-4dc3-a9dd-070d1d495d97}`.
 final FOLDERID_ProgramData = GUID.fromComponents(
   0x62ab5d82,
   0xfdc1,
@@ -1998,6 +2071,7 @@ final FOLDERID_ProgramData = GUID.fromComponents(
   .fromList(const [0xa9, 0xdd, 0x7, 0xd, 0x1d, 0x49, 0x5d, 0x97]),
 );
 
+/// `{905e63b6-c1bf-494e-b29c-65b732d3d21a}`.
 final FOLDERID_ProgramFiles = GUID.fromComponents(
   0x905e63b6,
   0xc1bf,
@@ -2005,6 +2079,7 @@ final FOLDERID_ProgramFiles = GUID.fromComponents(
   .fromList(const [0xb2, 0x9c, 0x65, 0xb7, 0x32, 0xd3, 0xd2, 0x1a]),
 );
 
+/// `{f7f1ed05-9f6d-47a2-aaae-29d317c6f066}`.
 final FOLDERID_ProgramFilesCommon = GUID.fromComponents(
   0xf7f1ed05,
   0x9f6d,
@@ -2012,6 +2087,7 @@ final FOLDERID_ProgramFilesCommon = GUID.fromComponents(
   .fromList(const [0xaa, 0xae, 0x29, 0xd3, 0x17, 0xc6, 0xf0, 0x66]),
 );
 
+/// `{6365d5a7-0f0d-45e5-87f6-0da56b6a4f7d}`.
 final FOLDERID_ProgramFilesCommonX64 = GUID.fromComponents(
   0x6365d5a7,
   0xf0d,
@@ -2019,6 +2095,7 @@ final FOLDERID_ProgramFilesCommonX64 = GUID.fromComponents(
   .fromList(const [0x87, 0xf6, 0xd, 0xa5, 0x6b, 0x6a, 0x4f, 0x7d]),
 );
 
+/// `{de974d24-d9c6-4d3e-bf91-f4455120b917}`.
 final FOLDERID_ProgramFilesCommonX86 = GUID.fromComponents(
   0xde974d24,
   0xd9c6,
@@ -2026,6 +2103,7 @@ final FOLDERID_ProgramFilesCommonX86 = GUID.fromComponents(
   .fromList(const [0xbf, 0x91, 0xf4, 0x45, 0x51, 0x20, 0xb9, 0x17]),
 );
 
+/// `{6d809377-6af0-444b-8957-a3773f02200e}`.
 final FOLDERID_ProgramFilesX64 = GUID.fromComponents(
   0x6d809377,
   0x6af0,
@@ -2033,6 +2111,7 @@ final FOLDERID_ProgramFilesX64 = GUID.fromComponents(
   .fromList(const [0x89, 0x57, 0xa3, 0x77, 0x3f, 0x2, 0x20, 0xe]),
 );
 
+/// `{7c5a40ef-a0fb-4bfc-874a-c0f2e0b9fa8e}`.
 final FOLDERID_ProgramFilesX86 = GUID.fromComponents(
   0x7c5a40ef,
   0xa0fb,
@@ -2040,6 +2119,7 @@ final FOLDERID_ProgramFilesX86 = GUID.fromComponents(
   .fromList(const [0x87, 0x4a, 0xc0, 0xf2, 0xe0, 0xb9, 0xfa, 0x8e]),
 );
 
+/// `{a77f5d77-2e2b-44c3-a6a2-aba601054a51}`.
 final FOLDERID_Programs = GUID.fromComponents(
   0xa77f5d77,
   0x2e2b,
@@ -2047,6 +2127,7 @@ final FOLDERID_Programs = GUID.fromComponents(
   .fromList(const [0xa6, 0xa2, 0xab, 0xa6, 0x1, 0x5, 0x4a, 0x51]),
 );
 
+/// `{dfdf76a2-c82a-4d63-906a-5644ac457385}`.
 final FOLDERID_Public = GUID.fromComponents(
   0xdfdf76a2,
   0xc82a,
@@ -2054,6 +2135,7 @@ final FOLDERID_Public = GUID.fromComponents(
   .fromList(const [0x90, 0x6a, 0x56, 0x44, 0xac, 0x45, 0x73, 0x85]),
 );
 
+/// `{c4aa340d-f20f-4863-afef-f87ef2e6ba25}`.
 final FOLDERID_PublicDesktop = GUID.fromComponents(
   0xc4aa340d,
   0xf20f,
@@ -2061,6 +2143,7 @@ final FOLDERID_PublicDesktop = GUID.fromComponents(
   .fromList(const [0xaf, 0xef, 0xf8, 0x7e, 0xf2, 0xe6, 0xba, 0x25]),
 );
 
+/// `{ed4824af-dce4-45a8-81e2-fc7965083634}`.
 final FOLDERID_PublicDocuments = GUID.fromComponents(
   0xed4824af,
   0xdce4,
@@ -2068,6 +2151,7 @@ final FOLDERID_PublicDocuments = GUID.fromComponents(
   .fromList(const [0x81, 0xe2, 0xfc, 0x79, 0x65, 0x8, 0x36, 0x34]),
 );
 
+/// `{3d644c9b-1fb8-4f30-9b45-f670235f79c0}`.
 final FOLDERID_PublicDownloads = GUID.fromComponents(
   0x3d644c9b,
   0x1fb8,
@@ -2075,6 +2159,7 @@ final FOLDERID_PublicDownloads = GUID.fromComponents(
   .fromList(const [0x9b, 0x45, 0xf6, 0x70, 0x23, 0x5f, 0x79, 0xc0]),
 );
 
+/// `{debf2536-e1a8-4c59-b6a2-414586476aea}`.
 final FOLDERID_PublicGameTasks = GUID.fromComponents(
   0xdebf2536,
   0xe1a8,
@@ -2082,6 +2167,7 @@ final FOLDERID_PublicGameTasks = GUID.fromComponents(
   .fromList(const [0xb6, 0xa2, 0x41, 0x45, 0x86, 0x47, 0x6a, 0xea]),
 );
 
+/// `{48daf80b-e6cf-4f4e-b800-0e69d84ee384}`.
 final FOLDERID_PublicLibraries = GUID.fromComponents(
   0x48daf80b,
   0xe6cf,
@@ -2089,6 +2175,7 @@ final FOLDERID_PublicLibraries = GUID.fromComponents(
   .fromList(const [0xb8, 0x0, 0xe, 0x69, 0xd8, 0x4e, 0xe3, 0x84]),
 );
 
+/// `{3214fab5-9757-4298-bb61-92a9deaa44ff}`.
 final FOLDERID_PublicMusic = GUID.fromComponents(
   0x3214fab5,
   0x9757,
@@ -2096,6 +2183,7 @@ final FOLDERID_PublicMusic = GUID.fromComponents(
   .fromList(const [0xbb, 0x61, 0x92, 0xa9, 0xde, 0xaa, 0x44, 0xff]),
 );
 
+/// `{b6ebfb86-6907-413c-9af7-4fc2abf07cc5}`.
 final FOLDERID_PublicPictures = GUID.fromComponents(
   0xb6ebfb86,
   0x6907,
@@ -2103,6 +2191,7 @@ final FOLDERID_PublicPictures = GUID.fromComponents(
   .fromList(const [0x9a, 0xf7, 0x4f, 0xc2, 0xab, 0xf0, 0x7c, 0xc5]),
 );
 
+/// `{e555ab60-153b-4d17-9f04-a5fe99fc15ec}`.
 final FOLDERID_PublicRingtones = GUID.fromComponents(
   0xe555ab60,
   0x153b,
@@ -2110,6 +2199,7 @@ final FOLDERID_PublicRingtones = GUID.fromComponents(
   .fromList(const [0x9f, 0x4, 0xa5, 0xfe, 0x99, 0xfc, 0x15, 0xec]),
 );
 
+/// `{0482af6c-08f1-4c34-8c90-e17ec98b1e17}`.
 final FOLDERID_PublicUserTiles = GUID.fromComponents(
   0x482af6c,
   0x8f1,
@@ -2117,6 +2207,7 @@ final FOLDERID_PublicUserTiles = GUID.fromComponents(
   .fromList(const [0x8c, 0x90, 0xe1, 0x7e, 0xc9, 0x8b, 0x1e, 0x17]),
 );
 
+/// `{2400183a-6185-49fb-a2d8-4a392a602ba3}`.
 final FOLDERID_PublicVideos = GUID.fromComponents(
   0x2400183a,
   0x6185,
@@ -2124,6 +2215,7 @@ final FOLDERID_PublicVideos = GUID.fromComponents(
   .fromList(const [0xa2, 0xd8, 0x4a, 0x39, 0x2a, 0x60, 0x2b, 0xa3]),
 );
 
+/// `{52a4f021-7b75-48a9-9f6b-4b87a210bc8f}`.
 final FOLDERID_QuickLaunch = GUID.fromComponents(
   0x52a4f021,
   0x7b75,
@@ -2131,6 +2223,7 @@ final FOLDERID_QuickLaunch = GUID.fromComponents(
   .fromList(const [0x9f, 0x6b, 0x4b, 0x87, 0xa2, 0x10, 0xbc, 0x8f]),
 );
 
+/// `{ae50c081-ebd2-438a-8655-8a092e34987a}`.
 final FOLDERID_Recent = GUID.fromComponents(
   0xae50c081,
   0xebd2,
@@ -2138,6 +2231,7 @@ final FOLDERID_Recent = GUID.fromComponents(
   .fromList(const [0x86, 0x55, 0x8a, 0x9, 0x2e, 0x34, 0x98, 0x7a]),
 );
 
+/// `{2f8b40c2-83ed-48ee-b383-a1f157ec6f9a}`.
 final FOLDERID_RecordedCalls = GUID.fromComponents(
   0x2f8b40c2,
   0x83ed,
@@ -2145,6 +2239,7 @@ final FOLDERID_RecordedCalls = GUID.fromComponents(
   .fromList(const [0xb3, 0x83, 0xa1, 0xf1, 0x57, 0xec, 0x6f, 0x9a]),
 );
 
+/// `{1a6fdba2-f42d-4358-a798-b74d745926c5}`.
 final FOLDERID_RecordedTVLibrary = GUID.fromComponents(
   0x1a6fdba2,
   0xf42d,
@@ -2152,6 +2247,7 @@ final FOLDERID_RecordedTVLibrary = GUID.fromComponents(
   .fromList(const [0xa7, 0x98, 0xb7, 0x4d, 0x74, 0x59, 0x26, 0xc5]),
 );
 
+/// `{b7534046-3ecb-4c18-be4e-64cd4cb7d6ac}`.
 final FOLDERID_RecycleBinFolder = GUID.fromComponents(
   0xb7534046,
   0x3ecb,
@@ -2159,6 +2255,7 @@ final FOLDERID_RecycleBinFolder = GUID.fromComponents(
   .fromList(const [0xbe, 0x4e, 0x64, 0xcd, 0x4c, 0xb7, 0xd6, 0xac]),
 );
 
+/// `{8ad10c31-2adb-4296-a8f7-e4701232c972}`.
 final FOLDERID_ResourceDir = GUID.fromComponents(
   0x8ad10c31,
   0x2adb,
@@ -2166,6 +2263,7 @@ final FOLDERID_ResourceDir = GUID.fromComponents(
   .fromList(const [0xa8, 0xf7, 0xe4, 0x70, 0x12, 0x32, 0xc9, 0x72]),
 );
 
+/// `{12d4c69e-24ad-4923-be19-31321c43a767}`.
 final FOLDERID_RetailDemo = GUID.fromComponents(
   0x12d4c69e,
   0x24ad,
@@ -2173,6 +2271,7 @@ final FOLDERID_RetailDemo = GUID.fromComponents(
   .fromList(const [0xbe, 0x19, 0x31, 0x32, 0x1c, 0x43, 0xa7, 0x67]),
 );
 
+/// `{c870044b-f49e-4126-a9c3-b52a1ff411e8}`.
 final FOLDERID_Ringtones = GUID.fromComponents(
   0xc870044b,
   0xf49e,
@@ -2180,6 +2279,7 @@ final FOLDERID_Ringtones = GUID.fromComponents(
   .fromList(const [0xa9, 0xc3, 0xb5, 0x2a, 0x1f, 0xf4, 0x11, 0xe8]),
 );
 
+/// `{aaa8d5a5-f1d6-4259-baa8-78e7ef60835e}`.
 final FOLDERID_RoamedTileImages = GUID.fromComponents(
   0xaaa8d5a5,
   0xf1d6,
@@ -2187,6 +2287,7 @@ final FOLDERID_RoamedTileImages = GUID.fromComponents(
   .fromList(const [0xba, 0xa8, 0x78, 0xe7, 0xef, 0x60, 0x83, 0x5e]),
 );
 
+/// `{3eb685db-65f9-4cf6-a03a-e3ef65729f3d}`.
 final FOLDERID_RoamingAppData = GUID.fromComponents(
   0x3eb685db,
   0x65f9,
@@ -2194,6 +2295,7 @@ final FOLDERID_RoamingAppData = GUID.fromComponents(
   .fromList(const [0xa0, 0x3a, 0xe3, 0xef, 0x65, 0x72, 0x9f, 0x3d]),
 );
 
+/// `{00bcfc5a-ed94-4e48-96a1-3f6217f21990}`.
 final FOLDERID_RoamingTiles = GUID.fromComponents(
   0xbcfc5a,
   0xed94,
@@ -2201,6 +2303,7 @@ final FOLDERID_RoamingTiles = GUID.fromComponents(
   .fromList(const [0x96, 0xa1, 0x3f, 0x62, 0x17, 0xf2, 0x19, 0x90]),
 );
 
+/// `{ee32e446-31ca-4aba-814f-a5ebd2fd6d5e}`.
 final FOLDERID_SEARCH_CSC = GUID.fromComponents(
   0xee32e446,
   0x31ca,
@@ -2208,6 +2311,7 @@ final FOLDERID_SEARCH_CSC = GUID.fromComponents(
   .fromList(const [0x81, 0x4f, 0xa5, 0xeb, 0xd2, 0xfd, 0x6d, 0x5e]),
 );
 
+/// `{98ec0e18-2098-4d44-8644-66979315a281}`.
 final FOLDERID_SEARCH_MAPI = GUID.fromComponents(
   0x98ec0e18,
   0x2098,
@@ -2215,6 +2319,7 @@ final FOLDERID_SEARCH_MAPI = GUID.fromComponents(
   .fromList(const [0x86, 0x44, 0x66, 0x97, 0x93, 0x15, 0xa2, 0x81]),
 );
 
+/// `{b250c668-f57d-4ee1-a63c-290ee7d1aa1f}`.
 final FOLDERID_SampleMusic = GUID.fromComponents(
   0xb250c668,
   0xf57d,
@@ -2222,6 +2327,7 @@ final FOLDERID_SampleMusic = GUID.fromComponents(
   .fromList(const [0xa6, 0x3c, 0x29, 0xe, 0xe7, 0xd1, 0xaa, 0x1f]),
 );
 
+/// `{c4900540-2379-4c75-844b-64e6faf8716b}`.
 final FOLDERID_SamplePictures = GUID.fromComponents(
   0xc4900540,
   0x2379,
@@ -2229,6 +2335,7 @@ final FOLDERID_SamplePictures = GUID.fromComponents(
   .fromList(const [0x84, 0x4b, 0x64, 0xe6, 0xfa, 0xf8, 0x71, 0x6b]),
 );
 
+/// `{15ca69b3-30ee-49c1-ace1-6b5ec372afb5}`.
 final FOLDERID_SamplePlaylists = GUID.fromComponents(
   0x15ca69b3,
   0x30ee,
@@ -2236,6 +2343,7 @@ final FOLDERID_SamplePlaylists = GUID.fromComponents(
   .fromList(const [0xac, 0xe1, 0x6b, 0x5e, 0xc3, 0x72, 0xaf, 0xb5]),
 );
 
+/// `{859ead94-2e85-48ad-a71a-0969cb56a6cd}`.
 final FOLDERID_SampleVideos = GUID.fromComponents(
   0x859ead94,
   0x2e85,
@@ -2243,6 +2351,7 @@ final FOLDERID_SampleVideos = GUID.fromComponents(
   .fromList(const [0xa7, 0x1a, 0x9, 0x69, 0xcb, 0x56, 0xa6, 0xcd]),
 );
 
+/// `{4c5c32ff-bb9d-43b0-b5b4-2d72e54eaaa4}`.
 final FOLDERID_SavedGames = GUID.fromComponents(
   0x4c5c32ff,
   0xbb9d,
@@ -2250,6 +2359,7 @@ final FOLDERID_SavedGames = GUID.fromComponents(
   .fromList(const [0xb5, 0xb4, 0x2d, 0x72, 0xe5, 0x4e, 0xaa, 0xa4]),
 );
 
+/// `{3b193882-d3ad-4eab-965a-69829d1fb59f}`.
 final FOLDERID_SavedPictures = GUID.fromComponents(
   0x3b193882,
   0xd3ad,
@@ -2257,6 +2367,7 @@ final FOLDERID_SavedPictures = GUID.fromComponents(
   .fromList(const [0x96, 0x5a, 0x69, 0x82, 0x9d, 0x1f, 0xb5, 0x9f]),
 );
 
+/// `{e25b5812-be88-4bd9-94b0-29233477b6c3}`.
 final FOLDERID_SavedPicturesLibrary = GUID.fromComponents(
   0xe25b5812,
   0xbe88,
@@ -2264,6 +2375,7 @@ final FOLDERID_SavedPicturesLibrary = GUID.fromComponents(
   .fromList(const [0x94, 0xb0, 0x29, 0x23, 0x34, 0x77, 0xb6, 0xc3]),
 );
 
+/// `{7d1d3a04-debb-4115-95cf-2f29da2920da}`.
 final FOLDERID_SavedSearches = GUID.fromComponents(
   0x7d1d3a04,
   0xdebb,
@@ -2271,6 +2383,7 @@ final FOLDERID_SavedSearches = GUID.fromComponents(
   .fromList(const [0x95, 0xcf, 0x2f, 0x29, 0xda, 0x29, 0x20, 0xda]),
 );
 
+/// `{b7bede81-df94-4682-a7d8-57a52620b86f}`.
 final FOLDERID_Screenshots = GUID.fromComponents(
   0xb7bede81,
   0xdf94,
@@ -2278,6 +2391,7 @@ final FOLDERID_Screenshots = GUID.fromComponents(
   .fromList(const [0xa7, 0xd8, 0x57, 0xa5, 0x26, 0x20, 0xb8, 0x6f]),
 );
 
+/// `{0d4c3db6-03a3-462f-a0e6-08924c41b5d4}`.
 final FOLDERID_SearchHistory = GUID.fromComponents(
   0xd4c3db6,
   0x3a3,
@@ -2285,6 +2399,7 @@ final FOLDERID_SearchHistory = GUID.fromComponents(
   .fromList(const [0xa0, 0xe6, 0x8, 0x92, 0x4c, 0x41, 0xb5, 0xd4]),
 );
 
+/// `{190337d1-b8ca-4121-a639-6d472d16972a}`.
 final FOLDERID_SearchHome = GUID.fromComponents(
   0x190337d1,
   0xb8ca,
@@ -2292,6 +2407,7 @@ final FOLDERID_SearchHome = GUID.fromComponents(
   .fromList(const [0xa6, 0x39, 0x6d, 0x47, 0x2d, 0x16, 0x97, 0x2a]),
 );
 
+/// `{7e636bfe-dfa9-4d5e-b456-d7b39851d8a9}`.
 final FOLDERID_SearchTemplates = GUID.fromComponents(
   0x7e636bfe,
   0xdfa9,
@@ -2299,6 +2415,7 @@ final FOLDERID_SearchTemplates = GUID.fromComponents(
   .fromList(const [0xb4, 0x56, 0xd7, 0xb3, 0x98, 0x51, 0xd8, 0xa9]),
 );
 
+/// `{8983036c-27c0-404b-8f08-102d10dcfd74}`.
 final FOLDERID_SendTo = GUID.fromComponents(
   0x8983036c,
   0x27c0,
@@ -2306,6 +2423,7 @@ final FOLDERID_SendTo = GUID.fromComponents(
   .fromList(const [0x8f, 0x8, 0x10, 0x2d, 0x10, 0xdc, 0xfd, 0x74]),
 );
 
+/// `{7b396e54-9ec5-4300-be0a-2482ebae1a26}`.
 final FOLDERID_SidebarDefaultParts = GUID.fromComponents(
   0x7b396e54,
   0x9ec5,
@@ -2313,6 +2431,7 @@ final FOLDERID_SidebarDefaultParts = GUID.fromComponents(
   .fromList(const [0xbe, 0xa, 0x24, 0x82, 0xeb, 0xae, 0x1a, 0x26]),
 );
 
+/// `{a75d362e-50fc-4fb7-ac2c-a8beaa314493}`.
 final FOLDERID_SidebarParts = GUID.fromComponents(
   0xa75d362e,
   0x50fc,
@@ -2320,6 +2439,7 @@ final FOLDERID_SidebarParts = GUID.fromComponents(
   .fromList(const [0xac, 0x2c, 0xa8, 0xbe, 0xaa, 0x31, 0x44, 0x93]),
 );
 
+/// `{a52bba46-e9e1-435f-b3d9-28daa648c0f6}`.
 final FOLDERID_SkyDrive = GUID.fromComponents(
   0xa52bba46,
   0xe9e1,
@@ -2327,6 +2447,7 @@ final FOLDERID_SkyDrive = GUID.fromComponents(
   .fromList(const [0xb3, 0xd9, 0x28, 0xda, 0xa6, 0x48, 0xc0, 0xf6]),
 );
 
+/// `{767e6811-49cb-4273-87c2-20f355e1085b}`.
 final FOLDERID_SkyDriveCameraRoll = GUID.fromComponents(
   0x767e6811,
   0x49cb,
@@ -2334,6 +2455,7 @@ final FOLDERID_SkyDriveCameraRoll = GUID.fromComponents(
   .fromList(const [0x87, 0xc2, 0x20, 0xf3, 0x55, 0xe1, 0x8, 0x5b]),
 );
 
+/// `{24d89e24-2f19-4534-9dde-6a6671fbb8fe}`.
 final FOLDERID_SkyDriveDocuments = GUID.fromComponents(
   0x24d89e24,
   0x2f19,
@@ -2341,6 +2463,7 @@ final FOLDERID_SkyDriveDocuments = GUID.fromComponents(
   .fromList(const [0x9d, 0xde, 0x6a, 0x66, 0x71, 0xfb, 0xb8, 0xfe]),
 );
 
+/// `{c3f2459e-80d6-45dc-bfef-1f769f2be730}`.
 final FOLDERID_SkyDriveMusic = GUID.fromComponents(
   0xc3f2459e,
   0x80d6,
@@ -2348,6 +2471,7 @@ final FOLDERID_SkyDriveMusic = GUID.fromComponents(
   .fromList(const [0xbf, 0xef, 0x1f, 0x76, 0x9f, 0x2b, 0xe7, 0x30]),
 );
 
+/// `{339719b5-8c47-4894-94c2-d8f77add44a6}`.
 final FOLDERID_SkyDrivePictures = GUID.fromComponents(
   0x339719b5,
   0x8c47,
@@ -2355,6 +2479,7 @@ final FOLDERID_SkyDrivePictures = GUID.fromComponents(
   .fromList(const [0x94, 0xc2, 0xd8, 0xf7, 0x7a, 0xdd, 0x44, 0xa6]),
 );
 
+/// `{625b53c3-ab48-4ec1-ba1f-a1ef4146fc19}`.
 final FOLDERID_StartMenu = GUID.fromComponents(
   0x625b53c3,
   0xab48,
@@ -2362,6 +2487,7 @@ final FOLDERID_StartMenu = GUID.fromComponents(
   .fromList(const [0xba, 0x1f, 0xa1, 0xef, 0x41, 0x46, 0xfc, 0x19]),
 );
 
+/// `{f26305ef-6948-40b9-b255-81453d09c785}`.
 final FOLDERID_StartMenuAllPrograms = GUID.fromComponents(
   0xf26305ef,
   0x6948,
@@ -2369,6 +2495,7 @@ final FOLDERID_StartMenuAllPrograms = GUID.fromComponents(
   .fromList(const [0xb2, 0x55, 0x81, 0x45, 0x3d, 0x9, 0xc7, 0x85]),
 );
 
+/// `{b97d20bb-f46a-4c97-ba10-5e3608430854}`.
 final FOLDERID_Startup = GUID.fromComponents(
   0xb97d20bb,
   0xf46a,
@@ -2376,6 +2503,7 @@ final FOLDERID_Startup = GUID.fromComponents(
   .fromList(const [0xba, 0x10, 0x5e, 0x36, 0x8, 0x43, 0x8, 0x54]),
 );
 
+/// `{43668bf8-c14e-49b2-97c9-747784d784b7}`.
 final FOLDERID_SyncManagerFolder = GUID.fromComponents(
   0x43668bf8,
   0xc14e,
@@ -2383,6 +2511,7 @@ final FOLDERID_SyncManagerFolder = GUID.fromComponents(
   .fromList(const [0x97, 0xc9, 0x74, 0x77, 0x84, 0xd7, 0x84, 0xb7]),
 );
 
+/// `{289a9a43-be44-4057-a41b-587a76d7e7f9}`.
 final FOLDERID_SyncResultsFolder = GUID.fromComponents(
   0x289a9a43,
   0xbe44,
@@ -2390,6 +2519,7 @@ final FOLDERID_SyncResultsFolder = GUID.fromComponents(
   .fromList(const [0xa4, 0x1b, 0x58, 0x7a, 0x76, 0xd7, 0xe7, 0xf9]),
 );
 
+/// `{0f214138-b1d3-4a90-bba9-27cbc0c5389a}`.
 final FOLDERID_SyncSetupFolder = GUID.fromComponents(
   0xf214138,
   0xb1d3,
@@ -2397,6 +2527,7 @@ final FOLDERID_SyncSetupFolder = GUID.fromComponents(
   .fromList(const [0xbb, 0xa9, 0x27, 0xcb, 0xc0, 0xc5, 0x38, 0x9a]),
 );
 
+/// `{1ac14e77-02e7-4e5d-b744-2eb1ae5198b7}`.
 final FOLDERID_System = GUID.fromComponents(
   0x1ac14e77,
   0x2e7,
@@ -2404,6 +2535,7 @@ final FOLDERID_System = GUID.fromComponents(
   .fromList(const [0xb7, 0x44, 0x2e, 0xb1, 0xae, 0x51, 0x98, 0xb7]),
 );
 
+/// `{d65231b0-b2f1-4857-a4ce-a8e7c6ea7d27}`.
 final FOLDERID_SystemX86 = GUID.fromComponents(
   0xd65231b0,
   0xb2f1,
@@ -2411,6 +2543,7 @@ final FOLDERID_SystemX86 = GUID.fromComponents(
   .fromList(const [0xa4, 0xce, 0xa8, 0xe7, 0xc6, 0xea, 0x7d, 0x27]),
 );
 
+/// `{a63293e8-664e-48db-a079-df759e0509f7}`.
 final FOLDERID_Templates = GUID.fromComponents(
   0xa63293e8,
   0x664e,
@@ -2418,6 +2551,7 @@ final FOLDERID_Templates = GUID.fromComponents(
   .fromList(const [0xa0, 0x79, 0xdf, 0x75, 0x9e, 0x5, 0x9, 0xf7]),
 );
 
+/// `{9e3995ab-1f9c-4f13-b827-48b24b6c7174}`.
 final FOLDERID_UserPinned = GUID.fromComponents(
   0x9e3995ab,
   0x1f9c,
@@ -2425,6 +2559,7 @@ final FOLDERID_UserPinned = GUID.fromComponents(
   .fromList(const [0xb8, 0x27, 0x48, 0xb2, 0x4b, 0x6c, 0x71, 0x74]),
 );
 
+/// `{0762d272-c50a-4bb0-a382-697dcd729b80}`.
 final FOLDERID_UserProfiles = GUID.fromComponents(
   0x762d272,
   0xc50a,
@@ -2432,6 +2567,7 @@ final FOLDERID_UserProfiles = GUID.fromComponents(
   .fromList(const [0xa3, 0x82, 0x69, 0x7d, 0xcd, 0x72, 0x9b, 0x80]),
 );
 
+/// `{5cd7aee2-2219-4a67-b85d-6c9ce15660cb}`.
 final FOLDERID_UserProgramFiles = GUID.fromComponents(
   0x5cd7aee2,
   0x2219,
@@ -2439,6 +2575,7 @@ final FOLDERID_UserProgramFiles = GUID.fromComponents(
   .fromList(const [0xb8, 0x5d, 0x6c, 0x9c, 0xe1, 0x56, 0x60, 0xcb]),
 );
 
+/// `{bcbd3057-ca5c-4622-b42d-bc56db0ae516}`.
 final FOLDERID_UserProgramFilesCommon = GUID.fromComponents(
   0xbcbd3057,
   0xca5c,
@@ -2446,6 +2583,7 @@ final FOLDERID_UserProgramFilesCommon = GUID.fromComponents(
   .fromList(const [0xb4, 0x2d, 0xbc, 0x56, 0xdb, 0xa, 0xe5, 0x16]),
 );
 
+/// `{f3ce0f7c-4901-4acc-8648-d5d44b04ef8f}`.
 final FOLDERID_UsersFiles = GUID.fromComponents(
   0xf3ce0f7c,
   0x4901,
@@ -2453,6 +2591,7 @@ final FOLDERID_UsersFiles = GUID.fromComponents(
   .fromList(const [0x86, 0x48, 0xd5, 0xd4, 0x4b, 0x4, 0xef, 0x8f]),
 );
 
+/// `{a302545d-deff-464b-abe8-61c8648d939b}`.
 final FOLDERID_UsersLibraries = GUID.fromComponents(
   0xa302545d,
   0xdeff,
@@ -2460,6 +2599,7 @@ final FOLDERID_UsersLibraries = GUID.fromComponents(
   .fromList(const [0xab, 0xe8, 0x61, 0xc8, 0x64, 0x8d, 0x93, 0x9b]),
 );
 
+/// `{18989b1d-99b5-455b-841c-ab7c74e4ddfc}`.
 final FOLDERID_Videos = GUID.fromComponents(
   0x18989b1d,
   0x99b5,
@@ -2467,6 +2607,7 @@ final FOLDERID_Videos = GUID.fromComponents(
   .fromList(const [0x84, 0x1c, 0xab, 0x7c, 0x74, 0xe4, 0xdd, 0xfc]),
 );
 
+/// `{491e922f-5643-4af4-a7eb-4e7a138d8174}`.
 final FOLDERID_VideosLibrary = GUID.fromComponents(
   0x491e922f,
   0x5643,
@@ -2474,6 +2615,7 @@ final FOLDERID_VideosLibrary = GUID.fromComponents(
   .fromList(const [0xa7, 0xeb, 0x4e, 0x7a, 0x13, 0x8d, 0x81, 0x74]),
 );
 
+/// `{f38bf404-1d43-42f2-9305-67de0b28fc23}`.
 final FOLDERID_Windows = GUID.fromComponents(
   0xf38bf404,
   0x1d43,
@@ -3313,6 +3455,7 @@ const FSCTL_WRITE_USN_CLOSE_RECORD = 590063;
 
 const FSCTL_WRITE_USN_REASON = 590544;
 
+/// `{781aee18-7733-4ce4-add0-91f41c67b592}`.
 final GUID_BLUETOOTHLE_DEVICE_INTERFACE = GUID.fromComponents(
   0x781aee18,
   0x7733,
@@ -3320,6 +3463,7 @@ final GUID_BLUETOOTHLE_DEVICE_INTERFACE = GUID.fromComponents(
   .fromList(const [0xad, 0xd0, 0x91, 0xf4, 0x1c, 0x67, 0xb5, 0x92]),
 );
 
+/// `{6e3bb679-4372-40c8-9eaa-4509df260cd8}`.
 final GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = GUID.fromComponents(
   0x6e3bb679,
   0x4372,
@@ -3327,6 +3471,7 @@ final GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = GUID.fromComponents(
   .fromList(const [0x9e, 0xaa, 0x45, 0x9, 0xdf, 0x26, 0xc, 0xd8]),
 );
 
+/// `{6fe69556-704a-47a0-8f24-c28d936fda47}`.
 final GUID_CONSOLE_DISPLAY_STATE = GUID.fromComponents(
   0x6fe69556,
   0x704a,
@@ -3334,6 +3479,7 @@ final GUID_CONSOLE_DISPLAY_STATE = GUID.fromComponents(
   .fromList(const [0x8f, 0x24, 0xc2, 0x8d, 0x93, 0x6f, 0xda, 0x47]),
 );
 
+/// `{6bdd1fc1-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_1394 = GUID.fromComponents(
   0x6bdd1fc1,
   0x810f,
@@ -3341,6 +3487,7 @@ final GUID_DEVCLASS_1394 = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{66f250d6-7801-4a64-b139-eea80a450b24}`.
 final GUID_DEVCLASS_1394DEBUG = GUID.fromComponents(
   0x66f250d6,
   0x7801,
@@ -3348,6 +3495,7 @@ final GUID_DEVCLASS_1394DEBUG = GUID.fromComponents(
   .fromList(const [0xb1, 0x39, 0xee, 0xa8, 0xa, 0x45, 0xb, 0x24]),
 );
 
+/// `{7ebefbc0-3200-11d2-b4c2-00a0c9697d07}`.
 final GUID_DEVCLASS_61883 = GUID.fromComponents(
   0x7ebefbc0,
   0x3200,
@@ -3355,6 +3503,7 @@ final GUID_DEVCLASS_61883 = GUID.fromComponents(
   .fromList(const [0xb4, 0xc2, 0x0, 0xa0, 0xc9, 0x69, 0x7d, 0x7]),
 );
 
+/// `{4d36e964-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_ADAPTER = GUID.fromComponents(
   0x4d36e964,
   0xe325,
@@ -3362,6 +3511,7 @@ final GUID_DEVCLASS_ADAPTER = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{d45b1c18-c8fa-11d1-9f77-0000f805f530}`.
 final GUID_DEVCLASS_APMSUPPORT = GUID.fromComponents(
   0xd45b1c18,
   0xc8fa,
@@ -3369,6 +3519,7 @@ final GUID_DEVCLASS_APMSUPPORT = GUID.fromComponents(
   .fromList(const [0x9f, 0x77, 0x0, 0x0, 0xf8, 0x5, 0xf5, 0x30]),
 );
 
+/// `{c06ff265-ae09-48f0-812c-16753d7cba83}`.
 final GUID_DEVCLASS_AVC = GUID.fromComponents(
   0xc06ff265,
   0xae09,
@@ -3376,6 +3527,7 @@ final GUID_DEVCLASS_AVC = GUID.fromComponents(
   .fromList(const [0x81, 0x2c, 0x16, 0x75, 0x3d, 0x7c, 0xba, 0x83]),
 );
 
+/// `{72631e54-78a4-11d0-bcf7-00aa00b7b32a}`.
 final GUID_DEVCLASS_BATTERY = GUID.fromComponents(
   0x72631e54,
   0x78a4,
@@ -3383,6 +3535,7 @@ final GUID_DEVCLASS_BATTERY = GUID.fromComponents(
   .fromList(const [0xbc, 0xf7, 0x0, 0xaa, 0x0, 0xb7, 0xb3, 0x2a]),
 );
 
+/// `{53d29ef7-377c-4d14-864b-eb3a85769359}`.
 final GUID_DEVCLASS_BIOMETRIC = GUID.fromComponents(
   0x53d29ef7,
   0x377c,
@@ -3390,6 +3543,7 @@ final GUID_DEVCLASS_BIOMETRIC = GUID.fromComponents(
   .fromList(const [0x86, 0x4b, 0xeb, 0x3a, 0x85, 0x76, 0x93, 0x59]),
 );
 
+/// `{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}`.
 final GUID_DEVCLASS_BLUETOOTH = GUID.fromComponents(
   0xe0cbf06c,
   0xcd8b,
@@ -3397,6 +3551,7 @@ final GUID_DEVCLASS_BLUETOOTH = GUID.fromComponents(
   .fromList(const [0xbb, 0x8a, 0x26, 0x3b, 0x43, 0xf0, 0xf9, 0x74]),
 );
 
+/// `{ca3e7ab9-b4c3-4ae6-8251-579ef933890f}`.
 final GUID_DEVCLASS_CAMERA = GUID.fromComponents(
   0xca3e7ab9,
   0xb4c3,
@@ -3404,6 +3559,7 @@ final GUID_DEVCLASS_CAMERA = GUID.fromComponents(
   .fromList(const [0x82, 0x51, 0x57, 0x9e, 0xf9, 0x33, 0x89, 0xf]),
 );
 
+/// `{4d36e965-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_CDROM = GUID.fromComponents(
   0x4d36e965,
   0xe325,
@@ -3411,6 +3567,7 @@ final GUID_DEVCLASS_CDROM = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{f01a9d53-3ff6-48d2-9f97-c8a7004be10c}`.
 final GUID_DEVCLASS_COMPUTEACCELERATOR = GUID.fromComponents(
   0xf01a9d53,
   0x3ff6,
@@ -3418,6 +3575,7 @@ final GUID_DEVCLASS_COMPUTEACCELERATOR = GUID.fromComponents(
   .fromList(const [0x9f, 0x97, 0xc8, 0xa7, 0x0, 0x4b, 0xe1, 0xc]),
 );
 
+/// `{4d36e966-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_COMPUTER = GUID.fromComponents(
   0x4d36e966,
   0xe325,
@@ -3425,6 +3583,7 @@ final GUID_DEVCLASS_COMPUTER = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{6bdd1fc2-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_DECODER = GUID.fromComponents(
   0x6bdd1fc2,
   0x810f,
@@ -3432,6 +3591,7 @@ final GUID_DEVCLASS_DECODER = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{4d36e967-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_DISKDRIVE = GUID.fromComponents(
   0x4d36e967,
   0xe325,
@@ -3439,6 +3599,7 @@ final GUID_DEVCLASS_DISKDRIVE = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e968-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_DISPLAY = GUID.fromComponents(
   0x4d36e968,
   0xe325,
@@ -3446,6 +3607,7 @@ final GUID_DEVCLASS_DISPLAY = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{48721b56-6795-11d2-b1a8-0080c72e74a2}`.
 final GUID_DEVCLASS_DOT4 = GUID.fromComponents(
   0x48721b56,
   0x6795,
@@ -3453,6 +3615,7 @@ final GUID_DEVCLASS_DOT4 = GUID.fromComponents(
   .fromList(const [0xb1, 0xa8, 0x0, 0x80, 0xc7, 0x2e, 0x74, 0xa2]),
 );
 
+/// `{49ce6ac8-6f86-11d2-b1e5-0080c72e74a2}`.
 final GUID_DEVCLASS_DOT4PRINT = GUID.fromComponents(
   0x49ce6ac8,
   0x6f86,
@@ -3460,6 +3623,7 @@ final GUID_DEVCLASS_DOT4PRINT = GUID.fromComponents(
   .fromList(const [0xb1, 0xe5, 0x0, 0x80, 0xc7, 0x2e, 0x74, 0xa2]),
 );
 
+/// `{9da2b80f-f89f-4a49-a5c2-511b085b9e8a}`.
 final GUID_DEVCLASS_EHSTORAGESILO = GUID.fromComponents(
   0x9da2b80f,
   0xf89f,
@@ -3467,6 +3631,7 @@ final GUID_DEVCLASS_EHSTORAGESILO = GUID.fromComponents(
   .fromList(const [0xa5, 0xc2, 0x51, 0x1b, 0x8, 0x5b, 0x9e, 0x8a]),
 );
 
+/// `{c459df55-db08-11d1-b009-00a0c9081ff6}`.
 final GUID_DEVCLASS_ENUM1394 = GUID.fromComponents(
   0xc459df55,
   0xdb08,
@@ -3474,6 +3639,7 @@ final GUID_DEVCLASS_ENUM1394 = GUID.fromComponents(
   .fromList(const [0xb0, 0x9, 0x0, 0xa0, 0xc9, 0x8, 0x1f, 0xf6]),
 );
 
+/// `{e2f84ce7-8efa-411c-aa69-97454ca4cb57}`.
 final GUID_DEVCLASS_EXTENSION = GUID.fromComponents(
   0xe2f84ce7,
   0x8efa,
@@ -3481,6 +3647,7 @@ final GUID_DEVCLASS_EXTENSION = GUID.fromComponents(
   .fromList(const [0xaa, 0x69, 0x97, 0x45, 0x4c, 0xa4, 0xcb, 0x57]),
 );
 
+/// `{4d36e969-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_FDC = GUID.fromComponents(
   0x4d36e969,
   0xe325,
@@ -3488,6 +3655,7 @@ final GUID_DEVCLASS_FDC = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{f2e7dd72-6468-4e36-b6f1-6488f42c1b52}`.
 final GUID_DEVCLASS_FIRMWARE = GUID.fromComponents(
   0xf2e7dd72,
   0x6468,
@@ -3495,6 +3663,7 @@ final GUID_DEVCLASS_FIRMWARE = GUID.fromComponents(
   .fromList(const [0xb6, 0xf1, 0x64, 0x88, 0xf4, 0x2c, 0x1b, 0x52]),
 );
 
+/// `{4d36e980-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_FLOPPYDISK = GUID.fromComponents(
   0x4d36e980,
   0xe325,
@@ -3502,6 +3671,7 @@ final GUID_DEVCLASS_FLOPPYDISK = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{6bdd1fc3-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_GPS = GUID.fromComponents(
   0x6bdd1fc3,
   0x810f,
@@ -3509,6 +3679,7 @@ final GUID_DEVCLASS_GPS = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{4d36e96a-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_HDC = GUID.fromComponents(
   0x4d36e96a,
   0xe325,
@@ -3516,6 +3687,7 @@ final GUID_DEVCLASS_HDC = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{745a17a0-74d3-11d0-b6fe-00a0c90f57da}`.
 final GUID_DEVCLASS_HIDCLASS = GUID.fromComponents(
   0x745a17a0,
   0x74d3,
@@ -3523,6 +3695,7 @@ final GUID_DEVCLASS_HIDCLASS = GUID.fromComponents(
   .fromList(const [0xb6, 0xfe, 0x0, 0xa0, 0xc9, 0xf, 0x57, 0xda]),
 );
 
+/// `{d612553d-06b1-49ca-8938-e39ef80eb16f}`.
 final GUID_DEVCLASS_HOLOGRAPHIC = GUID.fromComponents(
   0xd612553d,
   0x6b1,
@@ -3530,6 +3703,7 @@ final GUID_DEVCLASS_HOLOGRAPHIC = GUID.fromComponents(
   .fromList(const [0x89, 0x38, 0xe3, 0x9e, 0xf8, 0xe, 0xb1, 0x6f]),
 );
 
+/// `{6bdd1fc6-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_IMAGE = GUID.fromComponents(
   0x6bdd1fc6,
   0x810f,
@@ -3537,6 +3711,7 @@ final GUID_DEVCLASS_IMAGE = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{30ef7132-d858-4a0c-ac24-b9028a5cca3f}`.
 final GUID_DEVCLASS_INFINIBAND = GUID.fromComponents(
   0x30ef7132,
   0xd858,
@@ -3544,6 +3719,7 @@ final GUID_DEVCLASS_INFINIBAND = GUID.fromComponents(
   .fromList(const [0xac, 0x24, 0xb9, 0x2, 0x8a, 0x5c, 0xca, 0x3f]),
 );
 
+/// `{6bdd1fc5-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_INFRARED = GUID.fromComponents(
   0x6bdd1fc5,
   0x810f,
@@ -3551,6 +3727,7 @@ final GUID_DEVCLASS_INFRARED = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{4d36e96b-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_KEYBOARD = GUID.fromComponents(
   0x4d36e96b,
   0xe325,
@@ -3558,6 +3735,7 @@ final GUID_DEVCLASS_KEYBOARD = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{8ecc055d-047f-11d1-a537-0000f8753ed1}`.
 final GUID_DEVCLASS_LEGACYDRIVER = GUID.fromComponents(
   0x8ecc055d,
   0x47f,
@@ -3565,6 +3743,7 @@ final GUID_DEVCLASS_LEGACYDRIVER = GUID.fromComponents(
   .fromList(const [0xa5, 0x37, 0x0, 0x0, 0xf8, 0x75, 0x3e, 0xd1]),
 );
 
+/// `{4d36e96c-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MEDIA = GUID.fromComponents(
   0x4d36e96c,
   0xe325,
@@ -3572,6 +3751,7 @@ final GUID_DEVCLASS_MEDIA = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{ce5939ae-ebde-11d0-b181-0000f8753ec4}`.
 final GUID_DEVCLASS_MEDIUM_CHANGER = GUID.fromComponents(
   0xce5939ae,
   0xebde,
@@ -3579,6 +3759,7 @@ final GUID_DEVCLASS_MEDIUM_CHANGER = GUID.fromComponents(
   .fromList(const [0xb1, 0x81, 0x0, 0x0, 0xf8, 0x75, 0x3e, 0xc4]),
 );
 
+/// `{5099944a-f6b9-4057-a056-8c550228544c}`.
 final GUID_DEVCLASS_MEMORY = GUID.fromComponents(
   0x5099944a,
   0xf6b9,
@@ -3586,6 +3767,7 @@ final GUID_DEVCLASS_MEMORY = GUID.fromComponents(
   .fromList(const [0xa0, 0x56, 0x8c, 0x55, 0x2, 0x28, 0x54, 0x4c]),
 );
 
+/// `{4d36e96d-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MODEM = GUID.fromComponents(
   0x4d36e96d,
   0xe325,
@@ -3593,6 +3775,7 @@ final GUID_DEVCLASS_MODEM = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e96e-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MONITOR = GUID.fromComponents(
   0x4d36e96e,
   0xe325,
@@ -3600,6 +3783,7 @@ final GUID_DEVCLASS_MONITOR = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e96f-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MOUSE = GUID.fromComponents(
   0x4d36e96f,
   0xe325,
@@ -3607,6 +3791,7 @@ final GUID_DEVCLASS_MOUSE = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e970-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MTD = GUID.fromComponents(
   0x4d36e970,
   0xe325,
@@ -3614,6 +3799,7 @@ final GUID_DEVCLASS_MTD = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e971-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_MULTIFUNCTION = GUID.fromComponents(
   0x4d36e971,
   0xe325,
@@ -3621,6 +3807,7 @@ final GUID_DEVCLASS_MULTIFUNCTION = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{50906cb8-ba12-11d1-bf5d-0000f805f530}`.
 final GUID_DEVCLASS_MULTIPORTSERIAL = GUID.fromComponents(
   0x50906cb8,
   0xba12,
@@ -3628,6 +3815,7 @@ final GUID_DEVCLASS_MULTIPORTSERIAL = GUID.fromComponents(
   .fromList(const [0xbf, 0x5d, 0x0, 0x0, 0xf8, 0x5, 0xf5, 0x30]),
 );
 
+/// `{4d36e972-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_NET = GUID.fromComponents(
   0x4d36e972,
   0xe325,
@@ -3635,6 +3823,7 @@ final GUID_DEVCLASS_NET = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e973-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_NETCLIENT = GUID.fromComponents(
   0x4d36e973,
   0xe325,
@@ -3642,6 +3831,7 @@ final GUID_DEVCLASS_NETCLIENT = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{87ef9ad1-8f70-49ee-b215-ab1fcadcbe3c}`.
 final GUID_DEVCLASS_NETDRIVER = GUID.fromComponents(
   0x87ef9ad1,
   0x8f70,
@@ -3649,6 +3839,7 @@ final GUID_DEVCLASS_NETDRIVER = GUID.fromComponents(
   .fromList(const [0xb2, 0x15, 0xab, 0x1f, 0xca, 0xdc, 0xbe, 0x3c]),
 );
 
+/// `{4d36e974-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_NETSERVICE = GUID.fromComponents(
   0x4d36e974,
   0xe325,
@@ -3656,6 +3847,7 @@ final GUID_DEVCLASS_NETSERVICE = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e975-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_NETTRANS = GUID.fromComponents(
   0x4d36e975,
   0xe325,
@@ -3663,6 +3855,7 @@ final GUID_DEVCLASS_NETTRANS = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{78912bc1-cb8e-4b28-a329-f322ebadbe0f}`.
 final GUID_DEVCLASS_NETUIO = GUID.fromComponents(
   0x78912bc1,
   0xcb8e,
@@ -3670,6 +3863,7 @@ final GUID_DEVCLASS_NETUIO = GUID.fromComponents(
   .fromList(const [0xa3, 0x29, 0xf3, 0x22, 0xeb, 0xad, 0xbe, 0xf]),
 );
 
+/// `{4d36e976-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_NODRIVER = GUID.fromComponents(
   0x4d36e976,
   0xe325,
@@ -3677,6 +3871,7 @@ final GUID_DEVCLASS_NODRIVER = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e977-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_PCMCIA = GUID.fromComponents(
   0x4d36e977,
   0xe325,
@@ -3684,6 +3879,7 @@ final GUID_DEVCLASS_PCMCIA = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4658ee7e-f050-11d1-b6bd-00c04fa372a7}`.
 final GUID_DEVCLASS_PNPPRINTERS = GUID.fromComponents(
   0x4658ee7e,
   0xf050,
@@ -3691,6 +3887,7 @@ final GUID_DEVCLASS_PNPPRINTERS = GUID.fromComponents(
   .fromList(const [0xb6, 0xbd, 0x0, 0xc0, 0x4f, 0xa3, 0x72, 0xa7]),
 );
 
+/// `{4d36e978-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_PORTS = GUID.fromComponents(
   0x4d36e978,
   0xe325,
@@ -3698,6 +3895,7 @@ final GUID_DEVCLASS_PORTS = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e979-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_PRINTER = GUID.fromComponents(
   0x4d36e979,
   0xe325,
@@ -3705,6 +3903,7 @@ final GUID_DEVCLASS_PRINTER = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e97a-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_PRINTERUPGRADE = GUID.fromComponents(
   0x4d36e97a,
   0xe325,
@@ -3712,6 +3911,7 @@ final GUID_DEVCLASS_PRINTERUPGRADE = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{1ed2bbf9-11f0-4084-b21f-ad83a8e6dcdc}`.
 final GUID_DEVCLASS_PRINTQUEUE = GUID.fromComponents(
   0x1ed2bbf9,
   0x11f0,
@@ -3719,6 +3919,7 @@ final GUID_DEVCLASS_PRINTQUEUE = GUID.fromComponents(
   .fromList(const [0xb2, 0x1f, 0xad, 0x83, 0xa8, 0xe6, 0xdc, 0xdc]),
 );
 
+/// `{50127dc3-0f36-415e-a6cc-4cb3be910b65}`.
 final GUID_DEVCLASS_PROCESSOR = GUID.fromComponents(
   0x50127dc3,
   0xf36,
@@ -3726,6 +3927,7 @@ final GUID_DEVCLASS_PROCESSOR = GUID.fromComponents(
   .fromList(const [0xa6, 0xcc, 0x4c, 0xb3, 0xbe, 0x91, 0xb, 0x65]),
 );
 
+/// `{d48179be-ec20-11d1-b6b8-00c04fa372a7}`.
 final GUID_DEVCLASS_SBP2 = GUID.fromComponents(
   0xd48179be,
   0xec20,
@@ -3733,6 +3935,7 @@ final GUID_DEVCLASS_SBP2 = GUID.fromComponents(
   .fromList(const [0xb6, 0xb8, 0x0, 0xc0, 0x4f, 0xa3, 0x72, 0xa7]),
 );
 
+/// `{53966cb1-4d46-4166-bf23-c522403cd495}`.
 final GUID_DEVCLASS_SCMDISK = GUID.fromComponents(
   0x53966cb1,
   0x4d46,
@@ -3740,6 +3943,7 @@ final GUID_DEVCLASS_SCMDISK = GUID.fromComponents(
   .fromList(const [0xbf, 0x23, 0xc5, 0x22, 0x40, 0x3c, 0xd4, 0x95]),
 );
 
+/// `{53ccb149-e543-4c84-b6e0-bce4f6b7e806}`.
 final GUID_DEVCLASS_SCMVOLUME = GUID.fromComponents(
   0x53ccb149,
   0xe543,
@@ -3747,6 +3951,7 @@ final GUID_DEVCLASS_SCMVOLUME = GUID.fromComponents(
   .fromList(const [0xb6, 0xe0, 0xbc, 0xe4, 0xf6, 0xb7, 0xe8, 0x6]),
 );
 
+/// `{4d36e97b-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_SCSIADAPTER = GUID.fromComponents(
   0x4d36e97b,
   0xe325,
@@ -3754,6 +3959,7 @@ final GUID_DEVCLASS_SCSIADAPTER = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{268c95a1-edfe-11d3-95c3-0010dc4050a5}`.
 final GUID_DEVCLASS_SECURITYACCELERATOR = GUID.fromComponents(
   0x268c95a1,
   0xedfe,
@@ -3761,6 +3967,7 @@ final GUID_DEVCLASS_SECURITYACCELERATOR = GUID.fromComponents(
   .fromList(const [0x95, 0xc3, 0x0, 0x10, 0xdc, 0x40, 0x50, 0xa5]),
 );
 
+/// `{5175d334-c371-4806-b3ba-71fd53c9258d}`.
 final GUID_DEVCLASS_SENSOR = GUID.fromComponents(
   0x5175d334,
   0xc371,
@@ -3768,6 +3975,7 @@ final GUID_DEVCLASS_SENSOR = GUID.fromComponents(
   .fromList(const [0xb3, 0xba, 0x71, 0xfd, 0x53, 0xc9, 0x25, 0x8d]),
 );
 
+/// `{997b5d8d-c442-4f2e-baf3-9c8e671e9e21}`.
 final GUID_DEVCLASS_SIDESHOW = GUID.fromComponents(
   0x997b5d8d,
   0xc442,
@@ -3775,6 +3983,7 @@ final GUID_DEVCLASS_SIDESHOW = GUID.fromComponents(
   .fromList(const [0xba, 0xf3, 0x9c, 0x8e, 0x67, 0x1e, 0x9e, 0x21]),
 );
 
+/// `{50dd5230-ba8a-11d1-bf5d-0000f805f530}`.
 final GUID_DEVCLASS_SMARTCARDREADER = GUID.fromComponents(
   0x50dd5230,
   0xba8a,
@@ -3782,6 +3991,7 @@ final GUID_DEVCLASS_SMARTCARDREADER = GUID.fromComponents(
   .fromList(const [0xbf, 0x5d, 0x0, 0x0, 0xf8, 0x5, 0xf5, 0x30]),
 );
 
+/// `{53487c23-680f-4585-acc3-1f10d6777e82}`.
 final GUID_DEVCLASS_SMRDISK = GUID.fromComponents(
   0x53487c23,
   0x680f,
@@ -3789,6 +3999,7 @@ final GUID_DEVCLASS_SMRDISK = GUID.fromComponents(
   .fromList(const [0xac, 0xc3, 0x1f, 0x10, 0xd6, 0x77, 0x7e, 0x82]),
 );
 
+/// `{53b3cf03-8f5a-4788-91b6-d19ed9fcccbf}`.
 final GUID_DEVCLASS_SMRVOLUME = GUID.fromComponents(
   0x53b3cf03,
   0x8f5a,
@@ -3796,6 +4007,7 @@ final GUID_DEVCLASS_SMRVOLUME = GUID.fromComponents(
   .fromList(const [0x91, 0xb6, 0xd1, 0x9e, 0xd9, 0xfc, 0xcc, 0xbf]),
 );
 
+/// `{5c4c3332-344d-483c-8739-259e934c9cc8}`.
 final GUID_DEVCLASS_SOFTWARECOMPONENT = GUID.fromComponents(
   0x5c4c3332,
   0x344d,
@@ -3803,6 +4015,7 @@ final GUID_DEVCLASS_SOFTWARECOMPONENT = GUID.fromComponents(
   .fromList(const [0x87, 0x39, 0x25, 0x9e, 0x93, 0x4c, 0x9c, 0xc8]),
 );
 
+/// `{4d36e97c-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_SOUND = GUID.fromComponents(
   0x4d36e97c,
   0xe325,
@@ -3810,6 +4023,7 @@ final GUID_DEVCLASS_SOUND = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{4d36e97d-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_SYSTEM = GUID.fromComponents(
   0x4d36e97d,
   0xe325,
@@ -3817,6 +4031,7 @@ final GUID_DEVCLASS_SYSTEM = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{6d807884-7d21-11cf-801c-08002be10318}`.
 final GUID_DEVCLASS_TAPEDRIVE = GUID.fromComponents(
   0x6d807884,
   0x7d21,
@@ -3824,6 +4039,7 @@ final GUID_DEVCLASS_TAPEDRIVE = GUID.fromComponents(
   .fromList(const [0x80, 0x1c, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{e6f1aa1c-7f3b-4473-b2e8-c97d8ac71d53}`.
 final GUID_DEVCLASS_UCM = GUID.fromComponents(
   0xe6f1aa1c,
   0x7f3b,
@@ -3831,6 +4047,7 @@ final GUID_DEVCLASS_UCM = GUID.fromComponents(
   .fromList(const [0xb2, 0xe8, 0xc9, 0x7d, 0x8a, 0xc7, 0x1d, 0x53]),
 );
 
+/// `{4d36e97e-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVCLASS_UNKNOWN = GUID.fromComponents(
   0x4d36e97e,
   0xe325,
@@ -3838,6 +4055,7 @@ final GUID_DEVCLASS_UNKNOWN = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{36fc9e60-c465-11cf-8056-444553540000}`.
 final GUID_DEVCLASS_USB = GUID.fromComponents(
   0x36fc9e60,
   0xc465,
@@ -3845,6 +4063,7 @@ final GUID_DEVCLASS_USB = GUID.fromComponents(
   .fromList(const [0x80, 0x56, 0x44, 0x45, 0x53, 0x54, 0x0, 0x0]),
 );
 
+/// `{71a27cdd-812a-11d0-bec7-08002be2092f}`.
 final GUID_DEVCLASS_VOLUME = GUID.fromComponents(
   0x71a27cdd,
   0x812a,
@@ -3852,6 +4071,7 @@ final GUID_DEVCLASS_VOLUME = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{533c5b84-ec70-11d2-9505-00c04f79deaf}`.
 final GUID_DEVCLASS_VOLUMESNAPSHOT = GUID.fromComponents(
   0x533c5b84,
   0xec70,
@@ -3859,6 +4079,7 @@ final GUID_DEVCLASS_VOLUMESNAPSHOT = GUID.fromComponents(
   .fromList(const [0x95, 0x5, 0x0, 0xc0, 0x4f, 0x79, 0xde, 0xaf]),
 );
 
+/// `{25dbce51-6c8f-4a72-8a6d-b54c2b4fc835}`.
 final GUID_DEVCLASS_WCEUSBS = GUID.fromComponents(
   0x25dbce51,
   0x6c8f,
@@ -3866,6 +4087,7 @@ final GUID_DEVCLASS_WCEUSBS = GUID.fromComponents(
   .fromList(const [0x8a, 0x6d, 0xb5, 0x4c, 0x2b, 0x4f, 0xc8, 0x35]),
 );
 
+/// `{eec5ad98-8080-425f-922a-dabf3de3f69a}`.
 final GUID_DEVCLASS_WPD = GUID.fromComponents(
   0xeec5ad98,
   0x8080,
@@ -3873,6 +4095,7 @@ final GUID_DEVCLASS_WPD = GUID.fromComponents(
   .fromList(const [0x92, 0x2a, 0xda, 0xbf, 0x3d, 0xe3, 0xf6, 0x9a]),
 );
 
+/// `{53f56312-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_CDCHANGER = GUID.fromComponents(
   0x53f56312,
   0xb6bf,
@@ -3880,6 +4103,7 @@ final GUID_DEVINTERFACE_CDCHANGER = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{53f56308-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_CDROM = GUID.fromComponents(
   0x53f56308,
   0xb6bf,
@@ -3887,6 +4111,7 @@ final GUID_DEVINTERFACE_CDROM = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{86e0d1e0-8089-11d0-9ce4-08003e301f73}`.
 final GUID_DEVINTERFACE_COMPORT = GUID.fromComponents(
   0x86e0d1e0,
   0x8089,
@@ -3894,6 +4119,7 @@ final GUID_DEVINTERFACE_COMPORT = GUID.fromComponents(
   .fromList(const [0x9c, 0xe4, 0x8, 0x0, 0x3e, 0x30, 0x1f, 0x73]),
 );
 
+/// `{53f56307-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_DISK = GUID.fromComponents(
   0x53f56307,
   0xb6bf,
@@ -3901,6 +4127,7 @@ final GUID_DEVINTERFACE_DISK = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{5b45201d-f2f2-4f3b-85bb-30ff1f953599}`.
 final GUID_DEVINTERFACE_DISPLAY_ADAPTER = GUID.fromComponents(
   0x5b45201d,
   0xf2f2,
@@ -3908,6 +4135,7 @@ final GUID_DEVINTERFACE_DISPLAY_ADAPTER = GUID.fromComponents(
   .fromList(const [0x85, 0xbb, 0x30, 0xff, 0x1f, 0x95, 0x35, 0x99]),
 );
 
+/// `{53f56311-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_FLOPPY = GUID.fromComponents(
   0x53f56311,
   0xb6bf,
@@ -3915,6 +4143,7 @@ final GUID_DEVINTERFACE_FLOPPY = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{4d1e55b2-f16f-11cf-88cb-001111000030}`.
 final GUID_DEVINTERFACE_HID = GUID.fromComponents(
   0x4d1e55b2,
   0xf16f,
@@ -3922,6 +4151,7 @@ final GUID_DEVINTERFACE_HID = GUID.fromComponents(
   .fromList(const [0x88, 0xcb, 0x0, 0x11, 0x11, 0x0, 0x0, 0x30]),
 );
 
+/// `{6bdd1fc6-810f-11d0-bec7-08002be2092f}`.
 final GUID_DEVINTERFACE_IMAGE = GUID.fromComponents(
   0x6bdd1fc6,
   0x810f,
@@ -3929,6 +4159,7 @@ final GUID_DEVINTERFACE_IMAGE = GUID.fromComponents(
   .fromList(const [0xbe, 0xc7, 0x8, 0x0, 0x2b, 0xe2, 0x9, 0x2f]),
 );
 
+/// `{884b96c3-56ef-11d1-bc8c-00a0c91405dd}`.
 final GUID_DEVINTERFACE_KEYBOARD = GUID.fromComponents(
   0x884b96c3,
   0x56ef,
@@ -3936,6 +4167,7 @@ final GUID_DEVINTERFACE_KEYBOARD = GUID.fromComponents(
   .fromList(const [0xbc, 0x8c, 0x0, 0xa0, 0xc9, 0x14, 0x5, 0xdd]),
 );
 
+/// `{53f56310-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_MEDIUMCHANGER = GUID.fromComponents(
   0x53f56310,
   0xb6bf,
@@ -3943,6 +4175,7 @@ final GUID_DEVINTERFACE_MEDIUMCHANGER = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}`.
 final GUID_DEVINTERFACE_MONITOR = GUID.fromComponents(
   0xe6f07b5f,
   0xee97,
@@ -3950,6 +4183,7 @@ final GUID_DEVINTERFACE_MONITOR = GUID.fromComponents(
   .fromList(const [0xb0, 0x76, 0x33, 0xf5, 0x7b, 0xf4, 0xea, 0xa7]),
 );
 
+/// `{378de44c-56ef-11d1-bc8c-00a0c91405dd}`.
 final GUID_DEVINTERFACE_MOUSE = GUID.fromComponents(
   0x378de44c,
   0x56ef,
@@ -3957,6 +4191,7 @@ final GUID_DEVINTERFACE_MOUSE = GUID.fromComponents(
   .fromList(const [0xbc, 0x8c, 0x0, 0xa0, 0xc9, 0x14, 0x5, 0xdd]),
 );
 
+/// `{cac88484-7515-4c03-82e6-71a87abac361}`.
 final GUID_DEVINTERFACE_NET = GUID.fromComponents(
   0xcac88484,
   0x7515,
@@ -3964,6 +4199,7 @@ final GUID_DEVINTERFACE_NET = GUID.fromComponents(
   .fromList(const [0x82, 0xe6, 0x71, 0xa8, 0x7a, 0xba, 0xc3, 0x61]),
 );
 
+/// `{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_PARTITION = GUID.fromComponents(
   0x53f5630a,
   0xb6bf,
@@ -3971,6 +4207,7 @@ final GUID_DEVINTERFACE_PARTITION = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{4d36e978-e325-11ce-bfc1-08002be10318}`.
 final GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR = GUID.fromComponents(
   0x4d36e978,
   0xe325,
@@ -3978,6 +4215,7 @@ final GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x8, 0x0, 0x2b, 0xe1, 0x3, 0x18]),
 );
 
+/// `{2accfe60-c130-11d2-b082-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_STORAGEPORT = GUID.fromComponents(
   0x2accfe60,
   0xc130,
@@ -3985,6 +4223,7 @@ final GUID_DEVINTERFACE_STORAGEPORT = GUID.fromComponents(
   .fromList(const [0xb0, 0x82, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{53f5630b-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_TAPE = GUID.fromComponents(
   0x53f5630b,
   0xb6bf,
@@ -3992,6 +4231,7 @@ final GUID_DEVINTERFACE_TAPE = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{a5dcbf10-6530-11d2-901f-00c04fb951ed}`.
 final GUID_DEVINTERFACE_USB_DEVICE = GUID.fromComponents(
   0xa5dcbf10,
   0x6530,
@@ -3999,6 +4239,7 @@ final GUID_DEVINTERFACE_USB_DEVICE = GUID.fromComponents(
   .fromList(const [0x90, 0x1f, 0x0, 0xc0, 0x4f, 0xb9, 0x51, 0xed]),
 );
 
+/// `{3abf6f2d-71c4-462a-8a92-1e6861e6af27}`.
 final GUID_DEVINTERFACE_USB_HOST_CONTROLLER = GUID.fromComponents(
   0x3abf6f2d,
   0x71c4,
@@ -4006,6 +4247,7 @@ final GUID_DEVINTERFACE_USB_HOST_CONTROLLER = GUID.fromComponents(
   .fromList(const [0x8a, 0x92, 0x1e, 0x68, 0x61, 0xe6, 0xaf, 0x27]),
 );
 
+/// `{f18a0e88-c30c-11d0-8815-00a0c906bed8}`.
 final GUID_DEVINTERFACE_USB_HUB = GUID.fromComponents(
   0xf18a0e88,
   0xc30c,
@@ -4013,6 +4255,7 @@ final GUID_DEVINTERFACE_USB_HUB = GUID.fromComponents(
   .fromList(const [0x88, 0x15, 0x0, 0xa0, 0xc9, 0x6, 0xbe, 0xd8]),
 );
 
+/// `{1ad9e4f0-f88d-4360-bab9-4c2d55e564cd}`.
 final GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL = GUID.fromComponents(
   0x1ad9e4f0,
   0xf88d,
@@ -4020,6 +4263,7 @@ final GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL = GUID.fromComponents(
   .fromList(const [0xba, 0xb9, 0x4c, 0x2d, 0x55, 0xe5, 0x64, 0xcd]),
 );
 
+/// `{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_VOLUME = GUID.fromComponents(
   0x53f5630d,
   0xb6bf,
@@ -4027,6 +4271,7 @@ final GUID_DEVINTERFACE_VOLUME = GUID.fromComponents(
   .fromList(const [0x94, 0xf2, 0x0, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b]),
 );
 
+/// `{6ac27878-a6fa-4155-ba85-f98f491d4f33}`.
 final GUID_DEVINTERFACE_WPD = GUID.fromComponents(
   0x6ac27878,
   0xa6fa,
@@ -4034,6 +4279,7 @@ final GUID_DEVINTERFACE_WPD = GUID.fromComponents(
   .fromList(const [0xba, 0x85, 0xf9, 0x8f, 0x49, 0x1d, 0x4f, 0x33]),
 );
 
+/// `{ba0c718f-4ded-49b7-bdd3-fabe28661211}`.
 final GUID_DEVINTERFACE_WPD_PRIVATE = GUID.fromComponents(
   0xba0c718f,
   0x4ded,
@@ -4041,6 +4287,7 @@ final GUID_DEVINTERFACE_WPD_PRIVATE = GUID.fromComponents(
   .fromList(const [0xbd, 0xd3, 0xfa, 0xbe, 0x28, 0x66, 0x12, 0x11]),
 );
 
+/// `{53f5630c-b6bf-11d0-94f2-00a0c91efb8b}`.
 final GUID_DEVINTERFACE_WRITEONCEDISK = GUID.fromComponents(
   0x53f5630c,
   0xb6bf,

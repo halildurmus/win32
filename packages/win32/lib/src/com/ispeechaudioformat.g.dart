@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'ispeechwaveformatex.g.dart';
 import 'iunknown.g.dart';
 
+/// `{e6e9c590-3e18-40e3-8299-061f98bde7c7}`.
+///
 /// @nodoc
 final IID_ISpeechAudioFormat = GUID.fromComponents(
   0xe6e9c590,

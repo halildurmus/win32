@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{64a1cbf0-3a1a-4461-9158-376969693950}`.
+///
 /// @nodoc
 final IID_IFileIsInUse = GUID.fromComponents(
   0x64a1cbf0,

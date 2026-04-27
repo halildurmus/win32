@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{49353c99-516b-11d1-aea6-00c04fb68820}`.
+///
 /// @nodoc
 final IID_IWbemRefresher = GUID.fromComponents(
   0x49353c99,

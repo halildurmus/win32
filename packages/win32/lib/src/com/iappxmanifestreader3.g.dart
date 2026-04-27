@@ -38,6 +38,8 @@ import 'iappxmanifesttargetdevicefamiliesenumerator.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c43825ab-69b7-400a-9709-cc37f5a72d24}`.
+///
 /// @nodoc
 final IID_IAppxManifestReader3 = GUID.fromComponents(
   0xc43825ab,

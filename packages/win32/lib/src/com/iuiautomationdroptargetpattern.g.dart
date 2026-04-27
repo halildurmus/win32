@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{69a095f7-eee4-430e-a46b-fb73b1ae39a5}`.
+///
 /// @nodoc
 final IID_IUIAutomationDropTargetPattern = GUID.fromComponents(
   0x69a095f7,

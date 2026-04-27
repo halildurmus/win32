@@ -35,6 +35,8 @@ import 'iappxblockmapfile.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{02b856a2-4262-4070-bacb-1a8cbbc42305}`.
+///
 /// @nodoc
 final IID_IAppxBlockMapFilesEnumerator = GUID.fromComponents(
   0x2b856a2,

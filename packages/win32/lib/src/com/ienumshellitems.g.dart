@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ishellitem.g.dart';
 import 'iunknown.g.dart';
 
+/// `{70629033-e363-4a28-a567-0db78006e6d7}`.
+///
 /// @nodoc
 final IID_IEnumShellItems = GUID.fromComponents(
   0x70629033,

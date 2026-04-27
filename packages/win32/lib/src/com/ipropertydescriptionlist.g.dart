@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{1f9fc1d0-c39b-4b26-817f-011967d3440e}`.
+///
 /// @nodoc
 final IID_IPropertyDescriptionList = GUID.fromComponents(
   0x1f9fc1d0,

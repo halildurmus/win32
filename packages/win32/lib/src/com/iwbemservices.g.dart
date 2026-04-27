@@ -41,6 +41,8 @@ import 'iwbemcontext.g.dart';
 import 'iwbemobjectsink.g.dart';
 import 'iwbemservices.g.dart';
 
+/// `{9556dc99-828c-11cf-a37e-00aa003240c7}`.
+///
 /// @nodoc
 final IID_IWbemServices = GUID.fromComponents(
   0x9556dc99,

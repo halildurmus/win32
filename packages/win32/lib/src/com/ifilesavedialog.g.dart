@@ -39,6 +39,8 @@ import 'ipropertystore.g.dart';
 import 'ishellitem.g.dart';
 import 'iunknown.g.dart';
 
+/// `{84bccd23-5fde-4cdb-aea4-af64b83d78ab}`.
+///
 /// @nodoc
 final IID_IFileSaveDialog = GUID.fromComponents(
   0x84bccd23,

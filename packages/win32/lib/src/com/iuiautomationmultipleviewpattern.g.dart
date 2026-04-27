@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{8d253c91-1dc5-4bb5-b18f-ade16fa495e8}`.
+///
 /// @nodoc
 final IID_IUIAutomationMultipleViewPattern = GUID.fromComponents(
   0x8d253c91,

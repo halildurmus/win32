@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2233be0b-afb7-448b-9fda-3b378aa5eae1}`.
+///
 /// @nodoc
 final IID_IUIAutomationSynchronizedInputPattern = GUID.fromComponents(
   0x2233be0b,

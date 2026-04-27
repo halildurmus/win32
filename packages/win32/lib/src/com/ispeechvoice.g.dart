@@ -41,6 +41,8 @@ import 'ispeechobjecttokens.g.dart';
 import 'ispeechvoicestatus.g.dart';
 import 'iunknown.g.dart';
 
+/// `{269316d8-57bd-11d2-9eee-00c04f797396}`.
+///
 /// @nodoc
 final IID_ISpeechVoice = GUID.fromComponents(
   0x269316d8,

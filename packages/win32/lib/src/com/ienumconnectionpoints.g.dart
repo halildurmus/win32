@@ -36,6 +36,8 @@ import 'ienumconnectionpoints.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b196b285-bab4-101a-b69c-00aa00341d07}`.
+///
 /// @nodoc
 final IID_IEnumConnectionPoints = GUID.fromComponents(
   0xb196b285,

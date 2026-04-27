@@ -16,6 +16,8 @@ import 'guid.dart';
 /// {@category constant}
 const int DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
 
+/// `{4d36e96e-e325-11ce-bfc1-08002be10318}`.
+///
 /// {@category constant}
 final GUID_CLASS_MONITOR = GUID.fromComponents(
   0x4d36e96e,
@@ -24,6 +26,8 @@ final GUID_CLASS_MONITOR = GUID.fromComponents(
   .fromList(const [0xbf, 0xc1, 0x08, 0x00, 0x2b, 0xe1, 0x03, 0x18]),
 );
 
+/// `{fde5bba4-b3f9-46fb-bdaa-0728ce3100b4}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_BRIGHTNESS = GUID.fromComponents(
   0xfde5bba4,
@@ -32,6 +36,8 @@ final GUID_DEVINTERFACE_BRIGHTNESS = GUID.fromComponents(
   .fromList(const [0xbd, 0xaa, 0x07, 0x28, 0xce, 0x31, 0x00, 0xb4]),
 );
 
+/// `{2564aa4f-dddb-4495-b497-6ad4a84163d7}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_I2C = GUID.fromComponents(
   0x2564aa4f,
@@ -40,6 +46,8 @@ final GUID_DEVINTERFACE_I2C = GUID.fromComponents(
   .fromList(const [0xb4, 0x97, 0x6a, 0xd4, 0xa8, 0x41, 0x63, 0xd7]),
 );
 
+/// `{2c7089aa-2e0e-11d1-b114-00c04fc2aae4}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_MODEM = GUID.fromComponents(
   0x2c7089aa,
@@ -48,6 +56,8 @@ final GUID_DEVINTERFACE_MODEM = GUID.fromComponents(
   .fromList(const [0xb1, 0x14, 0x00, 0xc0, 0x4f, 0xc2, 0xaa, 0xe4]),
 );
 
+/// `{bf4672de-6b4e-4be4-a325-68a91ea49c09}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_OPM = GUID.fromComponents(
   0xbf4672de,
@@ -56,6 +66,8 @@ final GUID_DEVINTERFACE_OPM = GUID.fromComponents(
   .fromList(const [0xa3, 0x25, 0x68, 0xa9, 0x1e, 0xa4, 0x9c, 0x09]),
 );
 
+/// `{97f76ef0-f883-11d0-af1f-0000f800845c}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_PARALLEL = GUID.fromComponents(
   0x97f76ef0,
@@ -64,6 +76,8 @@ final GUID_DEVINTERFACE_PARALLEL = GUID.fromComponents(
   .fromList(const [0xaf, 0x1f, 0x00, 0x00, 0xf8, 0x00, 0x84, 0x5c]),
 );
 
+/// `{811fc6a5-f728-11d0-a537-0000f8753ed1}`.
+///
 /// {@category constant}
 final GUID_DEVINTERFACE_PARCLASS = GUID.fromComponents(
   0x811fc6a5,
@@ -72,6 +86,8 @@ final GUID_DEVINTERFACE_PARCLASS = GUID.fromComponents(
   .fromList(const [0xa5, 0x37, 0x00, 0x00, 0xf8, 0x75, 0x3e, 0xd1]),
 );
 
+/// `{00000000-0000-0000-0000-000000000000}`.
+///
 /// {@category constant}
 final IID_NULL = GUID.zero();
 

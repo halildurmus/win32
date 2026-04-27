@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2634847d-5b5d-4fe5-a243-002ff95edc7e}`.
+///
 /// @nodoc
 final IID_IAppxManifestOptionalPackageInfo = GUID.fromComponents(
   0x2634847d,

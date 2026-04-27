@@ -35,6 +35,8 @@ import 'iappxmanifestmainpackagedependenciesenumerator.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{8d7ae132-a690-4c00-b75a-6aae1feaac80}`.
+///
 /// @nodoc
 final IID_IAppxManifestReader5 = GUID.fromComponents(
   0x8d7ae132,

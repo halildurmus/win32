@@ -36,6 +36,8 @@ import 'iunknown.g.dart';
 import 'iwbemcontext.g.dart';
 import 'iwbemservices.g.dart';
 
+/// `{dc12a687-737f-11cf-884d-00aa004b2e24}`.
+///
 /// @nodoc
 final IID_IWbemLocator = GUID.fromComponents(
   0xdc12a687,

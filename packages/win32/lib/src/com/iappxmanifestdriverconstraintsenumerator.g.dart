@@ -35,6 +35,8 @@ import 'iappxmanifestdriverconstraint.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d402b2d1-f600-49e0-95e6-975d8da13d89}`.
+///
 /// @nodoc
 final IID_IAppxManifestDriverConstraintsEnumerator = GUID.fromComponents(
   0xd402b2d1,

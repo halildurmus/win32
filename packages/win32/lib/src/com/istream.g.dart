@@ -37,6 +37,8 @@ import 'isequentialstream.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000000c-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IStream = GUID.fromComponents(
   0xc,

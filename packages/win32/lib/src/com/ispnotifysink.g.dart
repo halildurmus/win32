@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{259684dc-37c3-11d2-9603-00c04f8ee628}`.
+///
 /// @nodoc
 final IID_ISpNotifySink = GUID.fromComponents(
   0x259684dc,

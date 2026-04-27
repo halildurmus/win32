@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ishellitemarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d57c7288-d4ad-4768-be02-9d969532d960}`.
+///
 /// @nodoc
 final IID_IFileOpenDialog = GUID.fromComponents(
   0xd57c7288,

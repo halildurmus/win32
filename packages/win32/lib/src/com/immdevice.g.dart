@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'ipropertystore.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d666063f-1587-4e43-81f1-b948e807363f}`.
+///
 /// @nodoc
 final IID_IMMDevice = GUID.fromComponents(
   0xd666063f,

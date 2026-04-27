@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c3b284d4-6d39-4359-b3cf-b56ddb3bb39c}`.
+///
 /// @nodoc
 final IID_IAudioVolumeDuckNotification = GUID.fromComponents(
   0xc3b284d4,

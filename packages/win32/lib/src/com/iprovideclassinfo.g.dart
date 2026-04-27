@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'itypeinfo.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b196b283-bab4-101a-b69c-00aa00341d07}`.
+///
 /// @nodoc
 final IID_IProvideClassInfo = GUID.fromComponents(
   0xb196b283,

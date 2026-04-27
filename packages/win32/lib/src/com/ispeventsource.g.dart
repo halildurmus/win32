@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ispnotifysource.g.dart';
 import 'iunknown.g.dart';
 
+/// `{be7a9cce-5f9e-11d2-960f-00c04f8ee628}`.
+///
 /// @nodoc
 final IID_ISpEventSource = GUID.fromComponents(
   0xbe7a9cce,

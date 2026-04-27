@@ -37,6 +37,8 @@ import 'iuiautomationcacherequest.g.dart';
 import 'iuiautomationcondition.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b32a92b5-bc25-4078-9c08-d7ee95c48e03}`.
+///
 /// @nodoc
 final IID_IUIAutomationCacheRequest = GUID.fromComponents(
   0xb32a92b5,

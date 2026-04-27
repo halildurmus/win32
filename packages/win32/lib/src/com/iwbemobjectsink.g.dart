@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iunknown.g.dart';
 import 'iwbemclassobject.g.dart';
 
+/// `{7c857801-7381-11cf-884d-00aa004b2e24}`.
+///
 /// @nodoc
 final IID_IWbemObjectSink = GUID.fromComponents(
   0x7c857801,
