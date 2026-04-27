@@ -36,6 +36,8 @@ import 'iuiautomationelement.g.dart';
 import 'iuiautomationselectionpattern.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0532bfae-c011-4e32-a343-6d642d798555}`.
+///
 /// @nodoc
 final IID_IUIAutomationSelectionPattern2 = GUID.fromComponents(
   0x532bfae,

@@ -38,6 +38,8 @@ import 'interface.g.dart';
 import 'ipersiststream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000000f-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IMoniker = GUID.fromComponents(
   0xf,

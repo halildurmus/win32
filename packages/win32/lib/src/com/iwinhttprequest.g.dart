@@ -37,6 +37,8 @@ import 'idispatch.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{016fe2ec-b2c8-45f8-b23b-39e53a75396b}`.
+///
 /// @nodoc
 final IID_IWinHttpRequest = GUID.fromComponents(
   0x16fe2ec,

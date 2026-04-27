@@ -38,6 +38,8 @@ import 'ioptiondescription.g.dart';
 import 'ispellcheckerchangedeventhandler.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b6fd0b71-e2bc-4653-8d05-f197e412770b}`.
+///
 /// @nodoc
 final IID_ISpellChecker = GUID.fromComponents(
   0xb6fd0b71,

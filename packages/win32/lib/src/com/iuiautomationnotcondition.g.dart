@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iuiautomationcondition.g.dart';
 import 'iunknown.g.dart';
 
+/// `{f528b657-847b-498c-8896-d52b565407a1}`.
+///
 /// @nodoc
 final IID_IUIAutomationNotCondition = GUID.fromComponents(
   0xf528b657,

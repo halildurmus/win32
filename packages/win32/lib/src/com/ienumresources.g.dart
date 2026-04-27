@@ -35,6 +35,8 @@ import 'ienumresources.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{2dd81fe3-a83c-4da9-a330-47249d345ba1}`.
+///
 /// @nodoc
 final IID_IEnumResources = GUID.fromComponents(
   0x2dd81fe3,

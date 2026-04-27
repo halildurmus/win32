@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6f49ff73-6727-49ac-a008-d98cf5e70048}`.
+///
 /// @nodoc
 final IID_IAudioClock2 = GUID.fromComponents(
   0x6f49ff73,

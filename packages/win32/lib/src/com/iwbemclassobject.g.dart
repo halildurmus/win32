@@ -38,6 +38,8 @@ import 'iunknown.g.dart';
 import 'iwbemclassobject.g.dart';
 import 'iwbemqualifierset.g.dart';
 
+/// `{dc12a681-737f-11cf-884d-00aa004b2e24}`.
+///
 /// @nodoc
 final IID_IWbemClassObject = GUID.fromComponents(
   0xdc12a681,

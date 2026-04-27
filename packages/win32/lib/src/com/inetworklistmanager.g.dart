@@ -40,6 +40,8 @@ import 'inetworkconnection.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{dcb00000-570f-4a9b-8d69-199fdba5723b}`.
+///
 /// @nodoc
 final IID_INetworkListManager = GUID.fromComponents(
   0xdcb00000,

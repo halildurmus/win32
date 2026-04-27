@@ -37,6 +37,8 @@ import 'iportabledevicekeycollection.g.dart';
 import 'iportabledevicevalues.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0ab9df9b-c4b5-4796-8898-0470706a2e1d}`.
+///
 /// @nodoc
 final IID_ISensorDataReport = GUID.fromComponents(
   0xab9df9b,

@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ipersist.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000010b-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IPersistFile = GUID.fromComponents(
   0x10b,

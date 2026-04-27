@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{85b5f0a2-bd79-484a-ad2b-388c9838d5fb}`.
+///
 /// @nodoc
 final IID_IUIAutomationStylesPattern = GUID.fromComponents(
   0x85b5f0a2,

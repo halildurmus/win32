@@ -36,6 +36,8 @@ import 'iknownfolder.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{8be2d872-86aa-4d47-b776-32cca40c7018}`.
+///
 /// @nodoc
 final IID_IKnownFolderManager = GUID.fromComponents(
   0x8be2d872,

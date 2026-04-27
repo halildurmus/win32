@@ -37,6 +37,8 @@ import 'interface.g.dart';
 import 'ispeechdatakey.g.dart';
 import 'iunknown.g.dart';
 
+/// `{ce17c09b-4efa-44d5-a4c9-59d9585ab0cd}`.
+///
 /// @nodoc
 final IID_ISpeechDataKey = GUID.fromComponents(
   0xce17c09b,

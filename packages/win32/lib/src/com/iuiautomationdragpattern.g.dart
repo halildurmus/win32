@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iuiautomationelementarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{1dc7b570-1f54-4bad-bcda-d36a722fb7bd}`.
+///
 /// @nodoc
 final IID_IUIAutomationDragPattern = GUID.fromComponents(
   0x1dc7b570,

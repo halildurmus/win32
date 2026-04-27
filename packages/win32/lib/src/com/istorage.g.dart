@@ -38,6 +38,8 @@ import 'istorage.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000000b-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IStorage = GUID.fromComponents(
   0xb,

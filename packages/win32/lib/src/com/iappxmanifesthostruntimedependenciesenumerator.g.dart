@@ -35,6 +35,8 @@ import 'iappxmanifesthostruntimedependency.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6427a646-7f49-433e-b1a6-0da309f6885a}`.
+///
 /// @nodoc
 final IID_IAppxManifestHostRuntimeDependenciesEnumerator = GUID.fromComponents(
   0x6427a646,

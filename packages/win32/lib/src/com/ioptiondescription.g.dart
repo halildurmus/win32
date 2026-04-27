@@ -35,6 +35,8 @@ import 'ienumstring.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{432e5f85-35cf-4606-a801-6f70277e1d7a}`.
+///
 /// @nodoc
 final IID_IOptionDescription = GUID.fromComponents(
   0x432e5f85,

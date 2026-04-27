@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iuiautomationelement.g.dart';
 import 'iunknown.g.dart';
 
+/// `{01ea217a-1766-47ed-a6cc-acf492854b1f}`.
+///
 /// @nodoc
 final IID_IUIAutomationCustomNavigationPattern = GUID.fromComponents(
   0x1ea217a,

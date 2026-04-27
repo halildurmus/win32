@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iuiautomationtransformpattern.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6d74d017-6ecb-4381-b38b-3c17a48ff1c2}`.
+///
 /// @nodoc
 final IID_IUIAutomationTransformPattern2 = GUID.fromComponents(
   0x6d74d017,

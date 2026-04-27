@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c031bee4-bbcc-48ea-a237-c34045c80a07}`.
+///
 /// @nodoc
 final IID_IAppxManifestDriverConstraint = GUID.fromComponents(
   0xc031bee4,

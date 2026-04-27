@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b4db1657-70d7-485e-8e3e-6fcb5a5c1802}`.
+///
 /// @nodoc
 final IID_IModalWindow = GUID.fromComponents(
   0xb4db1657,

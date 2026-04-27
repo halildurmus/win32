@@ -37,6 +37,8 @@ import 'iuiautomationtextpattern.g.dart';
 import 'iuiautomationtextrange.g.dart';
 import 'iunknown.g.dart';
 
+/// `{506a921a-fcc9-409f-b23b-37eb74106872}`.
+///
 /// @nodoc
 final IID_IUIAutomationTextPattern2 = GUID.fromComponents(
   0x506a921a,

@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6ba3d7a6-04cf-4f11-8793-a8d1cde9969f}`.
+///
 /// @nodoc
 final IID_IUIAutomationVirtualizedItemPattern = GUID.fromComponents(
   0x6ba3d7a6,

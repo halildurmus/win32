@@ -37,6 +37,8 @@ import 'ienumnetworkconnections.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{dcb00002-570f-4a9b-8d69-199fdba5723b}`.
+///
 /// @nodoc
 final IID_INetwork = GUID.fromComponents(
   0xdcb00002,

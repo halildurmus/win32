@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ishellitem.g.dart';
 import 'iunknown.g.dart';
 
+/// `{04b0f1a7-9490-44bc-96e1-4296a31252e2}`.
+///
 /// @nodoc
 final IID_IFileOperationProgressSink = GUID.fromComponents(
   0x4b0f1a7,

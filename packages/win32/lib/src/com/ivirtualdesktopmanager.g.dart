@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{a5cd92ff-29be-454c-8d04-d82879fb3f1b}`.
+///
 /// @nodoc
 final IID_IVirtualDesktopManager = GUID.fromComponents(
   0xa5cd92ff,

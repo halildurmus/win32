@@ -35,6 +35,8 @@ import 'iappxfile.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{f007eeaf-9831-411c-9847-917cdc62d1fe}`.
+///
 /// @nodoc
 final IID_IAppxFilesEnumerator = GUID.fromComponents(
   0xf007eeaf,

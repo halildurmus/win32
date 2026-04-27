@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ispdatakey.g.dart';
 import 'iunknown.g.dart';
 
+/// `{14056581-e16c-11d2-bb90-00c04f8ee6c0}`.
+///
 /// @nodoc
 final IID_ISpDataKey = GUID.fromComponents(
   0x14056581,

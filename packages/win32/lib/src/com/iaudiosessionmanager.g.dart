@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'isimpleaudiovolume.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bfa971f1-4d5e-40bb-935e-967039bfbee4}`.
+///
 /// @nodoc
 final IID_IAudioSessionManager = GUID.fromComponents(
   0xbfa971f1,

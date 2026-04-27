@@ -37,6 +37,8 @@ import 'ispnotifycallback.g.dart';
 import 'ispnotifysink.g.dart';
 import 'iunknown.g.dart';
 
+/// `{5eff4aef-8487-11d2-961c-00c04f8ee628}`.
+///
 /// @nodoc
 final IID_ISpNotifySource = GUID.fromComponents(
   0x5eff4aef,

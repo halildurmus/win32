@@ -36,6 +36,8 @@ import 'ienumvariant.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00020404-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IEnumVARIANT = GUID.fromComponents(
   0x20404,

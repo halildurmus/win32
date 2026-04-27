@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{3b53a497-3c5c-48d1-9ea3-bb7eac8cd7d4}`.
+///
 /// @nodoc
 final IID_IAppxManifestQualifiedResource = GUID.fromComponents(
   0x3b53a497,

@@ -43,6 +43,8 @@ import 'iuiautomationstructurechangedeventhandler.g.dart';
 import 'iuiautomationtextedittextchangedeventhandler.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c9ee12f2-c13b-4408-997c-639914377f4e}`.
+///
 /// @nodoc
 final IID_IUIAutomationEventHandlerGroup = GUID.fromComponents(
   0xc9ee12f2,

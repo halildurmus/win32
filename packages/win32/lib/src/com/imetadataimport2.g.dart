@@ -35,6 +35,8 @@ import 'imetadataimport.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{fce5efa0-8bba-4f8e-a036-8f2022b08466}`.
+///
 /// @nodoc
 final IID_IMetaDataImport2 = GUID.fromComponents(
   0xfce5efa0,

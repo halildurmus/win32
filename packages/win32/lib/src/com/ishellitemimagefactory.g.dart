@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bcc18b79-ba16-442f-80c4-8a59c30c463b}`.
+///
 /// @nodoc
 final IID_IShellItemImageFactory = GUID.fromComponents(
   0xbcc18b79,

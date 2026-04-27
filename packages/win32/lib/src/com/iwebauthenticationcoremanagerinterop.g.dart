@@ -35,6 +35,8 @@ import 'iinspectable.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{f4b8e804-811e-4436-b69c-44cb67b72084}`.
+///
 /// @nodoc
 final IID_IWebAuthenticationCoreManagerInterop = GUID.fromComponents(
   0xf4b8e804,

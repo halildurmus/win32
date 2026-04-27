@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iuiautomationelement.g.dart';
 import 'iunknown.g.dart';
 
+/// `{414c3cdc-856b-4f5b-8538-3131c6302550}`.
+///
 /// @nodoc
 final IID_IUIAutomationGridPattern = GUID.fromComponents(
   0x414c3cdc,

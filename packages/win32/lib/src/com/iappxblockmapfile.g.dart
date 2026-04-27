@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'istream.g.dart';
 import 'iunknown.g.dart';
 
+/// `{277672ac-4f63-42c1-8abc-beae3600eb59}`.
+///
 /// @nodoc
 final IID_IAppxBlockMapFile = GUID.fromComponents(
   0x277672ac,

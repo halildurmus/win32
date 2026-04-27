@@ -36,6 +36,8 @@ import 'imoniker.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00000102-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IEnumMoniker = GUID.fromComponents(
   0x102,

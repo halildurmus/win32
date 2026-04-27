@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iuiautomationproxyfactory.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d50e472e-b64b-490c-bca1-d30696f9f289}`.
+///
 /// @nodoc
 final IID_IUIAutomationProxyFactoryEntry = GUID.fromComponents(
   0xd50e472e,

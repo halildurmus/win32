@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'iuiautomationelement.g.dart';
 import 'iunknown.g.dart';
 
+/// `{92faa680-e704-4156-931a-e32d5bb38f3f}`.
+///
 /// @nodoc
 final IID_IUIAutomationTextEditTextChangedEventHandler = GUID.fromComponents(
   0x92faa680,

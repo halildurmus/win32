@@ -38,6 +38,8 @@ import 'interface.g.dart';
 import 'ispeechaudioformat.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6450336f-7d49-4ced-8097-49d6dee37294}`.
+///
 /// @nodoc
 final IID_ISpeechBaseStream = GUID.fromComponents(
   0x6450336f,

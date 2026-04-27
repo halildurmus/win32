@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{1cb9ad4c-dbfa-4c32-b178-c2f568a703b2}`.
+///
 /// @nodoc
 final IID_IAudioClient = GUID.fromComponents(
   0x1cb9ad4c,

@@ -35,6 +35,8 @@ import 'ienumstatstg.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{0000000d-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IEnumSTATSTG = GUID.fromComponents(
   0xd,

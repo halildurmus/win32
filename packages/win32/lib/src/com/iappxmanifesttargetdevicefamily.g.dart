@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{9091b09b-c8d5-4f31-8687-a338259faefb}`.
+///
 /// @nodoc
 final IID_IAppxManifestTargetDeviceFamily = GUID.fromComponents(
   0x9091b09b,

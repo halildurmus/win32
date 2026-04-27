@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{af86e2e0-b12d-4c6a-9c5a-d7aa65101e90}`.
+///
 /// @nodoc
 final IID_IInspectable = GUID.fromComponents(
   0xaf86e2e0,

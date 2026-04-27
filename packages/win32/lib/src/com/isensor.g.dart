@@ -40,6 +40,8 @@ import 'isensordatareport.g.dart';
 import 'isensorevents.g.dart';
 import 'iunknown.g.dart';
 
+/// `{5fa08f80-2657-458e-af75-46f73fa6ac5c}`.
+///
 /// @nodoc
 final IID_ISensor = GUID.fromComponents(
   0x5fa08f80,

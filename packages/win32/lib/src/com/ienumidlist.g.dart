@@ -35,6 +35,8 @@ import 'ienumidlist.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{000214f2-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IEnumIDList = GUID.fromComponents(
   0x214f2,

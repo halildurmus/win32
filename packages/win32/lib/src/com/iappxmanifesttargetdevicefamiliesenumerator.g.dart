@@ -35,6 +35,8 @@ import 'iappxmanifesttargetdevicefamily.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{36537f36-27a4-4788-88c0-733819575017}`.
+///
 /// @nodoc
 final IID_IAppxManifestTargetDeviceFamiliesEnumerator = GUID.fromComponents(
   0x36537f36,

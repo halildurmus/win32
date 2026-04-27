@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b7c82d61-fbe8-4b47-9b27-6c0d2e0de0a3}`.
+///
 /// @nodoc
 final IID_ISpellingError = GUID.fromComponents(
   0xb7c82d61,

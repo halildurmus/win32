@@ -36,6 +36,8 @@ import 'idispatch.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{88a05c00-f000-11ce-8350-444553540000}`.
+///
 /// @nodoc
 final IID_IShellLinkDual = GUID.fromComponents(
   0x88a05c00,

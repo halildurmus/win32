@@ -401,6 +401,7 @@ base class ASSEMBLYMETADATA extends Struct {
       allocator()..ref = this;
 }
 
+/// `{45ba127d-10a8-46ea-8ab7-56ea9078943c}`.
 final ApplicationActivationManager = GUID.fromComponents(
   0x45ba127d,
   0x10a8,
@@ -408,6 +409,7 @@ final ApplicationActivationManager = GUID.fromComponents(
   .fromList(const [0x8a, 0xb7, 0x56, 0xea, 0x90, 0x78, 0x94, 0x3c]),
 );
 
+/// `{5842a140-ff9f-4166-8f5c-62f5b7b0c781}`.
 final AppxFactory = GUID.fromComponents(
   0x5842a140,
   0xff9f,
@@ -4399,6 +4401,7 @@ base class CRYPT_INTEGER_BLOB extends Struct {
   }) => allocator()..ref = this;
 }
 
+/// `{ff48dba4-60ef-4201-aa87-54103eef594e}`.
 final CUIAutomation = GUID.fromComponents(
   0xff48dba4,
   0x60ef,
@@ -4406,6 +4409,7 @@ final CUIAutomation = GUID.fromComponents(
   .fromList(const [0xaa, 0x87, 0x54, 0x10, 0x3e, 0xef, 0x59, 0x4e]),
 );
 
+/// `{e22ad333-b25f-460c-83d0-0581107395c9}`.
 final CUIAutomation8 = GUID.fromComponents(
   0xe22ad333,
   0xb25f,
@@ -6908,6 +6912,7 @@ base class DWM_BLURBEHIND extends Struct {
       allocator()..ref = this;
 }
 
+/// `{c2cf3110-460e-4fc1-b9d0-8a1c0c9cc4bd}`.
 final DesktopWallpaper = GUID.fromComponents(
   0xc2cf3110,
   0x460e,
@@ -7839,6 +7844,7 @@ base class FUNCDESC extends Struct {
       allocator()..ref = this;
 }
 
+/// `{dc1c5a9c-e88a-4dde-a5a1-60f82a20aef7}`.
 final FileOpenDialog = GUID.fromComponents(
   0xdc1c5a9c,
   0xe88a,
@@ -7846,6 +7852,7 @@ final FileOpenDialog = GUID.fromComponents(
   .fromList(const [0xa5, 0xa1, 0x60, 0xf8, 0x2a, 0x20, 0xae, 0xf7]),
 );
 
+/// `{c0b4e2f3-ba21-4773-8dba-335ec946eb8b}`.
 final FileSaveDialog = GUID.fromComponents(
   0xc0b4e2f3,
   0xba21,
@@ -7984,6 +7991,7 @@ base class GESTURENOTIFYSTRUCT extends Struct {
   }) => allocator()..ref = this;
 }
 
+/// `{00000000-0000-0000-0000-000000000000}`.
 final GUID_NULL = GUID.fromComponents(
   0x0,
   0x0,
@@ -10670,6 +10678,7 @@ base class KNOWNFOLDER_DEFINITION extends Struct {
   }) => allocator()..ref = this;
 }
 
+/// `{4df0c730-df9d-4ae3-9153-aa6b82e9795a}`.
 final KnownFolderManager = GUID.fromComponents(
   0x4df0c730,
   0xdf9d,
@@ -11906,6 +11915,7 @@ base class MINMAXINFO extends Struct {
       allocator()..ref = this;
 }
 
+/// `{bcde0395-e52f-467c-8e3d-c4579291692e}`.
 final MMDeviceEnumerator = GUID.fromComponents(
   0xbcde0395,
   0xe52f,
@@ -13083,6 +13093,7 @@ extension NOTIFYICONDATA_0_Extension on NOTIFYICONDATA {
   set uVersion(int value) => this.Anonymous.uVersion = value;
 }
 
+/// `{dcb00c01-570f-4a9b-8d69-199fdba5723b}`.
 final NetworkListManager = GUID.fromComponents(
   0xdcb00c01,
   0x570f,
@@ -15797,6 +15808,7 @@ extension type const PSECURITY_DESCRIPTOR(Pointer _) implements Pointer {
 
 extension type const PSID(Pointer _) implements Pointer {}
 
+/// `{de2d022d-2480-43be-97f0-d1fa2cf98f4f}`.
 final PortableDeviceKeyCollection = GUID.fromComponents(
   0xde2d022d,
   0x2480,
@@ -15804,6 +15816,7 @@ final PortableDeviceKeyCollection = GUID.fromComponents(
   .fromList(const [0x97, 0xf0, 0xd1, 0xfa, 0x2c, 0xf9, 0x8f, 0x4f]),
 );
 
+/// `{08a99e2f-6d6d-4b80-af5a-baf2bcbe4cb9}`.
 final PortableDevicePropVariantCollection = GUID.fromComponents(
   0x8a99e2f,
   0x6d6d,
@@ -15811,6 +15824,7 @@ final PortableDevicePropVariantCollection = GUID.fromComponents(
   .fromList(const [0xaf, 0x5a, 0xba, 0xf2, 0xbc, 0xbe, 0x4c, 0xb9]),
 );
 
+/// `{0c15d503-d017-47ce-9016-7b3f978721cc}`.
 final PortableDeviceValues = GUID.fromComponents(
   0xc15d503,
   0xd017,
@@ -15818,6 +15832,7 @@ final PortableDeviceValues = GUID.fromComponents(
   .fromList(const [0x90, 0x16, 0x7b, 0x3f, 0x97, 0x87, 0x21, 0xcc]),
 );
 
+/// `{3882134d-14cf-4220-9cb4-435f86d83f60}`.
 final PortableDeviceValuesCollection = GUID.fromComponents(
   0x3882134d,
   0x14cf,
@@ -19702,6 +19717,8 @@ sealed class SdpQueryUuidUnion extends Union {
 
 /// The following GUIDS define the different types of sensor profiles.
 ///
+/// `{e97ced00-523a-4133-bf6f-d3a2dae7f6ba}`.
+///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/medfound/sensor-profile-guids>.
 final Sensor = GUID.fromComponents(
@@ -19711,6 +19728,7 @@ final Sensor = GUID.fromComponents(
   .fromList(const [0xbf, 0x6f, 0xd3, 0xa2, 0xda, 0xe7, 0xf6, 0xba]),
 );
 
+/// `{79c43adb-a429-469f-aa39-2f2b74b75937}`.
 final SensorCollection = GUID.fromComponents(
   0x79c43adb,
   0xa429,
@@ -19718,6 +19736,7 @@ final SensorCollection = GUID.fromComponents(
   .fromList(const [0xaa, 0x39, 0x2f, 0x2b, 0x74, 0xb7, 0x59, 0x37]),
 );
 
+/// `{4ea9d6ef-694b-4218-8816-ccda8da74bba}`.
 final SensorDataReport = GUID.fromComponents(
   0x4ea9d6ef,
   0x694b,
@@ -19725,6 +19744,7 @@ final SensorDataReport = GUID.fromComponents(
   .fromList(const [0x88, 0x16, 0xcc, 0xda, 0x8d, 0xa7, 0x4b, 0xba]),
 );
 
+/// `{77a1c827-fcd2-4689-8915-9d613cc5fa3e}`.
 final SensorManager = GUID.fromComponents(
   0x77a1c827,
   0xfcd2,
@@ -19732,6 +19752,7 @@ final SensorManager = GUID.fromComponents(
   .fromList(const [0x89, 0x15, 0x9d, 0x61, 0x3c, 0xc5, 0xfa, 0x3e]),
 );
 
+/// `{9ac9fbe1-e0a2-4ad6-b4ee-e212013ea917}`.
 final ShellItem = GUID.fromComponents(
   0x9ac9fbe1,
   0xe0a2,
@@ -19739,6 +19760,7 @@ final ShellItem = GUID.fromComponents(
   .fromList(const [0xb4, 0xee, 0xe2, 0x12, 0x1, 0x3e, 0xa9, 0x17]),
 );
 
+/// `{00021401-0000-0000-c000-000000000046}`.
 final ShellLink = GUID.fromComponents(
   0x21401,
   0x0,
@@ -19746,6 +19768,7 @@ final ShellLink = GUID.fromComponents(
   .fromList(const [0xc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x46]),
 );
 
+/// `{d9f6ee60-58c9-458b-88e1-2f908fd7f87c}`.
 final SpDataKey = GUID.fromComponents(
   0xd9f6ee60,
   0x58c9,
@@ -19753,6 +19776,7 @@ final SpDataKey = GUID.fromComponents(
   .fromList(const [0x88, 0xe1, 0x2f, 0x90, 0x8f, 0xd7, 0xf8, 0x7c]),
 );
 
+/// `{ef411752-3736-4cb4-9c8c-8ef4ccb58efe}`.
 final SpObjectToken = GUID.fromComponents(
   0xef411752,
   0x3736,
@@ -19760,6 +19784,7 @@ final SpObjectToken = GUID.fromComponents(
   .fromList(const [0x9c, 0x8c, 0x8e, 0xf4, 0xcc, 0xb5, 0x8e, 0xfe]),
 );
 
+/// `{a910187f-0c7a-45ac-92cc-59edafb77b53}`.
 final SpObjectTokenCategory = GUID.fromComponents(
   0xa910187f,
   0xc7a,
@@ -19767,6 +19792,7 @@ final SpObjectTokenCategory = GUID.fromComponents(
   .fromList(const [0x92, 0xcc, 0x59, 0xed, 0xaf, 0xb7, 0x7b, 0x53]),
 );
 
+/// `{96749377-3391-11d2-9ee3-00c04f797396}`.
 final SpVoice = GUID.fromComponents(
   0x96749377,
   0x3391,
@@ -19774,6 +19800,7 @@ final SpVoice = GUID.fromComponents(
   .fromList(const [0x9e, 0xe3, 0x0, 0xc0, 0x4f, 0x79, 0x73, 0x96]),
 );
 
+/// `{7ab36653-1796-484b-bdfa-e74f1db7c1dc}`.
 final SpellCheckerFactory = GUID.fromComponents(
   0x7ab36653,
   0x1796,
@@ -21369,6 +21396,8 @@ base class VS_FIXEDFILEINFO extends Struct {
 }
 
 /// VirtualDesktopManager implements the IVirtualDesktopManager interface.
+///
+/// `{aa509086-5ca9-4c25-8f95-589d3c07b48a}`.
 ///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/shell/virtualdesktopmanager>.
@@ -23754,6 +23783,8 @@ base class WTA_OPTIONS extends Struct {
 
 /// Contains and manipulates both class definitions and class object instances.
 ///
+/// `{9a653086-174f-11d2-b5f9-00104b703efd}`.
+///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemclassobject>.
 final WbemClassObject = GUID.fromComponents(
@@ -23769,6 +23800,8 @@ final WbemClassObject = GUID.fromComponents(
 /// All primary calls in IWbemServices take an optional parameter pointing to an
 /// object of this type.
 ///
+/// `{674b6698-ee92-11d0-ad71-00c04fd8fdff}`.
+///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemcontext>.
 final WbemContext = GUID.fromComponents(
@@ -23778,6 +23811,7 @@ final WbemContext = GUID.fromComponents(
   .fromList(const [0xad, 0x71, 0x0, 0xc0, 0x4f, 0xd8, 0xfd, 0xff]),
 );
 
+/// `{4590f811-1d3a-11d0-891f-00aa004b2e24}`.
 final WbemLocator = GUID.fromComponents(
   0x4590f811,
   0x1d3a,
@@ -23787,6 +23821,8 @@ final WbemLocator = GUID.fromComponents(
 
 /// Provides an entry point through which refreshable objects such as
 /// enumerators or refresher objects, can be refreshed.
+///
+/// `{c71566f2-561e-11d1-ad87-00c04fd8fdff}`.
 ///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemrefresher>.
@@ -23799,6 +23835,8 @@ final WbemRefresher = GUID.fromComponents(
 
 /// This topic provides information about using the WinHTTP WinHttpRequest COM
 /// object with scripting languages.
+///
+/// `{2087c2f4-2cef-4953-a8ab-66779b670495}`.
 ///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/WinHttp/winhttprequest>.

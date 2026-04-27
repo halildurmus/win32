@@ -35,6 +35,8 @@ import 'ienumresources.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{ff5693be-2ce0-4d48-b5c5-40817d1acdb9}`.
+///
 /// @nodoc
 final IID_IShellItemResources = GUID.fromComponents(
   0xff5693be,

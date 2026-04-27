@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iuiautomationelement.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c270f6b5-5c69-4290-9745-7a7f97169468}`.
+///
 /// @nodoc
 final IID_IUIAutomationFocusChangedEventHandler = GUID.fromComponents(
   0xc270f6b5,

@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c8adbd64-e71e-48a0-a4de-185c395cd317}`.
+///
 /// @nodoc
 final IID_IAudioCaptureClient = GUID.fromComponents(
   0xc8adbd64,

@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{000214f9-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IShellLink = GUID.fromComponents(
   0x214f9,

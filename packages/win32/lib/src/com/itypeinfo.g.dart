@@ -39,6 +39,8 @@ import 'itypeinfo.g.dart';
 import 'itypelib.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00020401-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_ITypeInfo = GUID.fromComponents(
   0x20401,

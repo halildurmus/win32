@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{283ce2d7-7153-4a91-9649-7a0f7240945f}`.
+///
 /// @nodoc
 final IID_IAppxManifestPackageId = GUID.fromComponents(
   0x283ce2d7,

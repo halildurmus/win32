@@ -40,6 +40,8 @@ import 'iuiautomationelement.g.dart';
 import 'iuiautomationelementarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{d22108aa-8ac5-49a5-837b-37bbb3d7591e}`.
+///
 /// @nodoc
 final IID_IUIAutomationElement = GUID.fromComponents(
   0xd22108aa,

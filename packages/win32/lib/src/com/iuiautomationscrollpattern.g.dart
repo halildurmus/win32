@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{88f4d42a-e881-459d-a77c-73bbbb7e02dc}`.
+///
 /// @nodoc
 final IID_IUIAutomationScrollPattern = GUID.fromComponents(
   0x88f4d42a,

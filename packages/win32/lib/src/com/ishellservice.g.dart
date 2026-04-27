@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{5836fb00-8187-11cf-a12b-00aa004ae837}`.
+///
 /// @nodoc
 final IID_IShellService = GUID.fromComponents(
   0x5836fb00,

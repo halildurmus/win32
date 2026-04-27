@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{1be09788-6894-4089-8586-9a2a6c265ac5}`.
+///
 /// @nodoc
 final IID_IMMEndpoint = GUID.fromComponents(
   0x1be09788,

@@ -36,6 +36,8 @@ import 'ispdatakey.g.dart';
 import 'ispobjecttokencategory.g.dart';
 import 'iunknown.g.dart';
 
+/// `{14056589-e16c-11d2-bb90-00c04f8ee6c0}`.
+///
 /// @nodoc
 final IID_ISpObjectToken = GUID.fromComponents(
   0x14056589,

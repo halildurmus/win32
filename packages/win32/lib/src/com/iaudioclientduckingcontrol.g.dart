@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{c789d381-a28c-4168-b28f-d3a837924dc3}`.
+///
 /// @nodoc
 final IID_IAudioClientDuckingControl = GUID.fromComponents(
   0xc789d381,

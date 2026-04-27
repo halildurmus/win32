@@ -215,7 +215,7 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
 
     return .new(
       (b) => b
-        ..docs.add('@nodoc')
+        ..docs.addAll(['`{$guid}`.', '@nodoc'])
         ..modifier = .final$
         ..name = name
         ..assignment = cb.refer('GUID').property('fromComponents').call([

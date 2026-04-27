@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{1cf2b120-547d-101b-8e65-08002b2bd119}`.
+///
 /// @nodoc
 final IID_IErrorInfo = GUID.fromComponents(
   0x1cf2b120,

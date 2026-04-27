@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{ee62470b-e94b-424e-9b7c-2f00c9249f93}`.
+///
 /// @nodoc
 final IID_IMetaDataAssemblyImport = GUID.fromComponents(
   0xee62470b,

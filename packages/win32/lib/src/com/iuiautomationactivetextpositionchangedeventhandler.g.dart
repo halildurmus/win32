@@ -36,6 +36,8 @@ import 'iuiautomationelement.g.dart';
 import 'iuiautomationtextrange.g.dart';
 import 'iunknown.g.dart';
 
+/// `{f97933b0-8dae-4496-8997-5ba015fe0d82}`.
+///
 /// @nodoc
 final IID_IUIAutomationActiveTextPositionChangedEventHandler = GUID
     .fromComponents(

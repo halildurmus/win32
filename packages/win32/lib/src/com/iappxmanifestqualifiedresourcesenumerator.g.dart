@@ -35,6 +35,8 @@ import 'iappxmanifestqualifiedresource.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{8ef6adfe-3762-4a8f-9373-2fc5d444c8d2}`.
+///
 /// @nodoc
 final IID_IAppxManifestQualifiedResourcesEnumerator = GUID.fromComponents(
   0x8ef6adfe,

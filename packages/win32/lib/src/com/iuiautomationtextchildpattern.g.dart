@@ -36,6 +36,8 @@ import 'iuiautomationelement.g.dart';
 import 'iuiautomationtextrange.g.dart';
 import 'iunknown.g.dart';
 
+/// `{6552b038-ae05-40c8-abfd-aa08352aab86}`.
+///
 /// @nodoc
 final IID_IUIAutomationTextChildPattern = GUID.fromComponents(
   0x6552b038,

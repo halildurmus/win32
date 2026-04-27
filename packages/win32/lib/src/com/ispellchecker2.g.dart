@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'ispellchecker.g.dart';
 import 'iunknown.g.dart';
 
+/// `{e7ed1c71-87f7-4378-a840-c9200dacee47}`.
+///
 /// @nodoc
 final IID_ISpellChecker2 = GUID.fromComponents(
   0xe7ed1c71,

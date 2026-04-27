@@ -35,6 +35,8 @@ import 'interface.g.dart';
 import 'iuiautomationtextrange.g.dart';
 import 'iunknown.g.dart';
 
+/// `{bb9b40e0-5e04-46bd-9be0-4b601b9afad4}`.
+///
 /// @nodoc
 final IID_IUIAutomationTextRange2 = GUID.fromComponents(
   0xbb9b40e0,

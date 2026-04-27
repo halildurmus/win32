@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{00000001-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IClassFactory = GUID.fromComponents(
   0x1,

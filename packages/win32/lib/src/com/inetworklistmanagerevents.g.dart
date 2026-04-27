@@ -35,6 +35,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{dcb00001-570f-4a9b-8d69-199fdba5723b}`.
+///
 /// @nodoc
 final IID_INetworkListManagerEvents = GUID.fromComponents(
   0xdcb00001,

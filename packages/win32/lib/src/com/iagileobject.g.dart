@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{94ea2b94-e9cc-49e0-c0ff-ee64ca8f5b90}`.
+///
 /// @nodoc
 final IID_IAgileObject = GUID.fromComponents(
   0x94ea2b94,

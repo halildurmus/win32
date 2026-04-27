@@ -37,6 +37,8 @@ import 'ienumidlist.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{000214e6-0000-0000-c000-000000000046}`.
+///
 /// @nodoc
 final IID_IShellFolder = GUID.fromComponents(
   0x214e6,

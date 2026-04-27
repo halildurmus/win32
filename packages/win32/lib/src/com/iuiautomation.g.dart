@@ -48,6 +48,8 @@ import 'iuiautomationstructurechangedeventhandler.g.dart';
 import 'iuiautomationtreewalker.g.dart';
 import 'iunknown.g.dart';
 
+/// `{30cbe57d-d9d0-452a-ab13-7ac5ac4825ee}`.
+///
 /// @nodoc
 final IID_IUIAutomation = GUID.fromComponents(
   0x30cbe57d,

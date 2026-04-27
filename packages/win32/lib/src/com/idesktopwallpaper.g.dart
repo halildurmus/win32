@@ -36,6 +36,8 @@ import 'interface.g.dart';
 import 'ishellitemarray.g.dart';
 import 'iunknown.g.dart';
 
+/// `{b92b56a9-8b55-4e14-9a89-0199bbb6f93b}`.
+///
 /// @nodoc
 final IID_IDesktopWallpaper = GUID.fromComponents(
   0xb92b56a9,

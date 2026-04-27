@@ -35,6 +35,8 @@ import 'iappxmanifestapplication.g.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{9eb8a55a-f04b-4d0d-808d-686185d4847a}`.
+///
 /// @nodoc
 final IID_IAppxManifestApplicationsEnumerator = GUID.fromComponents(
   0x9eb8a55a,

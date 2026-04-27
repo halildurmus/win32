@@ -35,6 +35,8 @@ import '../variant.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{dc12a680-737f-11cf-884d-00aa004b2e24}`.
+///
 /// @nodoc
 final IID_IWbemQualifierSet = GUID.fromComponents(
   0xdc12a680,

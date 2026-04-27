@@ -37,6 +37,8 @@ import 'iunknown.g.dart';
 import 'iwbemclassobject.g.dart';
 import 'iwbemobjectsink.g.dart';
 
+/// `{027947e1-d731-11ce-a357-000000000001}`.
+///
 /// @nodoc
 final IID_IEnumWbemClassObject = GUID.fromComponents(
   0x27947e1,

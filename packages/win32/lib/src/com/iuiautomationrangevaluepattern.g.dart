@@ -34,6 +34,8 @@ import '../utils.dart';
 import 'interface.g.dart';
 import 'iunknown.g.dart';
 
+/// `{59213f4f-7346-49e5-b120-80555987a148}`.
+///
 /// @nodoc
 final IID_IUIAutomationRangeValuePattern = GUID.fromComponents(
   0x59213f4f,

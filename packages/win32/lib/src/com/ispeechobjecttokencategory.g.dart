@@ -38,6 +38,8 @@ import 'ispeechdatakey.g.dart';
 import 'ispeechobjecttokens.g.dart';
 import 'iunknown.g.dart';
 
+/// `{ca7eac50-2d01-4145-86d4-5ae7d70f4469}`.
+///
 /// @nodoc
 final IID_ISpeechObjectTokenCategory = GUID.fromComponents(
   0xca7eac50,
