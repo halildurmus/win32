@@ -40,6 +40,7 @@ export '_win32.g.dart'; // Traditional C-style Windows APIs.
 export 'src/extensions/arena.dart';
 export 'src/extensions/dialog.dart';
 export 'src/extensions/filetime.dart';
+export 'src/extensions/guid.dart';
 export 'src/extensions/int.dart';
 export 'src/extensions/pointer.dart';
 export 'src/extensions/string.dart';
