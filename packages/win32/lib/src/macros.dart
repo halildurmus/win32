@@ -71,7 +71,7 @@ int CTL_CODE(int DeviceType, int Function, int Method, int Access) =>
 ///
 /// [DialogBoxIndirect] does not return control until the specified callback
 /// function terminates the modal dialog box by calling the [EndDialog]
-/// unction.
+/// function.
 ///
 /// To learn more, see
 /// <https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-dialogboxindirectw>.
@@ -135,6 +135,29 @@ int GetBValue(int rgb) => LOBYTE(rgb >> 16);
 // #define GET_SC_WPARAM(wParam) ((int)wParam & 0xFFF0)
 @pragma('vm:prefer-inline')
 int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
+
+/// Retrieves the signed x-coordinate from the specified [LPARAM] value.
+///
+/// Use this macro instead of [LOWORD] when extracting cursor x positions from
+/// Windows messages (e.g., [WM_MOUSEMOVE], [WM_LBUTTONDOWN]).
+/// Unlike [LOWORD], this macro correctly returns negative coordinates, which
+/// occur when a secondary display is positioned to the left of the primary
+/// display.
+//
+// #define GET_X_LPARAM(lp)  ((int)(short)LOWORD(lp))
+@pragma('vm:prefer-inline')
+int GET_X_LPARAM(LPARAM lp) => LOWORD(lp).toSigned(16);
+
+/// Retrieves the signed y-coordinate from the specified [LPARAM] value.
+///
+/// Use this macro instead of [HIWORD] when extracting cursor y positions from
+/// Windows messages (e.g., [WM_MOUSEMOVE], [WM_LBUTTONDOWN]).
+/// Unlike [HIWORD], this macro correctly returns negative coordinates, which
+/// occur when a secondary display is positioned above the primary display.
+//
+// #define GET_Y_LPARAM(lp)  ((int)(short)HIWORD(lp))
+@pragma('vm:prefer-inline')
+int GET_Y_LPARAM(LPARAM lp) => HIWORD(lp).toSigned(16);
 
 /// Retrieves the high-order byte from the specified 16-bit value.
 //
@@ -203,7 +226,7 @@ int LOWORD(int l) => l & 0xffff;
 //
 // #define MAKEINTRESOURCEW(i) ((LPWSTR)((ULONG_PTR)((WORD)(i))))
 @pragma('vm:prefer-inline')
-PWSTR MAKEINTRESOURCE(int i) => PWSTR(Pointer.fromAddress(i));
+PWSTR MAKEINTRESOURCE(int i) => .new(Pointer.fromAddress(i));
 
 /// Creates a LONG value by concatenating the specified values.
 //
@@ -233,7 +256,7 @@ void PropVariantInit(Pointer<PROPVARIANT> pvar) =>
 //
 // ((COLORREF)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
 @pragma('vm:prefer-inline')
-COLORREF RGB(int r, int g, int b) => COLORREF(r + (g << 8) + (b << 16));
+COLORREF RGB(int r, int g, int b) => .new(r + (g << 8) + (b << 16));
 
 /// Provides a generic test for success on any status value.
 //

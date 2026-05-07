@@ -427,8 +427,8 @@ int mainWindowProc(Pointer hWnd, int msg, int wParam, int lParam) {
       final padding = GetSystemMetricsForDpi(SM_CXPADDEDBORDER, dpi).value;
       final cursorPoint = adaptiveCalloc<POINT>();
       cursorPoint.ref
-        ..x = LOWORD(lParam)
-        ..y = HIWORD(lParam);
+        ..x = GET_X_LPARAM(.new(lParam))
+        ..y = GET_Y_LPARAM(.new(lParam));
 
       try {
         ScreenToClient(hwnd, cursorPoint);

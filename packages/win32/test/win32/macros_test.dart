@@ -130,5 +130,19 @@ void main() {
     test('GET_SC_WPARAM extracts system command WPARAM', () {
       check(GET_SC_WPARAM(SC_CLOSE)).equals(SC_CLOSE);
     });
+
+    test('GET_X_LPARAM extracts signed x-coordinate', () {
+      const lParam1 = LPARAM(0x00640032); // x=50, y=100
+      const lParam2 = LPARAM(0xFF9CFFCE); // x=-50, y=-100
+      check(GET_X_LPARAM(lParam1)).equals(50);
+      check(GET_X_LPARAM(lParam2)).equals(-50);
+    });
+
+    test('GET_Y_LPARAM extracts signed y-coordinate', () {
+      const lParam1 = LPARAM(0x00640032); // x=50, y=100
+      const lParam2 = LPARAM(0xFF9CFFCE); // x=-50, y=-100
+      check(GET_Y_LPARAM(lParam1)).equals(100);
+      check(GET_Y_LPARAM(lParam2)).equals(-100);
+    });
   });
 }
