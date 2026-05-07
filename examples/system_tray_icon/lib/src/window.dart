@@ -126,8 +126,8 @@ int _windowProc(Pointer hWnd, int uMsg, int wParam, int lParam) {
         case WM_CONTEXTMENU:
           final window = Win32Window._windowRegistry[hwnd]!;
           window._app.showTrayContextMenu(
-            screenX: LOWORD(wParam),
-            screenY: HIWORD(wParam),
+            screenX: GET_X_LPARAM(.new(wParam)),
+            screenY: GET_Y_LPARAM(.new(wParam)),
           );
           return 0;
 
