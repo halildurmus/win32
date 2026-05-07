@@ -122,6 +122,7 @@ This repository includes a wide range of examples demonstrating real-world
 usage in the [examples directory]:
 
 - **Flutter desktop apps** using native Win32 APIs
+- **Reliable Windows version detection and OS baseline checks**
 - **System information tools**
 - **Traditional Win32 GUI applications written in Dart**
 - **Games using GDI**

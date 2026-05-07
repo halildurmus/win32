@@ -1,6 +1,6 @@
 name: win32
 description: Call common Windows APIs directly from Dart using FFI.
-version: 6.1.0
+version: 6.2.0
 homepage: https://win32.pub
 repository: https://github.com/halildurmus/win32
 issue_tracker: https://github.com/halildurmus/win32/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22package%3A%20win32%22
