@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.0] - 2026-05-07
+
+### 🚀 Features
+
+- Add `OsVersion` class for reliable Windows version detection and OS baseline
+  checks. Use `OsVersion.current` to retrieve the running version and the
+  relational operators (`<`, `<=`, `>=`, `>`) to range-check it against
+  well-known baselines (`OsVersion.win10`, `OsVersion.win11`, etc.).
+
+- Add extension methods on `GUID` for comparison and ordering: `compareTo()`,
+  `isEqualTo()`, and the relational operators (`<`, `<=`, `>=`, `>`). Useful for
+  using `GUID` as a key in sorted collections such as `SplayTreeMap`.
+
+- Add `GET_X_LPARAM()` and `GET_Y_LPARAM()` macros for correctly extracting
+  signed x/y cursor coordinates from Windows message parameters. Unlike
+  `LOWORD()`/`HIWORD()`, these macros handle negative coordinates that occur
+  when a secondary display is positioned to the left of or above the primary
+  display.
+
+### 🐛 Bug Fixes
+
+- Fix `IsWindowsServer()` using the wrong constant.
+
+[6.2.0]: https://github.com/halildurmus/win32/compare/win32-v6.1.0..win32-v6.2.0
+
 ## [6.1.0] - 2026-04-22
 
 ### 🚀 Features
