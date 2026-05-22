@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -38,28 +38,30 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer, Pointer<VTablePointer>)>(
-  symbol: 'RoActivateInstance',
-)
-external int _RoActivateInstance(
-  Pointer activatableClassId,
-  Pointer<VTablePointer> instance,
+final _api_ms_win_core_winrt_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-core-winrt-l1-1-0.dll',
 );
 
-@Native<Int32 Function(Pointer, Pointer<GUID>, Pointer<Pointer>)>(
-  symbol: 'RoGetActivationFactory',
-)
-external int _RoGetActivationFactory(
-  Pointer activatableClassId,
-  Pointer<GUID> iid,
-  Pointer<Pointer> factory,
-);
+final _RoActivateInstance = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<VTablePointer>),
+      int Function(Pointer, Pointer<VTablePointer>)
+    >('RoActivateInstance');
 
-@Native<Int32 Function(Pointer<Uint64>)>(symbol: 'RoGetApartmentIdentifier')
-external int _RoGetApartmentIdentifier(Pointer<Uint64> apartmentIdentifier);
+final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<GUID>, Pointer<Pointer>),
+      int Function(Pointer, Pointer<GUID>, Pointer<Pointer>)
+    >('RoGetActivationFactory');
 
-@Native<Int32 Function(Int32)>(symbol: 'RoInitialize')
-external int _RoInitialize(int initType);
+final _RoGetApartmentIdentifier = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Uint64>),
+      int Function(Pointer<Uint64>)
+    >('RoGetApartmentIdentifier');
 
-@Native<Void Function()>(symbol: 'RoUninitialize')
-external void _RoUninitialize();
+final _RoInitialize = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('RoInitialize');
+
+final _RoUninitialize = _api_ms_win_core_winrt_l1_1_0
+    .lookupFunction<Void Function(), void Function()>('RoUninitialize');

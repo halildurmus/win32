@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -26,13 +26,10 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Int32, Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'CallNtPowerInformation',
-)
-external int _CallNtPowerInformation(
-  int informationLevel,
-  Pointer inputBuffer,
-  int inputBufferLength,
-  Pointer outputBuffer,
-  int outputBufferLength,
-);
+final _powrprof = DynamicLibrary.open('powrprof.dll');
+
+final _CallNtPowerInformation = _powrprof
+    .lookupFunction<
+      Int32 Function(Int32, Pointer, Uint32, Pointer, Uint32),
+      int Function(int, Pointer, int, Pointer, int)
+    >('CallNtPowerInformation');

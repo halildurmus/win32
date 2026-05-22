@@ -104,8 +104,8 @@ native counterparts. Be sure to [`free()`][free] or
 
 ## APIs That Call `SetLastError()`
 
-Many Win32 APIs indicate failure by their return value and record corresponding
-error code in the thread-local *last-error* slot via
+Many Win32 APIs indicate failure by their return value and record a
+corresponding error code in the thread-local *last-error* slot via
 [`SetLastError()`][SetLastError]. This error code can be queried using
 [`GetLastError()`][GetLastError].
 
@@ -115,13 +115,20 @@ In Dart, calling `GetLastError()` directly after a Win32 API invocation is
 operations that **overwrite the last-error state**.
 
 This is a known limitation of Dart FFI (see
-[dart-lang/sdk#38832](https://github.com/dart-lang/sdk/issues/38832)) and
-**cannot be reliably mitigated in user code**.
+[dart-lang/sdk#38832](https://github.com/dart-lang/sdk/issues/38832)).
 
 To address this, `package:win32` adopts a different convention for APIs that
 follow this pattern. These APIs return a [`Win32Result<T>`][Win32Result],
 which captures both the logical return value and the associated last-error
 code atomically on the native side, ensuring the **error state is preserved**.
+
+:::note
+
+As of **v6.3.0**, `package:win32` no longer ships a native DLL. Instead,
+bindings that use `GetLastError()` now pre-resolve it before each API call,
+making error capture reliable in practice without requiring any native code.
+
+:::
 
 ```dart
 final Win32Result(:value, :error) = WriteFile(...);

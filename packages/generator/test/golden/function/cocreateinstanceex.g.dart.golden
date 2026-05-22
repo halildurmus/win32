@@ -29,21 +29,22 @@ void CoCreateInstanceEx(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<
-  Int32 Function(
-    Pointer<GUID>,
-    VTablePointer,
-    Uint32,
-    Pointer<COSERVERINFO>,
-    Uint32,
-    Pointer<MULTI_QI>,
-  )
->(symbol: 'CoCreateInstanceEx')
-external int _CoCreateInstanceEx(
-  Pointer<GUID> clsid,
-  VTablePointer punkOuter,
-  int dwClsCtx,
-  Pointer<COSERVERINFO> pServerInfo,
-  int dwCount,
-  Pointer<MULTI_QI> pResults,
-);
+final _CoCreateInstanceEx = _ole32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<GUID>,
+        VTablePointer,
+        Uint32,
+        Pointer<COSERVERINFO>,
+        Uint32,
+        Pointer<MULTI_QI>,
+      ),
+      int Function(
+        Pointer<GUID>,
+        VTablePointer,
+        int,
+        Pointer<COSERVERINFO>,
+        int,
+        Pointer<MULTI_QI>,
+      )
+    >('CoCreateInstanceEx');

@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -29,15 +29,16 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Int32, Pointer, Uint32, Pointer<Uint32>)>(
-  symbol: 'NtQuerySystemInformation',
-)
-external int _NtQuerySystemInformation(
-  int systemInformationClass,
-  Pointer systemInformation,
-  int systemInformationLength,
-  Pointer<Uint32> returnLength,
-);
+final _ntdll = DynamicLibrary.open('ntdll.dll');
 
-@Native<Int32 Function(Pointer<OSVERSIONINFO>)>(symbol: 'RtlGetVersion')
-external int _RtlGetVersion(Pointer<OSVERSIONINFO> lpVersionInformation);
+final _NtQuerySystemInformation = _ntdll
+    .lookupFunction<
+      Int32 Function(Int32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(int, Pointer, int, Pointer<Uint32>)
+    >('NtQuerySystemInformation');
+
+final _RtlGetVersion = _ntdll
+    .lookupFunction<
+      Int32 Function(Pointer<OSVERSIONINFO>),
+      int Function(Pointer<OSVERSIONINFO>)
+    >('RtlGetVersion');

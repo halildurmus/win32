@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/win32.dart';
-import '../_internal/ws2_32.g.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -20,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -35,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _ws2_32 = DynamicLibrary.open('ws2_32.dll');
+
 /// Permits an incoming connection attempt on a socket.
 ///
 /// To learn more, see
@@ -46,9 +48,16 @@ Win32Result<SOCKET> accept(
   Pointer<SOCKADDR>? addr,
   Pointer<Int32>? addrlen,
 ) {
-  final result_ = accept_Wrapper(s, addr ?? nullptr, addrlen ?? nullptr);
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  resolveGetLastError();
+  final result_ = _accept(s, addr ?? nullptr, addrlen ?? nullptr);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _accept = _ws2_32
+    .lookupFunction<
+      IntPtr Function(IntPtr, Pointer<SOCKADDR>, Pointer<Int32>),
+      int Function(int, Pointer<SOCKADDR>, Pointer<Int32>)
+    >('accept');
 
 /// Associates a local address with a socket.
 ///
@@ -57,9 +66,16 @@ Win32Result<SOCKET> accept(
 ///
 /// {@category winsock}
 Win32Result<int> bind(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
-  final result_ = bind_Wrapper(s, name, namelen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _bind(s, name, namelen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _bind = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<SOCKADDR>, Int32),
+      int Function(int, Pointer<SOCKADDR>, int)
+    >('bind');
 
 /// Closes an existing socket.
 ///
@@ -68,9 +84,13 @@ Win32Result<int> bind(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
 ///
 /// {@category winsock}
 Win32Result<int> closesocket(SOCKET s) {
-  final result_ = closesocket_Wrapper(s);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _closesocket(s);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _closesocket = _ws2_32
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>('closesocket');
 
 /// Establishes a connection to a specified socket.
 ///
@@ -79,9 +99,16 @@ Win32Result<int> closesocket(SOCKET s) {
 ///
 /// {@category winsock}
 Win32Result<int> connect(SOCKET s, Pointer<SOCKADDR> name, int namelen) {
-  final result_ = connect_Wrapper(s, name, namelen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _connect(s, name, namelen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _connect = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<SOCKADDR>, Int32),
+      int Function(int, Pointer<SOCKADDR>, int)
+    >('connect');
 
 /// Provides protocol-independent translation from a Unicode host name to an
 /// address.
@@ -103,20 +130,21 @@ int GetAddrInfo(
   ppResult,
 );
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<ADDRINFO>,
-    Pointer<Pointer<ADDRINFO>>,
-  )
->(symbol: 'GetAddrInfoW')
-external int _GetAddrInfo(
-  Pointer<Utf16> pNodeName,
-  Pointer<Utf16> pServiceName,
-  Pointer<ADDRINFO> pHints,
-  Pointer<Pointer<ADDRINFO>> ppResult,
-);
+final _GetAddrInfo = _ws2_32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<ADDRINFO>,
+        Pointer<Pointer<ADDRINFO>>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<ADDRINFO>,
+        Pointer<Pointer<ADDRINFO>>,
+      )
+    >('GetAddrInfoW');
 
 /// Retrieves the standard host name for the local computer.
 ///
@@ -125,9 +153,16 @@ external int _GetAddrInfo(
 ///
 /// {@category winsock}
 Win32Result<int> gethostname(PSTR name, int namelen) {
-  final result_ = gethostname_Wrapper(name, namelen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _gethostname(name, namelen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _gethostname = _ws2_32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf8>, Int32),
+      int Function(Pointer<Utf8>, int)
+    >('gethostname');
 
 /// Provides protocol-independent name resolution from an address to an ANSI
 /// host name and from a port number to the ANSI service name.
@@ -145,7 +180,8 @@ Win32Result<int> getnameinfo(
   int serviceBufferSize,
   int flags,
 ) {
-  final result_ = getnameinfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _getnameinfo(
     pSockaddr,
     sockaddrLength,
     pNodeBuffer ?? nullptr,
@@ -154,8 +190,30 @@ Win32Result<int> getnameinfo(
     serviceBufferSize,
     flags,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getnameinfo = _ws2_32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<SOCKADDR>,
+        Int32,
+        Pointer<Utf8>,
+        Uint32,
+        Pointer<Utf8>,
+        Uint32,
+        Int32,
+      ),
+      int Function(
+        Pointer<SOCKADDR>,
+        int,
+        Pointer<Utf8>,
+        int,
+        Pointer<Utf8>,
+        int,
+        int,
+      )
+    >('getnameinfo');
 
 /// Retrieves the address of the peer to which a socket is connected.
 ///
@@ -168,9 +226,16 @@ Win32Result<int> getpeername(
   Pointer<SOCKADDR> name,
   Pointer<Int32> namelen,
 ) {
-  final result_ = getpeername_Wrapper(s, name, namelen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _getpeername(s, name, namelen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getpeername = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<SOCKADDR>, Pointer<Int32>),
+      int Function(int, Pointer<SOCKADDR>, Pointer<Int32>)
+    >('getpeername');
 
 /// Retrieves the protocol information corresponding to a protocol name.
 ///
@@ -179,9 +244,16 @@ Win32Result<int> getpeername(
 ///
 /// {@category winsock}
 Win32Result<Pointer<PROTOENT>> getprotobyname(PCSTR name) {
-  final result_ = getprotobyname_Wrapper(name);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _getprotobyname(name);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getprotobyname = _ws2_32
+    .lookupFunction<
+      Pointer<PROTOENT> Function(Pointer<Utf8>),
+      Pointer<PROTOENT> Function(Pointer<Utf8>)
+    >('getprotobyname');
 
 /// Retrieves protocol information corresponding to a protocol number.
 ///
@@ -190,9 +262,16 @@ Win32Result<Pointer<PROTOENT>> getprotobyname(PCSTR name) {
 ///
 /// {@category winsock}
 Win32Result<Pointer<PROTOENT>> getprotobynumber(int number) {
-  final result_ = getprotobynumber_Wrapper(number);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _getprotobynumber(number);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getprotobynumber = _ws2_32
+    .lookupFunction<
+      Pointer<PROTOENT> Function(Int32),
+      Pointer<PROTOENT> Function(int)
+    >('getprotobynumber');
 
 /// Retrieves service information corresponding to a service name and protocol.
 ///
@@ -201,9 +280,16 @@ Win32Result<Pointer<PROTOENT>> getprotobynumber(int number) {
 ///
 /// {@category winsock}
 Win32Result<Pointer<SERVENT>> getservbyname(PCSTR name, PCSTR? proto) {
-  final result_ = getservbyname_Wrapper(name, proto ?? nullptr);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _getservbyname(name, proto ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getservbyname = _ws2_32
+    .lookupFunction<
+      Pointer<SERVENT> Function(Pointer<Utf8>, Pointer<Utf8>),
+      Pointer<SERVENT> Function(Pointer<Utf8>, Pointer<Utf8>)
+    >('getservbyname');
 
 /// Retrieves service information corresponding to a port and protocol.
 ///
@@ -212,9 +298,16 @@ Win32Result<Pointer<SERVENT>> getservbyname(PCSTR name, PCSTR? proto) {
 ///
 /// {@category winsock}
 Win32Result<Pointer<SERVENT>> getservbyport(int port, PCSTR? proto) {
-  final result_ = getservbyport_Wrapper(port, proto ?? nullptr);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _getservbyport(port, proto ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getservbyport = _ws2_32
+    .lookupFunction<
+      Pointer<SERVENT> Function(Int32, Pointer<Utf8>),
+      Pointer<SERVENT> Function(int, Pointer<Utf8>)
+    >('getservbyport');
 
 /// Retrieves the local name for a socket.
 ///
@@ -227,9 +320,16 @@ Win32Result<int> getsockname(
   Pointer<SOCKADDR> name,
   Pointer<Int32> namelen,
 ) {
-  final result_ = getsockname_Wrapper(s, name, namelen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _getsockname(s, name, namelen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getsockname = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<SOCKADDR>, Pointer<Int32>),
+      int Function(int, Pointer<SOCKADDR>, Pointer<Int32>)
+    >('getsockname');
 
 /// Retrieves a socket option.
 ///
@@ -244,9 +344,16 @@ Win32Result<int> getsockopt(
   PSTR optval,
   Pointer<Int32> optlen,
 ) {
-  final result_ = getsockopt_Wrapper(s, level, optname, optval, optlen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _getsockopt(s, level, optname, optval, optlen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _getsockopt = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Int32, Pointer<Utf8>, Pointer<Int32>),
+      int Function(int, int, int, Pointer<Utf8>, Pointer<Int32>)
+    >('getsockopt');
 
 /// Converts a u_long from host to TCP/IP network byte order (which is
 /// big-endian).
@@ -256,9 +363,13 @@ Win32Result<int> getsockopt(
 ///
 /// {@category winsock}
 Win32Result<int> htonl(int hostlong) {
-  final result_ = htonl_Wrapper(hostlong);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _htonl(hostlong);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _htonl = _ws2_32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>('htonl');
 
 /// Converts a u_short from host to TCP/IP network byte order (which is
 /// big-endian).
@@ -268,9 +379,13 @@ Win32Result<int> htonl(int hostlong) {
 ///
 /// {@category winsock}
 Win32Result<int> htons(int hostshort) {
-  final result_ = htons_Wrapper(hostshort);
-  return .new(value: result_.value.u16, error: result_.error);
+  resolveGetLastError();
+  final result_ = _htons(hostshort);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _htons = _ws2_32
+    .lookupFunction<Uint16 Function(Uint16), int Function(int)>('htons');
 
 /// Converts an IPv4 or IPv6 Internet network address into a string in Internet
 /// standard format.
@@ -287,9 +402,16 @@ Win32Result<PCSTR> inet_ntop(
   PSTR pStringBuf,
   int stringBufSize,
 ) {
-  final result_ = inet_ntop_Wrapper(family, pAddr, pStringBuf, stringBufSize);
-  return .new(value: .new(result_.value.ptr.cast()), error: result_.error);
+  resolveGetLastError();
+  final result_ = _inet_ntop(family, pAddr, pStringBuf, stringBufSize);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _inet_ntop = _ws2_32
+    .lookupFunction<
+      Pointer<Utf8> Function(Int32, Pointer, Pointer<Utf8>, IntPtr),
+      Pointer<Utf8> Function(int, Pointer, Pointer<Utf8>, int)
+    >('inet_ntop');
 
 /// Controls the I/O mode of a socket.
 ///
@@ -298,9 +420,16 @@ Win32Result<PCSTR> inet_ntop(
 ///
 /// {@category winsock}
 Win32Result<int> ioctlsocket(SOCKET s, int cmd, Pointer<Uint32> argp) {
-  final result_ = ioctlsocket_Wrapper(s, cmd, argp);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ioctlsocket(s, cmd, argp);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _ioctlsocket = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Pointer<Uint32>),
+      int Function(int, int, Pointer<Uint32>)
+    >('ioctlsocket');
 
 /// Places a socket in a state in which it is listening for an incoming
 /// connection.
@@ -310,9 +439,15 @@ Win32Result<int> ioctlsocket(SOCKET s, int cmd, Pointer<Uint32> argp) {
 ///
 /// {@category winsock}
 Win32Result<int> listen(SOCKET s, int backlog) {
-  final result_ = listen_Wrapper(s, backlog);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _listen(s, backlog);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _listen = _ws2_32
+    .lookupFunction<Int32 Function(IntPtr, Int32), int Function(int, int)>(
+      'listen',
+    );
 
 /// Converts a u_long from TCP/IP network order to host byte order, which is
 /// little-endian on Intel processors.
@@ -322,9 +457,13 @@ Win32Result<int> listen(SOCKET s, int backlog) {
 ///
 /// {@category winsock}
 Win32Result<int> ntohl(int netlong) {
-  final result_ = ntohl_Wrapper(netlong);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ntohl(netlong);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _ntohl = _ws2_32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>('ntohl');
 
 /// Converts a u_short from TCP/IP network byte order to host byte order, which
 /// is little-endian on Intel processors.
@@ -334,9 +473,13 @@ Win32Result<int> ntohl(int netlong) {
 ///
 /// {@category winsock}
 Win32Result<int> ntohs(int netshort) {
-  final result_ = ntohs_Wrapper(netshort);
-  return .new(value: result_.value.u16, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ntohs(netshort);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _ntohs = _ws2_32
+    .lookupFunction<Uint16 Function(Uint16), int Function(int)>('ntohs');
 
 /// Receives data from a connected socket or a bound connectionless socket.
 ///
@@ -345,9 +488,16 @@ Win32Result<int> ntohs(int netshort) {
 ///
 /// {@category winsock}
 Win32Result<int> recv(SOCKET s, PSTR buf, int len, SEND_RECV_FLAGS flags) {
-  final result_ = recv_Wrapper(s, buf, len, flags);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _recv(s, buf, len, flags);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _recv = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<Utf8>, Int32, Int32),
+      int Function(int, Pointer<Utf8>, int, int)
+    >('recv');
 
 /// Receives a datagram and stores the source address.
 ///
@@ -363,7 +513,8 @@ Win32Result<int> recvfrom(
   Pointer<SOCKADDR>? from,
   Pointer<Int32>? fromlen,
 ) {
-  final result_ = recvfrom_Wrapper(
+  resolveGetLastError();
+  final result_ = _recvfrom(
     s,
     buf,
     len,
@@ -371,8 +522,28 @@ Win32Result<int> recvfrom(
     from ?? nullptr,
     fromlen ?? nullptr,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _recvfrom = _ws2_32
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<Utf8>,
+        Int32,
+        Int32,
+        Pointer<SOCKADDR>,
+        Pointer<Int32>,
+      ),
+      int Function(
+        int,
+        Pointer<Utf8>,
+        int,
+        int,
+        Pointer<SOCKADDR>,
+        Pointer<Int32>,
+      )
+    >('recvfrom');
 
 /// Determines the status of one or more sockets, waiting if necessary, to
 /// perform synchronous I/O.
@@ -388,15 +559,34 @@ Win32Result<int> select(
   Pointer<FD_SET>? exceptfds,
   Pointer<TIMEVAL>? timeout,
 ) {
-  final result_ = select_Wrapper(
+  resolveGetLastError();
+  final result_ = _select(
     nfds,
     readfds ?? nullptr,
     writefds ?? nullptr,
     exceptfds ?? nullptr,
     timeout ?? nullptr,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _select = _ws2_32
+    .lookupFunction<
+      Int32 Function(
+        Int32,
+        Pointer<FD_SET>,
+        Pointer<FD_SET>,
+        Pointer<FD_SET>,
+        Pointer<TIMEVAL>,
+      ),
+      int Function(
+        int,
+        Pointer<FD_SET>,
+        Pointer<FD_SET>,
+        Pointer<FD_SET>,
+        Pointer<TIMEVAL>,
+      )
+    >('select');
 
 /// Sends data on a connected socket.
 ///
@@ -405,9 +595,16 @@ Win32Result<int> select(
 ///
 /// {@category winsock}
 Win32Result<int> send(SOCKET s, PCSTR buf, int len, SEND_RECV_FLAGS flags) {
-  final result_ = send_Wrapper(s, buf, len, flags);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _send(s, buf, len, flags);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _send = _ws2_32
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer<Utf8>, Int32, Int32),
+      int Function(int, Pointer<Utf8>, int, int)
+    >('send');
 
 /// Sends data to a specific destination.
 ///
@@ -423,9 +620,23 @@ Win32Result<int> sendto(
   Pointer<SOCKADDR> to,
   int tolen,
 ) {
-  final result_ = sendto_Wrapper(s, buf, len, flags, to, tolen);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _sendto(s, buf, len, flags, to, tolen);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _sendto = _ws2_32
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<Utf8>,
+        Int32,
+        Int32,
+        Pointer<SOCKADDR>,
+        Int32,
+      ),
+      int Function(int, Pointer<Utf8>, int, int, Pointer<SOCKADDR>, int)
+    >('sendto');
 
 /// Disables sends or receives on a socket.
 ///
@@ -434,9 +645,15 @@ Win32Result<int> sendto(
 ///
 /// {@category winsock}
 Win32Result<int> shutdown(SOCKET s, WINSOCK_SHUTDOWN_HOW how) {
-  final result_ = shutdown_Wrapper(s, how);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _shutdown(s, how);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _shutdown = _ws2_32
+    .lookupFunction<Int32 Function(IntPtr, Int32), int Function(int, int)>(
+      'shutdown',
+    );
 
 /// Creates a socket that is bound to a specific transport service provider.
 ///
@@ -445,6 +662,13 @@ Win32Result<int> shutdown(SOCKET s, WINSOCK_SHUTDOWN_HOW how) {
 ///
 /// {@category winsock}
 Win32Result<SOCKET> socket(int af, WINSOCK_SOCKET_TYPE type, int protocol) {
-  final result_ = socket_Wrapper(af, type, protocol);
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  resolveGetLastError();
+  final result_ = _socket(af, type, protocol);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _socket = _ws2_32
+    .lookupFunction<
+      IntPtr Function(Int32, Int32, Int32),
+      int Function(int, int, int)
+    >('socket');

@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -29,18 +29,16 @@ void main() {
   });
 }
 
-@Native<Pointer<Utf16> Function(Pointer<PROPVARIANT>, Pointer<Utf16>)>(
-  symbol: 'PropVariantToStringWithDefault',
-)
-external Pointer<Utf16> _PropVariantToStringWithDefault(
-  Pointer<PROPVARIANT> propvarIn,
-  Pointer<Utf16> pszDefault,
-);
+final _propsys = DynamicLibrary.open('propsys.dll');
 
-@Native<Int32 Function(Pointer<PROPVARIANT>, Pointer<STRRET>)>(
-  symbol: 'PropVariantToStrRet',
-)
-external int _PropVariantToStrRet(
-  Pointer<PROPVARIANT> propvar,
-  Pointer<STRRET> pstrret,
-);
+final _PropVariantToStringWithDefault = _propsys
+    .lookupFunction<
+      Pointer<Utf16> Function(Pointer<PROPVARIANT>, Pointer<Utf16>),
+      Pointer<Utf16> Function(Pointer<PROPVARIANT>, Pointer<Utf16>)
+    >('PropVariantToStringWithDefault');
+
+final _PropVariantToStrRet = _propsys
+    .lookupFunction<
+      Int32 Function(Pointer<PROPVARIANT>, Pointer<STRRET>),
+      int Function(Pointer<PROPVARIANT>, Pointer<STRRET>)
+    >('PropVariantToStrRet');

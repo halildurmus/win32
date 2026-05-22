@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/wevtapi.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -20,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -35,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _wevtapi = DynamicLibrary.open('wevtapi.dll');
+
 /// Closes an open handle.
 ///
 /// To learn more, see
@@ -42,9 +44,13 @@ import '../win32_result.dart';
 ///
 /// {@category wevtapi}
 Win32Result<bool> EvtClose(EVT_HANDLE object) {
-  final result_ = EvtClose_Wrapper(object);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EvtClose(object);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtClose = _wevtapi
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>('EvtClose');
 
 /// Creates a bookmark that identifies an event in a channel.
 ///
@@ -53,9 +59,16 @@ Win32Result<bool> EvtClose(EVT_HANDLE object) {
 ///
 /// {@category wevtapi}
 Win32Result<EVT_HANDLE> EvtCreateBookmark(PCWSTR? bookmarkXml) {
-  final result_ = EvtCreateBookmark_Wrapper(bookmarkXml ?? nullptr);
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  resolveGetLastError();
+  final result_ = _EvtCreateBookmark(bookmarkXml ?? nullptr);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _EvtCreateBookmark = _wevtapi
+    .lookupFunction<
+      IntPtr Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('EvtCreateBookmark');
 
 /// Creates a context that specifies the information in the event that you want
 /// to render.
@@ -69,13 +82,20 @@ Win32Result<EVT_HANDLE> EvtCreateRenderContext(
   Pointer<Pointer<Utf16>>? valuePaths,
   int flags,
 ) {
-  final result_ = EvtCreateRenderContext_Wrapper(
+  resolveGetLastError();
+  final result_ = _EvtCreateRenderContext(
     valuePathsCount,
     valuePaths ?? nullptr,
     flags,
   );
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _EvtCreateRenderContext = _wevtapi
+    .lookupFunction<
+      IntPtr Function(Uint32, Pointer<Pointer<Utf16>>, Uint32),
+      int Function(int, Pointer<Pointer<Utf16>>, int)
+    >('EvtCreateRenderContext');
 
 /// Gets a text message that contains the extended error information for the
 /// current error.
@@ -91,14 +111,11 @@ int EvtGetExtendedStatus(
   Pointer<Uint32> bufferUsed,
 ) => _EvtGetExtendedStatus(bufferSize, buffer ?? nullptr, bufferUsed);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Pointer<Uint32>)>(
-  symbol: 'EvtGetExtendedStatus',
-)
-external int _EvtGetExtendedStatus(
-  int bufferSize,
-  Pointer<Utf16> buffer,
-  Pointer<Uint32> bufferUsed,
-);
+final _EvtGetExtendedStatus = _wevtapi
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(int, Pointer<Utf16>, Pointer<Uint32>)
+    >('EvtGetExtendedStatus');
 
 /// Gets information about a query that you ran that identifies the list of
 /// channels or log files that the query attempted to access.
@@ -117,15 +134,28 @@ Win32Result<bool> EvtGetQueryInfo(
   Pointer<EVT_VARIANT>? propertyValueBuffer,
   Pointer<Uint32> propertyValueBufferUsed,
 ) {
-  final result_ = EvtGetQueryInfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _EvtGetQueryInfo(
     queryOrSubscription,
     propertyId,
     propertyValueBufferSize,
     propertyValueBuffer ?? nullptr,
     propertyValueBufferUsed,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtGetQueryInfo = _wevtapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Int32,
+        Uint32,
+        Pointer<EVT_VARIANT>,
+        Pointer<Uint32>,
+      ),
+      int Function(int, int, int, Pointer<EVT_VARIANT>, Pointer<Uint32>)
+    >('EvtGetQueryInfo');
 
 /// Gets the next event from the query or subscription results.
 ///
@@ -141,7 +171,8 @@ Win32Result<bool> EvtNext(
   int flags,
   Pointer<Uint32> returned,
 ) {
-  final result_ = EvtNext_Wrapper(
+  resolveGetLastError();
+  final result_ = _EvtNext(
     resultSet,
     eventsSize,
     events,
@@ -149,8 +180,21 @@ Win32Result<bool> EvtNext(
     flags,
     returned,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtNext = _wevtapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Uint32,
+        Pointer<IntPtr>,
+        Uint32,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      int Function(int, int, Pointer<IntPtr>, int, int, Pointer<Uint32>)
+    >('EvtNext');
 
 /// Establishes a connection to a remote computer that you can use when calling
 /// the other Windows Event Log functions.
@@ -163,9 +207,16 @@ Win32Result<EVT_HANDLE> EvtOpenSession(
   EVT_LOGIN_CLASS loginClass,
   Pointer login,
 ) {
-  final result_ = EvtOpenSession_Wrapper(loginClass, login, NULL, NULL);
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  resolveGetLastError();
+  final result_ = _EvtOpenSession(loginClass, login, NULL, NULL);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _EvtOpenSession = _wevtapi
+    .lookupFunction<
+      IntPtr Function(Int32, Pointer, Uint32, Uint32),
+      int Function(int, Pointer, int, int)
+    >('EvtOpenSession');
 
 /// Runs a query to retrieve events from a channel or log file that match the
 /// specified query criteria.
@@ -180,14 +231,21 @@ Win32Result<EVT_HANDLE> EvtQuery(
   PCWSTR? query,
   int flags,
 ) {
-  final result_ = EvtQuery_Wrapper(
+  resolveGetLastError();
+  final result_ = _EvtQuery(
     session ?? NULL,
     path ?? nullptr,
     query ?? nullptr,
     flags,
   );
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _EvtQuery = _wevtapi
+    .lookupFunction<
+      IntPtr Function(IntPtr, Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, Pointer<Utf16>, int)
+    >('EvtQuery');
 
 /// Renders an XML fragment based on the rendering context that you specify.
 ///
@@ -204,7 +262,8 @@ Win32Result<bool> EvtRender(
   Pointer<Uint32> bufferUsed,
   Pointer<Uint32> propertyCount,
 ) {
-  final result_ = EvtRender_Wrapper(
+  resolveGetLastError();
+  final result_ = _EvtRender(
     context ?? NULL,
     fragment,
     flags,
@@ -213,8 +272,30 @@ Win32Result<bool> EvtRender(
     bufferUsed,
     propertyCount,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtRender = _wevtapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        IntPtr,
+        Uint32,
+        Uint32,
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('EvtRender');
 
 /// Seeks to a specific event in a query result set.
 ///
@@ -228,15 +309,16 @@ Win32Result<bool> EvtSeek(
   EVT_HANDLE? bookmark,
   int flags,
 ) {
-  final result_ = EvtSeek_Wrapper(
-    resultSet,
-    position,
-    bookmark ?? NULL,
-    NULL,
-    flags,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EvtSeek(resultSet, position, bookmark ?? NULL, NULL, flags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtSeek = _wevtapi
+    .lookupFunction<
+      Int32 Function(IntPtr, Int64, IntPtr, Uint32, Uint32),
+      int Function(int, int, int, int, int)
+    >('EvtSeek');
 
 /// Updates the bookmark with information that identifies the specified event.
 ///
@@ -245,6 +327,12 @@ Win32Result<bool> EvtSeek(
 ///
 /// {@category wevtapi}
 Win32Result<bool> EvtUpdateBookmark(EVT_HANDLE bookmark, EVT_HANDLE event) {
-  final result_ = EvtUpdateBookmark_Wrapper(bookmark, event);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EvtUpdateBookmark(bookmark, event);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EvtUpdateBookmark = _wevtapi
+    .lookupFunction<Int32 Function(IntPtr, IntPtr), int Function(int, int)>(
+      'EvtUpdateBookmark',
+    );

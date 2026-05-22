@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -30,11 +30,10 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>)>(
-  symbol: 'MetaDataGetDispenser',
-)
-external int _MetaDataGetDispenser(
-  Pointer<GUID> rclsid,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _rometadata = DynamicLibrary.open('rometadata.dll');
+
+final _MetaDataGetDispenser = _rometadata
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>),
+      int Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>)
+    >('MetaDataGetDispenser');

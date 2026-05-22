@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _api_ms_win_core_comm_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-core-comm-l1-1-1.dll',
+);
+
 /// Attempts to open a communication device.
 ///
 /// To learn more, see
@@ -45,9 +51,8 @@ HANDLE OpenCommPort(
   int dwFlagsAndAttributes,
 ) => HANDLE(_OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes));
 
-@Native<Pointer Function(Uint32, Uint32, Uint32)>(symbol: 'OpenCommPort')
-external Pointer _OpenCommPort(
-  int uPortNumber,
-  int dwDesiredAccess,
-  int dwFlagsAndAttributes,
-);
+final _OpenCommPort = _api_ms_win_core_comm_l1_1_1
+    .lookupFunction<
+      Pointer Function(Uint32, Uint32, Uint32),
+      Pointer Function(int, int, int)
+    >('OpenCommPort');

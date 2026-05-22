@@ -10,19 +10,6 @@ import 'win32_error.dart';
 /// - Store extended error details in thread-local state retrievable via
 ///   `GetLastError()`
 ///
-/// When such APIs are called through Dart FFI, invoking `GetLastError()`
-/// *after* the native call is fundamentally unreliable:
-/// - Dart ↔ native transitions may overwrite the last-error state
-/// - The Dart VM and FFI glue can invoke additional Win32 APIs internally
-/// - See: https://github.com/dart-lang/sdk/issues/38832
-///
-/// [Win32Result] establishes a correctness boundary by capturing:
-/// - The primary return value ([value])
-/// - The corresponding Win32 error code ([error])
-/// **on the native side**, immediately after the API call
-///
-/// This guarantees deterministic and race-free error handling in Dart code.
-///
 /// Example:
 /// ```dart
 /// final Win32Result(value: hFile, :error) = CreateFile(...);

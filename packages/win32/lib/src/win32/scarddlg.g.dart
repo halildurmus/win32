@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _scarddlg = DynamicLibrary.open('scarddlg.dll');
+
 /// Displays the smart card Select Card dialog box.
 ///
 /// To learn more, see
@@ -42,7 +46,8 @@ import '../win32_result.dart';
 int SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0) =>
     _SCardUIDlgSelectCard(param0);
 
-@Native<Int32 Function(Pointer<OPENCARDNAME_EX>)>(
-  symbol: 'SCardUIDlgSelectCardW',
-)
-external int _SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0);
+final _SCardUIDlgSelectCard = _scarddlg
+    .lookupFunction<
+      Int32 Function(Pointer<OPENCARDNAME_EX>),
+      int Function(Pointer<OPENCARDNAME_EX>)
+    >('SCardUIDlgSelectCardW');

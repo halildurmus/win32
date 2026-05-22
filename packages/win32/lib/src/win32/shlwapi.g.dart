@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -33,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _shlwapi = DynamicLibrary.open('shlwapi.dll');
+
 /// Creates a memory stream using a similar process to CreateStreamOnHGlobal.
 ///
 /// To learn more, see
@@ -46,7 +50,8 @@ IStream? SHCreateMemStream(Pointer<Uint8>? pInit, int cbInit) {
   return .new(result);
 }
 
-@Native<VTablePointer Function(Pointer<Uint8>, Uint32)>(
-  symbol: 'SHCreateMemStream',
-)
-external VTablePointer _SHCreateMemStream(Pointer<Uint8> pInit, int cbInit);
+final _SHCreateMemStream = _shlwapi
+    .lookupFunction<
+      VTablePointer Function(Pointer<Uint8>, Uint32),
+      VTablePointer Function(Pointer<Uint8>, int)
+    >('SHCreateMemStream');

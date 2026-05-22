@@ -109,12 +109,9 @@ final class DynamicLibraryProjection extends Projection {
     '../constants.g.dart',
     '../extensions/pointer.dart',
     '../exception.dart',
+    '../functions.dart',
     '../hresult.dart',
     '../hstring.dart',
-    if (methods.any((m) => m.supportsLastError)) ...{
-      '../_internal/$safeName.g.dart',
-      '../_internal/win32.dart',
-    },
     '../macros.dart',
     '../ntstatus.dart',
     '../pcstr.dart',
@@ -141,7 +138,17 @@ final class DynamicLibraryProjection extends Projection {
     return cb.Library(
       (b) => b
         ..directives.addAll(imports)
-        ..body.addAll(methods.map((m) => FunctionProjection(m).generate())),
+        ..body.addAll([
+          cb.Field(
+            (b) => b
+              ..modifier = .final$
+              ..name = '_$safeName'
+              ..assignment = cb.refer('DynamicLibrary').property('open').call([
+                cb.literalString(name),
+              ]).code,
+          ),
+          ...methods.map((m) => FunctionProjection(m).generate()),
+        ]),
     );
   }
 
@@ -168,8 +175,6 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
     'package:checks/checks.dart',
     'package:ffi/ffi.dart',
     'package:test/scaffolding.dart',
-    if (methods.any((m) => m.supportsLastError))
-      'package:win32/src/_internal/$safeName.g.dart',
     'package:win32/win32.dart',
     '../../helpers.dart',
   };
@@ -195,8 +200,15 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
                 ]),
               ]),
           ),
+          cb.Field(
+            (b) => b
+              ..modifier = .final$
+              ..name = '_$safeName'
+              ..assignment = cb.refer('DynamicLibrary').property('open').call([
+                cb.literalString(name),
+              ]).code,
+          ),
           ...methods
-              .where((m) => !m.supportsLastError)
               .where((m) {
                 final function = functions.firstWhere(
                   (f) => f.originalName == m.name,
@@ -208,7 +220,7 @@ final class DynamicLibraryTestProjection extends DynamicLibraryProjection {
                 }
                 return true;
               })
-              .map((m) => FunctionProjection(m).generateNativeFunction()),
+              .map((m) => FunctionProjection(m).generateNativeField()),
         ]),
     );
   }

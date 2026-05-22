@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/setupapi.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -20,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../guid.dart';
 import '../hresult.dart';
 import '../hstring.dart';
@@ -36,6 +36,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _setupapi = DynamicLibrary.open('setupapi.dll');
+
 /// Deletes a device information set and frees all associated memory.
 ///
 /// To learn more, see
@@ -43,9 +45,15 @@ import '../win32_result.dart';
 ///
 /// {@category setupapi}
 Win32Result<bool> SetupDiDestroyDeviceInfoList(HDEVINFO deviceInfoSet) {
-  final result_ = SetupDiDestroyDeviceInfoList_Wrapper(deviceInfoSet);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetupDiDestroyDeviceInfoList(deviceInfoSet);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiDestroyDeviceInfoList = _setupapi
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>(
+      'SetupDiDestroyDeviceInfoList',
+    );
 
 /// Returns a SP_DEVINFO_DATA structure that specifies a device information
 /// element in a device information set.
@@ -59,13 +67,20 @@ Win32Result<bool> SetupDiEnumDeviceInfo(
   int memberIndex,
   Pointer<SP_DEVINFO_DATA> deviceInfoData,
 ) {
-  final result_ = SetupDiEnumDeviceInfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiEnumDeviceInfo(
     deviceInfoSet,
     memberIndex,
     deviceInfoData,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiEnumDeviceInfo = _setupapi
+    .lookupFunction<
+      Int32 Function(IntPtr, Uint32, Pointer<SP_DEVINFO_DATA>),
+      int Function(int, int, Pointer<SP_DEVINFO_DATA>)
+    >('SetupDiEnumDeviceInfo');
 
 /// Enumerates the device interfaces that are contained in a device information
 /// set.
@@ -81,15 +96,34 @@ Win32Result<bool> SetupDiEnumDeviceInterfaces(
   int memberIndex,
   Pointer<SP_DEVICE_INTERFACE_DATA> deviceInterfaceData,
 ) {
-  final result_ = SetupDiEnumDeviceInterfaces_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiEnumDeviceInterfaces(
     deviceInfoSet,
     deviceInfoData ?? nullptr,
     interfaceClassGuid,
     memberIndex,
     deviceInterfaceData,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiEnumDeviceInterfaces = _setupapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<SP_DEVINFO_DATA>,
+        Pointer<GUID>,
+        Uint32,
+        Pointer<SP_DEVICE_INTERFACE_DATA>,
+      ),
+      int Function(
+        int,
+        Pointer<SP_DEVINFO_DATA>,
+        Pointer<GUID>,
+        int,
+        Pointer<SP_DEVICE_INTERFACE_DATA>,
+      )
+    >('SetupDiEnumDeviceInterfaces');
 
 /// Returns a handle to a device information set that contains requested device
 /// information elements for a local computer.
@@ -104,14 +138,21 @@ Win32Result<HDEVINFO> SetupDiGetClassDevs(
   HWND? hwndParent,
   SETUP_DI_GET_CLASS_DEVS_FLAGS flags,
 ) {
-  final result_ = SetupDiGetClassDevsW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiGetClassDevs(
     classGuid ?? nullptr,
     enumerator ?? nullptr,
     hwndParent ?? nullptr,
     flags,
   );
-  return .new(value: .new(result_.value.i64), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _SetupDiGetClassDevs = _setupapi
+    .lookupFunction<
+      IntPtr Function(Pointer<GUID>, Pointer<Utf16>, Pointer, Uint32),
+      int Function(Pointer<GUID>, Pointer<Utf16>, Pointer, int)
+    >('SetupDiGetClassDevsW');
 
 /// Retrieves the device instance ID that is associated with a device
 /// information element.
@@ -127,15 +168,34 @@ Win32Result<bool> SetupDiGetDeviceInstanceId(
   int deviceInstanceIdSize,
   Pointer<Uint32>? requiredSize,
 ) {
-  final result_ = SetupDiGetDeviceInstanceIdW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiGetDeviceInstanceId(
     deviceInfoSet,
     deviceInfoData,
     deviceInstanceId ?? nullptr,
     deviceInstanceIdSize,
     requiredSize ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiGetDeviceInstanceId = _setupapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<SP_DEVINFO_DATA>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<SP_DEVINFO_DATA>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+      )
+    >('SetupDiGetDeviceInstanceIdW');
 
 /// Returns details about a device interface.
 ///
@@ -151,7 +211,8 @@ Win32Result<bool> SetupDiGetDeviceInterfaceDetail(
   Pointer<Uint32>? requiredSize,
   Pointer<SP_DEVINFO_DATA>? deviceInfoData,
 ) {
-  final result_ = SetupDiGetDeviceInterfaceDetailW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiGetDeviceInterfaceDetail(
     deviceInfoSet,
     deviceInterfaceData,
     deviceInterfaceDetailData ?? nullptr,
@@ -159,8 +220,28 @@ Win32Result<bool> SetupDiGetDeviceInterfaceDetail(
     requiredSize ?? nullptr,
     deviceInfoData ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiGetDeviceInterfaceDetail = _setupapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<SP_DEVICE_INTERFACE_DATA>,
+        Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<SP_DEVINFO_DATA>,
+      ),
+      int Function(
+        int,
+        Pointer<SP_DEVICE_INTERFACE_DATA>,
+        Pointer<SP_DEVICE_INTERFACE_DETAIL_DATA>,
+        int,
+        Pointer<Uint32>,
+        Pointer<SP_DEVINFO_DATA>,
+      )
+    >('SetupDiGetDeviceInterfaceDetailW');
 
 /// Retrieves a specified Plug and Play device property.
 ///
@@ -177,7 +258,8 @@ Win32Result<bool> SetupDiGetDeviceRegistryProperty(
   int propertyBufferSize,
   Pointer<Uint32>? requiredSize,
 ) {
-  final result_ = SetupDiGetDeviceRegistryPropertyW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiGetDeviceRegistryProperty(
     deviceInfoSet,
     deviceInfoData,
     property,
@@ -186,8 +268,30 @@ Win32Result<bool> SetupDiGetDeviceRegistryProperty(
     propertyBufferSize,
     requiredSize ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupDiGetDeviceRegistryProperty = _setupapi
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer<SP_DEVINFO_DATA>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<SP_DEVINFO_DATA>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        int,
+        Pointer<Uint32>,
+      )
+    >('SetupDiGetDeviceRegistryPropertyW');
 
 /// Opens a registry key for device-specific configuration information.
 ///
@@ -203,7 +307,8 @@ Win32Result<HKEY> SetupDiOpenDevRegKey(
   int keyType,
   int samDesired,
 ) {
-  final result_ = SetupDiOpenDevRegKey_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetupDiOpenDevRegKey(
     deviceInfoSet,
     deviceInfoData,
     scope,
@@ -211,5 +316,18 @@ Win32Result<HKEY> SetupDiOpenDevRegKey(
     keyType,
     samDesired,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _SetupDiOpenDevRegKey = _setupapi
+    .lookupFunction<
+      Pointer Function(
+        IntPtr,
+        Pointer<SP_DEVINFO_DATA>,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+      ),
+      Pointer Function(int, Pointer<SP_DEVINFO_DATA>, int, int, int, int)
+    >('SetupDiOpenDevRegKey');

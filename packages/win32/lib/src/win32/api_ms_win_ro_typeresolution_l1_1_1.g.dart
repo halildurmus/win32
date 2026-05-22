@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -31,6 +33,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_ro_typeresolution_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-ro-typeresolution-l1-1-1.dll',
+);
 
 /// Returns true or false to indicate whether the API contract with the
 /// specified name and major version number is present.
@@ -55,14 +61,11 @@ bool RoIsApiContractMajorVersionPresent(PCWSTR name, int majorVersion) {
   return result$ != FALSE;
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Uint16, Pointer<Int32>)>(
-  symbol: 'RoIsApiContractMajorVersionPresent',
-)
-external int _RoIsApiContractMajorVersionPresent(
-  Pointer<Utf16> name,
-  int majorVersion,
-  Pointer<Int32> present,
-);
+final _RoIsApiContractMajorVersionPresent = _api_ms_win_ro_typeresolution_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint16, Pointer<Int32>),
+      int Function(Pointer<Utf16>, int, Pointer<Int32>)
+    >('RoIsApiContractMajorVersionPresent');
 
 /// Returns true or false to indicate whether the API contract with the
 /// specified name and major and minor version number is present.
@@ -87,12 +90,8 @@ bool RoIsApiContractPresent(PCWSTR name, int majorVersion, int minorVersion) {
   return result$ != FALSE;
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Uint16, Uint16, Pointer<Int32>)>(
-  symbol: 'RoIsApiContractPresent',
-)
-external int _RoIsApiContractPresent(
-  Pointer<Utf16> name,
-  int majorVersion,
-  int minorVersion,
-  Pointer<Int32> present,
-);
+final _RoIsApiContractPresent = _api_ms_win_ro_typeresolution_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint16, Uint16, Pointer<Int32>),
+      int Function(Pointer<Utf16>, int, int, Pointer<Int32>)
+    >('RoIsApiContractPresent');

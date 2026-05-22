@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/dxva2.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -20,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -35,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _dxva2 = DynamicLibrary.open('dxva2.dll');
+
 /// Closes a handle to a physical monitor.
 ///
 /// To learn more, see
@@ -42,9 +44,15 @@ import '../win32_result.dart';
 ///
 /// {@category dxva2}
 Win32Result<bool> DestroyPhysicalMonitor(HANDLE hMonitor) {
-  final result_ = DestroyPhysicalMonitor_Wrapper(hMonitor);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DestroyPhysicalMonitor(hMonitor);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DestroyPhysicalMonitor = _dxva2
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyPhysicalMonitor',
+    );
 
 /// Closes an array of physical monitor handles.
 ///
@@ -56,12 +64,19 @@ Win32Result<bool> DestroyPhysicalMonitors(
   int dwPhysicalMonitorArraySize,
   Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
 ) {
-  final result_ = DestroyPhysicalMonitors_Wrapper(
+  resolveGetLastError();
+  final result_ = _DestroyPhysicalMonitors(
     dwPhysicalMonitorArraySize,
     pPhysicalMonitorArray,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DestroyPhysicalMonitors = _dxva2
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<PHYSICAL_MONITOR>),
+      int Function(int, Pointer<PHYSICAL_MONITOR>)
+    >('DestroyPhysicalMonitors');
 
 /// Retrieves a monitor's minimum, maximum, and current brightness settings.
 ///
@@ -75,14 +90,26 @@ Win32Result<int> GetMonitorBrightness(
   Pointer<Uint32> pdwCurrentBrightness,
   Pointer<Uint32> pdwMaximumBrightness,
 ) {
-  final result_ = GetMonitorBrightness_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorBrightness(
     hMonitor,
     pdwMinimumBrightness,
     pdwCurrentBrightness,
     pdwMaximumBrightness,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorBrightness = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Uint32>, Pointer<Uint32>)
+    >('GetMonitorBrightness');
 
 /// Retrieves the configuration capabilities of a monitor.
 ///
@@ -104,14 +131,11 @@ int GetMonitorCapabilities(
   pdwSupportedColorTemperatures,
 );
 
-@Native<Int32 Function(Pointer, Pointer<Uint32>, Pointer<Uint32>)>(
-  symbol: 'GetMonitorCapabilities',
-)
-external int _GetMonitorCapabilities(
-  Pointer hMonitor,
-  Pointer<Uint32> pdwMonitorCapabilities,
-  Pointer<Uint32> pdwSupportedColorTemperatures,
-);
+final _GetMonitorCapabilities = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Uint32>)
+    >('GetMonitorCapabilities');
 
 /// Retrieves a monitor's current color temperature.
 ///
@@ -123,12 +147,19 @@ Win32Result<int> GetMonitorColorTemperature(
   HANDLE hMonitor,
   Pointer<Int32> pctCurrentColorTemperature,
 ) {
-  final result_ = GetMonitorColorTemperature_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorColorTemperature(
     hMonitor,
     pctCurrentColorTemperature,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorColorTemperature = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetMonitorColorTemperature');
 
 /// Retrieves a monitor's minimum, maximum, and current contrast settings.
 ///
@@ -142,14 +173,26 @@ Win32Result<int> GetMonitorContrast(
   Pointer<Uint32> pdwCurrentContrast,
   Pointer<Uint32> pdwMaximumContrast,
 ) {
-  final result_ = GetMonitorContrast_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorContrast(
     hMonitor,
     pdwMinimumContrast,
     pdwCurrentContrast,
     pdwMaximumContrast,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorContrast = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Uint32>, Pointer<Uint32>)
+    >('GetMonitorContrast');
 
 /// Retrieves a monitor's minimum, maximum, and current horizontal or vertical
 /// position.
@@ -165,15 +208,34 @@ Win32Result<int> GetMonitorDisplayAreaPosition(
   Pointer<Uint32> pdwCurrentPosition,
   Pointer<Uint32> pdwMaximumPosition,
 ) {
-  final result_ = GetMonitorDisplayAreaPosition_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorDisplayAreaPosition(
     hMonitor,
     ptPositionType,
     pdwMinimumPosition,
     pdwCurrentPosition,
     pdwMaximumPosition,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorDisplayAreaPosition = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetMonitorDisplayAreaPosition');
 
 /// Retrieves a monitor's minimum, maximum, and current width or height.
 ///
@@ -188,15 +250,34 @@ Win32Result<int> GetMonitorDisplayAreaSize(
   Pointer<Uint32> pdwCurrentWidthOrHeight,
   Pointer<Uint32> pdwMaximumWidthOrHeight,
 ) {
-  final result_ = GetMonitorDisplayAreaSize_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorDisplayAreaSize(
     hMonitor,
     stSizeType,
     pdwMinimumWidthOrHeight,
     pdwCurrentWidthOrHeight,
     pdwMaximumWidthOrHeight,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorDisplayAreaSize = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetMonitorDisplayAreaSize');
 
 /// Retrieves a monitor's red, green, or blue drive value.
 ///
@@ -211,15 +292,34 @@ Win32Result<int> GetMonitorRedGreenOrBlueDrive(
   Pointer<Uint32> pdwCurrentDrive,
   Pointer<Uint32> pdwMaximumDrive,
 ) {
-  final result_ = GetMonitorRedGreenOrBlueDrive_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorRedGreenOrBlueDrive(
     hMonitor,
     dtDriveType,
     pdwMinimumDrive,
     pdwCurrentDrive,
     pdwMaximumDrive,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorRedGreenOrBlueDrive = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetMonitorRedGreenOrBlueDrive');
 
 /// Retrieves a monitor's red, green, or blue gain value.
 ///
@@ -234,15 +334,34 @@ Win32Result<int> GetMonitorRedGreenOrBlueGain(
   Pointer<Uint32> pdwCurrentGain,
   Pointer<Uint32> pdwMaximumGain,
 ) {
-  final result_ = GetMonitorRedGreenOrBlueGain_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorRedGreenOrBlueGain(
     hMonitor,
     gtGainType,
     pdwMinimumGain,
     pdwCurrentGain,
     pdwMaximumGain,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorRedGreenOrBlueGain = _dxva2
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetMonitorRedGreenOrBlueGain');
 
 /// Retrieves the type of technology used by a monitor.
 ///
@@ -254,12 +373,19 @@ Win32Result<int> GetMonitorTechnologyType(
   HANDLE hMonitor,
   Pointer<Int32> pdtyDisplayTechnologyType,
 ) {
-  final result_ = GetMonitorTechnologyType_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetMonitorTechnologyType(
     hMonitor,
     pdtyDisplayTechnologyType,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMonitorTechnologyType = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetMonitorTechnologyType');
 
 /// Retrieves the number of physical monitors associated with an HMONITOR
 /// monitor handle.
@@ -272,12 +398,19 @@ Win32Result<bool> GetNumberOfPhysicalMonitorsFromHMONITOR(
   HMONITOR hMonitor,
   Pointer<Uint32> pdwNumberOfPhysicalMonitors,
 ) {
-  final result_ = GetNumberOfPhysicalMonitorsFromHMONITOR_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetNumberOfPhysicalMonitorsFromHMONITOR(
     hMonitor,
     pdwNumberOfPhysicalMonitors,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetNumberOfPhysicalMonitorsFromHMONITOR = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetNumberOfPhysicalMonitorsFromHMONITOR');
 
 /// Retrieves the physical monitors associated with an HMONITOR monitor handle.
 ///
@@ -290,13 +423,20 @@ Win32Result<bool> GetPhysicalMonitorsFromHMONITOR(
   int dwPhysicalMonitorArraySize,
   Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray,
 ) {
-  final result_ = GetPhysicalMonitorsFromHMONITOR_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetPhysicalMonitorsFromHMONITOR(
     hMonitor,
     dwPhysicalMonitorArraySize,
     pPhysicalMonitorArray,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetPhysicalMonitorsFromHMONITOR = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<PHYSICAL_MONITOR>),
+      int Function(Pointer, int, Pointer<PHYSICAL_MONITOR>)
+    >('GetPhysicalMonitorsFromHMONITOR');
 
 /// Saves the current monitor settings to the display's nonvolatile storage.
 ///
@@ -305,9 +445,15 @@ Win32Result<bool> GetPhysicalMonitorsFromHMONITOR(
 ///
 /// {@category dxva2}
 Win32Result<int> SaveCurrentMonitorSettings(HANDLE hMonitor) {
-  final result_ = SaveCurrentMonitorSettings_Wrapper(hMonitor);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SaveCurrentMonitorSettings(hMonitor);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SaveCurrentMonitorSettings = _dxva2
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SaveCurrentMonitorSettings',
+    );
 
 /// Sets a monitor's brightness value.
 ///
@@ -316,9 +462,16 @@ Win32Result<int> SaveCurrentMonitorSettings(HANDLE hMonitor) {
 ///
 /// {@category dxva2}
 Win32Result<int> SetMonitorBrightness(HANDLE hMonitor, int dwNewBrightness) {
-  final result_ = SetMonitorBrightness_Wrapper(hMonitor, dwNewBrightness);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetMonitorBrightness(hMonitor, dwNewBrightness);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetMonitorBrightness = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetMonitorBrightness');
 
 /// Sets a monitor's color temperature.
 ///
@@ -330,12 +483,18 @@ Win32Result<int> SetMonitorColorTemperature(
   HANDLE hMonitor,
   MC_COLOR_TEMPERATURE ctCurrentColorTemperature,
 ) {
-  final result_ = SetMonitorColorTemperature_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetMonitorColorTemperature(
     hMonitor,
     ctCurrentColorTemperature,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetMonitorColorTemperature = _dxva2
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetMonitorColorTemperature',
+    );
 
 /// Sets a monitor's contrast value.
 ///
@@ -344,9 +503,16 @@ Win32Result<int> SetMonitorColorTemperature(
 ///
 /// {@category dxva2}
 Win32Result<int> SetMonitorContrast(HANDLE hMonitor, int dwNewContrast) {
-  final result_ = SetMonitorContrast_Wrapper(hMonitor, dwNewContrast);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetMonitorContrast(hMonitor, dwNewContrast);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetMonitorContrast = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetMonitorContrast');
 
 /// Sets the horizontal or vertical position of a monitor's display area.
 ///
@@ -359,13 +525,20 @@ Win32Result<int> SetMonitorDisplayAreaPosition(
   MC_POSITION_TYPE ptPositionType,
   int dwNewPosition,
 ) {
-  final result_ = SetMonitorDisplayAreaPosition_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetMonitorDisplayAreaPosition(
     hMonitor,
     ptPositionType,
     dwNewPosition,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetMonitorDisplayAreaPosition = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetMonitorDisplayAreaPosition');
 
 /// Sets the width or height of a monitor's display area.
 ///
@@ -378,13 +551,20 @@ Win32Result<int> SetMonitorDisplayAreaSize(
   MC_SIZE_TYPE stSizeType,
   int dwNewDisplayAreaWidthOrHeight,
 ) {
-  final result_ = SetMonitorDisplayAreaSize_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetMonitorDisplayAreaSize(
     hMonitor,
     stSizeType,
     dwNewDisplayAreaWidthOrHeight,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetMonitorDisplayAreaSize = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetMonitorDisplayAreaSize');
 
 /// Sets a monitor's red, green, or blue drive value.
 ///
@@ -399,14 +579,11 @@ int SetMonitorRedGreenOrBlueDrive(
   int dwNewDrive,
 ) => _SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive);
 
-@Native<Int32 Function(Pointer, Int32, Uint32)>(
-  symbol: 'SetMonitorRedGreenOrBlueDrive',
-)
-external int _SetMonitorRedGreenOrBlueDrive(
-  Pointer hMonitor,
-  int dtDriveType,
-  int dwNewDrive,
-);
+final _SetMonitorRedGreenOrBlueDrive = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetMonitorRedGreenOrBlueDrive');
 
 /// Sets a monitor's red, green, or blue gain value.
 ///
@@ -421,11 +598,8 @@ int SetMonitorRedGreenOrBlueGain(
   int dwNewGain,
 ) => _SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain);
 
-@Native<Int32 Function(Pointer, Int32, Uint32)>(
-  symbol: 'SetMonitorRedGreenOrBlueGain',
-)
-external int _SetMonitorRedGreenOrBlueGain(
-  Pointer hMonitor,
-  int gtGainType,
-  int dwNewGain,
-);
+final _SetMonitorRedGreenOrBlueGain = _dxva2
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetMonitorRedGreenOrBlueGain');

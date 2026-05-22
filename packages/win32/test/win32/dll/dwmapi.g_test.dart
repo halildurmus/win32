@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -56,77 +56,63 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer, Pointer<DWM_BLURBEHIND>)>(
-  symbol: 'DwmEnableBlurBehindWindow',
-)
-external int _DwmEnableBlurBehindWindow(
-  Pointer hWnd,
-  Pointer<DWM_BLURBEHIND> pBlurBehind,
+final _dwmapi = DynamicLibrary.open('dwmapi.dll');
+
+final _DwmEnableBlurBehindWindow = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<DWM_BLURBEHIND>),
+      int Function(Pointer, Pointer<DWM_BLURBEHIND>)
+    >('DwmEnableBlurBehindWindow');
+
+final _DwmEnableMMCSS = _dwmapi
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('DwmEnableMMCSS');
+
+final _DwmExtendFrameIntoClientArea = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MARGINS>),
+      int Function(Pointer, Pointer<MARGINS>)
+    >('DwmExtendFrameIntoClientArea');
+
+final _DwmFlush = _dwmapi.lookupFunction<Int32 Function(), int Function()>(
+  'DwmFlush',
 );
 
-@Native<Int32 Function(Int32)>(symbol: 'DwmEnableMMCSS')
-external int _DwmEnableMMCSS(int fEnableMMCSS);
+final _DwmGetColorizationColor = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Pointer<Int32>),
+      int Function(Pointer<Uint32>, Pointer<Int32>)
+    >('DwmGetColorizationColor');
 
-@Native<Int32 Function(Pointer, Pointer<MARGINS>)>(
-  symbol: 'DwmExtendFrameIntoClientArea',
-)
-external int _DwmExtendFrameIntoClientArea(
-  Pointer hWnd,
-  Pointer<MARGINS> pMarInset,
-);
+final _DwmGetTransportAttributes = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>),
+      int Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>)
+    >('DwmGetTransportAttributes');
 
-@Native<Int32 Function()>(symbol: 'DwmFlush')
-external int _DwmFlush();
+final _DwmGetWindowAttribute = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('DwmGetWindowAttribute');
 
-@Native<Int32 Function(Pointer<Uint32>, Pointer<Int32>)>(
-  symbol: 'DwmGetColorizationColor',
-)
-external int _DwmGetColorizationColor(
-  Pointer<Uint32> pcrColorization,
-  Pointer<Int32> pfOpaqueBlend,
-);
+final _DwmInvalidateIconicBitmaps = _dwmapi
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DwmInvalidateIconicBitmaps',
+    );
 
-@Native<Int32 Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>)>(
-  symbol: 'DwmGetTransportAttributes',
-)
-external int _DwmGetTransportAttributes(
-  Pointer<Int32> pfIsRemoting,
-  Pointer<Int32> pfIsConnected,
-  Pointer<Uint32> pDwGeneration,
-);
+final _DwmRenderGesture = _dwmapi
+    .lookupFunction<
+      Int32 Function(Int32, Uint32, Pointer<Uint32>, Pointer<POINT>),
+      int Function(int, int, Pointer<Uint32>, Pointer<POINT>)
+    >('DwmRenderGesture');
 
-@Native<Int32 Function(Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'DwmGetWindowAttribute',
-)
-external int _DwmGetWindowAttribute(
-  Pointer hwnd,
-  int dwAttribute,
-  Pointer pvAttribute,
-  int cbAttribute,
-);
+final _DwmSetWindowAttribute = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('DwmSetWindowAttribute');
 
-@Native<Int32 Function(Pointer)>(symbol: 'DwmInvalidateIconicBitmaps')
-external int _DwmInvalidateIconicBitmaps(Pointer hwnd);
-
-@Native<Int32 Function(Int32, Uint32, Pointer<Uint32>, Pointer<POINT>)>(
-  symbol: 'DwmRenderGesture',
-)
-external int _DwmRenderGesture(
-  int gt,
-  int cContacts,
-  Pointer<Uint32> pdwPointerID,
-  Pointer<POINT> pPoints,
-);
-
-@Native<Int32 Function(Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'DwmSetWindowAttribute',
-)
-external int _DwmSetWindowAttribute(
-  Pointer hwnd,
-  int dwAttribute,
-  Pointer pvAttribute,
-  int cbAttribute,
-);
-
-@Native<Int32 Function(Uint32, Uint32)>(symbol: 'DwmShowContact')
-external int _DwmShowContact(int dwPointerID, int eShowContact);
+final _DwmShowContact = _dwmapi
+    .lookupFunction<Int32 Function(Uint32, Uint32), int Function(int, int)>(
+      'DwmShowContact',
+    );

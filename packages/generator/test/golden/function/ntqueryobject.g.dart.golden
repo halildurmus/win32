@@ -22,13 +22,8 @@ NTSTATUS NtQueryObject(
   ),
 );
 
-@Native<Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>)>(
-  symbol: 'NtQueryObject',
-)
-external int _NtQueryObject(
-  Pointer handle,
-  int objectInformationClass,
-  Pointer objectInformation,
-  int objectInformationLength,
-  Pointer<Uint32> returnLength,
-);
+final _NtQueryObject = _ntdll
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, int, Pointer<Uint32>)
+    >('NtQueryObject');

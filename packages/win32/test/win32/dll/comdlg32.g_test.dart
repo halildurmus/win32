@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -41,20 +41,40 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<CHOOSECOLOR>)>(symbol: 'ChooseColorW')
-external int _ChooseColor(Pointer<CHOOSECOLOR> param0);
+final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 
-@Native<Int32 Function(Pointer<CHOOSEFONT>)>(symbol: 'ChooseFontW')
-external int _ChooseFont(Pointer<CHOOSEFONT> param0);
+final _ChooseColor = _comdlg32
+    .lookupFunction<
+      Int32 Function(Pointer<CHOOSECOLOR>),
+      int Function(Pointer<CHOOSECOLOR>)
+    >('ChooseColorW');
 
-@Native<Pointer Function(Pointer<FINDREPLACE>)>(symbol: 'FindTextW')
-external Pointer _FindText(Pointer<FINDREPLACE> param0);
+final _ChooseFont = _comdlg32
+    .lookupFunction<
+      Int32 Function(Pointer<CHOOSEFONT>),
+      int Function(Pointer<CHOOSEFONT>)
+    >('ChooseFontW');
 
-@Native<Int32 Function(Pointer<OPENFILENAME>)>(symbol: 'GetOpenFileNameW')
-external int _GetOpenFileName(Pointer<OPENFILENAME> param0);
+final _FindText = _comdlg32
+    .lookupFunction<
+      Pointer Function(Pointer<FINDREPLACE>),
+      Pointer Function(Pointer<FINDREPLACE>)
+    >('FindTextW');
 
-@Native<Int32 Function(Pointer<OPENFILENAME>)>(symbol: 'GetSaveFileNameW')
-external int _GetSaveFileName(Pointer<OPENFILENAME> param0);
+final _GetOpenFileName = _comdlg32
+    .lookupFunction<
+      Int32 Function(Pointer<OPENFILENAME>),
+      int Function(Pointer<OPENFILENAME>)
+    >('GetOpenFileNameW');
 
-@Native<Pointer Function(Pointer<FINDREPLACE>)>(symbol: 'ReplaceTextW')
-external Pointer _ReplaceText(Pointer<FINDREPLACE> param0);
+final _GetSaveFileName = _comdlg32
+    .lookupFunction<
+      Int32 Function(Pointer<OPENFILENAME>),
+      int Function(Pointer<OPENFILENAME>)
+    >('GetSaveFileNameW');
+
+final _ReplaceText = _comdlg32
+    .lookupFunction<
+      Pointer Function(Pointer<FINDREPLACE>),
+      Pointer Function(Pointer<FINDREPLACE>)
+    >('ReplaceTextW');

@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -19,6 +20,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -33,6 +35,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_ro_typeresolution_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-ro-typeresolution-l1-1-0.dll',
+);
 
 /// Locates and retrieves the metadata file that describes the Application
 /// Binary Interface (ABI) for the specified typename.
@@ -63,19 +69,20 @@ void RoGetMetaDataFile(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<
-  Int32 Function(
-    Pointer,
-    VTablePointer,
-    Pointer<Pointer>,
-    Pointer<VTablePointer>,
-    Pointer<Uint32>,
-  )
->(symbol: 'RoGetMetaDataFile')
-external int _RoGetMetaDataFile(
-  Pointer name,
-  VTablePointer metaDataDispenser,
-  Pointer<Pointer> metaDataFilePath,
-  Pointer<VTablePointer> metaDataImport,
-  Pointer<Uint32> typeDefToken,
-);
+final _RoGetMetaDataFile = _api_ms_win_ro_typeresolution_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        VTablePointer,
+        Pointer<Pointer>,
+        Pointer<VTablePointer>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        VTablePointer,
+        Pointer<Pointer>,
+        Pointer<VTablePointer>,
+        Pointer<Uint32>,
+      )
+    >('RoGetMetaDataFile');

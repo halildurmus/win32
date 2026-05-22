@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../guid.dart';
 import '../hresult.dart';
 import '../hstring.dart';
@@ -32,6 +34,8 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _rometadata = DynamicLibrary.open('rometadata.dll');
 
 /// Creates a dispenser class.
 ///
@@ -51,11 +55,8 @@ void MetaDataGetDispenser(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>)>(
-  symbol: 'MetaDataGetDispenser',
-)
-external int _MetaDataGetDispenser(
-  Pointer<GUID> rclsid,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _MetaDataGetDispenser = _rometadata
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>),
+      int Function(Pointer<GUID>, Pointer<GUID>, Pointer<Pointer>)
+    >('MetaDataGetDispenser');

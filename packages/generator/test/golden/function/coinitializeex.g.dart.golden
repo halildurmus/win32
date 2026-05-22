@@ -11,5 +11,8 @@ CoInitializeEx|
 HRESULT CoInitializeEx(COINIT dwCoInit) =>
     HRESULT(_CoInitializeEx(nullptr, dwCoInit));
 
-@Native<Int32 Function(Pointer, Uint32)>(symbol: 'CoInitializeEx')
-external int _CoInitializeEx(Pointer pvReserved, int dwCoInit);
+final _CoInitializeEx = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('CoInitializeEx');

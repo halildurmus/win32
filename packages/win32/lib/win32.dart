@@ -58,7 +58,7 @@ export 'src/dispatcher.dart';
 export 'src/enums.dart';
 export 'src/enums.g.dart';
 export 'src/exception.dart';
-export 'src/functions.dart';
+export 'src/functions.dart' hide resolveGetLastError;
 export 'src/guid.dart';
 export 'src/hresult.dart';
 export 'src/hstring.dart';

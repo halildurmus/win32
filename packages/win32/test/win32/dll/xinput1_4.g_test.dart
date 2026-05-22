@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -44,62 +44,55 @@ void main() {
   });
 }
 
-@Native<Void Function(Int32)>(symbol: 'XInputEnable')
-external void _XInputEnable(int enable);
+final _xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
 
-@Native<
-  Uint32 Function(
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'XInputGetAudioDeviceIds')
-external int _XInputGetAudioDeviceIds(
-  int dwUserIndex,
-  Pointer<Utf16> pRenderDeviceId,
-  Pointer<Uint32> pRenderCount,
-  Pointer<Utf16> pCaptureDeviceId,
-  Pointer<Uint32> pCaptureCount,
-);
+final _XInputEnable = _xinput1_4
+    .lookupFunction<Void Function(Int32), void Function(int)>('XInputEnable');
 
-@Native<Uint32 Function(Uint32, Uint8, Pointer<XINPUT_BATTERY_INFORMATION>)>(
-  symbol: 'XInputGetBatteryInformation',
-)
-external int _XInputGetBatteryInformation(
-  int dwUserIndex,
-  int devType,
-  Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation,
-);
+final _XInputGetAudioDeviceIds = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('XInputGetAudioDeviceIds');
 
-@Native<Uint32 Function(Uint32, Uint32, Pointer<XINPUT_CAPABILITIES>)>(
-  symbol: 'XInputGetCapabilities',
-)
-external int _XInputGetCapabilities(
-  int dwUserIndex,
-  int dwFlags,
-  Pointer<XINPUT_CAPABILITIES> pCapabilities,
-);
+final _XInputGetBatteryInformation = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint8, Pointer<XINPUT_BATTERY_INFORMATION>),
+      int Function(int, int, Pointer<XINPUT_BATTERY_INFORMATION>)
+    >('XInputGetBatteryInformation');
 
-@Native<Uint32 Function(Uint32, Uint32, Pointer<XINPUT_KEYSTROKE>)>(
-  symbol: 'XInputGetKeystroke',
-)
-external int _XInputGetKeystroke(
-  int dwUserIndex,
-  int dwReserved,
-  Pointer<XINPUT_KEYSTROKE> pKeystroke,
-);
+final _XInputGetCapabilities = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Pointer<XINPUT_CAPABILITIES>),
+      int Function(int, int, Pointer<XINPUT_CAPABILITIES>)
+    >('XInputGetCapabilities');
 
-@Native<Uint32 Function(Uint32, Pointer<XINPUT_STATE>)>(
-  symbol: 'XInputGetState',
-)
-external int _XInputGetState(int dwUserIndex, Pointer<XINPUT_STATE> pState);
+final _XInputGetKeystroke = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Pointer<XINPUT_KEYSTROKE>),
+      int Function(int, int, Pointer<XINPUT_KEYSTROKE>)
+    >('XInputGetKeystroke');
 
-@Native<Uint32 Function(Uint32, Pointer<XINPUT_VIBRATION>)>(
-  symbol: 'XInputSetState',
-)
-external int _XInputSetState(
-  int dwUserIndex,
-  Pointer<XINPUT_VIBRATION> pVibration,
-);
+final _XInputGetState = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<XINPUT_STATE>),
+      int Function(int, Pointer<XINPUT_STATE>)
+    >('XInputGetState');
+
+final _XInputSetState = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<XINPUT_VIBRATION>),
+      int Function(int, Pointer<XINPUT_VIBRATION>)
+    >('XInputSetState');

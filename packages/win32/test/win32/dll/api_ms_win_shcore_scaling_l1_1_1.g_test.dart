@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -35,25 +35,29 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer, Int32, Pointer<Uint32>, Pointer<Uint32>)>(
-  symbol: 'GetDpiForMonitor',
-)
-external int _GetDpiForMonitor(
-  Pointer hmonitor,
-  int dpiType,
-  Pointer<Uint32> dpiX,
-  Pointer<Uint32> dpiY,
+final _api_ms_win_shcore_scaling_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-shcore-scaling-l1-1-1.dll',
 );
 
-@Native<Int32 Function(Pointer, Pointer<Int32>)>(
-  symbol: 'GetProcessDpiAwareness',
-)
-external int _GetProcessDpiAwareness(Pointer hprocess, Pointer<Int32> value);
+final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<Uint32>, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Uint32>, Pointer<Uint32>)
+    >('GetDpiForMonitor');
 
-@Native<Int32 Function(Pointer, Pointer<Int32>)>(
-  symbol: 'GetScaleFactorForMonitor',
-)
-external int _GetScaleFactorForMonitor(Pointer hMon, Pointer<Int32> pScale);
+final _GetProcessDpiAwareness = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetProcessDpiAwareness');
 
-@Native<Int32 Function(Int32)>(symbol: 'SetProcessDpiAwareness')
-external int _SetProcessDpiAwareness(int value);
+final _GetScaleFactorForMonitor = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetScaleFactorForMonitor');
+
+final _SetProcessDpiAwareness = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'SetProcessDpiAwareness',
+    );

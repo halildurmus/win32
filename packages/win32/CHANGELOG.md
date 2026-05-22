@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.3.0] - 2026-05-22
+
+### 🧹 Refactor
+
+- Remove the build hook that either downloaded prebuilt binaries or compiled
+  native C wrappers for Win32 APIs that report errors via `GetLastError()`.
+  These bindings now pre-resolve `GetLastError()` before each call, ensuring the
+  error code is captured reliably without any native code.
+
+[6.3.0]: https://github.com/halildurmus/win32/compare/win32-v6.2.0..win32-v6.3.0
+
 ## [6.2.0] - 2026-05-07
 
 ### 🚀 Features

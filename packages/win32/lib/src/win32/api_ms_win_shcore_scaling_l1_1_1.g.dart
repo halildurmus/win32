@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_shcore_scaling_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-shcore-scaling-l1-1-1.dll',
+);
 
 /// Queries the dots per inch (dpi) of a display.
 ///
@@ -52,15 +58,11 @@ void GetDpiForMonitor(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Int32, Pointer<Uint32>, Pointer<Uint32>)>(
-  symbol: 'GetDpiForMonitor',
-)
-external int _GetDpiForMonitor(
-  Pointer hmonitor,
-  int dpiType,
-  Pointer<Uint32> dpiX,
-  Pointer<Uint32> dpiY,
-);
+final _GetDpiForMonitor = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<Uint32>, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Uint32>, Pointer<Uint32>)
+    >('GetDpiForMonitor');
 
 /// Retrieves the dots per inch (dpi) awareness of the specified process.
 ///
@@ -82,10 +84,11 @@ PROCESS_DPI_AWARENESS GetProcessDpiAwareness(HANDLE? hprocess) {
   return .new(result$);
 }
 
-@Native<Int32 Function(Pointer, Pointer<Int32>)>(
-  symbol: 'GetProcessDpiAwareness',
-)
-external int _GetProcessDpiAwareness(Pointer hprocess, Pointer<Int32> value);
+final _GetProcessDpiAwareness = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetProcessDpiAwareness');
 
 /// Gets the scale factor of a specific monitor.
 ///
@@ -109,10 +112,11 @@ DEVICE_SCALE_FACTOR GetScaleFactorForMonitor(HMONITOR hMon) {
   return .new(result$);
 }
 
-@Native<Int32 Function(Pointer, Pointer<Int32>)>(
-  symbol: 'GetScaleFactorForMonitor',
-)
-external int _GetScaleFactorForMonitor(Pointer hMon, Pointer<Int32> pScale);
+final _GetScaleFactorForMonitor = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('GetScaleFactorForMonitor');
 
 /// Sets the process-default DPI awareness level.
 ///
@@ -131,5 +135,7 @@ void SetProcessDpiAwareness(PROCESS_DPI_AWARENESS value) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Int32)>(symbol: 'SetProcessDpiAwareness')
-external int _SetProcessDpiAwareness(int value);
+final _SetProcessDpiAwareness = _api_ms_win_shcore_scaling_l1_1_1
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'SetProcessDpiAwareness',
+    );

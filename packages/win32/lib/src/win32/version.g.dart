@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/version.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -20,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -35,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _version = DynamicLibrary.open('version.dll');
+
 /// Retrieves version information for the specified file.
 ///
 /// To learn more, see
@@ -46,14 +48,16 @@ Win32Result<bool> GetFileVersionInfo(
   int dwLen,
   Pointer lpData,
 ) {
-  final result_ = GetFileVersionInfoW_Wrapper(
-    lptstrFilename,
-    NULL,
-    dwLen,
-    lpData,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileVersionInfo(lptstrFilename, NULL, dwLen, lpData);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetFileVersionInfo = _version
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Uint32, Pointer),
+      int Function(Pointer<Utf16>, int, int, Pointer)
+    >('GetFileVersionInfoW');
 
 /// Retrieves version information for the specified file.
 ///
@@ -67,15 +71,22 @@ Win32Result<bool> GetFileVersionInfoEx(
   int dwLen,
   Pointer lpData,
 ) {
-  final result_ = GetFileVersionInfoExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFileVersionInfoEx(
     dwFlags,
     lpwstrFilename,
     NULL,
     dwLen,
     lpData,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetFileVersionInfoEx = _version
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Utf16>, Uint32, Uint32, Pointer),
+      int Function(int, Pointer<Utf16>, int, int, Pointer)
+    >('GetFileVersionInfoExW');
 
 /// Determines whether the operating system can retrieve version information for
 /// a specified file.
@@ -91,12 +102,19 @@ Win32Result<int> GetFileVersionInfoSize(
   PCWSTR lptstrFilename,
   Pointer<Uint32>? lpdwHandle,
 ) {
-  final result_ = GetFileVersionInfoSizeW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFileVersionInfoSize(
     lptstrFilename,
     lpdwHandle ?? nullptr,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFileVersionInfoSize = _version
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetFileVersionInfoSizeW');
 
 /// Determines whether the operating system can retrieve version information for
 /// a specified file.
@@ -113,13 +131,20 @@ Win32Result<int> GetFileVersionInfoSizeEx(
   PCWSTR lpwstrFilename,
   Pointer<Uint32> lpdwHandle,
 ) {
-  final result_ = GetFileVersionInfoSizeExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFileVersionInfoSizeEx(
     dwFlags,
     lpwstrFilename,
     lpdwHandle,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFileVersionInfoSizeEx = _version
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(int, Pointer<Utf16>, Pointer<Uint32>)
+    >('GetFileVersionInfoSizeExW');
 
 /// Determines where to install a file based on whether it locates another
 /// version of the file in the system.
@@ -154,28 +179,29 @@ VER_FIND_FILE_STATUS VerFindFile(
   ),
 );
 
-@Native<
-  Uint32 Function(
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'VerFindFileW')
-external int _VerFindFile(
-  int uFlags,
-  Pointer<Utf16> szFileName,
-  Pointer<Utf16> szWinDir,
-  Pointer<Utf16> szAppDir,
-  Pointer<Utf16> szCurDir,
-  Pointer<Uint32> puCurDirLen,
-  Pointer<Utf16> szDestDir,
-  Pointer<Uint32> puDestDirLen,
-);
+final _VerFindFile = _version
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('VerFindFileW');
 
 /// Installs the specified file based on information returned from the
 /// VerFindFile function.
@@ -210,28 +236,29 @@ VER_INSTALL_FILE_STATUS VerInstallFile(
   ),
 );
 
-@Native<
-  Uint32 Function(
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'VerInstallFileW')
-external int _VerInstallFile(
-  int uFlags,
-  Pointer<Utf16> szSrcFileName,
-  Pointer<Utf16> szDestFileName,
-  Pointer<Utf16> szSrcDir,
-  Pointer<Utf16> szDestDir,
-  Pointer<Utf16> szCurDir,
-  Pointer<Utf16> szTmpFile,
-  Pointer<Uint32> puTmpFileLen,
-);
+final _VerInstallFile = _version
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('VerInstallFileW');
 
 /// Retrieves specified version information from the specified
 /// version-information resource.
@@ -248,12 +275,13 @@ bool VerQueryValue(
   Pointer<Uint32> puLen,
 ) => _VerQueryValue(pBlock, lpSubBlock, lplpBuffer, puLen) != FALSE;
 
-@Native<
-  Int32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>, Pointer<Uint32>)
->(symbol: 'VerQueryValueW')
-external int _VerQueryValue(
-  Pointer pBlock,
-  Pointer<Utf16> lpSubBlock,
-  Pointer<Pointer> lplpBuffer,
-  Pointer<Uint32> puLen,
-);
+final _VerQueryValue = _version
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+      ),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Pointer>, Pointer<Uint32>)
+    >('VerQueryValueW');

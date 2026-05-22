@@ -43,19 +43,20 @@ T CoCreateInstance<T extends IUnknown>(
   return result;
 }
 
-@Native<
-  Int32 Function(
-    Pointer<GUID>,
-    VTablePointer,
-    Uint32,
-    Pointer<GUID>,
-    Pointer<Pointer>,
-  )
->(symbol: 'CoCreateInstance')
-external int _CoCreateInstance(
-  Pointer<GUID> rclsid,
-  VTablePointer pUnkOuter,
-  int dwClsContext,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _CoCreateInstance = _ole32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<GUID>,
+        VTablePointer,
+        Uint32,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      ),
+      int Function(
+        Pointer<GUID>,
+        VTablePointer,
+        int,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      )
+    >('CoCreateInstance');

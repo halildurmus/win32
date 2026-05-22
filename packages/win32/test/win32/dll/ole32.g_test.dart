@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -126,238 +126,242 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<GUID>)>(
-  symbol: 'CLSIDFromProgID',
-)
-external int _CLSIDFromProgID(Pointer<Utf16> lpszProgID, Pointer<GUID> lpclsid);
+final _ole32 = DynamicLibrary.open('ole32.dll');
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<GUID>)>(
-  symbol: 'CLSIDFromProgIDEx',
-)
-external int _CLSIDFromProgIDEx(
-  Pointer<Utf16> lpszProgID,
-  Pointer<GUID> lpclsid,
+final _CLSIDFromProgID = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<GUID>),
+      int Function(Pointer<Utf16>, Pointer<GUID>)
+    >('CLSIDFromProgID');
+
+final _CLSIDFromProgIDEx = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<GUID>),
+      int Function(Pointer<Utf16>, Pointer<GUID>)
+    >('CLSIDFromProgIDEx');
+
+final _CLSIDFromString = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<GUID>),
+      int Function(Pointer<Utf16>, Pointer<GUID>)
+    >('CLSIDFromString');
+
+final _CoAddRefServerProcess = _ole32
+    .lookupFunction<Uint32 Function(), int Function()>('CoAddRefServerProcess');
+
+final _CoCreateGuid = _ole32
+    .lookupFunction<Int32 Function(Pointer<GUID>), int Function(Pointer<GUID>)>(
+      'CoCreateGuid',
+    );
+
+final _CoCreateInstance = _ole32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<GUID>,
+        VTablePointer,
+        Uint32,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      ),
+      int Function(
+        Pointer<GUID>,
+        VTablePointer,
+        int,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      )
+    >('CoCreateInstance');
+
+final _CoDecrementMTAUsage = _ole32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CoDecrementMTAUsage',
+    );
+
+final _CoGetApartmentType = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>, Pointer<Int32>),
+      int Function(Pointer<Int32>, Pointer<Int32>)
+    >('CoGetApartmentType');
+
+final _CoGetClassObject = _ole32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<GUID>,
+        Uint32,
+        Pointer,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      ),
+      int Function(Pointer<GUID>, int, Pointer, Pointer<GUID>, Pointer<Pointer>)
+    >('CoGetClassObject');
+
+final _CoGetCurrentProcess = _ole32
+    .lookupFunction<Uint32 Function(), int Function()>('CoGetCurrentProcess');
+
+final _CoGetMalloc = _ole32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<VTablePointer>),
+      int Function(int, Pointer<VTablePointer>)
+    >('CoGetMalloc');
+
+final _CoIncrementMTAUsage = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer>),
+      int Function(Pointer<Pointer>)
+    >('CoIncrementMTAUsage');
+
+final _CoInitializeEx = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('CoInitializeEx');
+
+final _CoInitializeSecurity = _ole32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<SOLE_AUTHENTICATION_SERVICE>,
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer,
+        Uint32,
+        Pointer,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<SOLE_AUTHENTICATION_SERVICE>,
+        Pointer,
+        int,
+        int,
+        Pointer,
+        int,
+        Pointer,
+      )
+    >('CoInitializeSecurity');
+
+final _CoSetProxyBlanket = _ole32
+    .lookupFunction<
+      Int32 Function(
+        VTablePointer,
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer,
+        Uint32,
+      ),
+      int Function(
+        VTablePointer,
+        int,
+        int,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer,
+        int,
+      )
+    >('CoSetProxyBlanket');
+
+final _CoTaskMemAlloc = _ole32
+    .lookupFunction<Pointer Function(IntPtr), Pointer Function(int)>(
+      'CoTaskMemAlloc',
+    );
+
+final _CoTaskMemFree = _ole32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'CoTaskMemFree',
+    );
+
+final _CoTaskMemRealloc = _ole32
+    .lookupFunction<
+      Pointer Function(Pointer, IntPtr),
+      Pointer Function(Pointer, int)
+    >('CoTaskMemRealloc');
+
+final _CoUninitialize = _ole32.lookupFunction<Void Function(), void Function()>(
+  'CoUninitialize',
 );
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<GUID>)>(
-  symbol: 'CLSIDFromString',
-)
-external int _CLSIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> pclsid);
+final _CoWaitForMultipleHandles = _ole32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Uint32, Pointer<Pointer>, Pointer<Uint32>),
+      int Function(int, int, int, Pointer<Pointer>, Pointer<Uint32>)
+    >('CoWaitForMultipleHandles');
 
-@Native<Uint32 Function()>(symbol: 'CoAddRefServerProcess')
-external int _CoAddRefServerProcess();
+final _CoWaitForMultipleObjects = _ole32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Uint32, Pointer<Pointer>, Pointer<Uint32>),
+      int Function(int, int, int, Pointer<Pointer>, Pointer<Uint32>)
+    >('CoWaitForMultipleObjects');
 
-@Native<Int32 Function(Pointer<GUID>)>(symbol: 'CoCreateGuid')
-external int _CoCreateGuid(Pointer<GUID> pguid);
+final _CreateStreamOnHGlobal = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<VTablePointer>),
+      int Function(Pointer, int, Pointer<VTablePointer>)
+    >('CreateStreamOnHGlobal');
 
-@Native<
-  Int32 Function(
-    Pointer<GUID>,
-    VTablePointer,
-    Uint32,
-    Pointer<GUID>,
-    Pointer<Pointer>,
-  )
->(symbol: 'CoCreateInstance')
-external int _CoCreateInstance(
-  Pointer<GUID> rclsid,
-  VTablePointer pUnkOuter,
-  int dwClsContext,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _GetClassFile = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<GUID>),
+      int Function(Pointer<Utf16>, Pointer<GUID>)
+    >('GetClassFile');
 
-@Native<Int32 Function(Pointer)>(symbol: 'CoDecrementMTAUsage')
-external int _CoDecrementMTAUsage(Pointer cookie);
+final _GetHGlobalFromStream = _ole32
+    .lookupFunction<
+      Int32 Function(VTablePointer, Pointer<Pointer>),
+      int Function(VTablePointer, Pointer<Pointer>)
+    >('GetHGlobalFromStream');
 
-@Native<Int32 Function(Pointer<Int32>, Pointer<Int32>)>(
-  symbol: 'CoGetApartmentType',
-)
-external int _CoGetApartmentType(
-  Pointer<Int32> pAptType,
-  Pointer<Int32> pAptQualifier,
-);
+final _IIDFromString = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<GUID>),
+      int Function(Pointer<Utf16>, Pointer<GUID>)
+    >('IIDFromString');
 
-@Native<
-  Int32 Function(
-    Pointer<GUID>,
-    Uint32,
-    Pointer,
-    Pointer<GUID>,
-    Pointer<Pointer>,
-  )
->(symbol: 'CoGetClassObject')
-external int _CoGetClassObject(
-  Pointer<GUID> rclsid,
-  int dwClsContext,
-  Pointer pvReserved,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _OleInitialize = _ole32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'OleInitialize',
+    );
 
-@Native<Uint32 Function()>(symbol: 'CoGetCurrentProcess')
-external int _CoGetCurrentProcess();
+final _OleUninitialize = _ole32
+    .lookupFunction<Void Function(), void Function()>('OleUninitialize');
 
-@Native<Int32 Function(Uint32, Pointer<VTablePointer>)>(symbol: 'CoGetMalloc')
-external int _CoGetMalloc(int dwMemContext, Pointer<VTablePointer> ppMalloc);
+final _ProgIDFromCLSID = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>),
+      int Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)
+    >('ProgIDFromCLSID');
 
-@Native<Int32 Function(Pointer<Pointer>)>(symbol: 'CoIncrementMTAUsage')
-external int _CoIncrementMTAUsage(Pointer<Pointer> pCookie);
+final _PropVariantClear = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<PROPVARIANT>),
+      int Function(Pointer<PROPVARIANT>)
+    >('PropVariantClear');
 
-@Native<Int32 Function(Pointer, Uint32)>(symbol: 'CoInitializeEx')
-external int _CoInitializeEx(Pointer pvReserved, int dwCoInit);
+final _PropVariantCopy = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<PROPVARIANT>, Pointer<PROPVARIANT>),
+      int Function(Pointer<PROPVARIANT>, Pointer<PROPVARIANT>)
+    >('PropVariantCopy');
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Pointer<SOLE_AUTHENTICATION_SERVICE>,
-    Pointer,
-    Uint32,
-    Uint32,
-    Pointer,
-    Uint32,
-    Pointer,
-  )
->(symbol: 'CoInitializeSecurity')
-external int _CoInitializeSecurity(
-  Pointer pSecDesc,
-  int cAuthSvc,
-  Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-  Pointer pReserved1,
-  int dwAuthnLevel,
-  int dwImpLevel,
-  Pointer pAuthList,
-  int dwCapabilities,
-  Pointer pReserved3,
-);
+final _StringFromCLSID = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>),
+      int Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)
+    >('StringFromCLSID');
 
-@Native<
-  Int32 Function(
-    VTablePointer,
-    Uint32,
-    Uint32,
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Pointer,
-    Uint32,
-  )
->(symbol: 'CoSetProxyBlanket')
-external int _CoSetProxyBlanket(
-  VTablePointer pProxy,
-  int dwAuthnSvc,
-  int dwAuthzSvc,
-  Pointer<Utf16> pServerPrincName,
-  int dwAuthnLevel,
-  int dwImpLevel,
-  Pointer pAuthInfo,
-  int dwCapabilities,
-);
+final _StringFromGUID2 = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<Utf16>, Int32),
+      int Function(Pointer<GUID>, Pointer<Utf16>, int)
+    >('StringFromGUID2');
 
-@Native<Pointer Function(IntPtr)>(symbol: 'CoTaskMemAlloc')
-external Pointer _CoTaskMemAlloc(int cb);
-
-@Native<Void Function(Pointer)>(symbol: 'CoTaskMemFree')
-external void _CoTaskMemFree(Pointer pv);
-
-@Native<Pointer Function(Pointer, IntPtr)>(symbol: 'CoTaskMemRealloc')
-external Pointer _CoTaskMemRealloc(Pointer pv, int cb);
-
-@Native<Void Function()>(symbol: 'CoUninitialize')
-external void _CoUninitialize();
-
-@Native<
-  Int32 Function(Uint32, Uint32, Uint32, Pointer<Pointer>, Pointer<Uint32>)
->(symbol: 'CoWaitForMultipleHandles')
-external int _CoWaitForMultipleHandles(
-  int dwFlags,
-  int dwTimeout,
-  int cHandles,
-  Pointer<Pointer> pHandles,
-  Pointer<Uint32> lpdwindex,
-);
-
-@Native<
-  Int32 Function(Uint32, Uint32, Uint32, Pointer<Pointer>, Pointer<Uint32>)
->(symbol: 'CoWaitForMultipleObjects')
-external int _CoWaitForMultipleObjects(
-  int dwFlags,
-  int dwTimeout,
-  int cHandles,
-  Pointer<Pointer> pHandles,
-  Pointer<Uint32> lpdwindex,
-);
-
-@Native<Int32 Function(Pointer, Int32, Pointer<VTablePointer>)>(
-  symbol: 'CreateStreamOnHGlobal',
-)
-external int _CreateStreamOnHGlobal(
-  Pointer hGlobal,
-  int fDeleteOnRelease,
-  Pointer<VTablePointer> ppstm,
-);
-
-@Native<Int32 Function(Pointer<Utf16>, Pointer<GUID>)>(symbol: 'GetClassFile')
-external int _GetClassFile(Pointer<Utf16> szFilename, Pointer<GUID> pclsid);
-
-@Native<Int32 Function(VTablePointer, Pointer<Pointer>)>(
-  symbol: 'GetHGlobalFromStream',
-)
-external int _GetHGlobalFromStream(
-  VTablePointer pstm,
-  Pointer<Pointer> phglobal,
-);
-
-@Native<Int32 Function(Pointer<Utf16>, Pointer<GUID>)>(symbol: 'IIDFromString')
-external int _IIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> lpiid);
-
-@Native<Int32 Function(Pointer)>(symbol: 'OleInitialize')
-external int _OleInitialize(Pointer pvReserved);
-
-@Native<Void Function()>(symbol: 'OleUninitialize')
-external void _OleUninitialize();
-
-@Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(
-  symbol: 'ProgIDFromCLSID',
-)
-external int _ProgIDFromCLSID(
-  Pointer<GUID> clsid,
-  Pointer<Pointer<Utf16>> lplpszProgID,
-);
-
-@Native<Int32 Function(Pointer<PROPVARIANT>)>(symbol: 'PropVariantClear')
-external int _PropVariantClear(Pointer<PROPVARIANT> pvar);
-
-@Native<Int32 Function(Pointer<PROPVARIANT>, Pointer<PROPVARIANT>)>(
-  symbol: 'PropVariantCopy',
-)
-external int _PropVariantCopy(
-  Pointer<PROPVARIANT> pvarDest,
-  Pointer<PROPVARIANT> pvarSrc,
-);
-
-@Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(
-  symbol: 'StringFromCLSID',
-)
-external int _StringFromCLSID(
-  Pointer<GUID> rclsid,
-  Pointer<Pointer<Utf16>> lplpsz,
-);
-
-@Native<Int32 Function(Pointer<GUID>, Pointer<Utf16>, Int32)>(
-  symbol: 'StringFromGUID2',
-)
-external int _StringFromGUID2(
-  Pointer<GUID> rguid,
-  Pointer<Utf16> lpsz,
-  int cchMax,
-);
-
-@Native<Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)>(
-  symbol: 'StringFromIID',
-)
-external int _StringFromIID(
-  Pointer<GUID> rclsid,
-  Pointer<Pointer<Utf16>> lplpsz,
-);
+final _StringFromIID = _ole32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer<Pointer<Utf16>>),
+      int Function(Pointer<GUID>, Pointer<Pointer<Utf16>>)
+    >('StringFromIID');

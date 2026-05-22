@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/gdi32.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../callbacks.g.dart';
 import '../com/interface.g.dart';
@@ -21,6 +20,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -36,6 +36,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _gdi32 = DynamicLibrary.open('gdi32.dll');
+
 /// Closes and discards any paths in the specified device context.
 ///
 /// To learn more, see
@@ -45,8 +47,10 @@ import '../win32_result.dart';
 @pragma('vm:prefer-inline')
 bool AbortPath(HDC hdc) => _AbortPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'AbortPath')
-external int _AbortPath(Pointer hdc);
+final _AbortPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'AbortPath',
+    );
 
 /// Adds the font resource from the specified file to the system font table.
 ///
@@ -59,8 +63,11 @@ external int _AbortPath(Pointer hdc);
 @pragma('vm:prefer-inline')
 int AddFontResource(PCWSTR param0) => _AddFontResource(param0);
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'AddFontResourceW')
-external int _AddFontResource(Pointer<Utf16> param0);
+final _AddFontResource = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('AddFontResourceW');
 
 /// Adds the font resource from the specified file to the system.
 ///
@@ -75,10 +82,11 @@ external int _AddFontResource(Pointer<Utf16> param0);
 int AddFontResourceEx(PCWSTR name, FONT_RESOURCE_CHARACTERISTICS fl) =>
     _AddFontResourceEx(name, fl, nullptr);
 
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer)>(
-  symbol: 'AddFontResourceExW',
-)
-external int _AddFontResourceEx(Pointer<Utf16> name, int fl, Pointer res);
+final _AddFontResourceEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer),
+      int Function(Pointer<Utf16>, int, Pointer)
+    >('AddFontResourceExW');
 
 /// Draws a line segment and an arc.
 ///
@@ -96,17 +104,11 @@ bool AngleArc(
   double sweepAngle,
 ) => _AngleArc(hdc, x, y, r, startAngle, sweepAngle) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Uint32, Float, Float)>(
-  symbol: 'AngleArc',
-)
-external int _AngleArc(
-  Pointer hdc,
-  int x,
-  int y,
-  int r,
-  double startAngle,
-  double sweepAngle,
-);
+final _AngleArc = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Uint32, Float, Float),
+      int Function(Pointer, int, int, int, double, double)
+    >('AngleArc');
 
 /// Replaces entries in the specified logical palette.
 ///
@@ -122,15 +124,11 @@ bool AnimatePalette(
   Pointer<PALETTEENTRY> ppe,
 ) => _AnimatePalette(hPal, iStartIndex, cEntries, ppe) != FALSE;
 
-@Native<Int32 Function(Pointer, Uint32, Uint32, Pointer<PALETTEENTRY>)>(
-  symbol: 'AnimatePalette',
-)
-external int _AnimatePalette(
-  Pointer hPal,
-  int iStartIndex,
-  int cEntries,
-  Pointer<PALETTEENTRY> ppe,
-);
+final _AnimatePalette = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer<PALETTEENTRY>),
+      int Function(Pointer, int, int, Pointer<PALETTEENTRY>)
+    >('AnimatePalette');
 
 /// Draws an elliptical arc.
 ///
@@ -151,30 +149,21 @@ bool Arc(
   int y4,
 ) => _Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Arc')
-external int _Arc(
-  Pointer hdc,
-  int x1,
-  int y1,
-  int x2,
-  int y2,
-  int x3,
-  int y3,
-  int x4,
-  int y4,
-);
+final _Arc = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Arc');
 
 /// Draws an elliptical arc.
 ///
@@ -195,30 +184,21 @@ bool ArcTo(
   int yr2,
 ) => _ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2) != FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'ArcTo')
-external int _ArcTo(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int xr1,
-  int yr1,
-  int xr2,
-  int yr2,
-);
+final _ArcTo = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('ArcTo');
 
 /// Opens a path bracket in the specified device context.
 ///
@@ -229,8 +209,10 @@ external int _ArcTo(
 @pragma('vm:prefer-inline')
 bool BeginPath(HDC hdc) => _BeginPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'BeginPath')
-external int _BeginPath(Pointer hdc);
+final _BeginPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'BeginPath',
+    );
 
 /// Performs a bit-block transfer of the color data corresponding to a rectangle
 /// of pixels from the specified source device context into a destination device
@@ -251,19 +233,26 @@ Win32Result<bool> BitBlt(
   int y1,
   ROP_CODE rop,
 ) {
-  final result_ = BitBlt_Wrapper(
-    hdc,
-    x,
-    y,
-    cx,
-    cy,
-    hdcSrc ?? nullptr,
-    x1,
-    y1,
-    rop,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _BitBlt(hdc, x, y, cx, cy, hdcSrc ?? nullptr, x1, y1, rop);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _BitBlt = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      int Function(Pointer, int, int, int, int, Pointer, int, int, int)
+    >('BitBlt');
 
 /// Cancels any pending operation on the specified device context (DC).
 ///
@@ -274,8 +263,8 @@ Win32Result<bool> BitBlt(
 @pragma('vm:prefer-inline')
 bool CancelDC(HDC hdc) => _CancelDC(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'CancelDC')
-external int _CancelDC(Pointer hdc);
+final _CancelDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('CancelDC');
 
 /// Draws a chord (a region bounded by the intersection of an ellipse and a line
 /// segment, called a secant).
@@ -300,30 +289,21 @@ bool Chord(
   int y4,
 ) => _Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Chord')
-external int _Chord(
-  Pointer hdc,
-  int x1,
-  int y1,
-  int x2,
-  int y2,
-  int x3,
-  int y3,
-  int x4,
-  int y4,
-);
+final _Chord = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Chord');
 
 /// Closes an open figure in a path.
 ///
@@ -334,8 +314,10 @@ external int _Chord(
 @pragma('vm:prefer-inline')
 bool CloseFigure(HDC hdc) => _CloseFigure(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'CloseFigure')
-external int _CloseFigure(Pointer hdc);
+final _CloseFigure = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseFigure',
+    );
 
 /// Creates a bitmap with the specified width, height, and color format (color
 /// planes and bits-per-pixel).
@@ -355,16 +337,11 @@ HBITMAP CreateBitmap(
   _CreateBitmap(nWidth, nHeight, nPlanes, nBitCount, lpBits ?? nullptr),
 );
 
-@Native<Pointer Function(Int32, Int32, Uint32, Uint32, Pointer)>(
-  symbol: 'CreateBitmap',
-)
-external Pointer _CreateBitmap(
-  int nWidth,
-  int nHeight,
-  int nPlanes,
-  int nBitCount,
-  Pointer lpBits,
-);
+final _CreateBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Uint32, Uint32, Pointer),
+      Pointer Function(int, int, int, int, Pointer)
+    >('CreateBitmap');
 
 /// Creates a bitmap with the specified width, height, and color format (color
 /// planes and bits-per-pixel).
@@ -377,8 +354,11 @@ external Pointer _CreateBitmap(
 HBITMAP CreateBitmapIndirect(Pointer<BITMAP> pbm) =>
     HBITMAP(_CreateBitmapIndirect(pbm));
 
-@Native<Pointer Function(Pointer<BITMAP>)>(symbol: 'CreateBitmapIndirect')
-external Pointer _CreateBitmapIndirect(Pointer<BITMAP> pbm);
+final _CreateBitmapIndirect = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer<BITMAP>),
+      Pointer Function(Pointer<BITMAP>)
+    >('CreateBitmapIndirect');
 
 /// Creates a bitmap compatible with the device that is associated with the
 /// specified device context.
@@ -391,10 +371,11 @@ external Pointer _CreateBitmapIndirect(Pointer<BITMAP> pbm);
 HBITMAP CreateCompatibleBitmap(HDC hdc, int cx, int cy) =>
     HBITMAP(_CreateCompatibleBitmap(hdc, cx, cy));
 
-@Native<Pointer Function(Pointer, Int32, Int32)>(
-  symbol: 'CreateCompatibleBitmap',
-)
-external Pointer _CreateCompatibleBitmap(Pointer hdc, int cx, int cy);
+final _CreateCompatibleBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32, Int32),
+      Pointer Function(Pointer, int, int)
+    >('CreateCompatibleBitmap');
 
 /// Creates a memory device context (DC) compatible with the specified device.
 ///
@@ -405,8 +386,10 @@ external Pointer _CreateCompatibleBitmap(Pointer hdc, int cx, int cy);
 @pragma('vm:prefer-inline')
 HDC CreateCompatibleDC(HDC? hdc) => HDC(_CreateCompatibleDC(hdc ?? nullptr));
 
-@Native<Pointer Function(Pointer)>(symbol: 'CreateCompatibleDC')
-external Pointer _CreateCompatibleDC(Pointer hdc);
+final _CreateCompatibleDC = _gdi32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'CreateCompatibleDC',
+    );
 
 /// Creates a device context (DC) for a device using the specified name.
 ///
@@ -429,20 +412,21 @@ HDC CreateDC(
   ),
 );
 
-@Native<
-  Pointer Function(
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<DEVMODE>,
-  )
->(symbol: 'CreateDCW')
-external Pointer _CreateDC(
-  Pointer<Utf16> pwszDriver,
-  Pointer<Utf16> pwszDevice,
-  Pointer<Utf16> pszPort,
-  Pointer<DEVMODE> pdm,
-);
+final _CreateDC = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+      )
+    >('CreateDCW');
 
 /// Creates a compatible bitmap (DDB) from a DIB and, optionally, sets the
 /// bitmap bits.
@@ -470,24 +454,25 @@ HBITMAP CreateDIBitmap(
   ),
 );
 
-@Native<
-  Pointer Function(
-    Pointer,
-    Pointer<BITMAPINFOHEADER>,
-    Uint32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-  )
->(symbol: 'CreateDIBitmap')
-external Pointer _CreateDIBitmap(
-  Pointer hdc,
-  Pointer<BITMAPINFOHEADER> pbmih,
-  int flInit,
-  Pointer pjBits,
-  Pointer<BITMAPINFO> pbmi,
-  int iUsage,
-);
+final _CreateDIBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFOHEADER>,
+        Uint32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFOHEADER>,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+      )
+    >('CreateDIBitmap');
 
 /// Creates a logical brush that has the pattern specified by the
 /// device-independent bitmap (DIB).
@@ -500,8 +485,11 @@ external Pointer _CreateDIBitmap(
 HBRUSH CreateDIBPatternBrushPt(Pointer lpPackedDIB, DIB_USAGE iUsage) =>
     HBRUSH(_CreateDIBPatternBrushPt(lpPackedDIB, iUsage));
 
-@Native<Pointer Function(Pointer, Uint32)>(symbol: 'CreateDIBPatternBrushPt')
-external Pointer _CreateDIBPatternBrushPt(Pointer lpPackedDIB, int iUsage);
+final _CreateDIBPatternBrushPt = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('CreateDIBPatternBrushPt');
 
 /// Creates a DIB that applications can write to directly.
 ///
@@ -517,7 +505,8 @@ Win32Result<HBITMAP> CreateDIBSection(
   HANDLE? hSection,
   int offset,
 ) {
-  final result_ = CreateDIBSection_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateDIBSection(
     hdc ?? nullptr,
     pbmi,
     usage,
@@ -525,8 +514,28 @@ Win32Result<HBITMAP> CreateDIBSection(
     hSection ?? nullptr,
     offset,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateDIBSection = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+        Pointer<Pointer>,
+        Pointer,
+        Uint32,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+        Pointer<Pointer>,
+        Pointer,
+        int,
+      )
+    >('CreateDIBSection');
 
 /// Creates an elliptical region.
 ///
@@ -538,10 +547,11 @@ Win32Result<HBITMAP> CreateDIBSection(
 HRGN CreateEllipticRgn(int x1, int y1, int x2, int y2) =>
     HRGN(_CreateEllipticRgn(x1, y1, x2, y2));
 
-@Native<Pointer Function(Int32, Int32, Int32, Int32)>(
-  symbol: 'CreateEllipticRgn',
-)
-external Pointer _CreateEllipticRgn(int x1, int y1, int x2, int y2);
+final _CreateEllipticRgn = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Int32, Int32),
+      Pointer Function(int, int, int, int)
+    >('CreateEllipticRgn');
 
 /// Creates a logical font with the specified characteristics.
 ///
@@ -586,40 +596,41 @@ HFONT CreateFont(
   ),
 );
 
-@Native<
-  Pointer Function(
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Pointer<Utf16>,
-  )
->(symbol: 'CreateFontW')
-external Pointer _CreateFont(
-  int cHeight,
-  int cWidth,
-  int cEscapement,
-  int cOrientation,
-  int cWeight,
-  int bItalic,
-  int bUnderline,
-  int bStrikeOut,
-  int iCharSet,
-  int iOutPrecision,
-  int iClipPrecision,
-  int iQuality,
-  int iPitchAndFamily,
-  Pointer<Utf16> pszFaceName,
-);
+final _CreateFont = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+      ),
+      Pointer Function(
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer<Utf16>,
+      )
+    >('CreateFontW');
 
 /// Creates a logical font that has the specified characteristics.
 ///
@@ -634,8 +645,11 @@ external Pointer _CreateFont(
 HFONT CreateFontIndirect(Pointer<LOGFONT> lplf) =>
     HFONT(_CreateFontIndirect(lplf));
 
-@Native<Pointer Function(Pointer<LOGFONT>)>(symbol: 'CreateFontIndirectW')
-external Pointer _CreateFontIndirect(Pointer<LOGFONT> lplf);
+final _CreateFontIndirect = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer<LOGFONT>),
+      Pointer Function(Pointer<LOGFONT>)
+    >('CreateFontIndirectW');
 
 /// Creates a halftone palette for the specified device context (DC).
 ///
@@ -647,8 +661,10 @@ external Pointer _CreateFontIndirect(Pointer<LOGFONT> lplf);
 HPALETTE CreateHalftonePalette(HDC? hdc) =>
     HPALETTE(_CreateHalftonePalette(hdc ?? nullptr));
 
-@Native<Pointer Function(Pointer)>(symbol: 'CreateHalftonePalette')
-external Pointer _CreateHalftonePalette(Pointer hdc);
+final _CreateHalftonePalette = _gdi32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'CreateHalftonePalette',
+    );
 
 /// Creates a logical brush that has the specified hatch pattern and color.
 ///
@@ -660,8 +676,11 @@ external Pointer _CreateHalftonePalette(Pointer hdc);
 HBRUSH CreateHatchBrush(HATCH_BRUSH_STYLE iHatch, COLORREF color) =>
     HBRUSH(_CreateHatchBrush(iHatch, color));
 
-@Native<Pointer Function(Int32, Uint32)>(symbol: 'CreateHatchBrush')
-external Pointer _CreateHatchBrush(int iHatch, int color);
+final _CreateHatchBrush = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Uint32),
+      Pointer Function(int, int)
+    >('CreateHatchBrush');
 
 /// Creates a logical pen that has the specified style, width, and color.
 ///
@@ -676,8 +695,11 @@ external Pointer _CreateHatchBrush(int iHatch, int color);
 HPEN CreatePen(PEN_STYLE iStyle, int cWidth, COLORREF color) =>
     HPEN(_CreatePen(iStyle, cWidth, color));
 
-@Native<Pointer Function(Int32, Int32, Uint32)>(symbol: 'CreatePen')
-external Pointer _CreatePen(int iStyle, int cWidth, int color);
+final _CreatePen = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Uint32),
+      Pointer Function(int, int, int)
+    >('CreatePen');
 
 /// Creates a rectangular region.
 ///
@@ -689,8 +711,11 @@ external Pointer _CreatePen(int iStyle, int cWidth, int color);
 HRGN CreateRectRgn(int x1, int y1, int x2, int y2) =>
     HRGN(_CreateRectRgn(x1, y1, x2, y2));
 
-@Native<Pointer Function(Int32, Int32, Int32, Int32)>(symbol: 'CreateRectRgn')
-external Pointer _CreateRectRgn(int x1, int y1, int x2, int y2);
+final _CreateRectRgn = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Int32, Int32),
+      Pointer Function(int, int, int, int)
+    >('CreateRectRgn');
 
 /// Creates a logical brush that has the specified solid color.
 ///
@@ -701,8 +726,10 @@ external Pointer _CreateRectRgn(int x1, int y1, int x2, int y2);
 @pragma('vm:prefer-inline')
 HBRUSH CreateSolidBrush(COLORREF color) => HBRUSH(_CreateSolidBrush(color));
 
-@Native<Pointer Function(Uint32)>(symbol: 'CreateSolidBrush')
-external Pointer _CreateSolidBrush(int color);
+final _CreateSolidBrush = _gdi32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'CreateSolidBrush',
+    );
 
 /// Deletes the specified device context (DC).
 ///
@@ -713,8 +740,8 @@ external Pointer _CreateSolidBrush(int color);
 @pragma('vm:prefer-inline')
 bool DeleteDC(HDC hdc) => _DeleteDC(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteDC')
-external int _DeleteDC(Pointer hdc);
+final _DeleteDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('DeleteDC');
 
 /// Deletes a Windows-format metafile or Windows-format metafile handle.
 ///
@@ -725,8 +752,10 @@ external int _DeleteDC(Pointer hdc);
 @pragma('vm:prefer-inline')
 bool DeleteMetaFile(HMETAFILE hmf) => _DeleteMetaFile(hmf) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteMetaFile')
-external int _DeleteMetaFile(Pointer hmf);
+final _DeleteMetaFile = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DeleteMetaFile',
+    );
 
 /// Deletes a logical pen, brush, font, bitmap, region, or palette, freeing all
 /// system resources associated with the object.
@@ -740,8 +769,10 @@ external int _DeleteMetaFile(Pointer hmf);
 @pragma('vm:prefer-inline')
 bool DeleteObject(HGDIOBJ ho) => _DeleteObject(ho) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteObject')
-external int _DeleteObject(Pointer ho);
+final _DeleteObject = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DeleteObject',
+    );
 
 /// Provides drawing capabilities of the specified video display that are not
 /// directly available through the graphics device interface (GDI).
@@ -754,15 +785,11 @@ external int _DeleteObject(Pointer ho);
 int DrawEscape(HDC hdc, int iEscape, int cjIn, PCSTR? lpIn) =>
     _DrawEscape(hdc, iEscape, cjIn, lpIn ?? nullptr);
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<Utf8>)>(
-  symbol: 'DrawEscape',
-)
-external int _DrawEscape(
-  Pointer hdc,
-  int iEscape,
-  int cjIn,
-  Pointer<Utf8> lpIn,
-);
+final _DrawEscape = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<Utf8>),
+      int Function(Pointer, int, int, Pointer<Utf8>)
+    >('DrawEscape');
 
 /// Creates a D2D1_ELLIPSE structure.
 ///
@@ -774,8 +801,11 @@ external int _DrawEscape(
 bool Ellipse(HDC hdc, int left, int top, int right, int bottom) =>
     _Ellipse(hdc, left, top, right, bottom) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32)>(symbol: 'Ellipse')
-external int _Ellipse(Pointer hdc, int left, int top, int right, int bottom);
+final _Ellipse = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int)
+    >('Ellipse');
 
 /// Closes a path bracket and selects the path defined by the bracket into the
 /// specified device context.
@@ -787,8 +817,8 @@ external int _Ellipse(Pointer hdc, int left, int top, int right, int bottom);
 @pragma('vm:prefer-inline')
 bool EndPath(HDC hdc) => _EndPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'EndPath')
-external int _EndPath(Pointer hdc);
+final _EndPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('EndPath');
 
 /// Enumerates all uniquely-named fonts in the system that match the font
 /// characteristics specified by the LOGFONT structure.
@@ -809,22 +839,23 @@ int EnumFontFamiliesEx(
   int dwFlags,
 ) => _EnumFontFamiliesEx(hdc, lpLogfont, lpProc, lParam, dwFlags);
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<LOGFONT>,
-    Pointer<NativeFunction<FONTENUMPROC>>,
-    IntPtr,
-    Uint32,
-  )
->(symbol: 'EnumFontFamiliesExW')
-external int _EnumFontFamiliesEx(
-  Pointer hdc,
-  Pointer<LOGFONT> lpLogfont,
-  Pointer<NativeFunction<FONTENUMPROC>> lpProc,
-  int lParam,
-  int dwFlags,
-);
+final _EnumFontFamiliesEx = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<LOGFONT>,
+        Pointer<NativeFunction<FONTENUMPROC>>,
+        IntPtr,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<LOGFONT>,
+        Pointer<NativeFunction<FONTENUMPROC>>,
+        int,
+        int,
+      )
+    >('EnumFontFamiliesExW');
 
 /// Creates a logical cosmetic or geometric pen that has the specified style,
 /// width, and brush attributes.
@@ -842,16 +873,17 @@ HPEN ExtCreatePen(
   Pointer<Uint32>? pstyle,
 ) => HPEN(_ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle ?? nullptr));
 
-@Native<
-  Pointer Function(Uint32, Uint32, Pointer<LOGBRUSH>, Uint32, Pointer<Uint32>)
->(symbol: 'ExtCreatePen')
-external Pointer _ExtCreatePen(
-  int iPenStyle,
-  int cWidth,
-  Pointer<LOGBRUSH> plbrush,
-  int cStyle,
-  Pointer<Uint32> pstyle,
-);
+final _ExtCreatePen = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Uint32,
+        Uint32,
+        Pointer<LOGBRUSH>,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      Pointer Function(int, int, Pointer<LOGBRUSH>, int, Pointer<Uint32>)
+    >('ExtCreatePen');
 
 /// Draws text using the currently selected font, background color, and text
 /// color.
@@ -886,28 +918,29 @@ bool ExtTextOut(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Uint32,
-    Pointer<RECT>,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Int32>,
-  )
->(symbol: 'ExtTextOutW')
-external int _ExtTextOut(
-  Pointer hdc,
-  int x,
-  int y,
-  int options,
-  Pointer<RECT> lprect,
-  Pointer<Utf16> lpString,
-  int c,
-  Pointer<Int32> lpDx,
-);
+final _ExtTextOut = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Uint32,
+        Pointer<RECT>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Int32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        Pointer<RECT>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Int32>,
+      )
+    >('ExtTextOutW');
 
 /// Closes any open figures in the current path and fills the path's interior by
 /// using the current brush and polygon-filling mode.
@@ -919,8 +952,8 @@ external int _ExtTextOut(
 @pragma('vm:prefer-inline')
 bool FillPath(HDC hdc) => _FillPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'FillPath')
-external int _FillPath(Pointer hdc);
+final _FillPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('FillPath');
 
 /// Transforms any curves in the path that is selected into the current device
 /// context (DC), turning each curve into a sequence of lines.
@@ -932,8 +965,10 @@ external int _FillPath(Pointer hdc);
 @pragma('vm:prefer-inline')
 bool FlattenPath(HDC hdc) => _FlattenPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'FlattenPath')
-external int _FlattenPath(Pointer hdc);
+final _FlattenPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FlattenPath',
+    );
 
 /// Retrieves device-specific information for the specified device.
 ///
@@ -945,8 +980,10 @@ external int _FlattenPath(Pointer hdc);
 int GetDeviceCaps(HDC? hdc, GET_DEVICE_CAPS_INDEX index) =>
     _GetDeviceCaps(hdc ?? nullptr, index);
 
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'GetDeviceCaps')
-external int _GetDeviceCaps(Pointer hdc, int index);
+final _GetDeviceCaps = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'GetDeviceCaps',
+    );
 
 /// Retrieves the bits of the specified compatible bitmap and copies them into a
 /// buffer as a DIB using the specified format.
@@ -966,26 +1003,27 @@ int GetDIBits(
   DIB_USAGE usage,
 ) => _GetDIBits(hdc, hbm, start, cLines, lpvBits ?? nullptr, lpbmi, usage);
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer,
-    Uint32,
-    Uint32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-  )
->(symbol: 'GetDIBits')
-external int _GetDIBits(
-  Pointer hdc,
-  Pointer hbm,
-  int start,
-  int cLines,
-  Pointer lpvBits,
-  Pointer<BITMAPINFO> lpbmi,
-  int usage,
-);
+final _GetDIBits = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        int,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+      )
+    >('GetDIBits');
 
 /// Retrieves a color value identifying a color from the system palette that
 /// will be displayed when the specified color value is used.
@@ -998,8 +1036,11 @@ external int _GetDIBits(
 COLORREF GetNearestColor(HDC hdc, COLORREF color) =>
     COLORREF(_GetNearestColor(hdc, color));
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'GetNearestColor')
-external int _GetNearestColor(Pointer hdc, int color);
+final _GetNearestColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('GetNearestColor');
 
 /// Retrieves information for the specified graphics object.
 ///
@@ -1010,8 +1051,11 @@ external int _GetNearestColor(Pointer hdc, int color);
 @pragma('vm:prefer-inline')
 int GetObject(HGDIOBJ h, int c, Pointer? pv) => _GetObject(h, c, pv ?? nullptr);
 
-@Native<Int32 Function(Pointer, Int32, Pointer)>(symbol: 'GetObjectW')
-external int _GetObject(Pointer h, int c, Pointer pv);
+final _GetObject = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('GetObjectW');
 
 /// Retrieves the coordinates defining the endpoints of lines and the control
 /// points of curves found in the path that is selected into the specified
@@ -1025,15 +1069,11 @@ external int _GetObject(Pointer h, int c, Pointer pv);
 int GetPath(HDC hdc, Pointer<POINT>? apt, Pointer<Uint8>? aj, int cpt) =>
     _GetPath(hdc, apt ?? nullptr, aj ?? nullptr, cpt);
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32)>(
-  symbol: 'GetPath',
-)
-external int _GetPath(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint8> aj,
-  int cpt,
-);
+final _GetPath = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint8>, int)
+    >('GetPath');
 
 /// Retrieves the red, green, blue (RGB) color value of the pixel at the
 /// specified coordinates.
@@ -1045,8 +1085,11 @@ external int _GetPath(
 @pragma('vm:prefer-inline')
 COLORREF GetPixel(HDC hdc, int x, int y) => COLORREF(_GetPixel(hdc, x, y));
 
-@Native<Uint32 Function(Pointer, Int32, Int32)>(symbol: 'GetPixel')
-external int _GetPixel(Pointer hdc, int x, int y);
+final _GetPixel = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('GetPixel');
 
 /// Retrieves a handle to one of the stock pens, brushes, fonts, or palettes.
 ///
@@ -1057,8 +1100,10 @@ external int _GetPixel(Pointer hdc, int x, int y);
 @pragma('vm:prefer-inline')
 HGDIOBJ GetStockObject(GET_STOCK_OBJECT_FLAGS i) => HGDIOBJ(_GetStockObject(i));
 
-@Native<Pointer Function(Int32)>(symbol: 'GetStockObject')
-external Pointer _GetStockObject(int i);
+final _GetStockObject = _gdi32
+    .lookupFunction<Pointer Function(Int32), Pointer Function(int)>(
+      'GetStockObject',
+    );
 
 /// Fills the specified buffer with the metrics for the currently selected font.
 ///
@@ -1070,8 +1115,11 @@ external Pointer _GetStockObject(int i);
 bool GetTextMetrics(HDC hdc, Pointer<TEXTMETRIC> lptm) =>
     _GetTextMetrics(hdc, lptm) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<TEXTMETRIC>)>(symbol: 'GetTextMetricsW')
-external int _GetTextMetrics(Pointer hdc, Pointer<TEXTMETRIC> lptm);
+final _GetTextMetrics = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<TEXTMETRIC>),
+      int Function(Pointer, Pointer<TEXTMETRIC>)
+    >('GetTextMetricsW');
 
 /// This function retrieves the x-extent and y-extent of the window for the
 /// specified device context.
@@ -1084,8 +1132,11 @@ external int _GetTextMetrics(Pointer hdc, Pointer<TEXTMETRIC> lptm);
 bool GetWindowExtEx(HDC hdc, Pointer<SIZE> lpsize) =>
     _GetWindowExtEx(hdc, lpsize) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<SIZE>)>(symbol: 'GetWindowExtEx')
-external int _GetWindowExtEx(Pointer hdc, Pointer<SIZE> lpsize);
+final _GetWindowExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<SIZE>),
+      int Function(Pointer, Pointer<SIZE>)
+    >('GetWindowExtEx');
 
 /// Retrieves the x-coordinates and y-coordinates of the window origin for the
 /// specified device context.
@@ -1098,8 +1149,11 @@ external int _GetWindowExtEx(Pointer hdc, Pointer<SIZE> lpsize);
 bool GetWindowOrgEx(HDC hdc, Pointer<POINT> lppoint) =>
     _GetWindowOrgEx(hdc, lppoint) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(symbol: 'GetWindowOrgEx')
-external int _GetWindowOrgEx(Pointer hdc, Pointer<POINT> lppoint);
+final _GetWindowOrgEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('GetWindowOrgEx');
 
 /// Draws a line from the current position up to, but not including, the
 /// specified point.
@@ -1111,8 +1165,11 @@ external int _GetWindowOrgEx(Pointer hdc, Pointer<POINT> lppoint);
 @pragma('vm:prefer-inline')
 bool LineTo(HDC hdc, int x, int y) => _LineTo(hdc, x, y) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32)>(symbol: 'LineTo')
-external int _LineTo(Pointer hdc, int x, int y);
+final _LineTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('LineTo');
 
 /// Updates the current position to the specified point and optionally returns
 /// the previous position.
@@ -1125,10 +1182,11 @@ external int _LineTo(Pointer hdc, int x, int y);
 bool MoveToEx(HDC hdc, int x, int y, Pointer<POINT>? lppt) =>
     _MoveToEx(hdc, x, y, lppt ?? nullptr) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<POINT>)>(
-  symbol: 'MoveToEx',
-)
-external int _MoveToEx(Pointer hdc, int x, int y, Pointer<POINT> lppt);
+final _MoveToEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<POINT>),
+      int Function(Pointer, int, int, Pointer<POINT>)
+    >('MoveToEx');
 
 /// Draws a pie-shaped wedge bounded by the intersection of an ellipse and two
 /// radials.
@@ -1153,30 +1211,21 @@ bool Pie(
   int yr2,
 ) => _Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2) != FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Pie')
-external int _Pie(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int xr1,
-  int yr1,
-  int xr2,
-  int yr2,
-);
+final _Pie = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Pie');
 
 /// Draws one or more Bézier curves.
 ///
@@ -1188,8 +1237,11 @@ external int _Pie(
 bool PolyBezier(HDC hdc, Pointer<POINT> apt, int cpt) =>
     _PolyBezier(hdc, apt, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolyBezier')
-external int _PolyBezier(Pointer hdc, Pointer<POINT> apt, int cpt);
+final _PolyBezier = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolyBezier');
 
 /// Draws one or more Bézier curves.
 ///
@@ -1201,8 +1253,11 @@ external int _PolyBezier(Pointer hdc, Pointer<POINT> apt, int cpt);
 bool PolyBezierTo(HDC hdc, Pointer<POINT> apt, int cpt) =>
     _PolyBezierTo(hdc, apt, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolyBezierTo')
-external int _PolyBezierTo(Pointer hdc, Pointer<POINT> apt, int cpt);
+final _PolyBezierTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolyBezierTo');
 
 /// Draws a set of line segments and Bézier curves.
 ///
@@ -1214,15 +1269,11 @@ external int _PolyBezierTo(Pointer hdc, Pointer<POINT> apt, int cpt);
 bool PolyDraw(HDC hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) =>
     _PolyDraw(hdc, apt, aj, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32)>(
-  symbol: 'PolyDraw',
-)
-external int _PolyDraw(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint8> aj,
-  int cpt,
-);
+final _PolyDraw = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint8>, int)
+    >('PolyDraw');
 
 /// Draws a polygon consisting of two or more vertices connected by straight
 /// lines.
@@ -1238,8 +1289,11 @@ external int _PolyDraw(
 bool Polygon(HDC hdc, Pointer<POINT> apt, int cpt) =>
     _Polygon(hdc, apt, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Int32)>(symbol: 'Polygon')
-external int _Polygon(Pointer hdc, Pointer<POINT> apt, int cpt);
+final _Polygon = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Int32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('Polygon');
 
 /// Draws a series of line segments by connecting the points in the specified
 /// array.
@@ -1252,8 +1306,11 @@ external int _Polygon(Pointer hdc, Pointer<POINT> apt, int cpt);
 bool Polyline(HDC hdc, Pointer<POINT> apt, int cpt) =>
     _Polyline(hdc, apt, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Int32)>(symbol: 'Polyline')
-external int _Polyline(Pointer hdc, Pointer<POINT> apt, int cpt);
+final _Polyline = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Int32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('Polyline');
 
 /// Draws one or more straight lines.
 ///
@@ -1265,8 +1322,11 @@ external int _Polyline(Pointer hdc, Pointer<POINT> apt, int cpt);
 bool PolylineTo(HDC hdc, Pointer<POINT> apt, int cpt) =>
     _PolylineTo(hdc, apt, cpt) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolylineTo')
-external int _PolylineTo(Pointer hdc, Pointer<POINT> apt, int cpt);
+final _PolylineTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolylineTo');
 
 /// Draws a series of closed polygons.
 ///
@@ -1282,15 +1342,11 @@ external int _PolylineTo(Pointer hdc, Pointer<POINT> apt, int cpt);
 bool PolyPolygon(HDC hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) =>
     _PolyPolygon(hdc, apt, asz, csz) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Int32>, Int32)>(
-  symbol: 'PolyPolygon',
-)
-external int _PolyPolygon(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Int32> asz,
-  int csz,
-);
+final _PolyPolygon = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Int32>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Int32>, int)
+    >('PolyPolygon');
 
 /// Draws multiple series of connected line segments.
 ///
@@ -1302,15 +1358,11 @@ external int _PolyPolygon(
 bool PolyPolyline(HDC hdc, Pointer<POINT> apt, Pointer<Uint32> asz, int csz) =>
     _PolyPolyline(hdc, apt, asz, csz) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint32>, Uint32)>(
-  symbol: 'PolyPolyline',
-)
-external int _PolyPolyline(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint32> asz,
-  int csz,
-);
+final _PolyPolyline = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint32>, Uint32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint32>, int)
+    >('PolyPolyline');
 
 /// Determines whether the specified point is inside the specified region.
 ///
@@ -1321,8 +1373,11 @@ external int _PolyPolyline(
 @pragma('vm:prefer-inline')
 bool PtInRegion(HRGN hrgn, int x, int y) => _PtInRegion(hrgn, x, y) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32)>(symbol: 'PtInRegion')
-external int _PtInRegion(Pointer hrgn, int x, int y);
+final _PtInRegion = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('PtInRegion');
 
 /// Draws a rectangle.
 ///
@@ -1337,10 +1392,11 @@ external int _PtInRegion(Pointer hrgn, int x, int y);
 bool Rectangle(HDC hdc, int left, int top, int right, int bottom) =>
     _Rectangle(hdc, left, top, right, bottom) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32)>(
-  symbol: 'Rectangle',
-)
-external int _Rectangle(Pointer hdc, int left, int top, int right, int bottom);
+final _Rectangle = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int)
+    >('Rectangle');
 
 /// Determines whether any part of the specified rectangle is within the
 /// boundaries of a region.
@@ -1353,8 +1409,11 @@ external int _Rectangle(Pointer hdc, int left, int top, int right, int bottom);
 bool RectInRegion(HRGN hrgn, Pointer<RECT> lprect) =>
     _RectInRegion(hrgn, lprect) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'RectInRegion')
-external int _RectInRegion(Pointer hrgn, Pointer<RECT> lprect);
+final _RectInRegion = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('RectInRegion');
 
 /// Draws a rectangle with rounded corners.
 ///
@@ -1376,18 +1435,11 @@ bool RoundRect(
   int height,
 ) => _RoundRect(hdc, left, top, right, bottom, width, height) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32, Int32, Int32)>(
-  symbol: 'RoundRect',
-)
-external int _RoundRect(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int width,
-  int height,
-);
+final _RoundRect = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int, int, int)
+    >('RoundRect');
 
 /// Saves the current state of the specified device context (DC) by copying data
 /// describing selected objects and graphic modes (such as the bitmap, brush,
@@ -1401,8 +1453,8 @@ external int _RoundRect(
 @pragma('vm:prefer-inline')
 int SaveDC(HDC hdc) => _SaveDC(hdc);
 
-@Native<Int32 Function(Pointer)>(symbol: 'SaveDC')
-external int _SaveDC(Pointer hdc);
+final _SaveDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('SaveDC');
 
 /// Selects the current path as a clipping region for a device context,
 /// combining the new region with any existing clipping region using the
@@ -1416,8 +1468,10 @@ external int _SaveDC(Pointer hdc);
 bool SelectClipPath(HDC hdc, RGN_COMBINE_MODE mode) =>
     _SelectClipPath(hdc, mode) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SelectClipPath')
-external int _SelectClipPath(Pointer hdc, int mode);
+final _SelectClipPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SelectClipPath',
+    );
 
 /// Selects an object into the specified device context (DC).
 ///
@@ -1430,8 +1484,11 @@ external int _SelectClipPath(Pointer hdc, int mode);
 @pragma('vm:prefer-inline')
 HGDIOBJ SelectObject(HDC hdc, HGDIOBJ h) => HGDIOBJ(_SelectObject(hdc, h));
 
-@Native<Pointer Function(Pointer, Pointer)>(symbol: 'SelectObject')
-external Pointer _SelectObject(Pointer hdc, Pointer h);
+final _SelectObject = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer),
+      Pointer Function(Pointer, Pointer)
+    >('SelectObject');
 
 /// Sets the current background color to the specified color value, or to the
 /// nearest physical color if the device cannot represent the specified color
@@ -1445,8 +1502,11 @@ external Pointer _SelectObject(Pointer hdc, Pointer h);
 COLORREF SetBkColor(HDC hdc, COLORREF color) =>
     COLORREF(_SetBkColor(hdc, color));
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'SetBkColor')
-external int _SetBkColor(Pointer hdc, int color);
+final _SetBkColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetBkColor');
 
 /// Sets the background mix mode of the specified device context.
 ///
@@ -1460,8 +1520,10 @@ external int _SetBkColor(Pointer hdc, int color);
 @pragma('vm:prefer-inline')
 int SetBkMode(HDC hdc, BACKGROUND_MODE mode) => _SetBkMode(hdc, mode);
 
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetBkMode')
-external int _SetBkMode(Pointer hdc, int mode);
+final _SetBkMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetBkMode',
+    );
 
 /// Sets the mapping mode of the specified device context.
 ///
@@ -1476,8 +1538,10 @@ external int _SetBkMode(Pointer hdc, int mode);
 @pragma('vm:prefer-inline')
 int SetMapMode(HDC hdc, HDC_MAP_MODE iMode) => _SetMapMode(hdc, iMode);
 
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetMapMode')
-external int _SetMapMode(Pointer hdc, int iMode);
+final _SetMapMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetMapMode',
+    );
 
 /// Sets the pixel at the specified coordinates to the specified color.
 ///
@@ -1489,8 +1553,11 @@ external int _SetMapMode(Pointer hdc, int iMode);
 COLORREF SetPixel(HDC hdc, int x, int y, COLORREF color) =>
     COLORREF(_SetPixel(hdc, x, y, color));
 
-@Native<Uint32 Function(Pointer, Int32, Int32, Uint32)>(symbol: 'SetPixel')
-external int _SetPixel(Pointer hdc, int x, int y, int color);
+final _SetPixel = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Int32, Uint32),
+      int Function(Pointer, int, int, int)
+    >('SetPixel');
 
 /// Sets the bitmap stretching mode in the specified device context.
 ///
@@ -1502,8 +1569,10 @@ external int _SetPixel(Pointer hdc, int x, int y, int color);
 int SetStretchBltMode(HDC hdc, STRETCH_BLT_MODE mode) =>
     _SetStretchBltMode(hdc, mode);
 
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetStretchBltMode')
-external int _SetStretchBltMode(Pointer hdc, int mode);
+final _SetStretchBltMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetStretchBltMode',
+    );
 
 /// Sets the text color for the specified device context to the specified color.
 ///
@@ -1515,8 +1584,11 @@ external int _SetStretchBltMode(Pointer hdc, int mode);
 COLORREF SetTextColor(HDC hdc, COLORREF color) =>
     COLORREF(_SetTextColor(hdc, color));
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'SetTextColor')
-external int _SetTextColor(Pointer hdc, int color);
+final _SetTextColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetTextColor');
 
 /// Sets the horizontal and vertical extents of the viewport for a device
 /// context by using the specified values.
@@ -1529,10 +1601,11 @@ external int _SetTextColor(Pointer hdc, int color);
 bool SetViewportExtEx(HDC hdc, int x, int y, Pointer<SIZE>? lpsz) =>
     _SetViewportExtEx(hdc, x, y, lpsz ?? nullptr) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>)>(
-  symbol: 'SetViewportExtEx',
-)
-external int _SetViewportExtEx(Pointer hdc, int x, int y, Pointer<SIZE> lpsz);
+final _SetViewportExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>),
+      int Function(Pointer, int, int, Pointer<SIZE>)
+    >('SetViewportExtEx');
 
 /// Specifies which device point maps to the window origin (0,0).
 ///
@@ -1544,10 +1617,11 @@ external int _SetViewportExtEx(Pointer hdc, int x, int y, Pointer<SIZE> lpsz);
 bool SetViewportOrgEx(HDC hdc, int x, int y, Pointer<POINT>? lppt) =>
     _SetViewportOrgEx(hdc, x, y, lppt ?? nullptr) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<POINT>)>(
-  symbol: 'SetViewportOrgEx',
-)
-external int _SetViewportOrgEx(Pointer hdc, int x, int y, Pointer<POINT> lppt);
+final _SetViewportOrgEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<POINT>),
+      int Function(Pointer, int, int, Pointer<POINT>)
+    >('SetViewportOrgEx');
 
 /// Sets the horizontal and vertical extents of the window for a device context
 /// by using the specified values.
@@ -1560,10 +1634,11 @@ external int _SetViewportOrgEx(Pointer hdc, int x, int y, Pointer<POINT> lppt);
 bool SetWindowExtEx(HDC hdc, int x, int y, Pointer<SIZE>? lpsz) =>
     _SetWindowExtEx(hdc, x, y, lpsz ?? nullptr) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>)>(
-  symbol: 'SetWindowExtEx',
-)
-external int _SetWindowExtEx(Pointer hdc, int x, int y, Pointer<SIZE> lpsz);
+final _SetWindowExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>),
+      int Function(Pointer, int, int, Pointer<SIZE>)
+    >('SetWindowExtEx');
 
 /// Copies a bitmap from a source rectangle into a destination rectangle,
 /// stretching or compressing the bitmap to fit the dimensions of the
@@ -1602,34 +1677,35 @@ bool StretchBlt(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Uint32,
-  )
->(symbol: 'StretchBlt')
-external int _StretchBlt(
-  Pointer hdcDest,
-  int xDest,
-  int yDest,
-  int wDest,
-  int hDest,
-  Pointer hdcSrc,
-  int xSrc,
-  int ySrc,
-  int wSrc,
-  int hSrc,
-  int rop,
-);
+final _StretchBlt = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        int,
+      )
+    >('StretchBlt');
 
 /// Copies the color data for a rectangle of pixels in a DIB, JPEG, or PNG image
 /// to the specified destination rectangle.
@@ -1669,38 +1745,39 @@ int StretchDIBits(
   rop,
 );
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-    Uint32,
-  )
->(symbol: 'StretchDIBits')
-external int _StretchDIBits(
-  Pointer hdc,
-  int xDest,
-  int yDest,
-  int destWidth,
-  int destHeight,
-  int xSrc,
-  int ySrc,
-  int srcWidth,
-  int srcHeight,
-  Pointer lpBits,
-  Pointer<BITMAPINFO> lpbmi,
-  int iUsage,
-  int rop,
-);
+final _StretchDIBits = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+        int,
+      )
+    >('StretchDIBits');
 
 /// Closes any open figures in a path, strokes the outline of the path by using
 /// the current pen, and fills its interior by using the current brush.
@@ -1712,8 +1789,10 @@ external int _StretchDIBits(
 @pragma('vm:prefer-inline')
 bool StrokeAndFillPath(HDC hdc) => _StrokeAndFillPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'StrokeAndFillPath')
-external int _StrokeAndFillPath(Pointer hdc);
+final _StrokeAndFillPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'StrokeAndFillPath',
+    );
 
 /// Renders the specified path by using the current pen.
 ///
@@ -1724,8 +1803,10 @@ external int _StrokeAndFillPath(Pointer hdc);
 @pragma('vm:prefer-inline')
 bool StrokePath(HDC hdc) => _StrokePath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'StrokePath')
-external int _StrokePath(Pointer hdc);
+final _StrokePath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'StrokePath',
+    );
 
 /// Writes a character string at the specified location, using the currently
 /// selected font, background color, and text color.
@@ -1738,16 +1819,11 @@ external int _StrokePath(Pointer hdc);
 bool TextOut(HDC hdc, int x, int y, PCWSTR lpString, int c) =>
     _TextOut(hdc, x, y, lpString, c) != FALSE;
 
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<Utf16>, Int32)>(
-  symbol: 'TextOutW',
-)
-external int _TextOut(
-  Pointer hdc,
-  int x,
-  int y,
-  Pointer<Utf16> lpString,
-  int c,
-);
+final _TextOut = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<Utf16>, Int32),
+      int Function(Pointer, int, int, Pointer<Utf16>, int)
+    >('TextOutW');
 
 /// Redefines the current path as the area that would be painted if the path
 /// were stroked using the pen currently selected into the given device context.
@@ -1759,5 +1835,7 @@ external int _TextOut(
 @pragma('vm:prefer-inline')
 bool WidenPath(HDC hdc) => _WidenPath(hdc) != FALSE;
 
-@Native<Int32 Function(Pointer)>(symbol: 'WidenPath')
-external int _WidenPath(Pointer hdc);
+final _WidenPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'WidenPath',
+    );

@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -14,7 +14,6 @@ import 'dart:ffi';
 import 'package:checks/checks.dart';
 import 'package:ffi/ffi.dart';
 import 'package:test/scaffolding.dart';
-import 'package:win32/src/_internal/advapi32.g.dart';
 import 'package:win32/win32.dart';
 
 import '../../helpers.dart';
@@ -22,103 +21,103 @@ import '../../helpers.dart';
 void main() {
   group('advapi32.dll', () {
     test('ChangeServiceConfig2 can be instantiated', () {
-      check(ChangeServiceConfig2W_Wrapper).isA<Function>();
+      check(_ChangeServiceConfig2).isA<Function>();
     });
     test('CloseServiceHandle can be instantiated', () {
-      check(CloseServiceHandle_Wrapper).isA<Function>();
+      check(_CloseServiceHandle).isA<Function>();
     });
     test('CloseTrace can be instantiated', () {
       check(_CloseTrace).isA<Function>();
     });
     test('ControlService can be instantiated', () {
-      check(ControlService_Wrapper).isA<Function>();
+      check(_ControlService).isA<Function>();
     });
     test('ControlServiceEx can be instantiated', () {
-      check(ControlServiceExW_Wrapper).isA<Function>();
+      check(_ControlServiceEx).isA<Function>();
     });
     test('CredDelete can be instantiated', () {
-      check(CredDeleteW_Wrapper).isA<Function>();
+      check(_CredDelete).isA<Function>();
     });
     test('CredFree can be instantiated', () {
       check(_CredFree).isA<Function>();
     });
     test('CredRead can be instantiated', () {
-      check(CredReadW_Wrapper).isA<Function>();
+      check(_CredRead).isA<Function>();
     });
     test('CredWrite can be instantiated', () {
-      check(CredWriteW_Wrapper).isA<Function>();
+      check(_CredWrite).isA<Function>();
     });
     test('DecryptFile can be instantiated', () {
-      check(DecryptFileW_Wrapper).isA<Function>();
+      check(_DecryptFile).isA<Function>();
     });
     test('DeleteService can be instantiated', () {
-      check(DeleteService_Wrapper).isA<Function>();
+      check(_DeleteService).isA<Function>();
     });
     test('EncryptFile can be instantiated', () {
-      check(EncryptFileW_Wrapper).isA<Function>();
+      check(_EncryptFile).isA<Function>();
     });
     test('EnumDependentServices can be instantiated', () {
-      check(EnumDependentServicesW_Wrapper).isA<Function>();
+      check(_EnumDependentServices).isA<Function>();
     });
     test('EnumServicesStatus can be instantiated', () {
-      check(EnumServicesStatusW_Wrapper).isA<Function>();
+      check(_EnumServicesStatus).isA<Function>();
     });
     test('EnumServicesStatusEx can be instantiated', () {
-      check(EnumServicesStatusExW_Wrapper).isA<Function>();
+      check(_EnumServicesStatusEx).isA<Function>();
     });
     test('FileEncryptionStatus can be instantiated', () {
-      check(FileEncryptionStatusW_Wrapper).isA<Function>();
+      check(_FileEncryptionStatus).isA<Function>();
     });
     test('GetServiceDisplayName can be instantiated', () {
-      check(GetServiceDisplayNameW_Wrapper).isA<Function>();
+      check(_GetServiceDisplayName).isA<Function>();
     });
     test('GetServiceKeyName can be instantiated', () {
-      check(GetServiceKeyNameW_Wrapper).isA<Function>();
+      check(_GetServiceKeyName).isA<Function>();
     });
     test('GetTokenInformation can be instantiated', () {
-      check(GetTokenInformation_Wrapper).isA<Function>();
+      check(_GetTokenInformation).isA<Function>();
     });
     test('GetUserName can be instantiated', () {
-      check(GetUserNameW_Wrapper).isA<Function>();
+      check(_GetUserName).isA<Function>();
     });
     test('InitiateShutdown can be instantiated', () {
       check(_InitiateShutdown).isA<Function>();
     });
     test('NotifyBootConfigStatus can be instantiated', () {
-      check(NotifyBootConfigStatus_Wrapper).isA<Function>();
+      check(_NotifyBootConfigStatus).isA<Function>();
     });
     test('NotifyServiceStatusChange can be instantiated', () {
       check(_NotifyServiceStatusChange).isA<Function>();
     });
     test('OpenProcessToken can be instantiated', () {
-      check(OpenProcessToken_Wrapper).isA<Function>();
+      check(_OpenProcessToken).isA<Function>();
     });
     test('OpenSCManager can be instantiated', () {
-      check(OpenSCManagerW_Wrapper).isA<Function>();
+      check(_OpenSCManager).isA<Function>();
     });
     test('OpenService can be instantiated', () {
-      check(OpenServiceW_Wrapper).isA<Function>();
+      check(_OpenService).isA<Function>();
     });
     test('OpenThreadToken can be instantiated', () {
-      check(OpenThreadToken_Wrapper).isA<Function>();
+      check(_OpenThreadToken).isA<Function>();
     });
     test('QueryServiceConfig can be instantiated', () {
-      check(QueryServiceConfigW_Wrapper).isA<Function>();
+      check(_QueryServiceConfig).isA<Function>();
     });
     test('QueryServiceConfig2 can be instantiated', () {
-      check(QueryServiceConfig2W_Wrapper).isA<Function>();
+      check(_QueryServiceConfig2).isA<Function>();
     });
     test('QueryServiceDynamicInformation can be instantiated', () {
-      check(QueryServiceDynamicInformation_Wrapper).isA<Function>();
+      check(_QueryServiceDynamicInformation).isA<Function>();
     });
     test('QueryServiceObjectSecurity can be instantiated', () {
-      check(QueryServiceObjectSecurity_Wrapper).isA<Function>();
+      check(_QueryServiceObjectSecurity).isA<Function>();
     });
     test('QueryServiceStatus can be instantiated', () {
-      check(QueryServiceStatus_Wrapper).isA<Function>();
+      check(_QueryServiceStatus).isA<Function>();
     });
     test('QueryServiceStatusEx can be instantiated', () {
-      check(QueryServiceStatusEx_Wrapper).isA<Function>();
+      check(_QueryServiceStatusEx).isA<Function>();
     });
     test('RegCloseKey can be instantiated', () {
       check(_RegCloseKey).isA<Function>();
@@ -184,10 +183,10 @@ void main() {
       check(_RegGetValue).isA<Function>();
     });
     test('RegisterServiceCtrlHandler can be instantiated', () {
-      check(RegisterServiceCtrlHandlerW_Wrapper).isA<Function>();
+      check(_RegisterServiceCtrlHandler).isA<Function>();
     });
     test('RegisterServiceCtrlHandlerEx can be instantiated', () {
-      check(RegisterServiceCtrlHandlerExW_Wrapper).isA<Function>();
+      check(_RegisterServiceCtrlHandlerEx).isA<Function>();
     });
     test('RegLoadAppKey can be instantiated', () {
       check(_RegLoadAppKey).isA<Function>();
@@ -262,550 +261,806 @@ void main() {
       check(_RegUnLoadKey).isA<Function>();
     });
     test('SetServiceObjectSecurity can be instantiated', () {
-      check(SetServiceObjectSecurity_Wrapper).isA<Function>();
+      check(_SetServiceObjectSecurity).isA<Function>();
     });
     test('SetServiceStatus can be instantiated', () {
-      check(SetServiceStatus_Wrapper).isA<Function>();
+      check(_SetServiceStatus).isA<Function>();
     });
     test('SetThreadToken can be instantiated', () {
-      check(SetThreadToken_Wrapper).isA<Function>();
+      check(_SetThreadToken).isA<Function>();
     });
     test('StartService can be instantiated', () {
-      check(StartServiceW_Wrapper).isA<Function>();
+      check(_StartService).isA<Function>();
     });
     test('StartServiceCtrlDispatcher can be instantiated', () {
-      check(StartServiceCtrlDispatcherW_Wrapper).isA<Function>();
+      check(_StartServiceCtrlDispatcher).isA<Function>();
     });
   });
 }
 
-@Native<Uint32 Function(Uint64)>(symbol: 'CloseTrace')
-external int _CloseTrace(int traceHandle);
+final _advapi32 = DynamicLibrary.open('advapi32.dll');
 
-@Native<Void Function(Pointer)>(symbol: 'CredFree')
-external void _CredFree(Pointer buffer);
+final _ChangeServiceConfig2 = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('ChangeServiceConfig2W');
 
-@Native<
-  Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Uint32, Uint32)
->(symbol: 'InitiateShutdownW')
-external int _InitiateShutdown(
-  Pointer<Utf16> lpMachineName,
-  Pointer<Utf16> lpMessage,
-  int dwGracePeriod,
-  int dwShutdownFlags,
-  int dwReason,
-);
+final _CloseServiceHandle = _advapi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseServiceHandle',
+    );
 
-@Native<Uint32 Function(Pointer, Uint32, Pointer<SERVICE_NOTIFY_2>)>(
-  symbol: 'NotifyServiceStatusChangeW',
-)
-external int _NotifyServiceStatusChange(
-  Pointer hService,
-  int dwNotifyMask,
-  Pointer<SERVICE_NOTIFY_2> pNotifyBuffer,
-);
+final _CloseTrace = _advapi32
+    .lookupFunction<Uint32 Function(Uint64), int Function(int)>('CloseTrace');
 
-@Native<Uint32 Function(Pointer)>(symbol: 'RegCloseKey')
-external int _RegCloseKey(Pointer hKey);
+final _ControlService = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<SERVICE_STATUS>),
+      int Function(Pointer, int, Pointer<SERVICE_STATUS>)
+    >('ControlService');
 
-@Native<Uint32 Function(Pointer<Utf16>, Pointer, Pointer<Pointer>)>(
-  symbol: 'RegConnectRegistryW',
-)
-external int _RegConnectRegistry(
-  Pointer<Utf16> lpMachineName,
-  Pointer hKey,
-  Pointer<Pointer> phkResult,
-);
+final _ControlServiceEx = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer),
+      int Function(Pointer, int, int, Pointer)
+    >('ControlServiceExW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer)>(
-  symbol: 'RegCopyTreeW',
-)
-external int _RegCopyTree(
-  Pointer hKeySrc,
-  Pointer<Utf16> lpSubKey,
-  Pointer hKeyDest,
-);
+final _CredDelete = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Uint32),
+      int Function(Pointer<Utf16>, int, int)
+    >('CredDeleteW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)>(
-  symbol: 'RegCreateKeyW',
-)
-external int _RegCreateKey(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Pointer> phkResult,
-);
+final _CredFree = _advapi32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>('CredFree');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Pointer<SECURITY_ATTRIBUTES>,
-    Pointer<Pointer>,
-    Pointer<Uint32>,
-  )
->(symbol: 'RegCreateKeyExW')
-external int _RegCreateKeyEx(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int reserved,
-  Pointer<Utf16> lpClass,
-  int dwOptions,
-  int samDesired,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-  Pointer<Pointer> phkResult,
-  Pointer<Uint32> lpdwDisposition,
-);
+final _CredRead = _advapi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<Pointer<CREDENTIAL>>,
+      ),
+      int Function(Pointer<Utf16>, int, int, Pointer<Pointer<CREDENTIAL>>)
+    >('CredReadW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Pointer<SECURITY_ATTRIBUTES>,
-    Pointer<Pointer>,
-    Pointer<Uint32>,
-    Pointer,
-    Pointer,
-  )
->(symbol: 'RegCreateKeyTransactedW')
-external int _RegCreateKeyTransacted(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int reserved,
-  Pointer<Utf16> lpClass,
-  int dwOptions,
-  int samDesired,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-  Pointer<Pointer> phkResult,
-  Pointer<Uint32> lpdwDisposition,
-  Pointer hTransaction,
-  Pointer pExtendedParemeter,
-);
+final _CredWrite = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<CREDENTIAL>, Uint32),
+      int Function(Pointer<CREDENTIAL>, int)
+    >('CredWriteW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteKeyW')
-external int _RegDeleteKey(Pointer hKey, Pointer<Utf16> lpSubKey);
+final _DecryptFile = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, int)
+    >('DecryptFileW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32)>(
-  symbol: 'RegDeleteKeyExW',
-)
-external int _RegDeleteKeyEx(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int samDesired,
-  int reserved,
-);
+final _DeleteService = _advapi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DeleteService',
+    );
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32, Pointer, Pointer)
->(symbol: 'RegDeleteKeyTransactedW')
-external int _RegDeleteKeyTransacted(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int samDesired,
-  int reserved,
-  Pointer hTransaction,
-  Pointer pExtendedParameter,
-);
+final _EncryptFile = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('EncryptFileW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'RegDeleteKeyValueW',
-)
-external int _RegDeleteKeyValue(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpValueName,
-);
+final _EnumDependentServices = _advapi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Pointer<ENUM_SERVICE_STATUS>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<ENUM_SERVICE_STATUS>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('EnumDependentServicesW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteTreeW')
-external int _RegDeleteTree(Pointer hKey, Pointer<Utf16> lpSubKey);
+final _EnumServicesStatus = _advapi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer<ENUM_SERVICE_STATUS>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        Pointer<ENUM_SERVICE_STATUS>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('EnumServicesStatusW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegDeleteValueW')
-external int _RegDeleteValue(Pointer hKey, Pointer<Utf16> lpValueName);
+final _EnumServicesStatusEx = _advapi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Uint32,
+        Uint32,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        Pointer<Uint8>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+      )
+    >('EnumServicesStatusExW');
 
-@Native<Uint32 Function()>(symbol: 'RegDisablePredefinedCache')
-external int _RegDisablePredefinedCache();
+final _FileEncryptionStatus = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('FileEncryptionStatusW');
 
-@Native<Uint32 Function()>(symbol: 'RegDisablePredefinedCacheEx')
-external int _RegDisablePredefinedCacheEx();
+final _GetServiceDisplayName = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>)
+    >('GetServiceDisplayNameW');
 
-@Native<Uint32 Function(Pointer)>(symbol: 'RegDisableReflectionKey')
-external int _RegDisableReflectionKey(Pointer hBase);
+final _GetServiceKeyName = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>)
+    >('GetServiceKeyNameW');
 
-@Native<Uint32 Function(Pointer)>(symbol: 'RegEnableReflectionKey')
-external int _RegEnableReflectionKey(Pointer hBase);
+final _GetTokenInformation = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, int, Pointer<Uint32>)
+    >('GetTokenInformation');
 
-@Native<Uint32 Function(Pointer, Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'RegEnumKeyW',
-)
-external int _RegEnumKey(
-  Pointer hKey,
-  int dwIndex,
-  Pointer<Utf16> lpName,
-  int cchName,
-);
+final _GetUserName = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetUserNameW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<FILETIME>,
-  )
->(symbol: 'RegEnumKeyExW')
-external int _RegEnumKeyEx(
-  Pointer hKey,
-  int dwIndex,
-  Pointer<Utf16> lpName,
-  Pointer<Uint32> lpcchName,
-  Pointer<Uint32> lpReserved,
-  Pointer<Utf16> lpClass,
-  Pointer<Uint32> lpcchClass,
-  Pointer<FILETIME> lpftLastWriteTime,
-);
+final _InitiateShutdown = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Uint32, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, int, int)
+    >('InitiateShutdownW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint8>,
-    Pointer<Uint32>,
-  )
->(symbol: 'RegEnumValueW')
-external int _RegEnumValue(
-  Pointer hKey,
-  int dwIndex,
-  Pointer<Utf16> lpValueName,
-  Pointer<Uint32> lpcchValueName,
-  Pointer<Uint32> lpReserved,
-  Pointer<Uint32> lpType,
-  Pointer<Uint8> lpData,
-  Pointer<Uint32> lpcbData,
-);
+final _NotifyBootConfigStatus = _advapi32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'NotifyBootConfigStatus',
+    );
 
-@Native<Uint32 Function(Pointer)>(symbol: 'RegFlushKey')
-external int _RegFlushKey(Pointer hKey);
+final _NotifyServiceStatusChange = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer<SERVICE_NOTIFY_2>),
+      int Function(Pointer, int, Pointer<SERVICE_NOTIFY_2>)
+    >('NotifyServiceStatusChangeW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Uint32>,
-    Pointer,
-    Pointer<Uint32>,
-  )
->(symbol: 'RegGetValueW')
-external int _RegGetValue(
-  Pointer hkey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpValue,
-  int dwFlags,
-  Pointer<Uint32> pdwType,
-  Pointer pvData,
-  Pointer<Uint32> pcbData,
-);
+final _OpenProcessToken = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, Pointer<Pointer>)
+    >('OpenProcessToken');
 
-@Native<
-  Uint32 Function(Pointer<Utf16>, Pointer<Pointer>, Uint32, Uint32, Uint32)
->(symbol: 'RegLoadAppKeyW')
-external int _RegLoadAppKey(
-  Pointer<Utf16> lpFile,
-  Pointer<Pointer> phkResult,
-  int samDesired,
-  int dwOptions,
-  int reserved,
-);
+final _OpenSCManager = _advapi32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('OpenSCManagerW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'RegLoadKeyW',
-)
-external int _RegLoadKey(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpFile,
-);
+final _OpenService = _advapi32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>, Uint32),
+      Pointer Function(Pointer, Pointer<Utf16>, int)
+    >('OpenServiceW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Uint32>,
-    Uint32,
-    Pointer<Utf16>,
-  )
->(symbol: 'RegLoadMUIStringW')
-external int _RegLoadMUIString(
-  Pointer hKey,
-  Pointer<Utf16> pszValue,
-  Pointer<Utf16> pszOutBuf,
-  int cbOutBuf,
-  Pointer<Uint32> pcbData,
-  int flags,
-  Pointer<Utf16> pszDirectory,
-);
+final _OpenThreadToken = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('OpenThreadToken');
 
-@Native<Uint32 Function(Pointer, Int32, Uint32, Pointer, Int32)>(
-  symbol: 'RegNotifyChangeKeyValue',
-)
-external int _RegNotifyChangeKeyValue(
-  Pointer hKey,
-  int bWatchSubtree,
-  int dwNotifyFilter,
-  Pointer hEvent,
-  int fAsynchronous,
-);
+final _QueryServiceConfig = _advapi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<QUERY_SERVICE_CONFIG>,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      int Function(Pointer, Pointer<QUERY_SERVICE_CONFIG>, int, Pointer<Uint32>)
+    >('QueryServiceConfigW');
 
-@Native<Uint32 Function(Uint32, Pointer<Pointer>)>(symbol: 'RegOpenCurrentUser')
-external int _RegOpenCurrentUser(int samDesired, Pointer<Pointer> phkResult);
+final _QueryServiceConfig2 = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Uint8>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Uint8>, int, Pointer<Uint32>)
+    >('QueryServiceConfig2W');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)>(
-  symbol: 'RegOpenKeyW',
-)
-external int _RegOpenKey(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Pointer> phkResult,
-);
+final _QueryServiceDynamicInformation = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, Pointer<Pointer>)
+    >('QueryServiceDynamicInformation');
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32, Pointer<Pointer>)
->(symbol: 'RegOpenKeyExW')
-external int _RegOpenKeyEx(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int ulOptions,
-  int samDesired,
-  Pointer<Pointer> phkResult,
-);
+final _QueryServiceObjectSecurity = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, int, Pointer<Uint32>)
+    >('QueryServiceObjectSecurity');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Pointer<Pointer>,
-    Pointer,
-    Pointer,
-  )
->(symbol: 'RegOpenKeyTransactedW')
-external int _RegOpenKeyTransacted(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int ulOptions,
-  int samDesired,
-  Pointer<Pointer> phkResult,
-  Pointer hTransaction,
-  Pointer pExtendedParemeter,
-);
+final _QueryServiceStatus = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<SERVICE_STATUS>),
+      int Function(Pointer, Pointer<SERVICE_STATUS>)
+    >('QueryServiceStatus');
 
-@Native<Uint32 Function(Pointer, Uint32, Uint32, Pointer<Pointer>)>(
-  symbol: 'RegOpenUserClassesRoot',
-)
-external int _RegOpenUserClassesRoot(
-  Pointer hToken,
-  int dwOptions,
-  int samDesired,
-  Pointer<Pointer> phkResult,
-);
+final _QueryServiceStatusEx = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<Uint8>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Uint8>, int, Pointer<Uint32>)
+    >('QueryServiceStatusEx');
 
-@Native<Uint32 Function(Pointer, Pointer)>(symbol: 'RegOverridePredefKey')
-external int _RegOverridePredefKey(Pointer hKey, Pointer hNewHKey);
+final _RegCloseKey = _advapi32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'RegCloseKey',
+    );
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<FILETIME>,
-  )
->(symbol: 'RegQueryInfoKeyW')
-external int _RegQueryInfoKey(
-  Pointer hKey,
-  Pointer<Utf16> lpClass,
-  Pointer<Uint32> lpcchClass,
-  Pointer<Uint32> lpReserved,
-  Pointer<Uint32> lpcSubKeys,
-  Pointer<Uint32> lpcbMaxSubKeyLen,
-  Pointer<Uint32> lpcbMaxClassLen,
-  Pointer<Uint32> lpcValues,
-  Pointer<Uint32> lpcbMaxValueNameLen,
-  Pointer<Uint32> lpcbMaxValueLen,
-  Pointer<Uint32> lpcbSecurityDescriptor,
-  Pointer<FILETIME> lpftLastWriteTime,
-);
+final _RegConnectRegistry = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer, Pointer<Pointer>),
+      int Function(Pointer<Utf16>, Pointer, Pointer<Pointer>)
+    >('RegConnectRegistryW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<VALENT>,
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'RegQueryMultipleValuesW')
-external int _RegQueryMultipleValues(
-  Pointer hKey,
-  Pointer<VALENT> val_list,
-  int num_vals,
-  Pointer<Utf16> lpValueBuf,
-  Pointer<Uint32> ldwTotsize,
-);
+final _RegCopyTree = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer),
+      int Function(Pointer, Pointer<Utf16>, Pointer)
+    >('RegCopyTreeW');
 
-@Native<Uint32 Function(Pointer, Pointer<Int32>)>(
-  symbol: 'RegQueryReflectionKey',
-)
-external int _RegQueryReflectionKey(
-  Pointer hBase,
-  Pointer<Int32> bIsReflectionDisabled,
-);
+final _RegCreateKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)
+    >('RegCreateKeyW');
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Int32>)
->(symbol: 'RegQueryValueW')
-external int _RegQueryValue(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpData,
-  Pointer<Int32> lpcbData,
-);
+final _RegCreateKeyEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+      )
+    >('RegCreateKeyExW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint8>,
-    Pointer<Uint32>,
-  )
->(symbol: 'RegQueryValueExW')
-external int _RegQueryValueEx(
-  Pointer hKey,
-  Pointer<Utf16> lpValueName,
-  Pointer<Uint32> lpReserved,
-  Pointer<Uint32> lpType,
-  Pointer<Uint8> lpData,
-  Pointer<Uint32> lpcbData,
-);
+final _RegCreateKeyTransacted = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+        Pointer,
+        Pointer,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+        Pointer,
+        Pointer,
+      )
+    >('RegCreateKeyTransactedW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'RegRenameKey',
-)
-external int _RegRenameKey(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKeyName,
-  Pointer<Utf16> lpNewKeyName,
-);
+final _RegDeleteKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('RegDeleteKeyW');
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>)
->(symbol: 'RegReplaceKeyW')
-external int _RegReplaceKey(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpNewFile,
-  Pointer<Utf16> lpOldFile,
-);
+final _RegDeleteKeyEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int, int)
+    >('RegDeleteKeyExW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'RegRestoreKeyW',
-)
-external int _RegRestoreKey(Pointer hKey, Pointer<Utf16> lpFile, int dwFlags);
+final _RegDeleteKeyTransacted = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer,
+        Pointer,
+      ),
+      int Function(Pointer, Pointer<Utf16>, int, int, Pointer, Pointer)
+    >('RegDeleteKeyTransactedW');
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>)>(
-  symbol: 'RegSaveKeyW',
-)
-external int _RegSaveKey(
-  Pointer hKey,
-  Pointer<Utf16> lpFile,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-);
+final _RegDeleteKeyValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('RegDeleteKeyValueW');
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>, Uint32)
->(symbol: 'RegSaveKeyExW')
-external int _RegSaveKeyEx(
-  Pointer hKey,
-  Pointer<Utf16> lpFile,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-  int flags,
-);
+final _RegDeleteTree = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('RegDeleteTreeW');
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer,
-    Uint32,
-  )
->(symbol: 'RegSetKeyValueW')
-external int _RegSetKeyValue(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  Pointer<Utf16> lpValueName,
-  int dwType,
-  Pointer lpData,
-  int cbData,
-);
+final _RegDeleteValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('RegDeleteValueW');
 
-@Native<
-  Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Pointer<Utf16>, Uint32)
->(symbol: 'RegSetValueW')
-external int _RegSetValue(
-  Pointer hKey,
-  Pointer<Utf16> lpSubKey,
-  int dwType,
-  Pointer<Utf16> lpData,
-  int cbData,
-);
+final _RegDisablePredefinedCache = _advapi32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'RegDisablePredefinedCache',
+    );
 
-@Native<
-  Uint32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Pointer<Uint8>,
-    Uint32,
-  )
->(symbol: 'RegSetValueExW')
-external int _RegSetValueEx(
-  Pointer hKey,
-  Pointer<Utf16> lpValueName,
-  int reserved,
-  int dwType,
-  Pointer<Uint8> lpData,
-  int cbData,
-);
+final _RegDisablePredefinedCacheEx = _advapi32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'RegDisablePredefinedCacheEx',
+    );
 
-@Native<Uint32 Function(Pointer, Pointer<Utf16>)>(symbol: 'RegUnLoadKeyW')
-external int _RegUnLoadKey(Pointer hKey, Pointer<Utf16> lpSubKey);
+final _RegDisableReflectionKey = _advapi32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'RegDisableReflectionKey',
+    );
+
+final _RegEnableReflectionKey = _advapi32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'RegEnableReflectionKey',
+    );
+
+final _RegEnumKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer<Utf16>, Uint32),
+      int Function(Pointer, int, Pointer<Utf16>, int)
+    >('RegEnumKeyW');
+
+final _RegEnumKeyEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<FILETIME>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<FILETIME>,
+      )
+    >('RegEnumKeyExW');
+
+final _RegEnumValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        Pointer<Uint32>,
+      )
+    >('RegEnumValueW');
+
+final _RegFlushKey = _advapi32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'RegFlushKey',
+    );
+
+final _RegGetValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        Pointer,
+        Pointer<Uint32>,
+      )
+    >('RegGetValueW');
+
+final _RegisterServiceCtrlHandler = _advapi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION>>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION>>,
+      )
+    >('RegisterServiceCtrlHandlerW');
+
+final _RegisterServiceCtrlHandlerEx = _advapi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION_EX>>,
+        Pointer,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPHANDLER_FUNCTION_EX>>,
+        Pointer,
+      )
+    >('RegisterServiceCtrlHandlerExW');
+
+final _RegLoadAppKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Pointer>, Uint32, Uint32, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Pointer>, int, int, int)
+    >('RegLoadAppKeyW');
+
+final _RegLoadKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('RegLoadKeyW');
+
+final _RegLoadMUIString = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Uint32,
+        Pointer<Utf16>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        int,
+        Pointer<Utf16>,
+      )
+    >('RegLoadMUIStringW');
+
+final _RegNotifyChangeKeyValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Uint32, Pointer, Int32),
+      int Function(Pointer, int, int, Pointer, int)
+    >('RegNotifyChangeKeyValue');
+
+final _RegOpenCurrentUser = _advapi32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Pointer>),
+      int Function(int, Pointer<Pointer>)
+    >('RegOpenCurrentUser');
+
+final _RegOpenKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Pointer>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Pointer>)
+    >('RegOpenKeyW');
+
+final _RegOpenKeyEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<Pointer>,
+      ),
+      int Function(Pointer, Pointer<Utf16>, int, int, Pointer<Pointer>)
+    >('RegOpenKeyExW');
+
+final _RegOpenKeyTransacted = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<Pointer>,
+        Pointer,
+        Pointer,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<Pointer>,
+        Pointer,
+        Pointer,
+      )
+    >('RegOpenKeyTransactedW');
+
+final _RegOpenUserClassesRoot = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('RegOpenUserClassesRoot');
+
+final _RegOverridePredefKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('RegOverridePredefKey');
+
+final _RegQueryInfoKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<FILETIME>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<FILETIME>,
+      )
+    >('RegQueryInfoKeyW');
+
+final _RegQueryMultipleValues = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<VALENT>,
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<VALENT>,
+        int,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('RegQueryMultipleValuesW');
+
+final _RegQueryReflectionKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('RegQueryReflectionKey');
+
+final _RegQueryValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Int32>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Int32>)
+    >('RegQueryValueW');
+
+final _RegQueryValueEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint8>,
+        Pointer<Uint32>,
+      )
+    >('RegQueryValueExW');
+
+final _RegRenameKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('RegRenameKey');
+
+final _RegReplaceKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>)
+    >('RegReplaceKeyW');
+
+final _RegRestoreKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('RegRestoreKeyW');
+
+final _RegSaveKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>)
+    >('RegSaveKeyW');
+
+final _RegSaveKeyEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Uint32,
+      ),
+      int Function(Pointer, Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>, int)
+    >('RegSaveKeyExW');
+
+final _RegSetKeyValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer,
+        Uint32,
+      ),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, int, Pointer, int)
+    >('RegSetKeyValueW');
+
+final _RegSetValue = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int, Pointer<Utf16>, int)
+    >('RegSetValueW');
+
+final _RegSetValueEx = _advapi32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<Uint8>,
+        Uint32,
+      ),
+      int Function(Pointer, Pointer<Utf16>, int, int, Pointer<Uint8>, int)
+    >('RegSetValueExW');
+
+final _RegUnLoadKey = _advapi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('RegUnLoadKeyW');
+
+final _SetServiceObjectSecurity = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('SetServiceObjectSecurity');
+
+final _SetServiceStatus = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<SERVICE_STATUS>),
+      int Function(Pointer, Pointer<SERVICE_STATUS>)
+    >('SetServiceStatus');
+
+final _SetThreadToken = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer>, Pointer),
+      int Function(Pointer<Pointer>, Pointer)
+    >('SetThreadToken');
+
+final _StartService = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Pointer<Utf16>>),
+      int Function(Pointer, int, Pointer<Pointer<Utf16>>)
+    >('StartServiceW');
+
+final _StartServiceCtrlDispatcher = _advapi32
+    .lookupFunction<
+      Int32 Function(Pointer<SERVICE_TABLE_ENTRY>),
+      int Function(Pointer<SERVICE_TABLE_ENTRY>)
+    >('StartServiceCtrlDispatcherW');

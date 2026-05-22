@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -14,7 +14,6 @@ import 'dart:ffi';
 import 'package:checks/checks.dart';
 import 'package:ffi/ffi.dart';
 import 'package:test/scaffolding.dart';
-import 'package:win32/src/_internal/user32.g.dart';
 import 'package:win32/win32.dart';
 
 import '../../helpers.dart';
@@ -22,35 +21,35 @@ import '../../helpers.dart';
 void main() {
   group('user32.dll', () {
     test('ActivateKeyboardLayout can be instantiated', () {
-      check(ActivateKeyboardLayout_Wrapper).isA<Function>();
+      check(_ActivateKeyboardLayout).isA<Function>();
     });
     test('AddClipboardFormatListener can be instantiated', () {
-      check(AddClipboardFormatListener_Wrapper).isA<Function>();
+      check(_AddClipboardFormatListener).isA<Function>();
     });
     test('AdjustWindowRect can be instantiated', () {
-      check(AdjustWindowRect_Wrapper).isA<Function>();
+      check(_AdjustWindowRect).isA<Function>();
     });
     test('AdjustWindowRectEx can be instantiated', () {
-      check(AdjustWindowRectEx_Wrapper).isA<Function>();
+      check(_AdjustWindowRectEx).isA<Function>();
     });
     test(
       'AdjustWindowRectExForDpi can be instantiated',
       skip: 14393 > windowsBuildNumber,
       () {
-        check(AdjustWindowRectExForDpi_Wrapper).isA<Function>();
+        check(_AdjustWindowRectExForDpi).isA<Function>();
       },
     );
     test('AllowSetForegroundWindow can be instantiated', () {
-      check(AllowSetForegroundWindow_Wrapper).isA<Function>();
+      check(_AllowSetForegroundWindow).isA<Function>();
     });
     test('AnimateWindow can be instantiated', () {
-      check(AnimateWindow_Wrapper).isA<Function>();
+      check(_AnimateWindow).isA<Function>();
     });
     test('AnyPopup can be instantiated', () {
       check(_AnyPopup).isA<Function>();
     });
     test('AppendMenu can be instantiated', () {
-      check(AppendMenuW_Wrapper).isA<Function>();
+      check(_AppendMenu).isA<Function>();
     });
     test(
       'AreDpiAwarenessContextsEqual can be instantiated',
@@ -60,31 +59,31 @@ void main() {
       },
     );
     test('ArrangeIconicWindows can be instantiated', () {
-      check(ArrangeIconicWindows_Wrapper).isA<Function>();
+      check(_ArrangeIconicWindows).isA<Function>();
     });
     test('AttachThreadInput can be instantiated', () {
       check(_AttachThreadInput).isA<Function>();
     });
     test('BeginDeferWindowPos can be instantiated', () {
-      check(BeginDeferWindowPos_Wrapper).isA<Function>();
+      check(_BeginDeferWindowPos).isA<Function>();
     });
     test('BeginPaint can be instantiated', () {
       check(_BeginPaint).isA<Function>();
     });
     test('BlockInput can be instantiated', () {
-      check(BlockInput_Wrapper).isA<Function>();
+      check(_BlockInput).isA<Function>();
     });
     test('BringWindowToTop can be instantiated', () {
-      check(BringWindowToTop_Wrapper).isA<Function>();
+      check(_BringWindowToTop).isA<Function>();
     });
     test('BroadcastSystemMessage can be instantiated', () {
-      check(BroadcastSystemMessageW_Wrapper).isA<Function>();
+      check(_BroadcastSystemMessage).isA<Function>();
     });
     test('BroadcastSystemMessageEx can be instantiated', () {
-      check(BroadcastSystemMessageExW_Wrapper).isA<Function>();
+      check(_BroadcastSystemMessageEx).isA<Function>();
     });
     test('CalculatePopupWindowPosition can be instantiated', () {
-      check(CalculatePopupWindowPosition_Wrapper).isA<Function>();
+      check(_CalculatePopupWindowPosition).isA<Function>();
     });
     test('CallMsgFilter can be instantiated', () {
       check(_CallMsgFilter).isA<Function>();
@@ -96,7 +95,7 @@ void main() {
       check(_CallWindowProc).isA<Function>();
     });
     test('CascadeWindows can be instantiated', () {
-      check(CascadeWindows_Wrapper).isA<Function>();
+      check(_CascadeWindows).isA<Function>();
     });
     test('ChangeClipboardChain can be instantiated', () {
       check(_ChangeClipboardChain).isA<Function>();
@@ -108,16 +107,16 @@ void main() {
       check(_ChangeDisplaySettingsEx).isA<Function>();
     });
     test('ChangeWindowMessageFilter can be instantiated', () {
-      check(ChangeWindowMessageFilter_Wrapper).isA<Function>();
+      check(_ChangeWindowMessageFilter).isA<Function>();
     });
     test('ChangeWindowMessageFilterEx can be instantiated', () {
-      check(ChangeWindowMessageFilterEx_Wrapper).isA<Function>();
+      check(_ChangeWindowMessageFilterEx).isA<Function>();
     });
     test('CheckDlgButton can be instantiated', () {
-      check(CheckDlgButton_Wrapper).isA<Function>();
+      check(_CheckDlgButton).isA<Function>();
     });
     test('CheckRadioButton can be instantiated', () {
-      check(CheckRadioButton_Wrapper).isA<Function>();
+      check(_CheckRadioButton).isA<Function>();
     });
     test('ChildWindowFromPoint can be instantiated', () {
       check(_ChildWindowFromPoint).isA<Function>();
@@ -129,88 +128,88 @@ void main() {
       check(_ClientToScreen).isA<Function>();
     });
     test('ClipCursor can be instantiated', () {
-      check(ClipCursor_Wrapper).isA<Function>();
+      check(_ClipCursor).isA<Function>();
     });
     test('CloseClipboard can be instantiated', () {
-      check(CloseClipboard_Wrapper).isA<Function>();
+      check(_CloseClipboard).isA<Function>();
     });
     test('CloseDesktop can be instantiated', () {
-      check(CloseDesktop_Wrapper).isA<Function>();
+      check(_CloseDesktop).isA<Function>();
     });
     test('CloseGestureInfoHandle can be instantiated', () {
-      check(CloseGestureInfoHandle_Wrapper).isA<Function>();
+      check(_CloseGestureInfoHandle).isA<Function>();
     });
     test('CloseTouchInputHandle can be instantiated', () {
-      check(CloseTouchInputHandle_Wrapper).isA<Function>();
+      check(_CloseTouchInputHandle).isA<Function>();
     });
     test('CloseWindow can be instantiated', () {
-      check(CloseWindow_Wrapper).isA<Function>();
+      check(_CloseWindow).isA<Function>();
     });
     test('CloseWindowStation can be instantiated', () {
-      check(CloseWindowStation_Wrapper).isA<Function>();
+      check(_CloseWindowStation).isA<Function>();
     });
     test('CopyAcceleratorTable can be instantiated', () {
       check(_CopyAcceleratorTable).isA<Function>();
     });
     test('CopyIcon can be instantiated', () {
-      check(CopyIcon_Wrapper).isA<Function>();
+      check(_CopyIcon).isA<Function>();
     });
     test('CopyImage can be instantiated', () {
-      check(CopyImage_Wrapper).isA<Function>();
+      check(_CopyImage).isA<Function>();
     });
     test('CopyRect can be instantiated', () {
       check(_CopyRect).isA<Function>();
     });
     test('CountClipboardFormats can be instantiated', () {
-      check(CountClipboardFormats_Wrapper).isA<Function>();
+      check(_CountClipboardFormats).isA<Function>();
     });
     test('CreateAcceleratorTable can be instantiated', () {
-      check(CreateAcceleratorTableW_Wrapper).isA<Function>();
+      check(_CreateAcceleratorTable).isA<Function>();
     });
     test('CreateCaret can be instantiated', () {
-      check(CreateCaret_Wrapper).isA<Function>();
+      check(_CreateCaret).isA<Function>();
     });
     test('CreateCursor can be instantiated', () {
-      check(CreateCursor_Wrapper).isA<Function>();
+      check(_CreateCursor).isA<Function>();
     });
     test('CreateDesktop can be instantiated', () {
-      check(CreateDesktopW_Wrapper).isA<Function>();
+      check(_CreateDesktop).isA<Function>();
     });
     test('CreateDesktopEx can be instantiated', () {
-      check(CreateDesktopExW_Wrapper).isA<Function>();
+      check(_CreateDesktopEx).isA<Function>();
     });
     test('CreateDialogIndirectParam can be instantiated', () {
-      check(CreateDialogIndirectParamW_Wrapper).isA<Function>();
+      check(_CreateDialogIndirectParam).isA<Function>();
     });
     test('CreateIcon can be instantiated', () {
-      check(CreateIcon_Wrapper).isA<Function>();
+      check(_CreateIcon).isA<Function>();
     });
     test('CreateIconFromResource can be instantiated', () {
-      check(CreateIconFromResource_Wrapper).isA<Function>();
+      check(_CreateIconFromResource).isA<Function>();
     });
     test('CreateIconFromResourceEx can be instantiated', () {
-      check(CreateIconFromResourceEx_Wrapper).isA<Function>();
+      check(_CreateIconFromResourceEx).isA<Function>();
     });
     test('CreateIconIndirect can be instantiated', () {
-      check(CreateIconIndirect_Wrapper).isA<Function>();
+      check(_CreateIconIndirect).isA<Function>();
     });
     test('CreateMDIWindow can be instantiated', () {
-      check(CreateMDIWindowW_Wrapper).isA<Function>();
+      check(_CreateMDIWindow).isA<Function>();
     });
     test('CreateMenu can be instantiated', () {
-      check(CreateMenu_Wrapper).isA<Function>();
+      check(_CreateMenu).isA<Function>();
     });
     test('CreatePopupMenu can be instantiated', () {
-      check(CreatePopupMenu_Wrapper).isA<Function>();
+      check(_CreatePopupMenu).isA<Function>();
     });
     test('CreateWindowEx can be instantiated', () {
-      check(CreateWindowExW_Wrapper).isA<Function>();
+      check(_CreateWindowEx).isA<Function>();
     });
     test('CreateWindowStation can be instantiated', () {
-      check(CreateWindowStationW_Wrapper).isA<Function>();
+      check(_CreateWindowStation).isA<Function>();
     });
     test('DeferWindowPos can be instantiated', () {
-      check(DeferWindowPos_Wrapper).isA<Function>();
+      check(_DeferWindowPos).isA<Function>();
     });
     test('DefMDIChildProc can be instantiated', () {
       check(_DefMDIChildProc).isA<Function>();
@@ -222,28 +221,28 @@ void main() {
       check(_DefWindowProc).isA<Function>();
     });
     test('DeleteMenu can be instantiated', () {
-      check(DeleteMenu_Wrapper).isA<Function>();
+      check(_DeleteMenu).isA<Function>();
     });
     test('DestroyAcceleratorTable can be instantiated', () {
       check(_DestroyAcceleratorTable).isA<Function>();
     });
     test('DestroyCaret can be instantiated', () {
-      check(DestroyCaret_Wrapper).isA<Function>();
+      check(_DestroyCaret).isA<Function>();
     });
     test('DestroyCursor can be instantiated', () {
-      check(DestroyCursor_Wrapper).isA<Function>();
+      check(_DestroyCursor).isA<Function>();
     });
     test('DestroyIcon can be instantiated', () {
-      check(DestroyIcon_Wrapper).isA<Function>();
+      check(_DestroyIcon).isA<Function>();
     });
     test('DestroyMenu can be instantiated', () {
-      check(DestroyMenu_Wrapper).isA<Function>();
+      check(_DestroyMenu).isA<Function>();
     });
     test('DestroyWindow can be instantiated', () {
-      check(DestroyWindow_Wrapper).isA<Function>();
+      check(_DestroyWindow).isA<Function>();
     });
     test('DialogBoxIndirectParam can be instantiated', () {
-      check(DialogBoxIndirectParamW_Wrapper).isA<Function>();
+      check(_DialogBoxIndirectParam).isA<Function>();
     });
     test('DisableProcessWindowsGhosting can be instantiated', () {
       check(_DisableProcessWindowsGhosting).isA<Function>();
@@ -270,7 +269,7 @@ void main() {
       check(_DrawFrameControl).isA<Function>();
     });
     test('DrawIcon can be instantiated', () {
-      check(DrawIcon_Wrapper).isA<Function>();
+      check(_DrawIcon).isA<Function>();
     });
     test('DrawState can be instantiated', () {
       check(_DrawState).isA<Function>();
@@ -282,35 +281,35 @@ void main() {
       check(_DrawTextEx).isA<Function>();
     });
     test('EmptyClipboard can be instantiated', () {
-      check(EmptyClipboard_Wrapper).isA<Function>();
+      check(_EmptyClipboard).isA<Function>();
     });
     test('EnableMenuItem can be instantiated', () {
       check(_EnableMenuItem).isA<Function>();
     });
     test('EnableMouseInPointer can be instantiated', () {
-      check(EnableMouseInPointer_Wrapper).isA<Function>();
+      check(_EnableMouseInPointer).isA<Function>();
     });
     test(
       'EnableNonClientDpiScaling can be instantiated',
       skip: 14393 > windowsBuildNumber,
       () {
-        check(EnableNonClientDpiScaling_Wrapper).isA<Function>();
+        check(_EnableNonClientDpiScaling).isA<Function>();
       },
     );
     test('EnableScrollBar can be instantiated', () {
-      check(EnableScrollBar_Wrapper).isA<Function>();
+      check(_EnableScrollBar).isA<Function>();
     });
     test('EnableWindow can be instantiated', () {
       check(_EnableWindow).isA<Function>();
     });
     test('EndDeferWindowPos can be instantiated', () {
-      check(EndDeferWindowPos_Wrapper).isA<Function>();
+      check(_EndDeferWindowPos).isA<Function>();
     });
     test('EndDialog can be instantiated', () {
-      check(EndDialog_Wrapper).isA<Function>();
+      check(_EndDialog).isA<Function>();
     });
     test('EndMenu can be instantiated', () {
-      check(EndMenu_Wrapper).isA<Function>();
+      check(_EndMenu).isA<Function>();
     });
     test('EndPaint can be instantiated', () {
       check(_EndPaint).isA<Function>();
@@ -319,10 +318,10 @@ void main() {
       check(_EnumChildWindows).isA<Function>();
     });
     test('EnumClipboardFormats can be instantiated', () {
-      check(EnumClipboardFormats_Wrapper).isA<Function>();
+      check(_EnumClipboardFormats).isA<Function>();
     });
     test('EnumDesktopWindows can be instantiated', () {
-      check(EnumDesktopWindows_Wrapper).isA<Function>();
+      check(_EnumDesktopWindows).isA<Function>();
     });
     test('EnumDisplayDevices can be instantiated', () {
       check(_EnumDisplayDevices).isA<Function>();
@@ -340,7 +339,7 @@ void main() {
       check(_EnumThreadWindows).isA<Function>();
     });
     test('EnumWindows can be instantiated', () {
-      check(EnumWindows_Wrapper).isA<Function>();
+      check(_EnumWindows).isA<Function>();
     });
     test('EqualRect can be instantiated', () {
       check(_EqualRect).isA<Function>();
@@ -352,10 +351,10 @@ void main() {
       check(_FillRect).isA<Function>();
     });
     test('FindWindow can be instantiated', () {
-      check(FindWindowW_Wrapper).isA<Function>();
+      check(_FindWindow).isA<Function>();
     });
     test('FindWindowEx can be instantiated', () {
-      check(FindWindowExW_Wrapper).isA<Function>();
+      check(_FindWindowEx).isA<Function>();
     });
     test('FrameRect can be instantiated', () {
       check(_FrameRect).isA<Function>();
@@ -364,7 +363,7 @@ void main() {
       check(_GetActiveWindow).isA<Function>();
     });
     test('GetAltTabInfo can be instantiated', () {
-      check(GetAltTabInfoW_Wrapper).isA<Function>();
+      check(_GetAltTabInfo).isA<Function>();
     });
     test('GetAncestor can be instantiated', () {
       check(_GetAncestor).isA<Function>();
@@ -383,52 +382,52 @@ void main() {
       check(_GetCapture).isA<Function>();
     });
     test('GetCaretBlinkTime can be instantiated', () {
-      check(GetCaretBlinkTime_Wrapper).isA<Function>();
+      check(_GetCaretBlinkTime).isA<Function>();
     });
     test('GetCaretPos can be instantiated', () {
-      check(GetCaretPos_Wrapper).isA<Function>();
+      check(_GetCaretPos).isA<Function>();
     });
     test('GetClassInfo can be instantiated', () {
-      check(GetClassInfoW_Wrapper).isA<Function>();
+      check(_GetClassInfo).isA<Function>();
     });
     test('GetClassInfoEx can be instantiated', () {
-      check(GetClassInfoExW_Wrapper).isA<Function>();
+      check(_GetClassInfoEx).isA<Function>();
     });
     test('GetClassLongPtr can be instantiated', () {
-      check(GetClassLongPtrW_Wrapper).isA<Function>();
+      check(_GetClassLongPtr).isA<Function>();
     });
     test('GetClassName can be instantiated', () {
-      check(GetClassNameW_Wrapper).isA<Function>();
+      check(_GetClassName).isA<Function>();
     });
     test('GetClientRect can be instantiated', () {
-      check(GetClientRect_Wrapper).isA<Function>();
+      check(_GetClientRect).isA<Function>();
     });
     test('GetClipboardData can be instantiated', () {
-      check(GetClipboardData_Wrapper).isA<Function>();
+      check(_GetClipboardData).isA<Function>();
     });
     test('GetClipboardFormatName can be instantiated', () {
-      check(GetClipboardFormatNameW_Wrapper).isA<Function>();
+      check(_GetClipboardFormatName).isA<Function>();
     });
     test('GetClipboardOwner can be instantiated', () {
-      check(GetClipboardOwner_Wrapper).isA<Function>();
+      check(_GetClipboardOwner).isA<Function>();
     });
     test('GetClipboardSequenceNumber can be instantiated', () {
       check(_GetClipboardSequenceNumber).isA<Function>();
     });
     test('GetClipboardViewer can be instantiated', () {
-      check(GetClipboardViewer_Wrapper).isA<Function>();
+      check(_GetClipboardViewer).isA<Function>();
     });
     test('GetClipCursor can be instantiated', () {
-      check(GetClipCursor_Wrapper).isA<Function>();
+      check(_GetClipCursor).isA<Function>();
     });
     test('GetCursor can be instantiated', () {
       check(_GetCursor).isA<Function>();
     });
     test('GetCursorInfo can be instantiated', () {
-      check(GetCursorInfo_Wrapper).isA<Function>();
+      check(_GetCursorInfo).isA<Function>();
     });
     test('GetCursorPos can be instantiated', () {
-      check(GetCursorPos_Wrapper).isA<Function>();
+      check(_GetCursorPos).isA<Function>();
     });
     test('GetDC can be instantiated', () {
       check(_GetDC).isA<Function>();
@@ -446,27 +445,27 @@ void main() {
       'GetDialogControlDpiChangeBehavior can be instantiated',
       skip: 15063 > windowsBuildNumber,
       () {
-        check(GetDialogControlDpiChangeBehavior_Wrapper).isA<Function>();
+        check(_GetDialogControlDpiChangeBehavior).isA<Function>();
       },
     );
     test(
       'GetDialogDpiChangeBehavior can be instantiated',
       skip: 15063 > windowsBuildNumber,
       () {
-        check(GetDialogDpiChangeBehavior_Wrapper).isA<Function>();
+        check(_GetDialogDpiChangeBehavior).isA<Function>();
       },
     );
     test('GetDisplayAutoRotationPreferences can be instantiated', () {
       check(_GetDisplayAutoRotationPreferences).isA<Function>();
     });
     test('GetDlgItem can be instantiated', () {
-      check(GetDlgItem_Wrapper).isA<Function>();
+      check(_GetDlgItem).isA<Function>();
     });
     test('GetDlgItemInt can be instantiated', () {
-      check(GetDlgItemInt_Wrapper).isA<Function>();
+      check(_GetDlgItemInt).isA<Function>();
     });
     test('GetDlgItemText can be instantiated', () {
-      check(GetDlgItemTextW_Wrapper).isA<Function>();
+      check(_GetDlgItemText).isA<Function>();
     });
     test('GetDoubleClickTime can be instantiated', () {
       check(_GetDoubleClickTime).isA<Function>();
@@ -499,19 +498,19 @@ void main() {
       check(_GetForegroundWindow).isA<Function>();
     });
     test('GetGestureConfig can be instantiated', () {
-      check(GetGestureConfig_Wrapper).isA<Function>();
+      check(_GetGestureConfig).isA<Function>();
     });
     test('GetGestureExtraArgs can be instantiated', () {
-      check(GetGestureExtraArgs_Wrapper).isA<Function>();
+      check(_GetGestureExtraArgs).isA<Function>();
     });
     test('GetGestureInfo can be instantiated', () {
-      check(GetGestureInfo_Wrapper).isA<Function>();
+      check(_GetGestureInfo).isA<Function>();
     });
     test('GetGUIThreadInfo can be instantiated', () {
-      check(GetGUIThreadInfo_Wrapper).isA<Function>();
+      check(_GetGUIThreadInfo).isA<Function>();
     });
     test('GetIconInfo can be instantiated', () {
-      check(GetIconInfo_Wrapper).isA<Function>();
+      check(_GetIconInfo).isA<Function>();
     });
     test('GetIconInfoEx can be instantiated', () {
       check(_GetIconInfoEx).isA<Function>();
@@ -523,19 +522,19 @@ void main() {
       check(_GetKeyboardLayout).isA<Function>();
     });
     test('GetKeyboardLayoutList can be instantiated', () {
-      check(GetKeyboardLayoutList_Wrapper).isA<Function>();
+      check(_GetKeyboardLayoutList).isA<Function>();
     });
     test('GetKeyboardLayoutName can be instantiated', () {
-      check(GetKeyboardLayoutNameW_Wrapper).isA<Function>();
+      check(_GetKeyboardLayoutName).isA<Function>();
     });
     test('GetKeyboardState can be instantiated', () {
-      check(GetKeyboardState_Wrapper).isA<Function>();
+      check(_GetKeyboardState).isA<Function>();
     });
     test('GetKeyboardType can be instantiated', () {
-      check(GetKeyboardType_Wrapper).isA<Function>();
+      check(_GetKeyboardType).isA<Function>();
     });
     test('GetKeyNameText can be instantiated', () {
-      check(GetKeyNameTextW_Wrapper).isA<Function>();
+      check(_GetKeyNameText).isA<Function>();
     });
     test('GetKeyState can be instantiated', () {
       check(_GetKeyState).isA<Function>();
@@ -544,31 +543,31 @@ void main() {
       check(_GetLastInputInfo).isA<Function>();
     });
     test('GetLayeredWindowAttributes can be instantiated', () {
-      check(GetLayeredWindowAttributes_Wrapper).isA<Function>();
+      check(_GetLayeredWindowAttributes).isA<Function>();
     });
     test('GetMenu can be instantiated', () {
       check(_GetMenu).isA<Function>();
     });
     test('GetMenuBarInfo can be instantiated', () {
-      check(GetMenuBarInfo_Wrapper).isA<Function>();
+      check(_GetMenuBarInfo).isA<Function>();
     });
     test('GetMenuDefaultItem can be instantiated', () {
-      check(GetMenuDefaultItem_Wrapper).isA<Function>();
+      check(_GetMenuDefaultItem).isA<Function>();
     });
     test('GetMenuInfo can be instantiated', () {
-      check(GetMenuInfo_Wrapper).isA<Function>();
+      check(_GetMenuInfo).isA<Function>();
     });
     test('GetMenuItemCount can be instantiated', () {
-      check(GetMenuItemCount_Wrapper).isA<Function>();
+      check(_GetMenuItemCount).isA<Function>();
     });
     test('GetMenuItemID can be instantiated', () {
       check(_GetMenuItemID).isA<Function>();
     });
     test('GetMenuItemInfo can be instantiated', () {
-      check(GetMenuItemInfoW_Wrapper).isA<Function>();
+      check(_GetMenuItemInfo).isA<Function>();
     });
     test('GetMenuItemRect can be instantiated', () {
-      check(GetMenuItemRect_Wrapper).isA<Function>();
+      check(_GetMenuItemRect).isA<Function>();
     });
     test('GetMenuState can be instantiated', () {
       check(_GetMenuState).isA<Function>();
@@ -577,7 +576,7 @@ void main() {
       check(_GetMenuString).isA<Function>();
     });
     test('GetMessage can be instantiated', () {
-      check(GetMessageW_Wrapper).isA<Function>();
+      check(_GetMessage).isA<Function>();
     });
     test('GetMessageExtraInfo can be instantiated', () {
       check(_GetMessageExtraInfo).isA<Function>();
@@ -592,97 +591,97 @@ void main() {
       check(_GetMonitorInfo).isA<Function>();
     });
     test('GetMouseMovePointsEx can be instantiated', () {
-      check(GetMouseMovePointsEx_Wrapper).isA<Function>();
+      check(_GetMouseMovePointsEx).isA<Function>();
     });
     test('GetNextDlgGroupItem can be instantiated', () {
-      check(GetNextDlgGroupItem_Wrapper).isA<Function>();
+      check(_GetNextDlgGroupItem).isA<Function>();
     });
     test('GetNextDlgTabItem can be instantiated', () {
-      check(GetNextDlgTabItem_Wrapper).isA<Function>();
+      check(_GetNextDlgTabItem).isA<Function>();
     });
     test('GetOpenClipboardWindow can be instantiated', () {
-      check(GetOpenClipboardWindow_Wrapper).isA<Function>();
+      check(_GetOpenClipboardWindow).isA<Function>();
     });
     test('GetParent can be instantiated', () {
-      check(GetParent_Wrapper).isA<Function>();
+      check(_GetParent).isA<Function>();
     });
     test('GetPhysicalCursorPos can be instantiated', () {
-      check(GetPhysicalCursorPos_Wrapper).isA<Function>();
+      check(_GetPhysicalCursorPos).isA<Function>();
     });
     test('GetPointerCursorId can be instantiated', () {
-      check(GetPointerCursorId_Wrapper).isA<Function>();
+      check(_GetPointerCursorId).isA<Function>();
     });
     test('GetPointerFrameInfo can be instantiated', () {
-      check(GetPointerFrameInfo_Wrapper).isA<Function>();
+      check(_GetPointerFrameInfo).isA<Function>();
     });
     test('GetPointerFrameInfoHistory can be instantiated', () {
-      check(GetPointerFrameInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerFrameInfoHistory).isA<Function>();
     });
     test('GetPointerFramePenInfo can be instantiated', () {
-      check(GetPointerFramePenInfo_Wrapper).isA<Function>();
+      check(_GetPointerFramePenInfo).isA<Function>();
     });
     test('GetPointerFramePenInfoHistory can be instantiated', () {
-      check(GetPointerFramePenInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerFramePenInfoHistory).isA<Function>();
     });
     test('GetPointerFrameTouchInfo can be instantiated', () {
-      check(GetPointerFrameTouchInfo_Wrapper).isA<Function>();
+      check(_GetPointerFrameTouchInfo).isA<Function>();
     });
     test('GetPointerFrameTouchInfoHistory can be instantiated', () {
-      check(GetPointerFrameTouchInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerFrameTouchInfoHistory).isA<Function>();
     });
     test('GetPointerInfo can be instantiated', () {
-      check(GetPointerInfo_Wrapper).isA<Function>();
+      check(_GetPointerInfo).isA<Function>();
     });
     test('GetPointerInfoHistory can be instantiated', () {
-      check(GetPointerInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerInfoHistory).isA<Function>();
     });
     test('GetPointerInputTransform can be instantiated', () {
-      check(GetPointerInputTransform_Wrapper).isA<Function>();
+      check(_GetPointerInputTransform).isA<Function>();
     });
     test('GetPointerPenInfo can be instantiated', () {
-      check(GetPointerPenInfo_Wrapper).isA<Function>();
+      check(_GetPointerPenInfo).isA<Function>();
     });
     test('GetPointerPenInfoHistory can be instantiated', () {
-      check(GetPointerPenInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerPenInfoHistory).isA<Function>();
     });
     test('GetPointerTouchInfo can be instantiated', () {
-      check(GetPointerTouchInfo_Wrapper).isA<Function>();
+      check(_GetPointerTouchInfo).isA<Function>();
     });
     test('GetPointerTouchInfoHistory can be instantiated', () {
-      check(GetPointerTouchInfoHistory_Wrapper).isA<Function>();
+      check(_GetPointerTouchInfoHistory).isA<Function>();
     });
     test('GetPointerType can be instantiated', () {
-      check(GetPointerType_Wrapper).isA<Function>();
+      check(_GetPointerType).isA<Function>();
     });
     test('GetPriorityClipboardFormat can be instantiated', () {
-      check(GetPriorityClipboardFormat_Wrapper).isA<Function>();
+      check(_GetPriorityClipboardFormat).isA<Function>();
     });
     test('GetProcessWindowStation can be instantiated', () {
-      check(GetProcessWindowStation_Wrapper).isA<Function>();
+      check(_GetProcessWindowStation).isA<Function>();
     });
     test('GetProp can be instantiated', () {
       check(_GetProp).isA<Function>();
     });
     test('GetRawInputBuffer can be instantiated', () {
-      check(GetRawInputBuffer_Wrapper).isA<Function>();
+      check(_GetRawInputBuffer).isA<Function>();
     });
     test('GetRawInputData can be instantiated', () {
       check(_GetRawInputData).isA<Function>();
     });
     test('GetRawInputDeviceInfo can be instantiated', () {
-      check(GetRawInputDeviceInfoW_Wrapper).isA<Function>();
+      check(_GetRawInputDeviceInfo).isA<Function>();
     });
     test('GetRawInputDeviceList can be instantiated', () {
-      check(GetRawInputDeviceList_Wrapper).isA<Function>();
+      check(_GetRawInputDeviceList).isA<Function>();
     });
     test('GetRegisteredRawInputDevices can be instantiated', () {
-      check(GetRegisteredRawInputDevices_Wrapper).isA<Function>();
+      check(_GetRegisteredRawInputDevices).isA<Function>();
     });
     test('GetScrollBarInfo can be instantiated', () {
-      check(GetScrollBarInfo_Wrapper).isA<Function>();
+      check(_GetScrollBarInfo).isA<Function>();
     });
     test('GetScrollInfo can be instantiated', () {
-      check(GetScrollInfo_Wrapper).isA<Function>();
+      check(_GetScrollInfo).isA<Function>();
     });
     test('GetShellWindow can be instantiated', () {
       check(_GetShellWindow).isA<Function>();
@@ -713,14 +712,14 @@ void main() {
       'GetSystemMetricsForDpi can be instantiated',
       skip: 14393 > windowsBuildNumber,
       () {
-        check(GetSystemMetricsForDpi_Wrapper).isA<Function>();
+        check(_GetSystemMetricsForDpi).isA<Function>();
       },
     );
     test('GetTabbedTextExtent can be instantiated', () {
       check(_GetTabbedTextExtent).isA<Function>();
     });
     test('GetThreadDesktop can be instantiated', () {
-      check(GetThreadDesktop_Wrapper).isA<Function>();
+      check(_GetThreadDesktop).isA<Function>();
     });
     test(
       'GetThreadDpiAwarenessContext can be instantiated',
@@ -737,19 +736,19 @@ void main() {
       },
     );
     test('GetTitleBarInfo can be instantiated', () {
-      check(GetTitleBarInfo_Wrapper).isA<Function>();
+      check(_GetTitleBarInfo).isA<Function>();
     });
     test('GetTopWindow can be instantiated', () {
-      check(GetTopWindow_Wrapper).isA<Function>();
+      check(_GetTopWindow).isA<Function>();
     });
     test('GetTouchInputInfo can be instantiated', () {
-      check(GetTouchInputInfo_Wrapper).isA<Function>();
+      check(_GetTouchInputInfo).isA<Function>();
     });
     test('GetUnpredictedMessagePos can be instantiated', () {
       check(_GetUnpredictedMessagePos).isA<Function>();
     });
     test('GetUpdatedClipboardFormats can be instantiated', () {
-      check(GetUpdatedClipboardFormats_Wrapper).isA<Function>();
+      check(_GetUpdatedClipboardFormats).isA<Function>();
     });
     test('GetUpdateRect can be instantiated', () {
       check(_GetUpdateRect).isA<Function>();
@@ -758,16 +757,16 @@ void main() {
       check(_GetUpdateRgn).isA<Function>();
     });
     test('GetUserObjectInformation can be instantiated', () {
-      check(GetUserObjectInformationW_Wrapper).isA<Function>();
+      check(_GetUserObjectInformation).isA<Function>();
     });
     test('GetWindow can be instantiated', () {
-      check(GetWindow_Wrapper).isA<Function>();
+      check(_GetWindow).isA<Function>();
     });
     test('GetWindowDC can be instantiated', () {
       check(_GetWindowDC).isA<Function>();
     });
     test('GetWindowDisplayAffinity can be instantiated', () {
-      check(GetWindowDisplayAffinity_Wrapper).isA<Function>();
+      check(_GetWindowDisplayAffinity).isA<Function>();
     });
     test(
       'GetWindowDpiAwarenessContext can be instantiated',
@@ -784,19 +783,19 @@ void main() {
       },
     );
     test('GetWindowInfo can be instantiated', () {
-      check(GetWindowInfo_Wrapper).isA<Function>();
+      check(_GetWindowInfo).isA<Function>();
     });
     test('GetWindowLongPtr can be instantiated', () {
-      check(GetWindowLongPtrW_Wrapper).isA<Function>();
+      check(_GetWindowLongPtr).isA<Function>();
     });
     test('GetWindowModuleFileName can be instantiated', () {
       check(_GetWindowModuleFileName).isA<Function>();
     });
     test('GetWindowPlacement can be instantiated', () {
-      check(GetWindowPlacement_Wrapper).isA<Function>();
+      check(_GetWindowPlacement).isA<Function>();
     });
     test('GetWindowRect can be instantiated', () {
-      check(GetWindowRect_Wrapper).isA<Function>();
+      check(_GetWindowRect).isA<Function>();
     });
     test('GetWindowRgn can be instantiated', () {
       check(_GetWindowRgn).isA<Function>();
@@ -805,10 +804,10 @@ void main() {
       check(_GetWindowRgnBox).isA<Function>();
     });
     test('GetWindowText can be instantiated', () {
-      check(GetWindowTextW_Wrapper).isA<Function>();
+      check(_GetWindowText).isA<Function>();
     });
     test('GetWindowTextLength can be instantiated', () {
-      check(GetWindowTextLengthW_Wrapper).isA<Function>();
+      check(_GetWindowTextLength).isA<Function>();
     });
     test('GetWindowThreadProcessId can be instantiated', () {
       check(_GetWindowThreadProcessId).isA<Function>();
@@ -817,7 +816,7 @@ void main() {
       check(_GrayString).isA<Function>();
     });
     test('HideCaret can be instantiated', () {
-      check(HideCaret_Wrapper).isA<Function>();
+      check(_HideCaret).isA<Function>();
     });
     test('HiliteMenuItem can be instantiated', () {
       check(_HiliteMenuItem).isA<Function>();
@@ -832,10 +831,10 @@ void main() {
       check(_InSendMessageEx).isA<Function>();
     });
     test('InsertMenu can be instantiated', () {
-      check(InsertMenuW_Wrapper).isA<Function>();
+      check(_InsertMenu).isA<Function>();
     });
     test('InsertMenuItem can be instantiated', () {
-      check(InsertMenuItemW_Wrapper).isA<Function>();
+      check(_InsertMenuItem).isA<Function>();
     });
     test('IntersectRect can be instantiated', () {
       check(_IntersectRect).isA<Function>();
@@ -853,7 +852,7 @@ void main() {
       check(_IsChild).isA<Function>();
     });
     test('IsClipboardFormatAvailable can be instantiated', () {
-      check(IsClipboardFormatAvailable_Wrapper).isA<Function>();
+      check(_IsClipboardFormatAvailable).isA<Function>();
     });
     test('IsDialogMessage can be instantiated', () {
       check(_IsDialogMessage).isA<Function>();
@@ -871,7 +870,7 @@ void main() {
       check(_IsIconic).isA<Function>();
     });
     test('IsImmersiveProcess can be instantiated', () {
-      check(IsImmersiveProcess_Wrapper).isA<Function>();
+      check(_IsImmersiveProcess).isA<Function>();
     });
     test('IsMenu can be instantiated', () {
       check(_IsMenu).isA<Function>();
@@ -914,43 +913,43 @@ void main() {
       check(_IsZoomed).isA<Function>();
     });
     test('KillTimer can be instantiated', () {
-      check(KillTimer_Wrapper).isA<Function>();
+      check(_KillTimer).isA<Function>();
     });
     test('LoadAccelerators can be instantiated', () {
-      check(LoadAcceleratorsW_Wrapper).isA<Function>();
+      check(_LoadAccelerators).isA<Function>();
     });
     test('LoadCursor can be instantiated', () {
-      check(LoadCursorW_Wrapper).isA<Function>();
+      check(_LoadCursor).isA<Function>();
     });
     test('LoadCursorFromFile can be instantiated', () {
-      check(LoadCursorFromFileW_Wrapper).isA<Function>();
+      check(_LoadCursorFromFile).isA<Function>();
     });
     test('LoadIcon can be instantiated', () {
-      check(LoadIconW_Wrapper).isA<Function>();
+      check(_LoadIcon).isA<Function>();
     });
     test('LoadImage can be instantiated', () {
-      check(LoadImageW_Wrapper).isA<Function>();
+      check(_LoadImage).isA<Function>();
     });
     test('LoadKeyboardLayout can be instantiated', () {
-      check(LoadKeyboardLayoutW_Wrapper).isA<Function>();
+      check(_LoadKeyboardLayout).isA<Function>();
     });
     test('LoadMenu can be instantiated', () {
-      check(LoadMenuW_Wrapper).isA<Function>();
+      check(_LoadMenu).isA<Function>();
     });
     test('LoadMenuIndirect can be instantiated', () {
-      check(LoadMenuIndirectW_Wrapper).isA<Function>();
+      check(_LoadMenuIndirect).isA<Function>();
     });
     test('LoadString can be instantiated', () {
-      check(LoadStringW_Wrapper).isA<Function>();
+      check(_LoadString).isA<Function>();
     });
     test('LockSetForegroundWindow can be instantiated', () {
-      check(LockSetForegroundWindow_Wrapper).isA<Function>();
+      check(_LockSetForegroundWindow).isA<Function>();
     });
     test('LockWindowUpdate can be instantiated', () {
       check(_LockWindowUpdate).isA<Function>();
     });
     test('LockWorkStation can be instantiated', () {
-      check(LockWorkStation_Wrapper).isA<Function>();
+      check(_LockWorkStation).isA<Function>();
     });
     test('LogicalToPhysicalPoint can be instantiated', () {
       check(_LogicalToPhysicalPoint).isA<Function>();
@@ -959,13 +958,13 @@ void main() {
       check(_LogicalToPhysicalPointForPerMonitorDPI).isA<Function>();
     });
     test('LookupIconIdFromDirectory can be instantiated', () {
-      check(LookupIconIdFromDirectory_Wrapper).isA<Function>();
+      check(_LookupIconIdFromDirectory).isA<Function>();
     });
     test('LookupIconIdFromDirectoryEx can be instantiated', () {
-      check(LookupIconIdFromDirectoryEx_Wrapper).isA<Function>();
+      check(_LookupIconIdFromDirectoryEx).isA<Function>();
     });
     test('MapDialogRect can be instantiated', () {
-      check(MapDialogRect_Wrapper).isA<Function>();
+      check(_MapDialogRect).isA<Function>();
     });
     test('MapVirtualKey can be instantiated', () {
       check(_MapVirtualKey).isA<Function>();
@@ -980,16 +979,16 @@ void main() {
       check(_MenuItemFromPoint).isA<Function>();
     });
     test('MessageBeep can be instantiated', () {
-      check(MessageBeep_Wrapper).isA<Function>();
+      check(_MessageBeep).isA<Function>();
     });
     test('MessageBox can be instantiated', () {
-      check(MessageBoxW_Wrapper).isA<Function>();
+      check(_MessageBox).isA<Function>();
     });
     test('MessageBoxEx can be instantiated', () {
-      check(MessageBoxExW_Wrapper).isA<Function>();
+      check(_MessageBoxEx).isA<Function>();
     });
     test('ModifyMenu can be instantiated', () {
-      check(ModifyMenuW_Wrapper).isA<Function>();
+      check(_ModifyMenu).isA<Function>();
     });
     test('MonitorFromPoint can be instantiated', () {
       check(_MonitorFromPoint).isA<Function>();
@@ -1001,13 +1000,13 @@ void main() {
       check(_MonitorFromWindow).isA<Function>();
     });
     test('MoveWindow can be instantiated', () {
-      check(MoveWindow_Wrapper).isA<Function>();
+      check(_MoveWindow).isA<Function>();
     });
     test('MsgWaitForMultipleObjects can be instantiated', () {
-      check(MsgWaitForMultipleObjects_Wrapper).isA<Function>();
+      check(_MsgWaitForMultipleObjects).isA<Function>();
     });
     test('MsgWaitForMultipleObjectsEx can be instantiated', () {
-      check(MsgWaitForMultipleObjectsEx_Wrapper).isA<Function>();
+      check(_MsgWaitForMultipleObjectsEx).isA<Function>();
     });
     test('NotifyWinEvent can be instantiated', () {
       check(_NotifyWinEvent).isA<Function>();
@@ -1019,19 +1018,19 @@ void main() {
       check(_OffsetRect).isA<Function>();
     });
     test('OpenClipboard can be instantiated', () {
-      check(OpenClipboard_Wrapper).isA<Function>();
+      check(_OpenClipboard).isA<Function>();
     });
     test('OpenDesktop can be instantiated', () {
-      check(OpenDesktopW_Wrapper).isA<Function>();
+      check(_OpenDesktop).isA<Function>();
     });
     test('OpenIcon can be instantiated', () {
-      check(OpenIcon_Wrapper).isA<Function>();
+      check(_OpenIcon).isA<Function>();
     });
     test('OpenInputDesktop can be instantiated', () {
-      check(OpenInputDesktop_Wrapper).isA<Function>();
+      check(_OpenInputDesktop).isA<Function>();
     });
     test('OpenWindowStation can be instantiated', () {
-      check(OpenWindowStationW_Wrapper).isA<Function>();
+      check(_OpenWindowStation).isA<Function>();
     });
     test('PaintDesktop can be instantiated', () {
       check(_PaintDesktop).isA<Function>();
@@ -1046,13 +1045,13 @@ void main() {
       check(_PhysicalToLogicalPointForPerMonitorDPI).isA<Function>();
     });
     test('PostMessage can be instantiated', () {
-      check(PostMessageW_Wrapper).isA<Function>();
+      check(_PostMessage).isA<Function>();
     });
     test('PostQuitMessage can be instantiated', () {
       check(_PostQuitMessage).isA<Function>();
     });
     test('PostThreadMessage can be instantiated', () {
-      check(PostThreadMessageW_Wrapper).isA<Function>();
+      check(_PostThreadMessage).isA<Function>();
     });
     test('PrintWindow can be instantiated', () {
       check(_PrintWindow).isA<Function>();
@@ -1067,49 +1066,49 @@ void main() {
       check(_RedrawWindow).isA<Function>();
     });
     test('RegisterClass can be instantiated', () {
-      check(RegisterClassW_Wrapper).isA<Function>();
+      check(_RegisterClass).isA<Function>();
     });
     test('RegisterClassEx can be instantiated', () {
-      check(RegisterClassExW_Wrapper).isA<Function>();
+      check(_RegisterClassEx).isA<Function>();
     });
     test('RegisterClipboardFormat can be instantiated', () {
-      check(RegisterClipboardFormatW_Wrapper).isA<Function>();
+      check(_RegisterClipboardFormat).isA<Function>();
     });
     test('RegisterDeviceNotification can be instantiated', () {
-      check(RegisterDeviceNotificationW_Wrapper).isA<Function>();
+      check(_RegisterDeviceNotification).isA<Function>();
     });
     test('RegisterHotKey can be instantiated', () {
-      check(RegisterHotKey_Wrapper).isA<Function>();
+      check(_RegisterHotKey).isA<Function>();
     });
     test('RegisterPowerSettingNotification can be instantiated', () {
-      check(RegisterPowerSettingNotification_Wrapper).isA<Function>();
+      check(_RegisterPowerSettingNotification).isA<Function>();
     });
     test('RegisterRawInputDevices can be instantiated', () {
-      check(RegisterRawInputDevices_Wrapper).isA<Function>();
+      check(_RegisterRawInputDevices).isA<Function>();
     });
     test('RegisterTouchHitTestingWindow can be instantiated', () {
-      check(RegisterTouchHitTestingWindow_Wrapper).isA<Function>();
+      check(_RegisterTouchHitTestingWindow).isA<Function>();
     });
     test('RegisterTouchWindow can be instantiated', () {
-      check(RegisterTouchWindow_Wrapper).isA<Function>();
+      check(_RegisterTouchWindow).isA<Function>();
     });
     test('RegisterWindowMessage can be instantiated', () {
-      check(RegisterWindowMessageW_Wrapper).isA<Function>();
+      check(_RegisterWindowMessage).isA<Function>();
     });
     test('ReleaseCapture can be instantiated', () {
-      check(ReleaseCapture_Wrapper).isA<Function>();
+      check(_ReleaseCapture).isA<Function>();
     });
     test('ReleaseDC can be instantiated', () {
       check(_ReleaseDC).isA<Function>();
     });
     test('RemoveClipboardFormatListener can be instantiated', () {
-      check(RemoveClipboardFormatListener_Wrapper).isA<Function>();
+      check(_RemoveClipboardFormatListener).isA<Function>();
     });
     test('RemoveMenu can be instantiated', () {
-      check(RemoveMenu_Wrapper).isA<Function>();
+      check(_RemoveMenu).isA<Function>();
     });
     test('RemoveProp can be instantiated', () {
-      check(RemovePropW_Wrapper).isA<Function>();
+      check(_RemoveProp).isA<Function>();
     });
     test('ReplyMessage can be instantiated', () {
       check(_ReplyMessage).isA<Function>();
@@ -1118,74 +1117,74 @@ void main() {
       check(_ScreenToClient).isA<Function>();
     });
     test('ScrollDC can be instantiated', () {
-      check(ScrollDC_Wrapper).isA<Function>();
+      check(_ScrollDC).isA<Function>();
     });
     test('ScrollWindow can be instantiated', () {
-      check(ScrollWindow_Wrapper).isA<Function>();
+      check(_ScrollWindow).isA<Function>();
     });
     test('ScrollWindowEx can be instantiated', () {
-      check(ScrollWindowEx_Wrapper).isA<Function>();
+      check(_ScrollWindowEx).isA<Function>();
     });
     test('SendDlgItemMessage can be instantiated', () {
       check(_SendDlgItemMessage).isA<Function>();
     });
     test('SendInput can be instantiated', () {
-      check(SendInput_Wrapper).isA<Function>();
+      check(_SendInput).isA<Function>();
     });
     test('SendMessage can be instantiated', () {
-      check(SendMessageW_Wrapper).isA<Function>();
+      check(_SendMessage).isA<Function>();
     });
     test('SendMessageCallback can be instantiated', () {
-      check(SendMessageCallbackW_Wrapper).isA<Function>();
+      check(_SendMessageCallback).isA<Function>();
     });
     test('SendMessageTimeout can be instantiated', () {
-      check(SendMessageTimeoutW_Wrapper).isA<Function>();
+      check(_SendMessageTimeout).isA<Function>();
     });
     test('SendNotifyMessage can be instantiated', () {
-      check(SendNotifyMessageW_Wrapper).isA<Function>();
+      check(_SendNotifyMessage).isA<Function>();
     });
     test('SetActiveWindow can be instantiated', () {
-      check(SetActiveWindow_Wrapper).isA<Function>();
+      check(_SetActiveWindow).isA<Function>();
     });
     test('SetCapture can be instantiated', () {
       check(_SetCapture).isA<Function>();
     });
     test('SetCaretBlinkTime can be instantiated', () {
-      check(SetCaretBlinkTime_Wrapper).isA<Function>();
+      check(_SetCaretBlinkTime).isA<Function>();
     });
     test('SetCaretPos can be instantiated', () {
-      check(SetCaretPos_Wrapper).isA<Function>();
+      check(_SetCaretPos).isA<Function>();
     });
     test('SetClassLongPtr can be instantiated', () {
-      check(SetClassLongPtrW_Wrapper).isA<Function>();
+      check(_SetClassLongPtr).isA<Function>();
     });
     test('SetClipboardData can be instantiated', () {
-      check(SetClipboardData_Wrapper).isA<Function>();
+      check(_SetClipboardData).isA<Function>();
     });
     test('SetClipboardViewer can be instantiated', () {
-      check(SetClipboardViewer_Wrapper).isA<Function>();
+      check(_SetClipboardViewer).isA<Function>();
     });
     test('SetCoalescableTimer can be instantiated', () {
-      check(SetCoalescableTimer_Wrapper).isA<Function>();
+      check(_SetCoalescableTimer).isA<Function>();
     });
     test('SetCursor can be instantiated', () {
       check(_SetCursor).isA<Function>();
     });
     test('SetCursorPos can be instantiated', () {
-      check(SetCursorPos_Wrapper).isA<Function>();
+      check(_SetCursorPos).isA<Function>();
     });
     test(
       'SetDialogControlDpiChangeBehavior can be instantiated',
       skip: 15063 > windowsBuildNumber,
       () {
-        check(SetDialogControlDpiChangeBehavior_Wrapper).isA<Function>();
+        check(_SetDialogControlDpiChangeBehavior).isA<Function>();
       },
     );
     test(
       'SetDialogDpiChangeBehavior can be instantiated',
       skip: 15063 > windowsBuildNumber,
       () {
-        check(SetDialogDpiChangeBehavior_Wrapper).isA<Function>();
+        check(_SetDialogDpiChangeBehavior).isA<Function>();
       },
     );
     test('SetDisplayAutoRotationPreferences can be instantiated', () {
@@ -1195,52 +1194,52 @@ void main() {
       check(_SetDisplayConfig).isA<Function>();
     });
     test('SetDlgItemInt can be instantiated', () {
-      check(SetDlgItemInt_Wrapper).isA<Function>();
+      check(_SetDlgItemInt).isA<Function>();
     });
     test('SetDlgItemText can be instantiated', () {
-      check(SetDlgItemTextW_Wrapper).isA<Function>();
+      check(_SetDlgItemText).isA<Function>();
     });
     test('SetDoubleClickTime can be instantiated', () {
-      check(SetDoubleClickTime_Wrapper).isA<Function>();
+      check(_SetDoubleClickTime).isA<Function>();
     });
     test('SetFocus can be instantiated', () {
-      check(SetFocus_Wrapper).isA<Function>();
+      check(_SetFocus).isA<Function>();
     });
     test('SetForegroundWindow can be instantiated', () {
       check(_SetForegroundWindow).isA<Function>();
     });
     test('SetGestureConfig can be instantiated', () {
-      check(SetGestureConfig_Wrapper).isA<Function>();
+      check(_SetGestureConfig).isA<Function>();
     });
     test('SetKeyboardState can be instantiated', () {
-      check(SetKeyboardState_Wrapper).isA<Function>();
+      check(_SetKeyboardState).isA<Function>();
     });
     test('SetLayeredWindowAttributes can be instantiated', () {
-      check(SetLayeredWindowAttributes_Wrapper).isA<Function>();
+      check(_SetLayeredWindowAttributes).isA<Function>();
     });
     test('SetMenu can be instantiated', () {
-      check(SetMenu_Wrapper).isA<Function>();
+      check(_SetMenu).isA<Function>();
     });
     test('SetMenuDefaultItem can be instantiated', () {
-      check(SetMenuDefaultItem_Wrapper).isA<Function>();
+      check(_SetMenuDefaultItem).isA<Function>();
     });
     test('SetMenuInfo can be instantiated', () {
-      check(SetMenuInfo_Wrapper).isA<Function>();
+      check(_SetMenuInfo).isA<Function>();
     });
     test('SetMenuItemBitmaps can be instantiated', () {
-      check(SetMenuItemBitmaps_Wrapper).isA<Function>();
+      check(_SetMenuItemBitmaps).isA<Function>();
     });
     test('SetMenuItemInfo can be instantiated', () {
-      check(SetMenuItemInfoW_Wrapper).isA<Function>();
+      check(_SetMenuItemInfo).isA<Function>();
     });
     test('SetMessageExtraInfo can be instantiated', () {
       check(_SetMessageExtraInfo).isA<Function>();
     });
     test('SetParent can be instantiated', () {
-      check(SetParent_Wrapper).isA<Function>();
+      check(_SetParent).isA<Function>();
     });
     test('SetPhysicalCursorPos can be instantiated', () {
-      check(SetPhysicalCursorPos_Wrapper).isA<Function>();
+      check(_SetPhysicalCursorPos).isA<Function>();
     });
     test('SetProcessDPIAware can be instantiated', () {
       check(_SetProcessDPIAware).isA<Function>();
@@ -1249,11 +1248,11 @@ void main() {
       'SetProcessDpiAwarenessContext can be instantiated',
       skip: 15063 > windowsBuildNumber,
       () {
-        check(SetProcessDpiAwarenessContext_Wrapper).isA<Function>();
+        check(_SetProcessDpiAwarenessContext).isA<Function>();
       },
     );
     test('SetProp can be instantiated', skip: 14393 > windowsBuildNumber, () {
-      check(SetPropW_Wrapper).isA<Function>();
+      check(_SetProp).isA<Function>();
     });
     test('SetRect can be instantiated', () {
       check(_SetRect).isA<Function>();
@@ -1265,10 +1264,10 @@ void main() {
       check(_SetScrollInfo).isA<Function>();
     });
     test('SetSysColors can be instantiated', () {
-      check(SetSysColors_Wrapper).isA<Function>();
+      check(_SetSysColors).isA<Function>();
     });
     test('SetSystemCursor can be instantiated', () {
-      check(SetSystemCursor_Wrapper).isA<Function>();
+      check(_SetSystemCursor).isA<Function>();
     });
     test(
       'SetThreadDpiAwarenessContext can be instantiated',
@@ -1285,40 +1284,40 @@ void main() {
       },
     );
     test('SetTimer can be instantiated', () {
-      check(SetTimer_Wrapper).isA<Function>();
+      check(_SetTimer).isA<Function>();
     });
     test('SetUserObjectInformation can be instantiated', () {
-      check(SetUserObjectInformationW_Wrapper).isA<Function>();
+      check(_SetUserObjectInformation).isA<Function>();
     });
     test('SetWindowDisplayAffinity can be instantiated', () {
-      check(SetWindowDisplayAffinity_Wrapper).isA<Function>();
+      check(_SetWindowDisplayAffinity).isA<Function>();
     });
     test('SetWindowLongPtr can be instantiated', () {
-      check(SetWindowLongPtrW_Wrapper).isA<Function>();
+      check(_SetWindowLongPtr).isA<Function>();
     });
     test('SetWindowPlacement can be instantiated', () {
-      check(SetWindowPlacement_Wrapper).isA<Function>();
+      check(_SetWindowPlacement).isA<Function>();
     });
     test('SetWindowPos can be instantiated', () {
-      check(SetWindowPos_Wrapper).isA<Function>();
+      check(_SetWindowPos).isA<Function>();
     });
     test('SetWindowRgn can be instantiated', () {
       check(_SetWindowRgn).isA<Function>();
     });
     test('SetWindowsHookEx can be instantiated', () {
-      check(SetWindowsHookExW_Wrapper).isA<Function>();
+      check(_SetWindowsHookEx).isA<Function>();
     });
     test('SetWindowText can be instantiated', () {
-      check(SetWindowTextW_Wrapper).isA<Function>();
+      check(_SetWindowText).isA<Function>();
     });
     test('ShowCaret can be instantiated', () {
-      check(ShowCaret_Wrapper).isA<Function>();
+      check(_ShowCaret).isA<Function>();
     });
     test('ShowCursor can be instantiated', () {
       check(_ShowCursor).isA<Function>();
     });
     test('ShowOwnedPopups can be instantiated', () {
-      check(ShowOwnedPopups_Wrapper).isA<Function>();
+      check(_ShowOwnedPopups).isA<Function>();
     });
     test('ShowWindow can be instantiated', () {
       check(_ShowWindow).isA<Function>();
@@ -1327,7 +1326,7 @@ void main() {
       check(_ShowWindowAsync).isA<Function>();
     });
     test('SkipPointerFrameMessages can be instantiated', () {
-      check(SkipPointerFrameMessages_Wrapper).isA<Function>();
+      check(_SkipPointerFrameMessages).isA<Function>();
     });
     test('SoundSentry can be instantiated', () {
       check(_SoundSentry).isA<Function>();
@@ -1339,26 +1338,26 @@ void main() {
       check(_SwapMouseButton).isA<Function>();
     });
     test('SwitchDesktop can be instantiated', () {
-      check(SwitchDesktop_Wrapper).isA<Function>();
+      check(_SwitchDesktop).isA<Function>();
     });
     test('SwitchToThisWindow can be instantiated', () {
       check(_SwitchToThisWindow).isA<Function>();
     });
     test('SystemParametersInfo can be instantiated', () {
-      check(SystemParametersInfoW_Wrapper).isA<Function>();
+      check(_SystemParametersInfo).isA<Function>();
     });
     test(
       'SystemParametersInfoForDpi can be instantiated',
       skip: 14393 > windowsBuildNumber,
       () {
-        check(SystemParametersInfoForDpi_Wrapper).isA<Function>();
+        check(_SystemParametersInfoForDpi).isA<Function>();
       },
     );
     test('TabbedTextOut can be instantiated', () {
       check(_TabbedTextOut).isA<Function>();
     });
     test('TileWindows can be instantiated', () {
-      check(TileWindows_Wrapper).isA<Function>();
+      check(_TileWindows).isA<Function>();
     });
     test('ToAscii can be instantiated', () {
       check(_ToAscii).isA<Function>();
@@ -1373,13 +1372,13 @@ void main() {
       check(_ToUnicodeEx).isA<Function>();
     });
     test('TrackPopupMenu can be instantiated', () {
-      check(TrackPopupMenu_Wrapper).isA<Function>();
+      check(_TrackPopupMenu).isA<Function>();
     });
     test('TrackPopupMenuEx can be instantiated', () {
-      check(TrackPopupMenuEx_Wrapper).isA<Function>();
+      check(_TrackPopupMenuEx).isA<Function>();
     });
     test('TranslateAccelerator can be instantiated', () {
-      check(TranslateAcceleratorW_Wrapper).isA<Function>();
+      check(_TranslateAccelerator).isA<Function>();
     });
     test('TranslateMDISysAccel can be instantiated', () {
       check(_TranslateMDISysAccel).isA<Function>();
@@ -1388,28 +1387,28 @@ void main() {
       check(_TranslateMessage).isA<Function>();
     });
     test('UnhookWindowsHookEx can be instantiated', () {
-      check(UnhookWindowsHookEx_Wrapper).isA<Function>();
+      check(_UnhookWindowsHookEx).isA<Function>();
     });
     test('UnionRect can be instantiated', () {
       check(_UnionRect).isA<Function>();
     });
     test('UnloadKeyboardLayout can be instantiated', () {
-      check(UnloadKeyboardLayout_Wrapper).isA<Function>();
+      check(_UnloadKeyboardLayout).isA<Function>();
     });
     test('UnregisterClass can be instantiated', () {
-      check(UnregisterClassW_Wrapper).isA<Function>();
+      check(_UnregisterClass).isA<Function>();
     });
     test('UnregisterDeviceNotification can be instantiated', () {
-      check(UnregisterDeviceNotification_Wrapper).isA<Function>();
+      check(_UnregisterDeviceNotification).isA<Function>();
     });
     test('UnregisterHotKey can be instantiated', () {
-      check(UnregisterHotKey_Wrapper).isA<Function>();
+      check(_UnregisterHotKey).isA<Function>();
     });
     test('UnregisterPowerSettingNotification can be instantiated', () {
-      check(UnregisterPowerSettingNotification_Wrapper).isA<Function>();
+      check(_UnregisterPowerSettingNotification).isA<Function>();
     });
     test('UnregisterTouchWindow can be instantiated', () {
-      check(UnregisterTouchWindow_Wrapper).isA<Function>();
+      check(_UnregisterTouchWindow).isA<Function>();
     });
     test('UpdateLayeredWindowIndirect can be instantiated', () {
       check(_UpdateLayeredWindowIndirect).isA<Function>();
@@ -1418,7 +1417,7 @@ void main() {
       check(_UpdateWindow).isA<Function>();
     });
     test('UserHandleGrantAccess can be instantiated', () {
-      check(UserHandleGrantAccess_Wrapper).isA<Function>();
+      check(_UserHandleGrantAccess).isA<Function>();
     });
     test('ValidateRect can be instantiated', () {
       check(_ValidateRect).isA<Function>();
@@ -1436,7 +1435,7 @@ void main() {
       check(_WaitForInputIdle).isA<Function>();
     });
     test('WaitMessage can be instantiated', () {
-      check(WaitMessage_Wrapper).isA<Function>();
+      check(_WaitMessage).isA<Function>();
     });
     test('WindowFromDC can be instantiated', () {
       check(_WindowFromDC).isA<Function>();
@@ -1450,987 +1449,2895 @@ void main() {
   });
 }
 
-@Native<Int32 Function()>(symbol: 'AnyPopup')
-external int _AnyPopup();
+final _user32 = DynamicLibrary.open('user32.dll');
 
-@Native<Int32 Function(Pointer, Pointer)>(
-  symbol: 'AreDpiAwarenessContextsEqual',
-)
-external int _AreDpiAwarenessContextsEqual(
-  Pointer dpiContextA,
-  Pointer dpiContextB,
+final _ActivateKeyboardLayout = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('ActivateKeyboardLayout');
+
+final _AddClipboardFormatListener = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'AddClipboardFormatListener',
+    );
+
+final _AdjustWindowRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Uint32, Int32),
+      int Function(Pointer<RECT>, int, int)
+    >('AdjustWindowRect');
+
+final _AdjustWindowRectEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Uint32, Int32, Uint32),
+      int Function(Pointer<RECT>, int, int, int)
+    >('AdjustWindowRectEx');
+
+final _AdjustWindowRectExForDpi = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Uint32, Int32, Uint32, Uint32),
+      int Function(Pointer<RECT>, int, int, int, int)
+    >('AdjustWindowRectExForDpi');
+
+final _AllowSetForegroundWindow = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'AllowSetForegroundWindow',
+    );
+
+final _AnimateWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('AnimateWindow');
+
+final _AnyPopup = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'AnyPopup',
 );
 
-@Native<Int32 Function(Uint32, Uint32, Int32)>(symbol: 'AttachThreadInput')
-external int _AttachThreadInput(int idAttach, int idAttachTo, int fAttach);
+final _AppendMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, IntPtr, Pointer<Utf16>),
+      int Function(Pointer, int, int, Pointer<Utf16>)
+    >('AppendMenuW');
 
-@Native<Pointer Function(Pointer, Pointer<PAINTSTRUCT>)>(symbol: 'BeginPaint')
-external Pointer _BeginPaint(Pointer hWnd, Pointer<PAINTSTRUCT> lpPaint);
+final _AreDpiAwarenessContextsEqual = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('AreDpiAwarenessContextsEqual');
 
-@Native<Int32 Function(Pointer<MSG>, Int32)>(symbol: 'CallMsgFilterW')
-external int _CallMsgFilter(Pointer<MSG> lpMsg, int nCode);
+final _ArrangeIconicWindows = _user32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'ArrangeIconicWindows',
+    );
 
-@Native<IntPtr Function(Pointer, Int32, IntPtr, IntPtr)>(
-  symbol: 'CallNextHookEx',
-)
-external int _CallNextHookEx(Pointer hhk, int nCode, int wParam, int lParam);
+final _AttachThreadInput = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Int32),
+      int Function(int, int, int)
+    >('AttachThreadInput');
 
-@Native<
-  IntPtr Function(
-    Pointer<NativeFunction<WNDPROC>>,
-    Pointer,
-    Uint32,
-    IntPtr,
-    IntPtr,
-  )
->(symbol: 'CallWindowProcW')
-external int _CallWindowProc(
-  Pointer<NativeFunction<WNDPROC>> lpPrevWndFunc,
-  Pointer hWnd,
-  int msg,
-  int wParam,
-  int lParam,
+final _BeginDeferWindowPos = _user32
+    .lookupFunction<Pointer Function(Int32), Pointer Function(int)>(
+      'BeginDeferWindowPos',
+    );
+
+final _BeginPaint = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<PAINTSTRUCT>),
+      Pointer Function(Pointer, Pointer<PAINTSTRUCT>)
+    >('BeginPaint');
+
+final _BlockInput = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('BlockInput');
+
+final _BringWindowToTop = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'BringWindowToTop',
+    );
+
+final _BroadcastSystemMessage = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Uint32, IntPtr, IntPtr),
+      int Function(int, Pointer<Uint32>, int, int, int)
+    >('BroadcastSystemMessageW');
+
+final _BroadcastSystemMessageEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<Uint32>,
+        Uint32,
+        IntPtr,
+        IntPtr,
+        Pointer<BSMINFO>,
+      ),
+      int Function(int, Pointer<Uint32>, int, int, int, Pointer<BSMINFO>)
+    >('BroadcastSystemMessageExW');
+
+final _CalculatePopupWindowPosition = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<POINT>,
+        Pointer<SIZE>,
+        Uint32,
+        Pointer<RECT>,
+        Pointer<RECT>,
+      ),
+      int Function(
+        Pointer<POINT>,
+        Pointer<SIZE>,
+        int,
+        Pointer<RECT>,
+        Pointer<RECT>,
+      )
+    >('CalculatePopupWindowPosition');
+
+final _CallMsgFilter = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<MSG>, Int32),
+      int Function(Pointer<MSG>, int)
+    >('CallMsgFilterW');
+
+final _CallNextHookEx = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('CallNextHookEx');
+
+final _CallWindowProc = _user32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer<NativeFunction<WNDPROC>>,
+        Pointer,
+        Uint32,
+        IntPtr,
+        IntPtr,
+      ),
+      int Function(Pointer<NativeFunction<WNDPROC>>, Pointer, int, int, int)
+    >('CallWindowProcW');
+
+final _CascadeWindows = _user32
+    .lookupFunction<
+      Uint16 Function(Pointer, Uint32, Pointer<RECT>, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, Pointer<RECT>, int, Pointer<Pointer>)
+    >('CascadeWindows');
+
+final _ChangeClipboardChain = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('ChangeClipboardChain');
+
+final _ChangeDisplaySettings = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<DEVMODE>, Uint32),
+      int Function(Pointer<DEVMODE>, int)
+    >('ChangeDisplaySettingsW');
+
+final _ChangeDisplaySettingsEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+        Pointer,
+        Uint32,
+        Pointer,
+      ),
+      int Function(Pointer<Utf16>, Pointer<DEVMODE>, Pointer, int, Pointer)
+    >('ChangeDisplaySettingsExW');
+
+final _ChangeWindowMessageFilter = _user32
+    .lookupFunction<Int32 Function(Uint32, Uint32), int Function(int, int)>(
+      'ChangeWindowMessageFilter',
+    );
+
+final _ChangeWindowMessageFilterEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer<CHANGEFILTERSTRUCT>),
+      int Function(Pointer, int, int, Pointer<CHANGEFILTERSTRUCT>)
+    >('ChangeWindowMessageFilterEx');
+
+final _CheckDlgButton = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32),
+      int Function(Pointer, int, int)
+    >('CheckDlgButton');
+
+final _CheckRadioButton = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int)
+    >('CheckRadioButton');
+
+final _ChildWindowFromPoint = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, POINT),
+      Pointer Function(Pointer, POINT)
+    >('ChildWindowFromPoint');
+
+final _ChildWindowFromPointEx = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, POINT, Uint32),
+      Pointer Function(Pointer, POINT, int)
+    >('ChildWindowFromPointEx');
+
+final _ClientToScreen = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('ClientToScreen');
+
+final _ClipCursor = _user32
+    .lookupFunction<Int32 Function(Pointer<RECT>), int Function(Pointer<RECT>)>(
+      'ClipCursor',
+    );
+
+final _CloseClipboard = _user32
+    .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
+
+final _CloseDesktop = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseDesktop',
+    );
+
+final _CloseGestureInfoHandle = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseGestureInfoHandle',
+    );
+
+final _CloseTouchInputHandle = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseTouchInputHandle',
+    );
+
+final _CloseWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseWindow',
+    );
+
+final _CloseWindowStation = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseWindowStation',
+    );
+
+final _CopyAcceleratorTable = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<ACCEL>, Int32),
+      int Function(Pointer, Pointer<ACCEL>, int)
+    >('CopyAcceleratorTableW');
+
+final _CopyIcon = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'CopyIcon',
+    );
+
+final _CopyImage = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32, Int32, Int32, Uint32),
+      Pointer Function(Pointer, int, int, int, int)
+    >('CopyImage');
+
+final _CopyRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<RECT>, Pointer<RECT>)
+    >('CopyRect');
+
+final _CountClipboardFormats = _user32
+    .lookupFunction<Int32 Function(), int Function()>('CountClipboardFormats');
+
+final _CreateAcceleratorTable = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<ACCEL>, Int32),
+      Pointer Function(Pointer<ACCEL>, int)
+    >('CreateAcceleratorTableW');
+
+final _CreateCaret = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32, Int32),
+      int Function(Pointer, Pointer, int, int)
+    >('CreateCaret');
+
+final _CreateCursor = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32, Int32, Int32, Int32, Pointer, Pointer),
+      Pointer Function(Pointer, int, int, int, int, Pointer, Pointer)
+    >('CreateCursor');
+
+final _CreateDesktop = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+      )
+    >('CreateDesktopW');
+
+final _CreateDesktopEx = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Uint32,
+        Pointer,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        Pointer,
+      )
+    >('CreateDesktopExW');
+
+final _CreateDialogIndirectParam = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<DLGTEMPLATE>,
+        Pointer,
+        Pointer<NativeFunction<DLGPROC>>,
+        IntPtr,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<DLGTEMPLATE>,
+        Pointer,
+        Pointer<NativeFunction<DLGPROC>>,
+        int,
+      )
+    >('CreateDialogIndirectParamW');
+
+final _CreateIcon = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Int32,
+        Int32,
+        Uint8,
+        Uint8,
+        Pointer<Uint8>,
+        Pointer<Uint8>,
+      ),
+      Pointer Function(
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        Pointer<Uint8>,
+        Pointer<Uint8>,
+      )
+    >('CreateIcon');
+
+final _CreateIconFromResource = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Uint8>, Uint32, Int32, Uint32),
+      Pointer Function(Pointer<Uint8>, int, int, int)
+    >('CreateIconFromResource');
+
+final _CreateIconFromResourceEx = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Uint8>,
+        Uint32,
+        Int32,
+        Uint32,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      Pointer Function(Pointer<Uint8>, int, int, int, int, int, int)
+    >('CreateIconFromResourceEx');
+
+final _CreateIconIndirect = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<ICONINFO>),
+      Pointer Function(Pointer<ICONINFO>)
+    >('CreateIconIndirect');
+
+final _CreateMDIWindow = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer,
+        IntPtr,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        Pointer,
+        int,
+      )
+    >('CreateMDIWindowW');
+
+final _CreateMenu = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('CreateMenu');
+
+final _CreatePopupMenu = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('CreatePopupMenu');
+
+final _CreateWindowEx = _user32
+    .lookupFunction<
+      Pointer Function(
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer,
+      ),
+      Pointer Function(
+        int,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer,
+      )
+    >('CreateWindowExW');
+
+final _CreateWindowStation = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+      ),
+      Pointer Function(Pointer<Utf16>, int, int, Pointer<SECURITY_ATTRIBUTES>)
+    >('CreateWindowStationW');
+
+final _DeferWindowPos = _user32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer,
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      Pointer Function(Pointer, Pointer, Pointer, int, int, int, int, int)
+    >('DeferWindowPos');
+
+final _DefMDIChildProc = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('DefMDIChildProcW');
+
+final _DefRawInputProc = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer<Pointer<RAWINPUT>>, Int32, Uint32),
+      int Function(Pointer<Pointer<RAWINPUT>>, int, int)
+    >('DefRawInputProc');
+
+final _DefWindowProc = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('DefWindowProcW');
+
+final _DeleteMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('DeleteMenu');
+
+final _DestroyAcceleratorTable = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyAcceleratorTable',
+    );
+
+final _DestroyCaret = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'DestroyCaret',
 );
 
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'ChangeClipboardChain')
-external int _ChangeClipboardChain(Pointer hWndRemove, Pointer hWndNewNext);
+final _DestroyCursor = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyCursor',
+    );
 
-@Native<Int32 Function(Pointer<DEVMODE>, Uint32)>(
-  symbol: 'ChangeDisplaySettingsW',
-)
-external int _ChangeDisplaySettings(Pointer<DEVMODE> lpDevMode, int dwFlags);
+final _DestroyIcon = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyIcon',
+    );
 
-@Native<
-  Int32 Function(Pointer<Utf16>, Pointer<DEVMODE>, Pointer, Uint32, Pointer)
->(symbol: 'ChangeDisplaySettingsExW')
-external int _ChangeDisplaySettingsEx(
-  Pointer<Utf16> lpszDeviceName,
-  Pointer<DEVMODE> lpDevMode,
-  Pointer hwnd,
-  int dwflags,
-  Pointer lParam,
+final _DestroyMenu = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyMenu',
+    );
+
+final _DestroyWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DestroyWindow',
+    );
+
+final _DialogBoxIndirectParam = _user32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer,
+        Pointer<DLGTEMPLATE>,
+        Pointer,
+        Pointer<NativeFunction<DLGPROC>>,
+        IntPtr,
+      ),
+      int Function(
+        Pointer,
+        Pointer<DLGTEMPLATE>,
+        Pointer,
+        Pointer<NativeFunction<DLGPROC>>,
+        int,
+      )
+    >('DialogBoxIndirectParamW');
+
+final _DisableProcessWindowsGhosting = _user32
+    .lookupFunction<Void Function(), void Function()>(
+      'DisableProcessWindowsGhosting',
+    );
+
+final _DispatchMessage = _user32
+    .lookupFunction<IntPtr Function(Pointer<MSG>), int Function(Pointer<MSG>)>(
+      'DispatchMessageW',
+    );
+
+final _DragDetect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, POINT),
+      int Function(Pointer, POINT)
+    >('DragDetect');
+
+final _DrawAnimatedRects = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer, int, Pointer<RECT>, Pointer<RECT>)
+    >('DrawAnimatedRects');
+
+final _DrawCaption = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<RECT>, Uint32),
+      int Function(Pointer, Pointer, Pointer<RECT>, int)
+    >('DrawCaption');
+
+final _DrawEdge = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Uint32, Uint32),
+      int Function(Pointer, Pointer<RECT>, int, int)
+    >('DrawEdge');
+
+final _DrawFocusRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('DrawFocusRect');
+
+final _DrawFrameControl = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Uint32, Uint32),
+      int Function(Pointer, Pointer<RECT>, int, int)
+    >('DrawFrameControl');
+
+final _DrawIcon = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer),
+      int Function(Pointer, int, int, Pointer)
+    >('DrawIcon');
+
+final _DrawState = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Pointer<NativeFunction<DRAWSTATEPROC>>,
+        IntPtr,
+        IntPtr,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        Pointer<NativeFunction<DRAWSTATEPROC>>,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+      )
+    >('DrawStateW');
+
+final _DrawText = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Int32, Pointer<RECT>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int, Pointer<RECT>, int)
+    >('DrawTextW');
+
+final _DrawTextEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Int32,
+        Pointer<RECT>,
+        Uint32,
+        Pointer<DRAWTEXTPARAMS>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        Pointer<RECT>,
+        int,
+        Pointer<DRAWTEXTPARAMS>,
+      )
+    >('DrawTextExW');
+
+final _EmptyClipboard = _user32
+    .lookupFunction<Int32 Function(), int Function()>('EmptyClipboard');
+
+final _EnableMenuItem = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('EnableMenuItem');
+
+final _EnableMouseInPointer = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'EnableMouseInPointer',
+    );
+
+final _EnableNonClientDpiScaling = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'EnableNonClientDpiScaling',
+    );
+
+final _EnableScrollBar = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('EnableScrollBar');
+
+final _EnableWindow = _user32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'EnableWindow',
+    );
+
+final _EndDeferWindowPos = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'EndDeferWindowPos',
+    );
+
+final _EndDialog = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('EndDialog');
+
+final _EndMenu = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'EndMenu',
 );
 
-@Native<Pointer Function(Pointer, POINT)>(symbol: 'ChildWindowFromPoint')
-external Pointer _ChildWindowFromPoint(Pointer hWndParent, POINT point);
+final _EndPaint = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<PAINTSTRUCT>),
+      int Function(Pointer, Pointer<PAINTSTRUCT>)
+    >('EndPaint');
 
-@Native<Pointer Function(Pointer, POINT, Uint32)>(
-  symbol: 'ChildWindowFromPointEx',
-)
-external Pointer _ChildWindowFromPointEx(Pointer hwnd, POINT pt, int flags);
+final _EnumChildWindows = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<WNDENUMPROC>>, IntPtr),
+      int Function(Pointer, Pointer<NativeFunction<WNDENUMPROC>>, int)
+    >('EnumChildWindows');
 
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(symbol: 'ClientToScreen')
-external int _ClientToScreen(Pointer hWnd, Pointer<POINT> lpPoint);
+final _EnumClipboardFormats = _user32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>(
+      'EnumClipboardFormats',
+    );
 
-@Native<Int32 Function(Pointer, Pointer<ACCEL>, Int32)>(
-  symbol: 'CopyAcceleratorTableW',
-)
-external int _CopyAcceleratorTable(
-  Pointer hAccelSrc,
-  Pointer<ACCEL> lpAccelDst,
-  int cAccelEntries,
+final _EnumDesktopWindows = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<WNDENUMPROC>>, IntPtr),
+      int Function(Pointer, Pointer<NativeFunction<WNDENUMPROC>>, int)
+    >('EnumDesktopWindows');
+
+final _EnumDisplayDevices = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer<DISPLAY_DEVICE>, Uint32),
+      int Function(Pointer<Utf16>, int, Pointer<DISPLAY_DEVICE>, int)
+    >('EnumDisplayDevicesW');
+
+final _EnumDisplayMonitors = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<RECT>,
+        Pointer<NativeFunction<MONITORENUMPROC>>,
+        IntPtr,
+      ),
+      int Function(
+        Pointer,
+        Pointer<RECT>,
+        Pointer<NativeFunction<MONITORENUMPROC>>,
+        int,
+      )
+    >('EnumDisplayMonitors');
+
+final _EnumDisplaySettings = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer<DEVMODE>),
+      int Function(Pointer<Utf16>, int, Pointer<DEVMODE>)
+    >('EnumDisplaySettingsW');
+
+final _EnumDisplaySettingsEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer<DEVMODE>, Uint32),
+      int Function(Pointer<Utf16>, int, Pointer<DEVMODE>, int)
+    >('EnumDisplaySettingsExW');
+
+final _EnumThreadWindows = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<NativeFunction<WNDENUMPROC>>, IntPtr),
+      int Function(int, Pointer<NativeFunction<WNDENUMPROC>>, int)
+    >('EnumThreadWindows');
+
+final _EnumWindows = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<NativeFunction<WNDENUMPROC>>, IntPtr),
+      int Function(Pointer<NativeFunction<WNDENUMPROC>>, int)
+    >('EnumWindows');
+
+final _EqualRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<RECT>, Pointer<RECT>)
+    >('EqualRect');
+
+final _ExcludeUpdateRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('ExcludeUpdateRgn');
+
+final _FillRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Pointer),
+      int Function(Pointer, Pointer<RECT>, Pointer)
+    >('FillRect');
+
+final _FindWindow = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('FindWindowW');
+
+final _FindWindowEx = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('FindWindowExW');
+
+final _FrameRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Pointer),
+      int Function(Pointer, Pointer<RECT>, Pointer)
+    >('FrameRect');
+
+final _GetActiveWindow = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetActiveWindow');
+
+final _GetAltTabInfo = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Pointer<ALTTABINFO>,
+        Pointer<Utf16>,
+        Uint32,
+      ),
+      int Function(Pointer, int, Pointer<ALTTABINFO>, Pointer<Utf16>, int)
+    >('GetAltTabInfoW');
+
+final _GetAncestor = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('GetAncestor');
+
+final _GetAsyncKeyState = _user32
+    .lookupFunction<Int16 Function(Int32), int Function(int)>(
+      'GetAsyncKeyState',
+    );
+
+final _GetAwarenessFromDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetAwarenessFromDpiAwarenessContext',
+    );
+
+final _GetCapture = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetCapture');
+
+final _GetCaretBlinkTime = _user32
+    .lookupFunction<Uint32 Function(), int Function()>('GetCaretBlinkTime');
+
+final _GetCaretPos = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<POINT>),
+      int Function(Pointer<POINT>)
+    >('GetCaretPos');
+
+final _GetClassInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<WNDCLASS>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<WNDCLASS>)
+    >('GetClassInfoW');
+
+final _GetClassInfoEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<WNDCLASSEX>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<WNDCLASSEX>)
+    >('GetClassInfoExW');
+
+final _GetClassLongPtr = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32),
+      int Function(Pointer, int)
+    >('GetClassLongPtrW');
+
+final _GetClassName = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Int32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('GetClassNameW');
+
+final _GetClientRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('GetClientRect');
+
+final _GetClipboardData = _user32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'GetClipboardData',
+    );
+
+final _GetClipboardFormatName = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Utf16>, Int32),
+      int Function(int, Pointer<Utf16>, int)
+    >('GetClipboardFormatNameW');
+
+final _GetClipboardOwner = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetClipboardOwner',
+    );
+
+final _GetClipboardSequenceNumber = _user32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetClipboardSequenceNumber',
+    );
+
+final _GetClipboardViewer = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetClipboardViewer',
+    );
+
+final _GetClipCursor = _user32
+    .lookupFunction<Int32 Function(Pointer<RECT>), int Function(Pointer<RECT>)>(
+      'GetClipCursor',
+    );
+
+final _GetCursor = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetCursor');
+
+final _GetCursorInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<CURSORINFO>),
+      int Function(Pointer<CURSORINFO>)
+    >('GetCursorInfo');
+
+final _GetCursorPos = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<POINT>),
+      int Function(Pointer<POINT>)
+    >('GetCursorPos');
+
+final _GetDC = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetDC',
+    );
+
+final _GetDCEx = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, Uint32),
+      Pointer Function(Pointer, Pointer, int)
+    >('GetDCEx');
+
+final _GetDesktopWindow = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetDesktopWindow');
+
+final _GetDialogBaseUnits = _user32
+    .lookupFunction<Int32 Function(), int Function()>('GetDialogBaseUnits');
+
+final _GetDialogControlDpiChangeBehavior = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetDialogControlDpiChangeBehavior',
+    );
+
+final _GetDialogDpiChangeBehavior = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetDialogDpiChangeBehavior',
+    );
+
+final _GetDisplayAutoRotationPreferences = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>),
+      int Function(Pointer<Int32>)
+    >('GetDisplayAutoRotationPreferences');
+
+final _GetDlgItem = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32),
+      Pointer Function(Pointer, int)
+    >('GetDlgItem');
+
+final _GetDlgItemInt = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Int32>, Int32),
+      int Function(Pointer, int, Pointer<Int32>, int)
+    >('GetDlgItemInt');
+
+final _GetDlgItemText = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Utf16>, Int32),
+      int Function(Pointer, int, Pointer<Utf16>, int)
+    >('GetDlgItemTextW');
+
+final _GetDoubleClickTime = _user32
+    .lookupFunction<Uint32 Function(), int Function()>('GetDoubleClickTime');
+
+final _GetDpiForSystem = _user32
+    .lookupFunction<Uint32 Function(), int Function()>('GetDpiForSystem');
+
+final _GetDpiForWindow = _user32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetDpiForWindow',
+    );
+
+final _GetDpiFromDpiAwarenessContext = _user32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetDpiFromDpiAwarenessContext',
+    );
+
+final _GetFocus = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetFocus');
+
+final _GetForegroundWindow = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetForegroundWindow',
+    );
+
+final _GetGestureConfig = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<GESTURECONFIG>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        Pointer<Uint32>,
+        Pointer<GESTURECONFIG>,
+        int,
+      )
+    >('GetGestureConfig');
+
+final _GetGestureExtraArgs = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Uint8>),
+      int Function(Pointer, int, Pointer<Uint8>)
+    >('GetGestureExtraArgs');
+
+final _GetGestureInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<GESTUREINFO>),
+      int Function(Pointer, Pointer<GESTUREINFO>)
+    >('GetGestureInfo');
+
+final _GetGUIThreadInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<GUITHREADINFO>),
+      int Function(int, Pointer<GUITHREADINFO>)
+    >('GetGUIThreadInfo');
+
+final _GetIconInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<ICONINFO>),
+      int Function(Pointer, Pointer<ICONINFO>)
+    >('GetIconInfo');
+
+final _GetIconInfoEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<ICONINFOEX>),
+      int Function(Pointer, Pointer<ICONINFOEX>)
+    >('GetIconInfoExW');
+
+final _GetInputState = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'GetInputState',
 );
 
-@Native<Int32 Function(Pointer<RECT>, Pointer<RECT>)>(symbol: 'CopyRect')
-external int _CopyRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc);
+final _GetKeyboardLayout = _user32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'GetKeyboardLayout',
+    );
 
-@Native<IntPtr Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'DefMDIChildProcW',
-)
-external int _DefMDIChildProc(Pointer hWnd, int uMsg, int wParam, int lParam);
+final _GetKeyboardLayoutList = _user32
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<Pointer>),
+      int Function(int, Pointer<Pointer>)
+    >('GetKeyboardLayoutList');
 
-@Native<IntPtr Function(Pointer<Pointer<RAWINPUT>>, Int32, Uint32)>(
-  symbol: 'DefRawInputProc',
-)
-external int _DefRawInputProc(
-  Pointer<Pointer<RAWINPUT>> paRawInput,
-  int nInput,
-  int cbSizeHeader,
+final _GetKeyboardLayoutName = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('GetKeyboardLayoutNameW');
+
+final _GetKeyboardState = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint8>),
+      int Function(Pointer<Uint8>)
+    >('GetKeyboardState');
+
+final _GetKeyboardType = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'GetKeyboardType',
+    );
+
+final _GetKeyNameText = _user32
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<Utf16>, Int32),
+      int Function(int, Pointer<Utf16>, int)
+    >('GetKeyNameTextW');
+
+final _GetKeyState = _user32
+    .lookupFunction<Int16 Function(Int32), int Function(int)>('GetKeyState');
+
+final _GetLastInputInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<LASTINPUTINFO>),
+      int Function(Pointer<LASTINPUTINFO>)
+    >('GetLastInputInfo');
+
+final _GetLayeredWindowAttributes = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Pointer<Uint8>, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Uint8>, Pointer<Uint32>)
+    >('GetLayeredWindowAttributes');
+
+final _GetMenu = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetMenu',
+    );
+
+final _GetMenuBarInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<MENUBARINFO>),
+      int Function(Pointer, int, int, Pointer<MENUBARINFO>)
+    >('GetMenuBarInfo');
+
+final _GetMenuDefaultItem = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('GetMenuDefaultItem');
+
+final _GetMenuInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MENUINFO>),
+      int Function(Pointer, Pointer<MENUINFO>)
+    >('GetMenuInfo');
+
+final _GetMenuItemCount = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetMenuItemCount',
+    );
+
+final _GetMenuItemID = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32),
+      int Function(Pointer, int)
+    >('GetMenuItemID');
+
+final _GetMenuItemInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<MENUITEMINFO>),
+      int Function(Pointer, int, int, Pointer<MENUITEMINFO>)
+    >('GetMenuItemInfoW');
+
+final _GetMenuItemRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Uint32, Pointer<RECT>),
+      int Function(Pointer, Pointer, int, Pointer<RECT>)
+    >('GetMenuItemRect');
+
+final _GetMenuState = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('GetMenuState');
+
+final _GetMenuString = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Utf16>, Int32, Uint32),
+      int Function(Pointer, int, Pointer<Utf16>, int, int)
+    >('GetMenuStringW');
+
+final _GetMessage = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<MSG>, Pointer, Uint32, Uint32),
+      int Function(Pointer<MSG>, Pointer, int, int)
+    >('GetMessageW');
+
+final _GetMessageExtraInfo = _user32
+    .lookupFunction<IntPtr Function(), int Function()>('GetMessageExtraInfo');
+
+final _GetMessagePos = _user32
+    .lookupFunction<Uint32 Function(), int Function()>('GetMessagePos');
+
+final _GetMessageTime = _user32
+    .lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
+
+final _GetMonitorInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MONITORINFO>),
+      int Function(Pointer, Pointer<MONITORINFO>)
+    >('GetMonitorInfoW');
+
+final _GetMouseMovePointsEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<MOUSEMOVEPOINT>,
+        Pointer<MOUSEMOVEPOINT>,
+        Int32,
+        Uint32,
+      ),
+      int Function(
+        int,
+        Pointer<MOUSEMOVEPOINT>,
+        Pointer<MOUSEMOVEPOINT>,
+        int,
+        int,
+      )
+    >('GetMouseMovePointsEx');
+
+final _GetNextDlgGroupItem = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, Int32),
+      Pointer Function(Pointer, Pointer, int)
+    >('GetNextDlgGroupItem');
+
+final _GetNextDlgTabItem = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, Int32),
+      Pointer Function(Pointer, Pointer, int)
+    >('GetNextDlgTabItem');
+
+final _GetOpenClipboardWindow = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetOpenClipboardWindow',
+    );
+
+final _GetParent = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetParent',
+    );
+
+final _GetPhysicalCursorPos = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<POINT>),
+      int Function(Pointer<POINT>)
+    >('GetPhysicalCursorPos');
+
+final _GetPointerCursorId = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>),
+      int Function(int, Pointer<Uint32>)
+    >('GetPointerCursorId');
+
+final _GetPointerFrameInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_INFO>)
+    >('GetPointerFrameInfo');
+
+final _GetPointerFrameInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<POINTER_INFO>,
+      ),
+      int Function(int, Pointer<Uint32>, Pointer<Uint32>, Pointer<POINTER_INFO>)
+    >('GetPointerFrameInfoHistory');
+
+final _GetPointerFramePenInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_PEN_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_PEN_INFO>)
+    >('GetPointerFramePenInfo');
+
+final _GetPointerFramePenInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<POINTER_PEN_INFO>,
+      ),
+      int Function(
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<POINTER_PEN_INFO>,
+      )
+    >('GetPointerFramePenInfoHistory');
+
+final _GetPointerFrameTouchInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_TOUCH_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_TOUCH_INFO>)
+    >('GetPointerFrameTouchInfo');
+
+final _GetPointerFrameTouchInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<POINTER_TOUCH_INFO>,
+      ),
+      int Function(
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<POINTER_TOUCH_INFO>,
+      )
+    >('GetPointerFrameTouchInfoHistory');
+
+final _GetPointerInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<POINTER_INFO>),
+      int Function(int, Pointer<POINTER_INFO>)
+    >('GetPointerInfo');
+
+final _GetPointerInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_INFO>)
+    >('GetPointerInfoHistory');
+
+final _GetPointerInputTransform = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Pointer<INPUT_TRANSFORM>),
+      int Function(int, int, Pointer<INPUT_TRANSFORM>)
+    >('GetPointerInputTransform');
+
+final _GetPointerPenInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<POINTER_PEN_INFO>),
+      int Function(int, Pointer<POINTER_PEN_INFO>)
+    >('GetPointerPenInfo');
+
+final _GetPointerPenInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_PEN_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_PEN_INFO>)
+    >('GetPointerPenInfoHistory');
+
+final _GetPointerTouchInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<POINTER_TOUCH_INFO>),
+      int Function(int, Pointer<POINTER_TOUCH_INFO>)
+    >('GetPointerTouchInfo');
+
+final _GetPointerTouchInfoHistory = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>, Pointer<POINTER_TOUCH_INFO>),
+      int Function(int, Pointer<Uint32>, Pointer<POINTER_TOUCH_INFO>)
+    >('GetPointerTouchInfoHistory');
+
+final _GetPointerType = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Int32>),
+      int Function(int, Pointer<Int32>)
+    >('GetPointerType');
+
+final _GetPriorityClipboardFormat = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Int32),
+      int Function(Pointer<Uint32>, int)
+    >('GetPriorityClipboardFormat');
+
+final _GetProcessWindowStation = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetProcessWindowStation',
+    );
+
+final _GetProp = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('GetPropW');
+
+final _GetRawInputBuffer = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer<RAWINPUT>, Pointer<Uint32>, Uint32),
+      int Function(Pointer<RAWINPUT>, Pointer<Uint32>, int)
+    >('GetRawInputBuffer');
+
+final _GetRawInputData = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer, Pointer<Uint32>, Uint32),
+      int Function(Pointer, int, Pointer, Pointer<Uint32>, int)
+    >('GetRawInputData');
+
+final _GetRawInputDeviceInfo = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, Pointer<Uint32>)
+    >('GetRawInputDeviceInfoW');
+
+final _GetRawInputDeviceList = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer<RAWINPUTDEVICELIST>, Pointer<Uint32>, Uint32),
+      int Function(Pointer<RAWINPUTDEVICELIST>, Pointer<Uint32>, int)
+    >('GetRawInputDeviceList');
+
+final _GetRegisteredRawInputDevices = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer<RAWINPUTDEVICE>, Pointer<Uint32>, Uint32),
+      int Function(Pointer<RAWINPUTDEVICE>, Pointer<Uint32>, int)
+    >('GetRegisteredRawInputDevices');
+
+final _GetScrollBarInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<SCROLLBARINFO>),
+      int Function(Pointer, int, Pointer<SCROLLBARINFO>)
+    >('GetScrollBarInfo');
+
+final _GetScrollInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<SCROLLINFO>),
+      int Function(Pointer, int, Pointer<SCROLLINFO>)
+    >('GetScrollInfo');
+
+final _GetShellWindow = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetShellWindow');
+
+final _GetSubMenu = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32),
+      Pointer Function(Pointer, int)
+    >('GetSubMenu');
+
+final _GetSysColor = _user32
+    .lookupFunction<Uint32 Function(Int32), int Function(int)>('GetSysColor');
+
+final _GetSysColorBrush = _user32
+    .lookupFunction<Pointer Function(Int32), Pointer Function(int)>(
+      'GetSysColorBrush',
+    );
+
+final _GetSystemDpiForProcess = _user32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetSystemDpiForProcess',
+    );
+
+final _GetSystemMenu = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32),
+      Pointer Function(Pointer, int)
+    >('GetSystemMenu');
+
+final _GetSystemMetrics = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'GetSystemMetrics',
+    );
+
+final _GetSystemMetricsForDpi = _user32
+    .lookupFunction<Int32 Function(Int32, Uint32), int Function(int, int)>(
+      'GetSystemMetricsForDpi',
+    );
+
+final _GetTabbedTextExtent = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Int32, Int32, Pointer<Int32>),
+      int Function(Pointer, Pointer<Utf16>, int, int, Pointer<Int32>)
+    >('GetTabbedTextExtentW');
+
+final _GetThreadDesktop = _user32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'GetThreadDesktop',
+    );
+
+final _GetThreadDpiAwarenessContext = _user32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetThreadDpiAwarenessContext',
+    );
+
+final _GetThreadDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(), int Function()>(
+      'GetThreadDpiHostingBehavior',
+    );
+
+final _GetTitleBarInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<TITLEBARINFO>),
+      int Function(Pointer, Pointer<TITLEBARINFO>)
+    >('GetTitleBarInfo');
+
+final _GetTopWindow = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetTopWindow',
+    );
+
+final _GetTouchInputInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<TOUCHINPUT>, Int32),
+      int Function(Pointer, int, Pointer<TOUCHINPUT>, int)
+    >('GetTouchInputInfo');
+
+final _GetUnpredictedMessagePos = _user32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetUnpredictedMessagePos',
+    );
+
+final _GetUpdatedClipboardFormats = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Uint32, Pointer<Uint32>),
+      int Function(Pointer<Uint32>, int, Pointer<Uint32>)
+    >('GetUpdatedClipboardFormats');
+
+final _GetUpdateRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Int32),
+      int Function(Pointer, Pointer<RECT>, int)
+    >('GetUpdateRect');
+
+final _GetUpdateRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32),
+      int Function(Pointer, Pointer, int)
+    >('GetUpdateRgn');
+
+final _GetUserObjectInformation = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, int, Pointer<Uint32>)
+    >('GetUserObjectInformationW');
+
+final _GetWindow = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('GetWindow');
+
+final _GetWindowDC = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetWindowDC',
+    );
+
+final _GetWindowDisplayAffinity = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetWindowDisplayAffinity');
+
+final _GetWindowDpiAwarenessContext = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GetWindowDpiAwarenessContext',
+    );
+
+final _GetWindowDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetWindowDpiHostingBehavior',
+    );
+
+final _GetWindowInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<WINDOWINFO>),
+      int Function(Pointer, Pointer<WINDOWINFO>)
+    >('GetWindowInfo');
+
+final _GetWindowLongPtr = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32),
+      int Function(Pointer, int)
+    >('GetWindowLongPtrW');
+
+final _GetWindowModuleFileName = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('GetWindowModuleFileNameW');
+
+final _GetWindowPlacement = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<WINDOWPLACEMENT>),
+      int Function(Pointer, Pointer<WINDOWPLACEMENT>)
+    >('GetWindowPlacement');
+
+final _GetWindowRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('GetWindowRect');
+
+final _GetWindowRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('GetWindowRgn');
+
+final _GetWindowRgnBox = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('GetWindowRgnBox');
+
+final _GetWindowText = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Int32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('GetWindowTextW');
+
+final _GetWindowTextLength = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GetWindowTextLengthW',
+    );
+
+final _GetWindowThreadProcessId = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetWindowThreadProcessId');
+
+final _GrayString = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Pointer<NativeFunction<GRAYSTRINGPROC>>,
+        IntPtr,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        Pointer<NativeFunction<GRAYSTRINGPROC>>,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+      )
+    >('GrayStringW');
+
+final _HideCaret = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'HideCaret',
+    );
+
+final _HiliteMenuItem = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Uint32, Uint32),
+      int Function(Pointer, Pointer, int, int)
+    >('HiliteMenuItem');
+
+final _InflateRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Int32, Int32),
+      int Function(Pointer<RECT>, int, int)
+    >('InflateRect');
+
+final _InSendMessage = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'InSendMessage',
 );
 
-@Native<IntPtr Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'DefWindowProcW',
-)
-external int _DefWindowProc(Pointer hWnd, int msg, int wParam, int lParam);
+final _InSendMessageEx = _user32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'InSendMessageEx',
+    );
 
-@Native<Int32 Function(Pointer)>(symbol: 'DestroyAcceleratorTable')
-external int _DestroyAcceleratorTable(Pointer hAccel);
+final _InsertMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, IntPtr, Pointer<Utf16>),
+      int Function(Pointer, int, int, int, Pointer<Utf16>)
+    >('InsertMenuW');
 
-@Native<Void Function()>(symbol: 'DisableProcessWindowsGhosting')
-external void _DisableProcessWindowsGhosting();
+final _InsertMenuItem = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<MENUITEMINFO>),
+      int Function(Pointer, int, int, Pointer<MENUITEMINFO>)
+    >('InsertMenuItemW');
 
-@Native<IntPtr Function(Pointer<MSG>)>(symbol: 'DispatchMessageW')
-external int _DispatchMessage(Pointer<MSG> lpMsg);
+final _IntersectRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)
+    >('IntersectRect');
 
-@Native<Int32 Function(Pointer, POINT)>(symbol: 'DragDetect')
-external int _DragDetect(Pointer hwnd, POINT pt);
+final _InvalidateRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Int32),
+      int Function(Pointer, Pointer<RECT>, int)
+    >('InvalidateRect');
 
-@Native<Int32 Function(Pointer, Int32, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'DrawAnimatedRects',
-)
-external int _DrawAnimatedRects(
-  Pointer hwnd,
-  int idAni,
-  Pointer<RECT> lprcFrom,
-  Pointer<RECT> lprcTo,
+final _InvalidateRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32),
+      int Function(Pointer, Pointer, int)
+    >('InvalidateRgn');
+
+final _InvertRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('InvertRect');
+
+final _IsChild = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('IsChild');
+
+final _IsClipboardFormatAvailable = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'IsClipboardFormatAvailable',
+    );
+
+final _IsDialogMessage = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MSG>),
+      int Function(Pointer, Pointer<MSG>)
+    >('IsDialogMessageW');
+
+final _IsDlgButtonChecked = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32),
+      int Function(Pointer, int)
+    >('IsDlgButtonChecked');
+
+final _IsGUIThread = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('IsGUIThread');
+
+final _IsHungAppWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsHungAppWindow',
+    );
+
+final _IsIconic = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('IsIconic');
+
+final _IsImmersiveProcess = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsImmersiveProcess',
+    );
+
+final _IsMenu = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('IsMenu');
+
+final _IsMouseInPointerEnabled = _user32
+    .lookupFunction<Int32 Function(), int Function()>(
+      'IsMouseInPointerEnabled',
+    );
+
+final _IsProcessDPIAware = _user32
+    .lookupFunction<Int32 Function(), int Function()>('IsProcessDPIAware');
+
+final _IsRectEmpty = _user32
+    .lookupFunction<Int32 Function(Pointer<RECT>), int Function(Pointer<RECT>)>(
+      'IsRectEmpty',
+    );
+
+final _IsTouchWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('IsTouchWindow');
+
+final _IsValidDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsValidDpiAwarenessContext',
+    );
+
+final _IsWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('IsWindow');
+
+final _IsWindowEnabled = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsWindowEnabled',
+    );
+
+final _IsWindowUnicode = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsWindowUnicode',
+    );
+
+final _IsWindowVisible = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsWindowVisible',
+    );
+
+final _IsWow64Message = _user32
+    .lookupFunction<Int32 Function(), int Function()>('IsWow64Message');
+
+final _IsZoomed = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('IsZoomed');
+
+final _KillTimer = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('KillTimer');
+
+final _LoadAccelerators = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('LoadAcceleratorsW');
+
+final _LoadCursor = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('LoadCursorW');
+
+final _LoadCursorFromFile = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>)
+    >('LoadCursorFromFileW');
+
+final _LoadIcon = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('LoadIconW');
+
+final _LoadImage = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>, Uint32, Int32, Int32, Uint32),
+      Pointer Function(Pointer, Pointer<Utf16>, int, int, int, int)
+    >('LoadImageW');
+
+final _LoadKeyboardLayout = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Uint32),
+      Pointer Function(Pointer<Utf16>, int)
+    >('LoadKeyboardLayoutW');
+
+final _LoadMenu = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('LoadMenuW');
+
+final _LoadMenuIndirect = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'LoadMenuIndirectW',
+    );
+
+final _LoadString = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Utf16>, Int32),
+      int Function(Pointer, int, Pointer<Utf16>, int)
+    >('LoadStringW');
+
+final _LockSetForegroundWindow = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'LockSetForegroundWindow',
+    );
+
+final _LockWindowUpdate = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'LockWindowUpdate',
+    );
+
+final _LockWorkStation = _user32
+    .lookupFunction<Int32 Function(), int Function()>('LockWorkStation');
+
+final _LogicalToPhysicalPoint = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('LogicalToPhysicalPoint');
+
+final _LogicalToPhysicalPointForPerMonitorDPI = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('LogicalToPhysicalPointForPerMonitorDPI');
+
+final _LookupIconIdFromDirectory = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint8>, Int32),
+      int Function(Pointer<Uint8>, int)
+    >('LookupIconIdFromDirectory');
+
+final _LookupIconIdFromDirectoryEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint8>, Int32, Int32, Int32, Uint32),
+      int Function(Pointer<Uint8>, int, int, int, int)
+    >('LookupIconIdFromDirectoryEx');
+
+final _MapDialogRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('MapDialogRect');
+
+final _MapVirtualKey = _user32
+    .lookupFunction<Uint32 Function(Uint32, Uint32), int Function(int, int)>(
+      'MapVirtualKeyW',
+    );
+
+final _MapVirtualKeyEx = _user32
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Pointer),
+      int Function(int, int, Pointer)
+    >('MapVirtualKeyExW');
+
+final _MapWindowPoints = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer, Pointer<POINT>, int)
+    >('MapWindowPoints');
+
+final _MenuItemFromPoint = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, POINT),
+      int Function(Pointer, Pointer, POINT)
+    >('MenuItemFromPoint');
+
+final _MessageBeep = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>('MessageBeep');
+
+final _MessageBox = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, int)
+    >('MessageBoxW');
+
+final _MessageBoxEx = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Uint32, Uint16),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, int, int)
+    >('MessageBoxExW');
+
+final _ModifyMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, IntPtr, Pointer<Utf16>),
+      int Function(Pointer, int, int, int, Pointer<Utf16>)
+    >('ModifyMenuW');
+
+final _MonitorFromPoint = _user32
+    .lookupFunction<
+      Pointer Function(POINT, Uint32),
+      Pointer Function(POINT, int)
+    >('MonitorFromPoint');
+
+final _MonitorFromRect = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<RECT>, Uint32),
+      Pointer Function(Pointer<RECT>, int)
+    >('MonitorFromRect');
+
+final _MonitorFromWindow = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('MonitorFromWindow');
+
+final _MoveWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int, int)
+    >('MoveWindow');
+
+final _MsgWaitForMultipleObjects = _user32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Pointer>, Int32, Uint32, Uint32),
+      int Function(int, Pointer<Pointer>, int, int, int)
+    >('MsgWaitForMultipleObjects');
+
+final _MsgWaitForMultipleObjectsEx = _user32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Pointer>, Uint32, Uint32, Uint32),
+      int Function(int, Pointer<Pointer>, int, int, int)
+    >('MsgWaitForMultipleObjectsEx');
+
+final _NotifyWinEvent = _user32
+    .lookupFunction<
+      Void Function(Uint32, Pointer, Int32, Int32),
+      void Function(int, Pointer, int, int)
+    >('NotifyWinEvent');
+
+final _OemKeyScan = _user32
+    .lookupFunction<Uint32 Function(Uint16), int Function(int)>('OemKeyScan');
+
+final _OffsetRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Int32, Int32),
+      int Function(Pointer<RECT>, int, int)
+    >('OffsetRect');
+
+final _OpenClipboard = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'OpenClipboard',
+    );
+
+final _OpenDesktop = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Uint32, Int32, Uint32),
+      Pointer Function(Pointer<Utf16>, int, int, int)
+    >('OpenDesktopW');
+
+final _OpenIcon = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('OpenIcon');
+
+final _OpenInputDesktop = _user32
+    .lookupFunction<
+      Pointer Function(Uint32, Int32, Uint32),
+      Pointer Function(int, int, int)
+    >('OpenInputDesktop');
+
+final _OpenWindowStation = _user32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Int32, Uint32),
+      Pointer Function(Pointer<Utf16>, int, int)
+    >('OpenWindowStationW');
+
+final _PaintDesktop = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'PaintDesktop',
+    );
+
+final _PeekMessage = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<MSG>, Pointer, Uint32, Uint32, Uint32),
+      int Function(Pointer<MSG>, Pointer, int, int, int)
+    >('PeekMessageW');
+
+final _PhysicalToLogicalPoint = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('PhysicalToLogicalPoint');
+
+final _PhysicalToLogicalPointForPerMonitorDPI = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('PhysicalToLogicalPointForPerMonitorDPI');
+
+final _PostMessage = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('PostMessageW');
+
+final _PostQuitMessage = _user32
+    .lookupFunction<Void Function(Int32), void Function(int)>(
+      'PostQuitMessage',
+    );
+
+final _PostThreadMessage = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, IntPtr, IntPtr),
+      int Function(int, int, int, int)
+    >('PostThreadMessageW');
+
+final _PrintWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Uint32),
+      int Function(Pointer, Pointer, int)
+    >('PrintWindow');
+
+final _PrivateExtractIcons = _user32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Utf16>,
+        Int32,
+        Int32,
+        Int32,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+        Uint32,
+        Uint32,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        int,
+        int,
+        int,
+        Pointer<Pointer>,
+        Pointer<Uint32>,
+        int,
+        int,
+      )
+    >('PrivateExtractIconsW');
+
+final _PtInRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, POINT),
+      int Function(Pointer<RECT>, POINT)
+    >('PtInRect');
+
+final _RedrawWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>, Pointer, Uint32),
+      int Function(Pointer, Pointer<RECT>, Pointer, int)
+    >('RedrawWindow');
+
+final _RegisterClass = _user32
+    .lookupFunction<
+      Uint16 Function(Pointer<WNDCLASS>),
+      int Function(Pointer<WNDCLASS>)
+    >('RegisterClassW');
+
+final _RegisterClassEx = _user32
+    .lookupFunction<
+      Uint16 Function(Pointer<WNDCLASSEX>),
+      int Function(Pointer<WNDCLASSEX>)
+    >('RegisterClassExW');
+
+final _RegisterClipboardFormat = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('RegisterClipboardFormatW');
+
+final _RegisterDeviceNotification = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, Uint32),
+      Pointer Function(Pointer, Pointer, int)
+    >('RegisterDeviceNotificationW');
+
+final _RegisterHotKey = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32, Uint32),
+      int Function(Pointer, int, int, int)
+    >('RegisterHotKey');
+
+final _RegisterPowerSettingNotification = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Pointer<GUID>, Uint32),
+      int Function(Pointer, Pointer<GUID>, int)
+    >('RegisterPowerSettingNotification');
+
+final _RegisterRawInputDevices = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RAWINPUTDEVICE>, Uint32, Uint32),
+      int Function(Pointer<RAWINPUTDEVICE>, int, int)
+    >('RegisterRawInputDevices');
+
+final _RegisterTouchHitTestingWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('RegisterTouchHitTestingWindow');
+
+final _RegisterTouchWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('RegisterTouchWindow');
+
+final _RegisterWindowMessage = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('RegisterWindowMessageW');
+
+final _ReleaseCapture = _user32
+    .lookupFunction<Int32 Function(), int Function()>('ReleaseCapture');
+
+final _ReleaseDC = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('ReleaseDC');
+
+final _RemoveClipboardFormatListener = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'RemoveClipboardFormatListener',
+    );
+
+final _RemoveMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('RemoveMenu');
+
+final _RemoveProp = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>)
+    >('RemovePropW');
+
+final _ReplyMessage = _user32
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>('ReplyMessage');
+
+final _ScreenToClient = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('ScreenToClient');
+
+final _ScrollDC = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        Pointer<RECT>,
+        Pointer,
+        Pointer<RECT>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        Pointer<RECT>,
+        Pointer<RECT>,
+        Pointer,
+        Pointer<RECT>,
+      )
+    >('ScrollDC');
+
+final _ScrollWindow = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer, int, int, Pointer<RECT>, Pointer<RECT>)
+    >('ScrollWindow');
+
+final _ScrollWindowEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        Pointer<RECT>,
+        Pointer,
+        Pointer<RECT>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        Pointer<RECT>,
+        Pointer<RECT>,
+        Pointer,
+        Pointer<RECT>,
+        int,
+      )
+    >('ScrollWindowEx');
+
+final _SendDlgItemMessage = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int, int)
+    >('SendDlgItemMessageW');
+
+final _SendInput = _user32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<INPUT>, Int32),
+      int Function(int, Pointer<INPUT>, int)
+    >('SendInput');
+
+final _SendMessage = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('SendMessageW');
+
+final _SendMessageCallback = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        IntPtr,
+        IntPtr,
+        Pointer<NativeFunction<SENDASYNCPROC>>,
+        IntPtr,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        Pointer<NativeFunction<SENDASYNCPROC>>,
+        int,
+      )
+    >('SendMessageCallbackW');
+
+final _SendMessageTimeout = _user32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer,
+        Uint32,
+        IntPtr,
+        IntPtr,
+        Uint32,
+        Uint32,
+        Pointer<IntPtr>,
+      ),
+      int Function(Pointer, int, int, int, int, int, Pointer<IntPtr>)
+    >('SendMessageTimeoutW');
+
+final _SendNotifyMessage = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('SendNotifyMessageW');
+
+final _SetActiveWindow = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetActiveWindow',
+    );
+
+final _SetCapture = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetCapture',
+    );
+
+final _SetCaretBlinkTime = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'SetCaretBlinkTime',
+    );
+
+final _SetCaretPos = _user32
+    .lookupFunction<Int32 Function(Int32, Int32), int Function(int, int)>(
+      'SetCaretPos',
+    );
+
+final _SetClassLongPtr = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32, IntPtr),
+      int Function(Pointer, int, int)
+    >('SetClassLongPtrW');
+
+final _SetClipboardData = _user32
+    .lookupFunction<
+      Pointer Function(Uint32, Pointer),
+      Pointer Function(int, Pointer)
+    >('SetClipboardData');
+
+final _SetClipboardViewer = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetClipboardViewer',
+    );
+
+final _SetCoalescableTimer = _user32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer,
+        IntPtr,
+        Uint32,
+        Pointer<NativeFunction<TIMERPROC>>,
+        Uint32,
+      ),
+      int Function(Pointer, int, int, Pointer<NativeFunction<TIMERPROC>>, int)
+    >('SetCoalescableTimer');
+
+final _SetCursor = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetCursor',
+    );
+
+final _SetCursorPos = _user32
+    .lookupFunction<Int32 Function(Int32, Int32), int Function(int, int)>(
+      'SetCursorPos',
+    );
+
+final _SetDialogControlDpiChangeBehavior = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('SetDialogControlDpiChangeBehavior');
+
+final _SetDialogDpiChangeBehavior = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('SetDialogDpiChangeBehavior');
+
+final _SetDisplayAutoRotationPreferences = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'SetDisplayAutoRotationPreferences',
+    );
+
+final _SetDisplayConfig = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<DISPLAYCONFIG_PATH_INFO>,
+        Uint32,
+        Pointer<DISPLAYCONFIG_MODE_INFO>,
+        Uint32,
+      ),
+      int Function(
+        int,
+        Pointer<DISPLAYCONFIG_PATH_INFO>,
+        int,
+        Pointer<DISPLAYCONFIG_MODE_INFO>,
+        int,
+      )
+    >('SetDisplayConfig');
+
+final _SetDlgItemInt = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Uint32, Int32),
+      int Function(Pointer, int, int, int)
+    >('SetDlgItemInt');
+
+final _SetDlgItemText = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<Utf16>),
+      int Function(Pointer, int, Pointer<Utf16>)
+    >('SetDlgItemTextW');
+
+final _SetDoubleClickTime = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'SetDoubleClickTime',
+    );
+
+final _SetFocus = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetFocus',
+    );
+
+final _SetForegroundWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SetForegroundWindow',
+    );
+
+final _SetGestureConfig = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer<GESTURECONFIG>, Uint32),
+      int Function(Pointer, int, int, Pointer<GESTURECONFIG>, int)
+    >('SetGestureConfig');
+
+final _SetKeyboardState = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint8>),
+      int Function(Pointer<Uint8>)
+    >('SetKeyboardState');
+
+final _SetLayeredWindowAttributes = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint8, Uint32),
+      int Function(Pointer, int, int, int)
+    >('SetLayeredWindowAttributes');
+
+final _SetMenu = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('SetMenu');
+
+final _SetMenuDefaultItem = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetMenuDefaultItem');
+
+final _SetMenuInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MENUINFO>),
+      int Function(Pointer, Pointer<MENUINFO>)
+    >('SetMenuInfo');
+
+final _SetMenuItemBitmaps = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer, Pointer),
+      int Function(Pointer, int, int, Pointer, Pointer)
+    >('SetMenuItemBitmaps');
+
+final _SetMenuItemInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<MENUITEMINFO>),
+      int Function(Pointer, int, int, Pointer<MENUITEMINFO>)
+    >('SetMenuItemInfoW');
+
+final _SetMessageExtraInfo = _user32
+    .lookupFunction<IntPtr Function(IntPtr), int Function(int)>(
+      'SetMessageExtraInfo',
+    );
+
+final _SetParent = _user32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer),
+      Pointer Function(Pointer, Pointer)
+    >('SetParent');
+
+final _SetPhysicalCursorPos = _user32
+    .lookupFunction<Int32 Function(Int32, Int32), int Function(int, int)>(
+      'SetPhysicalCursorPos',
+    );
+
+final _SetProcessDPIAware = _user32
+    .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
+
+final _SetProcessDpiAwarenessContext = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SetProcessDpiAwarenessContext',
+    );
+
+final _SetProp = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer),
+      int Function(Pointer, Pointer<Utf16>, Pointer)
+    >('SetPropW');
+
+final _SetRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Int32, Int32, Int32, Int32),
+      int Function(Pointer<RECT>, int, int, int, int)
+    >('SetRect');
+
+final _SetRectEmpty = _user32
+    .lookupFunction<Int32 Function(Pointer<RECT>), int Function(Pointer<RECT>)>(
+      'SetRectEmpty',
+    );
+
+final _SetScrollInfo = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<SCROLLINFO>, Int32),
+      int Function(Pointer, int, Pointer<SCROLLINFO>, int)
+    >('SetScrollInfo');
+
+final _SetSysColors = _user32
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<Int32>, Pointer<Uint32>),
+      int Function(int, Pointer<Int32>, Pointer<Uint32>)
+    >('SetSysColors');
+
+final _SetSystemCursor = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetSystemCursor');
+
+final _SetThreadDpiAwarenessContext = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'SetThreadDpiAwarenessContext',
+    );
+
+final _SetThreadDpiHostingBehavior = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'SetThreadDpiHostingBehavior',
+    );
+
+final _SetTimer = _user32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer,
+        IntPtr,
+        Uint32,
+        Pointer<NativeFunction<TIMERPROC>>,
+      ),
+      int Function(Pointer, int, int, Pointer<NativeFunction<TIMERPROC>>)
+    >('SetTimer');
+
+final _SetUserObjectInformation = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('SetUserObjectInformationW');
+
+final _SetWindowDisplayAffinity = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetWindowDisplayAffinity');
+
+final _SetWindowLongPtr = _user32
+    .lookupFunction<
+      IntPtr Function(Pointer, Int32, IntPtr),
+      int Function(Pointer, int, int)
+    >('SetWindowLongPtrW');
+
+final _SetWindowPlacement = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<WINDOWPLACEMENT>),
+      int Function(Pointer, Pointer<WINDOWPLACEMENT>)
+    >('SetWindowPlacement');
+
+final _SetWindowPos = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32, Int32, Int32, Int32, Uint32),
+      int Function(Pointer, Pointer, int, int, int, int, int)
+    >('SetWindowPos');
+
+final _SetWindowRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32),
+      int Function(Pointer, Pointer, int)
+    >('SetWindowRgn');
+
+final _SetWindowsHookEx = _user32
+    .lookupFunction<
+      Pointer Function(
+        Int32,
+        Pointer<NativeFunction<HOOKPROC>>,
+        Pointer,
+        Uint32,
+      ),
+      Pointer Function(int, Pointer<NativeFunction<HOOKPROC>>, Pointer, int)
+    >('SetWindowsHookExW');
+
+final _SetWindowText = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('SetWindowTextW');
+
+final _ShowCaret = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'ShowCaret',
+    );
+
+final _ShowCursor = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('ShowCursor');
+
+final _ShowOwnedPopups = _user32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'ShowOwnedPopups',
+    );
+
+final _ShowWindow = _user32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'ShowWindow',
+    );
+
+final _ShowWindowAsync = _user32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'ShowWindowAsync',
+    );
+
+final _SkipPointerFrameMessages = _user32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'SkipPointerFrameMessages',
+    );
+
+final _SoundSentry = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'SoundSentry',
 );
 
-@Native<Int32 Function(Pointer, Pointer, Pointer<RECT>, Uint32)>(
-  symbol: 'DrawCaption',
-)
-external int _DrawCaption(
-  Pointer hwnd,
-  Pointer hdc,
-  Pointer<RECT> lprect,
-  int flags,
+final _SubtractRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)
+    >('SubtractRect');
+
+final _SwapMouseButton = _user32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'SwapMouseButton',
+    );
+
+final _SwitchDesktop = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SwitchDesktop',
+    );
+
+final _SwitchToThisWindow = _user32
+    .lookupFunction<Void Function(Pointer, Int32), void Function(Pointer, int)>(
+      'SwitchToThisWindow',
+    );
+
+final _SystemParametersInfo = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Pointer, Uint32),
+      int Function(int, int, Pointer, int)
+    >('SystemParametersInfoW');
+
+final _SystemParametersInfoForDpi = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Pointer, Uint32, Uint32),
+      int Function(int, int, Pointer, int, int)
+    >('SystemParametersInfoForDpi');
+
+final _TabbedTextOut = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<Utf16>,
+        Int32,
+        Int32,
+        Pointer<Int32>,
+        Int32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<Int32>,
+        int,
+      )
+    >('TabbedTextOutW');
+
+final _TileWindows = _user32
+    .lookupFunction<
+      Uint16 Function(Pointer, Uint32, Pointer<RECT>, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, Pointer<RECT>, int, Pointer<Pointer>)
+    >('TileWindows');
+
+final _ToAscii = _user32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Pointer<Uint8>, Pointer<Uint16>, Uint32),
+      int Function(int, int, Pointer<Uint8>, Pointer<Uint16>, int)
+    >('ToAscii');
+
+final _ToAsciiEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Uint32,
+        Pointer<Uint8>,
+        Pointer<Uint16>,
+        Uint32,
+        Pointer,
+      ),
+      int Function(int, int, Pointer<Uint8>, Pointer<Uint16>, int, Pointer)
+    >('ToAsciiEx');
+
+final _ToUnicode = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Uint32,
+        Pointer<Uint8>,
+        Pointer<Utf16>,
+        Int32,
+        Uint32,
+      ),
+      int Function(int, int, Pointer<Uint8>, Pointer<Utf16>, int, int)
+    >('ToUnicode');
+
+final _ToUnicodeEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Uint32,
+        Pointer<Uint8>,
+        Pointer<Utf16>,
+        Int32,
+        Uint32,
+        Pointer,
+      ),
+      int Function(int, int, Pointer<Uint8>, Pointer<Utf16>, int, int, Pointer)
+    >('ToUnicodeEx');
+
+final _TrackPopupMenu = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer<RECT>,
+      ),
+      int Function(Pointer, int, int, int, int, Pointer, Pointer<RECT>)
+    >('TrackPopupMenu');
+
+final _TrackPopupMenuEx = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer<TPMPARAMS>,
+      ),
+      int Function(Pointer, int, int, int, Pointer, Pointer<TPMPARAMS>)
+    >('TrackPopupMenuEx');
+
+final _TranslateAccelerator = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<MSG>),
+      int Function(Pointer, Pointer, Pointer<MSG>)
+    >('TranslateAcceleratorW');
+
+final _TranslateMDISysAccel = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MSG>),
+      int Function(Pointer, Pointer<MSG>)
+    >('TranslateMDISysAccel');
+
+final _TranslateMessage = _user32
+    .lookupFunction<Int32 Function(Pointer<MSG>), int Function(Pointer<MSG>)>(
+      'TranslateMessage',
+    );
+
+final _UnhookWindowsHookEx = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'UnhookWindowsHookEx',
+    );
+
+final _UnionRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)
+    >('UnionRect');
+
+final _UnloadKeyboardLayout = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'UnloadKeyboardLayout',
+    );
+
+final _UnregisterClass = _user32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer),
+      int Function(Pointer<Utf16>, Pointer)
+    >('UnregisterClassW');
+
+final _UnregisterDeviceNotification = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'UnregisterDeviceNotification',
+    );
+
+final _UnregisterHotKey = _user32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'UnregisterHotKey',
+    );
+
+final _UnregisterPowerSettingNotification = _user32
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>(
+      'UnregisterPowerSettingNotification',
+    );
+
+final _UnregisterTouchWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'UnregisterTouchWindow',
+    );
+
+final _UpdateLayeredWindowIndirect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<UPDATELAYEREDWINDOWINFO>),
+      int Function(Pointer, Pointer<UPDATELAYEREDWINDOWINFO>)
+    >('UpdateLayeredWindowIndirect');
+
+final _UpdateWindow = _user32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'UpdateWindow',
+    );
+
+final _UserHandleGrantAccess = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Int32),
+      int Function(Pointer, Pointer, int)
+    >('UserHandleGrantAccess');
+
+final _ValidateRect = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('ValidateRect');
+
+final _ValidateRgn = _user32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('ValidateRgn');
+
+final _VkKeyScan = _user32
+    .lookupFunction<Int16 Function(Uint16), int Function(int)>('VkKeyScanW');
+
+final _VkKeyScanEx = _user32
+    .lookupFunction<
+      Int16 Function(Uint16, Pointer),
+      int Function(int, Pointer)
+    >('VkKeyScanExW');
+
+final _WaitForInputIdle = _user32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('WaitForInputIdle');
+
+final _WaitMessage = _user32.lookupFunction<Int32 Function(), int Function()>(
+  'WaitMessage',
 );
 
-@Native<Int32 Function(Pointer, Pointer<RECT>, Uint32, Uint32)>(
-  symbol: 'DrawEdge',
-)
-external int _DrawEdge(Pointer hdc, Pointer<RECT> qrc, int edge, int grfFlags);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'DrawFocusRect')
-external int _DrawFocusRect(Pointer hDC, Pointer<RECT> lprc);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Uint32, Uint32)>(
-  symbol: 'DrawFrameControl',
-)
-external int _DrawFrameControl(
-  Pointer hdc,
-  Pointer<RECT> lprc,
-  int uType,
-  int uState,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer,
-    Pointer<NativeFunction<DRAWSTATEPROC>>,
-    IntPtr,
-    IntPtr,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Uint32,
-  )
->(symbol: 'DrawStateW')
-external int _DrawState(
-  Pointer hdc,
-  Pointer hbrFore,
-  Pointer<NativeFunction<DRAWSTATEPROC>> qfnCallBack,
-  int lData,
-  int wData,
-  int x,
-  int y,
-  int cx,
-  int cy,
-  int uFlags,
-);
-
-@Native<Int32 Function(Pointer, Pointer<Utf16>, Int32, Pointer<RECT>, Uint32)>(
-  symbol: 'DrawTextW',
-)
-external int _DrawText(
-  Pointer hdc,
-  Pointer<Utf16> lpchText,
-  int cchText,
-  Pointer<RECT> lprc,
-  int format,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Int32,
-    Pointer<RECT>,
-    Uint32,
-    Pointer<DRAWTEXTPARAMS>,
-  )
->(symbol: 'DrawTextExW')
-external int _DrawTextEx(
-  Pointer hdc,
-  Pointer<Utf16> lpchText,
-  int cchText,
-  Pointer<RECT> lprc,
-  int format,
-  Pointer<DRAWTEXTPARAMS> lpdtp,
-);
-
-@Native<Int32 Function(Pointer, Uint32, Uint32)>(symbol: 'EnableMenuItem')
-external int _EnableMenuItem(Pointer hMenu, int uIDEnableItem, int uEnable);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'EnableWindow')
-external int _EnableWindow(Pointer hWnd, int bEnable);
-
-@Native<Int32 Function(Pointer, Pointer<PAINTSTRUCT>)>(symbol: 'EndPaint')
-external int _EndPaint(Pointer hWnd, Pointer<PAINTSTRUCT> lpPaint);
-
-@Native<Int32 Function(Pointer, Pointer<NativeFunction<WNDENUMPROC>>, IntPtr)>(
-  symbol: 'EnumChildWindows',
-)
-external int _EnumChildWindows(
-  Pointer hWndParent,
-  Pointer<NativeFunction<WNDENUMPROC>> lpEnumFunc,
-  int lParam,
-);
-
-@Native<
-  Int32 Function(Pointer<Utf16>, Uint32, Pointer<DISPLAY_DEVICE>, Uint32)
->(symbol: 'EnumDisplayDevicesW')
-external int _EnumDisplayDevices(
-  Pointer<Utf16> lpDevice,
-  int iDevNum,
-  Pointer<DISPLAY_DEVICE> lpDisplayDevice,
-  int dwFlags,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<RECT>,
-    Pointer<NativeFunction<MONITORENUMPROC>>,
-    IntPtr,
-  )
->(symbol: 'EnumDisplayMonitors')
-external int _EnumDisplayMonitors(
-  Pointer hdc,
-  Pointer<RECT> lprcClip,
-  Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
-  int dwData,
-);
-
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer<DEVMODE>)>(
-  symbol: 'EnumDisplaySettingsW',
-)
-external int _EnumDisplaySettings(
-  Pointer<Utf16> lpszDeviceName,
-  int iModeNum,
-  Pointer<DEVMODE> lpDevMode,
-);
-
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer<DEVMODE>, Uint32)>(
-  symbol: 'EnumDisplaySettingsExW',
-)
-external int _EnumDisplaySettingsEx(
-  Pointer<Utf16> lpszDeviceName,
-  int iModeNum,
-  Pointer<DEVMODE> lpDevMode,
-  int dwFlags,
-);
-
-@Native<Int32 Function(Uint32, Pointer<NativeFunction<WNDENUMPROC>>, IntPtr)>(
-  symbol: 'EnumThreadWindows',
-)
-external int _EnumThreadWindows(
-  int dwThreadId,
-  Pointer<NativeFunction<WNDENUMPROC>> lpfn,
-  int lParam,
-);
-
-@Native<Int32 Function(Pointer<RECT>, Pointer<RECT>)>(symbol: 'EqualRect')
-external int _EqualRect(Pointer<RECT> lprc1, Pointer<RECT> lprc2);
-
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'ExcludeUpdateRgn')
-external int _ExcludeUpdateRgn(Pointer hDC, Pointer hWnd);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Pointer)>(symbol: 'FillRect')
-external int _FillRect(Pointer hDC, Pointer<RECT> lprc, Pointer hbr);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Pointer)>(symbol: 'FrameRect')
-external int _FrameRect(Pointer hDC, Pointer<RECT> lprc, Pointer hbr);
-
-@Native<Pointer Function()>(symbol: 'GetActiveWindow')
-external Pointer _GetActiveWindow();
-
-@Native<Pointer Function(Pointer, Uint32)>(symbol: 'GetAncestor')
-external Pointer _GetAncestor(Pointer hwnd, int gaFlags);
-
-@Native<Int16 Function(Int32)>(symbol: 'GetAsyncKeyState')
-external int _GetAsyncKeyState(int vKey);
-
-@Native<Int32 Function(Pointer)>(symbol: 'GetAwarenessFromDpiAwarenessContext')
-external int _GetAwarenessFromDpiAwarenessContext(Pointer value);
-
-@Native<Pointer Function()>(symbol: 'GetCapture')
-external Pointer _GetCapture();
-
-@Native<Uint32 Function()>(symbol: 'GetClipboardSequenceNumber')
-external int _GetClipboardSequenceNumber();
-
-@Native<Pointer Function()>(symbol: 'GetCursor')
-external Pointer _GetCursor();
-
-@Native<Pointer Function(Pointer)>(symbol: 'GetDC')
-external Pointer _GetDC(Pointer hWnd);
-
-@Native<Pointer Function(Pointer, Pointer, Uint32)>(symbol: 'GetDCEx')
-external Pointer _GetDCEx(Pointer hWnd, Pointer hrgnClip, int flags);
-
-@Native<Pointer Function()>(symbol: 'GetDesktopWindow')
-external Pointer _GetDesktopWindow();
-
-@Native<Int32 Function()>(symbol: 'GetDialogBaseUnits')
-external int _GetDialogBaseUnits();
-
-@Native<Int32 Function(Pointer<Int32>)>(
-  symbol: 'GetDisplayAutoRotationPreferences',
-)
-external int _GetDisplayAutoRotationPreferences(Pointer<Int32> pOrientation);
-
-@Native<Uint32 Function()>(symbol: 'GetDoubleClickTime')
-external int _GetDoubleClickTime();
-
-@Native<Uint32 Function()>(symbol: 'GetDpiForSystem')
-external int _GetDpiForSystem();
-
-@Native<Uint32 Function(Pointer)>(symbol: 'GetDpiForWindow')
-external int _GetDpiForWindow(Pointer hwnd);
-
-@Native<Uint32 Function(Pointer)>(symbol: 'GetDpiFromDpiAwarenessContext')
-external int _GetDpiFromDpiAwarenessContext(Pointer value);
-
-@Native<Pointer Function()>(symbol: 'GetFocus')
-external Pointer _GetFocus();
-
-@Native<Pointer Function()>(symbol: 'GetForegroundWindow')
-external Pointer _GetForegroundWindow();
-
-@Native<Int32 Function(Pointer, Pointer<ICONINFOEX>)>(symbol: 'GetIconInfoExW')
-external int _GetIconInfoEx(Pointer hicon, Pointer<ICONINFOEX> piconinfo);
-
-@Native<Int32 Function()>(symbol: 'GetInputState')
-external int _GetInputState();
-
-@Native<Pointer Function(Uint32)>(symbol: 'GetKeyboardLayout')
-external Pointer _GetKeyboardLayout(int idThread);
-
-@Native<Int16 Function(Int32)>(symbol: 'GetKeyState')
-external int _GetKeyState(int nVirtKey);
-
-@Native<Int32 Function(Pointer<LASTINPUTINFO>)>(symbol: 'GetLastInputInfo')
-external int _GetLastInputInfo(Pointer<LASTINPUTINFO> plii);
-
-@Native<Pointer Function(Pointer)>(symbol: 'GetMenu')
-external Pointer _GetMenu(Pointer hWnd);
-
-@Native<Uint32 Function(Pointer, Int32)>(symbol: 'GetMenuItemID')
-external int _GetMenuItemID(Pointer hMenu, int nPos);
-
-@Native<Uint32 Function(Pointer, Uint32, Uint32)>(symbol: 'GetMenuState')
-external int _GetMenuState(Pointer hMenu, int uId, int uFlags);
-
-@Native<Int32 Function(Pointer, Uint32, Pointer<Utf16>, Int32, Uint32)>(
-  symbol: 'GetMenuStringW',
-)
-external int _GetMenuString(
-  Pointer hMenu,
-  int uIDItem,
-  Pointer<Utf16> lpString,
-  int cchMax,
-  int flags,
-);
-
-@Native<IntPtr Function()>(symbol: 'GetMessageExtraInfo')
-external int _GetMessageExtraInfo();
-
-@Native<Uint32 Function()>(symbol: 'GetMessagePos')
-external int _GetMessagePos();
-
-@Native<Int32 Function()>(symbol: 'GetMessageTime')
-external int _GetMessageTime();
-
-@Native<Int32 Function(Pointer, Pointer<MONITORINFO>)>(
-  symbol: 'GetMonitorInfoW',
-)
-external int _GetMonitorInfo(Pointer hMonitor, Pointer<MONITORINFO> lpmi);
-
-@Native<Pointer Function(Pointer, Pointer<Utf16>)>(symbol: 'GetPropW')
-external Pointer _GetProp(Pointer hWnd, Pointer<Utf16> lpString);
-
-@Native<Uint32 Function(Pointer, Uint32, Pointer, Pointer<Uint32>, Uint32)>(
-  symbol: 'GetRawInputData',
-)
-external int _GetRawInputData(
-  Pointer hRawInput,
-  int uiCommand,
-  Pointer pData,
-  Pointer<Uint32> pcbSize,
-  int cbSizeHeader,
-);
-
-@Native<Pointer Function()>(symbol: 'GetShellWindow')
-external Pointer _GetShellWindow();
-
-@Native<Pointer Function(Pointer, Int32)>(symbol: 'GetSubMenu')
-external Pointer _GetSubMenu(Pointer hMenu, int nPos);
-
-@Native<Uint32 Function(Int32)>(symbol: 'GetSysColor')
-external int _GetSysColor(int nIndex);
-
-@Native<Pointer Function(Int32)>(symbol: 'GetSysColorBrush')
-external Pointer _GetSysColorBrush(int nIndex);
-
-@Native<Uint32 Function(Pointer)>(symbol: 'GetSystemDpiForProcess')
-external int _GetSystemDpiForProcess(Pointer hProcess);
-
-@Native<Pointer Function(Pointer, Int32)>(symbol: 'GetSystemMenu')
-external Pointer _GetSystemMenu(Pointer hWnd, int bRevert);
-
-@Native<Int32 Function(Int32)>(symbol: 'GetSystemMetrics')
-external int _GetSystemMetrics(int nIndex);
-
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Int32, Int32, Pointer<Int32>)>(
-  symbol: 'GetTabbedTextExtentW',
-)
-external int _GetTabbedTextExtent(
-  Pointer hdc,
-  Pointer<Utf16> lpString,
-  int chCount,
-  int nTabPositions,
-  Pointer<Int32> lpnTabStopPositions,
-);
-
-@Native<Pointer Function()>(symbol: 'GetThreadDpiAwarenessContext')
-external Pointer _GetThreadDpiAwarenessContext();
-
-@Native<Int32 Function()>(symbol: 'GetThreadDpiHostingBehavior')
-external int _GetThreadDpiHostingBehavior();
-
-@Native<Uint32 Function()>(symbol: 'GetUnpredictedMessagePos')
-external int _GetUnpredictedMessagePos();
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Int32)>(symbol: 'GetUpdateRect')
-external int _GetUpdateRect(Pointer hWnd, Pointer<RECT> lpRect, int bErase);
-
-@Native<Int32 Function(Pointer, Pointer, Int32)>(symbol: 'GetUpdateRgn')
-external int _GetUpdateRgn(Pointer hWnd, Pointer hRgn, int bErase);
-
-@Native<Pointer Function(Pointer)>(symbol: 'GetWindowDC')
-external Pointer _GetWindowDC(Pointer hWnd);
-
-@Native<Pointer Function(Pointer)>(symbol: 'GetWindowDpiAwarenessContext')
-external Pointer _GetWindowDpiAwarenessContext(Pointer hwnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'GetWindowDpiHostingBehavior')
-external int _GetWindowDpiHostingBehavior(Pointer hwnd);
-
-@Native<Uint32 Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'GetWindowModuleFileNameW',
-)
-external int _GetWindowModuleFileName(
-  Pointer hwnd,
-  Pointer<Utf16> pszFileName,
-  int cchFileNameMax,
-);
-
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'GetWindowRgn')
-external int _GetWindowRgn(Pointer hWnd, Pointer hRgn);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'GetWindowRgnBox')
-external int _GetWindowRgnBox(Pointer hWnd, Pointer<RECT> lprc);
-
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(
-  symbol: 'GetWindowThreadProcessId',
-)
-external int _GetWindowThreadProcessId(
-  Pointer hWnd,
-  Pointer<Uint32> lpdwProcessId,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer,
-    Pointer<NativeFunction<GRAYSTRINGPROC>>,
-    IntPtr,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'GrayStringW')
-external int _GrayString(
-  Pointer hDC,
-  Pointer hBrush,
-  Pointer<NativeFunction<GRAYSTRINGPROC>> lpOutputFunc,
-  int lpData,
-  int nCount,
-  int x,
-  int y,
-  int nWidth,
-  int nHeight,
-);
-
-@Native<Int32 Function(Pointer, Pointer, Uint32, Uint32)>(
-  symbol: 'HiliteMenuItem',
-)
-external int _HiliteMenuItem(
-  Pointer hWnd,
-  Pointer hMenu,
-  int uIDHiliteItem,
-  int uHilite,
-);
-
-@Native<Int32 Function(Pointer<RECT>, Int32, Int32)>(symbol: 'InflateRect')
-external int _InflateRect(Pointer<RECT> lprc, int dx, int dy);
-
-@Native<Int32 Function()>(symbol: 'InSendMessage')
-external int _InSendMessage();
-
-@Native<Uint32 Function(Pointer)>(symbol: 'InSendMessageEx')
-external int _InSendMessageEx(Pointer lpReserved);
-
-@Native<Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'IntersectRect',
-)
-external int _IntersectRect(
-  Pointer<RECT> lprcDst,
-  Pointer<RECT> lprcSrc1,
-  Pointer<RECT> lprcSrc2,
-);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Int32)>(symbol: 'InvalidateRect')
-external int _InvalidateRect(Pointer hWnd, Pointer<RECT> lpRect, int bErase);
-
-@Native<Int32 Function(Pointer, Pointer, Int32)>(symbol: 'InvalidateRgn')
-external int _InvalidateRgn(Pointer hWnd, Pointer hRgn, int bErase);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'InvertRect')
-external int _InvertRect(Pointer hDC, Pointer<RECT> lprc);
-
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'IsChild')
-external int _IsChild(Pointer hWndParent, Pointer hWnd);
-
-@Native<Int32 Function(Pointer, Pointer<MSG>)>(symbol: 'IsDialogMessageW')
-external int _IsDialogMessage(Pointer hDlg, Pointer<MSG> lpMsg);
-
-@Native<Uint32 Function(Pointer, Int32)>(symbol: 'IsDlgButtonChecked')
-external int _IsDlgButtonChecked(Pointer hDlg, int nIDButton);
-
-@Native<Int32 Function(Int32)>(symbol: 'IsGUIThread')
-external int _IsGUIThread(int bConvert);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsHungAppWindow')
-external int _IsHungAppWindow(Pointer hwnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsIconic')
-external int _IsIconic(Pointer hWnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsMenu')
-external int _IsMenu(Pointer hMenu);
-
-@Native<Int32 Function()>(symbol: 'IsMouseInPointerEnabled')
-external int _IsMouseInPointerEnabled();
-
-@Native<Int32 Function()>(symbol: 'IsProcessDPIAware')
-external int _IsProcessDPIAware();
-
-@Native<Int32 Function(Pointer<RECT>)>(symbol: 'IsRectEmpty')
-external int _IsRectEmpty(Pointer<RECT> lprc);
-
-@Native<Int32 Function(Pointer, Pointer<Uint32>)>(symbol: 'IsTouchWindow')
-external int _IsTouchWindow(Pointer hwnd, Pointer<Uint32> pulFlags);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsValidDpiAwarenessContext')
-external int _IsValidDpiAwarenessContext(Pointer value);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsWindow')
-external int _IsWindow(Pointer hWnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsWindowEnabled')
-external int _IsWindowEnabled(Pointer hWnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsWindowUnicode')
-external int _IsWindowUnicode(Pointer hWnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsWindowVisible')
-external int _IsWindowVisible(Pointer hWnd);
-
-@Native<Int32 Function()>(symbol: 'IsWow64Message')
-external int _IsWow64Message();
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsZoomed')
-external int _IsZoomed(Pointer hWnd);
-
-@Native<Int32 Function(Pointer)>(symbol: 'LockWindowUpdate')
-external int _LockWindowUpdate(Pointer hWndLock);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(
-  symbol: 'LogicalToPhysicalPoint',
-)
-external int _LogicalToPhysicalPoint(Pointer hWnd, Pointer<POINT> lpPoint);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(
-  symbol: 'LogicalToPhysicalPointForPerMonitorDPI',
-)
-external int _LogicalToPhysicalPointForPerMonitorDPI(
-  Pointer hWnd,
-  Pointer<POINT> lpPoint,
-);
-
-@Native<Uint32 Function(Uint32, Uint32)>(symbol: 'MapVirtualKeyW')
-external int _MapVirtualKey(int uCode, int uMapType);
-
-@Native<Uint32 Function(Uint32, Uint32, Pointer)>(symbol: 'MapVirtualKeyExW')
-external int _MapVirtualKeyEx(int uCode, int uMapType, Pointer dwhkl);
-
-@Native<Int32 Function(Pointer, Pointer, Pointer<POINT>, Uint32)>(
-  symbol: 'MapWindowPoints',
-)
-external int _MapWindowPoints(
-  Pointer hWndFrom,
-  Pointer hWndTo,
-  Pointer<POINT> lpPoints,
-  int cPoints,
-);
-
-@Native<Int32 Function(Pointer, Pointer, POINT)>(symbol: 'MenuItemFromPoint')
-external int _MenuItemFromPoint(Pointer hWnd, Pointer hMenu, POINT ptScreen);
-
-@Native<Pointer Function(POINT, Uint32)>(symbol: 'MonitorFromPoint')
-external Pointer _MonitorFromPoint(POINT pt, int dwFlags);
-
-@Native<Pointer Function(Pointer<RECT>, Uint32)>(symbol: 'MonitorFromRect')
-external Pointer _MonitorFromRect(Pointer<RECT> lprc, int dwFlags);
-
-@Native<Pointer Function(Pointer, Uint32)>(symbol: 'MonitorFromWindow')
-external Pointer _MonitorFromWindow(Pointer hwnd, int dwFlags);
-
-@Native<Void Function(Uint32, Pointer, Int32, Int32)>(symbol: 'NotifyWinEvent')
-external void _NotifyWinEvent(
-  int event,
-  Pointer hwnd,
-  int idObject,
-  int idChild,
-);
-
-@Native<Uint32 Function(Uint16)>(symbol: 'OemKeyScan')
-external int _OemKeyScan(int wOemChar);
-
-@Native<Int32 Function(Pointer<RECT>, Int32, Int32)>(symbol: 'OffsetRect')
-external int _OffsetRect(Pointer<RECT> lprc, int dx, int dy);
-
-@Native<Int32 Function(Pointer)>(symbol: 'PaintDesktop')
-external int _PaintDesktop(Pointer hdc);
-
-@Native<Int32 Function(Pointer<MSG>, Pointer, Uint32, Uint32, Uint32)>(
-  symbol: 'PeekMessageW',
-)
-external int _PeekMessage(
-  Pointer<MSG> lpMsg,
-  Pointer hWnd,
-  int wMsgFilterMin,
-  int wMsgFilterMax,
-  int wRemoveMsg,
-);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(
-  symbol: 'PhysicalToLogicalPoint',
-)
-external int _PhysicalToLogicalPoint(Pointer hWnd, Pointer<POINT> lpPoint);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(
-  symbol: 'PhysicalToLogicalPointForPerMonitorDPI',
-)
-external int _PhysicalToLogicalPointForPerMonitorDPI(
-  Pointer hWnd,
-  Pointer<POINT> lpPoint,
-);
-
-@Native<Void Function(Int32)>(symbol: 'PostQuitMessage')
-external void _PostQuitMessage(int nExitCode);
-
-@Native<Int32 Function(Pointer, Pointer, Uint32)>(symbol: 'PrintWindow')
-external int _PrintWindow(Pointer hwnd, Pointer hdcBlt, int nFlags);
-
-@Native<
-  Uint32 Function(
-    Pointer<Utf16>,
-    Int32,
-    Int32,
-    Int32,
-    Pointer<Pointer>,
-    Pointer<Uint32>,
-    Uint32,
-    Uint32,
-  )
->(symbol: 'PrivateExtractIconsW')
-external int _PrivateExtractIcons(
-  Pointer<Utf16> szFileName,
-  int nIconIndex,
-  int cxIcon,
-  int cyIcon,
-  Pointer<Pointer> phicon,
-  Pointer<Uint32> piconid,
-  int nIcons,
-  int flags,
-);
-
-@Native<Int32 Function(Pointer<RECT>, POINT)>(symbol: 'PtInRect')
-external int _PtInRect(Pointer<RECT> lprc, POINT pt);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>, Pointer, Uint32)>(
-  symbol: 'RedrawWindow',
-)
-external int _RedrawWindow(
-  Pointer hWnd,
-  Pointer<RECT> lprcUpdate,
-  Pointer hrgnUpdate,
-  int flags,
-);
-
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'ReleaseDC')
-external int _ReleaseDC(Pointer hWnd, Pointer hDC);
-
-@Native<Int32 Function(IntPtr)>(symbol: 'ReplyMessage')
-external int _ReplyMessage(int lResult);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(symbol: 'ScreenToClient')
-external int _ScreenToClient(Pointer hWnd, Pointer<POINT> lpPoint);
-
-@Native<IntPtr Function(Pointer, Int32, Uint32, IntPtr, IntPtr)>(
-  symbol: 'SendDlgItemMessageW',
-)
-external int _SendDlgItemMessage(
-  Pointer hDlg,
-  int nIDDlgItem,
-  int msg,
-  int wParam,
-  int lParam,
-);
-
-@Native<Pointer Function(Pointer)>(symbol: 'SetCapture')
-external Pointer _SetCapture(Pointer hWnd);
-
-@Native<Pointer Function(Pointer)>(symbol: 'SetCursor')
-external Pointer _SetCursor(Pointer hCursor);
-
-@Native<Int32 Function(Int32)>(symbol: 'SetDisplayAutoRotationPreferences')
-external int _SetDisplayAutoRotationPreferences(int orientation);
-
-@Native<
-  Int32 Function(
-    Uint32,
-    Pointer<DISPLAYCONFIG_PATH_INFO>,
-    Uint32,
-    Pointer<DISPLAYCONFIG_MODE_INFO>,
-    Uint32,
-  )
->(symbol: 'SetDisplayConfig')
-external int _SetDisplayConfig(
-  int numPathArrayElements,
-  Pointer<DISPLAYCONFIG_PATH_INFO> pathArray,
-  int numModeInfoArrayElements,
-  Pointer<DISPLAYCONFIG_MODE_INFO> modeInfoArray,
-  int flags,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'SetForegroundWindow')
-external int _SetForegroundWindow(Pointer hWnd);
-
-@Native<IntPtr Function(IntPtr)>(symbol: 'SetMessageExtraInfo')
-external int _SetMessageExtraInfo(int lParam);
-
-@Native<Int32 Function()>(symbol: 'SetProcessDPIAware')
-external int _SetProcessDPIAware();
-
-@Native<Int32 Function(Pointer<RECT>, Int32, Int32, Int32, Int32)>(
-  symbol: 'SetRect',
-)
-external int _SetRect(
-  Pointer<RECT> lprc,
-  int xLeft,
-  int yTop,
-  int xRight,
-  int yBottom,
-);
-
-@Native<Int32 Function(Pointer<RECT>)>(symbol: 'SetRectEmpty')
-external int _SetRectEmpty(Pointer<RECT> lprc);
-
-@Native<Int32 Function(Pointer, Int32, Pointer<SCROLLINFO>, Int32)>(
-  symbol: 'SetScrollInfo',
-)
-external int _SetScrollInfo(
-  Pointer hwnd,
-  int nBar,
-  Pointer<SCROLLINFO> lpsi,
-  int redraw,
-);
-
-@Native<Pointer Function(Pointer)>(symbol: 'SetThreadDpiAwarenessContext')
-external Pointer _SetThreadDpiAwarenessContext(Pointer dpiContext);
-
-@Native<Int32 Function(Int32)>(symbol: 'SetThreadDpiHostingBehavior')
-external int _SetThreadDpiHostingBehavior(int value);
-
-@Native<Int32 Function(Pointer, Pointer, Int32)>(symbol: 'SetWindowRgn')
-external int _SetWindowRgn(Pointer hWnd, Pointer hRgn, int bRedraw);
-
-@Native<Int32 Function(Int32)>(symbol: 'ShowCursor')
-external int _ShowCursor(int bShow);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'ShowWindow')
-external int _ShowWindow(Pointer hWnd, int nCmdShow);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'ShowWindowAsync')
-external int _ShowWindowAsync(Pointer hWnd, int nCmdShow);
-
-@Native<Int32 Function()>(symbol: 'SoundSentry')
-external int _SoundSentry();
-
-@Native<Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'SubtractRect',
-)
-external int _SubtractRect(
-  Pointer<RECT> lprcDst,
-  Pointer<RECT> lprcSrc1,
-  Pointer<RECT> lprcSrc2,
-);
-
-@Native<Int32 Function(Int32)>(symbol: 'SwapMouseButton')
-external int _SwapMouseButton(int fSwap);
-
-@Native<Void Function(Pointer, Int32)>(symbol: 'SwitchToThisWindow')
-external void _SwitchToThisWindow(Pointer hwnd, int fUnknown);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Pointer<Utf16>,
-    Int32,
-    Int32,
-    Pointer<Int32>,
-    Int32,
-  )
->(symbol: 'TabbedTextOutW')
-external int _TabbedTextOut(
-  Pointer hdc,
-  int x,
-  int y,
-  Pointer<Utf16> lpString,
-  int chCount,
-  int nTabPositions,
-  Pointer<Int32> lpnTabStopPositions,
-  int nTabOrigin,
-);
-
-@Native<
-  Int32 Function(Uint32, Uint32, Pointer<Uint8>, Pointer<Uint16>, Uint32)
->(symbol: 'ToAscii')
-external int _ToAscii(
-  int uVirtKey,
-  int uScanCode,
-  Pointer<Uint8> lpKeyState,
-  Pointer<Uint16> lpChar,
-  int uFlags,
-);
-
-@Native<
-  Int32 Function(
-    Uint32,
-    Uint32,
-    Pointer<Uint8>,
-    Pointer<Uint16>,
-    Uint32,
-    Pointer,
-  )
->(symbol: 'ToAsciiEx')
-external int _ToAsciiEx(
-  int uVirtKey,
-  int uScanCode,
-  Pointer<Uint8> lpKeyState,
-  Pointer<Uint16> lpChar,
-  int uFlags,
-  Pointer dwhkl,
-);
-
-@Native<
-  Int32 Function(Uint32, Uint32, Pointer<Uint8>, Pointer<Utf16>, Int32, Uint32)
->(symbol: 'ToUnicode')
-external int _ToUnicode(
-  int wVirtKey,
-  int wScanCode,
-  Pointer<Uint8> lpKeyState,
-  Pointer<Utf16> pwszBuff,
-  int cchBuff,
-  int wFlags,
-);
-
-@Native<
-  Int32 Function(
-    Uint32,
-    Uint32,
-    Pointer<Uint8>,
-    Pointer<Utf16>,
-    Int32,
-    Uint32,
-    Pointer,
-  )
->(symbol: 'ToUnicodeEx')
-external int _ToUnicodeEx(
-  int wVirtKey,
-  int wScanCode,
-  Pointer<Uint8> lpKeyState,
-  Pointer<Utf16> pwszBuff,
-  int cchBuff,
-  int wFlags,
-  Pointer dwhkl,
-);
-
-@Native<Int32 Function(Pointer, Pointer<MSG>)>(symbol: 'TranslateMDISysAccel')
-external int _TranslateMDISysAccel(Pointer hWndClient, Pointer<MSG> lpMsg);
-
-@Native<Int32 Function(Pointer<MSG>)>(symbol: 'TranslateMessage')
-external int _TranslateMessage(Pointer<MSG> lpMsg);
-
-@Native<Int32 Function(Pointer<RECT>, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'UnionRect',
-)
-external int _UnionRect(
-  Pointer<RECT> lprcDst,
-  Pointer<RECT> lprcSrc1,
-  Pointer<RECT> lprcSrc2,
-);
-
-@Native<Int32 Function(Pointer, Pointer<UPDATELAYEREDWINDOWINFO>)>(
-  symbol: 'UpdateLayeredWindowIndirect',
-)
-external int _UpdateLayeredWindowIndirect(
-  Pointer hWnd,
-  Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'UpdateWindow')
-external int _UpdateWindow(Pointer hWnd);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'ValidateRect')
-external int _ValidateRect(Pointer hWnd, Pointer<RECT> lpRect);
-
-@Native<Int32 Function(Pointer, Pointer)>(symbol: 'ValidateRgn')
-external int _ValidateRgn(Pointer hWnd, Pointer hRgn);
-
-@Native<Int16 Function(Uint16)>(symbol: 'VkKeyScanW')
-external int _VkKeyScan(int ch);
-
-@Native<Int16 Function(Uint16, Pointer)>(symbol: 'VkKeyScanExW')
-external int _VkKeyScanEx(int ch, Pointer dwhkl);
-
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'WaitForInputIdle')
-external int _WaitForInputIdle(Pointer hProcess, int dwMilliseconds);
-
-@Native<Pointer Function(Pointer)>(symbol: 'WindowFromDC')
-external Pointer _WindowFromDC(Pointer hDC);
-
-@Native<Pointer Function(POINT)>(symbol: 'WindowFromPhysicalPoint')
-external Pointer _WindowFromPhysicalPoint(POINT point);
-
-@Native<Pointer Function(POINT)>(symbol: 'WindowFromPoint')
-external Pointer _WindowFromPoint(POINT point);
+final _WindowFromDC = _user32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'WindowFromDC',
+    );
+
+final _WindowFromPhysicalPoint = _user32
+    .lookupFunction<Pointer Function(POINT), Pointer Function(POINT)>(
+      'WindowFromPhysicalPoint',
+    );
+
+final _WindowFromPoint = _user32
+    .lookupFunction<Pointer Function(POINT), Pointer Function(POINT)>(
+      'WindowFromPoint',
+    );

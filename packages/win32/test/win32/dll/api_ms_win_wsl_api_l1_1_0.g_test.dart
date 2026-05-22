@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -68,75 +68,78 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Int32)>(
-  symbol: 'WslConfigureDistribution',
-)
-external int _WslConfigureDistribution(
-  Pointer<Utf16> distributionName,
-  int defaultUID,
-  int wslDistributionFlags,
+final _api_ms_win_wsl_api_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-wsl-api-l1-1-0.dll',
 );
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Int32>,
-    Pointer<Pointer<Pointer<Utf8>>>,
-    Pointer<Uint32>,
-  )
->(symbol: 'WslGetDistributionConfiguration')
-external int _WslGetDistributionConfiguration(
-  Pointer<Utf16> distributionName,
-  Pointer<Uint32> distributionVersion,
-  Pointer<Uint32> defaultUID,
-  Pointer<Int32> wslDistributionFlags,
-  Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
-  Pointer<Uint32> defaultEnvironmentVariableCount,
-);
+final _WslConfigureDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Int32),
+      int Function(Pointer<Utf16>, int, int)
+    >('WslConfigureDistribution');
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'WslIsDistributionRegistered')
-external int _WslIsDistributionRegistered(Pointer<Utf16> distributionName);
+final _WslGetDistributionConfiguration = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Int32>,
+        Pointer<Pointer<Pointer<Utf8>>>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Int32>,
+        Pointer<Pointer<Pointer<Utf8>>>,
+        Pointer<Uint32>,
+      )
+    >('WslGetDistributionConfiguration');
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Int32,
-    Pointer,
-    Pointer,
-    Pointer,
-    Pointer<Pointer>,
-  )
->(symbol: 'WslLaunch')
-external int _WslLaunch(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
-  int useCurrentWorkingDirectory,
-  Pointer stdIn,
-  Pointer stdOut,
-  Pointer stdErr,
-  Pointer<Pointer> process,
-);
+final _WslIsDistributionRegistered = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('WslIsDistributionRegistered');
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Int32, Pointer<Uint32>)>(
-  symbol: 'WslLaunchInteractive',
-)
-external int _WslLaunchInteractive(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
-  int useCurrentWorkingDirectory,
-  Pointer<Uint32> exitCode,
-);
+final _WslLaunch = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Int32,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer<Pointer>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer<Pointer>,
+      )
+    >('WslLaunch');
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'WslRegisterDistribution',
-)
-external int _WslRegisterDistribution(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> tarGzFilename,
-);
+final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Int32, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('WslLaunchInteractive');
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'WslUnregisterDistribution')
-external int _WslUnregisterDistribution(Pointer<Utf16> distributionName);
+final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('WslRegisterDistribution');
+
+final _WslUnregisterDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('WslUnregisterDistribution');

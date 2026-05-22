@@ -12,7 +12,6 @@ void main() {
   group('WinType', () {
     testMethodParameterType('NtQueryObject', 'ObjectInformationClass', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('LONG');
       check(type.ffiType).equals('Int32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('OBJECT_INFORMATION_CLASS');
@@ -28,7 +27,6 @@ void main() {
 
     testMethodParameterType('BluetoothRemoveDevice', 'pAddress', (type) {
       check(type).isA<ConstPointerType>();
-      check(type.cType).equals('BLUETOOTH_ADDRESS*');
       check(type.ffiType).equals('Pointer<BLUETOOTH_ADDRESS>');
       check(type.dartType).equals('Pointer<BLUETOOTH_ADDRESS>');
       check(type.publicType).equals('Pointer<BLUETOOTH_ADDRESS>');
@@ -43,7 +41,6 @@ void main() {
 
     testMethodParameterType('SysAllocString', 'psz', (type) {
       check(type).isA<PCWSTRType>();
-      check(type.cType).equals('PCWSTR');
       check(type.ffiType).equals('Pointer<Utf16>');
       check(type.dartType).equals('Pointer<Utf16>');
       check(type.publicType).equals('PCWSTR');
@@ -61,7 +58,6 @@ void main() {
 
     testMethodParameterType('SysFreeString', 'bstrString', (type) {
       check(type).isA<BSTRType>();
-      check(type.cType).equals('BSTR');
       check(type.ffiType).equals('Pointer<Utf16>');
       check(type.dartType).equals('Pointer<Utf16>');
       check(type.publicType).equals('BSTR');
@@ -79,7 +75,6 @@ void main() {
 
     testMethodParameterType('WindowsConcatString', 'string1', (type) {
       check(type).isA<StringType>();
-      check(type.cType).equals('HSTRING');
       check(type.ffiType).equals('Pointer');
       check(type.dartType).equals('Pointer');
       check(type.publicType).equals('HSTRING');
@@ -97,7 +92,6 @@ void main() {
 
     testMethodParameterType('CreateDIBitmap', 'iUsage', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('DWORD');
       check(type.ffiType).equals('Uint32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('DIB_USAGE');
@@ -113,7 +107,6 @@ void main() {
 
     testMethodParameterType('EnumFontFamiliesExW', 'lpProc', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('FONTENUMPROCW');
       check(type.ffiType).equals('Pointer<NativeFunction<FONTENUMPROC>>');
       check(type.dartType).equals('Pointer<NativeFunction<FONTENUMPROC>>');
       check(type.publicType).equals('Pointer<NativeFunction<FONTENUMPROC>>');
@@ -129,7 +122,6 @@ void main() {
 
     testMethodParameterType('CredFree', 'Buffer', (type) {
       check(type).isA<ConstPointerType>();
-      check(type.cType).equals('void*');
       check(type.ffiType).equals('Pointer');
       check(type.dartType).equals('Pointer');
       check(type.publicType).equals('Pointer');
@@ -144,7 +136,6 @@ void main() {
 
     testMethodParameterType('GenerateConsoleCtrlEvent', 'dwCtrlEvent', (type) {
       check(type).isA<Uint32Type>();
-      check(type.cType).equals('unsigned long');
       check(type.ffiType).equals('Uint32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('int');
@@ -159,7 +150,6 @@ void main() {
 
     testMethodParameterType('SymEnumSymbolsW', 'EnumSymbolsCallback', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('PSYM_ENUMERATESYMBOLS_CALLBACKW');
       check(
         type.ffiType,
       ).equals('Pointer<NativeFunction<PSYM_ENUMERATESYMBOLS_CALLBACK>>');
@@ -181,7 +171,6 @@ void main() {
 
     testMethodParameterType('ReportEventW', 'wType', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('USHORT');
       check(type.ffiType).equals('Uint16');
       check(type.dartType).equals('int');
       check(type.publicType).equals('REPORT_EVENT_TYPE');
@@ -197,7 +186,6 @@ void main() {
 
     testMethodParameterType('GetActiveObject', 'ppunk', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('IUnknown*');
       check(type.ffiType).equals('Pointer<VTablePointer>');
       check(type.dartType).equals('Pointer<VTablePointer>');
       check(type.publicType).equals('Pointer<VTablePointer>');
@@ -212,7 +200,6 @@ void main() {
 
     testMethodParameterType('CredReadW', 'Credential', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('CREDENTIALW**');
       check(type.ffiType).equals('Pointer<Pointer<CREDENTIAL>>');
       check(type.dartType).equals('Pointer<Pointer<CREDENTIAL>>');
       check(type.publicType).equals('Pointer<Pointer<CREDENTIAL>>');
@@ -227,7 +214,6 @@ void main() {
 
     testMethodParameterType('SetFilePointerEx', 'liDistanceToMove', (type) {
       check(type).isA<Int64Type>();
-      check(type.cType).equals('long long');
       check(type.ffiType).equals('Int64');
       check(type.dartType).equals('int');
       check(type.publicType).equals('int');
@@ -242,7 +228,6 @@ void main() {
 
     testMethodParameterType('CoCreateInstance', 'pUnkOuter', (type) {
       check(type).isA<IUnknownType>();
-      check(type.cType).equals('IUnknown');
       check(type.dartType).equals('VTablePointer');
       check(type.ffiType).equals('VTablePointer');
       check(type.publicType).equals('IUnknown');
@@ -258,7 +243,6 @@ void main() {
 
     testMethodParameterType('CoSetProxyBlanket', 'pProxy', (type) {
       check(type).isA<IUnknownType>();
-      check(type.cType).equals('IUnknown');
       check(type.dartType).equals('VTablePointer');
       check(type.ffiType).equals('VTablePointer');
       check(type.publicType).equals('IUnknown');
@@ -274,7 +258,6 @@ void main() {
 
     testMethodParameterType('CreateAntiMoniker', 'ppmk', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('IMoniker*');
       check(type.ffiType).equals('Pointer<VTablePointer>');
       check(type.dartType).equals('Pointer<VTablePointer>');
       check(type.publicType).equals('Pointer<VTablePointer>');
@@ -289,7 +272,6 @@ void main() {
 
     testMethodParameterType('GetNamedPipeInfo', 'lpFlags', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('DWORD*');
       check(type.ffiType).equals('Pointer<Uint32>');
       check(type.dartType).equals('Pointer<Uint32>');
       check(type.publicType).equals('Pointer<Uint32>');
@@ -307,7 +289,6 @@ void main() {
       'lpAttributeList',
       (type) {
         check(type).isA<TypeDefType>();
-        check(type.cType).equals('LPPROC_THREAD_ATTRIBUTE_LIST');
         check(type.ffiType).equals('Pointer');
         check(type.dartType).equals('Pointer');
         check(type.publicType).equals('LPPROC_THREAD_ATTRIBUTE_LIST');
@@ -325,7 +306,6 @@ void main() {
 
     testMethodParameterType('ChooseFontW', 'param0', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('CHOOSEFONTW*');
       check(type.ffiType).equals('Pointer<CHOOSEFONT>');
       check(type.dartType).equals('Pointer<CHOOSEFONT>');
       check(type.publicType).equals('Pointer<CHOOSEFONT>');
@@ -340,7 +320,6 @@ void main() {
 
     testMethodParameterType('GetKeyboardState', 'lpKeyState', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('unsigned char*');
       check(type.ffiType).equals('Pointer<Uint8>');
       check(type.dartType).equals('Pointer<Uint8>');
       check(type.publicType).equals('Pointer<Uint8>');
@@ -354,7 +333,6 @@ void main() {
 
     testMethodParameterType('GetKeyNameTextA', 'lpString', (type) {
       check(type).isA<PSTRType>();
-      check(type.cType).equals('PSTR');
       check(type.ffiType).equals('Pointer<Utf8>');
       check(type.dartType).equals('Pointer<Utf8>');
       check(type.publicType).equals('PSTR');
@@ -372,7 +350,6 @@ void main() {
 
     testMethodParameterType('SHGetKnownFolderPath', 'ppszPath', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('PWSTR*');
       check(type.ffiType).equals('Pointer<Pointer<Utf16>>');
       check(type.dartType).equals('Pointer<Pointer<Utf16>>');
       check(type.publicType).equals('Pointer<Pointer<Utf16>>');
@@ -387,7 +364,6 @@ void main() {
 
     testMethodParameterType('PSPropertyBag_WriteGUID', 'value', (type) {
       check(type).isA<ConstPointerType>();
-      check(type.cType).equals('GUID*');
       check(type.ffiType).equals('Pointer<GUID>');
       check(type.dartType).equals('Pointer<GUID>');
       check(type.publicType).equals('Pointer<GUID>');
@@ -402,7 +378,6 @@ void main() {
 
     testMethodParameterType('CloseWindow', 'hWnd', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('HWND');
       check(type.ffiType).equals('Pointer');
       check(type.dartType).equals('Pointer');
       check(type.publicType).equals('HWND');
@@ -419,7 +394,6 @@ void main() {
 
     testMethodParameterType('GetWindowTextW', 'lpString', (type) {
       check(type).isA<PWSTRType>();
-      check(type.cType).equals('PWSTR');
       check(type.ffiType).equals('Pointer<Utf16>');
       check(type.dartType).equals('Pointer<Utf16>');
       check(type.publicType).equals('PWSTR');
@@ -437,7 +411,6 @@ void main() {
 
     testMethodParameterType('CascadeWindows', 'lpKids', (type) {
       check(type).isA<ConstPointerType>();
-      check(type.cType).equals('HWND*');
       check(type.ffiType).equals('Pointer<Pointer>');
       check(type.dartType).equals('Pointer<Pointer>');
       check(type.publicType).equals('Pointer<Pointer>');
@@ -452,7 +425,6 @@ void main() {
 
     testMethodReturnType('NtQueryObject', (type) {
       check(type).isA<NTSTATUSType>();
-      check(type.cType).equals('NTSTATUS');
       check(type.ffiType).equals('Int32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('NTSTATUS');
@@ -470,7 +442,6 @@ void main() {
 
     testMethodReturnType('CreateCompatibleDC', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('HDC');
       check(type.ffiType).equals('Pointer');
       check(type.dartType).equals('Pointer');
       check(type.publicType).equals('HDC');
@@ -487,7 +458,6 @@ void main() {
 
     testMethodReturnType('CredFree', (type) {
       check(type).isA<VoidType>();
-      check(type.cType).equals('void');
       check(type.ffiType).equals('Void');
       check(type.dartType).equals('void');
       check(type.publicType).equals('void');
@@ -503,7 +473,6 @@ void main() {
 
     testMethodReturnType('CoInitialize', (type) {
       check(type).isA<HRESULTType>();
-      check(type.cType).equals('HRESULT');
       check(type.ffiType).equals('Int32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('HRESULT');
@@ -520,7 +489,6 @@ void main() {
 
     testMethodReturnType('GetProcAddress', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('FARPROC');
       check(type.ffiType).equals('FARPROC');
       check(type.dartType).equals('FARPROC');
       check(type.publicType).equals('FARPROC');
@@ -536,7 +504,6 @@ void main() {
 
     testMethodReturnType('GetCurrentProcess', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('HANDLE');
       check(type.ffiType).equals('Pointer');
       check(type.dartType).equals('Pointer');
       check(type.publicType).equals('HANDLE');
@@ -553,7 +520,6 @@ void main() {
 
     testStructFieldType('ACCESS_STATE', 'ObjectName', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('UNICODE_STRING');
       check(type.ffiType).equals('UNICODE_STRING');
       check(type.dartType).equals('UNICODE_STRING');
       check(type.publicType).equals('UNICODE_STRING');
@@ -570,7 +536,6 @@ void main() {
 
     testStructFieldType('BLUETOOTH_RADIO_INFO', 'szName', (type) {
       check(type).isA<ArrayType>();
-      check(type.cType).equals('char arr[248]');
       check(type.ffiType).equals('Array<Uint16>');
       check(type.dartType).equals('Array<Uint16>');
       check(type.publicType).equals('Array<Uint16>');
@@ -585,7 +550,6 @@ void main() {
 
     testStructFieldType('DWM_BLURBEHIND', 'fEnable', (type) {
       check(type).isA<BOOLType>();
-      check(type.cType).equals('BOOL');
       check(type.ffiType).equals('Int32');
       check(type.dartType).equals('int');
       check(type.publicType).equals('bool');
@@ -603,7 +567,6 @@ void main() {
 
     testStructFieldType('BITMAPINFO', 'bmiColors', (type) {
       check(type).isA<ArrayType>();
-      check(type.cType).equals('RGBQUAD arr[1]');
       check(type.ffiType).equals('Array<RGBQUAD>');
       check(type.dartType).equals('Array<RGBQUAD>');
       check(type.publicType).equals('Array<RGBQUAD>');
@@ -618,7 +581,6 @@ void main() {
 
     testStructFieldType('YAMAHA_ADPCMWAVEFORMAT', 'wfx', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('WAVEFORMATEX');
       check(type.ffiType).equals('WAVEFORMATEX');
       check(type.dartType).equals('WAVEFORMATEX');
       check(type.publicType).equals('WAVEFORMATEX');
@@ -635,7 +597,6 @@ void main() {
 
     testStructFieldType('DHCP_ALL_OPTIONS', 'VendorOptions', (type) {
       check(type).isA<MutablePointerType>();
-      check(type.cType).equals('_Anonymous_e__Struct*');
       check(type.ffiType).equals('Pointer<DHCP_ALL_OPTIONS_0>');
       check(type.dartType).equals('Pointer<DHCP_ALL_OPTIONS_0>');
       check(type.publicType).equals('Pointer<DHCP_ALL_OPTIONS_0>');
@@ -650,7 +611,6 @@ void main() {
 
     testStructFieldType('DOT11_NETWORK_LIST', 'Network', (type) {
       check(type).isA<ArrayType>();
-      check(type.cType).equals('DOT11_NETWORK arr[1]');
       check(type.ffiType).equals('Array<DOT11_NETWORK>');
       check(type.dartType).equals('Array<DOT11_NETWORK>');
       check(type.publicType).equals('Array<DOT11_NETWORK>');
@@ -665,7 +625,6 @@ void main() {
 
     testStructFieldType('WLAN_RAW_DATA_LIST', 'DataList', (type) {
       check(type).isA<ArrayType>();
-      check(type.cType).equals('_Anonymous_e__Struct arr[1]');
       check(type.ffiType).equals('Array<WLAN_RAW_DATA_LIST_0>');
       check(type.dartType).equals('Array<WLAN_RAW_DATA_LIST_0>');
       check(type.publicType).equals('Array<WLAN_RAW_DATA_LIST_0>');
@@ -680,7 +639,6 @@ void main() {
 
     testStructFieldType('STATSTG', 'cbSize', (type) {
       check(type).isA<Uint64Type>();
-      check(type.cType).equals('unsigned long long');
       check(type.ffiType).equals('Uint64');
       check(type.dartType).equals('int');
       check(type.publicType).equals('int');
@@ -695,7 +653,6 @@ void main() {
 
     testStructFieldType('MAGCOLOREFFECT', 'transform', (type) {
       check(type).isA<ArrayType>();
-      check(type.cType).equals('float arr[25]');
       check(type.ffiType).equals('Array<Float>');
       check(type.dartType).equals('Array<Float>');
       check(type.publicType).equals('Array<Float>');
@@ -710,7 +667,6 @@ void main() {
 
     testStructFieldType('DEVMODEW', 'Anonymous1', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('_Anonymous1_e__Union');
       check(type.ffiType).equals('DEVMODE_0');
       check(type.dartType).equals('DEVMODE_0');
       check(type.publicType).equals('DEVMODE_0');
@@ -727,7 +683,6 @@ void main() {
 
     testStructFieldType('DEVMODEW', 'Anonymous2', (type) {
       check(type).isA<TypeDefType>();
-      check(type.cType).equals('_Anonymous2_e__Union');
       check(type.ffiType).equals('DEVMODE_1');
       check(type.dartType).equals('DEVMODE_1');
       check(type.publicType).equals('DEVMODE_1');

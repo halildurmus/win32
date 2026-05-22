@@ -3,12 +3,10 @@ import 'package:winmd/winmd.dart';
 
 import '../docs/api_details.dart';
 import '../extensions/collection.dart';
-import '../extensions/field.dart';
 import '../extensions/method_def.dart';
 import '../extensions/module_ref.dart';
 import '../extensions/param.dart';
 import '../extensions/string.dart';
-import '../extensions/type_def.dart';
 import '../interop_type.dart';
 import '../logger.dart';
 import '../projection.dart';
@@ -27,9 +25,7 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   FunctionProjection(this.method, {super.formatCode})
     : name = method.nameWithoutEncoding.safeTypeName,
       originalName = method.name,
-      wrapperName = method.supportsLastError
-          ? '${method.name}_Wrapper'
-          : method.nameWithoutEncoding.safeTypeName.privatize(),
+      wrapperName = method.nameWithoutEncoding.safeTypeName.privatize(),
       hint = method.hint,
       originalReturnType = method.returnType;
 
@@ -175,39 +171,19 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   cb.Library generate() {
     logger.finest('Generating $debugName...');
     return .new(
-      (b) => b.body.addAll([
-        generateMethod(),
-        if (!method.supportsLastError) generateNativeFunction(),
-      ]),
+      (b) => b.body.addAll([generateMethod(), generateNativeField()]),
     );
   }
 
-  cb.Method generateNativeFunction() => .new(
+  cb.Field generateNativeField() => .new(
     (b) => b
-      ..annotations.add(
-        cb
-            .refer('Native')
-            .call(
-              const [],
-              {
-                'symbol': cb.literalString(originalName),
-                if (method.isLeaf) 'isLeaf': cb.literalTrue,
-              },
-              [nativePrototype],
-            ),
-      )
-      ..external = true
-      ..returns = cb.refer(originalReturnType.dartType)
+      ..modifier = .final$
       ..name = name.privatize()
-      ..requiredParameters.addAll(
-        parameters.map(
-          (p) => .new(
-            (b) => b
-              ..type = p.dartProjection
-              ..name = p.name,
-          ),
-        ),
-      ),
+      ..assignment = cb.refer('_$library').property('lookupFunction').call(
+        [cb.literalString(originalName)],
+        {if (method.isLeaf) 'isLeaf': cb.literalTrue},
+        [nativePrototype, dartPrototype],
+      ).code,
   );
 
   /// The return type of the method.
@@ -267,42 +243,6 @@ base class FunctionProjection extends Projection with ProjectionMixin {
 
       // More complex cases where inlining is avoided.
       .query || .queryOptional || .resultValue => false,
-    };
-  }
-
-  String get win32ResultType {
-    if (originalReturnType.isPointer) return 'ptr';
-
-    if (originalReturnType case TypeDefType(
-      typeDef: TypeDef(
-        category: .struct,
-        fields: [Field(type: InteropType(:final isPointer))],
-        isWrapperStruct: true,
-      ),
-    )) {
-      return isPointer ? 'ptr' : 'i64';
-    }
-
-    if (originalReturnType case TypeDefType(
-      typeDef: TypeDef(category: .struct, isWrapperStruct: false),
-    )) {
-      return originalReturnType.cType.toLowerCase();
-    }
-
-    return switch (originalReturnType.ffiType) {
-      'Pointer' || 'FARPROC' || 'PROC' || 'HSTRING' => 'ptr',
-      'Int8' => 'i8',
-      'Int16' => 'i16',
-      'Int32' || 'BOOL' => 'i32',
-      'Int64' || 'IntPtr' => 'i64',
-      'Uint8' || 'BOOLEAN' => 'u8',
-      'Uint16' => 'u16',
-      'Uint32' => 'u32',
-      'Uint64' => 'u64',
-      _ => throw UnimplementedError(
-        'Win32Result type not implemented for '
-        '${originalReturnType.ffiType}',
-      ),
     };
   }
 
@@ -370,16 +310,13 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     if (originalReturnType.isBool) {
       if (method.supportsLastError) {
         return cb.Block.of([
+          cb.refer('resolveGetLastError').call(const []).statement,
           cb.declareFinal('result_').assign(ffiCall).statement,
           cb
               .refer('Win32Result')
               .newInstance(const [], {
-                'value': cb
-                    .refer('result_')
-                    .property('value')
-                    .property('i32')
-                    .notEqualTo(cb.refer('FALSE')),
-                'error': cb.refer('result_').property('error'),
+                'value': cb.refer('result_').notEqualTo(cb.refer('FALSE')),
+                'error': cb.refer('GetLastError').call(const []),
               })
               .returned
               .statement,
@@ -392,17 +329,13 @@ base class FunctionProjection extends Projection with ProjectionMixin {
     if (originalReturnType.isEnum) {
       if (method.supportsLastError) {
         return cb.Block.of([
+          cb.refer('resolveGetLastError').call(const []).statement,
           cb.declareFinal('result_').assign(ffiCall).statement,
           cb
               .refer('.new')
               .newInstance(const [], {
-                'value': cb.refer('.new').newInstance([
-                  cb
-                      .refer('result_')
-                      .property('value')
-                      .property(win32ResultType),
-                ]),
-                'error': cb.refer('result_').property('error'),
+                'value': cb.refer('.new').newInstance([cb.refer('result_')]),
+                'error': cb.refer('GetLastError').call(const []),
               })
               .returned
               .statement,
@@ -430,44 +363,18 @@ base class FunctionProjection extends Projection with ProjectionMixin {
         return cb.refer('WIN32_ERROR').newInstance([ffiCall]).statement;
       }
 
-      final needsCasting =
-          win32ResultType == 'ptr' && originalReturnType.ffiType != 'Pointer';
-
       return cb.Block.of([
+        cb.refer('resolveGetLastError').call(const []).statement,
         cb.declareFinal('result_').assign(ffiCall).statement,
         cb
             .refer('.new')
             .newInstance(const [], {
-              'value': needsCasting
-                  ? originalReturnType.isString ||
-                            originalReturnType.isWrapperStruct
-                        ? cb.refer('.new').newInstance([
-                            cb
-                                .refer('result_')
-                                .property('value')
-                                .property(win32ResultType)
-                                .property('cast')
-                                .call(const []),
-                          ])
-                        : cb
-                              .refer('result_')
-                              .property('value')
-                              .property(win32ResultType)
-                              .property('cast')
-                              .call(const [])
-                  : originalReturnType.isString ||
-                        originalReturnType.isWrapperStruct
-                  ? cb.refer('.new').newInstance([
-                      cb
-                          .refer('result_')
-                          .property('value')
-                          .property(win32ResultType),
-                    ])
-                  : cb
-                        .refer('result_')
-                        .property('value')
-                        .property(win32ResultType),
-              'error': cb.refer('result_').property('error'),
+              'value':
+                  originalReturnType.isString ||
+                      originalReturnType.isWrapperStruct
+                  ? cb.refer('.new').newInstance([cb.refer('result_')])
+                  : cb.refer('result_'),
+              'error': cb.refer('GetLastError').call(const []),
             })
             .returned
             .statement,
@@ -636,16 +543,13 @@ base class FunctionProjection extends Projection with ProjectionMixin {
   cb.Code _generateReturnBooleanFunctionBody() {
     if (method.supportsLastError) {
       return cb.Block.of([
+        cb.refer('resolveGetLastError').call(const []).statement,
         cb.declareFinal('result_').assign(ffiCall).statement,
         cb
             .refer('.new')
             .newInstance(const [], {
-              'value': cb
-                  .refer('result_')
-                  .property('value')
-                  .property('i32')
-                  .notEqualTo(cb.refer('FALSE')),
-              'error': cb.refer('result_').property('error'),
+              'value': cb.refer('result_').notEqualTo(cb.refer('FALSE')),
+              'error': cb.refer('GetLastError').call(const []),
             })
             .returned
             .statement,

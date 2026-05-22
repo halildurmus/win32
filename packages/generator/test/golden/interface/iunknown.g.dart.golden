@@ -6,7 +6,6 @@ import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 import 'package:meta/meta.dart';
 
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../constants.dart';
 import '../constants.g.dart';

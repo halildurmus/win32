@@ -18,8 +18,7 @@ This guide covers **breaking changes** and **recommended migration patterns**.
   directly.
 * **APIs That Call `SetLastError()`**: These APIs now return a
   [`Win32Result<T>`][Win32Result], which captures both the logical return value
-  and the associated last-error code atomically on the native side, ensuring the
-  **error state is preserved**.
+  and the associated last-error code, ensuring the **error state is preserved**.
 * **Win32 `BOOL` mapped to Dart `bool`**: All Win32 `BOOL` values — return
   values, parameters, and struct fields — are now exposed as Dart `bool` instead
   of `int`.
@@ -331,6 +330,14 @@ reliable workaround in user code.
 [`Win32Result<T>`][Win32Result] instead. This type captures both the logical
 return value and the last-error code *atomically on the native side*, so the
 error state is always preserved across the FFI boundary.
+
+:::note
+
+As of **v6.3.0**, `package:win32` no longer ships a native DLL. Instead,
+bindings that use `GetLastError()` now pre-resolve it before each API call,
+making error capture reliable in practice without requiring any native code.
+
+:::
 
 ```diff
 - final hWnd = CreateWindowEx(...);

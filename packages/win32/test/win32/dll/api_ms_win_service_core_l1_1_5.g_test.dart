@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -37,23 +37,18 @@ void main() {
   });
 }
 
-@Native<
-  Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>)
->(symbol: 'GetSharedServiceDirectory')
-external int _GetSharedServiceDirectory(
-  Pointer serviceHandle,
-  int directoryType,
-  Pointer<Utf16> pathBuffer,
-  int pathBufferLength,
-  Pointer<Uint32> requiredBufferLength,
+final _api_ms_win_service_core_l1_1_5 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-5.dll',
 );
 
-@Native<Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>)>(
-  symbol: 'GetSharedServiceRegistryStateKey',
-)
-external int _GetSharedServiceRegistryStateKey(
-  Pointer serviceHandle,
-  int stateType,
-  int accessMask,
-  Pointer<Pointer> serviceStateKey,
-);
+final _GetSharedServiceDirectory = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('GetSharedServiceDirectory');
+
+final _GetSharedServiceRegistryStateKey = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('GetSharedServiceRegistryStateKey');

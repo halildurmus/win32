@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -14,7 +14,6 @@ import 'dart:ffi';
 import 'package:checks/checks.dart';
 import 'package:ffi/ffi.dart';
 import 'package:test/scaffolding.dart';
-import 'package:win32/src/_internal/gdi32.g.dart';
 import 'package:win32/win32.dart';
 
 import '../../helpers.dart';
@@ -46,7 +45,7 @@ void main() {
       check(_BeginPath).isA<Function>();
     });
     test('BitBlt can be instantiated', () {
-      check(BitBlt_Wrapper).isA<Function>();
+      check(_BitBlt).isA<Function>();
     });
     test('CancelDC can be instantiated', () {
       check(_CancelDC).isA<Function>();
@@ -79,7 +78,7 @@ void main() {
       check(_CreateDIBPatternBrushPt).isA<Function>();
     });
     test('CreateDIBSection can be instantiated', () {
-      check(CreateDIBSection_Wrapper).isA<Function>();
+      check(_CreateDIBSection).isA<Function>();
     });
     test('CreateEllipticRgn can be instantiated', () {
       check(_CreateEllipticRgn).isA<Function>();
@@ -270,599 +269,685 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer)>(symbol: 'AbortPath')
-external int _AbortPath(Pointer hdc);
-
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'AddFontResourceW')
-external int _AddFontResource(Pointer<Utf16> param0);
-
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Pointer)>(
-  symbol: 'AddFontResourceExW',
-)
-external int _AddFontResourceEx(Pointer<Utf16> name, int fl, Pointer res);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Uint32, Float, Float)>(
-  symbol: 'AngleArc',
-)
-external int _AngleArc(
-  Pointer hdc,
-  int x,
-  int y,
-  int r,
-  double startAngle,
-  double sweepAngle,
-);
-
-@Native<Int32 Function(Pointer, Uint32, Uint32, Pointer<PALETTEENTRY>)>(
-  symbol: 'AnimatePalette',
-)
-external int _AnimatePalette(
-  Pointer hPal,
-  int iStartIndex,
-  int cEntries,
-  Pointer<PALETTEENTRY> ppe,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Arc')
-external int _Arc(
-  Pointer hdc,
-  int x1,
-  int y1,
-  int x2,
-  int y2,
-  int x3,
-  int y3,
-  int x4,
-  int y4,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'ArcTo')
-external int _ArcTo(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int xr1,
-  int yr1,
-  int xr2,
-  int yr2,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'BeginPath')
-external int _BeginPath(Pointer hdc);
-
-@Native<Int32 Function(Pointer)>(symbol: 'CancelDC')
-external int _CancelDC(Pointer hdc);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Chord')
-external int _Chord(
-  Pointer hdc,
-  int x1,
-  int y1,
-  int x2,
-  int y2,
-  int x3,
-  int y3,
-  int x4,
-  int y4,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'CloseFigure')
-external int _CloseFigure(Pointer hdc);
-
-@Native<Pointer Function(Int32, Int32, Uint32, Uint32, Pointer)>(
-  symbol: 'CreateBitmap',
-)
-external Pointer _CreateBitmap(
-  int nWidth,
-  int nHeight,
-  int nPlanes,
-  int nBitCount,
-  Pointer lpBits,
-);
-
-@Native<Pointer Function(Pointer<BITMAP>)>(symbol: 'CreateBitmapIndirect')
-external Pointer _CreateBitmapIndirect(Pointer<BITMAP> pbm);
-
-@Native<Pointer Function(Pointer, Int32, Int32)>(
-  symbol: 'CreateCompatibleBitmap',
-)
-external Pointer _CreateCompatibleBitmap(Pointer hdc, int cx, int cy);
-
-@Native<Pointer Function(Pointer)>(symbol: 'CreateCompatibleDC')
-external Pointer _CreateCompatibleDC(Pointer hdc);
-
-@Native<
-  Pointer Function(
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<DEVMODE>,
-  )
->(symbol: 'CreateDCW')
-external Pointer _CreateDC(
-  Pointer<Utf16> pwszDriver,
-  Pointer<Utf16> pwszDevice,
-  Pointer<Utf16> pszPort,
-  Pointer<DEVMODE> pdm,
-);
-
-@Native<
-  Pointer Function(
-    Pointer,
-    Pointer<BITMAPINFOHEADER>,
-    Uint32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-  )
->(symbol: 'CreateDIBitmap')
-external Pointer _CreateDIBitmap(
-  Pointer hdc,
-  Pointer<BITMAPINFOHEADER> pbmih,
-  int flInit,
-  Pointer pjBits,
-  Pointer<BITMAPINFO> pbmi,
-  int iUsage,
-);
-
-@Native<Pointer Function(Pointer, Uint32)>(symbol: 'CreateDIBPatternBrushPt')
-external Pointer _CreateDIBPatternBrushPt(Pointer lpPackedDIB, int iUsage);
-
-@Native<Pointer Function(Int32, Int32, Int32, Int32)>(
-  symbol: 'CreateEllipticRgn',
-)
-external Pointer _CreateEllipticRgn(int x1, int y1, int x2, int y2);
-
-@Native<
-  Pointer Function(
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Pointer<Utf16>,
-  )
->(symbol: 'CreateFontW')
-external Pointer _CreateFont(
-  int cHeight,
-  int cWidth,
-  int cEscapement,
-  int cOrientation,
-  int cWeight,
-  int bItalic,
-  int bUnderline,
-  int bStrikeOut,
-  int iCharSet,
-  int iOutPrecision,
-  int iClipPrecision,
-  int iQuality,
-  int iPitchAndFamily,
-  Pointer<Utf16> pszFaceName,
-);
-
-@Native<Pointer Function(Pointer<LOGFONT>)>(symbol: 'CreateFontIndirectW')
-external Pointer _CreateFontIndirect(Pointer<LOGFONT> lplf);
-
-@Native<Pointer Function(Pointer)>(symbol: 'CreateHalftonePalette')
-external Pointer _CreateHalftonePalette(Pointer hdc);
-
-@Native<Pointer Function(Int32, Uint32)>(symbol: 'CreateHatchBrush')
-external Pointer _CreateHatchBrush(int iHatch, int color);
-
-@Native<Pointer Function(Int32, Int32, Uint32)>(symbol: 'CreatePen')
-external Pointer _CreatePen(int iStyle, int cWidth, int color);
-
-@Native<Pointer Function(Int32, Int32, Int32, Int32)>(symbol: 'CreateRectRgn')
-external Pointer _CreateRectRgn(int x1, int y1, int x2, int y2);
-
-@Native<Pointer Function(Uint32)>(symbol: 'CreateSolidBrush')
-external Pointer _CreateSolidBrush(int color);
-
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteDC')
-external int _DeleteDC(Pointer hdc);
-
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteMetaFile')
-external int _DeleteMetaFile(Pointer hmf);
-
-@Native<Int32 Function(Pointer)>(symbol: 'DeleteObject')
-external int _DeleteObject(Pointer ho);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<Utf8>)>(
-  symbol: 'DrawEscape',
-)
-external int _DrawEscape(
-  Pointer hdc,
-  int iEscape,
-  int cjIn,
-  Pointer<Utf8> lpIn,
-);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32)>(symbol: 'Ellipse')
-external int _Ellipse(Pointer hdc, int left, int top, int right, int bottom);
-
-@Native<Int32 Function(Pointer)>(symbol: 'EndPath')
-external int _EndPath(Pointer hdc);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<LOGFONT>,
-    Pointer<NativeFunction<FONTENUMPROC>>,
-    IntPtr,
-    Uint32,
-  )
->(symbol: 'EnumFontFamiliesExW')
-external int _EnumFontFamiliesEx(
-  Pointer hdc,
-  Pointer<LOGFONT> lpLogfont,
-  Pointer<NativeFunction<FONTENUMPROC>> lpProc,
-  int lParam,
-  int dwFlags,
-);
-
-@Native<
-  Pointer Function(Uint32, Uint32, Pointer<LOGBRUSH>, Uint32, Pointer<Uint32>)
->(symbol: 'ExtCreatePen')
-external Pointer _ExtCreatePen(
-  int iPenStyle,
-  int cWidth,
-  Pointer<LOGBRUSH> plbrush,
-  int cStyle,
-  Pointer<Uint32> pstyle,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Uint32,
-    Pointer<RECT>,
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Int32>,
-  )
->(symbol: 'ExtTextOutW')
-external int _ExtTextOut(
-  Pointer hdc,
-  int x,
-  int y,
-  int options,
-  Pointer<RECT> lprect,
-  Pointer<Utf16> lpString,
-  int c,
-  Pointer<Int32> lpDx,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'FillPath')
-external int _FillPath(Pointer hdc);
-
-@Native<Int32 Function(Pointer)>(symbol: 'FlattenPath')
-external int _FlattenPath(Pointer hdc);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'GetDeviceCaps')
-external int _GetDeviceCaps(Pointer hdc, int index);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer,
-    Uint32,
-    Uint32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-  )
->(symbol: 'GetDIBits')
-external int _GetDIBits(
-  Pointer hdc,
-  Pointer hbm,
-  int start,
-  int cLines,
-  Pointer lpvBits,
-  Pointer<BITMAPINFO> lpbmi,
-  int usage,
-);
-
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'GetNearestColor')
-external int _GetNearestColor(Pointer hdc, int color);
-
-@Native<Int32 Function(Pointer, Int32, Pointer)>(symbol: 'GetObjectW')
-external int _GetObject(Pointer h, int c, Pointer pv);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32)>(
-  symbol: 'GetPath',
-)
-external int _GetPath(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint8> aj,
-  int cpt,
-);
-
-@Native<Uint32 Function(Pointer, Int32, Int32)>(symbol: 'GetPixel')
-external int _GetPixel(Pointer hdc, int x, int y);
-
-@Native<Pointer Function(Int32)>(symbol: 'GetStockObject')
-external Pointer _GetStockObject(int i);
-
-@Native<Int32 Function(Pointer, Pointer<TEXTMETRIC>)>(symbol: 'GetTextMetricsW')
-external int _GetTextMetrics(Pointer hdc, Pointer<TEXTMETRIC> lptm);
-
-@Native<Int32 Function(Pointer, Pointer<SIZE>)>(symbol: 'GetWindowExtEx')
-external int _GetWindowExtEx(Pointer hdc, Pointer<SIZE> lpsize);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>)>(symbol: 'GetWindowOrgEx')
-external int _GetWindowOrgEx(Pointer hdc, Pointer<POINT> lppoint);
-
-@Native<Int32 Function(Pointer, Int32, Int32)>(symbol: 'LineTo')
-external int _LineTo(Pointer hdc, int x, int y);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<POINT>)>(
-  symbol: 'MoveToEx',
-)
-external int _MoveToEx(Pointer hdc, int x, int y, Pointer<POINT> lppt);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-  )
->(symbol: 'Pie')
-external int _Pie(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int xr1,
-  int yr1,
-  int xr2,
-  int yr2,
-);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolyBezier')
-external int _PolyBezier(Pointer hdc, Pointer<POINT> apt, int cpt);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolyBezierTo')
-external int _PolyBezierTo(Pointer hdc, Pointer<POINT> apt, int cpt);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32)>(
-  symbol: 'PolyDraw',
-)
-external int _PolyDraw(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint8> aj,
-  int cpt,
-);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Int32)>(symbol: 'Polygon')
-external int _Polygon(Pointer hdc, Pointer<POINT> apt, int cpt);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Int32)>(symbol: 'Polyline')
-external int _Polyline(Pointer hdc, Pointer<POINT> apt, int cpt);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Uint32)>(symbol: 'PolylineTo')
-external int _PolylineTo(Pointer hdc, Pointer<POINT> apt, int cpt);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Int32>, Int32)>(
-  symbol: 'PolyPolygon',
-)
-external int _PolyPolygon(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Int32> asz,
-  int csz,
-);
-
-@Native<Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint32>, Uint32)>(
-  symbol: 'PolyPolyline',
-)
-external int _PolyPolyline(
-  Pointer hdc,
-  Pointer<POINT> apt,
-  Pointer<Uint32> asz,
-  int csz,
-);
-
-@Native<Int32 Function(Pointer, Int32, Int32)>(symbol: 'PtInRegion')
-external int _PtInRegion(Pointer hrgn, int x, int y);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32)>(
-  symbol: 'Rectangle',
-)
-external int _Rectangle(Pointer hdc, int left, int top, int right, int bottom);
-
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'RectInRegion')
-external int _RectInRegion(Pointer hrgn, Pointer<RECT> lprect);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Int32, Int32, Int32, Int32)>(
-  symbol: 'RoundRect',
-)
-external int _RoundRect(
-  Pointer hdc,
-  int left,
-  int top,
-  int right,
-  int bottom,
-  int width,
-  int height,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'SaveDC')
-external int _SaveDC(Pointer hdc);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SelectClipPath')
-external int _SelectClipPath(Pointer hdc, int mode);
-
-@Native<Pointer Function(Pointer, Pointer)>(symbol: 'SelectObject')
-external Pointer _SelectObject(Pointer hdc, Pointer h);
-
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'SetBkColor')
-external int _SetBkColor(Pointer hdc, int color);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetBkMode')
-external int _SetBkMode(Pointer hdc, int mode);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetMapMode')
-external int _SetMapMode(Pointer hdc, int iMode);
-
-@Native<Uint32 Function(Pointer, Int32, Int32, Uint32)>(symbol: 'SetPixel')
-external int _SetPixel(Pointer hdc, int x, int y, int color);
-
-@Native<Int32 Function(Pointer, Int32)>(symbol: 'SetStretchBltMode')
-external int _SetStretchBltMode(Pointer hdc, int mode);
-
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'SetTextColor')
-external int _SetTextColor(Pointer hdc, int color);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>)>(
-  symbol: 'SetViewportExtEx',
-)
-external int _SetViewportExtEx(Pointer hdc, int x, int y, Pointer<SIZE> lpsz);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<POINT>)>(
-  symbol: 'SetViewportOrgEx',
-)
-external int _SetViewportOrgEx(Pointer hdc, int x, int y, Pointer<POINT> lppt);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>)>(
-  symbol: 'SetWindowExtEx',
-)
-external int _SetWindowExtEx(Pointer hdc, int x, int y, Pointer<SIZE> lpsz);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Uint32,
-  )
->(symbol: 'StretchBlt')
-external int _StretchBlt(
-  Pointer hdcDest,
-  int xDest,
-  int yDest,
-  int wDest,
-  int hDest,
-  Pointer hdcSrc,
-  int xSrc,
-  int ySrc,
-  int wSrc,
-  int hSrc,
-  int rop,
-);
-
-@Native<
-  Int32 Function(
-    Pointer,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Int32,
-    Pointer,
-    Pointer<BITMAPINFO>,
-    Uint32,
-    Uint32,
-  )
->(symbol: 'StretchDIBits')
-external int _StretchDIBits(
-  Pointer hdc,
-  int xDest,
-  int yDest,
-  int destWidth,
-  int destHeight,
-  int xSrc,
-  int ySrc,
-  int srcWidth,
-  int srcHeight,
-  Pointer lpBits,
-  Pointer<BITMAPINFO> lpbmi,
-  int iUsage,
-  int rop,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'StrokeAndFillPath')
-external int _StrokeAndFillPath(Pointer hdc);
-
-@Native<Int32 Function(Pointer)>(symbol: 'StrokePath')
-external int _StrokePath(Pointer hdc);
-
-@Native<Int32 Function(Pointer, Int32, Int32, Pointer<Utf16>, Int32)>(
-  symbol: 'TextOutW',
-)
-external int _TextOut(
-  Pointer hdc,
-  int x,
-  int y,
-  Pointer<Utf16> lpString,
-  int c,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'WidenPath')
-external int _WidenPath(Pointer hdc);
+final _gdi32 = DynamicLibrary.open('gdi32.dll');
+
+final _AbortPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'AbortPath',
+    );
+
+final _AddFontResource = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('AddFontResourceW');
+
+final _AddFontResourceEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer),
+      int Function(Pointer<Utf16>, int, Pointer)
+    >('AddFontResourceExW');
+
+final _AngleArc = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Uint32, Float, Float),
+      int Function(Pointer, int, int, int, double, double)
+    >('AngleArc');
+
+final _AnimatePalette = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer<PALETTEENTRY>),
+      int Function(Pointer, int, int, Pointer<PALETTEENTRY>)
+    >('AnimatePalette');
+
+final _Arc = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Arc');
+
+final _ArcTo = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('ArcTo');
+
+final _BeginPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'BeginPath',
+    );
+
+final _BitBlt = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      int Function(Pointer, int, int, int, int, Pointer, int, int, int)
+    >('BitBlt');
+
+final _CancelDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('CancelDC');
+
+final _Chord = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Chord');
+
+final _CloseFigure = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseFigure',
+    );
+
+final _CreateBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Uint32, Uint32, Pointer),
+      Pointer Function(int, int, int, int, Pointer)
+    >('CreateBitmap');
+
+final _CreateBitmapIndirect = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer<BITMAP>),
+      Pointer Function(Pointer<BITMAP>)
+    >('CreateBitmapIndirect');
+
+final _CreateCompatibleBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Int32, Int32),
+      Pointer Function(Pointer, int, int)
+    >('CreateCompatibleBitmap');
+
+final _CreateCompatibleDC = _gdi32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'CreateCompatibleDC',
+    );
+
+final _CreateDC = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<DEVMODE>,
+      )
+    >('CreateDCW');
+
+final _CreateDIBitmap = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFOHEADER>,
+        Uint32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFOHEADER>,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+      )
+    >('CreateDIBitmap');
+
+final _CreateDIBPatternBrushPt = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32),
+      Pointer Function(Pointer, int)
+    >('CreateDIBPatternBrushPt');
+
+final _CreateDIBSection = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+        Pointer<Pointer>,
+        Pointer,
+        Uint32,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+        Pointer<Pointer>,
+        Pointer,
+        int,
+      )
+    >('CreateDIBSection');
+
+final _CreateEllipticRgn = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Int32, Int32),
+      Pointer Function(int, int, int, int)
+    >('CreateEllipticRgn');
+
+final _CreateFont = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+      ),
+      Pointer Function(
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer<Utf16>,
+      )
+    >('CreateFontW');
+
+final _CreateFontIndirect = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer<LOGFONT>),
+      Pointer Function(Pointer<LOGFONT>)
+    >('CreateFontIndirectW');
+
+final _CreateHalftonePalette = _gdi32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'CreateHalftonePalette',
+    );
+
+final _CreateHatchBrush = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Uint32),
+      Pointer Function(int, int)
+    >('CreateHatchBrush');
+
+final _CreatePen = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Uint32),
+      Pointer Function(int, int, int)
+    >('CreatePen');
+
+final _CreateRectRgn = _gdi32
+    .lookupFunction<
+      Pointer Function(Int32, Int32, Int32, Int32),
+      Pointer Function(int, int, int, int)
+    >('CreateRectRgn');
+
+final _CreateSolidBrush = _gdi32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'CreateSolidBrush',
+    );
+
+final _DeleteDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('DeleteDC');
+
+final _DeleteMetaFile = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DeleteMetaFile',
+    );
+
+final _DeleteObject = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DeleteObject',
+    );
+
+final _DrawEscape = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<Utf8>),
+      int Function(Pointer, int, int, Pointer<Utf8>)
+    >('DrawEscape');
+
+final _Ellipse = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int)
+    >('Ellipse');
+
+final _EndPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('EndPath');
+
+final _EnumFontFamiliesEx = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<LOGFONT>,
+        Pointer<NativeFunction<FONTENUMPROC>>,
+        IntPtr,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<LOGFONT>,
+        Pointer<NativeFunction<FONTENUMPROC>>,
+        int,
+        int,
+      )
+    >('EnumFontFamiliesExW');
+
+final _ExtCreatePen = _gdi32
+    .lookupFunction<
+      Pointer Function(
+        Uint32,
+        Uint32,
+        Pointer<LOGBRUSH>,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      Pointer Function(int, int, Pointer<LOGBRUSH>, int, Pointer<Uint32>)
+    >('ExtCreatePen');
+
+final _ExtTextOut = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Uint32,
+        Pointer<RECT>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Int32>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        Pointer<RECT>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Int32>,
+      )
+    >('ExtTextOutW');
+
+final _FillPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('FillPath');
+
+final _FlattenPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FlattenPath',
+    );
+
+final _GetDeviceCaps = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'GetDeviceCaps',
+    );
+
+final _GetDIBits = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        int,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+      )
+    >('GetDIBits');
+
+final _GetNearestColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('GetNearestColor');
+
+final _GetObject = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('GetObjectW');
+
+final _GetPath = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint8>, int)
+    >('GetPath');
+
+final _GetPixel = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('GetPixel');
+
+final _GetStockObject = _gdi32
+    .lookupFunction<Pointer Function(Int32), Pointer Function(int)>(
+      'GetStockObject',
+    );
+
+final _GetTextMetrics = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<TEXTMETRIC>),
+      int Function(Pointer, Pointer<TEXTMETRIC>)
+    >('GetTextMetricsW');
+
+final _GetWindowExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<SIZE>),
+      int Function(Pointer, Pointer<SIZE>)
+    >('GetWindowExtEx');
+
+final _GetWindowOrgEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>),
+      int Function(Pointer, Pointer<POINT>)
+    >('GetWindowOrgEx');
+
+final _LineTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('LineTo');
+
+final _MoveToEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<POINT>),
+      int Function(Pointer, int, int, Pointer<POINT>)
+    >('MoveToEx');
+
+final _Pie = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+      ),
+      int Function(Pointer, int, int, int, int, int, int, int, int)
+    >('Pie');
+
+final _PolyBezier = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolyBezier');
+
+final _PolyBezierTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolyBezierTo');
+
+final _PolyDraw = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint8>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint8>, int)
+    >('PolyDraw');
+
+final _Polygon = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Int32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('Polygon');
+
+final _Polyline = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Int32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('Polyline');
+
+final _PolylineTo = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Uint32),
+      int Function(Pointer, Pointer<POINT>, int)
+    >('PolylineTo');
+
+final _PolyPolygon = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Int32>, Int32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Int32>, int)
+    >('PolyPolygon');
+
+final _PolyPolyline = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<POINT>, Pointer<Uint32>, Uint32),
+      int Function(Pointer, Pointer<POINT>, Pointer<Uint32>, int)
+    >('PolyPolyline');
+
+final _PtInRegion = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32),
+      int Function(Pointer, int, int)
+    >('PtInRegion');
+
+final _Rectangle = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int)
+    >('Rectangle');
+
+final _RectInRegion = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('RectInRegion');
+
+final _RoundRect = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Int32, Int32, Int32, Int32),
+      int Function(Pointer, int, int, int, int, int, int)
+    >('RoundRect');
+
+final _SaveDC = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('SaveDC');
+
+final _SelectClipPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SelectClipPath',
+    );
+
+final _SelectObject = _gdi32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer),
+      Pointer Function(Pointer, Pointer)
+    >('SelectObject');
+
+final _SetBkColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetBkColor');
+
+final _SetBkMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetBkMode',
+    );
+
+final _SetMapMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetMapMode',
+    );
+
+final _SetPixel = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Int32, Uint32),
+      int Function(Pointer, int, int, int)
+    >('SetPixel');
+
+final _SetStretchBltMode = _gdi32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetStretchBltMode',
+    );
+
+final _SetTextColor = _gdi32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetTextColor');
+
+final _SetViewportExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>),
+      int Function(Pointer, int, int, Pointer<SIZE>)
+    >('SetViewportExtEx');
+
+final _SetViewportOrgEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<POINT>),
+      int Function(Pointer, int, int, Pointer<POINT>)
+    >('SetViewportOrgEx');
+
+final _SetWindowExtEx = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<SIZE>),
+      int Function(Pointer, int, int, Pointer<SIZE>)
+    >('SetWindowExtEx');
+
+final _StretchBlt = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        int,
+      )
+    >('StretchBlt');
+
+final _StretchDIBits = _gdi32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Int32,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        Uint32,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer,
+        Pointer<BITMAPINFO>,
+        int,
+        int,
+      )
+    >('StretchDIBits');
+
+final _StrokeAndFillPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'StrokeAndFillPath',
+    );
+
+final _StrokePath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'StrokePath',
+    );
+
+final _TextOut = _gdi32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Int32, Pointer<Utf16>, Int32),
+      int Function(Pointer, int, int, Pointer<Utf16>, int)
+    >('TextOutW');
+
+final _WidenPath = _gdi32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'WidenPath',
+    );

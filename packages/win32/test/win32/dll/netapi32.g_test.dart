@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -29,15 +29,16 @@ void main() {
   });
 }
 
-@Native<Void Function(Pointer<DSREG_JOIN_INFO>)>(
-  symbol: 'NetFreeAadJoinInformation',
-)
-external void _NetFreeAadJoinInformation(Pointer<DSREG_JOIN_INFO> pJoinInfo);
+final _netapi32 = DynamicLibrary.open('netapi32.dll');
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>)>(
-  symbol: 'NetGetAadJoinInformation',
-)
-external int _NetGetAadJoinInformation(
-  Pointer<Utf16> pcszTenantId,
-  Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo,
-);
+final _NetFreeAadJoinInformation = _netapi32
+    .lookupFunction<
+      Void Function(Pointer<DSREG_JOIN_INFO>),
+      void Function(Pointer<DSREG_JOIN_INFO>)
+    >('NetFreeAadJoinInformation');
+
+final _NetGetAadJoinInformation = _netapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>),
+      int Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>)
+    >('NetGetAadJoinInformation');
