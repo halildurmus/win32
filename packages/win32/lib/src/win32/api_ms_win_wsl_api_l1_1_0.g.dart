@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_wsl_api_l1_1_0 = DynamicLibrary.open(
+  'api-ms-win-wsl-api-l1-1-0.dll',
+);
 
 /// Modifies the behavior of a distribution registered with the Windows
 /// Subsystem for Linux (WSL).
@@ -58,14 +64,11 @@ void WslConfigureDistribution(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Uint32, Int32)>(
-  symbol: 'WslConfigureDistribution',
-)
-external int _WslConfigureDistribution(
-  Pointer<Utf16> distributionName,
-  int defaultUID,
-  int wslDistributionFlags,
-);
+final _WslConfigureDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Int32),
+      int Function(Pointer<Utf16>, int, int)
+    >('WslConfigureDistribution');
 
 /// Retrieves the current configuration of a distribution registered with the
 /// Windows Subsystem for Linux (WSL).
@@ -98,24 +101,25 @@ void WslGetDistributionConfiguration(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Int32>,
-    Pointer<Pointer<Pointer<Utf8>>>,
-    Pointer<Uint32>,
-  )
->(symbol: 'WslGetDistributionConfiguration')
-external int _WslGetDistributionConfiguration(
-  Pointer<Utf16> distributionName,
-  Pointer<Uint32> distributionVersion,
-  Pointer<Uint32> defaultUID,
-  Pointer<Int32> wslDistributionFlags,
-  Pointer<Pointer<Pointer<Utf8>>> defaultEnvironmentVariables,
-  Pointer<Uint32> defaultEnvironmentVariableCount,
-);
+final _WslGetDistributionConfiguration = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Int32>,
+        Pointer<Pointer<Pointer<Utf8>>>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Int32>,
+        Pointer<Pointer<Pointer<Utf8>>>,
+        Pointer<Uint32>,
+      )
+    >('WslGetDistributionConfiguration');
 
 /// Determines if a distribution is registered with the Windows Subsystem for
 /// Linux (WSL).
@@ -128,8 +132,11 @@ external int _WslGetDistributionConfiguration(
 bool WslIsDistributionRegistered(PCWSTR distributionName) =>
     _WslIsDistributionRegistered(distributionName) != FALSE;
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'WslIsDistributionRegistered')
-external int _WslIsDistributionRegistered(Pointer<Utf16> distributionName);
+final _WslIsDistributionRegistered = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('WslIsDistributionRegistered');
 
 /// Launches a Windows Subsystem for Linux (WSL) process in the context of a
 /// particular distribution.
@@ -169,26 +176,27 @@ HANDLE WslLaunch(
   return .new(result$);
 }
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Int32,
-    Pointer,
-    Pointer,
-    Pointer,
-    Pointer<Pointer>,
-  )
->(symbol: 'WslLaunch')
-external int _WslLaunch(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
-  int useCurrentWorkingDirectory,
-  Pointer stdIn,
-  Pointer stdOut,
-  Pointer stdErr,
-  Pointer<Pointer> process,
-);
+final _WslLaunch = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Int32,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer<Pointer>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer<Pointer>,
+      )
+    >('WslLaunch');
 
 /// Launches an interactive Windows Subsystem for Linux (WSL) process in the
 /// context of a particular distribution.
@@ -222,15 +230,11 @@ int WslLaunchInteractive(
   return result$;
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Int32, Pointer<Uint32>)>(
-  symbol: 'WslLaunchInteractive',
-)
-external int _WslLaunchInteractive(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> command,
-  int useCurrentWorkingDirectory,
-  Pointer<Uint32> exitCode,
-);
+final _WslLaunchInteractive = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Int32, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('WslLaunchInteractive');
 
 /// Registers a new distribution with the Windows Subsystem for Linux (WSL).
 ///
@@ -248,13 +252,11 @@ void WslRegisterDistribution(PCWSTR distributionName, PCWSTR tarGzFilename) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'WslRegisterDistribution',
-)
-external int _WslRegisterDistribution(
-  Pointer<Utf16> distributionName,
-  Pointer<Utf16> tarGzFilename,
-);
+final _WslRegisterDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('WslRegisterDistribution');
 
 /// Unregisters a distribution from the Windows Subsystem for Linux (WSL).
 ///
@@ -270,5 +272,8 @@ void WslUnregisterDistribution(PCWSTR distributionName) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'WslUnregisterDistribution')
-external int _WslUnregisterDistribution(Pointer<Utf16> distributionName);
+final _WslUnregisterDistribution = _api_ms_win_wsl_api_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('WslUnregisterDistribution');

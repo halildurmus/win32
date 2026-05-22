@@ -29,12 +29,8 @@ void DMLCreateDevice<T extends IUnknown>(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(VTablePointer, Int32, Pointer<GUID>, Pointer<Pointer>)>(
-  symbol: 'DMLCreateDevice',
-)
-external int _DMLCreateDevice(
-  VTablePointer d3d12Device,
-  int flags,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _DMLCreateDevice = _directml
+    .lookupFunction<
+      Int32 Function(VTablePointer, Int32, Pointer<GUID>, Pointer<Pointer>),
+      int Function(VTablePointer, int, Pointer<GUID>, Pointer<Pointer>)
+    >('DMLCreateDevice');

@@ -27,17 +27,18 @@ bool EnumDisplayMonitors(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<RECT>,
-    Pointer<NativeFunction<MONITORENUMPROC>>,
-    IntPtr,
-  )
->(symbol: 'EnumDisplayMonitors')
-external int _EnumDisplayMonitors(
-  Pointer hdc,
-  Pointer<RECT> lprcClip,
-  Pointer<NativeFunction<MONITORENUMPROC>> lpfnEnum,
-  int dwData,
-);
+final _EnumDisplayMonitors = _user32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<RECT>,
+        Pointer<NativeFunction<MONITORENUMPROC>>,
+        IntPtr,
+      ),
+      int Function(
+        Pointer,
+        Pointer<RECT>,
+        Pointer<NativeFunction<MONITORENUMPROC>>,
+        int,
+      )
+    >('EnumDisplayMonitors');

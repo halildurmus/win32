@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,8 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _powrprof = DynamicLibrary.open('powrprof.dll');
 
 /// Sets or retrieves power information.
 ///
@@ -56,13 +60,8 @@ NTSTATUS CallNtPowerInformation(
   ),
 );
 
-@Native<Int32 Function(Int32, Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'CallNtPowerInformation',
-)
-external int _CallNtPowerInformation(
-  int informationLevel,
-  Pointer inputBuffer,
-  int inputBufferLength,
-  Pointer outputBuffer,
-  int outputBufferLength,
-);
+final _CallNtPowerInformation = _powrprof
+    .lookupFunction<
+      Int32 Function(Int32, Pointer, Uint32, Pointer, Uint32),
+      int Function(int, Pointer, int, Pointer, int)
+    >('CallNtPowerInformation');

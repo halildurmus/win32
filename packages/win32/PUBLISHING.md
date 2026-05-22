@@ -2,23 +2,7 @@
 
 Follow these steps to publish a new release of the package:
 
-## 1️⃣ Trigger the **win32_prebuilt_assets** Workflow
-
-Push a new tag to the repository with the format `win32-prebuilt-assets-vX.Y.Z`
-(e.g., `win32-prebuilt-assets-v2.1.0`).
-
-This workflow will build the native assets for ARM64 and x64 architectures,
-upload them as artifacts, and create a new GitHub release with the tag name.
-The release will include the prebuilt binaries as assets.
-
-After the release is created, update the version in
-`lib/src/hook_helpers/version.dart` to match the new tag (e.g.,
-`win32-prebuilt-assets-v2.1.0`).
-
-Finally, run `dart run tool/generate_asset_hashes.dart` to regenerate the asset
-hashes in `lib/src/hook_helpers/hashes.g.dart`.
-
-## 2️⃣ Trigger the **Prepare Release** Workflow
+## 1️⃣ Trigger the **Prepare Release** Workflow
 
 Go to the [GitHub Actions] tab and trigger the [Prepare Release] workflow.
 
@@ -35,12 +19,12 @@ title:
 chore(release): `package:win32` v2.1.0
 ```
 
-## 3️⃣ Review and Merge the PR
+## 2️⃣ Review and Merge the PR
 
 Open the PR created by the workflow, review the changes, and **merge it** into
 the main branch.
 
-## 4️⃣ Automatic Release and Publishing
+## 3️⃣ Automatic Release and Publishing
 
 After merging the PR, the following workflows will automatically be triggered:
 

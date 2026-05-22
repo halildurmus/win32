@@ -76,7 +76,6 @@ base class ComInterfaceProjection extends Projection with ProjectionMixin {
     '../guid.dart',
     '../hresult.dart',
     '../hstring.dart',
-    if (name == 'IUnknown') '../_internal/win32.dart',
     if (name != 'IUnknown') 'iunknown.g.dart',
     '../macros.dart',
     '../ntstatus.dart',

@@ -1635,9 +1635,6 @@
   "GetLargestConsoleWindowSize": {
     "originalName": "GetLargestConsoleWindowSize"
   },
-  "GetLastError": {
-    "originalName": "GetLastError"
-  },
   "GetLastInputInfo": {
     "originalName": "GetLastInputInfo"
   },

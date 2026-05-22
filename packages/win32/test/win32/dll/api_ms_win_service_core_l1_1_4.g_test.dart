@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -30,13 +30,12 @@ void main() {
   });
 }
 
-@Native<
-  Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>)
->(symbol: 'GetServiceDirectory')
-external int _GetServiceDirectory(
-  Pointer hServiceStatus,
-  int eDirectoryType,
-  Pointer<Utf16> lpPathBuffer,
-  int cchPathBufferLength,
-  Pointer<Uint32> lpcchRequiredBufferLength,
+final _api_ms_win_service_core_l1_1_4 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-4.dll',
 );
+
+final _GetServiceDirectory = _api_ms_win_service_core_l1_1_4
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('GetServiceDirectory');

@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _api_ms_win_core_comm_l1_1_2 = DynamicLibrary.open(
+  'api-ms-win-core-comm-l1-1-2.dll',
+);
+
 /// Gets an array that contains the well-formed COM ports.
 ///
 /// To learn more, see
@@ -45,11 +51,8 @@ int GetCommPorts(
   Pointer<Uint32> puPortNumbersFound,
 ) => _GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound);
 
-@Native<Uint32 Function(Pointer<Uint32>, Uint32, Pointer<Uint32>)>(
-  symbol: 'GetCommPorts',
-)
-external int _GetCommPorts(
-  Pointer<Uint32> lpPortNumbers,
-  int uPortNumbersCount,
-  Pointer<Uint32> puPortNumbersFound,
-);
+final _GetCommPorts = _api_ms_win_core_comm_l1_1_2
+    .lookupFunction<
+      Uint32 Function(Pointer<Uint32>, Uint32, Pointer<Uint32>),
+      int Function(Pointer<Uint32>, int, Pointer<Uint32>)
+    >('GetCommPorts');

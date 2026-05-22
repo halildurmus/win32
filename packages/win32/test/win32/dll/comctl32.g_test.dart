@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -41,44 +41,44 @@ void main() {
   });
 }
 
-@Native<IntPtr Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'DefSubclassProc',
-)
-external int _DefSubclassProc(Pointer hWnd, int uMsg, int wParam, int lParam);
+final _comctl32 = DynamicLibrary.open('comctl32.dll');
 
-@Native<Void Function(Pointer, Pointer<RECT>, Pointer<Utf16>, Uint32)>(
-  symbol: 'DrawStatusTextW',
-)
-external void _DrawStatusText(
-  Pointer hDC,
-  Pointer<RECT> lprc,
-  Pointer<Utf16> pszText,
-  int uFlags,
-);
+final _DefSubclassProc = _comctl32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('DefSubclassProc');
 
-@Native<Int32 Function(IntPtr)>(symbol: 'ImageList_Destroy')
-external int _ImageList_Destroy(int himl);
+final _DrawStatusText = _comctl32
+    .lookupFunction<
+      Void Function(Pointer, Pointer<RECT>, Pointer<Utf16>, Uint32),
+      void Function(Pointer, Pointer<RECT>, Pointer<Utf16>, int)
+    >('DrawStatusTextW');
 
-@Native<Int32 Function(Pointer<INITCOMMONCONTROLSEX>)>(
-  symbol: 'InitCommonControlsEx',
-)
-external int _InitCommonControlsEx(Pointer<INITCOMMONCONTROLSEX> picce);
+final _ImageList_Destroy = _comctl32
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>(
+      'ImageList_Destroy',
+    );
 
-@Native<Int32 Function(Pointer, Pointer<NativeFunction<SUBCLASSPROC>>, IntPtr)>(
-  symbol: 'RemoveWindowSubclass',
-)
-external int _RemoveWindowSubclass(
-  Pointer hWnd,
-  Pointer<NativeFunction<SUBCLASSPROC>> pfnSubclass,
-  int uIdSubclass,
-);
+final _InitCommonControlsEx = _comctl32
+    .lookupFunction<
+      Int32 Function(Pointer<INITCOMMONCONTROLSEX>),
+      int Function(Pointer<INITCOMMONCONTROLSEX>)
+    >('InitCommonControlsEx');
 
-@Native<
-  Int32 Function(Pointer, Pointer<NativeFunction<SUBCLASSPROC>>, IntPtr, IntPtr)
->(symbol: 'SetWindowSubclass')
-external int _SetWindowSubclass(
-  Pointer hWnd,
-  Pointer<NativeFunction<SUBCLASSPROC>> pfnSubclass,
-  int uIdSubclass,
-  int dwRefData,
-);
+final _RemoveWindowSubclass = _comctl32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<SUBCLASSPROC>>, IntPtr),
+      int Function(Pointer, Pointer<NativeFunction<SUBCLASSPROC>>, int)
+    >('RemoveWindowSubclass');
+
+final _SetWindowSubclass = _comctl32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<NativeFunction<SUBCLASSPROC>>,
+        IntPtr,
+        IntPtr,
+      ),
+      int Function(Pointer, Pointer<NativeFunction<SUBCLASSPROC>>, int, int)
+    >('SetWindowSubclass');

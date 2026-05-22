@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -30,9 +30,12 @@ void main() {
   });
 }
 
-@Native<Pointer Function(Uint32, Uint32, Uint32)>(symbol: 'OpenCommPort')
-external Pointer _OpenCommPort(
-  int uPortNumber,
-  int dwDesiredAccess,
-  int dwFlagsAndAttributes,
+final _api_ms_win_core_comm_l1_1_1 = DynamicLibrary.open(
+  'api-ms-win-core-comm-l1-1-1.dll',
 );
+
+final _OpenCommPort = _api_ms_win_core_comm_l1_1_1
+    .lookupFunction<
+      Pointer Function(Uint32, Uint32, Uint32),
+      Pointer Function(int, int, int)
+    >('OpenCommPort');

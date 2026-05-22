@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -114,247 +114,239 @@ void main() {
   });
 }
 
-@Native<Int32 Function(IntPtr)>(symbol: 'CloseThemeData')
-external int _CloseThemeData(int hTheme);
+final _uxtheme = DynamicLibrary.open('uxtheme.dll');
 
-@Native<
-  Int32 Function(IntPtr, Pointer, Int32, Int32, Pointer<RECT>, Pointer<RECT>)
->(symbol: 'DrawThemeBackground')
-external int _DrawThemeBackground(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  Pointer<RECT> pRect,
-  Pointer<RECT> pClipRect,
+final _CloseThemeData = _uxtheme
+    .lookupFunction<Int32 Function(IntPtr), int Function(int)>(
+      'CloseThemeData',
+    );
+
+final _DrawThemeBackground = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        Pointer<RECT>,
+      ),
+      int Function(int, Pointer, int, int, Pointer<RECT>, Pointer<RECT>)
+    >('DrawThemeBackground');
+
+final _DrawThemeEdge = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        Uint32,
+        Uint32,
+        Pointer<RECT>,
+      ),
+      int Function(
+        int,
+        Pointer,
+        int,
+        int,
+        Pointer<RECT>,
+        int,
+        int,
+        Pointer<RECT>,
+      )
+    >('DrawThemeEdge');
+
+final _DrawThemeIcon = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        IntPtr,
+        Int32,
+      ),
+      int Function(int, Pointer, int, int, Pointer<RECT>, int, int)
+    >('DrawThemeIcon');
+
+final _DrawThemeParentBackground = _uxtheme
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer, Pointer<RECT>)
+    >('DrawThemeParentBackground');
+
+final _DrawThemeParentBackgroundEx = _uxtheme
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Uint32, Pointer<RECT>),
+      int Function(Pointer, Pointer, int, Pointer<RECT>)
+    >('DrawThemeParentBackgroundEx');
+
+final _DrawThemeTextEx = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<Utf16>,
+        Int32,
+        Uint32,
+        Pointer<RECT>,
+        Pointer<DTTOPTS>,
+      ),
+      int Function(
+        int,
+        Pointer,
+        int,
+        int,
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<RECT>,
+        Pointer<DTTOPTS>,
+      )
+    >('DrawThemeTextEx');
+
+final _EnableThemeDialogTexture = _uxtheme
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('EnableThemeDialogTexture');
+
+final _GetCurrentThemeName = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Int32,
+        Pointer<Utf16>,
+        Int32,
+        Pointer<Utf16>,
+        Int32,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        int,
+        Pointer<Utf16>,
+        int,
+        Pointer<Utf16>,
+        int,
+      )
+    >('GetCurrentThemeName');
+
+final _GetThemeMetric = _uxtheme
+    .lookupFunction<
+      Int32 Function(IntPtr, Pointer, Int32, Int32, Int32, Pointer<Int32>),
+      int Function(int, Pointer, int, int, int, Pointer<Int32>)
+    >('GetThemeMetric');
+
+final _GetThemePartSize = _uxtheme
+    .lookupFunction<
+      Int32 Function(
+        IntPtr,
+        Pointer,
+        Int32,
+        Int32,
+        Pointer<RECT>,
+        Int32,
+        Pointer<SIZE>,
+      ),
+      int Function(int, Pointer, int, int, Pointer<RECT>, int, Pointer<SIZE>)
+    >('GetThemePartSize');
+
+final _GetThemeRect = _uxtheme
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Int32, Int32, Pointer<RECT>),
+      int Function(int, int, int, int, Pointer<RECT>)
+    >('GetThemeRect');
+
+final _GetThemeSysColor = _uxtheme
+    .lookupFunction<Uint32 Function(IntPtr, Int32), int Function(int, int)>(
+      'GetThemeSysColor',
+    );
+
+final _GetThemeSysColorBrush = _uxtheme
+    .lookupFunction<
+      Pointer Function(IntPtr, Int32),
+      Pointer Function(int, int)
+    >('GetThemeSysColorBrush');
+
+final _GetThemeSysFont = _uxtheme
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Pointer<LOGFONT>),
+      int Function(int, int, Pointer<LOGFONT>)
+    >('GetThemeSysFont');
+
+final _GetThemeSysSize = _uxtheme
+    .lookupFunction<Int32 Function(IntPtr, Int32), int Function(int, int)>(
+      'GetThemeSysSize',
+    );
+
+final _GetWindowTheme = _uxtheme
+    .lookupFunction<IntPtr Function(Pointer), int Function(Pointer)>(
+      'GetWindowTheme',
+    );
+
+final _IsAppThemed = _uxtheme.lookupFunction<Int32 Function(), int Function()>(
+  'IsAppThemed',
 );
 
-@Native<
-  Int32 Function(
-    IntPtr,
-    Pointer,
-    Int32,
-    Int32,
-    Pointer<RECT>,
-    Uint32,
-    Uint32,
-    Pointer<RECT>,
-  )
->(symbol: 'DrawThemeEdge')
-external int _DrawThemeEdge(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  Pointer<RECT> pDestRect,
-  int uEdge,
-  int uFlags,
-  Pointer<RECT> pContentRect,
-);
+final _IsCompositionActive = _uxtheme
+    .lookupFunction<Int32 Function(), int Function()>('IsCompositionActive');
 
-@Native<
-  Int32 Function(IntPtr, Pointer, Int32, Int32, Pointer<RECT>, IntPtr, Int32)
->(symbol: 'DrawThemeIcon')
-external int _DrawThemeIcon(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  Pointer<RECT> pRect,
-  int himl,
-  int iImageIndex,
-);
+final _IsThemeActive = _uxtheme
+    .lookupFunction<Int32 Function(), int Function()>('IsThemeActive');
 
-@Native<Int32 Function(Pointer, Pointer, Pointer<RECT>)>(
-  symbol: 'DrawThemeParentBackground',
-)
-external int _DrawThemeParentBackground(
-  Pointer hwnd,
-  Pointer hdc,
-  Pointer<RECT> prc,
-);
+final _IsThemeBackgroundPartiallyTransparent = _uxtheme
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Int32),
+      int Function(int, int, int)
+    >('IsThemeBackgroundPartiallyTransparent');
 
-@Native<Int32 Function(Pointer, Pointer, Uint32, Pointer<RECT>)>(
-  symbol: 'DrawThemeParentBackgroundEx',
-)
-external int _DrawThemeParentBackgroundEx(
-  Pointer hwnd,
-  Pointer hdc,
-  int dwFlags,
-  Pointer<RECT> prc,
-);
+final _IsThemeDialogTextureEnabled = _uxtheme
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'IsThemeDialogTextureEnabled',
+    );
 
-@Native<
-  Int32 Function(
-    IntPtr,
-    Pointer,
-    Int32,
-    Int32,
-    Pointer<Utf16>,
-    Int32,
-    Uint32,
-    Pointer<RECT>,
-    Pointer<DTTOPTS>,
-  )
->(symbol: 'DrawThemeTextEx')
-external int _DrawThemeTextEx(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  Pointer<Utf16> pszText,
-  int cchText,
-  int dwTextFlags,
-  Pointer<RECT> pRect,
-  Pointer<DTTOPTS> pOptions,
-);
+final _IsThemePartDefined = _uxtheme
+    .lookupFunction<
+      Int32 Function(IntPtr, Int32, Int32),
+      int Function(int, int, int)
+    >('IsThemePartDefined');
 
-@Native<Int32 Function(Pointer, Uint32)>(symbol: 'EnableThemeDialogTexture')
-external int _EnableThemeDialogTexture(Pointer hwnd, int dwFlags);
+final _OpenThemeData = _uxtheme
+    .lookupFunction<
+      IntPtr Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('OpenThemeData');
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Int32,
-    Pointer<Utf16>,
-    Int32,
-    Pointer<Utf16>,
-    Int32,
-  )
->(symbol: 'GetCurrentThemeName')
-external int _GetCurrentThemeName(
-  Pointer<Utf16> pszThemeFileName,
-  int cchMaxNameChars,
-  Pointer<Utf16> pszColorBuff,
-  int cchMaxColorChars,
-  Pointer<Utf16> pszSizeBuff,
-  int cchMaxSizeChars,
-);
+final _OpenThemeDataEx = _uxtheme
+    .lookupFunction<
+      IntPtr Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('OpenThemeDataEx');
 
-@Native<Int32 Function(IntPtr, Pointer, Int32, Int32, Int32, Pointer<Int32>)>(
-  symbol: 'GetThemeMetric',
-)
-external int _GetThemeMetric(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  int iPropId,
-  Pointer<Int32> piVal,
-);
+final _OpenThemeDataForDpi = _uxtheme
+    .lookupFunction<
+      IntPtr Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('OpenThemeDataForDpi');
 
-@Native<
-  Int32 Function(
-    IntPtr,
-    Pointer,
-    Int32,
-    Int32,
-    Pointer<RECT>,
-    Int32,
-    Pointer<SIZE>,
-  )
->(symbol: 'GetThemePartSize')
-external int _GetThemePartSize(
-  int hTheme,
-  Pointer hdc,
-  int iPartId,
-  int iStateId,
-  Pointer<RECT> prc,
-  int eSize,
-  Pointer<SIZE> psz,
-);
+final _SetThemeAppProperties = _uxtheme
+    .lookupFunction<Void Function(Uint32), void Function(int)>(
+      'SetThemeAppProperties',
+    );
 
-@Native<Int32 Function(IntPtr, Int32, Int32, Int32, Pointer<RECT>)>(
-  symbol: 'GetThemeRect',
-)
-external int _GetThemeRect(
-  int hTheme,
-  int iPartId,
-  int iStateId,
-  int iPropId,
-  Pointer<RECT> pRect,
-);
+final _SetWindowTheme = _uxtheme
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('SetWindowTheme');
 
-@Native<Uint32 Function(IntPtr, Int32)>(symbol: 'GetThemeSysColor')
-external int _GetThemeSysColor(int hTheme, int iColorId);
-
-@Native<Pointer Function(IntPtr, Int32)>(symbol: 'GetThemeSysColorBrush')
-external Pointer _GetThemeSysColorBrush(int hTheme, int iColorId);
-
-@Native<Int32 Function(IntPtr, Int32, Pointer<LOGFONT>)>(
-  symbol: 'GetThemeSysFont',
-)
-external int _GetThemeSysFont(int hTheme, int iFontId, Pointer<LOGFONT> plf);
-
-@Native<Int32 Function(IntPtr, Int32)>(symbol: 'GetThemeSysSize')
-external int _GetThemeSysSize(int hTheme, int iSizeId);
-
-@Native<IntPtr Function(Pointer)>(symbol: 'GetWindowTheme')
-external int _GetWindowTheme(Pointer hwnd);
-
-@Native<Int32 Function()>(symbol: 'IsAppThemed')
-external int _IsAppThemed();
-
-@Native<Int32 Function()>(symbol: 'IsCompositionActive')
-external int _IsCompositionActive();
-
-@Native<Int32 Function()>(symbol: 'IsThemeActive')
-external int _IsThemeActive();
-
-@Native<Int32 Function(IntPtr, Int32, Int32)>(
-  symbol: 'IsThemeBackgroundPartiallyTransparent',
-)
-external int _IsThemeBackgroundPartiallyTransparent(
-  int hTheme,
-  int iPartId,
-  int iStateId,
-);
-
-@Native<Int32 Function(Pointer)>(symbol: 'IsThemeDialogTextureEnabled')
-external int _IsThemeDialogTextureEnabled(Pointer hwnd);
-
-@Native<Int32 Function(IntPtr, Int32, Int32)>(symbol: 'IsThemePartDefined')
-external int _IsThemePartDefined(int hTheme, int iPartId, int iStateId);
-
-@Native<IntPtr Function(Pointer, Pointer<Utf16>)>(symbol: 'OpenThemeData')
-external int _OpenThemeData(Pointer hwnd, Pointer<Utf16> pszClassList);
-
-@Native<IntPtr Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'OpenThemeDataEx',
-)
-external int _OpenThemeDataEx(
-  Pointer hwnd,
-  Pointer<Utf16> pszClassList,
-  int dwFlags,
-);
-
-@Native<IntPtr Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'OpenThemeDataForDpi',
-)
-external int _OpenThemeDataForDpi(
-  Pointer hwnd,
-  Pointer<Utf16> pszClassList,
-  int dpi,
-);
-
-@Native<Void Function(Uint32)>(symbol: 'SetThemeAppProperties')
-external void _SetThemeAppProperties(int dwFlags);
-
-@Native<Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'SetWindowTheme',
-)
-external int _SetWindowTheme(
-  Pointer hwnd,
-  Pointer<Utf16> pszSubAppName,
-  Pointer<Utf16> pszSubIdList,
-);
-
-@Native<Int32 Function(Pointer, Int32, Pointer, Uint32)>(
-  symbol: 'SetWindowThemeAttribute',
-)
-external int _SetWindowThemeAttribute(
-  Pointer hwnd,
-  int eAttribute,
-  Pointer pvAttribute,
-  int cbAttribute,
-);
+final _SetWindowThemeAttribute = _uxtheme
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('SetWindowThemeAttribute');

@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -26,7 +26,10 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<OPENCARDNAME_EX>)>(
-  symbol: 'SCardUIDlgSelectCardW',
-)
-external int _SCardUIDlgSelectCard(Pointer<OPENCARDNAME_EX> param0);
+final _scarddlg = DynamicLibrary.open('scarddlg.dll');
+
+final _SCardUIDlgSelectCard = _scarddlg
+    .lookupFunction<
+      Int32 Function(Pointer<OPENCARDNAME_EX>),
+      int Function(Pointer<OPENCARDNAME_EX>)
+    >('SCardUIDlgSelectCardW');

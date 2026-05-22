@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/kernel32.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../callbacks.g.dart';
 import '../com/interface.g.dart';
@@ -21,6 +20,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -36,6 +36,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _kernel32 = DynamicLibrary.open('kernel32.dll');
+
 /// Activates the specified activation context.
 ///
 /// To learn more, see
@@ -43,9 +45,16 @@ import '../win32_result.dart';
 ///
 /// {@category kernel32}
 Win32Result<bool> ActivateActCtx(HANDLE? hActCtx, Pointer<IntPtr> lpCookie) {
-  final result_ = ActivateActCtx_Wrapper(hActCtx ?? nullptr, lpCookie);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ActivateActCtx(hActCtx ?? nullptr, lpCookie);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ActivateActCtx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<IntPtr>),
+      int Function(Pointer, Pointer<IntPtr>)
+    >('ActivateActCtx');
 
 /// Adds a directory to the process DLL search path.
 ///
@@ -54,9 +63,16 @@ Win32Result<bool> ActivateActCtx(HANDLE? hActCtx, Pointer<IntPtr> lpCookie) {
 ///
 /// {@category kernel32}
 Win32Result<Pointer> AddDllDirectory(PCWSTR newDirectory) {
-  final result_ = AddDllDirectory_Wrapper(newDirectory);
-  return .new(value: result_.value.ptr, error: result_.error);
+  resolveGetLastError();
+  final result_ = _AddDllDirectory(newDirectory);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _AddDllDirectory = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>)
+    >('AddDllDirectory');
 
 /// Increments the reference count of the specified activation context.
 ///
@@ -67,8 +83,10 @@ Win32Result<Pointer> AddDllDirectory(PCWSTR newDirectory) {
 @pragma('vm:prefer-inline')
 void AddRefActCtx(HANDLE hActCtx) => _AddRefActCtx(hActCtx);
 
-@Native<Void Function(Pointer)>(symbol: 'AddRefActCtx')
-external void _AddRefActCtx(Pointer hActCtx);
+final _AddRefActCtx = _kernel32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'AddRefActCtx',
+    );
 
 /// Allocates a new console for the calling process.
 ///
@@ -77,9 +95,13 @@ external void _AddRefActCtx(Pointer hActCtx);
 ///
 /// {@category kernel32}
 Win32Result<bool> AllocConsole() {
-  final result_ = AllocConsole_Wrapper();
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _AllocConsole();
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _AllocConsole = _kernel32
+    .lookupFunction<Int32 Function(), int Function()>('AllocConsole');
 
 /// Determines whether the file I/O functions are using the ANSI or OEM
 /// character set code page.
@@ -91,8 +113,8 @@ Win32Result<bool> AllocConsole() {
 @pragma('vm:prefer-inline')
 bool AreFileApisANSI() => _AreFileApisANSI() != FALSE;
 
-@Native<Int32 Function()>(symbol: 'AreFileApisANSI')
-external int _AreFileApisANSI();
+final _AreFileApisANSI = _kernel32
+    .lookupFunction<Int32 Function(), int Function()>('AreFileApisANSI');
 
 /// Assigns a process to an existing job object.
 ///
@@ -101,9 +123,16 @@ external int _AreFileApisANSI();
 ///
 /// {@category kernel32}
 Win32Result<bool> AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess) {
-  final result_ = AssignProcessToJobObject_Wrapper(hJob, hProcess);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _AssignProcessToJobObject(hJob, hProcess);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _AssignProcessToJobObject = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('AssignProcessToJobObject');
 
 /// Attaches the calling process to the console of the specified process.
 ///
@@ -112,9 +141,13 @@ Win32Result<bool> AssignProcessToJobObject(HANDLE hJob, HANDLE hProcess) {
 ///
 /// {@category kernel32}
 Win32Result<bool> AttachConsole(int dwProcessId) {
-  final result_ = AttachConsole_Wrapper(dwProcessId);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _AttachConsole(dwProcessId);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _AttachConsole = _kernel32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>('AttachConsole');
 
 /// Generates simple tones on the speaker.
 ///
@@ -123,9 +156,15 @@ Win32Result<bool> AttachConsole(int dwProcessId) {
 ///
 /// {@category kernel32}
 Win32Result<bool> Beep(int dwFreq, int dwDuration) {
-  final result_ = Beep_Wrapper(dwFreq, dwDuration);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _Beep(dwFreq, dwDuration);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _Beep = _kernel32
+    .lookupFunction<Int32 Function(Uint32, Uint32), int Function(int, int)>(
+      'Beep',
+    );
 
 /// Retrieves a handle that can be used by the UpdateResource function to add,
 /// delete, or replace resources in a binary module.
@@ -138,12 +177,19 @@ Win32Result<HANDLE> BeginUpdateResource(
   PCWSTR pFileName,
   bool bDeleteExistingResources,
 ) {
-  final result_ = BeginUpdateResourceW_Wrapper(
+  resolveGetLastError();
+  final result_ = _BeginUpdateResource(
     pFileName,
     bDeleteExistingResources ? TRUE : FALSE,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _BeginUpdateResource = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Int32),
+      Pointer Function(Pointer<Utf16>, int)
+    >('BeginUpdateResourceW');
 
 /// Fills a specified DCB structure with values specified in a device-control
 /// string.
@@ -153,9 +199,16 @@ Win32Result<HANDLE> BeginUpdateResource(
 ///
 /// {@category kernel32}
 Win32Result<bool> BuildCommDCB(PCWSTR lpDef, Pointer<DCB> lpDCB) {
-  final result_ = BuildCommDCBW_Wrapper(lpDef, lpDCB);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _BuildCommDCB(lpDef, lpDCB);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _BuildCommDCB = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<DCB>),
+      int Function(Pointer<Utf16>, Pointer<DCB>)
+    >('BuildCommDCBW');
 
 /// Translates a device-definition string into appropriate device-control block
 /// codes and places them into a device control block.
@@ -169,13 +222,16 @@ Win32Result<bool> BuildCommDCBAndTimeouts(
   Pointer<DCB> lpDCB,
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
 ) {
-  final result_ = BuildCommDCBAndTimeoutsW_Wrapper(
-    lpDef,
-    lpDCB,
-    lpCommTimeouts,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _BuildCommDCBAndTimeouts(lpDef, lpDCB, lpCommTimeouts);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _BuildCommDCBAndTimeouts = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<DCB>, Pointer<COMMTIMEOUTS>),
+      int Function(Pointer<Utf16>, Pointer<DCB>, Pointer<COMMTIMEOUTS>)
+    >('BuildCommDCBAndTimeoutsW');
 
 /// Connects to a message-type pipe (and waits if an instance of the pipe is not
 /// available), writes to and reads from the pipe, and then closes the pipe.
@@ -205,26 +261,27 @@ bool CallNamedPipe(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer,
-    Uint32,
-    Pointer,
-    Uint32,
-    Pointer<Uint32>,
-    Uint32,
-  )
->(symbol: 'CallNamedPipeW')
-external int _CallNamedPipe(
-  Pointer<Utf16> lpNamedPipeName,
-  Pointer lpInBuffer,
-  int nInBufferSize,
-  Pointer lpOutBuffer,
-  int nOutBufferSize,
-  Pointer<Uint32> lpBytesRead,
-  int nTimeOut,
-);
+final _CallNamedPipe = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer,
+        Uint32,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+        Uint32,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer,
+        int,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        int,
+      )
+    >('CallNamedPipeW');
 
 /// Cancels all pending input and output (I/O) operations that are issued by the
 /// calling thread for the specified file.
@@ -234,9 +291,13 @@ external int _CallNamedPipe(
 ///
 /// {@category kernel32}
 Win32Result<bool> CancelIo(HANDLE hFile) {
-  final result_ = CancelIo_Wrapper(hFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CancelIo(hFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CancelIo = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('CancelIo');
 
 /// Marks any outstanding I/O operations for the specified file handle.
 ///
@@ -248,9 +309,16 @@ Win32Result<bool> CancelIo(HANDLE hFile) {
 ///
 /// {@category kernel32}
 Win32Result<bool> CancelIoEx(HANDLE hFile, Pointer<OVERLAPPED>? lpOverlapped) {
-  final result_ = CancelIoEx_Wrapper(hFile, lpOverlapped ?? nullptr);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CancelIoEx(hFile, lpOverlapped ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CancelIoEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<OVERLAPPED>),
+      int Function(Pointer, Pointer<OVERLAPPED>)
+    >('CancelIoEx');
 
 /// Marks pending synchronous I/O operations that are issued by the specified
 /// thread as canceled.
@@ -260,9 +328,15 @@ Win32Result<bool> CancelIoEx(HANDLE hFile, Pointer<OVERLAPPED>? lpOverlapped) {
 ///
 /// {@category kernel32}
 Win32Result<bool> CancelSynchronousIo(HANDLE hThread) {
-  final result_ = CancelSynchronousIo_Wrapper(hThread);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CancelSynchronousIo(hThread);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CancelSynchronousIo = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CancelSynchronousIo',
+    );
 
 /// Determines whether the specified process is being debugged.
 ///
@@ -274,12 +348,16 @@ Win32Result<bool> CheckRemoteDebuggerPresent(
   HANDLE hProcess,
   Pointer<Int32> pbDebuggerPresent,
 ) {
-  final result_ = CheckRemoteDebuggerPresent_Wrapper(
-    hProcess,
-    pbDebuggerPresent,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CheckRemoteDebuggerPresent = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer<Int32>)
+    >('CheckRemoteDebuggerPresent');
 
 /// Restores character transmission for a specified communications device and
 /// places the transmission line in a nonbreak state.
@@ -289,9 +367,15 @@ Win32Result<bool> CheckRemoteDebuggerPresent(
 ///
 /// {@category kernel32}
 Win32Result<bool> ClearCommBreak(HANDLE hFile) {
-  final result_ = ClearCommBreak_Wrapper(hFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ClearCommBreak(hFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ClearCommBreak = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'ClearCommBreak',
+    );
 
 /// Retrieves information about a communications error and reports the current
 /// status of a communications device.
@@ -305,13 +389,20 @@ Win32Result<bool> ClearCommError(
   Pointer<Uint32>? lpErrors,
   Pointer<COMSTAT>? lpStat,
 ) {
-  final result_ = ClearCommError_Wrapper(
+  resolveGetLastError();
+  final result_ = _ClearCommError(
     hFile,
     lpErrors ?? nullptr,
     lpStat ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ClearCommError = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Pointer<COMSTAT>),
+      int Function(Pointer, Pointer<Uint32>, Pointer<COMSTAT>)
+    >('ClearCommError');
 
 /// Closes an open object handle.
 ///
@@ -320,9 +411,15 @@ Win32Result<bool> ClearCommError(
 ///
 /// {@category kernel32}
 Win32Result<bool> CloseHandle(HANDLE hObject) {
-  final result_ = CloseHandle_Wrapper(hObject);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CloseHandle(hObject);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CloseHandle = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CloseHandle',
+    );
 
 /// Closes a pseudoconsole from the given handle.
 ///
@@ -333,8 +430,10 @@ Win32Result<bool> CloseHandle(HANDLE hObject) {
 @pragma('vm:prefer-inline')
 void ClosePseudoConsole(HPCON hPC) => _ClosePseudoConsole(hPC);
 
-@Native<Void Function(IntPtr)>(symbol: 'ClosePseudoConsole')
-external void _ClosePseudoConsole(int hPC);
+final _ClosePseudoConsole = _kernel32
+    .lookupFunction<Void Function(IntPtr), void Function(int)>(
+      'ClosePseudoConsole',
+    );
 
 /// Displays a driver-supplied configuration dialog box.
 ///
@@ -347,9 +446,16 @@ Win32Result<bool> CommConfigDialog(
   HWND? hWnd,
   Pointer<COMMCONFIG> lpCC,
 ) {
-  final result_ = CommConfigDialogW_Wrapper(lpszName, hWnd ?? nullptr, lpCC);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CommConfigDialog(lpszName, hWnd ?? nullptr, lpCC);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CommConfigDialog = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer, Pointer<COMMCONFIG>),
+      int Function(Pointer<Utf16>, Pointer, Pointer<COMMCONFIG>)
+    >('CommConfigDialogW');
 
 /// Enables a named pipe server process to wait for a client process to connect
 /// to an instance of a named pipe.
@@ -362,9 +468,16 @@ Win32Result<bool> ConnectNamedPipe(
   HANDLE hNamedPipe,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = ConnectNamedPipe_Wrapper(hNamedPipe, lpOverlapped ?? nullptr);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ConnectNamedPipe(hNamedPipe, lpOverlapped ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ConnectNamedPipe = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<OVERLAPPED>),
+      int Function(Pointer, Pointer<OVERLAPPED>)
+    >('ConnectNamedPipe');
 
 /// Enables a debugger to continue a thread that previously reported a debugging
 /// event.
@@ -378,13 +491,20 @@ Win32Result<bool> ContinueDebugEvent(
   int dwThreadId,
   NTSTATUS dwContinueStatus,
 ) {
-  final result_ = ContinueDebugEvent_Wrapper(
+  resolveGetLastError();
+  final result_ = _ContinueDebugEvent(
     dwProcessId,
     dwThreadId,
     dwContinueStatus,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ContinueDebugEvent = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Int32),
+      int Function(int, int, int)
+    >('ContinueDebugEvent');
 
 /// Copies an existing file to a new file.
 ///
@@ -397,13 +517,20 @@ Win32Result<bool> CopyFile(
   PCWSTR lpNewFileName,
   bool bFailIfExists,
 ) {
-  final result_ = CopyFileW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CopyFile(
     lpExistingFileName,
     lpNewFileName,
     bFailIfExists ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CopyFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Int32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('CopyFileW');
 
 /// Copies an existing file to a new file, notifying the application of its
 /// progress through a callback function.
@@ -420,7 +547,8 @@ Win32Result<bool> CopyFileEx(
   Pointer<Int32>? pbCancel,
   COPYFILE_FLAGS dwCopyFlags,
 ) {
-  final result_ = CopyFileExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CopyFileEx(
     lpExistingFileName,
     lpNewFileName,
     lpProgressRoutine ?? nullptr,
@@ -428,8 +556,28 @@ Win32Result<bool> CopyFileEx(
     pbCancel ?? nullptr,
     dwCopyFlags,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CopyFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPPROGRESS_ROUTINE>>,
+        Pointer,
+        Pointer<Int32>,
+        Uint32,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<NativeFunction<LPPROGRESS_ROUTINE>>,
+        Pointer,
+        Pointer<Int32>,
+        int,
+      )
+    >('CopyFileExW');
 
 /// Creates an activation context.
 ///
@@ -438,9 +586,16 @@ Win32Result<bool> CopyFileEx(
 ///
 /// {@category kernel32}
 Win32Result<HANDLE> CreateActCtx(Pointer<ACTCTX> pActCtx) {
-  final result_ = CreateActCtxW_Wrapper(pActCtx);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _CreateActCtx(pActCtx);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateActCtx = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<ACTCTX>),
+      Pointer Function(Pointer<ACTCTX>)
+    >('CreateActCtxW');
 
 /// Creates a screen buffer for the Windows Console.
 ///
@@ -454,15 +609,28 @@ Win32Result<HANDLE> CreateConsoleScreenBuffer(
   Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
   int dwFlags,
 ) {
-  final result_ = CreateConsoleScreenBuffer_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateConsoleScreenBuffer(
     dwDesiredAccess,
     dwShareMode,
     lpSecurityAttributes ?? nullptr,
     dwFlags,
     nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateConsoleScreenBuffer = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Uint32,
+        Pointer,
+      ),
+      Pointer Function(int, int, Pointer<SECURITY_ATTRIBUTES>, int, Pointer)
+    >('CreateConsoleScreenBuffer');
 
 /// Creates a new directory.
 ///
@@ -474,12 +642,16 @@ Win32Result<bool> CreateDirectory(
   PCWSTR lpPathName,
   Pointer<SECURITY_ATTRIBUTES>? lpSecurityAttributes,
 ) {
-  final result_ = CreateDirectoryW_Wrapper(
-    lpPathName,
-    lpSecurityAttributes ?? nullptr,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CreateDirectory(lpPathName, lpSecurityAttributes ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CreateDirectory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>),
+      int Function(Pointer<Utf16>, Pointer<SECURITY_ATTRIBUTES>)
+    >('CreateDirectoryW');
 
 /// Creates or opens a named or unnamed event object.
 ///
@@ -493,14 +665,26 @@ Win32Result<HANDLE> CreateEvent(
   bool bInitialState,
   PCWSTR? lpName,
 ) {
-  final result_ = CreateEventW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateEvent(
     lpEventAttributes ?? nullptr,
     bManualReset ? TRUE : FALSE,
     bInitialState ? TRUE : FALSE,
     lpName ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateEvent = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        Int32,
+        Int32,
+        Pointer<Utf16>,
+      ),
+      Pointer Function(Pointer<SECURITY_ATTRIBUTES>, int, int, Pointer<Utf16>)
+    >('CreateEventW');
 
 /// Creates or opens a named or unnamed event object and returns a handle to the
 /// object.
@@ -515,14 +699,26 @@ Win32Result<HANDLE> CreateEventEx(
   CREATE_EVENT dwFlags,
   int dwDesiredAccess,
 ) {
-  final result_ = CreateEventExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateEventEx(
     lpEventAttributes ?? nullptr,
     lpName ?? nullptr,
     dwFlags,
     dwDesiredAccess,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateEventEx = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+      ),
+      Pointer Function(Pointer<SECURITY_ATTRIBUTES>, Pointer<Utf16>, int, int)
+    >('CreateEventExW');
 
 /// Creates or opens a file or I/O device.
 ///
@@ -543,7 +739,8 @@ Win32Result<HANDLE> CreateFile(
   FILE_FLAGS_AND_ATTRIBUTES dwFlagsAndAttributes,
   HANDLE? hTemplateFile,
 ) {
-  final result_ = CreateFileW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateFile(
     lpFileName,
     dwDesiredAccess,
     dwShareMode,
@@ -552,8 +749,30 @@ Win32Result<HANDLE> CreateFile(
     dwFlagsAndAttributes,
     hTemplateFile ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateFile = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Uint32,
+        Uint32,
+        Pointer,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        int,
+        Pointer,
+      )
+    >('CreateFileW');
 
 /// Creates or opens a file or I/O device.
 ///
@@ -568,15 +787,34 @@ Win32Result<HANDLE> CreateFile2(
   FILE_CREATION_DISPOSITION dwCreationDisposition,
   Pointer<CREATEFILE2_EXTENDED_PARAMETERS>? pCreateExParams,
 ) {
-  final result_ = CreateFile2_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateFile2(
     lpFileName,
     dwDesiredAccess,
     dwShareMode,
     dwCreationDisposition,
     pCreateExParams ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateFile2 = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<CREATEFILE2_EXTENDED_PARAMETERS>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        int,
+        int,
+        int,
+        Pointer<CREATEFILE2_EXTENDED_PARAMETERS>,
+      )
+    >('CreateFile2');
 
 /// Creates an input/output (I/O) completion port and associates it with a
 /// specified file handle, or creates an I/O completion port that is not yet
@@ -592,14 +830,21 @@ Win32Result<HANDLE> CreateIoCompletionPort(
   int completionKey,
   int numberOfConcurrentThreads,
 ) {
-  final result_ = CreateIoCompletionPort_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateIoCompletionPort(
     fileHandle,
     existingCompletionPort ?? nullptr,
     completionKey,
     numberOfConcurrentThreads,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateIoCompletionPort = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, IntPtr, Uint32),
+      Pointer Function(Pointer, Pointer, int, int)
+    >('CreateIoCompletionPort');
 
 /// Creates or opens a job object.
 ///
@@ -611,12 +856,19 @@ Win32Result<HANDLE> CreateJobObject(
   Pointer<SECURITY_ATTRIBUTES>? lpJobAttributes,
   PCWSTR? lpName,
 ) {
-  final result_ = CreateJobObjectW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateJobObject(
     lpJobAttributes ?? nullptr,
     lpName ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateJobObject = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<SECURITY_ATTRIBUTES>, Pointer<Utf16>),
+      Pointer Function(Pointer<SECURITY_ATTRIBUTES>, Pointer<Utf16>)
+    >('CreateJobObjectW');
 
 /// Creates an instance of a named pipe and returns a handle for subsequent pipe
 /// operations.
@@ -648,28 +900,29 @@ HANDLE CreateNamedPipe(
   ),
 );
 
-@Native<
-  Pointer Function(
-    Pointer<Utf16>,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Uint32,
-    Pointer<SECURITY_ATTRIBUTES>,
-  )
->(symbol: 'CreateNamedPipeW')
-external Pointer _CreateNamedPipe(
-  Pointer<Utf16> lpName,
-  int dwOpenMode,
-  int dwPipeMode,
-  int nMaxInstances,
-  int nOutBufferSize,
-  int nInBufferSize,
-  int nDefaultTimeOut,
-  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-);
+final _CreateNamedPipe = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<Utf16>,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<SECURITY_ATTRIBUTES>,
+      ),
+      Pointer Function(
+        Pointer<Utf16>,
+        int,
+        int,
+        int,
+        int,
+        int,
+        int,
+        Pointer<SECURITY_ATTRIBUTES>,
+      )
+    >('CreateNamedPipeW');
 
 /// Creates an anonymous pipe, and returns handles to the read and write ends of
 /// the pipe.
@@ -684,14 +937,31 @@ Win32Result<bool> CreatePipe(
   Pointer<SECURITY_ATTRIBUTES>? lpPipeAttributes,
   int nSize,
 ) {
-  final result_ = CreatePipe_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreatePipe(
     hReadPipe,
     hWritePipe,
     lpPipeAttributes ?? nullptr,
     nSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CreatePipe = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Pointer>,
+        Pointer<Pointer>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Uint32,
+      ),
+      int Function(
+        Pointer<Pointer>,
+        Pointer<Pointer>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+      )
+    >('CreatePipe');
 
 /// Creates a new process and its primary thread.
 ///
@@ -713,7 +983,8 @@ Win32Result<bool> CreateProcess(
   Pointer<STARTUPINFO> lpStartupInfo,
   Pointer<PROCESS_INFORMATION> lpProcessInformation,
 ) {
-  final result_ = CreateProcessW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateProcess(
     lpApplicationName ?? nullptr,
     lpCommandLine ?? nullptr,
     lpProcessAttributes ?? nullptr,
@@ -725,8 +996,36 @@ Win32Result<bool> CreateProcess(
     lpStartupInfo,
     lpProcessInformation,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CreateProcess = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Int32,
+        Uint32,
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<STARTUPINFO>,
+        Pointer<PROCESS_INFORMATION>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        int,
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<STARTUPINFO>,
+        Pointer<PROCESS_INFORMATION>,
+      )
+    >('CreateProcessW');
 
 /// Allocates a new pseudoconsole for the calling process.
 ///
@@ -755,16 +1054,11 @@ HPCON CreatePseudoConsole(
   return .new(result$);
 }
 
-@Native<Int32 Function(COORD, Pointer, Pointer, Uint32, Pointer<IntPtr>)>(
-  symbol: 'CreatePseudoConsole',
-)
-external int _CreatePseudoConsole(
-  COORD size,
-  Pointer hInput,
-  Pointer hOutput,
-  int dwFlags,
-  Pointer<IntPtr> phPC,
-);
+final _CreatePseudoConsole = _kernel32
+    .lookupFunction<
+      Int32 Function(COORD, Pointer, Pointer, Uint32, Pointer<IntPtr>),
+      int Function(COORD, Pointer, Pointer, int, Pointer<IntPtr>)
+    >('CreatePseudoConsole');
 
 /// Creates a thread that runs in the virtual address space of another process.
 ///
@@ -781,7 +1075,8 @@ Win32Result<HANDLE> CreateRemoteThread(
   int dwCreationFlags,
   Pointer<Uint32>? lpThreadId,
 ) {
-  final result_ = CreateRemoteThread_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateRemoteThread(
     hProcess,
     lpThreadAttributes ?? nullptr,
     dwStackSize,
@@ -790,8 +1085,30 @@ Win32Result<HANDLE> CreateRemoteThread(
     dwCreationFlags,
     lpThreadId ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateRemoteThread = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<SECURITY_ATTRIBUTES>,
+        IntPtr,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+      )
+    >('CreateRemoteThread');
 
 /// Creates a thread that runs in the virtual address space of another process
 /// and optionally specifies extended attributes such as processor group
@@ -811,7 +1128,8 @@ Win32Result<HANDLE> CreateRemoteThreadEx(
   LPPROC_THREAD_ATTRIBUTE_LIST? lpAttributeList,
   Pointer<Uint32>? lpThreadId,
 ) {
-  final result_ = CreateRemoteThreadEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateRemoteThreadEx(
     hProcess,
     lpThreadAttributes ?? nullptr,
     dwStackSize,
@@ -821,8 +1139,32 @@ Win32Result<HANDLE> CreateRemoteThreadEx(
     lpAttributeList ?? nullptr,
     lpThreadId ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateRemoteThreadEx = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<SECURITY_ATTRIBUTES>,
+        IntPtr,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        Uint32,
+        Pointer,
+        Pointer<Uint32>,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        int,
+        Pointer,
+        Pointer<Uint32>,
+      )
+    >('CreateRemoteThreadEx');
 
 /// Creates a symbolic link.
 ///
@@ -835,13 +1177,20 @@ Win32Result<bool> CreateSymbolicLink(
   PCWSTR lpTargetFileName,
   SYMBOLIC_LINK_FLAGS dwFlags,
 ) {
-  final result_ = CreateSymbolicLinkW_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateSymbolicLink(
     lpSymlinkFileName,
     lpTargetFileName,
     dwFlags,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CreateSymbolicLink = _kernel32
+    .lookupFunction<
+      Uint8 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('CreateSymbolicLinkW');
 
 /// Creates a thread to execute within the virtual address space of the calling
 /// process.
@@ -858,7 +1207,8 @@ Win32Result<HANDLE> CreateThread(
   THREAD_CREATION_FLAGS dwCreationFlags,
   Pointer<Uint32>? lpThreadId,
 ) {
-  final result_ = CreateThread_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateThread(
     lpThreadAttributes ?? nullptr,
     dwStackSize,
     lpStartAddress,
@@ -866,8 +1216,28 @@ Win32Result<HANDLE> CreateThread(
     dwCreationFlags,
     lpThreadId ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateThread = _kernel32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        IntPtr,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+      ),
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        int,
+        Pointer<NativeFunction<LPTHREAD_START_ROUTINE>>,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+      )
+    >('CreateThread');
 
 /// Deactivates the activation context corresponding to the specified cookie.
 ///
@@ -876,9 +1246,15 @@ Win32Result<HANDLE> CreateThread(
 ///
 /// {@category kernel32}
 Win32Result<bool> DeactivateActCtx(int dwFlags, int ulCookie) {
-  final result_ = DeactivateActCtx_Wrapper(dwFlags, ulCookie);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DeactivateActCtx(dwFlags, ulCookie);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DeactivateActCtx = _kernel32
+    .lookupFunction<Int32 Function(Uint32, IntPtr), int Function(int, int)>(
+      'DeactivateActCtx',
+    );
 
 /// Causes a breakpoint exception to occur in the current process.
 ///
@@ -892,8 +1268,9 @@ Win32Result<bool> DeactivateActCtx(int dwFlags, int ulCookie) {
 @pragma('vm:prefer-inline')
 void DebugBreak() => _DebugBreak();
 
-@Native<Void Function()>(symbol: 'DebugBreak')
-external void _DebugBreak();
+final _DebugBreak = _kernel32.lookupFunction<Void Function(), void Function()>(
+  'DebugBreak',
+);
 
 /// Causes a breakpoint exception to occur in the specified process.
 ///
@@ -905,9 +1282,15 @@ external void _DebugBreak();
 ///
 /// {@category kernel32}
 Win32Result<bool> DebugBreakProcess(HANDLE process) {
-  final result_ = DebugBreakProcess_Wrapper(process);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DebugBreakProcess(process);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DebugBreakProcess = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DebugBreakProcess',
+    );
 
 /// Sets the action to be performed when the calling thread exits.
 ///
@@ -916,9 +1299,15 @@ Win32Result<bool> DebugBreakProcess(HANDLE process) {
 ///
 /// {@category kernel32}
 Win32Result<bool> DebugSetProcessKillOnExit(bool killOnExit) {
-  final result_ = DebugSetProcessKillOnExit_Wrapper(killOnExit ? TRUE : FALSE);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DebugSetProcessKillOnExit(killOnExit ? TRUE : FALSE);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DebugSetProcessKillOnExit = _kernel32
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'DebugSetProcessKillOnExit',
+    );
 
 /// Defines, redefines, or deletes MS-DOS device names.
 ///
@@ -931,13 +1320,20 @@ Win32Result<bool> DefineDosDevice(
   PCWSTR lpDeviceName,
   PCWSTR? lpTargetPath,
 ) {
-  final result_ = DefineDosDeviceW_Wrapper(
+  resolveGetLastError();
+  final result_ = _DefineDosDevice(
     dwFlags,
     lpDeviceName,
     lpTargetPath ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DefineDosDevice = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Utf16>, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>, Pointer<Utf16>)
+    >('DefineDosDeviceW');
 
 /// Deletes an existing file.
 ///
@@ -946,9 +1342,16 @@ Win32Result<bool> DefineDosDevice(
 ///
 /// {@category kernel32}
 Win32Result<bool> DeleteFile(PCWSTR lpFileName) {
-  final result_ = DeleteFileW_Wrapper(lpFileName);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DeleteFile(lpFileName);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DeleteFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('DeleteFileW');
 
 /// Deletes the specified list of attributes for process and thread creation.
 ///
@@ -961,8 +1364,10 @@ void DeleteProcThreadAttributeList(
   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
 ) => _DeleteProcThreadAttributeList(lpAttributeList);
 
-@Native<Void Function(Pointer)>(symbol: 'DeleteProcThreadAttributeList')
-external void _DeleteProcThreadAttributeList(Pointer lpAttributeList);
+final _DeleteProcThreadAttributeList = _kernel32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'DeleteProcThreadAttributeList',
+    );
 
 /// Deletes a drive letter or mounted folder.
 ///
@@ -971,9 +1376,16 @@ external void _DeleteProcThreadAttributeList(Pointer lpAttributeList);
 ///
 /// {@category kernel32}
 Win32Result<bool> DeleteVolumeMountPoint(PCWSTR lpszVolumeMountPoint) {
-  final result_ = DeleteVolumeMountPointW_Wrapper(lpszVolumeMountPoint);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DeleteVolumeMountPoint(lpszVolumeMountPoint);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DeleteVolumeMountPoint = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('DeleteVolumeMountPointW');
 
 /// Sends a control code directly to a specified device driver, causing the
 /// corresponding device to perform the corresponding operation.
@@ -992,7 +1404,8 @@ Win32Result<bool> DeviceIoControl(
   Pointer<Uint32>? lpBytesReturned,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = DeviceIoControl_Wrapper(
+  resolveGetLastError();
+  final result_ = _DeviceIoControl(
     hDevice,
     dwIoControlCode,
     lpInBuffer ?? nullptr,
@@ -1002,8 +1415,32 @@ Win32Result<bool> DeviceIoControl(
     lpBytesReturned ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DeviceIoControl = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Pointer,
+        Uint32,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        int,
+        Pointer,
+        int,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('DeviceIoControl');
 
 /// Disables the DLL_THREAD_ATTACH and DLL_THREAD_DETACH notifications for the
 /// specified dynamic-link library (DLL).
@@ -1013,9 +1450,15 @@ Win32Result<bool> DeviceIoControl(
 ///
 /// {@category kernel32}
 Win32Result<bool> DisableThreadLibraryCalls(HMODULE hLibModule) {
-  final result_ = DisableThreadLibraryCalls_Wrapper(hLibModule);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DisableThreadLibraryCalls(hLibModule);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DisableThreadLibraryCalls = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DisableThreadLibraryCalls',
+    );
 
 /// Disconnects the server end of a named pipe instance from a client process.
 ///
@@ -1024,9 +1467,15 @@ Win32Result<bool> DisableThreadLibraryCalls(HMODULE hLibModule) {
 ///
 /// {@category kernel32}
 Win32Result<bool> DisconnectNamedPipe(HANDLE hNamedPipe) {
-  final result_ = DisconnectNamedPipe_Wrapper(hNamedPipe);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DisconnectNamedPipe(hNamedPipe);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DisconnectNamedPipe = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DisconnectNamedPipe',
+    );
 
 /// Converts a DNS-style host name to a NetBIOS-style computer name.
 ///
@@ -1039,13 +1488,20 @@ Win32Result<bool> DnsHostnameToComputerName(
   PWSTR? computerName,
   Pointer<Uint32> nSize,
 ) {
-  final result_ = DnsHostnameToComputerNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _DnsHostnameToComputerName(
     hostname,
     computerName ?? nullptr,
     nSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DnsHostnameToComputerName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Uint32>)
+    >('DnsHostnameToComputerNameW');
 
 /// Converts MS-DOS date and time values to a file time.
 ///
@@ -1058,9 +1514,16 @@ Win32Result<bool> DosDateTimeToFileTime(
   int wFatTime,
   Pointer<FILETIME> lpFileTime,
 ) {
-  final result_ = DosDateTimeToFileTime_Wrapper(wFatDate, wFatTime, lpFileTime);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DosDateTimeToFileTime = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint16, Uint16, Pointer<FILETIME>),
+      int Function(int, int, Pointer<FILETIME>)
+    >('DosDateTimeToFileTime');
 
 /// Duplicates an object handle.
 ///
@@ -1077,7 +1540,8 @@ Win32Result<bool> DuplicateHandle(
   bool bInheritHandle,
   DUPLICATE_HANDLE_OPTIONS dwOptions,
 ) {
-  final result_ = DuplicateHandle_Wrapper(
+  resolveGetLastError();
+  final result_ = _DuplicateHandle(
     hSourceProcessHandle,
     hSourceHandle,
     hTargetProcessHandle,
@@ -1086,8 +1550,22 @@ Win32Result<bool> DuplicateHandle(
     bInheritHandle ? TRUE : FALSE,
     dwOptions,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _DuplicateHandle = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Pointer,
+        Pointer<Pointer>,
+        Uint32,
+        Int32,
+        Uint32,
+      ),
+      int Function(Pointer, Pointer, Pointer, Pointer<Pointer>, int, int, int)
+    >('DuplicateHandle');
 
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
@@ -1096,9 +1574,15 @@ Win32Result<bool> DuplicateHandle(
 ///
 /// {@category kernel32}
 Win32Result<bool> EndUpdateResource(HANDLE hUpdate, bool fDiscard) {
-  final result_ = EndUpdateResourceW_Wrapper(hUpdate, fDiscard ? TRUE : FALSE);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EndUpdateResource(hUpdate, fDiscard ? TRUE : FALSE);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EndUpdateResource = _kernel32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'EndUpdateResourceW',
+    );
 
 /// Enumerates resources of a specified type within a binary module.
 ///
@@ -1115,20 +1599,21 @@ bool EnumResourceNames(
 ) =>
     _EnumResourceNames(hModule ?? nullptr, lpType, lpEnumFunc, lParam) != FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<NativeFunction<ENUMRESNAMEPROC>>,
-    IntPtr,
-  )
->(symbol: 'EnumResourceNamesW')
-external int _EnumResourceNames(
-  Pointer hModule,
-  Pointer<Utf16> lpType,
-  Pointer<NativeFunction<ENUMRESNAMEPROC>> lpEnumFunc,
-  int lParam,
-);
+final _EnumResourceNames = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<NativeFunction<ENUMRESNAMEPROC>>,
+        IntPtr,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<NativeFunction<ENUMRESNAMEPROC>>,
+        int,
+      )
+    >('EnumResourceNamesW');
 
 /// Enumerates resource types within a binary module.
 ///
@@ -1141,13 +1626,16 @@ Win32Result<bool> EnumResourceTypes(
   Pointer<NativeFunction<ENUMRESTYPEPROC>> lpEnumFunc,
   int lParam,
 ) {
-  final result_ = EnumResourceTypesW_Wrapper(
-    hModule ?? nullptr,
-    lpEnumFunc,
-    lParam,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EnumResourceTypes(hModule ?? nullptr, lpEnumFunc, lParam);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EnumResourceTypes = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<ENUMRESTYPEPROC>>, IntPtr),
+      int Function(Pointer, Pointer<NativeFunction<ENUMRESTYPEPROC>>, int)
+    >('EnumResourceTypesW');
 
 /// Enumerates all system firmware tables of the specified type.
 ///
@@ -1160,13 +1648,20 @@ Win32Result<int> EnumSystemFirmwareTables(
   Pointer<Uint8>? pFirmwareTableEnumBuffer,
   int bufferSize,
 ) {
-  final result_ = EnumSystemFirmwareTables_Wrapper(
+  resolveGetLastError();
+  final result_ = _EnumSystemFirmwareTables(
     firmwareTableProviderSignature,
     pFirmwareTableEnumBuffer ?? nullptr,
     bufferSize,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _EnumSystemFirmwareTables = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Uint8>, Uint32),
+      int Function(int, Pointer<Uint8>, int)
+    >('EnumSystemFirmwareTables');
 
 /// Directs the specified communications device to perform an extended function.
 ///
@@ -1178,9 +1673,16 @@ Win32Result<bool> EscapeCommFunction(
   HANDLE hFile,
   ESCAPE_COMM_FUNCTION dwFunc,
 ) {
-  final result_ = EscapeCommFunction_Wrapper(hFile, dwFunc);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _EscapeCommFunction(hFile, dwFunc);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _EscapeCommFunction = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('EscapeCommFunction');
 
 /// Ends the calling process and all its threads.
 ///
@@ -1191,8 +1693,8 @@ Win32Result<bool> EscapeCommFunction(
 @pragma('vm:prefer-inline')
 void ExitProcess(int uExitCode) => _ExitProcess(uExitCode);
 
-@Native<Void Function(Uint32)>(symbol: 'ExitProcess')
-external void _ExitProcess(int uExitCode);
+final _ExitProcess = _kernel32
+    .lookupFunction<Void Function(Uint32), void Function(int)>('ExitProcess');
 
 /// Ends the calling thread.
 ///
@@ -1203,8 +1705,8 @@ external void _ExitProcess(int uExitCode);
 @pragma('vm:prefer-inline')
 void ExitThread(int dwExitCode) => _ExitThread(dwExitCode);
 
-@Native<Void Function(Uint32)>(symbol: 'ExitThread')
-external void _ExitThread(int dwExitCode);
+final _ExitThread = _kernel32
+    .lookupFunction<Void Function(Uint32), void Function(int)>('ExitThread');
 
 /// Converts a file time to MS-DOS date and time values.
 ///
@@ -1217,13 +1719,16 @@ Win32Result<bool> FileTimeToDosDateTime(
   Pointer<Uint16> lpFatDate,
   Pointer<Uint16> lpFatTime,
 ) {
-  final result_ = FileTimeToDosDateTime_Wrapper(
-    lpFileTime,
-    lpFatDate,
-    lpFatTime,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FileTimeToDosDateTime = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<FILETIME>, Pointer<Uint16>, Pointer<Uint16>),
+      int Function(Pointer<FILETIME>, Pointer<Uint16>, Pointer<Uint16>)
+    >('FileTimeToDosDateTime');
 
 /// Converts a file time to system time format.
 ///
@@ -1237,9 +1742,16 @@ Win32Result<bool> FileTimeToSystemTime(
   Pointer<FILETIME> lpFileTime,
   Pointer<SYSTEMTIME> lpSystemTime,
 ) {
-  final result_ = FileTimeToSystemTime_Wrapper(lpFileTime, lpSystemTime);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FileTimeToSystemTime(lpFileTime, lpSystemTime);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FileTimeToSystemTime = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<FILETIME>, Pointer<SYSTEMTIME>),
+      int Function(Pointer<FILETIME>, Pointer<SYSTEMTIME>)
+    >('FileTimeToSystemTime');
 
 /// Sets the character attributes for a specified number of character cells,
 /// beginning at the specified coordinates in a screen buffer.
@@ -1255,15 +1767,22 @@ Win32Result<bool> FillConsoleOutputAttribute(
   COORD dwWriteCoord,
   Pointer<Uint32> lpNumberOfAttrsWritten,
 ) {
-  final result_ = FillConsoleOutputAttribute_Wrapper(
+  resolveGetLastError();
+  final result_ = _FillConsoleOutputAttribute(
     hConsoleOutput,
     wAttribute,
     nLength,
     dwWriteCoord,
     lpNumberOfAttrsWritten,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FillConsoleOutputAttribute = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint16, Uint32, COORD, Pointer<Uint32>),
+      int Function(Pointer, int, int, COORD, Pointer<Uint32>)
+    >('FillConsoleOutputAttribute');
 
 /// Writes a character to the console screen buffer a specified number of times,
 /// beginning at the specified coordinates.
@@ -1279,15 +1798,22 @@ Win32Result<bool> FillConsoleOutputCharacter(
   COORD dwWriteCoord,
   Pointer<Uint32> lpNumberOfCharsWritten,
 ) {
-  final result_ = FillConsoleOutputCharacterW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FillConsoleOutputCharacter(
     hConsoleOutput,
     cCharacter,
     nLength,
     dwWriteCoord,
     lpNumberOfCharsWritten,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FillConsoleOutputCharacter = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint16, Uint32, COORD, Pointer<Uint32>),
+      int Function(Pointer, int, int, COORD, Pointer<Uint32>)
+    >('FillConsoleOutputCharacterW');
 
 /// Closes a file search handle opened by the FindFirstFile, FindFirstFileEx,
 /// FindFirstFileNameW, FindFirstFileNameTransactedW, FindFirstFileTransacted,
@@ -1298,9 +1824,15 @@ Win32Result<bool> FillConsoleOutputCharacter(
 ///
 /// {@category kernel32}
 Win32Result<bool> FindClose(HANDLE hFindFile) {
-  final result_ = FindClose_Wrapper(hFindFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindClose(hFindFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindClose = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FindClose',
+    );
 
 /// Stops change notification handle monitoring.
 ///
@@ -1309,9 +1841,15 @@ Win32Result<bool> FindClose(HANDLE hFindFile) {
 ///
 /// {@category kernel32}
 Win32Result<bool> FindCloseChangeNotification(HANDLE hChangeHandle) {
-  final result_ = FindCloseChangeNotification_Wrapper(hChangeHandle);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindCloseChangeNotification(hChangeHandle);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindCloseChangeNotification = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FindCloseChangeNotification',
+    );
 
 /// Creates a change notification handle and sets up initial change notification
 /// filter conditions.
@@ -1325,13 +1863,20 @@ Win32Result<HANDLE> FindFirstChangeNotification(
   bool bWatchSubtree,
   FILE_NOTIFY_CHANGE dwNotifyFilter,
 ) {
-  final result_ = FindFirstChangeNotificationW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FindFirstChangeNotification(
     lpPathName,
     bWatchSubtree ? TRUE : FALSE,
     dwNotifyFilter,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstChangeNotification = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Int32, Uint32),
+      Pointer Function(Pointer<Utf16>, int, int)
+    >('FindFirstChangeNotificationW');
 
 /// Searches a directory for a file or subdirectory with a name that matches a
 /// specific name (or partial name if wildcards are used).
@@ -1344,9 +1889,16 @@ Win32Result<HANDLE> FindFirstFile(
   PCWSTR lpFileName,
   Pointer<WIN32_FIND_DATA> lpFindFileData,
 ) {
-  final result_ = FindFirstFileW_Wrapper(lpFileName, lpFindFileData);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindFirstFile(lpFileName, lpFindFileData);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstFile = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Pointer<WIN32_FIND_DATA>),
+      Pointer Function(Pointer<Utf16>, Pointer<WIN32_FIND_DATA>)
+    >('FindFirstFileW');
 
 /// Searches a directory for a file or subdirectory with a name and attributes
 /// that match those specified.
@@ -1362,7 +1914,8 @@ Win32Result<HANDLE> FindFirstFileEx(
   FINDEX_SEARCH_OPS fSearchOp,
   FIND_FIRST_EX_FLAGS dwAdditionalFlags,
 ) {
-  final result_ = FindFirstFileExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FindFirstFileEx(
     lpFileName,
     fInfoLevelId,
     lpFindFileData,
@@ -1370,8 +1923,14 @@ Win32Result<HANDLE> FindFirstFileEx(
     nullptr,
     dwAdditionalFlags,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstFileEx = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Int32, Pointer, Int32, Pointer, Uint32),
+      Pointer Function(Pointer<Utf16>, int, Pointer, int, Pointer, int)
+    >('FindFirstFileExW');
 
 /// Creates an enumeration of all the hard links to the specified file.
 ///
@@ -1388,14 +1947,21 @@ Win32Result<HANDLE> FindFirstFileName(
   Pointer<Uint32> stringLength,
   PWSTR linkName,
 ) {
-  final result_ = FindFirstFileNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FindFirstFileName(
     lpFileName,
     dwFlags,
     stringLength,
     linkName,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstFileName = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Uint32, Pointer<Uint32>, Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>, int, Pointer<Uint32>, Pointer<Utf16>)
+    >('FindFirstFileNameW');
 
 /// Enumerates the first stream with a ::$DATA stream type in the specified file
 /// or directory.
@@ -1409,14 +1975,21 @@ Win32Result<HANDLE> FindFirstStream(
   STREAM_INFO_LEVELS infoLevel,
   Pointer lpFindStreamData,
 ) {
-  final result_ = FindFirstStreamW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FindFirstStream(
     lpFileName,
     infoLevel,
     lpFindStreamData,
     NULL,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstStream = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Int32, Pointer, Uint32),
+      Pointer Function(Pointer<Utf16>, int, Pointer, int)
+    >('FindFirstStreamW');
 
 /// Retrieves the name of a volume on a computer.
 ///
@@ -1425,9 +1998,16 @@ Win32Result<HANDLE> FindFirstStream(
 ///
 /// {@category kernel32}
 Win32Result<HANDLE> FindFirstVolume(PWSTR lpszVolumeName, int cchBufferLength) {
-  final result_ = FindFirstVolumeW_Wrapper(lpszVolumeName, cchBufferLength);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindFirstVolume(lpszVolumeName, cchBufferLength);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _FindFirstVolume = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Uint32),
+      Pointer Function(Pointer<Utf16>, int)
+    >('FindFirstVolumeW');
 
 /// Requests that the operating system signal a change notification handle the
 /// next time it detects an appropriate change.
@@ -1437,9 +2017,15 @@ Win32Result<HANDLE> FindFirstVolume(PWSTR lpszVolumeName, int cchBufferLength) {
 ///
 /// {@category kernel32}
 Win32Result<bool> FindNextChangeNotification(HANDLE hChangeHandle) {
-  final result_ = FindNextChangeNotification_Wrapper(hChangeHandle);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindNextChangeNotification(hChangeHandle);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindNextChangeNotification = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FindNextChangeNotification',
+    );
 
 /// Continues a file search from a previous call to the FindFirstFile,
 /// FindFirstFileEx, or FindFirstFileTransacted functions.
@@ -1452,9 +2038,16 @@ Win32Result<bool> FindNextFile(
   HANDLE hFindFile,
   Pointer<WIN32_FIND_DATA> lpFindFileData,
 ) {
-  final result_ = FindNextFileW_Wrapper(hFindFile, lpFindFileData);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindNextFile(hFindFile, lpFindFileData);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindNextFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<WIN32_FIND_DATA>),
+      int Function(Pointer, Pointer<WIN32_FIND_DATA>)
+    >('FindNextFileW');
 
 /// Continues enumerating the hard links to a file using the handle returned by
 /// a successful call to the FindFirstFileNameW function.
@@ -1468,13 +2061,16 @@ Win32Result<bool> FindNextFileName(
   Pointer<Uint32> stringLength,
   PWSTR linkName,
 ) {
-  final result_ = FindNextFileNameW_Wrapper(
-    hFindStream,
-    stringLength,
-    linkName,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindNextFileName(hFindStream, stringLength, linkName);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindNextFileName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Utf16>)
+    >('FindNextFileNameW');
 
 /// Continues a stream search started by a previous call to the FindFirstStreamW
 /// function.
@@ -1484,9 +2080,16 @@ Win32Result<bool> FindNextFileName(
 ///
 /// {@category kernel32}
 Win32Result<bool> FindNextStream(HANDLE hFindStream, Pointer lpFindStreamData) {
-  final result_ = FindNextStreamW_Wrapper(hFindStream, lpFindStreamData);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindNextStream(hFindStream, lpFindStreamData);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindNextStream = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('FindNextStreamW');
 
 /// Continues a volume search started by a call to the FindFirstVolume function.
 ///
@@ -1499,13 +2102,16 @@ Win32Result<bool> FindNextVolume(
   PWSTR lpszVolumeName,
   int cchBufferLength,
 ) {
-  final result_ = FindNextVolumeW_Wrapper(
-    hFindVolume,
-    lpszVolumeName,
-    cchBufferLength,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindNextVolume = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('FindNextVolumeW');
 
 /// Finds the packages with the specified family name for the current user.
 ///
@@ -1534,26 +2140,27 @@ WIN32_ERROR FindPackagesByPackageFamily(
   ),
 );
 
-@Native<
-  Uint32 Function(
-    Pointer<Utf16>,
-    Uint32,
-    Pointer<Uint32>,
-    Pointer<Pointer<Utf16>>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'FindPackagesByPackageFamily')
-external int _FindPackagesByPackageFamily(
-  Pointer<Utf16> packageFamilyName,
-  int packageFilters,
-  Pointer<Uint32> count,
-  Pointer<Pointer<Utf16>> packageFullNames,
-  Pointer<Uint32> bufferLength,
-  Pointer<Utf16> buffer,
-  Pointer<Uint32> packageProperties,
-);
+final _FindPackagesByPackageFamily = _kernel32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Pointer<Utf16>>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Pointer<Utf16>>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('FindPackagesByPackageFamily');
 
 /// Determines the location of a resource with the specified type and name in
 /// the specified module.
@@ -1566,14 +2173,11 @@ external int _FindPackagesByPackageFamily(
 HRSRC FindResource(HMODULE? hModule, PCWSTR lpName, PCWSTR lpType) =>
     HRSRC(_FindResource(hModule ?? nullptr, lpName, lpType));
 
-@Native<Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'FindResourceW',
-)
-external Pointer _FindResource(
-  Pointer hModule,
-  Pointer<Utf16> lpName,
-  Pointer<Utf16> lpType,
-);
+final _FindResource = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>),
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>)
+    >('FindResourceW');
 
 /// Determines the location of the resource with the specified type, name, and
 /// language in the specified module.
@@ -1590,15 +2194,11 @@ HRSRC FindResourceEx(
   int wLanguage,
 ) => HRSRC(_FindResourceEx(hModule ?? nullptr, lpType, lpName, wLanguage));
 
-@Native<Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Uint16)>(
-  symbol: 'FindResourceExW',
-)
-external Pointer _FindResourceEx(
-  Pointer hModule,
-  Pointer<Utf16> lpType,
-  Pointer<Utf16> lpName,
-  int wLanguage,
-);
+final _FindResourceEx = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Uint16),
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, int)
+    >('FindResourceExW');
 
 /// Locates a Unicode string (wide characters) in another Unicode string for a
 /// non-linguistic comparison.
@@ -1615,7 +2215,8 @@ Win32Result<int> FindStringOrdinal(
   int cchValue,
   bool bIgnoreCase,
 ) {
-  final result_ = FindStringOrdinal_Wrapper(
+  resolveGetLastError();
+  final result_ = _FindStringOrdinal(
     dwFindStringOrdinalFlags,
     lpStringSource,
     cchSource,
@@ -1623,8 +2224,21 @@ Win32Result<int> FindStringOrdinal(
     cchValue,
     bIgnoreCase ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _FindStringOrdinal = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Pointer<Utf16>,
+        Int32,
+        Pointer<Utf16>,
+        Int32,
+        Int32,
+      ),
+      int Function(int, Pointer<Utf16>, int, Pointer<Utf16>, int, int)
+    >('FindStringOrdinal');
 
 /// Closes the specified volume search handle.
 ///
@@ -1633,9 +2247,15 @@ Win32Result<int> FindStringOrdinal(
 ///
 /// {@category kernel32}
 Win32Result<bool> FindVolumeClose(HANDLE hFindVolume) {
-  final result_ = FindVolumeClose_Wrapper(hFindVolume);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FindVolumeClose(hFindVolume);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FindVolumeClose = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FindVolumeClose',
+    );
 
 /// Flushes the console input buffer.
 ///
@@ -1646,9 +2266,15 @@ Win32Result<bool> FindVolumeClose(HANDLE hFindVolume) {
 ///
 /// {@category kernel32}
 Win32Result<bool> FlushConsoleInputBuffer(HANDLE hConsoleInput) {
-  final result_ = FlushConsoleInputBuffer_Wrapper(hConsoleInput);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FlushConsoleInputBuffer(hConsoleInput);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FlushConsoleInputBuffer = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FlushConsoleInputBuffer',
+    );
 
 /// Flushes the buffers of a specified file and causes all buffered data to be
 /// written to a file.
@@ -1658,9 +2284,15 @@ Win32Result<bool> FlushConsoleInputBuffer(HANDLE hConsoleInput) {
 ///
 /// {@category kernel32}
 Win32Result<bool> FlushFileBuffers(HANDLE hFile) {
-  final result_ = FlushFileBuffers_Wrapper(hFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FlushFileBuffers(hFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FlushFileBuffers = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FlushFileBuffers',
+    );
 
 /// Formats a message string.
 ///
@@ -1677,7 +2309,8 @@ Win32Result<int> FormatMessage(
   int nSize,
   Pointer<Pointer<Int8>>? arguments,
 ) {
-  final result_ = FormatMessageW_Wrapper(
+  resolveGetLastError();
+  final result_ = _FormatMessage(
     dwFlags,
     lpSource ?? nullptr,
     dwMessageId,
@@ -1686,8 +2319,30 @@ Win32Result<int> FormatMessage(
     nSize,
     arguments ?? nullptr,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _FormatMessage = _kernel32
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer,
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Pointer<Int8>>,
+      ),
+      int Function(
+        int,
+        Pointer,
+        int,
+        int,
+        Pointer<Utf16>,
+        int,
+        Pointer<Pointer<Int8>>,
+      )
+    >('FormatMessageW');
 
 /// Detaches the calling process from its console.
 ///
@@ -1696,9 +2351,14 @@ Win32Result<int> FormatMessage(
 ///
 /// {@category kernel32}
 Win32Result<bool> FreeConsole() {
-  final result_ = FreeConsole_Wrapper();
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FreeConsole();
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FreeConsole = _kernel32.lookupFunction<Int32 Function(), int Function()>(
+  'FreeConsole',
+);
 
 /// Frees the loaded dynamic-link library (DLL) module and, if necessary,
 /// decrements its reference count.
@@ -1708,9 +2368,15 @@ Win32Result<bool> FreeConsole() {
 ///
 /// {@category kernel32}
 Win32Result<bool> FreeLibrary(HMODULE hLibModule) {
-  final result_ = FreeLibrary_Wrapper(hLibModule);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _FreeLibrary(hLibModule);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _FreeLibrary = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'FreeLibrary',
+    );
 
 /// Decrements the reference count of a loaded dynamic-link library (DLL) by
 /// one, then calls ExitThread to terminate the calling thread.
@@ -1723,8 +2389,11 @@ Win32Result<bool> FreeLibrary(HMODULE hLibModule) {
 void FreeLibraryAndExitThread(HMODULE hLibModule, int dwExitCode) =>
     _FreeLibraryAndExitThread(hLibModule, dwExitCode);
 
-@Native<Void Function(Pointer, Uint32)>(symbol: 'FreeLibraryAndExitThread')
-external void _FreeLibraryAndExitThread(Pointer hLibModule, int dwExitCode);
+final _FreeLibraryAndExitThread = _kernel32
+    .lookupFunction<
+      Void Function(Pointer, Uint32),
+      void Function(Pointer, int)
+    >('FreeLibraryAndExitThread');
 
 /// Frees memory that a function related to job objects allocated.
 ///
@@ -1738,8 +2407,10 @@ external void _FreeLibraryAndExitThread(Pointer hLibModule, int dwExitCode);
 @pragma('vm:prefer-inline')
 void FreeMemoryJobObject(Pointer buffer) => _FreeMemoryJobObject(buffer);
 
-@Native<Void Function(Pointer)>(symbol: 'FreeMemoryJobObject')
-external void _FreeMemoryJobObject(Pointer buffer);
+final _FreeMemoryJobObject = _kernel32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'FreeMemoryJobObject',
+    );
 
 /// Returns the number of active processors in a processor group or in the
 /// system.
@@ -1749,9 +2420,15 @@ external void _FreeMemoryJobObject(Pointer buffer);
 ///
 /// {@category kernel32}
 Win32Result<int> GetActiveProcessorCount(int groupNumber) {
-  final result_ = GetActiveProcessorCount_Wrapper(groupNumber);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetActiveProcessorCount(groupNumber);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetActiveProcessorCount = _kernel32
+    .lookupFunction<Uint32 Function(Uint16), int Function(int)>(
+      'GetActiveProcessorCount',
+    );
 
 /// Returns the number of active processor groups in the system.
 ///
@@ -1762,8 +2439,10 @@ Win32Result<int> GetActiveProcessorCount(int groupNumber) {
 @pragma('vm:prefer-inline')
 int GetActiveProcessorGroupCount() => _GetActiveProcessorGroupCount();
 
-@Native<Uint16 Function()>(symbol: 'GetActiveProcessorGroupCount')
-external int _GetActiveProcessorGroupCount();
+final _GetActiveProcessorGroupCount = _kernel32
+    .lookupFunction<Uint16 Function(), int Function()>(
+      'GetActiveProcessorGroupCount',
+    );
 
 /// Determines whether a file is an executable (.exe) file, and if so, which
 /// subsystem runs the executable file.
@@ -1776,9 +2455,16 @@ Win32Result<bool> GetBinaryType(
   PCWSTR lpApplicationName,
   Pointer<Uint32> lpBinaryType,
 ) {
-  final result_ = GetBinaryTypeW_Wrapper(lpApplicationName, lpBinaryType);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetBinaryType(lpApplicationName, lpBinaryType);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetBinaryType = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetBinaryTypeW');
 
 /// Retrieves the command-line string for the current process.
 ///
@@ -1789,8 +2475,10 @@ Win32Result<bool> GetBinaryType(
 @pragma('vm:prefer-inline')
 PCWSTR GetCommandLine() => PCWSTR(_GetCommandLine());
 
-@Native<Pointer<Utf16> Function()>(symbol: 'GetCommandLineW')
-external Pointer<Utf16> _GetCommandLine();
+final _GetCommandLine = _kernel32
+    .lookupFunction<Pointer<Utf16> Function(), Pointer<Utf16> Function()>(
+      'GetCommandLineW',
+    );
 
 /// Retrieves the current configuration of a communications device.
 ///
@@ -1803,9 +2491,16 @@ Win32Result<bool> GetCommConfig(
   Pointer<COMMCONFIG>? lpCC,
   Pointer<Uint32> lpdwSize,
 ) {
-  final result_ = GetCommConfig_Wrapper(hCommDev, lpCC ?? nullptr, lpdwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommConfig(hCommDev, lpCC ?? nullptr, lpdwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommConfig = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<COMMCONFIG>, Pointer<Uint32>),
+      int Function(Pointer, Pointer<COMMCONFIG>, Pointer<Uint32>)
+    >('GetCommConfig');
 
 /// Retrieves the value of the event mask for a specified communications device.
 ///
@@ -1814,9 +2509,16 @@ Win32Result<bool> GetCommConfig(
 ///
 /// {@category kernel32}
 Win32Result<bool> GetCommMask(HANDLE hFile, Pointer<Uint32> lpEvtMask) {
-  final result_ = GetCommMask_Wrapper(hFile, lpEvtMask);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommMask(hFile, lpEvtMask);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommMask = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetCommMask');
 
 /// Retrieves the modem control-register values.
 ///
@@ -1828,9 +2530,16 @@ Win32Result<bool> GetCommModemStatus(
   HANDLE hFile,
   Pointer<Uint32> lpModemStat,
 ) {
-  final result_ = GetCommModemStatus_Wrapper(hFile, lpModemStat);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommModemStatus(hFile, lpModemStat);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommModemStatus = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetCommModemStatus');
 
 /// Retrieves information about the communications properties for a specified
 /// communications device.
@@ -1843,9 +2552,16 @@ Win32Result<bool> GetCommProperties(
   HANDLE hFile,
   Pointer<COMMPROP> lpCommProp,
 ) {
-  final result_ = GetCommProperties_Wrapper(hFile, lpCommProp);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommProperties(hFile, lpCommProp);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommProperties = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<COMMPROP>),
+      int Function(Pointer, Pointer<COMMPROP>)
+    >('GetCommProperties');
 
 /// Retrieves the current control settings for a specified communications
 /// device.
@@ -1855,9 +2571,16 @@ Win32Result<bool> GetCommProperties(
 ///
 /// {@category kernel32}
 Win32Result<bool> GetCommState(HANDLE hFile, Pointer<DCB> lpDCB) {
-  final result_ = GetCommState_Wrapper(hFile, lpDCB);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommState(hFile, lpDCB);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommState = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<DCB>),
+      int Function(Pointer, Pointer<DCB>)
+    >('GetCommState');
 
 /// Retrieves the time-out parameters for all read and write operations on a
 /// specified communications device.
@@ -1870,9 +2593,16 @@ Win32Result<bool> GetCommTimeouts(
   HANDLE hFile,
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
 ) {
-  final result_ = GetCommTimeouts_Wrapper(hFile, lpCommTimeouts);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCommTimeouts(hFile, lpCommTimeouts);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCommTimeouts = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<COMMTIMEOUTS>),
+      int Function(Pointer, Pointer<COMMTIMEOUTS>)
+    >('GetCommTimeouts');
 
 /// Retrieves the actual number of bytes of disk storage used to store a
 /// specified file.
@@ -1885,12 +2615,16 @@ Win32Result<int> GetCompressedFileSize(
   PCWSTR lpFileName,
   Pointer<Uint32>? lpFileSizeHigh,
 ) {
-  final result_ = GetCompressedFileSizeW_Wrapper(
-    lpFileName,
-    lpFileSizeHigh ?? nullptr,
-  );
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCompressedFileSize(lpFileName, lpFileSizeHigh ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetCompressedFileSize = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetCompressedFileSizeW');
 
 /// Retrieves the NetBIOS name of the local computer.
 ///
@@ -1902,9 +2636,16 @@ Win32Result<int> GetCompressedFileSize(
 ///
 /// {@category kernel32}
 Win32Result<bool> GetComputerName(PWSTR? lpBuffer, Pointer<Uint32> nSize) {
-  final result_ = GetComputerNameW_Wrapper(lpBuffer ?? nullptr, nSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetComputerName(lpBuffer ?? nullptr, nSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetComputerName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetComputerNameW');
 
 /// Retrieves a NetBIOS or DNS name associated with the local computer.
 ///
@@ -1920,13 +2661,16 @@ Win32Result<bool> GetComputerNameEx(
   PWSTR? lpBuffer,
   Pointer<Uint32> nSize,
 ) {
-  final result_ = GetComputerNameExW_Wrapper(
-    nameType,
-    lpBuffer ?? nullptr,
-    nSize,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetComputerNameEx(nameType, lpBuffer ?? nullptr, nSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetComputerNameEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(int, Pointer<Utf16>, Pointer<Uint32>)
+    >('GetComputerNameExW');
 
 /// Retrieves the input code page used by the console associated with the
 /// calling process.
@@ -1936,9 +2680,13 @@ Win32Result<bool> GetComputerNameEx(
 ///
 /// {@category kernel32}
 Win32Result<int> GetConsoleCP() {
-  final result_ = GetConsoleCP_Wrapper();
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleCP();
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetConsoleCP = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetConsoleCP');
 
 /// Retrieves information about the size and visibility of the cursor for the
 /// specified console screen buffer.
@@ -1951,12 +2699,16 @@ Win32Result<bool> GetConsoleCursorInfo(
   HANDLE hConsoleOutput,
   Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
 ) {
-  final result_ = GetConsoleCursorInfo_Wrapper(
-    hConsoleOutput,
-    lpConsoleCursorInfo,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetConsoleCursorInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<CONSOLE_CURSOR_INFO>),
+      int Function(Pointer, Pointer<CONSOLE_CURSOR_INFO>)
+    >('GetConsoleCursorInfo');
 
 /// Retrieves the current input mode of a console's input buffer or the current
 /// output mode of a console screen buffer.
@@ -1969,9 +2721,16 @@ Win32Result<bool> GetConsoleMode(
   HANDLE hConsoleHandle,
   Pointer<Uint32> lpMode,
 ) {
-  final result_ = GetConsoleMode_Wrapper(hConsoleHandle, lpMode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleMode(hConsoleHandle, lpMode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetConsoleMode = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetConsoleMode');
 
 /// Retrieves the output code page used by the console associated with the
 /// calling process.
@@ -1981,9 +2740,13 @@ Win32Result<bool> GetConsoleMode(
 ///
 /// {@category kernel32}
 Win32Result<int> GetConsoleOutputCP() {
-  final result_ = GetConsoleOutputCP_Wrapper();
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleOutputCP();
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetConsoleOutputCP = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetConsoleOutputCP');
 
 /// Retrieves information about the specified console screen buffer.
 ///
@@ -1995,12 +2758,19 @@ Win32Result<bool> GetConsoleScreenBufferInfo(
   HANDLE hConsoleOutput,
   Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo,
 ) {
-  final result_ = GetConsoleScreenBufferInfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetConsoleScreenBufferInfo(
     hConsoleOutput,
     lpConsoleScreenBufferInfo,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetConsoleScreenBufferInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<CONSOLE_SCREEN_BUFFER_INFO>),
+      int Function(Pointer, Pointer<CONSOLE_SCREEN_BUFFER_INFO>)
+    >('GetConsoleScreenBufferInfo');
 
 /// Retrieves information about the current console selection.
 ///
@@ -2011,9 +2781,16 @@ Win32Result<bool> GetConsoleScreenBufferInfo(
 Win32Result<bool> GetConsoleSelectionInfo(
   Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo,
 ) {
-  final result_ = GetConsoleSelectionInfo_Wrapper(lpConsoleSelectionInfo);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleSelectionInfo(lpConsoleSelectionInfo);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetConsoleSelectionInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<CONSOLE_SELECTION_INFO>),
+      int Function(Pointer<CONSOLE_SELECTION_INFO>)
+    >('GetConsoleSelectionInfo');
 
 /// Retrieves the title and size of the title for the current console window.
 ///
@@ -2022,9 +2799,16 @@ Win32Result<bool> GetConsoleSelectionInfo(
 ///
 /// {@category kernel32}
 Win32Result<int> GetConsoleTitle(PWSTR lpConsoleTitle, int nSize) {
-  final result_ = GetConsoleTitleW_Wrapper(lpConsoleTitle, nSize);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetConsoleTitle(lpConsoleTitle, nSize);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetConsoleTitle = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, int)
+    >('GetConsoleTitleW');
 
 /// Retrieves the window handle used by the console associated with the calling
 /// process.
@@ -2036,8 +2820,8 @@ Win32Result<int> GetConsoleTitle(PWSTR lpConsoleTitle, int nSize) {
 @pragma('vm:prefer-inline')
 HWND GetConsoleWindow() => HWND(_GetConsoleWindow());
 
-@Native<Pointer Function()>(symbol: 'GetConsoleWindow')
-external Pointer _GetConsoleWindow();
+final _GetConsoleWindow = _kernel32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetConsoleWindow');
 
 /// Returns the handle to the active activation context of the calling thread.
 ///
@@ -2046,9 +2830,16 @@ external Pointer _GetConsoleWindow();
 ///
 /// {@category kernel32}
 Win32Result<bool> GetCurrentActCtx(Pointer<Pointer> lphActCtx) {
-  final result_ = GetCurrentActCtx_Wrapper(lphActCtx);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetCurrentActCtx(lphActCtx);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetCurrentActCtx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer>),
+      int Function(Pointer<Pointer>)
+    >('GetCurrentActCtx');
 
 /// Retrieves the current directory for the current process.
 ///
@@ -2060,8 +2851,11 @@ Win32Result<bool> GetCurrentActCtx(Pointer<Pointer> lphActCtx) {
 int GetCurrentDirectory(int nBufferLength, PWSTR? lpBuffer) =>
     _GetCurrentDirectory(nBufferLength, lpBuffer ?? nullptr);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>)>(symbol: 'GetCurrentDirectoryW')
-external int _GetCurrentDirectory(int nBufferLength, Pointer<Utf16> lpBuffer);
+final _GetCurrentDirectory = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('GetCurrentDirectoryW');
 
 /// Gets the package full name for the calling process.
 ///
@@ -2077,13 +2871,11 @@ WIN32_ERROR GetCurrentPackageFullName(
   _GetCurrentPackageFullName(packageFullNameLength, packageFullName ?? nullptr),
 );
 
-@Native<Uint32 Function(Pointer<Uint32>, Pointer<Utf16>)>(
-  symbol: 'GetCurrentPackageFullName',
-)
-external int _GetCurrentPackageFullName(
-  Pointer<Uint32> packageFullNameLength,
-  Pointer<Utf16> packageFullName,
-);
+final _GetCurrentPackageFullName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Uint32>, Pointer<Utf16>),
+      int Function(Pointer<Uint32>, Pointer<Utf16>)
+    >('GetCurrentPackageFullName');
 
 /// Retrieves a pseudo handle for the current process.
 ///
@@ -2094,8 +2886,10 @@ external int _GetCurrentPackageFullName(
 @pragma('vm:prefer-inline')
 HANDLE GetCurrentProcess() => HANDLE(_GetCurrentProcess());
 
-@Native<Pointer Function()>(symbol: 'GetCurrentProcess')
-external Pointer _GetCurrentProcess();
+final _GetCurrentProcess = _kernel32
+    .lookupFunction<Pointer Function(), Pointer Function()>(
+      'GetCurrentProcess',
+    );
 
 /// Retrieves the process identifier of the calling process.
 ///
@@ -2106,8 +2900,8 @@ external Pointer _GetCurrentProcess();
 @pragma('vm:prefer-inline')
 int GetCurrentProcessId() => _GetCurrentProcessId();
 
-@Native<Uint32 Function()>(symbol: 'GetCurrentProcessId')
-external int _GetCurrentProcessId();
+final _GetCurrentProcessId = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetCurrentProcessId');
 
 /// Retrieves the number of the processor the current thread was running on
 /// during the call to this function.
@@ -2119,8 +2913,10 @@ external int _GetCurrentProcessId();
 @pragma('vm:prefer-inline')
 int GetCurrentProcessorNumber() => _GetCurrentProcessorNumber();
 
-@Native<Uint32 Function()>(symbol: 'GetCurrentProcessorNumber')
-external int _GetCurrentProcessorNumber();
+final _GetCurrentProcessorNumber = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetCurrentProcessorNumber',
+    );
 
 /// Retrieves a pseudo handle for the calling thread.
 ///
@@ -2131,8 +2927,8 @@ external int _GetCurrentProcessorNumber();
 @pragma('vm:prefer-inline')
 HANDLE GetCurrentThread() => HANDLE(_GetCurrentThread());
 
-@Native<Pointer Function()>(symbol: 'GetCurrentThread')
-external Pointer _GetCurrentThread();
+final _GetCurrentThread = _kernel32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetCurrentThread');
 
 /// Retrieves the thread identifier of the calling thread.
 ///
@@ -2143,8 +2939,8 @@ external Pointer _GetCurrentThread();
 @pragma('vm:prefer-inline')
 int GetCurrentThreadId() => _GetCurrentThreadId();
 
-@Native<Uint32 Function()>(symbol: 'GetCurrentThreadId')
-external int _GetCurrentThreadId();
+final _GetCurrentThreadId = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetCurrentThreadId');
 
 /// Retrieves the default configuration for the specified communications device.
 ///
@@ -2157,9 +2953,16 @@ Win32Result<bool> GetDefaultCommConfig(
   Pointer<COMMCONFIG> lpCC,
   Pointer<Uint32> lpdwSize,
 ) {
-  final result_ = GetDefaultCommConfigW_Wrapper(lpszName, lpCC, lpdwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetDefaultCommConfig(lpszName, lpCC, lpdwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetDefaultCommConfig = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<COMMCONFIG>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<COMMCONFIG>, Pointer<Uint32>)
+    >('GetDefaultCommConfigW');
 
 /// Retrieves information about the specified disk, including the amount of free
 /// space on the disk.
@@ -2175,15 +2978,34 @@ Win32Result<bool> GetDiskFreeSpace(
   Pointer<Uint32>? lpNumberOfFreeClusters,
   Pointer<Uint32>? lpTotalNumberOfClusters,
 ) {
-  final result_ = GetDiskFreeSpaceW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetDiskFreeSpace(
     lpRootPathName ?? nullptr,
     lpSectorsPerCluster ?? nullptr,
     lpBytesPerSector ?? nullptr,
     lpNumberOfFreeClusters ?? nullptr,
     lpTotalNumberOfClusters ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetDiskFreeSpace = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetDiskFreeSpaceW');
 
 /// Retrieves information about the amount of space that is available on a disk
 /// volume, which is the total amount of space, the total amount of free space,
@@ -2200,14 +3022,31 @@ Win32Result<bool> GetDiskFreeSpaceEx(
   Pointer<Uint64>? lpTotalNumberOfBytes,
   Pointer<Uint64>? lpTotalNumberOfFreeBytes,
 ) {
-  final result_ = GetDiskFreeSpaceExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetDiskFreeSpaceEx(
     lpDirectoryName ?? nullptr,
     lpFreeBytesAvailableToCaller ?? nullptr,
     lpTotalNumberOfBytes ?? nullptr,
     lpTotalNumberOfFreeBytes ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetDiskFreeSpaceEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+      )
+    >('GetDiskFreeSpaceExW');
 
 /// Retrieves the application-specific portion of the search path used to locate
 /// DLLs for the application.
@@ -2217,9 +3056,16 @@ Win32Result<bool> GetDiskFreeSpaceEx(
 ///
 /// {@category kernel32}
 Win32Result<int> GetDllDirectory(int nBufferLength, PWSTR? lpBuffer) {
-  final result_ = GetDllDirectoryW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetDllDirectory(nBufferLength, lpBuffer ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetDllDirectory = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('GetDllDirectoryW');
 
 /// Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or
 /// network drive.
@@ -2232,8 +3078,11 @@ Win32Result<int> GetDllDirectory(int nBufferLength, PWSTR? lpBuffer) {
 int GetDriveType(PCWSTR? lpRootPathName) =>
     _GetDriveType(lpRootPathName ?? nullptr);
 
-@Native<Uint32 Function(Pointer<Utf16>)>(symbol: 'GetDriveTypeW')
-external int _GetDriveType(Pointer<Utf16> lpRootPathName);
+final _GetDriveType = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('GetDriveTypeW');
 
 /// Retrieves the contents of the specified variable from the environment block
 /// of the calling process.
@@ -2247,13 +3096,20 @@ Win32Result<int> GetEnvironmentVariable(
   PWSTR? lpBuffer,
   int nSize,
 ) {
-  final result_ = GetEnvironmentVariableW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetEnvironmentVariable(
     lpName ?? nullptr,
     lpBuffer ?? nullptr,
     nSize,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetEnvironmentVariable = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('GetEnvironmentVariableW');
 
 /// Retrieves the termination status of the specified process.
 ///
@@ -2265,9 +3121,16 @@ Win32Result<bool> GetExitCodeProcess(
   HANDLE hProcess,
   Pointer<Uint32> lpExitCode,
 ) {
-  final result_ = GetExitCodeProcess_Wrapper(hProcess, lpExitCode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetExitCodeProcess(hProcess, lpExitCode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetExitCodeProcess = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetExitCodeProcess');
 
 /// Retrieves file system attributes for a specified file or directory.
 ///
@@ -2276,9 +3139,16 @@ Win32Result<bool> GetExitCodeProcess(
 ///
 /// {@category kernel32}
 Win32Result<int> GetFileAttributes(PCWSTR lpFileName) {
-  final result_ = GetFileAttributesW_Wrapper(lpFileName);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileAttributes(lpFileName);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFileAttributes = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('GetFileAttributesW');
 
 /// Retrieves attributes for a specified file or directory.
 ///
@@ -2291,13 +3161,20 @@ Win32Result<bool> GetFileAttributesEx(
   GET_FILEEX_INFO_LEVELS fInfoLevelId,
   Pointer lpFileInformation,
 ) {
-  final result_ = GetFileAttributesExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFileAttributesEx(
     lpFileName,
     fInfoLevelId,
     lpFileInformation,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetFileAttributesEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Int32, Pointer),
+      int Function(Pointer<Utf16>, int, Pointer)
+    >('GetFileAttributesExW');
 
 /// Retrieves file information for the specified file.
 ///
@@ -2309,9 +3186,16 @@ Win32Result<bool> GetFileInformationByHandle(
   HANDLE hFile,
   Pointer<BY_HANDLE_FILE_INFORMATION> lpFileInformation,
 ) {
-  final result_ = GetFileInformationByHandle_Wrapper(hFile, lpFileInformation);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileInformationByHandle(hFile, lpFileInformation);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetFileInformationByHandle = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<BY_HANDLE_FILE_INFORMATION>),
+      int Function(Pointer, Pointer<BY_HANDLE_FILE_INFORMATION>)
+    >('GetFileInformationByHandle');
 
 /// Retrieves the size of the specified file, in bytes.
 ///
@@ -2320,9 +3204,16 @@ Win32Result<bool> GetFileInformationByHandle(
 ///
 /// {@category kernel32}
 Win32Result<int> GetFileSize(HANDLE hFile, Pointer<Uint32>? lpFileSizeHigh) {
-  final result_ = GetFileSize_Wrapper(hFile, lpFileSizeHigh ?? nullptr);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileSize(hFile, lpFileSizeHigh ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFileSize = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetFileSize');
 
 /// Retrieves the size of the specified file.
 ///
@@ -2331,9 +3222,16 @@ Win32Result<int> GetFileSize(HANDLE hFile, Pointer<Uint32>? lpFileSizeHigh) {
 ///
 /// {@category kernel32}
 Win32Result<bool> GetFileSizeEx(HANDLE hFile, Pointer<Int64> lpFileSize) {
-  final result_ = GetFileSizeEx_Wrapper(hFile, lpFileSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileSizeEx(hFile, lpFileSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetFileSizeEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Int64>),
+      int Function(Pointer, Pointer<Int64>)
+    >('GetFileSizeEx');
 
 /// Retrieves the file type of the specified file.
 ///
@@ -2342,9 +3240,15 @@ Win32Result<bool> GetFileSizeEx(HANDLE hFile, Pointer<Int64> lpFileSize) {
 ///
 /// {@category kernel32}
 Win32Result<FILE_TYPE> GetFileType(HANDLE hFile) {
-  final result_ = GetFileType_Wrapper(hFile);
-  return .new(value: .new(result_.value.u32), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetFileType(hFile);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GetFileType = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetFileType',
+    );
 
 /// Retrieves the final path for the specified file.
 ///
@@ -2358,14 +3262,21 @@ Win32Result<int> GetFinalPathNameByHandle(
   int cchFilePath,
   GETFINALPATHNAMEBYHANDLE_FLAGS dwFlags,
 ) {
-  final result_ = GetFinalPathNameByHandleW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFinalPathNameByHandle(
     hFile,
     lpszFilePath,
     cchFilePath,
     dwFlags,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFinalPathNameByHandle = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int, int)
+    >('GetFinalPathNameByHandleW');
 
 /// Retrieves the full path and file name of the specified file.
 ///
@@ -2379,14 +3290,26 @@ Win32Result<int> GetFullPathName(
   PWSTR? lpBuffer,
   Pointer<Pointer<Utf16>>? lpFilePart,
 ) {
-  final result_ = GetFullPathNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetFullPathName(
     lpFileName,
     nBufferLength,
     lpBuffer ?? nullptr,
     lpFilePart ?? nullptr,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetFullPathName = _kernel32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Pointer<Utf16>>,
+      ),
+      int Function(Pointer<Utf16>, int, Pointer<Utf16>, Pointer<Pointer<Utf16>>)
+    >('GetFullPathNameW');
 
 /// Retrieves certain properties of an object handle.
 ///
@@ -2398,9 +3321,16 @@ Win32Result<bool> GetHandleInformation(
   HANDLE hObject,
   Pointer<Uint32> lpdwFlags,
 ) {
-  final result_ = GetHandleInformation_Wrapper(hObject, lpdwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetHandleInformation(hObject, lpdwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetHandleInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetHandleInformation');
 
 /// Retrieves the size of the largest possible console window, based on the
 /// current font and the size of the display.
@@ -2410,21 +3340,15 @@ Win32Result<bool> GetHandleInformation(
 ///
 /// {@category kernel32}
 Win32Result<COORD> GetLargestConsoleWindowSize(HANDLE hConsoleOutput) {
-  final result_ = GetLargestConsoleWindowSize_Wrapper(hConsoleOutput);
-  return .new(value: result_.value.coord, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetLargestConsoleWindowSize(hConsoleOutput);
+  return .new(value: result_, error: GetLastError());
 }
 
-/// Retrieves the calling thread's last-error code value.
-///
-/// To learn more, see
-/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-getlasterror>.
-///
-/// {@category kernel32}
-@pragma('vm:prefer-inline')
-WIN32_ERROR GetLastError() => .new(_GetLastError());
-
-@Native<Uint32 Function()>(symbol: 'GetLastError')
-external int _GetLastError();
+final _GetLargestConsoleWindowSize = _kernel32
+    .lookupFunction<COORD Function(Pointer), COORD Function(Pointer)>(
+      'GetLargestConsoleWindowSize',
+    );
 
 /// Retrieves information about a locale specified by name.
 ///
@@ -2444,14 +3368,21 @@ Win32Result<int> GetLocaleInfoEx(
   PWSTR? lpLCData,
   int cchData,
 ) {
-  final result_ = GetLocaleInfoEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetLocaleInfoEx(
     lpLocaleName ?? nullptr,
     lCType,
     lpLCData ?? nullptr,
     cchData,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetLocaleInfoEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32, Pointer<Utf16>, Int32),
+      int Function(Pointer<Utf16>, int, Pointer<Utf16>, int)
+    >('GetLocaleInfoEx');
 
 /// Retrieves the current local date and time.
 ///
@@ -2463,8 +3394,11 @@ Win32Result<int> GetLocaleInfoEx(
 void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetLocalTime(lpSystemTime);
 
-@Native<Void Function(Pointer<SYSTEMTIME>)>(symbol: 'GetLocalTime')
-external void _GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime);
+final _GetLocalTime = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<SYSTEMTIME>),
+      void Function(Pointer<SYSTEMTIME>)
+    >('GetLocalTime');
 
 /// Retrieves a bitmask representing the currently available disk drives.
 ///
@@ -2473,9 +3407,13 @@ external void _GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime);
 ///
 /// {@category kernel32}
 Win32Result<int> GetLogicalDrives() {
-  final result_ = GetLogicalDrives_Wrapper();
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetLogicalDrives();
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetLogicalDrives = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetLogicalDrives');
 
 /// Fills a buffer with strings that specify valid drives in the system.
 ///
@@ -2484,12 +3422,16 @@ Win32Result<int> GetLogicalDrives() {
 ///
 /// {@category kernel32}
 Win32Result<int> GetLogicalDriveStrings(int nBufferLength, PWSTR? lpBuffer) {
-  final result_ = GetLogicalDriveStringsW_Wrapper(
-    nBufferLength,
-    lpBuffer ?? nullptr,
-  );
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetLogicalDriveStrings(nBufferLength, lpBuffer ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetLogicalDriveStrings = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('GetLogicalDriveStringsW');
 
 /// Retrieves information about logical processors and related hardware.
 ///
@@ -2501,12 +3443,25 @@ Win32Result<bool> GetLogicalProcessorInformation(
   Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>? buffer,
   Pointer<Uint32> returnedLength,
 ) {
-  final result_ = GetLogicalProcessorInformation_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetLogicalProcessorInformation(
     buffer ?? nullptr,
     returnedLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetLogicalProcessorInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>,
+        Pointer<Uint32>,
+      )
+    >('GetLogicalProcessorInformation');
 
 /// Converts the specified path to its long form.
 ///
@@ -2519,13 +3474,20 @@ Win32Result<int> GetLongPathName(
   PWSTR? lpszLongPath,
   int cchBuffer,
 ) {
-  final result_ = GetLongPathNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetLongPathName(
     lpszShortPath,
     lpszLongPath ?? nullptr,
     cchBuffer,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetLongPathName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('GetLongPathNameW');
 
 /// Queries if the specified architecture is supported on the current system,
 /// either natively or by any form of compatibility or emulation layer.
@@ -2550,13 +3512,11 @@ MACHINE_ATTRIBUTES GetMachineTypeAttributes(int machine) {
   return .new(result$);
 }
 
-@Native<Int32 Function(Uint16, Pointer<Int32>)>(
-  symbol: 'GetMachineTypeAttributes',
-)
-external int _GetMachineTypeAttributes(
-  int machine,
-  Pointer<Int32> machineTypeAttributes,
-);
+final _GetMachineTypeAttributes = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint16, Pointer<Int32>),
+      int Function(int, Pointer<Int32>)
+    >('GetMachineTypeAttributes');
 
 /// Returns the maximum number of logical processors that a processor group or
 /// the system can have.
@@ -2566,9 +3526,15 @@ external int _GetMachineTypeAttributes(
 ///
 /// {@category kernel32}
 Win32Result<int> GetMaximumProcessorCount(int groupNumber) {
-  final result_ = GetMaximumProcessorCount_Wrapper(groupNumber);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetMaximumProcessorCount(groupNumber);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetMaximumProcessorCount = _kernel32
+    .lookupFunction<Uint32 Function(Uint16), int Function(int)>(
+      'GetMaximumProcessorCount',
+    );
 
 /// Returns the maximum number of processor groups that the system can have.
 ///
@@ -2579,8 +3545,10 @@ Win32Result<int> GetMaximumProcessorCount(int groupNumber) {
 @pragma('vm:prefer-inline')
 int GetMaximumProcessorGroupCount() => _GetMaximumProcessorGroupCount();
 
-@Native<Uint16 Function()>(symbol: 'GetMaximumProcessorGroupCount')
-external int _GetMaximumProcessorGroupCount();
+final _GetMaximumProcessorGroupCount = _kernel32
+    .lookupFunction<Uint16 Function(), int Function()>(
+      'GetMaximumProcessorGroupCount',
+    );
 
 /// Retrieves the fully qualified path for the file that contains the specified
 /// module.
@@ -2596,13 +3564,16 @@ Win32Result<int> GetModuleFileName(
   PWSTR lpFilename,
   int nSize,
 ) {
-  final result_ = GetModuleFileNameW_Wrapper(
-    hModule ?? nullptr,
-    lpFilename,
-    nSize,
-  );
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetModuleFileName(hModule ?? nullptr, lpFilename, nSize);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetModuleFileName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('GetModuleFileNameW');
 
 /// Retrieves a module handle for the specified module.
 ///
@@ -2613,9 +3584,16 @@ Win32Result<int> GetModuleFileName(
 ///
 /// {@category kernel32}
 Win32Result<HMODULE> GetModuleHandle(PCWSTR? lpModuleName) {
-  final result_ = GetModuleHandleW_Wrapper(lpModuleName ?? nullptr);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetModuleHandle(lpModuleName ?? nullptr);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GetModuleHandle = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>)
+    >('GetModuleHandleW');
 
 /// Retrieves a module handle for the specified module and increments the
 /// module's reference count unless GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT
@@ -2632,13 +3610,20 @@ Win32Result<bool> GetModuleHandleEx(
   PCWSTR? lpModuleName,
   Pointer<Pointer> phModule,
 ) {
-  final result_ = GetModuleHandleExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetModuleHandleEx(
     dwFlags,
     lpModuleName ?? nullptr,
     phModule,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetModuleHandleEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Utf16>, Pointer<Pointer>),
+      int Function(int, Pointer<Utf16>, Pointer<Pointer>)
+    >('GetModuleHandleExW');
 
 /// Retrieves the client computer name for the specified named pipe.
 ///
@@ -2659,14 +3644,11 @@ bool GetNamedPipeClientComputerName(
     ) !=
     FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'GetNamedPipeClientComputerNameW',
-)
-external int _GetNamedPipeClientComputerName(
-  Pointer pipe,
-  Pointer<Utf16> clientComputerName,
-  int clientComputerNameLength,
-);
+final _GetNamedPipeClientComputerName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('GetNamedPipeClientComputerNameW');
 
 /// Retrieves the client process identifier for the specified named pipe.
 ///
@@ -2678,9 +3660,16 @@ Win32Result<bool> GetNamedPipeClientProcessId(
   HANDLE pipe,
   Pointer<Uint32> clientProcessId,
 ) {
-  final result_ = GetNamedPipeClientProcessId_Wrapper(pipe, clientProcessId);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetNamedPipeClientProcessId(pipe, clientProcessId);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetNamedPipeClientProcessId = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetNamedPipeClientProcessId');
 
 /// Retrieves the client session identifier for the specified named pipe.
 ///
@@ -2692,9 +3681,16 @@ Win32Result<bool> GetNamedPipeClientSessionId(
   HANDLE pipe,
   Pointer<Uint32> clientSessionId,
 ) {
-  final result_ = GetNamedPipeClientSessionId_Wrapper(pipe, clientSessionId);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetNamedPipeClientSessionId(pipe, clientSessionId);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetNamedPipeClientSessionId = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetNamedPipeClientSessionId');
 
 /// Retrieves information about a specified named pipe.
 ///
@@ -2723,26 +3719,27 @@ bool GetNamedPipeHandleState(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Uint32,
-  )
->(symbol: 'GetNamedPipeHandleStateW')
-external int _GetNamedPipeHandleState(
-  Pointer hNamedPipe,
-  Pointer<Uint32> lpState,
-  Pointer<Uint32> lpCurInstances,
-  Pointer<Uint32> lpMaxCollectionCount,
-  Pointer<Uint32> lpCollectDataTimeout,
-  Pointer<Utf16> lpUserName,
-  int nMaxUserNameSize,
-);
+final _GetNamedPipeHandleState = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        int,
+      )
+    >('GetNamedPipeHandleStateW');
 
 /// Retrieves information about the specified named pipe.
 ///
@@ -2757,15 +3754,34 @@ Win32Result<bool> GetNamedPipeInfo(
   Pointer<Uint32>? lpInBufferSize,
   Pointer<Uint32>? lpMaxInstances,
 ) {
-  final result_ = GetNamedPipeInfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetNamedPipeInfo(
     hNamedPipe,
     lpFlags ?? nullptr,
     lpOutBufferSize ?? nullptr,
     lpInBufferSize ?? nullptr,
     lpMaxInstances ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetNamedPipeInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('GetNamedPipeInfo');
 
 /// Retrieves information about the current system to an application running
 /// under WOW64.
@@ -2778,8 +3794,11 @@ Win32Result<bool> GetNamedPipeInfo(
 void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetNativeSystemInfo(lpSystemInfo);
 
-@Native<Void Function(Pointer<SYSTEM_INFO>)>(symbol: 'GetNativeSystemInfo')
-external void _GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo);
+final _GetNativeSystemInfo = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<SYSTEM_INFO>),
+      void Function(Pointer<SYSTEM_INFO>)
+    >('GetNativeSystemInfo');
 
 /// Retrieves the number of unread input records in the console's input buffer.
 ///
@@ -2791,12 +3810,19 @@ Win32Result<bool> GetNumberOfConsoleInputEvents(
   HANDLE hConsoleInput,
   Pointer<Uint32> lpNumberOfEvents,
 ) {
-  final result_ = GetNumberOfConsoleInputEvents_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetNumberOfConsoleInputEvents(
     hConsoleInput,
     lpNumberOfEvents,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetNumberOfConsoleInputEvents = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('GetNumberOfConsoleInputEvents');
 
 /// Retrieves the results of an overlapped operation on the specified file,
 /// named pipe, or communications device.
@@ -2811,14 +3837,21 @@ Win32Result<bool> GetOverlappedResult(
   Pointer<Uint32> lpNumberOfBytesTransferred,
   bool bWait,
 ) {
-  final result_ = GetOverlappedResult_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetOverlappedResult(
     hFile,
     lpOverlapped,
     lpNumberOfBytesTransferred,
     bWait ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetOverlappedResult = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<OVERLAPPED>, Pointer<Uint32>, Int32),
+      int Function(Pointer, Pointer<OVERLAPPED>, Pointer<Uint32>, int)
+    >('GetOverlappedResult');
 
 /// Retrieves the results of an overlapped operation on the specified file,
 /// named pipe, or communications device within the specified time-out interval.
@@ -2836,15 +3869,28 @@ Win32Result<bool> GetOverlappedResultEx(
   int dwMilliseconds,
   bool bAlertable,
 ) {
-  final result_ = GetOverlappedResultEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetOverlappedResultEx(
     hFile,
     lpOverlapped,
     lpNumberOfBytesTransferred,
     dwMilliseconds,
     bAlertable ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetOverlappedResultEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<OVERLAPPED>,
+        Pointer<Uint32>,
+        Uint32,
+        Int32,
+      ),
+      int Function(Pointer, Pointer<OVERLAPPED>, Pointer<Uint32>, int, int)
+    >('GetOverlappedResultEx');
 
 /// Retrieves the amount of RAM that is physically installed on the computer.
 ///
@@ -2855,11 +3901,16 @@ Win32Result<bool> GetOverlappedResultEx(
 Win32Result<bool> GetPhysicallyInstalledSystemMemory(
   Pointer<Uint64> totalMemoryInKilobytes,
 ) {
-  final result_ = GetPhysicallyInstalledSystemMemory_Wrapper(
-    totalMemoryInKilobytes,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetPhysicallyInstalledSystemMemory(totalMemoryInKilobytes);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetPhysicallyInstalledSystemMemory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint64>),
+      int Function(Pointer<Uint64>)
+    >('GetPhysicallyInstalledSystemMemory');
 
 /// Retrieves the address of an exported function or variable from the specified
 /// dynamic-link library (DLL).
@@ -2869,9 +3920,16 @@ Win32Result<bool> GetPhysicallyInstalledSystemMemory(
 ///
 /// {@category kernel32}
 Win32Result<FARPROC> GetProcAddress(HMODULE hModule, PCSTR lpProcName) {
-  final result_ = GetProcAddress_Wrapper(hModule, lpProcName);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcAddress(hModule, lpProcName);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetProcAddress = _kernel32
+    .lookupFunction<
+      FARPROC Function(Pointer, Pointer<Utf8>),
+      FARPROC Function(Pointer, Pointer<Utf8>)
+    >('GetProcAddress');
 
 /// Retrieves a handle to the default heap of the calling process.
 ///
@@ -2880,9 +3938,13 @@ Win32Result<FARPROC> GetProcAddress(HMODULE hModule, PCSTR lpProcName) {
 ///
 /// {@category kernel32}
 Win32Result<HANDLE> GetProcessHeap() {
-  final result_ = GetProcessHeap_Wrapper();
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcessHeap();
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GetProcessHeap = _kernel32
+    .lookupFunction<Pointer Function(), Pointer Function()>('GetProcessHeap');
 
 /// Returns the number of active heaps and retrieves handles to all of the
 /// active heaps for the calling process.
@@ -2895,9 +3957,16 @@ Win32Result<int> GetProcessHeaps(
   int numberOfHeaps,
   Pointer<Pointer> processHeaps,
 ) {
-  final result_ = GetProcessHeaps_Wrapper(numberOfHeaps, processHeaps);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcessHeaps(numberOfHeaps, processHeaps);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetProcessHeaps = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Pointer>),
+      int Function(int, Pointer<Pointer>)
+    >('GetProcessHeaps');
 
 /// Retrieves the process identifier of the specified process.
 ///
@@ -2906,9 +3975,15 @@ Win32Result<int> GetProcessHeaps(
 ///
 /// {@category kernel32}
 Win32Result<int> GetProcessId(HANDLE process) {
-  final result_ = GetProcessId_Wrapper(process);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcessId(process);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetProcessId = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetProcessId',
+    );
 
 /// Retrieves the shutdown parameters for the currently calling process.
 ///
@@ -2920,9 +3995,16 @@ Win32Result<bool> GetProcessShutdownParameters(
   Pointer<Uint32> lpdwLevel,
   Pointer<Uint32> lpdwFlags,
 ) {
-  final result_ = GetProcessShutdownParameters_Wrapper(lpdwLevel, lpdwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcessShutdownParameters(lpdwLevel, lpdwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetProcessShutdownParameters = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Pointer<Uint32>),
+      int Function(Pointer<Uint32>, Pointer<Uint32>)
+    >('GetProcessShutdownParameters');
 
 /// Retrieves timing information for the specified process.
 ///
@@ -2937,15 +4019,34 @@ Win32Result<bool> GetProcessTimes(
   Pointer<FILETIME> lpKernelTime,
   Pointer<FILETIME> lpUserTime,
 ) {
-  final result_ = GetProcessTimes_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetProcessTimes(
     hProcess,
     lpCreationTime,
     lpExitTime,
     lpKernelTime,
     lpUserTime,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetProcessTimes = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      )
+    >('GetProcessTimes');
 
 /// Retrieves the major and minor version numbers of the system on which the
 /// specified process expects to run.
@@ -2955,9 +4056,15 @@ Win32Result<bool> GetProcessTimes(
 ///
 /// {@category kernel32}
 Win32Result<int> GetProcessVersion(int processId) {
-  final result_ = GetProcessVersion_Wrapper(processId);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetProcessVersion(processId);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetProcessVersion = _kernel32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>(
+      'GetProcessVersion',
+    );
 
 /// Retrieves the minimum and maximum working set sizes of the specified
 /// process.
@@ -2971,13 +4078,20 @@ Win32Result<bool> GetProcessWorkingSetSize(
   Pointer<IntPtr> lpMinimumWorkingSetSize,
   Pointer<IntPtr> lpMaximumWorkingSetSize,
 ) {
-  final result_ = GetProcessWorkingSetSize_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetProcessWorkingSetSize(
     hProcess,
     lpMinimumWorkingSetSize,
     lpMaximumWorkingSetSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetProcessWorkingSetSize = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<IntPtr>, Pointer<IntPtr>),
+      int Function(Pointer, Pointer<IntPtr>, Pointer<IntPtr>)
+    >('GetProcessWorkingSetSize');
 
 /// Retrieves the product type for the operating system on the local computer,
 /// and maps the type to the product types supported by the specified operating
@@ -3004,16 +4118,11 @@ bool GetProductInfo(
     ) !=
     FALSE;
 
-@Native<Int32 Function(Uint32, Uint32, Uint32, Uint32, Pointer<Uint32>)>(
-  symbol: 'GetProductInfo',
-)
-external int _GetProductInfo(
-  int dwOSMajorVersion,
-  int dwOSMinorVersion,
-  int dwSpMajorVersion,
-  int dwSpMinorVersion,
-  Pointer<Uint32> pdwReturnedProductType,
-);
+final _GetProductInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Uint32, Uint32, Uint32, Pointer<Uint32>),
+      int Function(int, int, int, int, Pointer<Uint32>)
+    >('GetProductInfo');
 
 /// Attempts to dequeue an I/O completion packet from the specified I/O
 /// completion port.
@@ -3029,15 +4138,34 @@ Win32Result<bool> GetQueuedCompletionStatus(
   Pointer<Pointer<OVERLAPPED>> lpOverlapped,
   int dwMilliseconds,
 ) {
-  final result_ = GetQueuedCompletionStatus_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetQueuedCompletionStatus(
     completionPort,
     lpNumberOfBytesTransferred,
     lpCompletionKey,
     lpOverlapped,
     dwMilliseconds,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetQueuedCompletionStatus = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<IntPtr>,
+        Pointer<Pointer<OVERLAPPED>>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<IntPtr>,
+        Pointer<Pointer<OVERLAPPED>>,
+        int,
+      )
+    >('GetQueuedCompletionStatus');
 
 /// Retrieves multiple completion port entries simultaneously.
 ///
@@ -3053,7 +4181,8 @@ Win32Result<bool> GetQueuedCompletionStatusEx(
   int dwMilliseconds,
   bool fAlertable,
 ) {
-  final result_ = GetQueuedCompletionStatusEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetQueuedCompletionStatusEx(
     completionPort,
     lpCompletionPortEntries,
     ulCount,
@@ -3061,8 +4190,28 @@ Win32Result<bool> GetQueuedCompletionStatusEx(
     dwMilliseconds,
     fAlertable ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetQueuedCompletionStatusEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<OVERLAPPED_ENTRY>,
+        Uint32,
+        Pointer<Uint32>,
+        Uint32,
+        Int32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<OVERLAPPED_ENTRY>,
+        int,
+        Pointer<Uint32>,
+        int,
+        int,
+      )
+    >('GetQueuedCompletionStatusEx');
 
 /// Retrieves the short path form of the specified path.
 ///
@@ -3075,13 +4224,20 @@ Win32Result<int> GetShortPathName(
   PWSTR? lpszShortPath,
   int cchBuffer,
 ) {
-  final result_ = GetShortPathNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetShortPathName(
     lpszLongPath,
     lpszShortPath ?? nullptr,
     cchBuffer,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetShortPathName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('GetShortPathNameW');
 
 /// Retrieves the contents of the STARTUPINFO structure that was specified when
 /// the calling process was created.
@@ -3094,8 +4250,11 @@ Win32Result<int> GetShortPathName(
 void GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo) =>
     _GetStartupInfo(lpStartupInfo);
 
-@Native<Void Function(Pointer<STARTUPINFO>)>(symbol: 'GetStartupInfoW')
-external void _GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo);
+final _GetStartupInfo = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<STARTUPINFO>),
+      void Function(Pointer<STARTUPINFO>)
+    >('GetStartupInfoW');
 
 /// Retrieves a handle to the specified standard device (standard input,
 /// standard output, or standard error).
@@ -3105,9 +4264,15 @@ external void _GetStartupInfo(Pointer<STARTUPINFO> lpStartupInfo);
 ///
 /// {@category kernel32}
 Win32Result<HANDLE> GetStdHandle(STD_HANDLE nStdHandle) {
-  final result_ = GetStdHandle_Wrapper(nStdHandle);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetStdHandle(nStdHandle);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GetStdHandle = _kernel32
+    .lookupFunction<Pointer Function(Uint32), Pointer Function(int)>(
+      'GetStdHandle',
+    );
 
 /// Returns the language identifier for the system locale.
 ///
@@ -3118,8 +4283,10 @@ Win32Result<HANDLE> GetStdHandle(STD_HANDLE nStdHandle) {
 @pragma('vm:prefer-inline')
 int GetSystemDefaultLangID() => _GetSystemDefaultLangID();
 
-@Native<Uint16 Function()>(symbol: 'GetSystemDefaultLangID')
-external int _GetSystemDefaultLangID();
+final _GetSystemDefaultLangID = _kernel32
+    .lookupFunction<Uint16 Function(), int Function()>(
+      'GetSystemDefaultLangID',
+    );
 
 /// Retrieves the system default locale name.
 ///
@@ -3134,12 +4301,16 @@ Win32Result<int> GetSystemDefaultLocaleName(
   PWSTR lpLocaleName,
   int cchLocaleName,
 ) {
-  final result_ = GetSystemDefaultLocaleName_Wrapper(
-    lpLocaleName,
-    cchLocaleName,
-  );
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetSystemDefaultLocaleName(lpLocaleName, cchLocaleName);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetSystemDefaultLocaleName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Int32),
+      int Function(Pointer<Utf16>, int)
+    >('GetSystemDefaultLocaleName');
 
 /// Retrieves the path of the system directory.
 ///
@@ -3148,9 +4319,16 @@ Win32Result<int> GetSystemDefaultLocaleName(
 ///
 /// {@category kernel32}
 Win32Result<int> GetSystemDirectory(PWSTR? lpBuffer, int uSize) {
-  final result_ = GetSystemDirectoryW_Wrapper(lpBuffer ?? nullptr, uSize);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetSystemDirectory(lpBuffer ?? nullptr, uSize);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetSystemDirectory = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, int)
+    >('GetSystemDirectoryW');
 
 /// Retrieves information about the current system.
 ///
@@ -3162,8 +4340,11 @@ Win32Result<int> GetSystemDirectory(PWSTR? lpBuffer, int uSize) {
 void GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) =>
     _GetSystemInfo(lpSystemInfo);
 
-@Native<Void Function(Pointer<SYSTEM_INFO>)>(symbol: 'GetSystemInfo')
-external void _GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo);
+final _GetSystemInfo = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<SYSTEM_INFO>),
+      void Function(Pointer<SYSTEM_INFO>)
+    >('GetSystemInfo');
 
 /// Retrieves the power status of the system.
 ///
@@ -3178,9 +4359,16 @@ external void _GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo);
 Win32Result<bool> GetSystemPowerStatus(
   Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus,
 ) {
-  final result_ = GetSystemPowerStatus_Wrapper(lpSystemPowerStatus);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetSystemPowerStatus(lpSystemPowerStatus);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetSystemPowerStatus = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<SYSTEM_POWER_STATUS>),
+      int Function(Pointer<SYSTEM_POWER_STATUS>)
+    >('GetSystemPowerStatus');
 
 /// Retrieves the current system date and time in Coordinated Universal Time
 /// (UTC) format.
@@ -3193,8 +4381,11 @@ Win32Result<bool> GetSystemPowerStatus(
 void GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime) =>
     _GetSystemTime(lpSystemTime);
 
-@Native<Void Function(Pointer<SYSTEMTIME>)>(symbol: 'GetSystemTime')
-external void _GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime);
+final _GetSystemTime = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<SYSTEMTIME>),
+      void Function(Pointer<SYSTEMTIME>)
+    >('GetSystemTime');
 
 /// Determines whether the system is applying periodic time adjustments to its
 /// time-of-day clock, and obtains the value and period of any such adjustments.
@@ -3208,13 +4399,20 @@ Win32Result<bool> GetSystemTimeAdjustment(
   Pointer<Uint32> lpTimeIncrement,
   Pointer<Int32> lpTimeAdjustmentDisabled,
 ) {
-  final result_ = GetSystemTimeAdjustment_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetSystemTimeAdjustment(
     lpTimeAdjustment,
     lpTimeIncrement,
     lpTimeAdjustmentDisabled,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetSystemTimeAdjustment = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Pointer<Uint32>, Pointer<Int32>),
+      int Function(Pointer<Uint32>, Pointer<Uint32>, Pointer<Int32>)
+    >('GetSystemTimeAdjustment');
 
 /// Retrieves system timing information.
 ///
@@ -3230,13 +4428,20 @@ Win32Result<bool> GetSystemTimes(
   Pointer<FILETIME>? lpKernelTime,
   Pointer<FILETIME>? lpUserTime,
 ) {
-  final result_ = GetSystemTimes_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetSystemTimes(
     lpIdleTime ?? nullptr,
     lpKernelTime ?? nullptr,
     lpUserTime ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetSystemTimes = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<FILETIME>, Pointer<FILETIME>, Pointer<FILETIME>),
+      int Function(Pointer<FILETIME>, Pointer<FILETIME>, Pointer<FILETIME>)
+    >('GetSystemTimes');
 
 /// Creates a name for a temporary file.
 ///
@@ -3253,14 +4458,21 @@ Win32Result<int> GetTempFileName(
   int uUnique,
   PWSTR lpTempFileName,
 ) {
-  final result_ = GetTempFileNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetTempFileName(
     lpPathName,
     lpPrefixString,
     uUnique,
     lpTempFileName,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetTempFileName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer<Utf16>)
+    >('GetTempFileNameW');
 
 /// Retrieves the path of the directory designated for temporary files.
 ///
@@ -3269,9 +4481,16 @@ Win32Result<int> GetTempFileName(
 ///
 /// {@category kernel32}
 Win32Result<int> GetTempPath(int nBufferLength, PWSTR? lpBuffer) {
-  final result_ = GetTempPathW_Wrapper(nBufferLength, lpBuffer ?? nullptr);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetTempPath(nBufferLength, lpBuffer ?? nullptr);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetTempPath = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('GetTempPathW');
 
 /// Retrieves the path of the directory designated for temporary files, based on
 /// the privileges of the calling process.
@@ -3284,8 +4503,11 @@ Win32Result<int> GetTempPath(int nBufferLength, PWSTR? lpBuffer) {
 int GetTempPath2(int bufferLength, PWSTR? buffer) =>
     _GetTempPath2(bufferLength, buffer ?? nullptr);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>)>(symbol: 'GetTempPath2W')
-external int _GetTempPath2(int bufferLength, Pointer<Utf16> buffer);
+final _GetTempPath2 = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('GetTempPath2W');
 
 /// Retrieves the thread identifier of the specified thread.
 ///
@@ -3294,9 +4516,15 @@ external int _GetTempPath2(int bufferLength, Pointer<Utf16> buffer);
 ///
 /// {@category kernel32}
 Win32Result<int> GetThreadId(HANDLE thread) {
-  final result_ = GetThreadId_Wrapper(thread);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetThreadId(thread);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetThreadId = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'GetThreadId',
+    );
 
 /// Returns the locale identifier of the current locale for the calling thread.
 ///
@@ -3310,8 +4538,8 @@ Win32Result<int> GetThreadId(HANDLE thread) {
 @pragma('vm:prefer-inline')
 int GetThreadLocale() => _GetThreadLocale();
 
-@Native<Uint32 Function()>(symbol: 'GetThreadLocale')
-external int _GetThreadLocale();
+final _GetThreadLocale = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
 
 /// Retrieves timing information for the specified thread.
 ///
@@ -3326,15 +4554,34 @@ Win32Result<bool> GetThreadTimes(
   Pointer<FILETIME> lpKernelTime,
   Pointer<FILETIME> lpUserTime,
 ) {
-  final result_ = GetThreadTimes_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetThreadTimes(
     hThread,
     lpCreationTime,
     lpExitTime,
     lpKernelTime,
     lpUserTime,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetThreadTimes = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      )
+    >('GetThreadTimes');
 
 /// Returns the language identifier of the first user interface language for the
 /// current thread.
@@ -3346,8 +4593,8 @@ Win32Result<bool> GetThreadTimes(
 @pragma('vm:prefer-inline')
 int GetThreadUILanguage() => _GetThreadUILanguage();
 
-@Native<Uint16 Function()>(symbol: 'GetThreadUILanguage')
-external int _GetThreadUILanguage();
+final _GetThreadUILanguage = _kernel32
+    .lookupFunction<Uint16 Function(), int Function()>('GetThreadUILanguage');
 
 /// Retrieves the number of milliseconds that have elapsed since the system was
 /// started, up to 49.7 days.
@@ -3359,8 +4606,8 @@ external int _GetThreadUILanguage();
 @pragma('vm:prefer-inline')
 int GetTickCount() => _GetTickCount();
 
-@Native<Uint32 Function()>(symbol: 'GetTickCount')
-external int _GetTickCount();
+final _GetTickCount = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetTickCount');
 
 /// Returns the language identifier of the Region Format setting for the current
 /// user.
@@ -3372,8 +4619,8 @@ external int _GetTickCount();
 @pragma('vm:prefer-inline')
 int GetUserDefaultLangID() => _GetUserDefaultLangID();
 
-@Native<Uint16 Function()>(symbol: 'GetUserDefaultLangID')
-external int _GetUserDefaultLangID();
+final _GetUserDefaultLangID = _kernel32
+    .lookupFunction<Uint16 Function(), int Function()>('GetUserDefaultLangID');
 
 /// Returns the locale identifier for the user default locale.
 ///
@@ -3387,8 +4634,8 @@ external int _GetUserDefaultLangID();
 @pragma('vm:prefer-inline')
 int GetUserDefaultLCID() => _GetUserDefaultLCID();
 
-@Native<Uint32 Function()>(symbol: 'GetUserDefaultLCID')
-external int _GetUserDefaultLCID();
+final _GetUserDefaultLCID = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>('GetUserDefaultLCID');
 
 /// Retrieves the user default locale name.
 ///
@@ -3403,9 +4650,16 @@ Win32Result<int> GetUserDefaultLocaleName(
   PWSTR lpLocaleName,
   int cchLocaleName,
 ) {
-  final result_ = GetUserDefaultLocaleName_Wrapper(lpLocaleName, cchLocaleName);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GetUserDefaultLocaleName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Int32),
+      int Function(Pointer<Utf16>, int)
+    >('GetUserDefaultLocaleName');
 
 /// Retrieves information about the file system and volume associated with the
 /// specified root directory.
@@ -3424,7 +4678,8 @@ Win32Result<bool> GetVolumeInformation(
   PWSTR? lpFileSystemNameBuffer,
   int nFileSystemNameSize,
 ) {
-  final result_ = GetVolumeInformationW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetVolumeInformation(
     lpRootPathName ?? nullptr,
     lpVolumeNameBuffer ?? nullptr,
     nVolumeNameSize,
@@ -3434,8 +4689,32 @@ Win32Result<bool> GetVolumeInformation(
     lpFileSystemNameBuffer ?? nullptr,
     nFileSystemNameSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetVolumeInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Uint32,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        int,
+      )
+    >('GetVolumeInformationW');
 
 /// Retrieves information about the file system and volume associated with the
 /// specified file.
@@ -3454,7 +4733,8 @@ Win32Result<bool> GetVolumeInformationByHandle(
   PWSTR? lpFileSystemNameBuffer,
   int nFileSystemNameSize,
 ) {
-  final result_ = GetVolumeInformationByHandleW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetVolumeInformationByHandle(
     hFile,
     lpVolumeNameBuffer ?? nullptr,
     nVolumeNameSize,
@@ -3464,8 +4744,32 @@ Win32Result<bool> GetVolumeInformationByHandle(
     lpFileSystemNameBuffer ?? nullptr,
     nFileSystemNameSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetVolumeInformationByHandle = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Uint32,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        int,
+      )
+    >('GetVolumeInformationByHandleW');
 
 /// Retrieves a volume GUID path for the volume that is associated with the
 /// specified volume mount point ( drive letter, volume GUID path, or mounted
@@ -3480,13 +4784,20 @@ Win32Result<bool> GetVolumeNameForVolumeMountPoint(
   PWSTR lpszVolumeName,
   int cchBufferLength,
 ) {
-  final result_ = GetVolumeNameForVolumeMountPointW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetVolumeNameForVolumeMountPoint(
     lpszVolumeMountPoint,
     lpszVolumeName,
     cchBufferLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetVolumeNameForVolumeMountPoint = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('GetVolumeNameForVolumeMountPointW');
 
 /// Retrieves the volume mount point where the specified path is mounted.
 ///
@@ -3499,13 +4810,20 @@ Win32Result<bool> GetVolumePathName(
   PWSTR lpszVolumePathName,
   int cchBufferLength,
 ) {
-  final result_ = GetVolumePathNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetVolumePathName(
     lpszFileName,
     lpszVolumePathName,
     cchBufferLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetVolumePathName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('GetVolumePathNameW');
 
 /// Retrieves a list of drive letters and mounted folder paths for the specified
 /// volume.
@@ -3520,14 +4838,21 @@ Win32Result<bool> GetVolumePathNamesForVolumeName(
   int cchBufferLength,
   Pointer<Uint32> lpcchReturnLength,
 ) {
-  final result_ = GetVolumePathNamesForVolumeNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _GetVolumePathNamesForVolumeName(
     lpszVolumeName,
     lpszVolumePathNames ?? nullptr,
     cchBufferLength,
     lpcchReturnLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GetVolumePathNamesForVolumeName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('GetVolumePathNamesForVolumeNameW');
 
 /// Allocates the specified number of bytes from the heap.
 ///
@@ -3536,9 +4861,16 @@ Win32Result<bool> GetVolumePathNamesForVolumeName(
 ///
 /// {@category kernel32}
 Win32Result<HGLOBAL> GlobalAlloc(GLOBAL_ALLOC_FLAGS uFlags, int dwBytes) {
-  final result_ = GlobalAlloc_Wrapper(uFlags, dwBytes);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalAlloc(uFlags, dwBytes);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GlobalAlloc = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, IntPtr),
+      Pointer Function(int, int)
+    >('GlobalAlloc');
 
 /// Frees the specified global memory object and invalidates its handle.
 ///
@@ -3547,9 +4879,15 @@ Win32Result<HGLOBAL> GlobalAlloc(GLOBAL_ALLOC_FLAGS uFlags, int dwBytes) {
 ///
 /// {@category kernel32}
 Win32Result<HGLOBAL> GlobalFree(HGLOBAL? hMem) {
-  final result_ = GlobalFree_Wrapper(hMem ?? nullptr);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalFree(hMem ?? nullptr);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _GlobalFree = _kernel32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GlobalFree',
+    );
 
 /// Locks a global memory object and returns a pointer to the first byte of the
 /// object's memory block.
@@ -3559,9 +4897,15 @@ Win32Result<HGLOBAL> GlobalFree(HGLOBAL? hMem) {
 ///
 /// {@category kernel32}
 Win32Result<Pointer> GlobalLock(HGLOBAL hMem) {
-  final result_ = GlobalLock_Wrapper(hMem);
-  return .new(value: result_.value.ptr, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalLock(hMem);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GlobalLock = _kernel32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'GlobalLock',
+    );
 
 /// Retrieves information about the system's current usage of both physical and
 /// virtual memory.
@@ -3571,9 +4915,16 @@ Win32Result<Pointer> GlobalLock(HGLOBAL hMem) {
 ///
 /// {@category kernel32}
 Win32Result<bool> GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) {
-  final result_ = GlobalMemoryStatusEx_Wrapper(lpBuffer);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalMemoryStatusEx(lpBuffer);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GlobalMemoryStatusEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<MEMORYSTATUSEX>),
+      int Function(Pointer<MEMORYSTATUSEX>)
+    >('GlobalMemoryStatusEx');
 
 /// Retrieves the current size of the specified global memory object, in bytes.
 ///
@@ -3582,9 +4933,15 @@ Win32Result<bool> GlobalMemoryStatusEx(Pointer<MEMORYSTATUSEX> lpBuffer) {
 ///
 /// {@category kernel32}
 Win32Result<int> GlobalSize(HGLOBAL hMem) {
-  final result_ = GlobalSize_Wrapper(hMem);
-  return .new(value: result_.value.i64, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalSize(hMem);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _GlobalSize = _kernel32
+    .lookupFunction<IntPtr Function(Pointer), int Function(Pointer)>(
+      'GlobalSize',
+    );
 
 /// Decrements the lock count associated with a memory object that was allocated
 /// with GMEM_MOVEABLE.
@@ -3594,9 +4951,15 @@ Win32Result<int> GlobalSize(HGLOBAL hMem) {
 ///
 /// {@category kernel32}
 Win32Result<bool> GlobalUnlock(HGLOBAL hMem) {
-  final result_ = GlobalUnlock_Wrapper(hMem);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _GlobalUnlock(hMem);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _GlobalUnlock = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'GlobalUnlock',
+    );
 
 /// Allocates a block of memory from a heap.
 ///
@@ -3610,8 +4973,11 @@ Win32Result<bool> GlobalUnlock(HGLOBAL hMem) {
 Pointer HeapAlloc(HANDLE hHeap, HEAP_FLAGS dwFlags, int dwBytes) =>
     _HeapAlloc(hHeap, dwFlags, dwBytes);
 
-@Native<Pointer Function(Pointer, Uint32, IntPtr)>(symbol: 'HeapAlloc')
-external Pointer _HeapAlloc(Pointer hHeap, int dwFlags, int dwBytes);
+final _HeapAlloc = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32, IntPtr),
+      Pointer Function(Pointer, int, int)
+    >('HeapAlloc');
 
 /// Returns the size of the largest committed free block in the specified heap.
 ///
@@ -3623,9 +4989,16 @@ external Pointer _HeapAlloc(Pointer hHeap, int dwFlags, int dwBytes);
 ///
 /// {@category kernel32}
 Win32Result<int> HeapCompact(HANDLE hHeap, HEAP_FLAGS dwFlags) {
-  final result_ = HeapCompact_Wrapper(hHeap, dwFlags);
-  return .new(value: result_.value.i64, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapCompact(hHeap, dwFlags);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _HeapCompact = _kernel32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('HeapCompact');
 
 /// Creates a private heap object that can be used by the calling process.
 ///
@@ -3641,9 +5014,16 @@ Win32Result<HANDLE> HeapCreate(
   int dwInitialSize,
   int dwMaximumSize,
 ) {
-  final result_ = HeapCreate_Wrapper(flOptions, dwInitialSize, dwMaximumSize);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapCreate(flOptions, dwInitialSize, dwMaximumSize);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _HeapCreate = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, IntPtr, IntPtr),
+      Pointer Function(int, int, int)
+    >('HeapCreate');
 
 /// Destroys the specified heap object.
 ///
@@ -3655,9 +5035,15 @@ Win32Result<HANDLE> HeapCreate(
 ///
 /// {@category kernel32}
 Win32Result<bool> HeapDestroy(HANDLE hHeap) {
-  final result_ = HeapDestroy_Wrapper(hHeap);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapDestroy(hHeap);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapDestroy = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'HeapDestroy',
+    );
 
 /// Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc
 /// function.
@@ -3667,9 +5053,16 @@ Win32Result<bool> HeapDestroy(HANDLE hHeap) {
 ///
 /// {@category kernel32}
 Win32Result<bool> HeapFree(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) {
-  final result_ = HeapFree_Wrapper(hHeap, dwFlags, lpMem ?? nullptr);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapFree(hHeap, dwFlags, lpMem ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapFree = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('HeapFree');
 
 /// Attempts to acquire the critical section object, or lock, that is associated
 /// with a specified heap.
@@ -3679,9 +5072,13 @@ Win32Result<bool> HeapFree(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) {
 ///
 /// {@category kernel32}
 Win32Result<bool> HeapLock(HANDLE hHeap) {
-  final result_ = HeapLock_Wrapper(hHeap);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapLock(hHeap);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapLock = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('HeapLock');
 
 /// Retrieves information about the specified heap.
 ///
@@ -3696,15 +5093,22 @@ Win32Result<bool> HeapQueryInformation(
   int heapInformationLength,
   Pointer<IntPtr>? returnLength,
 ) {
-  final result_ = HeapQueryInformation_Wrapper(
+  resolveGetLastError();
+  final result_ = _HeapQueryInformation(
     heapHandle ?? nullptr,
     heapInformationClass,
     heapInformation ?? nullptr,
     heapInformationLength,
     returnLength ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapQueryInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, IntPtr, Pointer<IntPtr>),
+      int Function(Pointer, int, Pointer, int, Pointer<IntPtr>)
+    >('HeapQueryInformation');
 
 /// Reallocates a block of memory from a heap.
 ///
@@ -3723,15 +5127,11 @@ Pointer HeapReAlloc(
   int dwBytes,
 ) => _HeapReAlloc(hHeap, dwFlags, lpMem ?? nullptr, dwBytes);
 
-@Native<Pointer Function(Pointer, Uint32, Pointer, IntPtr)>(
-  symbol: 'HeapReAlloc',
-)
-external Pointer _HeapReAlloc(
-  Pointer hHeap,
-  int dwFlags,
-  Pointer lpMem,
-  int dwBytes,
-);
+final _HeapReAlloc = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32, Pointer, IntPtr),
+      Pointer Function(Pointer, int, Pointer, int)
+    >('HeapReAlloc');
 
 /// Enables features for a specified heap.
 ///
@@ -3745,14 +5145,21 @@ Win32Result<bool> HeapSetInformation(
   Pointer? heapInformation,
   int heapInformationLength,
 ) {
-  final result_ = HeapSetInformation_Wrapper(
+  resolveGetLastError();
+  final result_ = _HeapSetInformation(
     heapHandle ?? nullptr,
     heapInformationClass,
     heapInformation ?? nullptr,
     heapInformationLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapSetInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, IntPtr),
+      int Function(Pointer, int, Pointer, int)
+    >('HeapSetInformation');
 
 /// Retrieves the size of a memory block allocated from a heap by the HeapAlloc
 /// or HeapReAlloc function.
@@ -3765,8 +5172,11 @@ Win32Result<bool> HeapSetInformation(
 int HeapSize(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer lpMem) =>
     _HeapSize(hHeap, dwFlags, lpMem);
 
-@Native<IntPtr Function(Pointer, Uint32, Pointer)>(symbol: 'HeapSize')
-external int _HeapSize(Pointer hHeap, int dwFlags, Pointer lpMem);
+final _HeapSize = _kernel32
+    .lookupFunction<
+      IntPtr Function(Pointer, Uint32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('HeapSize');
 
 /// Releases ownership of the critical section object, or lock, that is
 /// associated with a specified heap.
@@ -3776,9 +5186,15 @@ external int _HeapSize(Pointer hHeap, int dwFlags, Pointer lpMem);
 ///
 /// {@category kernel32}
 Win32Result<bool> HeapUnlock(HANDLE hHeap) {
-  final result_ = HeapUnlock_Wrapper(hHeap);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapUnlock(hHeap);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapUnlock = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'HeapUnlock',
+    );
 
 /// Validates the specified heap.
 ///
@@ -3794,8 +5210,11 @@ Win32Result<bool> HeapUnlock(HANDLE hHeap) {
 bool HeapValidate(HANDLE hHeap, HEAP_FLAGS dwFlags, Pointer? lpMem) =>
     _HeapValidate(hHeap, dwFlags, lpMem ?? nullptr) != FALSE;
 
-@Native<Int32 Function(Pointer, Uint32, Pointer)>(symbol: 'HeapValidate')
-external int _HeapValidate(Pointer hHeap, int dwFlags, Pointer lpMem);
+final _HeapValidate = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer),
+      int Function(Pointer, int, Pointer)
+    >('HeapValidate');
 
 /// Enumerates the memory blocks in the specified heap.
 ///
@@ -3804,9 +5223,16 @@ external int _HeapValidate(Pointer hHeap, int dwFlags, Pointer lpMem);
 ///
 /// {@category kernel32}
 Win32Result<bool> HeapWalk(HANDLE hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) {
-  final result_ = HeapWalk_Wrapper(hHeap, lpEntry);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _HeapWalk(hHeap, lpEntry);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _HeapWalk = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<PROCESS_HEAP_ENTRY>),
+      int Function(Pointer, Pointer<PROCESS_HEAP_ENTRY>)
+    >('HeapWalk');
 
 /// Initializes the specified list of attributes for process and thread
 /// creation.
@@ -3820,14 +5246,21 @@ Win32Result<bool> InitializeProcThreadAttributeList(
   int dwAttributeCount,
   Pointer<IntPtr> lpSize,
 ) {
-  final result_ = InitializeProcThreadAttributeList_Wrapper(
+  resolveGetLastError();
+  final result_ = _InitializeProcThreadAttributeList(
     lpAttributeList ?? nullptr,
     dwAttributeCount,
     NULL,
     lpSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _InitializeProcThreadAttributeList = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Pointer<IntPtr>),
+      int Function(Pointer, int, int, Pointer<IntPtr>)
+    >('InitializeProcThreadAttributeList');
 
 /// Determines whether the calling process is being debugged by a user-mode
 /// debugger.
@@ -3839,8 +5272,8 @@ Win32Result<bool> InitializeProcThreadAttributeList(
 @pragma('vm:prefer-inline')
 bool IsDebuggerPresent() => _IsDebuggerPresent() != FALSE;
 
-@Native<Int32 Function()>(symbol: 'IsDebuggerPresent')
-external int _IsDebuggerPresent();
+final _IsDebuggerPresent = _kernel32
+    .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
 
 /// Indicates if the OS was booted from a VHD container.
 ///
@@ -3849,9 +5282,16 @@ external int _IsDebuggerPresent();
 ///
 /// {@category kernel32}
 Win32Result<bool> IsNativeVhdBoot(Pointer<Int32> nativeVhdBoot) {
-  final result_ = IsNativeVhdBoot_Wrapper(nativeVhdBoot);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _IsNativeVhdBoot(nativeVhdBoot);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _IsNativeVhdBoot = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>),
+      int Function(Pointer<Int32>)
+    >('IsNativeVhdBoot');
 
 /// Determines whether the process is running in the specified job.
 ///
@@ -3864,13 +5304,16 @@ Win32Result<bool> IsProcessInJob(
   HANDLE? jobHandle,
   Pointer<Int32> result,
 ) {
-  final result_ = IsProcessInJob_Wrapper(
-    processHandle,
-    jobHandle ?? nullptr,
-    result,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _IsProcessInJob(processHandle, jobHandle ?? nullptr, result);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _IsProcessInJob = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<Int32>),
+      int Function(Pointer, Pointer, Pointer<Int32>)
+    >('IsProcessInJob');
 
 /// Determines the current state of the computer.
 ///
@@ -3881,8 +5324,10 @@ Win32Result<bool> IsProcessInJob(
 @pragma('vm:prefer-inline')
 bool IsSystemResumeAutomatic() => _IsSystemResumeAutomatic() != FALSE;
 
-@Native<Int32 Function()>(symbol: 'IsSystemResumeAutomatic')
-external int _IsSystemResumeAutomatic();
+final _IsSystemResumeAutomatic = _kernel32
+    .lookupFunction<Int32 Function(), int Function()>(
+      'IsSystemResumeAutomatic',
+    );
 
 /// Determines if the specified locale name is valid for a locale that is
 /// installed or supported on the operating system.
@@ -3899,8 +5344,11 @@ external int _IsSystemResumeAutomatic();
 bool IsValidLocaleName(PCWSTR lpLocaleName) =>
     _IsValidLocaleName(lpLocaleName) != FALSE;
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'IsValidLocaleName')
-external int _IsValidLocaleName(Pointer<Utf16> lpLocaleName);
+final _IsValidLocaleName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('IsValidLocaleName');
 
 /// Determines whether the specified process is running under WOW64; also
 /// returns additional machine process and architecture information.
@@ -3914,13 +5362,20 @@ Win32Result<bool> IsWow64Process2(
   Pointer<Uint16> pProcessMachine,
   Pointer<Uint16>? pNativeMachine,
 ) {
-  final result_ = IsWow64Process2_Wrapper(
+  resolveGetLastError();
+  final result_ = _IsWow64Process2(
     hProcess,
     pProcessMachine,
     pNativeMachine ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _IsWow64Process2 = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint16>, Pointer<Uint16>),
+      int Function(Pointer, Pointer<Uint16>, Pointer<Uint16>)
+    >('IsWow64Process2');
 
 /// Loads the specified module into the address space of the calling process.
 ///
@@ -3929,9 +5384,16 @@ Win32Result<bool> IsWow64Process2(
 ///
 /// {@category kernel32}
 Win32Result<HMODULE> LoadLibrary(PCWSTR lpLibFileName) {
-  final result_ = LoadLibraryW_Wrapper(lpLibFileName);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _LoadLibrary(lpLibFileName);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _LoadLibrary = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>)
+    >('LoadLibraryW');
 
 /// Loads the specified module into the address space of the calling process.
 ///
@@ -3943,9 +5405,16 @@ Win32Result<HMODULE> LoadLibraryEx(
   PCWSTR lpLibFileName,
   LOAD_LIBRARY_FLAGS dwFlags,
 ) {
-  final result_ = LoadLibraryExW_Wrapper(lpLibFileName, nullptr, dwFlags);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _LoadLibraryEx(lpLibFileName, nullptr, dwFlags);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _LoadLibraryEx = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Pointer, Uint32),
+      Pointer Function(Pointer<Utf16>, Pointer, int)
+    >('LoadLibraryExW');
 
 /// Retrieves a handle that can be used to obtain a pointer to the first byte of
 /// the specified resource in memory.
@@ -3955,9 +5424,16 @@ Win32Result<HMODULE> LoadLibraryEx(
 ///
 /// {@category kernel32}
 Win32Result<HGLOBAL> LoadResource(HMODULE? hModule, HRSRC hResInfo) {
-  final result_ = LoadResource_Wrapper(hModule ?? nullptr, hResInfo);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _LoadResource(hModule ?? nullptr, hResInfo);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _LoadResource = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer),
+      Pointer Function(Pointer, Pointer)
+    >('LoadResource');
 
 /// Allocates the specified number of bytes from the heap.
 ///
@@ -3966,9 +5442,16 @@ Win32Result<HGLOBAL> LoadResource(HMODULE? hModule, HRSRC hResInfo) {
 ///
 /// {@category kernel32}
 Win32Result<HLOCAL> LocalAlloc(LOCAL_ALLOC_FLAGS uFlags, int uBytes) {
-  final result_ = LocalAlloc_Wrapper(uFlags, uBytes);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _LocalAlloc(uFlags, uBytes);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _LocalAlloc = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, IntPtr),
+      Pointer Function(int, int)
+    >('LocalAlloc');
 
 /// Frees the specified local memory object and invalidates its handle.
 ///
@@ -3977,9 +5460,15 @@ Win32Result<HLOCAL> LocalAlloc(LOCAL_ALLOC_FLAGS uFlags, int uBytes) {
 ///
 /// {@category kernel32}
 Win32Result<HLOCAL> LocalFree(HLOCAL? hMem) {
-  final result_ = LocalFree_Wrapper(hMem ?? nullptr);
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  resolveGetLastError();
+  final result_ = _LocalFree(hMem ?? nullptr);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _LocalFree = _kernel32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'LocalFree',
+    );
 
 /// Locks the specified file for exclusive access by the calling process.
 ///
@@ -3994,15 +5483,22 @@ Win32Result<bool> LockFile(
   int nNumberOfBytesToLockLow,
   int nNumberOfBytesToLockHigh,
 ) {
-  final result_ = LockFile_Wrapper(
+  resolveGetLastError();
+  final result_ = _LockFile(
     hFile,
     dwFileOffsetLow,
     dwFileOffsetHigh,
     nNumberOfBytesToLockLow,
     nNumberOfBytesToLockHigh,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _LockFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Uint32, Uint32),
+      int Function(Pointer, int, int, int, int)
+    >('LockFile');
 
 /// Locks the specified file for exclusive access by the calling process.
 ///
@@ -4020,7 +5516,8 @@ Win32Result<bool> LockFileEx(
   int nNumberOfBytesToLockHigh,
   Pointer<OVERLAPPED> lpOverlapped,
 ) {
-  final result_ = LockFileEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _LockFileEx(
     hFile,
     dwFlags,
     NULL,
@@ -4028,8 +5525,21 @@ Win32Result<bool> LockFileEx(
     nNumberOfBytesToLockHigh,
     lpOverlapped,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _LockFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(Pointer, int, int, int, int, Pointer<OVERLAPPED>)
+    >('LockFileEx');
 
 /// Retrieves a pointer to the specified resource in memory.
 ///
@@ -4040,8 +5550,10 @@ Win32Result<bool> LockFileEx(
 @pragma('vm:prefer-inline')
 Pointer LockResource(HGLOBAL hResData) => _LockResource(hResData);
 
-@Native<Pointer Function(Pointer)>(symbol: 'LockResource')
-external Pointer _LockResource(Pointer hResData);
+final _LockResource = _kernel32
+    .lookupFunction<Pointer Function(Pointer), Pointer Function(Pointer)>(
+      'LockResource',
+    );
 
 /// Moves an existing file or a directory, including its children.
 ///
@@ -4050,9 +5562,16 @@ external Pointer _LockResource(Pointer hResData);
 ///
 /// {@category kernel32}
 Win32Result<bool> MoveFile(PCWSTR lpExistingFileName, PCWSTR lpNewFileName) {
-  final result_ = MoveFileW_Wrapper(lpExistingFileName, lpNewFileName);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _MoveFile(lpExistingFileName, lpNewFileName);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _MoveFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('MoveFileW');
 
 /// Moves an existing file or directory, including its children, with various
 /// move options.
@@ -4066,13 +5585,20 @@ Win32Result<bool> MoveFileEx(
   PCWSTR? lpNewFileName,
   MOVE_FILE_FLAGS dwFlags,
 ) {
-  final result_ = MoveFileExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _MoveFileEx(
     lpExistingFileName,
     lpNewFileName ?? nullptr,
     dwFlags,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _MoveFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('MoveFileExW');
 
 /// Opens an existing named event object.
 ///
@@ -4085,13 +5611,20 @@ Win32Result<HANDLE> OpenEvent(
   bool bInheritHandle,
   PCWSTR lpName,
 ) {
-  final result_ = OpenEventW_Wrapper(
+  resolveGetLastError();
+  final result_ = _OpenEvent(
     dwDesiredAccess,
     bInheritHandle ? TRUE : FALSE,
     lpName,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _OpenEvent = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, Int32, Pointer<Utf16>),
+      Pointer Function(int, int, Pointer<Utf16>)
+    >('OpenEventW');
 
 /// Opens an existing job object.
 ///
@@ -4104,13 +5637,20 @@ Win32Result<HANDLE> OpenJobObject(
   bool bInheritHandle,
   PCWSTR lpName,
 ) {
-  final result_ = OpenJobObjectW_Wrapper(
+  resolveGetLastError();
+  final result_ = _OpenJobObject(
     dwDesiredAccess,
     bInheritHandle ? TRUE : FALSE,
     lpName,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _OpenJobObject = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, Int32, Pointer<Utf16>),
+      Pointer Function(int, int, Pointer<Utf16>)
+    >('OpenJobObjectW');
 
 /// Opens an existing local process object.
 ///
@@ -4123,13 +5663,20 @@ Win32Result<HANDLE> OpenProcess(
   bool bInheritHandle,
   int dwProcessId,
 ) {
-  final result_ = OpenProcess_Wrapper(
+  resolveGetLastError();
+  final result_ = _OpenProcess(
     dwDesiredAccess,
     bInheritHandle ? TRUE : FALSE,
     dwProcessId,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _OpenProcess = _kernel32
+    .lookupFunction<
+      Pointer Function(Uint32, Int32, Uint32),
+      Pointer Function(int, int, int)
+    >('OpenProcess');
 
 /// Sends a string to the debugger for display.
 ///
@@ -4141,8 +5688,11 @@ Win32Result<HANDLE> OpenProcess(
 void OutputDebugString(PCWSTR? lpOutputString) =>
     _OutputDebugString(lpOutputString ?? nullptr);
 
-@Native<Void Function(Pointer<Utf16>)>(symbol: 'OutputDebugStringW')
-external void _OutputDebugString(Pointer<Utf16> lpOutputString);
+final _OutputDebugString = _kernel32
+    .lookupFunction<
+      Void Function(Pointer<Utf16>),
+      void Function(Pointer<Utf16>)
+    >('OutputDebugStringW');
 
 /// Gets the package family name for the specified package full name.
 ///
@@ -4163,14 +5713,11 @@ WIN32_ERROR PackageFamilyNameFromFullName(
   ),
 );
 
-@Native<Uint32 Function(Pointer<Utf16>, Pointer<Uint32>, Pointer<Utf16>)>(
-  symbol: 'PackageFamilyNameFromFullName',
-)
-external int _PackageFamilyNameFromFullName(
-  Pointer<Utf16> packageFullName,
-  Pointer<Uint32> packageFamilyNameLength,
-  Pointer<Utf16> packageFamilyName,
-);
+final _PackageFamilyNameFromFullName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Uint32>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>, Pointer<Utf16>)
+    >('PackageFamilyNameFromFullName');
 
 /// Reads data from the specified console input buffer without removing it from
 /// the buffer.
@@ -4185,14 +5732,21 @@ Win32Result<bool> PeekConsoleInput(
   int nLength,
   Pointer<Uint32> lpNumberOfEventsRead,
 ) {
-  final result_ = PeekConsoleInputW_Wrapper(
+  resolveGetLastError();
+  final result_ = _PeekConsoleInput(
     hConsoleInput,
     lpBuffer,
     nLength,
     lpNumberOfEventsRead,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _PeekConsoleInput = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<INPUT_RECORD>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, Pointer<INPUT_RECORD>, int, Pointer<Uint32>)
+    >('PeekConsoleInputW');
 
 /// Copies data from a named or anonymous pipe into a buffer without removing it
 /// from the pipe.
@@ -4209,7 +5763,8 @@ Win32Result<bool> PeekNamedPipe(
   Pointer<Uint32>? lpTotalBytesAvail,
   Pointer<Uint32>? lpBytesLeftThisMessage,
 ) {
-  final result_ = PeekNamedPipe_Wrapper(
+  resolveGetLastError();
+  final result_ = _PeekNamedPipe(
     hNamedPipe,
     lpBuffer ?? nullptr,
     nBufferSize,
@@ -4217,8 +5772,28 @@ Win32Result<bool> PeekNamedPipe(
     lpTotalBytesAvail ?? nullptr,
     lpBytesLeftThisMessage ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _PeekNamedPipe = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('PeekNamedPipe');
 
 /// Posts an I/O completion packet to an I/O completion port.
 ///
@@ -4232,14 +5807,21 @@ Win32Result<bool> PostQueuedCompletionStatus(
   int dwCompletionKey,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = PostQueuedCompletionStatus_Wrapper(
+  resolveGetLastError();
+  final result_ = _PostQueuedCompletionStatus(
     completionPort,
     dwNumberOfBytesTransferred,
     dwCompletionKey,
     lpOverlapped ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _PostQueuedCompletionStatus = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, IntPtr, Pointer<OVERLAPPED>),
+      int Function(Pointer, int, int, Pointer<OVERLAPPED>)
+    >('PostQueuedCompletionStatus');
 
 /// Retrieves the Remote Desktop Services session associated with a specified
 /// process.
@@ -4252,9 +5834,16 @@ Win32Result<bool> ProcessIdToSessionId(
   int dwProcessId,
   Pointer<Uint32> pSessionId,
 ) {
-  final result_ = ProcessIdToSessionId_Wrapper(dwProcessId, pSessionId);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ProcessIdToSessionId(dwProcessId, pSessionId);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ProcessIdToSessionId = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>),
+      int Function(int, Pointer<Uint32>)
+    >('ProcessIdToSessionId');
 
 /// Discards all characters from the output or input buffer of a specified
 /// communications resource.
@@ -4266,9 +5855,16 @@ Win32Result<bool> ProcessIdToSessionId(
 ///
 /// {@category kernel32}
 Win32Result<bool> PurgeComm(HANDLE hFile, PURGE_COMM_FLAGS dwFlags) {
-  final result_ = PurgeComm_Wrapper(hFile, dwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _PurgeComm(hFile, dwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _PurgeComm = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('PurgeComm');
 
 /// Retrieves information about MS-DOS device names.
 ///
@@ -4281,13 +5877,20 @@ Win32Result<int> QueryDosDevice(
   PWSTR? lpTargetPath,
   int ucchMax,
 ) {
-  final result_ = QueryDosDeviceW_Wrapper(
+  resolveGetLastError();
+  final result_ = _QueryDosDevice(
     lpDeviceName ?? nullptr,
     lpTargetPath ?? nullptr,
     ucchMax,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _QueryDosDevice = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int)
+    >('QueryDosDeviceW');
 
 /// Retrieves the full name of the executable image for the specified process.
 ///
@@ -4301,14 +5904,21 @@ Win32Result<bool> QueryFullProcessImageName(
   PWSTR lpExeName,
   Pointer<Uint32> lpdwSize,
 ) {
-  final result_ = QueryFullProcessImageNameW_Wrapper(
+  resolveGetLastError();
+  final result_ = _QueryFullProcessImageName(
     hProcess,
     dwFlags,
     lpExeName,
     lpdwSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _QueryFullProcessImageName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Utf16>, Pointer<Uint32>)
+    >('QueryFullProcessImageNameW');
 
 /// Retrieves limit and job state information from the job object.
 ///
@@ -4323,15 +5933,22 @@ Win32Result<bool> QueryInformationJobObject(
   int cbJobObjectInformationLength,
   Pointer<Uint32>? lpReturnLength,
 ) {
-  final result_ = QueryInformationJobObject_Wrapper(
+  resolveGetLastError();
+  final result_ = _QueryInformationJobObject(
     hJob ?? nullptr,
     jobObjectInformationClass,
     lpJobObjectInformation,
     cbJobObjectInformationLength,
     lpReturnLength ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _QueryInformationJobObject = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer, int, Pointer<Uint32>)
+    >('QueryInformationJobObject');
 
 /// Gets information about the control of the I/O rate for a job object.
 ///
@@ -4345,14 +5962,31 @@ Win32Result<int> QueryIoRateControlInformationJobObject(
   Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>> infoBlocks,
   Pointer<Uint32> infoBlockCount,
 ) {
-  final result_ = QueryIoRateControlInformationJobObject_Wrapper(
+  resolveGetLastError();
+  final result_ = _QueryIoRateControlInformationJobObject(
     hJob ?? nullptr,
     volumeName ?? nullptr,
     infoBlocks,
     infoBlockCount,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _QueryIoRateControlInformationJobObject = _kernel32
+    .lookupFunction<
+      Uint32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>>,
+        Pointer<Uint32>,
+      )
+    >('QueryIoRateControlInformationJobObject');
 
 /// Retrieves the current value of the performance counter, which is a high
 /// resolution (&lt;1us) time stamp that can be used for time-interval
@@ -4363,9 +5997,16 @@ Win32Result<int> QueryIoRateControlInformationJobObject(
 ///
 /// {@category kernel32}
 Win32Result<bool> QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) {
-  final result_ = QueryPerformanceCounter_Wrapper(lpPerformanceCount);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _QueryPerformanceCounter(lpPerformanceCount);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _QueryPerformanceCounter = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Int64>),
+      int Function(Pointer<Int64>)
+    >('QueryPerformanceCounter');
 
 /// Retrieves the frequency of the performance counter.
 ///
@@ -4374,9 +6015,16 @@ Win32Result<bool> QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) {
 ///
 /// {@category kernel32}
 Win32Result<bool> QueryPerformanceFrequency(Pointer<Int64> lpFrequency) {
-  final result_ = QueryPerformanceFrequency_Wrapper(lpFrequency);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _QueryPerformanceFrequency(lpFrequency);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _QueryPerformanceFrequency = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Int64>),
+      int Function(Pointer<Int64>)
+    >('QueryPerformanceFrequency');
 
 /// Reads character input from the console input buffer and removes it from the
 /// buffer.
@@ -4392,15 +6040,34 @@ Win32Result<bool> ReadConsole(
   Pointer<Uint32> lpNumberOfCharsRead,
   Pointer<CONSOLE_READCONSOLE_CONTROL>? pInputControl,
 ) {
-  final result_ = ReadConsoleW_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadConsole(
     hConsoleInput,
     lpBuffer,
     nNumberOfCharsToRead,
     lpNumberOfCharsRead,
     pInputControl ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadConsole = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<CONSOLE_READCONSOLE_CONTROL>,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<CONSOLE_READCONSOLE_CONTROL>,
+      )
+    >('ReadConsoleW');
 
 /// Reads data from a console input buffer and removes it from the buffer.
 ///
@@ -4414,14 +6081,21 @@ Win32Result<bool> ReadConsoleInput(
   int nLength,
   Pointer<Uint32> lpNumberOfEventsRead,
 ) {
-  final result_ = ReadConsoleInputW_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadConsoleInput(
     hConsoleInput,
     lpBuffer,
     nLength,
     lpNumberOfEventsRead,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadConsoleInput = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<INPUT_RECORD>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, Pointer<INPUT_RECORD>, int, Pointer<Uint32>)
+    >('ReadConsoleInputW');
 
 /// Reads data from the specified file or input/output (I/O) device.
 ///
@@ -4439,15 +6113,34 @@ Win32Result<bool> ReadFile(
   Pointer<Uint32>? lpNumberOfBytesRead,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = ReadFile_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadFile(
     hFile,
     lpBuffer ?? nullptr,
     nNumberOfBytesToRead,
     lpNumberOfBytesRead ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadFile = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint8>,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('ReadFile');
 
 /// Reads data from the specified file or input/output (I/O) device.
 ///
@@ -4466,15 +6159,34 @@ Win32Result<bool> ReadFileEx(
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>> lpCompletionRoutine,
 ) {
-  final result_ = ReadFileEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadFileEx(
     hFile,
     lpBuffer ?? nullptr,
     nNumberOfBytesToRead,
     lpOverlapped,
     lpCompletionRoutine,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<OVERLAPPED>,
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint8>,
+        int,
+        Pointer<OVERLAPPED>,
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>,
+      )
+    >('ReadFileEx');
 
 /// Reads data from a file and stores it in an array of buffers.
 ///
@@ -4488,15 +6200,34 @@ Win32Result<bool> ReadFileScatter(
   int nNumberOfBytesToRead,
   Pointer<OVERLAPPED> lpOverlapped,
 ) {
-  final result_ = ReadFileScatter_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadFileScatter(
     hFile,
     aSegmentArray,
     nNumberOfBytesToRead,
     nullptr,
     lpOverlapped,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadFileScatter = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<FILE_SEGMENT_ELEMENT>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<FILE_SEGMENT_ELEMENT>,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('ReadFileScatter');
 
 /// Reads data from an area of memory in a specified process.
 ///
@@ -4513,15 +6244,22 @@ Win32Result<bool> ReadProcessMemory(
   int nSize,
   Pointer<IntPtr>? lpNumberOfBytesRead,
 ) {
-  final result_ = ReadProcessMemory_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReadProcessMemory(
     hProcess,
     lpBaseAddress,
     lpBuffer,
     nSize,
     lpNumberOfBytesRead ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ReadProcessMemory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer, IntPtr, Pointer<IntPtr>),
+      int Function(Pointer, Pointer, Pointer, int, Pointer<IntPtr>)
+    >('ReadProcessMemory');
 
 /// Decrements the reference count of the specified activation context.
 ///
@@ -4532,8 +6270,10 @@ Win32Result<bool> ReadProcessMemory(
 @pragma('vm:prefer-inline')
 void ReleaseActCtx(HANDLE hActCtx) => _ReleaseActCtx(hActCtx);
 
-@Native<Void Function(Pointer)>(symbol: 'ReleaseActCtx')
-external void _ReleaseActCtx(Pointer hActCtx);
+final _ReleaseActCtx = _kernel32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'ReleaseActCtx',
+    );
 
 /// Deletes an existing empty directory.
 ///
@@ -4542,9 +6282,16 @@ external void _ReleaseActCtx(Pointer hActCtx);
 ///
 /// {@category kernel32}
 Win32Result<bool> RemoveDirectory(PCWSTR lpPathName) {
-  final result_ = RemoveDirectoryW_Wrapper(lpPathName);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _RemoveDirectory(lpPathName);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _RemoveDirectory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('RemoveDirectoryW');
 
 /// Removes a directory that was added to the process DLL search path by using
 /// AddDllDirectory.
@@ -4554,9 +6301,15 @@ Win32Result<bool> RemoveDirectory(PCWSTR lpPathName) {
 ///
 /// {@category kernel32}
 Win32Result<bool> RemoveDllDirectory(Pointer cookie) {
-  final result_ = RemoveDllDirectory_Wrapper(cookie);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _RemoveDllDirectory(cookie);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _RemoveDllDirectory = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'RemoveDllDirectory',
+    );
 
 /// Reopens the specified file system object with different access rights,
 /// sharing mode, and flags.
@@ -4571,14 +6324,21 @@ Win32Result<HANDLE> ReOpenFile(
   FILE_SHARE_MODE dwShareMode,
   FILE_FLAGS_AND_ATTRIBUTES dwFlagsAndAttributes,
 ) {
-  final result_ = ReOpenFile_Wrapper(
+  resolveGetLastError();
+  final result_ = _ReOpenFile(
     hOriginalFile,
     dwDesiredAccess,
     dwShareMode,
     dwFlagsAndAttributes,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _ReOpenFile = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Uint32, Uint32, Uint32),
+      Pointer Function(Pointer, int, int, int)
+    >('ReOpenFile');
 
 /// Sets the specified event object to the nonsignaled state.
 ///
@@ -4587,9 +6347,15 @@ Win32Result<HANDLE> ReOpenFile(
 ///
 /// {@category kernel32}
 Win32Result<bool> ResetEvent(HANDLE hEvent) {
-  final result_ = ResetEvent_Wrapper(hEvent);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ResetEvent(hEvent);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ResetEvent = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'ResetEvent',
+    );
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
@@ -4605,8 +6371,10 @@ void ResizePseudoConsole(HPCON hPC, COORD size) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(IntPtr, COORD)>(symbol: 'ResizePseudoConsole')
-external int _ResizePseudoConsole(int hPC, COORD size);
+final _ResizePseudoConsole = _kernel32
+    .lookupFunction<Int32 Function(IntPtr, COORD), int Function(int, COORD)>(
+      'ResizePseudoConsole',
+    );
 
 /// Moves a block of data in a screen buffer.
 ///
@@ -4621,15 +6389,34 @@ Win32Result<bool> ScrollConsoleScreenBuffer(
   COORD dwDestinationOrigin,
   Pointer<CHAR_INFO> lpFill,
 ) {
-  final result_ = ScrollConsoleScreenBufferW_Wrapper(
+  resolveGetLastError();
+  final result_ = _ScrollConsoleScreenBuffer(
     hConsoleOutput,
     lpScrollRectangle,
     lpClipRectangle ?? nullptr,
     dwDestinationOrigin,
     lpFill,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ScrollConsoleScreenBuffer = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<SMALL_RECT>,
+        Pointer<SMALL_RECT>,
+        COORD,
+        Pointer<CHAR_INFO>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<SMALL_RECT>,
+        Pointer<SMALL_RECT>,
+        COORD,
+        Pointer<CHAR_INFO>,
+      )
+    >('ScrollConsoleScreenBufferW');
 
 /// Suspends character transmission for a specified communications device and
 /// places the transmission line in a break state until the ClearCommBreak
@@ -4640,9 +6427,15 @@ Win32Result<bool> ScrollConsoleScreenBuffer(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetCommBreak(HANDLE hFile) {
-  final result_ = SetCommBreak_Wrapper(hFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetCommBreak(hFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetCommBreak = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SetCommBreak',
+    );
 
 /// Sets the current configuration of a communications device.
 ///
@@ -4655,9 +6448,16 @@ Win32Result<bool> SetCommConfig(
   Pointer<COMMCONFIG> lpCC,
   int dwSize,
 ) {
-  final result_ = SetCommConfig_Wrapper(hCommDev, lpCC, dwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetCommConfig(hCommDev, lpCC, dwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetCommConfig = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<COMMCONFIG>, Uint32),
+      int Function(Pointer, Pointer<COMMCONFIG>, int)
+    >('SetCommConfig');
 
 /// Specifies a set of events to be monitored for a communications device.
 ///
@@ -4666,9 +6466,16 @@ Win32Result<bool> SetCommConfig(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetCommMask(HANDLE hFile, COMM_EVENT_MASK dwEvtMask) {
-  final result_ = SetCommMask_Wrapper(hFile, dwEvtMask);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetCommMask(hFile, dwEvtMask);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetCommMask = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetCommMask');
 
 /// Configures a communications device according to the specifications in a
 /// device-control block (a DCB structure).
@@ -4681,9 +6488,16 @@ Win32Result<bool> SetCommMask(HANDLE hFile, COMM_EVENT_MASK dwEvtMask) {
 ///
 /// {@category kernel32}
 Win32Result<bool> SetCommState(HANDLE hFile, Pointer<DCB> lpDCB) {
-  final result_ = SetCommState_Wrapper(hFile, lpDCB);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetCommState(hFile, lpDCB);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetCommState = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<DCB>),
+      int Function(Pointer, Pointer<DCB>)
+    >('SetCommState');
 
 /// Sets the time-out parameters for all read and write operations on a
 /// specified communications device.
@@ -4696,9 +6510,16 @@ Win32Result<bool> SetCommTimeouts(
   HANDLE hFile,
   Pointer<COMMTIMEOUTS> lpCommTimeouts,
 ) {
-  final result_ = SetCommTimeouts_Wrapper(hFile, lpCommTimeouts);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetCommTimeouts(hFile, lpCommTimeouts);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetCommTimeouts = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<COMMTIMEOUTS>),
+      int Function(Pointer, Pointer<COMMTIMEOUTS>)
+    >('SetCommTimeouts');
 
 /// Adds or removes an application-defined HandlerRoutine function from the list
 /// of handler functions for the calling process.
@@ -4711,12 +6532,19 @@ Win32Result<bool> SetConsoleCtrlHandler(
   Pointer<NativeFunction<PHANDLER_ROUTINE>>? handlerRoutine,
   bool add,
 ) {
-  final result_ = SetConsoleCtrlHandler_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetConsoleCtrlHandler(
     handlerRoutine ?? nullptr,
     add ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleCtrlHandler = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<NativeFunction<PHANDLER_ROUTINE>>, Int32),
+      int Function(Pointer<NativeFunction<PHANDLER_ROUTINE>>, int)
+    >('SetConsoleCtrlHandler');
 
 /// Sets the size and visibility of the cursor for the specified console screen
 /// buffer.
@@ -4729,12 +6557,16 @@ Win32Result<bool> SetConsoleCursorInfo(
   HANDLE hConsoleOutput,
   Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo,
 ) {
-  final result_ = SetConsoleCursorInfo_Wrapper(
-    hConsoleOutput,
-    lpConsoleCursorInfo,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleCursorInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<CONSOLE_CURSOR_INFO>),
+      int Function(Pointer, Pointer<CONSOLE_CURSOR_INFO>)
+    >('SetConsoleCursorInfo');
 
 /// Sets the cursor position in the specified console screen buffer.
 ///
@@ -4746,12 +6578,16 @@ Win32Result<bool> SetConsoleCursorPosition(
   HANDLE hConsoleOutput,
   COORD dwCursorPosition,
 ) {
-  final result_ = SetConsoleCursorPosition_Wrapper(
-    hConsoleOutput,
-    dwCursorPosition,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleCursorPosition = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, COORD),
+      int Function(Pointer, COORD)
+    >('SetConsoleCursorPosition');
 
 /// Sets the display mode of the specified console screen buffer.
 ///
@@ -4764,13 +6600,20 @@ Win32Result<bool> SetConsoleDisplayMode(
   int dwFlags,
   Pointer<COORD>? lpNewScreenBufferDimensions,
 ) {
-  final result_ = SetConsoleDisplayMode_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetConsoleDisplayMode(
     hConsoleOutput,
     dwFlags,
     lpNewScreenBufferDimensions ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleDisplayMode = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer<COORD>),
+      int Function(Pointer, int, Pointer<COORD>)
+    >('SetConsoleDisplayMode');
 
 /// Sets the input mode of a console's input buffer or the output mode of a
 /// console screen buffer.
@@ -4780,9 +6623,16 @@ Win32Result<bool> SetConsoleDisplayMode(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetConsoleMode(HANDLE hConsoleHandle, CONSOLE_MODE dwMode) {
-  final result_ = SetConsoleMode_Wrapper(hConsoleHandle, dwMode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetConsoleMode(hConsoleHandle, dwMode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleMode = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('SetConsoleMode');
 
 /// Sets the attributes of characters written to the console screen buffer by
 /// the WriteFile or WriteConsole function, or echoed by the ReadFile or
@@ -4796,9 +6646,16 @@ Win32Result<bool> SetConsoleTextAttribute(
   HANDLE hConsoleOutput,
   CONSOLE_CHARACTER_ATTRIBUTES wAttributes,
 ) {
-  final result_ = SetConsoleTextAttribute_Wrapper(hConsoleOutput, wAttributes);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleTextAttribute = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint16),
+      int Function(Pointer, int)
+    >('SetConsoleTextAttribute');
 
 /// Sets the current size and position of a console screen buffer's window.
 ///
@@ -4811,13 +6668,20 @@ Win32Result<bool> SetConsoleWindowInfo(
   bool bAbsolute,
   Pointer<SMALL_RECT> lpConsoleWindow,
 ) {
-  final result_ = SetConsoleWindowInfo_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetConsoleWindowInfo(
     hConsoleOutput,
     bAbsolute ? TRUE : FALSE,
     lpConsoleWindow,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetConsoleWindowInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer<SMALL_RECT>),
+      int Function(Pointer, int, Pointer<SMALL_RECT>)
+    >('SetConsoleWindowInfo');
 
 /// Changes the current directory for the current process.
 ///
@@ -4829,8 +6693,11 @@ Win32Result<bool> SetConsoleWindowInfo(
 bool SetCurrentDirectory(PCWSTR lpPathName) =>
     _SetCurrentDirectory(lpPathName) != FALSE;
 
-@Native<Int32 Function(Pointer<Utf16>)>(symbol: 'SetCurrentDirectoryW')
-external int _SetCurrentDirectory(Pointer<Utf16> lpPathName);
+final _SetCurrentDirectory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('SetCurrentDirectoryW');
 
 /// Sets the default configuration for a communications device.
 ///
@@ -4843,9 +6710,16 @@ Win32Result<bool> SetDefaultCommConfig(
   Pointer<COMMCONFIG> lpCC,
   int dwSize,
 ) {
-  final result_ = SetDefaultCommConfigW_Wrapper(lpszName, lpCC, dwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetDefaultCommConfig(lpszName, lpCC, dwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetDefaultCommConfig = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<COMMCONFIG>, Uint32),
+      int Function(Pointer<Utf16>, Pointer<COMMCONFIG>, int)
+    >('SetDefaultCommConfigW');
 
 /// Specifies a default set of directories to search when the calling process
 /// loads a DLL.
@@ -4858,9 +6732,15 @@ Win32Result<bool> SetDefaultCommConfig(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetDefaultDllDirectories(LOAD_LIBRARY_FLAGS directoryFlags) {
-  final result_ = SetDefaultDllDirectories_Wrapper(directoryFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetDefaultDllDirectories(directoryFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetDefaultDllDirectories = _kernel32
+    .lookupFunction<Int32 Function(Uint32), int Function(int)>(
+      'SetDefaultDllDirectories',
+    );
 
 /// Sets the physical file size for the specified file to the current position
 /// of the file pointer.
@@ -4870,9 +6750,15 @@ Win32Result<bool> SetDefaultDllDirectories(LOAD_LIBRARY_FLAGS directoryFlags) {
 ///
 /// {@category kernel32}
 Win32Result<bool> SetEndOfFile(HANDLE hFile) {
-  final result_ = SetEndOfFile_Wrapper(hFile);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetEndOfFile(hFile);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetEndOfFile = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'SetEndOfFile',
+    );
 
 /// Sets the contents of the specified environment variable for the current
 /// process.
@@ -4882,9 +6768,16 @@ Win32Result<bool> SetEndOfFile(HANDLE hFile) {
 ///
 /// {@category kernel32}
 Win32Result<bool> SetEnvironmentVariable(PCWSTR lpName, PCWSTR? lpValue) {
-  final result_ = SetEnvironmentVariableW_Wrapper(lpName, lpValue ?? nullptr);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetEnvironmentVariable(lpName, lpValue ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetEnvironmentVariable = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('SetEnvironmentVariableW');
 
 /// Controls whether the system will handle the specified types of serious
 /// errors or whether the process will handle them.
@@ -4897,8 +6790,8 @@ Win32Result<bool> SetEnvironmentVariable(PCWSTR lpName, PCWSTR? lpValue) {
 THREAD_ERROR_MODE SetErrorMode(THREAD_ERROR_MODE uMode) =>
     .new(_SetErrorMode(uMode));
 
-@Native<Uint32 Function(Uint32)>(symbol: 'SetErrorMode')
-external int _SetErrorMode(int uMode);
+final _SetErrorMode = _kernel32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>('SetErrorMode');
 
 /// Sets the specified event object to the signaled state.
 ///
@@ -4907,9 +6800,13 @@ external int _SetErrorMode(int uMode);
 ///
 /// {@category kernel32}
 Win32Result<bool> SetEvent(HANDLE hEvent) {
-  final result_ = SetEvent_Wrapper(hEvent);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetEvent(hEvent);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetEvent = _kernel32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>('SetEvent');
 
 /// Causes the file I/O functions to use the ANSI character set code page for
 /// the current process.
@@ -4921,8 +6818,8 @@ Win32Result<bool> SetEvent(HANDLE hEvent) {
 @pragma('vm:prefer-inline')
 void SetFileApisToANSI() => _SetFileApisToANSI();
 
-@Native<Void Function()>(symbol: 'SetFileApisToANSI')
-external void _SetFileApisToANSI();
+final _SetFileApisToANSI = _kernel32
+    .lookupFunction<Void Function(), void Function()>('SetFileApisToANSI');
 
 /// Causes the file I/O functions for the process to use the OEM character set
 /// code page.
@@ -4934,8 +6831,8 @@ external void _SetFileApisToANSI();
 @pragma('vm:prefer-inline')
 void SetFileApisToOEM() => _SetFileApisToOEM();
 
-@Native<Void Function()>(symbol: 'SetFileApisToOEM')
-external void _SetFileApisToOEM();
+final _SetFileApisToOEM = _kernel32
+    .lookupFunction<Void Function(), void Function()>('SetFileApisToOEM');
 
 /// Sets the attributes for a file or directory.
 ///
@@ -4947,9 +6844,16 @@ Win32Result<bool> SetFileAttributes(
   PCWSTR lpFileName,
   FILE_FLAGS_AND_ATTRIBUTES dwFileAttributes,
 ) {
-  final result_ = SetFileAttributesW_Wrapper(lpFileName, dwFileAttributes);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetFileAttributes(lpFileName, dwFileAttributes);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileAttributes = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Uint32),
+      int Function(Pointer<Utf16>, int)
+    >('SetFileAttributesW');
 
 /// Sets the file information for the specified file.
 ///
@@ -4963,14 +6867,21 @@ Win32Result<bool> SetFileInformationByHandle(
   Pointer lpFileInformation,
   int dwBufferSize,
 ) {
-  final result_ = SetFileInformationByHandle_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFileInformationByHandle(
     hFile,
     fileInformationClass,
     lpFileInformation,
     dwBufferSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileInformationByHandle = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('SetFileInformationByHandle');
 
 /// Associates a virtual address range with the specified file handle.
 ///
@@ -4983,13 +6894,20 @@ Win32Result<bool> SetFileIoOverlappedRange(
   Pointer<Uint8> overlappedRangeStart,
   int length,
 ) {
-  final result_ = SetFileIoOverlappedRange_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFileIoOverlappedRange(
     fileHandle,
     overlappedRangeStart,
     length,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileIoOverlappedRange = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint8>, Uint32),
+      int Function(Pointer, Pointer<Uint8>, int)
+    >('SetFileIoOverlappedRange');
 
 /// Moves the file pointer of the specified file.
 ///
@@ -5003,14 +6921,21 @@ Win32Result<int> SetFilePointer(
   Pointer<Int32>? lpDistanceToMoveHigh,
   SET_FILE_POINTER_MOVE_METHOD dwMoveMethod,
 ) {
-  final result_ = SetFilePointer_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFilePointer(
     hFile,
     lDistanceToMove,
     lpDistanceToMoveHigh ?? nullptr,
     dwMoveMethod,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetFilePointer = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Int32>, Uint32),
+      int Function(Pointer, int, Pointer<Int32>, int)
+    >('SetFilePointer');
 
 /// Moves the file pointer of the specified file.
 ///
@@ -5024,14 +6949,21 @@ Win32Result<bool> SetFilePointerEx(
   Pointer<Int64>? lpNewFilePointer,
   SET_FILE_POINTER_MOVE_METHOD dwMoveMethod,
 ) {
-  final result_ = SetFilePointerEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFilePointerEx(
     hFile,
     liDistanceToMove,
     lpNewFilePointer ?? nullptr,
     dwMoveMethod,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFilePointerEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int64, Pointer<Int64>, Uint32),
+      int Function(Pointer, int, Pointer<Int64>, int)
+    >('SetFilePointerEx');
 
 /// Sets the short name for the specified file.
 ///
@@ -5040,9 +6972,16 @@ Win32Result<bool> SetFilePointerEx(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetFileShortName(HANDLE hFile, PCWSTR lpShortName) {
-  final result_ = SetFileShortNameW_Wrapper(hFile, lpShortName);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetFileShortName(hFile, lpShortName);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileShortName = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>),
+      int Function(Pointer, Pointer<Utf16>)
+    >('SetFileShortNameW');
 
 /// Sets the date and time that the specified file or directory was created,
 /// last accessed, or last modified.
@@ -5057,14 +6996,31 @@ Win32Result<bool> SetFileTime(
   Pointer<FILETIME>? lpLastAccessTime,
   Pointer<FILETIME>? lpLastWriteTime,
 ) {
-  final result_ = SetFileTime_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFileTime(
     hFile,
     lpCreationTime ?? nullptr,
     lpLastAccessTime ?? nullptr,
     lpLastWriteTime ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileTime = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+        Pointer<FILETIME>,
+      )
+    >('SetFileTime');
 
 /// Sets the valid data length of the specified file.
 ///
@@ -5075,9 +7031,15 @@ Win32Result<bool> SetFileTime(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetFileValidData(HANDLE hFile, int validDataLength) {
-  final result_ = SetFileValidData_Wrapper(hFile, validDataLength);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetFileValidData(hFile, validDataLength);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFileValidData = _kernel32
+    .lookupFunction<Int32 Function(Pointer, Int64), int Function(Pointer, int)>(
+      'SetFileValidData',
+    );
 
 /// Sets the value of the specified firmware environment variable.
 ///
@@ -5091,14 +7053,21 @@ Win32Result<bool> SetFirmwareEnvironmentVariable(
   Pointer? pValue,
   int nSize,
 ) {
-  final result_ = SetFirmwareEnvironmentVariableW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFirmwareEnvironmentVariable(
     lpName,
     lpGuid,
     pValue ?? nullptr,
     nSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFirmwareEnvironmentVariable = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Pointer, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, Pointer, int)
+    >('SetFirmwareEnvironmentVariableW');
 
 /// Sets the value of the specified firmware environment variable and the
 /// attributes that indicate how this variable is stored and maintained.
@@ -5114,15 +7083,22 @@ Win32Result<bool> SetFirmwareEnvironmentVariableEx(
   int nSize,
   int dwAttributes,
 ) {
-  final result_ = SetFirmwareEnvironmentVariableExW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetFirmwareEnvironmentVariableEx(
     lpName,
     lpGuid,
     pValue ?? nullptr,
     nSize,
     dwAttributes,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetFirmwareEnvironmentVariableEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Pointer, Uint32, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, Pointer, int, int)
+    >('SetFirmwareEnvironmentVariableExW');
 
 /// Sets certain properties of an object handle.
 ///
@@ -5135,9 +7111,16 @@ Win32Result<bool> SetHandleInformation(
   int dwMask,
   HANDLE_FLAGS dwFlags,
 ) {
-  final result_ = SetHandleInformation_Wrapper(hObject, dwMask, dwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetHandleInformation(hObject, dwMask, dwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetHandleInformation = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetHandleInformation');
 
 /// Sets limits for a job object.
 ///
@@ -5151,14 +7134,21 @@ Win32Result<bool> SetInformationJobObject(
   Pointer lpJobObjectInformation,
   int cbJobObjectInformationLength,
 ) {
-  final result_ = SetInformationJobObject_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetInformationJobObject(
     hJob,
     jobObjectInformationClass,
     lpJobObjectInformation,
     cbJobObjectInformationLength,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetInformationJobObject = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('SetInformationJobObject');
 
 /// Sets I/O limits on a job object.
 ///
@@ -5170,12 +7160,19 @@ Win32Result<int> SetIoRateControlInformationJobObject(
   HANDLE hJob,
   Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION> ioRateControlInfo,
 ) {
-  final result_ = SetIoRateControlInformationJobObject_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetIoRateControlInformationJobObject(
     hJob,
     ioRateControlInfo,
   );
-  return .new(value: result_.value.u32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetIoRateControlInformationJobObject = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>),
+      int Function(Pointer, Pointer<JOBOBJECT_IO_RATE_CONTROL_INFORMATION>)
+    >('SetIoRateControlInformationJobObject');
 
 /// Sets the last-error code for the calling thread.
 ///
@@ -5186,8 +7183,8 @@ Win32Result<int> SetIoRateControlInformationJobObject(
 @pragma('vm:prefer-inline')
 void SetLastError(WIN32_ERROR dwErrCode) => _SetLastError(dwErrCode);
 
-@Native<Void Function(Uint32)>(symbol: 'SetLastError')
-external void _SetLastError(int dwErrCode);
+final _SetLastError = _kernel32
+    .lookupFunction<Void Function(Uint32), void Function(int)>('SetLastError');
 
 /// Sets the read mode and the blocking mode of the specified named pipe.
 ///
@@ -5205,14 +7202,26 @@ Win32Result<bool> SetNamedPipeHandleState(
   Pointer<Uint32>? lpMaxCollectionCount,
   Pointer<Uint32>? lpCollectDataTimeout,
 ) {
-  final result_ = SetNamedPipeHandleState_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetNamedPipeHandleState(
     hNamedPipe,
     lpMode ?? nullptr,
     lpMaxCollectionCount ?? nullptr,
     lpCollectDataTimeout ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetNamedPipeHandleState = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(Pointer, Pointer<Uint32>, Pointer<Uint32>, Pointer<Uint32>)
+    >('SetNamedPipeHandleState');
 
 /// Sets a processor affinity mask for the threads of the specified process.
 ///
@@ -5224,12 +7233,16 @@ Win32Result<bool> SetProcessAffinityMask(
   HANDLE hProcess,
   int dwProcessAffinityMask,
 ) {
-  final result_ = SetProcessAffinityMask_Wrapper(
-    hProcess,
-    dwProcessAffinityMask,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetProcessAffinityMask = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('SetProcessAffinityMask');
 
 /// Disables or enables the ability of the system to temporarily boost the
 /// priority of the threads of the specified process.
@@ -5242,12 +7255,18 @@ Win32Result<bool> SetProcessPriorityBoost(
   HANDLE hProcess,
   bool bDisablePriorityBoost,
 ) {
-  final result_ = SetProcessPriorityBoost_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetProcessPriorityBoost(
     hProcess,
     bDisablePriorityBoost ? TRUE : FALSE,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetProcessPriorityBoost = _kernel32
+    .lookupFunction<Int32 Function(Pointer, Int32), int Function(Pointer, int)>(
+      'SetProcessPriorityBoost',
+    );
 
 /// Sets the minimum and maximum working set sizes for the specified process.
 ///
@@ -5260,13 +7279,20 @@ Win32Result<bool> SetProcessWorkingSetSize(
   int dwMinimumWorkingSetSize,
   int dwMaximumWorkingSetSize,
 ) {
-  final result_ = SetProcessWorkingSetSize_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetProcessWorkingSetSize(
     hProcess,
     dwMinimumWorkingSetSize,
     dwMaximumWorkingSetSize,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetProcessWorkingSetSize = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr, IntPtr),
+      int Function(Pointer, int, int)
+    >('SetProcessWorkingSetSize');
 
 /// Sets the handle for the specified standard device (standard input, standard
 /// output, or standard error).
@@ -5276,9 +7302,16 @@ Win32Result<bool> SetProcessWorkingSetSize(
 ///
 /// {@category kernel32}
 Win32Result<bool> SetStdHandle(STD_HANDLE nStdHandle, HANDLE hHandle) {
-  final result_ = SetStdHandle_Wrapper(nStdHandle, hHandle);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetStdHandle(nStdHandle, hHandle);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetStdHandle = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer),
+      int Function(int, Pointer)
+    >('SetStdHandle');
 
 /// Sets a processor affinity mask for the specified thread.
 ///
@@ -5290,9 +7323,16 @@ Win32Result<int> SetThreadAffinityMask(
   HANDLE hThread,
   int dwThreadAffinityMask,
 ) {
-  final result_ = SetThreadAffinityMask_Wrapper(hThread, dwThreadAffinityMask);
-  return .new(value: result_.value.i64, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetThreadAffinityMask(hThread, dwThreadAffinityMask);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetThreadAffinityMask = _kernel32
+    .lookupFunction<
+      IntPtr Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('SetThreadAffinityMask');
 
 /// Controls whether the system will handle the specified types of serious
 /// errors or whether the calling thread will handle them.
@@ -5305,9 +7345,16 @@ Win32Result<bool> SetThreadErrorMode(
   THREAD_ERROR_MODE dwNewMode,
   Pointer<Uint32>? lpOldMode,
 ) {
-  final result_ = SetThreadErrorMode_Wrapper(dwNewMode, lpOldMode ?? nullptr);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetThreadErrorMode(dwNewMode, lpOldMode ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetThreadErrorMode = _kernel32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Uint32>),
+      int Function(int, Pointer<Uint32>)
+    >('SetThreadErrorMode');
 
 /// Enables an application to inform the system that it is in use, thereby
 /// preventing the system from entering sleep or turning off the display while
@@ -5321,8 +7368,10 @@ Win32Result<bool> SetThreadErrorMode(
 EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags) =>
     .new(_SetThreadExecutionState(esFlags));
 
-@Native<Uint32 Function(Uint32)>(symbol: 'SetThreadExecutionState')
-external int _SetThreadExecutionState(int esFlags);
+final _SetThreadExecutionState = _kernel32
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>(
+      'SetThreadExecutionState',
+    );
 
 /// Sets the user interface language for the current thread.
 ///
@@ -5331,9 +7380,15 @@ external int _SetThreadExecutionState(int esFlags);
 ///
 /// {@category kernel32}
 Win32Result<int> SetThreadUILanguage(int langId) {
-  final result_ = SetThreadUILanguage_Wrapper(langId);
-  return .new(value: result_.value.u16, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetThreadUILanguage(langId);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SetThreadUILanguage = _kernel32
+    .lookupFunction<Uint16 Function(Uint16), int Function(int)>(
+      'SetThreadUILanguage',
+    );
 
 /// Initializes the communications parameters for a specified communications
 /// device.
@@ -5343,9 +7398,16 @@ Win32Result<int> SetThreadUILanguage(int langId) {
 ///
 /// {@category kernel32}
 Win32Result<bool> SetupComm(HANDLE hFile, int dwInQueue, int dwOutQueue) {
-  final result_ = SetupComm_Wrapper(hFile, dwInQueue, dwOutQueue);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SetupComm(hFile, dwInQueue, dwOutQueue);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetupComm = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('SetupComm');
 
 /// Sets the label of a file system volume.
 ///
@@ -5354,12 +7416,19 @@ Win32Result<bool> SetupComm(HANDLE hFile, int dwInQueue, int dwOutQueue) {
 ///
 /// {@category kernel32}
 Win32Result<bool> SetVolumeLabel(PCWSTR? lpRootPathName, PCWSTR? lpVolumeName) {
-  final result_ = SetVolumeLabelW_Wrapper(
+  resolveGetLastError();
+  final result_ = _SetVolumeLabel(
     lpRootPathName ?? nullptr,
     lpVolumeName ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SetVolumeLabel = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>)
+    >('SetVolumeLabelW');
 
 /// Retrieves the size, in bytes, of the specified resource.
 ///
@@ -5368,9 +7437,16 @@ Win32Result<bool> SetVolumeLabel(PCWSTR? lpRootPathName, PCWSTR? lpVolumeName) {
 ///
 /// {@category kernel32}
 Win32Result<int> SizeofResource(HMODULE? hModule, HRSRC hResInfo) {
-  final result_ = SizeofResource_Wrapper(hModule ?? nullptr, hResInfo);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SizeofResource(hModule ?? nullptr, hResInfo);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SizeofResource = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer),
+      int Function(Pointer, Pointer)
+    >('SizeofResource');
 
 /// Suspends the execution of the current thread until the time-out interval
 /// elapses.
@@ -5382,8 +7458,8 @@ Win32Result<int> SizeofResource(HMODULE? hModule, HRSRC hResInfo) {
 @pragma('vm:prefer-inline')
 void Sleep(int dwMilliseconds) => _Sleep(dwMilliseconds);
 
-@Native<Void Function(Uint32)>(symbol: 'Sleep')
-external void _Sleep(int dwMilliseconds);
+final _Sleep = _kernel32
+    .lookupFunction<Void Function(Uint32), void Function(int)>('Sleep');
 
 /// Suspends the current thread until the specified condition is met.
 ///
@@ -5395,8 +7471,10 @@ external void _Sleep(int dwMilliseconds);
 int SleepEx(int dwMilliseconds, bool bAlertable) =>
     _SleepEx(dwMilliseconds, bAlertable ? TRUE : FALSE);
 
-@Native<Uint32 Function(Uint32, Int32)>(symbol: 'SleepEx')
-external int _SleepEx(int dwMilliseconds, int bAlertable);
+final _SleepEx = _kernel32
+    .lookupFunction<Uint32 Function(Uint32, Int32), int Function(int, int)>(
+      'SleepEx',
+    );
 
 /// Converts a system time to file time format.
 ///
@@ -5410,9 +7488,16 @@ Win32Result<bool> SystemTimeToFileTime(
   Pointer<SYSTEMTIME> lpSystemTime,
   Pointer<FILETIME> lpFileTime,
 ) {
-  final result_ = SystemTimeToFileTime_Wrapper(lpSystemTime, lpFileTime);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SystemTimeToFileTime(lpSystemTime, lpFileTime);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _SystemTimeToFileTime = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<SYSTEMTIME>, Pointer<FILETIME>),
+      int Function(Pointer<SYSTEMTIME>, Pointer<FILETIME>)
+    >('SystemTimeToFileTime');
 
 /// Terminates all processes currently associated with the job.
 ///
@@ -5421,9 +7506,16 @@ Win32Result<bool> SystemTimeToFileTime(
 ///
 /// {@category kernel32}
 Win32Result<bool> TerminateJobObject(HANDLE hJob, int uExitCode) {
-  final result_ = TerminateJobObject_Wrapper(hJob, uExitCode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _TerminateJobObject(hJob, uExitCode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _TerminateJobObject = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('TerminateJobObject');
 
 /// Terminates the specified process and all of its threads.
 ///
@@ -5432,9 +7524,16 @@ Win32Result<bool> TerminateJobObject(HANDLE hJob, int uExitCode) {
 ///
 /// {@category kernel32}
 Win32Result<bool> TerminateProcess(HANDLE hProcess, int uExitCode) {
-  final result_ = TerminateProcess_Wrapper(hProcess, uExitCode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _TerminateProcess(hProcess, uExitCode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _TerminateProcess = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('TerminateProcess');
 
 /// Terminates a thread.
 ///
@@ -5443,9 +7542,16 @@ Win32Result<bool> TerminateProcess(HANDLE hProcess, int uExitCode) {
 ///
 /// {@category kernel32}
 Win32Result<bool> TerminateThread(HANDLE hThread, int dwExitCode) {
-  final result_ = TerminateThread_Wrapper(hThread, dwExitCode);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _TerminateThread(hThread, dwExitCode);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _TerminateThread = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('TerminateThread');
 
 /// Combines the functions that write a message to and read a message from the
 /// specified named pipe into a single operation.
@@ -5463,7 +7569,8 @@ Win32Result<bool> TransactNamedPipe(
   Pointer<Uint32> lpBytesRead,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = TransactNamedPipe_Wrapper(
+  resolveGetLastError();
+  final result_ = _TransactNamedPipe(
     hNamedPipe,
     lpInBuffer ?? nullptr,
     nInBufferSize,
@@ -5472,8 +7579,30 @@ Win32Result<bool> TransactNamedPipe(
     lpBytesRead,
     lpOverlapped ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _TransactNamedPipe = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer,
+        Uint32,
+        Pointer,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        Pointer,
+        int,
+        Pointer,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('TransactNamedPipe');
 
 /// Transmits a specified character ahead of any pending data in the output
 /// buffer of the specified communications device.
@@ -5483,9 +7612,15 @@ Win32Result<bool> TransactNamedPipe(
 ///
 /// {@category kernel32}
 Win32Result<bool> TransmitCommChar(HANDLE hFile, CHAR cChar) {
-  final result_ = TransmitCommChar_Wrapper(hFile, cChar);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _TransmitCommChar(hFile, cChar);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _TransmitCommChar = _kernel32
+    .lookupFunction<Int32 Function(Pointer, Int8), int Function(Pointer, int)>(
+      'TransmitCommChar',
+    );
 
 /// Unlocks a region in an open file.
 ///
@@ -5500,15 +7635,22 @@ Win32Result<bool> UnlockFile(
   int nNumberOfBytesToUnlockLow,
   int nNumberOfBytesToUnlockHigh,
 ) {
-  final result_ = UnlockFile_Wrapper(
+  resolveGetLastError();
+  final result_ = _UnlockFile(
     hFile,
     dwFileOffsetLow,
     dwFileOffsetHigh,
     nNumberOfBytesToUnlockLow,
     nNumberOfBytesToUnlockHigh,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _UnlockFile = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Uint32, Uint32),
+      int Function(Pointer, int, int, int, int)
+    >('UnlockFile');
 
 /// Unlocks a region in the specified file.
 ///
@@ -5524,15 +7666,22 @@ Win32Result<bool> UnlockFileEx(
   int nNumberOfBytesToUnlockHigh,
   Pointer<OVERLAPPED> lpOverlapped,
 ) {
-  final result_ = UnlockFileEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _UnlockFileEx(
     hFile,
     NULL,
     nNumberOfBytesToUnlockLow,
     nNumberOfBytesToUnlockHigh,
     lpOverlapped,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _UnlockFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32, Uint32, Pointer<OVERLAPPED>),
+      int Function(Pointer, int, int, int, Pointer<OVERLAPPED>)
+    >('UnlockFileEx');
 
 /// Updates the specified attribute in a list of attributes for process and
 /// thread creation.
@@ -5550,7 +7699,8 @@ Win32Result<bool> UpdateProcThreadAttribute(
   Pointer? lpPreviousValue,
   Pointer<IntPtr>? lpReturnSize,
 ) {
-  final result_ = UpdateProcThreadAttribute_Wrapper(
+  resolveGetLastError();
+  final result_ = _UpdateProcThreadAttribute(
     lpAttributeList,
     dwFlags,
     attribute,
@@ -5559,8 +7709,22 @@ Win32Result<bool> UpdateProcThreadAttribute(
     lpPreviousValue ?? nullptr,
     lpReturnSize ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _UpdateProcThreadAttribute = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Uint32,
+        IntPtr,
+        Pointer,
+        IntPtr,
+        Pointer,
+        Pointer<IntPtr>,
+      ),
+      int Function(Pointer, int, int, Pointer, int, Pointer, Pointer<IntPtr>)
+    >('UpdateProcThreadAttribute');
 
 /// Adds, deletes, or replaces a resource in a portable executable (PE) file.
 ///
@@ -5576,7 +7740,8 @@ Win32Result<bool> UpdateResource(
   Pointer? lpData,
   int cb,
 ) {
-  final result_ = UpdateResourceW_Wrapper(
+  resolveGetLastError();
+  final result_ = _UpdateResource(
     hUpdate,
     lpType,
     lpName,
@@ -5584,8 +7749,21 @@ Win32Result<bool> UpdateResource(
     lpData ?? nullptr,
     cb,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _UpdateResource = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Uint16,
+        Pointer,
+        Uint32,
+      ),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, int, Pointer, int)
+    >('UpdateResourceW');
 
 /// Compares a set of operating system version requirements to the corresponding
 /// values for the currently running version of the system.
@@ -5599,13 +7777,20 @@ Win32Result<bool> VerifyVersionInfo(
   VER_FLAGS dwTypeMask,
   int dwlConditionMask,
 ) {
-  final result_ = VerifyVersionInfoW_Wrapper(
+  resolveGetLastError();
+  final result_ = _VerifyVersionInfo(
     lpVersionInformation,
     dwTypeMask,
     dwlConditionMask,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VerifyVersionInfo = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer<OSVERSIONINFOEX>, Uint32, Uint64),
+      int Function(Pointer<OSVERSIONINFOEX>, int, int)
+    >('VerifyVersionInfoW');
 
 /// Retrieves a description string for the language associated with a specified
 /// binary Microsoft language identifier.
@@ -5618,10 +7803,11 @@ Win32Result<bool> VerifyVersionInfo(
 int VerLanguageName(int wLang, PWSTR szLang, int cchLang) =>
     _VerLanguageName(wLang, szLang, cchLang);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'VerLanguageNameW',
-)
-external int _VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang);
+final _VerLanguageName = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('VerLanguageNameW');
 
 /// Sets the bits of a 64-bit value to indicate the comparison operator to use
 /// for a specified operating system version attribute.
@@ -5637,12 +7823,11 @@ external int _VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang);
 int VerSetConditionMask(int conditionMask, VER_FLAGS typeMask, int condition) =>
     _VerSetConditionMask(conditionMask, typeMask, condition);
 
-@Native<Uint64 Function(Uint64, Uint32, Uint8)>(symbol: 'VerSetConditionMask')
-external int _VerSetConditionMask(
-  int conditionMask,
-  int typeMask,
-  int condition,
-);
+final _VerSetConditionMask = _kernel32
+    .lookupFunction<
+      Uint64 Function(Uint64, Uint32, Uint8),
+      int Function(int, int, int)
+    >('VerSetConditionMask');
 
 /// Reserves, commits, or changes the state of a region of pages in the virtual
 /// address space of the calling process.
@@ -5657,14 +7842,21 @@ Win32Result<Pointer> VirtualAlloc(
   VIRTUAL_ALLOCATION_TYPE flAllocationType,
   PAGE_PROTECTION_FLAGS flProtect,
 ) {
-  final result_ = VirtualAlloc_Wrapper(
+  resolveGetLastError();
+  final result_ = _VirtualAlloc(
     lpAddress ?? nullptr,
     dwSize,
     flAllocationType,
     flProtect,
   );
-  return .new(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _VirtualAlloc = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, IntPtr, Uint32, Uint32),
+      Pointer Function(Pointer, int, int, int)
+    >('VirtualAlloc');
 
 /// Reserves, commits, or changes the state of a region of memory within the
 /// virtual address space of a specified process.
@@ -5682,15 +7874,22 @@ Win32Result<Pointer> VirtualAllocEx(
   VIRTUAL_ALLOCATION_TYPE flAllocationType,
   PAGE_PROTECTION_FLAGS flProtect,
 ) {
-  final result_ = VirtualAllocEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _VirtualAllocEx(
     hProcess,
     lpAddress ?? nullptr,
     dwSize,
     flAllocationType,
     flProtect,
   );
-  return .new(value: result_.value.ptr, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _VirtualAllocEx = _kernel32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer, IntPtr, Uint32, Uint32),
+      Pointer Function(Pointer, Pointer, int, int, int)
+    >('VirtualAllocEx');
 
 /// Releases, decommits, or releases and decommits a region of pages within the
 /// virtual address space of the calling process.
@@ -5704,9 +7903,16 @@ Win32Result<bool> VirtualFree(
   int dwSize,
   VIRTUAL_FREE_TYPE dwFreeType,
 ) {
-  final result_ = VirtualFree_Wrapper(lpAddress, dwSize, dwFreeType);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _VirtualFree(lpAddress, dwSize, dwFreeType);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualFree = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr, Uint32),
+      int Function(Pointer, int, int)
+    >('VirtualFree');
 
 /// Releases, decommits, or releases and decommits a region of memory within the
 /// virtual address space of a specified process.
@@ -5721,14 +7927,16 @@ Win32Result<bool> VirtualFreeEx(
   int dwSize,
   VIRTUAL_FREE_TYPE dwFreeType,
 ) {
-  final result_ = VirtualFreeEx_Wrapper(
-    hProcess,
-    lpAddress,
-    dwSize,
-    dwFreeType,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _VirtualFreeEx(hProcess, lpAddress, dwSize, dwFreeType);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualFreeEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, IntPtr, Uint32),
+      int Function(Pointer, Pointer, int, int)
+    >('VirtualFreeEx');
 
 /// Locks the specified region of the process's virtual address space into
 /// physical memory, ensuring that subsequent access to the region will not
@@ -5739,9 +7947,16 @@ Win32Result<bool> VirtualFreeEx(
 ///
 /// {@category kernel32}
 Win32Result<bool> VirtualLock(Pointer lpAddress, int dwSize) {
-  final result_ = VirtualLock_Wrapper(lpAddress, dwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _VirtualLock(lpAddress, dwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualLock = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('VirtualLock');
 
 /// Changes the protection on a region of committed pages in the virtual address
 /// space of the calling process.
@@ -5756,14 +7971,21 @@ Win32Result<bool> VirtualProtect(
   PAGE_PROTECTION_FLAGS flNewProtect,
   Pointer<Uint32> lpflOldProtect,
 ) {
-  final result_ = VirtualProtect_Wrapper(
+  resolveGetLastError();
+  final result_ = _VirtualProtect(
     lpAddress,
     dwSize,
     flNewProtect,
     lpflOldProtect,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualProtect = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, int, Pointer<Uint32>)
+    >('VirtualProtect');
 
 /// Changes the protection on a region of committed pages in the virtual address
 /// space of a specified process.
@@ -5779,15 +8001,22 @@ Win32Result<bool> VirtualProtectEx(
   PAGE_PROTECTION_FLAGS flNewProtect,
   Pointer<Uint32> lpflOldProtect,
 ) {
-  final result_ = VirtualProtectEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _VirtualProtectEx(
     hProcess,
     lpAddress,
     dwSize,
     flNewProtect,
     lpflOldProtect,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualProtectEx = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, IntPtr, Uint32, Pointer<Uint32>),
+      int Function(Pointer, Pointer, int, int, Pointer<Uint32>)
+    >('VirtualProtectEx');
 
 /// Retrieves information about a range of pages in the virtual address space of
 /// the calling process.
@@ -5801,13 +8030,16 @@ Win32Result<int> VirtualQuery(
   Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
   int dwLength,
 ) {
-  final result_ = VirtualQuery_Wrapper(
-    lpAddress ?? nullptr,
-    lpBuffer,
-    dwLength,
-  );
-  return .new(value: result_.value.i64, error: result_.error);
+  resolveGetLastError();
+  final result_ = _VirtualQuery(lpAddress ?? nullptr, lpBuffer, dwLength);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _VirtualQuery = _kernel32
+    .lookupFunction<
+      IntPtr Function(Pointer, Pointer<MEMORY_BASIC_INFORMATION>, IntPtr),
+      int Function(Pointer, Pointer<MEMORY_BASIC_INFORMATION>, int)
+    >('VirtualQuery');
 
 /// Retrieves information about a range of pages within the virtual address
 /// space of a specified process.
@@ -5822,14 +8054,26 @@ Win32Result<int> VirtualQueryEx(
   Pointer<MEMORY_BASIC_INFORMATION> lpBuffer,
   int dwLength,
 ) {
-  final result_ = VirtualQueryEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _VirtualQueryEx(
     hProcess,
     lpAddress ?? nullptr,
     lpBuffer,
     dwLength,
   );
-  return .new(value: result_.value.i64, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _VirtualQueryEx = _kernel32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer,
+        Pointer,
+        Pointer<MEMORY_BASIC_INFORMATION>,
+        IntPtr,
+      ),
+      int Function(Pointer, Pointer, Pointer<MEMORY_BASIC_INFORMATION>, int)
+    >('VirtualQueryEx');
 
 /// Unlocks a specified range of pages in the virtual address space of a
 /// process, enabling the system to swap the pages out to the paging file if
@@ -5840,9 +8084,16 @@ Win32Result<int> VirtualQueryEx(
 ///
 /// {@category kernel32}
 Win32Result<bool> VirtualUnlock(Pointer lpAddress, int dwSize) {
-  final result_ = VirtualUnlock_Wrapper(lpAddress, dwSize);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _VirtualUnlock(lpAddress, dwSize);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _VirtualUnlock = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, IntPtr),
+      int Function(Pointer, int)
+    >('VirtualUnlock');
 
 /// Waits for an event to occur for a specified communications device.
 ///
@@ -5858,13 +8109,16 @@ Win32Result<bool> WaitCommEvent(
   Pointer<Uint32> lpEvtMask,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = WaitCommEvent_Wrapper(
-    hFile,
-    lpEvtMask,
-    lpOverlapped ?? nullptr,
-  );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _WaitCommEvent(hFile, lpEvtMask, lpOverlapped ?? nullptr);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WaitCommEvent = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Pointer<OVERLAPPED>),
+      int Function(Pointer, Pointer<Uint32>, Pointer<OVERLAPPED>)
+    >('WaitCommEvent');
 
 /// Waits until one or all of the specified objects are in the signaled state or
 /// the time-out interval elapses.
@@ -5879,14 +8133,21 @@ Win32Result<WAIT_EVENT> WaitForMultipleObjects(
   bool bWaitAll,
   int dwMilliseconds,
 ) {
-  final result_ = WaitForMultipleObjects_Wrapper(
+  resolveGetLastError();
+  final result_ = _WaitForMultipleObjects(
     nCount,
     lpHandles,
     bWaitAll ? TRUE : FALSE,
     dwMilliseconds,
   );
-  return .new(value: .new(result_.value.u32), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _WaitForMultipleObjects = _kernel32
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Pointer>, Int32, Uint32),
+      int Function(int, Pointer<Pointer>, int, int)
+    >('WaitForMultipleObjects');
 
 /// Waits until the specified object is in the signaled state or the time-out
 /// interval elapses.
@@ -5899,9 +8160,16 @@ Win32Result<WAIT_EVENT> WaitForSingleObject(
   HANDLE hHandle,
   int dwMilliseconds,
 ) {
-  final result_ = WaitForSingleObject_Wrapper(hHandle, dwMilliseconds);
-  return .new(value: .new(result_.value.u32), error: result_.error);
+  resolveGetLastError();
+  final result_ = _WaitForSingleObject(hHandle, dwMilliseconds);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _WaitForSingleObject = _kernel32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('WaitForSingleObject');
 
 /// Maps a UTF-16 (wide character) string to a new character string.
 ///
@@ -5919,7 +8187,8 @@ Win32Result<int> WideCharToMultiByte(
   PCSTR? lpDefaultChar,
   Pointer<Int32>? lpUsedDefaultChar,
 ) {
-  final result_ = WideCharToMultiByte_Wrapper(
+  resolveGetLastError();
+  final result_ = _WideCharToMultiByte(
     codePage,
     dwFlags,
     lpWideCharStr,
@@ -5929,8 +8198,32 @@ Win32Result<int> WideCharToMultiByte(
     lpDefaultChar ?? nullptr,
     lpUsedDefaultChar ?? nullptr,
   );
-  return .new(value: result_.value.i32, error: result_.error);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _WideCharToMultiByte = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+        Int32,
+        Pointer<Utf8>,
+        Int32,
+        Pointer<Utf8>,
+        Pointer<Int32>,
+      ),
+      int Function(
+        int,
+        int,
+        Pointer<Utf16>,
+        int,
+        Pointer<Utf8>,
+        int,
+        Pointer<Utf8>,
+        Pointer<Int32>,
+      )
+    >('WideCharToMultiByte');
 
 /// Suspends the specified WOW64 thread.
 ///
@@ -5939,9 +8232,15 @@ Win32Result<int> WideCharToMultiByte(
 ///
 /// {@category kernel32}
 Win32Result<int> Wow64SuspendThread(HANDLE hThread) {
-  final result_ = Wow64SuspendThread_Wrapper(hThread);
-  return .new(value: result_.value.u32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _Wow64SuspendThread(hThread);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _Wow64SuspendThread = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'Wow64SuspendThread',
+    );
 
 /// Writes a character string to a console screen buffer beginning at the
 /// current cursor location.
@@ -5956,15 +8255,22 @@ Win32Result<bool> WriteConsole(
   int nNumberOfCharsToWrite,
   Pointer<Uint32>? lpNumberOfCharsWritten,
 ) {
-  final result_ = WriteConsoleW_Wrapper(
+  resolveGetLastError();
+  final result_ = _WriteConsole(
     hConsoleOutput,
     lpBuffer,
     nNumberOfCharsToWrite,
     lpNumberOfCharsWritten ?? nullptr,
     nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WriteConsole = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Uint32, Pointer<Uint32>, Pointer),
+      int Function(Pointer, Pointer<Utf16>, int, Pointer<Uint32>, Pointer)
+    >('WriteConsoleW');
 
 /// Writes data to the specified file or input/output (I/O) device.
 ///
@@ -5979,15 +8285,34 @@ Win32Result<bool> WriteFile(
   Pointer<Uint32>? lpNumberOfBytesWritten,
   Pointer<OVERLAPPED>? lpOverlapped,
 ) {
-  final result_ = WriteFile_Wrapper(
+  resolveGetLastError();
+  final result_ = _WriteFile(
     hFile,
     lpBuffer ?? nullptr,
     nNumberOfBytesToWrite,
     lpNumberOfBytesWritten ?? nullptr,
     lpOverlapped ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WriteFile = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint8>,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('WriteFile');
 
 /// Writes data to the specified file or input/output (I/O) device.
 ///
@@ -6006,15 +8331,34 @@ Win32Result<bool> WriteFileEx(
   Pointer<OVERLAPPED> lpOverlapped,
   Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>> lpCompletionRoutine,
 ) {
-  final result_ = WriteFileEx_Wrapper(
+  resolveGetLastError();
+  final result_ = _WriteFileEx(
     hFile,
     lpBuffer ?? nullptr,
     nNumberOfBytesToWrite,
     lpOverlapped,
     lpCompletionRoutine,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WriteFileEx = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Uint8>,
+        Uint32,
+        Pointer<OVERLAPPED>,
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Uint8>,
+        int,
+        Pointer<OVERLAPPED>,
+        Pointer<NativeFunction<LPOVERLAPPED_COMPLETION_ROUTINE>>,
+      )
+    >('WriteFileEx');
 
 /// Retrieves data from an array of buffers and writes the data to a file.
 ///
@@ -6028,15 +8372,34 @@ Win32Result<bool> WriteFileGather(
   int nNumberOfBytesToWrite,
   Pointer<OVERLAPPED> lpOverlapped,
 ) {
-  final result_ = WriteFileGather_Wrapper(
+  resolveGetLastError();
+  final result_ = _WriteFileGather(
     hFile,
     aSegmentArray,
     nNumberOfBytesToWrite,
     nullptr,
     lpOverlapped,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WriteFileGather = _kernel32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<FILE_SEGMENT_ELEMENT>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<FILE_SEGMENT_ELEMENT>,
+        int,
+        Pointer<Uint32>,
+        Pointer<OVERLAPPED>,
+      )
+    >('WriteFileGather');
 
 /// Writes data to an area of memory in a specified process.
 ///
@@ -6053,12 +8416,19 @@ Win32Result<bool> WriteProcessMemory(
   int nSize,
   Pointer<IntPtr>? lpNumberOfBytesWritten,
 ) {
-  final result_ = WriteProcessMemory_Wrapper(
+  resolveGetLastError();
+  final result_ = _WriteProcessMemory(
     hProcess,
     lpBaseAddress,
     lpBuffer,
     nSize,
     lpNumberOfBytesWritten ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _WriteProcessMemory = _kernel32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer, IntPtr, Pointer<IntPtr>),
+      int Function(Pointer, Pointer, Pointer, int, Pointer<IntPtr>)
+    >('WriteProcessMemory');

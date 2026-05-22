@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -176,328 +176,314 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Uint16, Uint16, Pointer<Double>)>(
-  symbol: 'DosDateTimeToVariantTime',
-)
-external int _DosDateTimeToVariantTime(
-  int wDosDate,
-  int wDosTime,
-  Pointer<Double> pvtime,
-);
+final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
-@Native<Int32 Function(Pointer<GUID>, Pointer, Pointer<VTablePointer>)>(
-  symbol: 'GetActiveObject',
-)
-external int _GetActiveObject(
-  Pointer<GUID> rclsid,
-  Pointer pvReserved,
-  Pointer<VTablePointer> ppunk,
-);
+final _DosDateTimeToVariantTime = _oleaut32
+    .lookupFunction<
+      Int32 Function(Uint16, Uint16, Pointer<Double>),
+      int Function(int, int, Pointer<Double>)
+    >('DosDateTimeToVariantTime');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>)>(
-  symbol: 'SafeArrayAccessData',
-)
-external int _SafeArrayAccessData(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Pointer> ppvData,
-);
+final _GetActiveObject = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Pointer, Pointer<VTablePointer>),
+      int Function(Pointer<GUID>, Pointer, Pointer<VTablePointer>)
+    >('GetActiveObject');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>)>(
-  symbol: 'SafeArrayAddRef',
-)
-external int _SafeArrayAddRef(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Pointer> ppDataToRelease,
-);
+final _SafeArrayAccessData = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>),
+      int Function(Pointer<SAFEARRAY>, Pointer<Pointer>)
+    >('SafeArrayAccessData');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayAllocData')
-external int _SafeArrayAllocData(Pointer<SAFEARRAY> psa);
+final _SafeArrayAddRef = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer>),
+      int Function(Pointer<SAFEARRAY>, Pointer<Pointer>)
+    >('SafeArrayAddRef');
 
-@Native<Int32 Function(Uint32, Pointer<Pointer<SAFEARRAY>>)>(
-  symbol: 'SafeArrayAllocDescriptor',
-)
-external int _SafeArrayAllocDescriptor(
-  int cDims,
-  Pointer<Pointer<SAFEARRAY>> ppsaOut,
-);
+final _SafeArrayAllocData = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayAllocData');
 
-@Native<Int32 Function(Uint16, Uint32, Pointer<Pointer<SAFEARRAY>>)>(
-  symbol: 'SafeArrayAllocDescriptorEx',
-)
-external int _SafeArrayAllocDescriptorEx(
-  int vt,
-  int cDims,
-  Pointer<Pointer<SAFEARRAY>> ppsaOut,
-);
+final _SafeArrayAllocDescriptor = _oleaut32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Pointer<SAFEARRAY>>),
+      int Function(int, Pointer<Pointer<SAFEARRAY>>)
+    >('SafeArrayAllocDescriptor');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer<SAFEARRAY>>)>(
-  symbol: 'SafeArrayCopy',
-)
-external int _SafeArrayCopy(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Pointer<SAFEARRAY>> ppsaOut,
-);
+final _SafeArrayAllocDescriptorEx = _oleaut32
+    .lookupFunction<
+      Int32 Function(Uint16, Uint32, Pointer<Pointer<SAFEARRAY>>),
+      int Function(int, int, Pointer<Pointer<SAFEARRAY>>)
+    >('SafeArrayAllocDescriptorEx');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAY>)>(
-  symbol: 'SafeArrayCopyData',
-)
-external int _SafeArrayCopyData(
-  Pointer<SAFEARRAY> psaSource,
-  Pointer<SAFEARRAY> psaTarget,
-);
+final _SafeArrayCopy = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Pointer<SAFEARRAY>>),
+      int Function(Pointer<SAFEARRAY>, Pointer<Pointer<SAFEARRAY>>)
+    >('SafeArrayCopy');
 
-@Native<Pointer<SAFEARRAY> Function(Uint16, Uint32, Pointer<SAFEARRAYBOUND>)>(
-  symbol: 'SafeArrayCreate',
-)
-external Pointer<SAFEARRAY> _SafeArrayCreate(
-  int vt,
-  int cDims,
-  Pointer<SAFEARRAYBOUND> rgsabound,
-);
+final _SafeArrayCopyData = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAY>)
+    >('SafeArrayCopyData');
 
-@Native<
-  Pointer<SAFEARRAY> Function(Uint16, Uint32, Pointer<SAFEARRAYBOUND>, Pointer)
->(symbol: 'SafeArrayCreateEx')
-external Pointer<SAFEARRAY> _SafeArrayCreateEx(
-  int vt,
-  int cDims,
-  Pointer<SAFEARRAYBOUND> rgsabound,
-  Pointer pvExtra,
-);
+final _SafeArrayCreate = _oleaut32
+    .lookupFunction<
+      Pointer<SAFEARRAY> Function(Uint16, Uint32, Pointer<SAFEARRAYBOUND>),
+      Pointer<SAFEARRAY> Function(int, int, Pointer<SAFEARRAYBOUND>)
+    >('SafeArrayCreate');
 
-@Native<Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32)>(
-  symbol: 'SafeArrayCreateVector',
-)
-external Pointer<SAFEARRAY> _SafeArrayCreateVector(
-  int vt,
-  int lLbound,
-  int cElements,
-);
+final _SafeArrayCreateEx = _oleaut32
+    .lookupFunction<
+      Pointer<SAFEARRAY> Function(
+        Uint16,
+        Uint32,
+        Pointer<SAFEARRAYBOUND>,
+        Pointer,
+      ),
+      Pointer<SAFEARRAY> Function(int, int, Pointer<SAFEARRAYBOUND>, Pointer)
+    >('SafeArrayCreateEx');
 
-@Native<Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32, Pointer)>(
-  symbol: 'SafeArrayCreateVectorEx',
-)
-external Pointer<SAFEARRAY> _SafeArrayCreateVectorEx(
-  int vt,
-  int lLbound,
-  int cElements,
-  Pointer pvExtra,
-);
+final _SafeArrayCreateVector = _oleaut32
+    .lookupFunction<
+      Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32),
+      Pointer<SAFEARRAY> Function(int, int, int)
+    >('SafeArrayCreateVector');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayDestroy')
-external int _SafeArrayDestroy(Pointer<SAFEARRAY> psa);
+final _SafeArrayCreateVectorEx = _oleaut32
+    .lookupFunction<
+      Pointer<SAFEARRAY> Function(Uint16, Int32, Uint32, Pointer),
+      Pointer<SAFEARRAY> Function(int, int, int, Pointer)
+    >('SafeArrayCreateVectorEx');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayDestroyData')
-external int _SafeArrayDestroyData(Pointer<SAFEARRAY> psa);
+final _SafeArrayDestroy = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayDestroy');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(
-  symbol: 'SafeArrayDestroyDescriptor',
-)
-external int _SafeArrayDestroyDescriptor(Pointer<SAFEARRAY> psa);
+final _SafeArrayDestroyData = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayDestroyData');
 
-@Native<Uint32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayGetDim')
-external int _SafeArrayGetDim(Pointer<SAFEARRAY> psa);
+final _SafeArrayDestroyDescriptor = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayDestroyDescriptor');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)>(
-  symbol: 'SafeArrayGetElement',
-)
-external int _SafeArrayGetElement(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Int32> rgIndices,
-  Pointer pv,
-);
+final _SafeArrayGetDim = _oleaut32
+    .lookupFunction<
+      Uint32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayGetDim');
 
-@Native<Uint32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayGetElemsize')
-external int _SafeArrayGetElemsize(Pointer<SAFEARRAY> psa);
+final _SafeArrayGetElement = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer),
+      int Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)
+    >('SafeArrayGetElement');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>)>(
-  symbol: 'SafeArrayGetIID',
-)
-external int _SafeArrayGetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> pguid);
+final _SafeArrayGetElemsize = _oleaut32
+    .lookupFunction<
+      Uint32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayGetElemsize');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>)>(
-  symbol: 'SafeArrayGetLBound',
-)
-external int _SafeArrayGetLBound(
-  Pointer<SAFEARRAY> psa,
-  int nDim,
-  Pointer<Int32> plLbound,
-);
+final _SafeArrayGetIID = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>),
+      int Function(Pointer<SAFEARRAY>, Pointer<GUID>)
+    >('SafeArrayGetIID');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<VTablePointer>)>(
-  symbol: 'SafeArrayGetRecordInfo',
-)
-external int _SafeArrayGetRecordInfo(
-  Pointer<SAFEARRAY> psa,
-  Pointer<VTablePointer> prinfo,
-);
+final _SafeArrayGetLBound = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>),
+      int Function(Pointer<SAFEARRAY>, int, Pointer<Int32>)
+    >('SafeArrayGetLBound');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>)>(
-  symbol: 'SafeArrayGetUBound',
-)
-external int _SafeArrayGetUBound(
-  Pointer<SAFEARRAY> psa,
-  int nDim,
-  Pointer<Int32> plUbound,
-);
+final _SafeArrayGetRecordInfo = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<VTablePointer>),
+      int Function(Pointer<SAFEARRAY>, Pointer<VTablePointer>)
+    >('SafeArrayGetRecordInfo');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Uint16>)>(
-  symbol: 'SafeArrayGetVartype',
-)
-external int _SafeArrayGetVartype(Pointer<SAFEARRAY> psa, Pointer<Uint16> pvt);
+final _SafeArrayGetUBound = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Uint32, Pointer<Int32>),
+      int Function(Pointer<SAFEARRAY>, int, Pointer<Int32>)
+    >('SafeArrayGetUBound');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayLock')
-external int _SafeArrayLock(Pointer<SAFEARRAY> psa);
+final _SafeArrayGetVartype = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Uint16>),
+      int Function(Pointer<SAFEARRAY>, Pointer<Uint16>)
+    >('SafeArrayGetVartype');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer<Pointer>)>(
-  symbol: 'SafeArrayPtrOfIndex',
-)
-external int _SafeArrayPtrOfIndex(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Int32> rgIndices,
-  Pointer<Pointer> ppvData,
-);
+final _SafeArrayLock = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayLock');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)>(
-  symbol: 'SafeArrayPutElement',
-)
-external int _SafeArrayPutElement(
-  Pointer<SAFEARRAY> psa,
-  Pointer<Int32> rgIndices,
-  Pointer pv,
-);
+final _SafeArrayPtrOfIndex = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer<Pointer>),
+      int Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer<Pointer>)
+    >('SafeArrayPtrOfIndex');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAYBOUND>)>(
-  symbol: 'SafeArrayRedim',
-)
-external int _SafeArrayRedim(
-  Pointer<SAFEARRAY> psa,
-  Pointer<SAFEARRAYBOUND> psaboundNew,
-);
+final _SafeArrayPutElement = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer),
+      int Function(Pointer<SAFEARRAY>, Pointer<Int32>, Pointer)
+    >('SafeArrayPutElement');
 
-@Native<Void Function(Pointer)>(symbol: 'SafeArrayReleaseData')
-external void _SafeArrayReleaseData(Pointer pData);
+final _SafeArrayRedim = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAYBOUND>),
+      int Function(Pointer<SAFEARRAY>, Pointer<SAFEARRAYBOUND>)
+    >('SafeArrayRedim');
 
-@Native<Void Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayReleaseDescriptor')
-external void _SafeArrayReleaseDescriptor(Pointer<SAFEARRAY> psa);
+final _SafeArrayReleaseData = _oleaut32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'SafeArrayReleaseData',
+    );
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>)>(
-  symbol: 'SafeArraySetIID',
-)
-external int _SafeArraySetIID(Pointer<SAFEARRAY> psa, Pointer<GUID> guid);
+final _SafeArrayReleaseDescriptor = _oleaut32
+    .lookupFunction<
+      Void Function(Pointer<SAFEARRAY>),
+      void Function(Pointer<SAFEARRAY>)
+    >('SafeArrayReleaseDescriptor');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>, VTablePointer)>(
-  symbol: 'SafeArraySetRecordInfo',
-)
-external int _SafeArraySetRecordInfo(
-  Pointer<SAFEARRAY> psa,
-  VTablePointer prinfo,
-);
+final _SafeArraySetIID = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, Pointer<GUID>),
+      int Function(Pointer<SAFEARRAY>, Pointer<GUID>)
+    >('SafeArraySetIID');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayUnaccessData')
-external int _SafeArrayUnaccessData(Pointer<SAFEARRAY> psa);
+final _SafeArraySetRecordInfo = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>, VTablePointer),
+      int Function(Pointer<SAFEARRAY>, VTablePointer)
+    >('SafeArraySetRecordInfo');
 
-@Native<Int32 Function(Pointer<SAFEARRAY>)>(symbol: 'SafeArrayUnlock')
-external int _SafeArrayUnlock(Pointer<SAFEARRAY> psa);
+final _SafeArrayUnaccessData = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayUnaccessData');
 
-@Native<Pointer<Utf16> Function(Pointer<Utf16>)>(symbol: 'SysAllocString')
-external Pointer<Utf16> _SysAllocString(Pointer<Utf16> psz);
+final _SafeArrayUnlock = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<SAFEARRAY>),
+      int Function(Pointer<SAFEARRAY>)
+    >('SafeArrayUnlock');
 
-@Native<Pointer<Utf16> Function(Pointer<Utf8>, Uint32)>(
-  symbol: 'SysAllocStringByteLen',
-)
-external Pointer<Utf16> _SysAllocStringByteLen(Pointer<Utf8> psz, int len);
+final _SysAllocString = _oleaut32
+    .lookupFunction<
+      Pointer<Utf16> Function(Pointer<Utf16>),
+      Pointer<Utf16> Function(Pointer<Utf16>)
+    >('SysAllocString');
 
-@Native<Pointer<Utf16> Function(Pointer<Utf16>, Uint32)>(
-  symbol: 'SysAllocStringLen',
-)
-external Pointer<Utf16> _SysAllocStringLen(Pointer<Utf16> strIn, int ui);
+final _SysAllocStringByteLen = _oleaut32
+    .lookupFunction<
+      Pointer<Utf16> Function(Pointer<Utf8>, Uint32),
+      Pointer<Utf16> Function(Pointer<Utf8>, int)
+    >('SysAllocStringByteLen');
 
-@Native<Void Function(Pointer<Utf16>)>(symbol: 'SysFreeString')
-external void _SysFreeString(Pointer<Utf16> bstrString);
+final _SysAllocStringLen = _oleaut32
+    .lookupFunction<
+      Pointer<Utf16> Function(Pointer<Utf16>, Uint32),
+      Pointer<Utf16> Function(Pointer<Utf16>, int)
+    >('SysAllocStringLen');
 
-@Native<Int32 Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>)>(
-  symbol: 'SysReAllocString',
-)
-external int _SysReAllocString(
-  Pointer<Pointer<Utf16>> pbstr,
-  Pointer<Utf16> psz,
-);
+final _SysFreeString = _oleaut32
+    .lookupFunction<
+      Void Function(Pointer<Utf16>),
+      void Function(Pointer<Utf16>)
+    >('SysFreeString');
 
-@Native<Int32 Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>, Uint32)>(
-  symbol: 'SysReAllocStringLen',
-)
-external int _SysReAllocStringLen(
-  Pointer<Pointer<Utf16>> pbstr,
-  Pointer<Utf16> psz,
-  int len,
-);
+final _SysReAllocString = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>),
+      int Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>)
+    >('SysReAllocString');
 
-@Native<Void Function(Pointer<Utf16>)>(symbol: 'SysReleaseString')
-external void _SysReleaseString(Pointer<Utf16> bstrString);
+final _SysReAllocStringLen = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>, Uint32),
+      int Function(Pointer<Pointer<Utf16>>, Pointer<Utf16>, int)
+    >('SysReAllocStringLen');
 
-@Native<Uint32 Function(Pointer<Utf16>)>(symbol: 'SysStringByteLen')
-external int _SysStringByteLen(Pointer<Utf16> bstr);
+final _SysReleaseString = _oleaut32
+    .lookupFunction<
+      Void Function(Pointer<Utf16>),
+      void Function(Pointer<Utf16>)
+    >('SysReleaseString');
 
-@Native<Uint32 Function(Pointer<Utf16>)>(symbol: 'SysStringLen')
-external int _SysStringLen(Pointer<Utf16> pbstr);
+final _SysStringByteLen = _oleaut32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('SysStringByteLen');
 
-@Native<
-  Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Pointer<Utf16>>)
->(symbol: 'VarBstrCat')
-external int _VarBstrCat(
-  Pointer<Utf16> bstrLeft,
-  Pointer<Utf16> bstrRight,
-  Pointer<Pointer<Utf16>> pbstrResult,
-);
+final _SysStringLen = _oleaut32
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('SysStringLen');
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Uint32)>(
-  symbol: 'VarBstrCmp',
-)
-external int _VarBstrCmp(
-  Pointer<Utf16> bstrLeft,
-  Pointer<Utf16> bstrRight,
-  int lcid,
-  int dwFlags,
-);
+final _VarBstrCat = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Pointer<Utf16>>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Pointer<Utf16>>)
+    >('VarBstrCat');
 
-@Native<Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>, Uint16, Uint16)>(
-  symbol: 'VariantChangeType',
-)
-external int _VariantChangeType(
-  Pointer<VARIANT> pvargDest,
-  Pointer<VARIANT> pvarSrc,
-  int wFlags,
-  int vt,
-);
+final _VarBstrCmp = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Uint32),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, int)
+    >('VarBstrCmp');
 
-@Native<Int32 Function(Pointer<VARIANT>)>(symbol: 'VariantClear')
-external int _VariantClear(Pointer<VARIANT> pvarg);
+final _VariantChangeType = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>, Uint16, Uint16),
+      int Function(Pointer<VARIANT>, Pointer<VARIANT>, int, int)
+    >('VariantChangeType');
 
-@Native<Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>)>(
-  symbol: 'VariantCopy',
-)
-external int _VariantCopy(
-  Pointer<VARIANT> pvargDest,
-  Pointer<VARIANT> pvargSrc,
-);
+final _VariantClear = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<VARIANT>),
+      int Function(Pointer<VARIANT>)
+    >('VariantClear');
 
-@Native<Void Function(Pointer<VARIANT>)>(symbol: 'VariantInit')
-external void _VariantInit(Pointer<VARIANT> pvarg);
+final _VariantCopy = _oleaut32
+    .lookupFunction<
+      Int32 Function(Pointer<VARIANT>, Pointer<VARIANT>),
+      int Function(Pointer<VARIANT>, Pointer<VARIANT>)
+    >('VariantCopy');
 
-@Native<Int32 Function(Double, Pointer<Uint16>, Pointer<Uint16>)>(
-  symbol: 'VariantTimeToDosDateTime',
-)
-external int _VariantTimeToDosDateTime(
-  double vtime,
-  Pointer<Uint16> pwDosDate,
-  Pointer<Uint16> pwDosTime,
-);
+final _VariantInit = _oleaut32
+    .lookupFunction<
+      Void Function(Pointer<VARIANT>),
+      void Function(Pointer<VARIANT>)
+    >('VariantInit');
 
-@Native<Int32 Function(Double, Pointer<SYSTEMTIME>)>(
-  symbol: 'VariantTimeToSystemTime',
-)
-external int _VariantTimeToSystemTime(
-  double vtime,
-  Pointer<SYSTEMTIME> lpSystemTime,
-);
+final _VariantTimeToDosDateTime = _oleaut32
+    .lookupFunction<
+      Int32 Function(Double, Pointer<Uint16>, Pointer<Uint16>),
+      int Function(double, Pointer<Uint16>, Pointer<Uint16>)
+    >('VariantTimeToDosDateTime');
+
+final _VariantTimeToSystemTime = _oleaut32
+    .lookupFunction<
+      Int32 Function(Double, Pointer<SYSTEMTIME>),
+      int Function(double, Pointer<SYSTEMTIME>)
+    >('VariantTimeToSystemTime');

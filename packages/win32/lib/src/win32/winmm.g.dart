@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -33,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _winmm = DynamicLibrary.open('winmm.dll');
+
 /// Retrieves the device identifier corresponding to the name of an open device.
 ///
 /// To learn more, see
@@ -42,8 +46,11 @@ import '../win32_result.dart';
 @pragma('vm:prefer-inline')
 int mciGetDeviceID(PCWSTR pszDevice) => _mciGetDeviceID(pszDevice);
 
-@Native<Uint32 Function(Pointer<Utf16>)>(symbol: 'mciGetDeviceIDW')
-external int _mciGetDeviceID(Pointer<Utf16> pszDevice);
+final _mciGetDeviceID = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>),
+      int Function(Pointer<Utf16>)
+    >('mciGetDeviceIDW');
 
 /// Retrieves the MCI device identifier corresponding to an element identifier.
 ///
@@ -55,13 +62,11 @@ external int _mciGetDeviceID(Pointer<Utf16> pszDevice);
 int mciGetDeviceIDFromElementID(int dwElementID, PCWSTR lpstrType) =>
     _mciGetDeviceIDFromElementID(dwElementID, lpstrType);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>)>(
-  symbol: 'mciGetDeviceIDFromElementIDW',
-)
-external int _mciGetDeviceIDFromElementID(
-  int dwElementID,
-  Pointer<Utf16> lpstrType,
-);
+final _mciGetDeviceIDFromElementID = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>),
+      int Function(int, Pointer<Utf16>)
+    >('mciGetDeviceIDFromElementIDW');
 
 /// Retrieves a string that describes the specified MCI error code.
 ///
@@ -73,14 +78,11 @@ external int _mciGetDeviceIDFromElementID(
 bool mciGetErrorString(int mcierr, PWSTR pszText, int cchText) =>
     _mciGetErrorString(mcierr, pszText, cchText) != FALSE;
 
-@Native<Int32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'mciGetErrorStringW',
-)
-external int _mciGetErrorString(
-  int mcierr,
-  Pointer<Utf16> pszText,
-  int cchText,
-);
+final _mciGetErrorString = _winmm
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('mciGetErrorStringW');
 
 /// Sends a command message to the specified MCI device.
 ///
@@ -92,10 +94,11 @@ external int _mciGetErrorString(
 int mciSendCommand(int mciId, int uMsg, int? dwParam1, int? dwParam2) =>
     _mciSendCommand(mciId, uMsg, dwParam1 ?? NULL, dwParam2 ?? NULL);
 
-@Native<Uint32 Function(Uint32, Uint32, IntPtr, IntPtr)>(
-  symbol: 'mciSendCommandW',
-)
-external int _mciSendCommand(int mciId, int uMsg, int dwParam1, int dwParam2);
+final _mciSendCommand = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, IntPtr, IntPtr),
+      int Function(int, int, int, int)
+    >('mciSendCommandW');
 
 /// Sends a command string to an MCI device.
 ///
@@ -118,15 +121,11 @@ int mciSendString(
   hwndCallback ?? nullptr,
 );
 
-@Native<Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer)>(
-  symbol: 'mciSendStringW',
-)
-external int _mciSendString(
-  Pointer<Utf16> lpstrCommand,
-  Pointer<Utf16> lpstrReturnString,
-  int uReturnLength,
-  Pointer hwndCallback,
-);
+final _mciSendString = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer)
+    >('mciSendStringW');
 
 /// Connects a MIDI input device to a MIDI thru or output device, or connects a
 /// MIDI thru device to a MIDI output device.
@@ -138,8 +137,11 @@ external int _mciSendString(
 @pragma('vm:prefer-inline')
 int midiConnect(HMIDI hmi, HMIDIOUT hmo) => _midiConnect(hmi, hmo, nullptr);
 
-@Native<Uint32 Function(Pointer, Pointer, Pointer)>(symbol: 'midiConnect')
-external int _midiConnect(Pointer hmi, Pointer hmo, Pointer pReserved);
+final _midiConnect = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer, Pointer),
+      int Function(Pointer, Pointer, Pointer)
+    >('midiConnect');
 
 /// Disconnects a MIDI input device from a MIDI thru or output device, or
 /// disconnects a MIDI thru device from a MIDI output device.
@@ -152,8 +154,11 @@ external int _midiConnect(Pointer hmi, Pointer hmo, Pointer pReserved);
 int midiDisconnect(HMIDI hmi, HMIDIOUT hmo) =>
     _midiDisconnect(hmi, hmo, nullptr);
 
-@Native<Uint32 Function(Pointer, Pointer, Pointer)>(symbol: 'midiDisconnect')
-external int _midiDisconnect(Pointer hmi, Pointer hmo, Pointer pReserved);
+final _midiDisconnect = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer, Pointer),
+      int Function(Pointer, Pointer, Pointer)
+    >('midiDisconnect');
 
 /// Sends an input buffer to a specified opened MIDI input device.
 ///
@@ -167,10 +172,11 @@ external int _midiDisconnect(Pointer hmi, Pointer hmo, Pointer pReserved);
 int midiInAddBuffer(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInAddBuffer(hmi, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiInAddBuffer',
-)
-external int _midiInAddBuffer(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
+final _midiInAddBuffer = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiInAddBuffer');
 
 /// Closes the specified MIDI input device.
 ///
@@ -181,8 +187,10 @@ external int _midiInAddBuffer(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
 @pragma('vm:prefer-inline')
 int midiInClose(HMIDIIN hmi) => _midiInClose(hmi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiInClose')
-external int _midiInClose(Pointer hmi);
+final _midiInClose = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiInClose',
+    );
 
 /// Determines the capabilities of a specified MIDI input device.
 ///
@@ -194,14 +202,11 @@ external int _midiInClose(Pointer hmi);
 int midiInGetDevCaps(int uDeviceID, Pointer<MIDIINCAPS> pmic, int cbmic) =>
     _midiInGetDevCaps(uDeviceID, pmic, cbmic);
 
-@Native<Uint32 Function(IntPtr, Pointer<MIDIINCAPS>, Uint32)>(
-  symbol: 'midiInGetDevCapsW',
-)
-external int _midiInGetDevCaps(
-  int uDeviceID,
-  Pointer<MIDIINCAPS> pmic,
-  int cbmic,
-);
+final _midiInGetDevCaps = _winmm
+    .lookupFunction<
+      Uint32 Function(IntPtr, Pointer<MIDIINCAPS>, Uint32),
+      int Function(int, Pointer<MIDIINCAPS>, int)
+    >('midiInGetDevCapsW');
 
 /// Retrieves a textual description for an error identified by the specified
 /// error code.
@@ -214,14 +219,11 @@ external int _midiInGetDevCaps(
 int midiInGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _midiInGetErrorText(mmrError, pszText, cchText);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'midiInGetErrorTextW',
-)
-external int _midiInGetErrorText(
-  int mmrError,
-  Pointer<Utf16> pszText,
-  int cchText,
-);
+final _midiInGetErrorText = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('midiInGetErrorTextW');
 
 /// Gets the device identifier for the given MIDI input device.
 ///
@@ -233,8 +235,11 @@ external int _midiInGetErrorText(
 int midiInGetID(HMIDIIN hmi, Pointer<Uint32> puDeviceID) =>
     _midiInGetID(hmi, puDeviceID);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiInGetID')
-external int _midiInGetID(Pointer hmi, Pointer<Uint32> puDeviceID);
+final _midiInGetID = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('midiInGetID');
 
 /// Retrieves the number of MIDI input devices in the system.
 ///
@@ -245,8 +250,8 @@ external int _midiInGetID(Pointer hmi, Pointer<Uint32> puDeviceID);
 @pragma('vm:prefer-inline')
 int midiInGetNumDevs() => _midiInGetNumDevs();
 
-@Native<Uint32 Function()>(symbol: 'midiInGetNumDevs')
-external int _midiInGetNumDevs();
+final _midiInGetNumDevs = _winmm
+    .lookupFunction<Uint32 Function(), int Function()>('midiInGetNumDevs');
 
 /// Sends a message to the MIDI device driver.
 ///
@@ -258,10 +263,11 @@ external int _midiInGetNumDevs();
 int midiInMessage(HMIDIIN? hmi, int uMsg, int? dw1, int? dw2) =>
     _midiInMessage(hmi ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
 
-@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'midiInMessage',
-)
-external int _midiInMessage(Pointer hmi, int uMsg, int dw1, int dw2);
+final _midiInMessage = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('midiInMessage');
 
 /// Opens a specified MIDI input device.
 ///
@@ -284,16 +290,11 @@ int midiInOpen(
   fdwOpen,
 );
 
-@Native<Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32)>(
-  symbol: 'midiInOpen',
-)
-external int _midiInOpen(
-  Pointer<Pointer> phmi,
-  int uDeviceID,
-  int dwCallback,
-  int dwInstance,
-  int fdwOpen,
-);
+final _midiInOpen = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32),
+      int Function(Pointer<Pointer>, int, int, int, int)
+    >('midiInOpen');
 
 /// Prepares a buffer for MIDI input.
 ///
@@ -305,10 +306,11 @@ external int _midiInOpen(
 int midiInPrepareHeader(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInPrepareHeader(hmi, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiInPrepareHeader',
-)
-external int _midiInPrepareHeader(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
+final _midiInPrepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiInPrepareHeader');
 
 /// Stops input on a given MIDI input device.
 ///
@@ -319,8 +321,10 @@ external int _midiInPrepareHeader(Pointer hmi, Pointer<MIDIHDR> pmh, int cbmh);
 @pragma('vm:prefer-inline')
 int midiInReset(HMIDIIN hmi) => _midiInReset(hmi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiInReset')
-external int _midiInReset(Pointer hmi);
+final _midiInReset = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiInReset',
+    );
 
 /// Starts MIDI input on the specified MIDI input device.
 ///
@@ -331,8 +335,10 @@ external int _midiInReset(Pointer hmi);
 @pragma('vm:prefer-inline')
 int midiInStart(HMIDIIN hmi) => _midiInStart(hmi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiInStart')
-external int _midiInStart(Pointer hmi);
+final _midiInStart = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiInStart',
+    );
 
 /// Stops MIDI input on the specified MIDI input device.
 ///
@@ -343,8 +349,10 @@ external int _midiInStart(Pointer hmi);
 @pragma('vm:prefer-inline')
 int midiInStop(HMIDIIN hmi) => _midiInStop(hmi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiInStop')
-external int _midiInStop(Pointer hmi);
+final _midiInStop = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiInStop',
+    );
 
 /// Cleans up the preparation performed by the midiInPrepareHeader function.
 ///
@@ -356,14 +364,11 @@ external int _midiInStop(Pointer hmi);
 int midiInUnprepareHeader(HMIDIIN hmi, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiInUnprepareHeader(hmi, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiInUnprepareHeader',
-)
-external int _midiInUnprepareHeader(
-  Pointer hmi,
-  Pointer<MIDIHDR> pmh,
-  int cbmh,
-);
+final _midiInUnprepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiInUnprepareHeader');
 
 /// Requests that an internal MIDI synthesizer device preload and cache a
 /// specified set of key-based percussion patches.
@@ -380,15 +385,11 @@ int midiOutCacheDrumPatches(
   int fuCache,
 ) => _midiOutCacheDrumPatches(hmo, uPatch, pwkya, fuCache);
 
-@Native<Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32)>(
-  symbol: 'midiOutCacheDrumPatches',
-)
-external int _midiOutCacheDrumPatches(
-  Pointer hmo,
-  int uPatch,
-  Pointer<Uint16> pwkya,
-  int fuCache,
-);
+final _midiOutCacheDrumPatches = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32),
+      int Function(Pointer, int, Pointer<Uint16>, int)
+    >('midiOutCacheDrumPatches');
 
 /// Requests that an internal MIDI synthesizer device preload and cache a
 /// specified set of patches.
@@ -405,15 +406,11 @@ int midiOutCachePatches(
   int fuCache,
 ) => _midiOutCachePatches(hmo, uBank, pwpa, fuCache);
 
-@Native<Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32)>(
-  symbol: 'midiOutCachePatches',
-)
-external int _midiOutCachePatches(
-  Pointer hmo,
-  int uBank,
-  Pointer<Uint16> pwpa,
-  int fuCache,
-);
+final _midiOutCachePatches = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer<Uint16>, Uint32),
+      int Function(Pointer, int, Pointer<Uint16>, int)
+    >('midiOutCachePatches');
 
 /// Closes the specified MIDI output device.
 ///
@@ -424,8 +421,10 @@ external int _midiOutCachePatches(
 @pragma('vm:prefer-inline')
 int midiOutClose(HMIDIOUT hmo) => _midiOutClose(hmo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiOutClose')
-external int _midiOutClose(Pointer hmo);
+final _midiOutClose = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiOutClose',
+    );
 
 /// Queries a specified MIDI output device to determine its capabilities.
 ///
@@ -437,14 +436,11 @@ external int _midiOutClose(Pointer hmo);
 int midiOutGetDevCaps(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc, int cbmoc) =>
     _midiOutGetDevCaps(uDeviceID, pmoc, cbmoc);
 
-@Native<Uint32 Function(IntPtr, Pointer<MIDIOUTCAPS>, Uint32)>(
-  symbol: 'midiOutGetDevCapsW',
-)
-external int _midiOutGetDevCaps(
-  int uDeviceID,
-  Pointer<MIDIOUTCAPS> pmoc,
-  int cbmoc,
-);
+final _midiOutGetDevCaps = _winmm
+    .lookupFunction<
+      Uint32 Function(IntPtr, Pointer<MIDIOUTCAPS>, Uint32),
+      int Function(int, Pointer<MIDIOUTCAPS>, int)
+    >('midiOutGetDevCapsW');
 
 /// Retrieves a textual description for an error identified by the specified
 /// error code.
@@ -457,14 +453,11 @@ external int _midiOutGetDevCaps(
 int midiOutGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _midiOutGetErrorText(mmrError, pszText, cchText);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'midiOutGetErrorTextW',
-)
-external int _midiOutGetErrorText(
-  int mmrError,
-  Pointer<Utf16> pszText,
-  int cchText,
-);
+final _midiOutGetErrorText = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('midiOutGetErrorTextW');
 
 /// Retrieves the device identifier for the given MIDI output device.
 ///
@@ -476,8 +469,11 @@ external int _midiOutGetErrorText(
 int midiOutGetID(HMIDIOUT hmo, Pointer<Uint32> puDeviceID) =>
     _midiOutGetID(hmo, puDeviceID);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiOutGetID')
-external int _midiOutGetID(Pointer hmo, Pointer<Uint32> puDeviceID);
+final _midiOutGetID = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('midiOutGetID');
 
 /// Retrieves the number of MIDI output devices present in the system.
 ///
@@ -488,8 +484,8 @@ external int _midiOutGetID(Pointer hmo, Pointer<Uint32> puDeviceID);
 @pragma('vm:prefer-inline')
 int midiOutGetNumDevs() => _midiOutGetNumDevs();
 
-@Native<Uint32 Function()>(symbol: 'midiOutGetNumDevs')
-external int _midiOutGetNumDevs();
+final _midiOutGetNumDevs = _winmm
+    .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
 
 /// Retrieves the current volume setting of a MIDI output device.
 ///
@@ -501,8 +497,11 @@ external int _midiOutGetNumDevs();
 int midiOutGetVolume(HMIDIOUT? hmo, Pointer<Uint32> pdwVolume) =>
     _midiOutGetVolume(hmo ?? nullptr, pdwVolume);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'midiOutGetVolume')
-external int _midiOutGetVolume(Pointer hmo, Pointer<Uint32> pdwVolume);
+final _midiOutGetVolume = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('midiOutGetVolume');
 
 /// Sends a system-exclusive MIDI message to the specified MIDI output device.
 ///
@@ -514,10 +513,11 @@ external int _midiOutGetVolume(Pointer hmo, Pointer<Uint32> pdwVolume);
 int midiOutLongMsg(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutLongMsg(hmo, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiOutLongMsg',
-)
-external int _midiOutLongMsg(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
+final _midiOutLongMsg = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiOutLongMsg');
 
 /// Sends a message to the MIDI device drivers.
 ///
@@ -532,10 +532,11 @@ external int _midiOutLongMsg(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
 int midiOutMessage(HMIDIOUT? hmo, int uMsg, int? dw1, int? dw2) =>
     _midiOutMessage(hmo ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
 
-@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'midiOutMessage',
-)
-external int _midiOutMessage(Pointer hmo, int uMsg, int dw1, int dw2);
+final _midiOutMessage = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('midiOutMessage');
 
 /// Opens a MIDI output device for playback.
 ///
@@ -558,16 +559,11 @@ int midiOutOpen(
   fdwOpen,
 );
 
-@Native<Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32)>(
-  symbol: 'midiOutOpen',
-)
-external int _midiOutOpen(
-  Pointer<Pointer> phmo,
-  int uDeviceID,
-  int dwCallback,
-  int dwInstance,
-  int fdwOpen,
-);
+final _midiOutOpen = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer<Pointer>, Uint32, IntPtr, IntPtr, Uint32),
+      int Function(Pointer<Pointer>, int, int, int, int)
+    >('midiOutOpen');
 
 /// Prepares a MIDI system-exclusive or stream buffer for output.
 ///
@@ -579,10 +575,11 @@ external int _midiOutOpen(
 int midiOutPrepareHeader(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutPrepareHeader(hmo, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiOutPrepareHeader',
-)
-external int _midiOutPrepareHeader(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
+final _midiOutPrepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiOutPrepareHeader');
 
 /// Turns off all notes on all MIDI channels for the specified MIDI output
 /// device.
@@ -594,8 +591,10 @@ external int _midiOutPrepareHeader(Pointer hmo, Pointer<MIDIHDR> pmh, int cbmh);
 @pragma('vm:prefer-inline')
 int midiOutReset(HMIDIOUT hmo) => _midiOutReset(hmo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'midiOutReset')
-external int _midiOutReset(Pointer hmo);
+final _midiOutReset = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'midiOutReset',
+    );
 
 /// Sets the volume of a MIDI output device.
 ///
@@ -607,8 +606,11 @@ external int _midiOutReset(Pointer hmo);
 int midiOutSetVolume(HMIDIOUT? hmo, int dwVolume) =>
     _midiOutSetVolume(hmo ?? nullptr, dwVolume);
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'midiOutSetVolume')
-external int _midiOutSetVolume(Pointer hmo, int dwVolume);
+final _midiOutSetVolume = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('midiOutSetVolume');
 
 /// Sends a short MIDI message to the specified MIDI output device.
 ///
@@ -619,8 +621,11 @@ external int _midiOutSetVolume(Pointer hmo, int dwVolume);
 @pragma('vm:prefer-inline')
 int midiOutShortMsg(HMIDIOUT hmo, int dwMsg) => _midiOutShortMsg(hmo, dwMsg);
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'midiOutShortMsg')
-external int _midiOutShortMsg(Pointer hmo, int dwMsg);
+final _midiOutShortMsg = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('midiOutShortMsg');
 
 /// Cleans up the preparation performed by the midiOutPrepareHeader function.
 ///
@@ -632,14 +637,11 @@ external int _midiOutShortMsg(Pointer hmo, int dwMsg);
 int midiOutUnprepareHeader(HMIDIOUT hmo, Pointer<MIDIHDR> pmh, int cbmh) =>
     _midiOutUnprepareHeader(hmo, pmh, cbmh);
 
-@Native<Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32)>(
-  symbol: 'midiOutUnprepareHeader',
-)
-external int _midiOutUnprepareHeader(
-  Pointer hmo,
-  Pointer<MIDIHDR> pmh,
-  int cbmh,
-);
+final _midiOutUnprepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MIDIHDR>, Uint32),
+      int Function(Pointer, Pointer<MIDIHDR>, int)
+    >('midiOutUnprepareHeader');
 
 /// Plays a sound specified by the given file name, resource, or system event.
 ///
@@ -651,8 +653,11 @@ external int _midiOutUnprepareHeader(
 bool PlaySound(PCWSTR? pszSound, HMODULE? hmod, SND_FLAGS fdwSound) =>
     _PlaySound(pszSound ?? nullptr, hmod ?? nullptr, fdwSound) != FALSE;
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer, Uint32)>(symbol: 'PlaySoundW')
-external int _PlaySound(Pointer<Utf16> pszSound, Pointer hmod, int fdwSound);
+final _PlaySound = _winmm
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer, Uint32),
+      int Function(Pointer<Utf16>, Pointer, int)
+    >('PlaySoundW');
 
 /// Retrieves the system time, in milliseconds.
 ///
@@ -665,8 +670,9 @@ external int _PlaySound(Pointer<Utf16> pszSound, Pointer hmod, int fdwSound);
 @pragma('vm:prefer-inline')
 int timeGetTime() => _timeGetTime();
 
-@Native<Uint32 Function()>(symbol: 'timeGetTime')
-external int _timeGetTime();
+final _timeGetTime = _winmm.lookupFunction<Uint32 Function(), int Function()>(
+  'timeGetTime',
+);
 
 /// Sends an input buffer to the given waveform-audio input device.
 ///
@@ -680,10 +686,11 @@ external int _timeGetTime();
 int waveInAddBuffer(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInAddBuffer(hwi, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveInAddBuffer',
-)
-external int _waveInAddBuffer(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
+final _waveInAddBuffer = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveInAddBuffer');
 
 /// Closes the given waveform-audio input device.
 ///
@@ -694,8 +701,10 @@ external int _waveInAddBuffer(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
 @pragma('vm:prefer-inline')
 int waveInClose(HWAVEIN hwi) => _waveInClose(hwi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveInClose')
-external int _waveInClose(Pointer hwi);
+final _waveInClose = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveInClose',
+    );
 
 /// Retrieves the capabilities of a given waveform-audio input device.
 ///
@@ -707,14 +716,11 @@ external int _waveInClose(Pointer hwi);
 int waveInGetDevCaps(int uDeviceID, Pointer<WAVEINCAPS> pwic, int cbwic) =>
     _waveInGetDevCaps(uDeviceID, pwic, cbwic);
 
-@Native<Uint32 Function(IntPtr, Pointer<WAVEINCAPS>, Uint32)>(
-  symbol: 'waveInGetDevCapsW',
-)
-external int _waveInGetDevCaps(
-  int uDeviceID,
-  Pointer<WAVEINCAPS> pwic,
-  int cbwic,
-);
+final _waveInGetDevCaps = _winmm
+    .lookupFunction<
+      Uint32 Function(IntPtr, Pointer<WAVEINCAPS>, Uint32),
+      int Function(int, Pointer<WAVEINCAPS>, int)
+    >('waveInGetDevCapsW');
 
 /// Retrieves a textual description of the error identified by the given error
 /// number.
@@ -727,14 +733,11 @@ external int _waveInGetDevCaps(
 int waveInGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _waveInGetErrorText(mmrError, pszText, cchText);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'waveInGetErrorTextW',
-)
-external int _waveInGetErrorText(
-  int mmrError,
-  Pointer<Utf16> pszText,
-  int cchText,
-);
+final _waveInGetErrorText = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('waveInGetErrorTextW');
 
 /// Gets the device identifier for the given waveform-audio input device.
 ///
@@ -746,8 +749,11 @@ external int _waveInGetErrorText(
 int waveInGetID(HWAVEIN hwi, Pointer<Uint32> puDeviceID) =>
     _waveInGetID(hwi, puDeviceID);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveInGetID')
-external int _waveInGetID(Pointer hwi, Pointer<Uint32> puDeviceID);
+final _waveInGetID = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('waveInGetID');
 
 /// Returns the number of waveform-audio input devices present in the system.
 ///
@@ -758,8 +764,8 @@ external int _waveInGetID(Pointer hwi, Pointer<Uint32> puDeviceID);
 @pragma('vm:prefer-inline')
 int waveInGetNumDevs() => _waveInGetNumDevs();
 
-@Native<Uint32 Function()>(symbol: 'waveInGetNumDevs')
-external int _waveInGetNumDevs();
+final _waveInGetNumDevs = _winmm
+    .lookupFunction<Uint32 Function(), int Function()>('waveInGetNumDevs');
 
 /// Retrieves the current input position of the given waveform-audio input
 /// device.
@@ -775,10 +781,11 @@ external int _waveInGetNumDevs();
 int waveInGetPosition(HWAVEIN hwi, Pointer<MMTIME> pmmt, int cbmmt) =>
     _waveInGetPosition(hwi, pmmt, cbmmt);
 
-@Native<Uint32 Function(Pointer, Pointer<MMTIME>, Uint32)>(
-  symbol: 'waveInGetPosition',
-)
-external int _waveInGetPosition(Pointer hwi, Pointer<MMTIME> pmmt, int cbmmt);
+final _waveInGetPosition = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MMTIME>, Uint32),
+      int Function(Pointer, Pointer<MMTIME>, int)
+    >('waveInGetPosition');
 
 /// Sends messages to the waveform-audio input device drivers.
 ///
@@ -790,10 +797,11 @@ external int _waveInGetPosition(Pointer hwi, Pointer<MMTIME> pmmt, int cbmmt);
 int waveInMessage(HWAVEIN? hwi, int uMsg, int? dw1, int? dw2) =>
     _waveInMessage(hwi ?? nullptr, uMsg, dw1 ?? NULL, dw2 ?? NULL);
 
-@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'waveInMessage',
-)
-external int _waveInMessage(Pointer hwi, int uMsg, int dw1, int dw2);
+final _waveInMessage = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('waveInMessage');
 
 /// Opens the given waveform-audio input device for recording.
 ///
@@ -818,24 +826,18 @@ int waveInOpen(
   fdwOpen,
 );
 
-@Native<
-  Uint32 Function(
-    Pointer<Pointer>,
-    Uint32,
-    Pointer<WAVEFORMATEX>,
-    IntPtr,
-    IntPtr,
-    Uint32,
-  )
->(symbol: 'waveInOpen')
-external int _waveInOpen(
-  Pointer<Pointer> phwi,
-  int uDeviceID,
-  Pointer<WAVEFORMATEX> pwfx,
-  int dwCallback,
-  int dwInstance,
-  int fdwOpen,
-);
+final _waveInOpen = _winmm
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Pointer>,
+        Uint32,
+        Pointer<WAVEFORMATEX>,
+        IntPtr,
+        IntPtr,
+        Uint32,
+      ),
+      int Function(Pointer<Pointer>, int, Pointer<WAVEFORMATEX>, int, int, int)
+    >('waveInOpen');
 
 /// Prepares a buffer for waveform-audio input.
 ///
@@ -847,10 +849,11 @@ external int _waveInOpen(
 int waveInPrepareHeader(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInPrepareHeader(hwi, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveInPrepareHeader',
-)
-external int _waveInPrepareHeader(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
+final _waveInPrepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveInPrepareHeader');
 
 /// Stops input on the given waveform-audio input device and resets the current
 /// position to zero.
@@ -864,8 +867,10 @@ external int _waveInPrepareHeader(Pointer hwi, Pointer<WAVEHDR> pwh, int cbwh);
 @pragma('vm:prefer-inline')
 int waveInReset(HWAVEIN hwi) => _waveInReset(hwi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveInReset')
-external int _waveInReset(Pointer hwi);
+final _waveInReset = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveInReset',
+    );
 
 /// Starts input on the given waveform-audio input device.
 ///
@@ -876,8 +881,10 @@ external int _waveInReset(Pointer hwi);
 @pragma('vm:prefer-inline')
 int waveInStart(HWAVEIN hwi) => _waveInStart(hwi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveInStart')
-external int _waveInStart(Pointer hwi);
+final _waveInStart = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveInStart',
+    );
 
 /// Stops waveform-audio input.
 ///
@@ -888,8 +895,10 @@ external int _waveInStart(Pointer hwi);
 @pragma('vm:prefer-inline')
 int waveInStop(HWAVEIN hwi) => _waveInStop(hwi);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveInStop')
-external int _waveInStop(Pointer hwi);
+final _waveInStop = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveInStop',
+    );
 
 /// Cleans up the preparation performed by the waveInPrepareHeader function.
 ///
@@ -901,14 +910,11 @@ external int _waveInStop(Pointer hwi);
 int waveInUnprepareHeader(HWAVEIN hwi, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveInUnprepareHeader(hwi, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveInUnprepareHeader',
-)
-external int _waveInUnprepareHeader(
-  Pointer hwi,
-  Pointer<WAVEHDR> pwh,
-  int cbwh,
-);
+final _waveInUnprepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveInUnprepareHeader');
 
 /// Closes the given waveform-audio output device.
 ///
@@ -919,8 +925,10 @@ external int _waveInUnprepareHeader(
 @pragma('vm:prefer-inline')
 int waveOutClose(HWAVEOUT hwo) => _waveOutClose(hwo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveOutClose')
-external int _waveOutClose(Pointer hwo);
+final _waveOutClose = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveOutClose',
+    );
 
 /// Retrieves the capabilities of a given waveform-audio output device.
 ///
@@ -932,14 +940,11 @@ external int _waveOutClose(Pointer hwo);
 int waveOutGetDevCaps(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc, int cbwoc) =>
     _waveOutGetDevCaps(uDeviceID, pwoc, cbwoc);
 
-@Native<Uint32 Function(IntPtr, Pointer<WAVEOUTCAPS>, Uint32)>(
-  symbol: 'waveOutGetDevCapsW',
-)
-external int _waveOutGetDevCaps(
-  int uDeviceID,
-  Pointer<WAVEOUTCAPS> pwoc,
-  int cbwoc,
-);
+final _waveOutGetDevCaps = _winmm
+    .lookupFunction<
+      Uint32 Function(IntPtr, Pointer<WAVEOUTCAPS>, Uint32),
+      int Function(int, Pointer<WAVEOUTCAPS>, int)
+    >('waveOutGetDevCapsW');
 
 /// Retrieves a textual description of the error identified by the given error
 /// number.
@@ -952,14 +957,11 @@ external int _waveOutGetDevCaps(
 int waveOutGetErrorText(int mmrError, PWSTR pszText, int cchText) =>
     _waveOutGetErrorText(mmrError, pszText, cchText);
 
-@Native<Uint32 Function(Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'waveOutGetErrorTextW',
-)
-external int _waveOutGetErrorText(
-  int mmrError,
-  Pointer<Utf16> pszText,
-  int cchText,
-);
+final _waveOutGetErrorText = _winmm
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<Utf16>, Uint32),
+      int Function(int, Pointer<Utf16>, int)
+    >('waveOutGetErrorTextW');
 
 /// Retrieves the device identifier for the given waveform-audio output device.
 ///
@@ -971,8 +973,11 @@ external int _waveOutGetErrorText(
 int waveOutGetID(HWAVEOUT hwo, Pointer<Uint32> puDeviceID) =>
     _waveOutGetID(hwo, puDeviceID);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetID')
-external int _waveOutGetID(Pointer hwo, Pointer<Uint32> puDeviceID);
+final _waveOutGetID = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('waveOutGetID');
 
 /// Retrieves the number of waveform-audio output devices present in the system.
 ///
@@ -983,8 +988,8 @@ external int _waveOutGetID(Pointer hwo, Pointer<Uint32> puDeviceID);
 @pragma('vm:prefer-inline')
 int waveOutGetNumDevs() => _waveOutGetNumDevs();
 
-@Native<Uint32 Function()>(symbol: 'waveOutGetNumDevs')
-external int _waveOutGetNumDevs();
+final _waveOutGetNumDevs = _winmm
+    .lookupFunction<Uint32 Function(), int Function()>('waveOutGetNumDevs');
 
 /// Retrieves the current pitch setting for the specified waveform-audio output
 /// device.
@@ -997,8 +1002,11 @@ external int _waveOutGetNumDevs();
 int waveOutGetPitch(HWAVEOUT hwo, Pointer<Uint32> pdwPitch) =>
     _waveOutGetPitch(hwo, pdwPitch);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetPitch')
-external int _waveOutGetPitch(Pointer hwo, Pointer<Uint32> pdwPitch);
+final _waveOutGetPitch = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('waveOutGetPitch');
 
 /// Retrieves the current playback rate for the specified waveform-audio output
 /// device.
@@ -1011,10 +1019,11 @@ external int _waveOutGetPitch(Pointer hwo, Pointer<Uint32> pdwPitch);
 int waveOutGetPlaybackRate(HWAVEOUT hwo, Pointer<Uint32> pdwRate) =>
     _waveOutGetPlaybackRate(hwo, pdwRate);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(
-  symbol: 'waveOutGetPlaybackRate',
-)
-external int _waveOutGetPlaybackRate(Pointer hwo, Pointer<Uint32> pdwRate);
+final _waveOutGetPlaybackRate = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('waveOutGetPlaybackRate');
 
 /// Retrieves the current playback position of the given waveform-audio output
 /// device.
@@ -1027,10 +1036,11 @@ external int _waveOutGetPlaybackRate(Pointer hwo, Pointer<Uint32> pdwRate);
 int waveOutGetPosition(HWAVEOUT hwo, Pointer<MMTIME> pmmt, int cbmmt) =>
     _waveOutGetPosition(hwo, pmmt, cbmmt);
 
-@Native<Uint32 Function(Pointer, Pointer<MMTIME>, Uint32)>(
-  symbol: 'waveOutGetPosition',
-)
-external int _waveOutGetPosition(Pointer hwo, Pointer<MMTIME> pmmt, int cbmmt);
+final _waveOutGetPosition = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<MMTIME>, Uint32),
+      int Function(Pointer, Pointer<MMTIME>, int)
+    >('waveOutGetPosition');
 
 /// Retrieves the current volume level of the specified waveform-audio output
 /// device.
@@ -1043,8 +1053,11 @@ external int _waveOutGetPosition(Pointer hwo, Pointer<MMTIME> pmmt, int cbmmt);
 int waveOutGetVolume(HWAVEOUT? hwo, Pointer<Uint32> pdwVolume) =>
     _waveOutGetVolume(hwo ?? nullptr, pdwVolume);
 
-@Native<Uint32 Function(Pointer, Pointer<Uint32>)>(symbol: 'waveOutGetVolume')
-external int _waveOutGetVolume(Pointer hwo, Pointer<Uint32> pdwVolume);
+final _waveOutGetVolume = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<Uint32>),
+      int Function(Pointer, Pointer<Uint32>)
+    >('waveOutGetVolume');
 
 /// Sends messages to the waveform-audio output device drivers.
 ///
@@ -1056,10 +1069,11 @@ external int _waveOutGetVolume(Pointer hwo, Pointer<Uint32> pdwVolume);
 int waveOutMessage(HWAVEOUT? hwo, int uMsg, int dw1, int dw2) =>
     _waveOutMessage(hwo ?? nullptr, uMsg, dw1, dw2);
 
-@Native<Uint32 Function(Pointer, Uint32, IntPtr, IntPtr)>(
-  symbol: 'waveOutMessage',
-)
-external int _waveOutMessage(Pointer hwo, int uMsg, int dw1, int dw2);
+final _waveOutMessage = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, IntPtr, IntPtr),
+      int Function(Pointer, int, int, int)
+    >('waveOutMessage');
 
 /// Opens the given waveform-audio output device for playback.
 ///
@@ -1084,24 +1098,18 @@ int waveOutOpen(
   fdwOpen,
 );
 
-@Native<
-  Uint32 Function(
-    Pointer<Pointer>,
-    Uint32,
-    Pointer<WAVEFORMATEX>,
-    IntPtr,
-    IntPtr,
-    Uint32,
-  )
->(symbol: 'waveOutOpen')
-external int _waveOutOpen(
-  Pointer<Pointer> phwo,
-  int uDeviceID,
-  Pointer<WAVEFORMATEX> pwfx,
-  int dwCallback,
-  int dwInstance,
-  int fdwOpen,
-);
+final _waveOutOpen = _winmm
+    .lookupFunction<
+      Uint32 Function(
+        Pointer<Pointer>,
+        Uint32,
+        Pointer<WAVEFORMATEX>,
+        IntPtr,
+        IntPtr,
+        Uint32,
+      ),
+      int Function(Pointer<Pointer>, int, Pointer<WAVEFORMATEX>, int, int, int)
+    >('waveOutOpen');
 
 /// Pauses playback on the given waveform-audio output device.
 ///
@@ -1115,8 +1123,10 @@ external int _waveOutOpen(
 @pragma('vm:prefer-inline')
 int waveOutPause(HWAVEOUT hwo) => _waveOutPause(hwo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveOutPause')
-external int _waveOutPause(Pointer hwo);
+final _waveOutPause = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveOutPause',
+    );
 
 /// Prepares a waveform-audio data block for playback.
 ///
@@ -1128,10 +1138,11 @@ external int _waveOutPause(Pointer hwo);
 int waveOutPrepareHeader(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutPrepareHeader(hwo, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveOutPrepareHeader',
-)
-external int _waveOutPrepareHeader(Pointer hwo, Pointer<WAVEHDR> pwh, int cbwh);
+final _waveOutPrepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveOutPrepareHeader');
 
 /// Stops playback on the given waveform-audio output device and resets the
 /// current position to zero.
@@ -1146,8 +1157,10 @@ external int _waveOutPrepareHeader(Pointer hwo, Pointer<WAVEHDR> pwh, int cbwh);
 @pragma('vm:prefer-inline')
 int waveOutReset(HWAVEOUT hwo) => _waveOutReset(hwo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveOutReset')
-external int _waveOutReset(Pointer hwo);
+final _waveOutReset = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveOutReset',
+    );
 
 /// Resumes playback on a paused waveform-audio output device.
 ///
@@ -1158,8 +1171,10 @@ external int _waveOutReset(Pointer hwo);
 @pragma('vm:prefer-inline')
 int waveOutRestart(HWAVEOUT hwo) => _waveOutRestart(hwo);
 
-@Native<Uint32 Function(Pointer)>(symbol: 'waveOutRestart')
-external int _waveOutRestart(Pointer hwo);
+final _waveOutRestart = _winmm
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'waveOutRestart',
+    );
 
 /// Sets the pitch for the specified waveform-audio output device.
 ///
@@ -1171,8 +1186,11 @@ external int _waveOutRestart(Pointer hwo);
 int waveOutSetPitch(HWAVEOUT hwo, int dwPitch) =>
     _waveOutSetPitch(hwo, dwPitch);
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetPitch')
-external int _waveOutSetPitch(Pointer hwo, int dwPitch);
+final _waveOutSetPitch = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('waveOutSetPitch');
 
 /// Sets the playback rate for the specified waveform-audio output device.
 ///
@@ -1184,8 +1202,11 @@ external int _waveOutSetPitch(Pointer hwo, int dwPitch);
 int waveOutSetPlaybackRate(HWAVEOUT hwo, int dwRate) =>
     _waveOutSetPlaybackRate(hwo, dwRate);
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetPlaybackRate')
-external int _waveOutSetPlaybackRate(Pointer hwo, int dwRate);
+final _waveOutSetPlaybackRate = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('waveOutSetPlaybackRate');
 
 /// Sets the volume level of the specified waveform-audio output device.
 ///
@@ -1197,8 +1218,11 @@ external int _waveOutSetPlaybackRate(Pointer hwo, int dwRate);
 int waveOutSetVolume(HWAVEOUT? hwo, int dwVolume) =>
     _waveOutSetVolume(hwo ?? nullptr, dwVolume);
 
-@Native<Uint32 Function(Pointer, Uint32)>(symbol: 'waveOutSetVolume')
-external int _waveOutSetVolume(Pointer hwo, int dwVolume);
+final _waveOutSetVolume = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32),
+      int Function(Pointer, int)
+    >('waveOutSetVolume');
 
 /// Cleans up the preparation performed by the waveOutPrepareHeader function.
 ///
@@ -1213,14 +1237,11 @@ external int _waveOutSetVolume(Pointer hwo, int dwVolume);
 int waveOutUnprepareHeader(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutUnprepareHeader(hwo, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveOutUnprepareHeader',
-)
-external int _waveOutUnprepareHeader(
-  Pointer hwo,
-  Pointer<WAVEHDR> pwh,
-  int cbwh,
-);
+final _waveOutUnprepareHeader = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveOutUnprepareHeader');
 
 /// Sends a data block to the given waveform-audio output device.
 ///
@@ -1232,7 +1253,8 @@ external int _waveOutUnprepareHeader(
 int waveOutWrite(HWAVEOUT hwo, Pointer<WAVEHDR> pwh, int cbwh) =>
     _waveOutWrite(hwo, pwh, cbwh);
 
-@Native<Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32)>(
-  symbol: 'waveOutWrite',
-)
-external int _waveOutWrite(Pointer hwo, Pointer<WAVEHDR> pwh, int cbwh);
+final _waveOutWrite = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer<WAVEHDR>, Uint32),
+      int Function(Pointer, Pointer<WAVEHDR>, int)
+    >('waveOutWrite');

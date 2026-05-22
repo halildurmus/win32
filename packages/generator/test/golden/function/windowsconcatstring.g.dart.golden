@@ -21,11 +21,8 @@ HSTRING WindowsConcatString(HSTRING? string1, HSTRING? string2) {
   return .new(result$);
 }
 
-@Native<Int32 Function(Pointer, Pointer, Pointer<Pointer>)>(
-  symbol: 'WindowsConcatString',
-)
-external int _WindowsConcatString(
-  Pointer string1,
-  Pointer string2,
-  Pointer<Pointer> newString,
-);
+final _WindowsConcatString = _api_ms_win_core_winrt_string_l1_1_0
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer, Pointer<Pointer>),
+      int Function(Pointer, Pointer, Pointer<Pointer>)
+    >('WindowsConcatString');

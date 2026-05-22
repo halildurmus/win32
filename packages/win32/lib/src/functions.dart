@@ -4,6 +4,7 @@
 // metadata used to generate bindings, or they require special handling.
 
 // ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types
 
 import 'dart:ffi';
 
@@ -11,6 +12,35 @@ import 'constants.g.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 import 'version.dart';
+import 'win32_error.dart';
+
+/// Retrieves the calling thread's last-error code value.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/errhandlingapi/nf-errhandlingapi-getlasterror>.
+@pragma('vm:prefer-inline')
+WIN32_ERROR GetLastError() => .new(_GetLastError());
+
+final _kernel32 = DynamicLibrary.open('kernel32.dll');
+
+final _GetLastError = _kernel32
+    .lookupFunction<Uint32 Function(), int Function()>(
+      'GetLastError',
+      isLeaf: true,
+    );
+
+var _getLastErrorIsResolved = false;
+
+/// Resolves the `GetLastError` function if it hasn't been resolved yet.
+///
+/// This is necessary to ensure that the correct error code is returned when a
+/// Win32 API call fails. Without this, the error code gets clobbered by Dart's
+/// runtime before it can be retrieved, leading to unreliable error handling.
+void resolveGetLastError() {
+  if (_getLastErrorIsResolved) return;
+  GetLastError();
+  _getLastErrorIsResolved = true;
+}
 
 /// Retrieves the current value of a specified Desktop Window Manager (DWM)
 /// attribute applied to a window.

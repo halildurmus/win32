@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -17,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _netapi32 = DynamicLibrary.open('netapi32.dll');
+
 /// Frees the memory allocated for the specified DSREG_JOIN_INFO structure,
 /// which contains join information for a tenant and which you retrieved by
 /// calling the NetGetAadJoinInformation function.
@@ -44,10 +48,11 @@ import '../win32_result.dart';
 void NetFreeAadJoinInformation(Pointer<DSREG_JOIN_INFO>? pJoinInfo) =>
     _NetFreeAadJoinInformation(pJoinInfo ?? nullptr);
 
-@Native<Void Function(Pointer<DSREG_JOIN_INFO>)>(
-  symbol: 'NetFreeAadJoinInformation',
-)
-external void _NetFreeAadJoinInformation(Pointer<DSREG_JOIN_INFO> pJoinInfo);
+final _NetFreeAadJoinInformation = _netapi32
+    .lookupFunction<
+      Void Function(Pointer<DSREG_JOIN_INFO>),
+      void Function(Pointer<DSREG_JOIN_INFO>)
+    >('NetFreeAadJoinInformation');
 
 /// Retrieves the join information for the specified tenant.
 ///
@@ -74,10 +79,8 @@ Pointer<DSREG_JOIN_INFO> NetGetAadJoinInformation(PCWSTR? pcszTenantId) {
   return result$;
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>)>(
-  symbol: 'NetGetAadJoinInformation',
-)
-external int _NetGetAadJoinInformation(
-  Pointer<Utf16> pcszTenantId,
-  Pointer<Pointer<DSREG_JOIN_INFO>> ppJoinInfo,
-);
+final _NetGetAadJoinInformation = _netapi32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>),
+      int Function(Pointer<Utf16>, Pointer<Pointer<DSREG_JOIN_INFO>>)
+    >('NetGetAadJoinInformation');

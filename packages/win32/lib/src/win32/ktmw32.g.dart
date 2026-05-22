@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/ktmw32.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -19,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../guid.dart';
 import '../hresult.dart';
 import '../hstring.dart';
@@ -35,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _ktmw32 = DynamicLibrary.open('ktmw32.dll');
+
 /// Requests that the specified transaction be committed.
 ///
 /// To learn more, see
@@ -42,9 +44,15 @@ import '../win32_result.dart';
 ///
 /// {@category ktmw32}
 Win32Result<bool> CommitTransaction(HANDLE transactionHandle) {
-  final result_ = CommitTransaction_Wrapper(transactionHandle);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CommitTransaction(transactionHandle);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CommitTransaction = _ktmw32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'CommitTransaction',
+    );
 
 /// Creates a new transaction object.
 ///
@@ -61,7 +69,8 @@ Win32Result<HANDLE> CreateTransaction(
   int? timeout,
   PCWSTR? description,
 ) {
-  final result_ = CreateTransaction_Wrapper(
+  resolveGetLastError();
+  final result_ = _CreateTransaction(
     lpTransactionAttributes ?? nullptr,
     uOW ?? nullptr,
     createOptions ?? NULL,
@@ -70,8 +79,30 @@ Win32Result<HANDLE> CreateTransaction(
     timeout ?? NULL,
     description ?? nullptr,
   );
-  return .new(value: .new(result_.value.ptr), error: result_.error);
+  return .new(value: .new(result_), error: GetLastError());
 }
+
+final _CreateTransaction = _ktmw32
+    .lookupFunction<
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<GUID>,
+        Uint32,
+        Uint32,
+        Uint32,
+        Uint32,
+        Pointer<Utf16>,
+      ),
+      Pointer Function(
+        Pointer<SECURITY_ATTRIBUTES>,
+        Pointer<GUID>,
+        int,
+        int,
+        int,
+        int,
+        Pointer<Utf16>,
+      )
+    >('CreateTransaction');
 
 /// Requests that the specified transaction be rolled back.
 ///
@@ -80,6 +111,12 @@ Win32Result<HANDLE> CreateTransaction(
 ///
 /// {@category ktmw32}
 Win32Result<bool> RollbackTransaction(HANDLE transactionHandle) {
-  final result_ = RollbackTransaction_Wrapper(transactionHandle);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _RollbackTransaction(transactionHandle);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _RollbackTransaction = _ktmw32
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'RollbackTransaction',
+    );

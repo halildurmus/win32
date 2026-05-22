@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -14,7 +14,6 @@ import 'dart:ffi';
 import 'package:checks/checks.dart';
 import 'package:ffi/ffi.dart';
 import 'package:test/scaffolding.dart';
-import 'package:win32/src/_internal/magnification.g.dart';
 import 'package:win32/win32.dart';
 
 import '../../helpers.dart';
@@ -61,7 +60,7 @@ void main() {
       check(_MagSetImageScalingCallback).isA<Function>();
     });
     test('MagSetInputTransform can be instantiated', () {
-      check(MagSetInputTransform_Wrapper).isA<Function>();
+      check(_MagSetInputTransform).isA<Function>();
     });
     test('MagSetWindowFilterList can be instantiated', () {
       check(_MagSetWindowFilterList).isA<Function>();
@@ -81,114 +80,110 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagGetColorEffect',
-)
-external int _MagGetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
+final _magnification = DynamicLibrary.open('magnification.dll');
 
-@Native<Int32 Function(Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagGetFullscreenColorEffect',
-)
-external int _MagGetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect);
+final _MagGetColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer, Pointer<MAGCOLOREFFECT>)
+    >('MagGetColorEffect');
 
-@Native<Int32 Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>)>(
-  symbol: 'MagGetFullscreenTransform',
-)
-external int _MagGetFullscreenTransform(
-  Pointer<Float> pMagLevel,
-  Pointer<Int32> pxOffset,
-  Pointer<Int32> pyOffset,
-);
+final _MagGetFullscreenColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer<MAGCOLOREFFECT>)
+    >('MagGetFullscreenColorEffect');
 
-@Native<Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer)>(
-  symbol: 'MagGetImageScalingCallback',
-)
-external Pointer<NativeFunction<MagImageScalingCallback>>
-_MagGetImageScalingCallback(Pointer hwnd);
+final _MagGetFullscreenTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>),
+      int Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>)
+    >('MagGetFullscreenTransform');
 
-@Native<Int32 Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'MagGetInputTransform',
-)
-external int _MagGetInputTransform(
-  Pointer<Int32> pfEnabled,
-  Pointer<RECT> pRectSource,
-  Pointer<RECT> pRectDest,
-);
+final _MagGetImageScalingCallback = _magnification
+    .lookupFunction<
+      Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer),
+      Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer)
+    >('MagGetImageScalingCallback');
 
-@Native<Int32 Function(Pointer, Pointer<Uint32>, Int32, Pointer<Pointer>)>(
-  symbol: 'MagGetWindowFilterList',
-)
-external int _MagGetWindowFilterList(
-  Pointer hwnd,
-  Pointer<Uint32> pdwFilterMode,
-  int count,
-  Pointer<Pointer> pHWND,
-);
+final _MagGetInputTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>)
+    >('MagGetInputTransform');
 
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'MagGetWindowSource')
-external int _MagGetWindowSource(Pointer hwnd, Pointer<RECT> pRect);
+final _MagGetWindowFilterList = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Int32, Pointer<Pointer>),
+      int Function(Pointer, Pointer<Uint32>, int, Pointer<Pointer>)
+    >('MagGetWindowFilterList');
 
-@Native<Int32 Function(Pointer, Pointer<MAGTRANSFORM>)>(
-  symbol: 'MagGetWindowTransform',
-)
-external int _MagGetWindowTransform(
-  Pointer hwnd,
-  Pointer<MAGTRANSFORM> pTransform,
-);
+final _MagGetWindowSource = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('MagGetWindowSource');
 
-@Native<Int32 Function()>(symbol: 'MagInitialize')
-external int _MagInitialize();
+final _MagGetWindowTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGTRANSFORM>),
+      int Function(Pointer, Pointer<MAGTRANSFORM>)
+    >('MagGetWindowTransform');
 
-@Native<Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagSetColorEffect',
-)
-external int _MagSetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
+final _MagInitialize = _magnification
+    .lookupFunction<Int32 Function(), int Function()>('MagInitialize');
 
-@Native<Int32 Function(Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagSetFullscreenColorEffect',
-)
-external int _MagSetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect);
+final _MagSetColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer, Pointer<MAGCOLOREFFECT>)
+    >('MagSetColorEffect');
 
-@Native<Int32 Function(Float, Int32, Int32)>(
-  symbol: 'MagSetFullscreenTransform',
-)
-external int _MagSetFullscreenTransform(
-  double magLevel,
-  int xOffset,
-  int yOffset,
-);
+final _MagSetFullscreenColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer<MAGCOLOREFFECT>)
+    >('MagSetFullscreenColorEffect');
 
-@Native<
-  Int32 Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>)
->(symbol: 'MagSetImageScalingCallback')
-external int _MagSetImageScalingCallback(
-  Pointer hwnd,
-  Pointer<NativeFunction<MagImageScalingCallback>> callback,
-);
+final _MagSetFullscreenTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Float, Int32, Int32),
+      int Function(double, int, int)
+    >('MagSetFullscreenTransform');
 
-@Native<Int32 Function(Pointer, Uint32, Int32, Pointer<Pointer>)>(
-  symbol: 'MagSetWindowFilterList',
-)
-external int _MagSetWindowFilterList(
-  Pointer hwnd,
-  int dwFilterMode,
-  int count,
-  Pointer<Pointer> pHWND,
-);
+final _MagSetImageScalingCallback = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>),
+      int Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>)
+    >('MagSetImageScalingCallback');
 
-@Native<Int32 Function(Pointer, RECT)>(symbol: 'MagSetWindowSource')
-external int _MagSetWindowSource(Pointer hwnd, RECT rect);
+final _MagSetInputTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<RECT>, Pointer<RECT>),
+      int Function(int, Pointer<RECT>, Pointer<RECT>)
+    >('MagSetInputTransform');
 
-@Native<Int32 Function(Pointer, Pointer<MAGTRANSFORM>)>(
-  symbol: 'MagSetWindowTransform',
-)
-external int _MagSetWindowTransform(
-  Pointer hwnd,
-  Pointer<MAGTRANSFORM> pTransform,
-);
+final _MagSetWindowFilterList = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('MagSetWindowFilterList');
 
-@Native<Int32 Function(Int32)>(symbol: 'MagShowSystemCursor')
-external int _MagShowSystemCursor(int fShowCursor);
+final _MagSetWindowSource = _magnification
+    .lookupFunction<Int32 Function(Pointer, RECT), int Function(Pointer, RECT)>(
+      'MagSetWindowSource',
+    );
 
-@Native<Int32 Function()>(symbol: 'MagUninitialize')
-external int _MagUninitialize();
+final _MagSetWindowTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGTRANSFORM>),
+      int Function(Pointer, Pointer<MAGTRANSFORM>)
+    >('MagSetWindowTransform');
+
+final _MagShowSystemCursor = _magnification
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'MagShowSystemCursor',
+    );
+
+final _MagUninitialize = _magnification
+    .lookupFunction<Int32 Function(), int Function()>('MagUninitialize');

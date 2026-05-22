@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_service_core_l1_1_5 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-5.dll',
+);
 
 /// Returns a path for a per-service filesystem location for a service and
 /// associated programs to read and/or write state to.
@@ -55,16 +61,11 @@ int GetSharedServiceDirectory(
   requiredBufferLength,
 );
 
-@Native<
-  Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>)
->(symbol: 'GetSharedServiceDirectory')
-external int _GetSharedServiceDirectory(
-  Pointer serviceHandle,
-  int directoryType,
-  Pointer<Utf16> pathBuffer,
-  int pathBufferLength,
-  Pointer<Uint32> requiredBufferLength,
-);
+final _GetSharedServiceDirectory = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Pointer<Utf16>, Uint32, Pointer<Uint32>),
+      int Function(Pointer, int, Pointer<Utf16>, int, Pointer<Uint32>)
+    >('GetSharedServiceDirectory');
 
 /// Returns a handle for a registry key for a service and associated programs to
 /// read and/or write state to.
@@ -86,12 +87,8 @@ int GetSharedServiceRegistryStateKey(
   serviceStateKey,
 );
 
-@Native<Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>)>(
-  symbol: 'GetSharedServiceRegistryStateKey',
-)
-external int _GetSharedServiceRegistryStateKey(
-  Pointer serviceHandle,
-  int stateType,
-  int accessMask,
-  Pointer<Pointer> serviceStateKey,
-);
+final _GetSharedServiceRegistryStateKey = _api_ms_win_service_core_l1_1_5
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('GetSharedServiceRegistryStateKey');

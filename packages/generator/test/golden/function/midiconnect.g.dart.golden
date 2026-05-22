@@ -9,5 +9,8 @@ midiConnect|
 @pragma('vm:prefer-inline')
 int midiConnect(HMIDI hmi, HMIDIOUT hmo) => _midiConnect(hmi, hmo, nullptr);
 
-@Native<Uint32 Function(Pointer, Pointer, Pointer)>(symbol: 'midiConnect')
-external int _midiConnect(Pointer hmi, Pointer hmo, Pointer pReserved);
+final _midiConnect = _winmm
+    .lookupFunction<
+      Uint32 Function(Pointer, Pointer, Pointer),
+      int Function(Pointer, Pointer, Pointer)
+    >('midiConnect');

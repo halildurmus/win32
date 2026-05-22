@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../guid.dart';
 import '../hresult.dart';
 import '../hstring.dart';
@@ -34,6 +36,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _iphlpapi = DynamicLibrary.open('iphlpapi.dll');
+
 /// Adds the specified IPv4 address to the specified adapter.
 ///
 /// To learn more, see
@@ -49,16 +53,11 @@ int AddIPAddress(
   Pointer<Uint32> nTEInstance,
 ) => _AddIPAddress(address, ipMask, ifIndex, nTEContext, nTEInstance);
 
-@Native<
-  Uint32 Function(Uint32, Uint32, Uint32, Pointer<Uint32>, Pointer<Uint32>)
->(symbol: 'AddIPAddress')
-external int _AddIPAddress(
-  int address,
-  int ipMask,
-  int ifIndex,
-  Pointer<Uint32> nTEContext,
-  Pointer<Uint32> nTEInstance,
-);
+final _AddIPAddress = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Uint32, Pointer<Uint32>, Pointer<Uint32>),
+      int Function(int, int, int, Pointer<Uint32>, Pointer<Uint32>)
+    >('AddIPAddress');
 
 /// Converts a globally unique identifier (GUID) for a network interface to the
 /// locally unique identifier (LUID) for the interface.
@@ -73,13 +72,11 @@ WIN32_ERROR ConvertInterfaceGuidToLuid(
   Pointer<NET_LUID_LH> interfaceLuid,
 ) => .new(_ConvertInterfaceGuidToLuid(interfaceGuid, interfaceLuid));
 
-@Native<Uint32 Function(Pointer<GUID>, Pointer<NET_LUID_LH>)>(
-  symbol: 'ConvertInterfaceGuidToLuid',
-)
-external int _ConvertInterfaceGuidToLuid(
-  Pointer<GUID> interfaceGuid,
-  Pointer<NET_LUID_LH> interfaceLuid,
-);
+final _ConvertInterfaceGuidToLuid = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Pointer<GUID>, Pointer<NET_LUID_LH>),
+      int Function(Pointer<GUID>, Pointer<NET_LUID_LH>)
+    >('ConvertInterfaceGuidToLuid');
 
 /// Deletes an IP address previously added using AddIPAddress.
 ///
@@ -90,8 +87,10 @@ external int _ConvertInterfaceGuidToLuid(
 @pragma('vm:prefer-inline')
 int DeleteIPAddress(int nTEContext) => _DeleteIPAddress(nTEContext);
 
-@Native<Uint32 Function(Uint32)>(symbol: 'DeleteIPAddress')
-external int _DeleteIPAddress(int nTEContext);
+final _DeleteIPAddress = _iphlpapi
+    .lookupFunction<Uint32 Function(Uint32), int Function(int)>(
+      'DeleteIPAddress',
+    );
 
 /// Obtains the index of an adapter, given its name.
 ///
@@ -103,13 +102,11 @@ external int _DeleteIPAddress(int nTEContext);
 int GetAdapterIndex(PCWSTR adapterName, Pointer<Uint32> ifIndex) =>
     _GetAdapterIndex(adapterName, ifIndex);
 
-@Native<Uint32 Function(Pointer<Utf16>, Pointer<Uint32>)>(
-  symbol: 'GetAdapterIndex',
-)
-external int _GetAdapterIndex(
-  Pointer<Utf16> adapterName,
-  Pointer<Uint32> ifIndex,
-);
+final _GetAdapterIndex = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('GetAdapterIndex');
 
 /// Retrieves the addresses associated with the adapters on the local computer.
 ///
@@ -131,22 +128,23 @@ int GetAdaptersAddresses(
   sizePointer,
 );
 
-@Native<
-  Uint32 Function(
-    Uint32,
-    Uint32,
-    Pointer,
-    Pointer<IP_ADAPTER_ADDRESSES_LH>,
-    Pointer<Uint32>,
-  )
->(symbol: 'GetAdaptersAddresses')
-external int _GetAdaptersAddresses(
-  int family,
-  int flags,
-  Pointer reserved,
-  Pointer<IP_ADAPTER_ADDRESSES_LH> adapterAddresses,
-  Pointer<Uint32> sizePointer,
-);
+final _GetAdaptersAddresses = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Uint32,
+        Pointer,
+        Pointer<IP_ADAPTER_ADDRESSES_LH>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        int,
+        Pointer,
+        Pointer<IP_ADAPTER_ADDRESSES_LH>,
+        Pointer<Uint32>,
+      )
+    >('GetAdaptersAddresses');
 
 /// Obtains the list of the network interface adapters with IPv4 enabled on the
 /// local system.
@@ -161,13 +159,11 @@ int GetInterfaceInfo(
   Pointer<Uint32> dwOutBufLen,
 ) => _GetInterfaceInfo(pIfTable ?? nullptr, dwOutBufLen);
 
-@Native<Uint32 Function(Pointer<IP_INTERFACE_INFO>, Pointer<Uint32>)>(
-  symbol: 'GetInterfaceInfo',
-)
-external int _GetInterfaceInfo(
-  Pointer<IP_INTERFACE_INFO> pIfTable,
-  Pointer<Uint32> dwOutBufLen,
-);
+final _GetInterfaceInfo = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Pointer<IP_INTERFACE_INFO>, Pointer<Uint32>),
+      int Function(Pointer<IP_INTERFACE_INFO>, Pointer<Uint32>)
+    >('GetInterfaceInfo');
 
 /// Retrieves information about the adapter corresponding to the specified
 /// interface.
@@ -183,14 +179,15 @@ int GetPerAdapterInfo(
   Pointer<Uint32> pOutBufLen,
 ) => _GetPerAdapterInfo(ifIndex, pPerAdapterInfo ?? nullptr, pOutBufLen);
 
-@Native<
-  Uint32 Function(Uint32, Pointer<IP_PER_ADAPTER_INFO_W2KSP1>, Pointer<Uint32>)
->(symbol: 'GetPerAdapterInfo')
-external int _GetPerAdapterInfo(
-  int ifIndex,
-  Pointer<IP_PER_ADAPTER_INFO_W2KSP1> pPerAdapterInfo,
-  Pointer<Uint32> pOutBufLen,
-);
+final _GetPerAdapterInfo = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer<IP_PER_ADAPTER_INFO_W2KSP1>,
+        Pointer<Uint32>,
+      ),
+      int Function(int, Pointer<IP_PER_ADAPTER_INFO_W2KSP1>, Pointer<Uint32>)
+    >('GetPerAdapterInfo');
 
 /// Releases an IPv4 address previously obtained through the Dynamic Host
 /// Configuration Protocol (DHCP).
@@ -203,10 +200,11 @@ external int _GetPerAdapterInfo(
 int IpReleaseAddress(Pointer<IP_ADAPTER_INDEX_MAP> adapterInfo) =>
     _IpReleaseAddress(adapterInfo);
 
-@Native<Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP>)>(
-  symbol: 'IpReleaseAddress',
-)
-external int _IpReleaseAddress(Pointer<IP_ADAPTER_INDEX_MAP> adapterInfo);
+final _IpReleaseAddress = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP>),
+      int Function(Pointer<IP_ADAPTER_INDEX_MAP>)
+    >('IpReleaseAddress');
 
 /// The IpRenewAddressfunction renews a lease on an IPv4 address previously
 /// obtained through Dynamic Host Configuration Protocol (DHCP).
@@ -219,7 +217,8 @@ external int _IpReleaseAddress(Pointer<IP_ADAPTER_INDEX_MAP> adapterInfo);
 int IpRenewAddress(Pointer<IP_ADAPTER_INDEX_MAP> adapterInfo) =>
     _IpRenewAddress(adapterInfo);
 
-@Native<Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP>)>(
-  symbol: 'IpRenewAddress',
-)
-external int _IpRenewAddress(Pointer<IP_ADAPTER_INDEX_MAP> adapterInfo);
+final _IpRenewAddress = _iphlpapi
+    .lookupFunction<
+      Uint32 Function(Pointer<IP_ADAPTER_INDEX_MAP>),
+      int Function(Pointer<IP_ADAPTER_INDEX_MAP>)
+    >('IpRenewAddress');

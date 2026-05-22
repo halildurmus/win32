@@ -785,13 +785,15 @@ final class MetadataWriter {
         // See §II.23.2.13 ArrayShape
         buffer.addByte(code);
         _encodeType(element, buffer);
-        buffer.add(CompressedInteger.encode(1)); // Rank
-        buffer.add(CompressedInteger.encode(1)); // NumSizes
-        buffer.add(CompressedInteger.encode(length)); // Size
-        buffer.add(CompressedInteger.encode(0)); // NumLoBounds
+        buffer
+          ..add(CompressedInteger.encode(1)) // Rank
+          ..add(CompressedInteger.encode(1)) // NumSizes
+          ..add(CompressedInteger.encode(length)) // Size
+          ..add(CompressedInteger.encode(0)); // NumLoBounds
       case ArrayReferenceType(:final element):
-        buffer.addByte(ELEMENT_TYPE_BYREF);
-        buffer.addByte(ELEMENT_TYPE_SZARRAY);
+        buffer
+          ..addByte(ELEMENT_TYPE_BYREF)
+          ..addByte(ELEMENT_TYPE_SZARRAY);
         _encodeType(element, buffer);
       case ConstReferenceType(:final element):
         buffer.add(CompressedInteger.encode(ELEMENT_TYPE_CMOD_REQD));
@@ -804,8 +806,9 @@ final class MetadataWriter {
         );
         _encodeType(element, buffer);
       case GenericParameterType(:final code, sequence: final parameterIndex):
-        buffer.addByte(code);
-        buffer.add(CompressedInteger.encode(parameterIndex));
+        buffer
+          ..addByte(code)
+          ..add(CompressedInteger.encode(parameterIndex));
       case MutablePointerType(:final pointee, :final depth):
         for (var i = 0; i < depth; i++) {
           buffer.add(CompressedInteger.encode(ELEMENT_TYPE_PTR));

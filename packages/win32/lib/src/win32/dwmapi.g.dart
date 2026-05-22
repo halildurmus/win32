@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -33,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _dwmapi = DynamicLibrary.open('dwmapi.dll');
+
 /// Enables the blur effect on a specified window.
 ///
 /// Throws a [WindowsException] on failure.
@@ -47,13 +51,11 @@ void DwmEnableBlurBehindWindow(HWND hWnd, Pointer<DWM_BLURBEHIND> pBlurBehind) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Pointer<DWM_BLURBEHIND>)>(
-  symbol: 'DwmEnableBlurBehindWindow',
-)
-external int _DwmEnableBlurBehindWindow(
-  Pointer hWnd,
-  Pointer<DWM_BLURBEHIND> pBlurBehind,
-);
+final _DwmEnableBlurBehindWindow = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<DWM_BLURBEHIND>),
+      int Function(Pointer, Pointer<DWM_BLURBEHIND>)
+    >('DwmEnableBlurBehindWindow');
 
 /// Notifies the Desktop Window Manager (DWM) to opt in to or out of Multimedia
 /// Class Schedule Service (MMCSS) scheduling while the calling process is
@@ -71,8 +73,8 @@ void DwmEnableMMCSS(bool fEnableMMCSS) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Int32)>(symbol: 'DwmEnableMMCSS')
-external int _DwmEnableMMCSS(int fEnableMMCSS);
+final _DwmEnableMMCSS = _dwmapi
+    .lookupFunction<Int32 Function(Int32), int Function(int)>('DwmEnableMMCSS');
 
 /// Extends the window frame into the client area.
 ///
@@ -88,13 +90,11 @@ void DwmExtendFrameIntoClientArea(HWND hWnd, Pointer<MARGINS> pMarInset) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Pointer<MARGINS>)>(
-  symbol: 'DwmExtendFrameIntoClientArea',
-)
-external int _DwmExtendFrameIntoClientArea(
-  Pointer hWnd,
-  Pointer<MARGINS> pMarInset,
-);
+final _DwmExtendFrameIntoClientArea = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MARGINS>),
+      int Function(Pointer, Pointer<MARGINS>)
+    >('DwmExtendFrameIntoClientArea');
 
 /// Issues a flush call that blocks the caller until the next present, when all
 /// of the Microsoft DirectX surface updates that are currently outstanding have
@@ -115,8 +115,9 @@ void DwmFlush() {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function()>(symbol: 'DwmFlush')
-external int _DwmFlush();
+final _DwmFlush = _dwmapi.lookupFunction<Int32 Function(), int Function()>(
+  'DwmFlush',
+);
 
 /// Retrieves the current color used for Desktop Window Manager (DWM) glass
 /// composition.
@@ -136,13 +137,11 @@ void DwmGetColorizationColor(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Uint32>, Pointer<Int32>)>(
-  symbol: 'DwmGetColorizationColor',
-)
-external int _DwmGetColorizationColor(
-  Pointer<Uint32> pcrColorization,
-  Pointer<Int32> pfOpaqueBlend,
-);
+final _DwmGetColorizationColor = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer<Uint32>, Pointer<Int32>),
+      int Function(Pointer<Uint32>, Pointer<Int32>)
+    >('DwmGetColorizationColor');
 
 /// Retrieves transport attributes.
 ///
@@ -164,14 +163,11 @@ void DwmGetTransportAttributes(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>)>(
-  symbol: 'DwmGetTransportAttributes',
-)
-external int _DwmGetTransportAttributes(
-  Pointer<Int32> pfIsRemoting,
-  Pointer<Int32> pfIsConnected,
-  Pointer<Uint32> pDwGeneration,
-);
+final _DwmGetTransportAttributes = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>),
+      int Function(Pointer<Int32>, Pointer<Int32>, Pointer<Uint32>)
+    >('DwmGetTransportAttributes');
 
 /// Retrieves the current value of a specified Desktop Window Manager (DWM)
 /// attribute applied to a window.
@@ -195,15 +191,11 @@ void DwmGetWindowAttribute(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'DwmGetWindowAttribute',
-)
-external int _DwmGetWindowAttribute(
-  Pointer hwnd,
-  int dwAttribute,
-  Pointer pvAttribute,
-  int cbAttribute,
-);
+final _DwmGetWindowAttribute = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('DwmGetWindowAttribute');
 
 /// Called by an application to indicate that all previously provided iconic
 /// bitmaps from a window, both thumbnails and peek representations, should be
@@ -221,8 +213,10 @@ void DwmInvalidateIconicBitmaps(HWND hwnd) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer)>(symbol: 'DwmInvalidateIconicBitmaps')
-external int _DwmInvalidateIconicBitmaps(Pointer hwnd);
+final _DwmInvalidateIconicBitmaps = _dwmapi
+    .lookupFunction<Int32 Function(Pointer), int Function(Pointer)>(
+      'DwmInvalidateIconicBitmaps',
+    );
 
 /// Notifies Desktop Window Manager (DWM) that a touch contact has been
 /// recognized as a gesture, and that DWM should draw feedback for that gesture.
@@ -244,15 +238,11 @@ void DwmRenderGesture(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Int32, Uint32, Pointer<Uint32>, Pointer<POINT>)>(
-  symbol: 'DwmRenderGesture',
-)
-external int _DwmRenderGesture(
-  int gt,
-  int cContacts,
-  Pointer<Uint32> pdwPointerID,
-  Pointer<POINT> pPoints,
-);
+final _DwmRenderGesture = _dwmapi
+    .lookupFunction<
+      Int32 Function(Int32, Uint32, Pointer<Uint32>, Pointer<POINT>),
+      int Function(int, int, Pointer<Uint32>, Pointer<POINT>)
+    >('DwmRenderGesture');
 
 /// Sets the value of Desktop Window Manager (DWM) non-client rendering
 /// attributes for a window.
@@ -276,15 +266,11 @@ void DwmSetWindowAttribute(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Uint32, Pointer, Uint32)>(
-  symbol: 'DwmSetWindowAttribute',
-)
-external int _DwmSetWindowAttribute(
-  Pointer hwnd,
-  int dwAttribute,
-  Pointer pvAttribute,
-  int cbAttribute,
-);
+final _DwmSetWindowAttribute = _dwmapi
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Pointer, Uint32),
+      int Function(Pointer, int, Pointer, int)
+    >('DwmSetWindowAttribute');
 
 /// Called by an app or framework to specify the visual feedback type to draw in
 /// response to a particular touch or pen contact.
@@ -301,5 +287,7 @@ void DwmShowContact(int dwPointerID, DWM_SHOWCONTACT eShowContact) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Uint32, Uint32)>(symbol: 'DwmShowContact')
-external int _DwmShowContact(int dwPointerID, int eShowContact);
+final _DwmShowContact = _dwmapi
+    .lookupFunction<Int32 Function(Uint32, Uint32), int Function(int, int)>(
+      'DwmShowContact',
+    );

@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -26,7 +26,10 @@ void main() {
   });
 }
 
-@Native<VTablePointer Function(Pointer<Uint8>, Uint32)>(
-  symbol: 'SHCreateMemStream',
-)
-external VTablePointer _SHCreateMemStream(Pointer<Uint8> pInit, int cbInit);
+final _shlwapi = DynamicLibrary.open('shlwapi.dll');
+
+final _SHCreateMemStream = _shlwapi
+    .lookupFunction<
+      VTablePointer Function(Pointer<Uint8>, Uint32),
+      VTablePointer Function(Pointer<Uint8>, int)
+    >('SHCreateMemStream');

@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/shell32.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/ibindctx.g.dart';
 import '../com/interface.g.dart';
@@ -22,6 +21,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../guid.dart';
 import '../hresult.dart';
 import '../hstring.dart';
@@ -38,6 +38,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _shell32 = DynamicLibrary.open('shell32.dll');
+
 /// Parses a Unicode command line string and returns an array of pointers to the
 /// command line arguments, along with a count of such arguments, in a way that
 /// is similar to the standard C run-time argv and argc values.
@@ -50,9 +52,16 @@ Win32Result<Pointer<Pointer<Utf16>>> CommandLineToArgv(
   PCWSTR lpCmdLine,
   Pointer<Int32> pNumArgs,
 ) {
-  final result_ = CommandLineToArgvW_Wrapper(lpCmdLine, pNumArgs);
-  return .new(value: result_.value.ptr.cast(), error: result_.error);
+  resolveGetLastError();
+  final result_ = _CommandLineToArgv(lpCmdLine, pNumArgs);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _CommandLineToArgv = _shell32
+    .lookupFunction<
+      Pointer<Pointer<Utf16>> Function(Pointer<Utf16>, Pointer<Int32>),
+      Pointer<Pointer<Utf16>> Function(Pointer<Utf16>, Pointer<Int32>)
+    >('CommandLineToArgvW');
 
 /// Registers whether a window accepts dropped files.
 ///
@@ -64,8 +73,10 @@ Win32Result<Pointer<Pointer<Utf16>>> CommandLineToArgv(
 void DragAcceptFiles(HWND hWnd, bool fAccept) =>
     _DragAcceptFiles(hWnd, fAccept ? TRUE : FALSE);
 
-@Native<Void Function(Pointer, Int32)>(symbol: 'DragAcceptFiles')
-external void _DragAcceptFiles(Pointer hWnd, int fAccept);
+final _DragAcceptFiles = _shell32
+    .lookupFunction<Void Function(Pointer, Int32), void Function(Pointer, int)>(
+      'DragAcceptFiles',
+    );
 
 /// Releases memory that the system allocated for use in transferring file names
 /// to the application.
@@ -77,8 +88,10 @@ external void _DragAcceptFiles(Pointer hWnd, int fAccept);
 @pragma('vm:prefer-inline')
 void DragFinish(HDROP hDrop) => _DragFinish(hDrop);
 
-@Native<Void Function(Pointer)>(symbol: 'DragFinish')
-external void _DragFinish(Pointer hDrop);
+final _DragFinish = _shell32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'DragFinish',
+    );
 
 /// Retrieves the names of dropped files that result from a successful
 /// drag-and-drop operation.
@@ -91,15 +104,11 @@ external void _DragFinish(Pointer hDrop);
 int DragQueryFile(HDROP hDrop, int iFile, PWSTR? lpszFile, int cch) =>
     _DragQueryFile(hDrop, iFile, lpszFile ?? nullptr, cch);
 
-@Native<Uint32 Function(Pointer, Uint32, Pointer<Utf16>, Uint32)>(
-  symbol: 'DragQueryFileW',
-)
-external int _DragQueryFile(
-  Pointer hDrop,
-  int iFile,
-  Pointer<Utf16> lpszFile,
-  int cch,
-);
+final _DragQueryFile = _shell32
+    .lookupFunction<
+      Uint32 Function(Pointer, Uint32, Pointer<Utf16>, Uint32),
+      int Function(Pointer, int, Pointer<Utf16>, int)
+    >('DragQueryFileW');
 
 /// Gets a handle to an icon stored as a resource in a file or an icon stored in
 /// a file's associated executable file.
@@ -112,14 +121,11 @@ external int _DragQueryFile(
 HICON ExtractAssociatedIcon(PWSTR pszIconPath, Pointer<Uint16> piIcon) =>
     HICON(_ExtractAssociatedIcon(nullptr, pszIconPath, piIcon));
 
-@Native<Pointer Function(Pointer, Pointer<Utf16>, Pointer<Uint16>)>(
-  symbol: 'ExtractAssociatedIconW',
-)
-external Pointer _ExtractAssociatedIcon(
-  Pointer hInst,
-  Pointer<Utf16> pszIconPath,
-  Pointer<Uint16> piIcon,
-);
+final _ExtractAssociatedIcon = _shell32
+    .lookupFunction<
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Uint16>),
+      Pointer Function(Pointer, Pointer<Utf16>, Pointer<Uint16>)
+    >('ExtractAssociatedIconW');
 
 /// Retrieves the name of and handle to the executable (.exe) file associated
 /// with a specific document file.
@@ -132,14 +138,11 @@ external Pointer _ExtractAssociatedIcon(
 HINSTANCE FindExecutable(PCWSTR lpFile, PCWSTR? lpDirectory, PWSTR lpResult) =>
     HINSTANCE(_FindExecutable(lpFile, lpDirectory ?? nullptr, lpResult));
 
-@Native<Pointer Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>)>(
-  symbol: 'FindExecutableW',
-)
-external Pointer _FindExecutable(
-  Pointer<Utf16> lpFile,
-  Pointer<Utf16> lpDirectory,
-  Pointer<Utf16> lpResult,
-);
+final _FindExecutable = _shell32
+    .lookupFunction<
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>),
+      Pointer Function(Pointer<Utf16>, Pointer<Utf16>, Pointer<Utf16>)
+    >('FindExecutableW');
 
 /// Displays a dialog box that enables the user to select a Shell folder.
 ///
@@ -151,10 +154,11 @@ external Pointer _FindExecutable(
 Pointer<ITEMIDLIST> SHBrowseForFolder(Pointer<BROWSEINFO> lpbi) =>
     _SHBrowseForFolder(lpbi);
 
-@Native<Pointer<ITEMIDLIST> Function(Pointer<BROWSEINFO>)>(
-  symbol: 'SHBrowseForFolderW',
-)
-external Pointer<ITEMIDLIST> _SHBrowseForFolder(Pointer<BROWSEINFO> lpbi);
+final _SHBrowseForFolder = _shell32
+    .lookupFunction<
+      Pointer<ITEMIDLIST> Function(Pointer<BROWSEINFO>),
+      Pointer<ITEMIDLIST> Function(Pointer<BROWSEINFO>)
+    >('SHBrowseForFolderW');
 
 /// Creates and initializes a Shell item object from a parsing name.
 ///
@@ -192,15 +196,21 @@ T SHCreateItemFromParsingName<T extends IUnknown>(
   return result;
 }
 
-@Native<
-  Int32 Function(Pointer<Utf16>, VTablePointer, Pointer<GUID>, Pointer<Pointer>)
->(symbol: 'SHCreateItemFromParsingName')
-external int _SHCreateItemFromParsingName(
-  Pointer<Utf16> pszPath,
-  VTablePointer pbc,
-  Pointer<GUID> riid,
-  Pointer<Pointer> ppv,
-);
+final _SHCreateItemFromParsingName = _shell32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        VTablePointer,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        VTablePointer,
+        Pointer<GUID>,
+        Pointer<Pointer>,
+      )
+    >('SHCreateItemFromParsingName');
 
 /// Sends a message to the taskbar's status area.
 ///
@@ -214,10 +224,11 @@ bool Shell_NotifyIcon(
   Pointer<NOTIFYICONDATA> lpData,
 ) => _Shell_NotifyIcon(dwMessage, lpData) != FALSE;
 
-@Native<Int32 Function(Uint32, Pointer<NOTIFYICONDATA>)>(
-  symbol: 'Shell_NotifyIconW',
-)
-external int _Shell_NotifyIcon(int dwMessage, Pointer<NOTIFYICONDATA> lpData);
+final _Shell_NotifyIcon = _shell32
+    .lookupFunction<
+      Int32 Function(Uint32, Pointer<NOTIFYICONDATA>),
+      int Function(int, Pointer<NOTIFYICONDATA>)
+    >('Shell_NotifyIconW');
 
 /// Displays a ShellAbout dialog box.
 ///
@@ -234,15 +245,11 @@ int ShellAbout(HWND? hWnd, PCWSTR szApp, PCWSTR? szOtherStuff, HICON? hIcon) =>
       hIcon ?? nullptr,
     );
 
-@Native<Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer)>(
-  symbol: 'ShellAboutW',
-)
-external int _ShellAbout(
-  Pointer hWnd,
-  Pointer<Utf16> szApp,
-  Pointer<Utf16> szOtherStuff,
-  Pointer hIcon,
-);
+final _ShellAbout = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer),
+      int Function(Pointer, Pointer<Utf16>, Pointer<Utf16>, Pointer)
+    >('ShellAboutW');
 
 /// Performs an operation on a specified file.
 ///
@@ -269,24 +276,25 @@ HINSTANCE ShellExecute(
   ),
 );
 
-@Native<
-  Pointer Function(
-    Pointer,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Pointer<Utf16>,
-    Int32,
-  )
->(symbol: 'ShellExecuteW')
-external Pointer _ShellExecute(
-  Pointer hwnd,
-  Pointer<Utf16> lpOperation,
-  Pointer<Utf16> lpFile,
-  Pointer<Utf16> lpParameters,
-  Pointer<Utf16> lpDirectory,
-  int nShowCmd,
-);
+final _ShellExecute = _shell32
+    .lookupFunction<
+      Pointer Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Int32,
+      ),
+      Pointer Function(
+        Pointer,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        Pointer<Utf16>,
+        int,
+      )
+    >('ShellExecuteW');
 
 /// Performs an operation on a specified file.
 ///
@@ -295,9 +303,16 @@ external Pointer _ShellExecute(
 ///
 /// {@category shell32}
 Win32Result<bool> ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) {
-  final result_ = ShellExecuteExW_Wrapper(pExecInfo);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _ShellExecuteEx(pExecInfo);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _ShellExecuteEx = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<SHELLEXECUTEINFO>),
+      int Function(Pointer<SHELLEXECUTEINFO>)
+    >('ShellExecuteExW');
 
 /// Empties the Recycle Bin on the specified drive.
 ///
@@ -315,14 +330,11 @@ void SHEmptyRecycleBin(HWND? hwnd, PCWSTR? pszRootPath, int dwFlags) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Pointer<Utf16>, Uint32)>(
-  symbol: 'SHEmptyRecycleBinW',
-)
-external int _SHEmptyRecycleBin(
-  Pointer hwnd,
-  Pointer<Utf16> pszRootPath,
-  int dwFlags,
-);
+final _SHEmptyRecycleBin = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Utf16>, Uint32),
+      int Function(Pointer, Pointer<Utf16>, int)
+    >('SHEmptyRecycleBinW');
 
 /// Copies, moves, renames, or deletes a file system object.
 ///
@@ -334,9 +346,16 @@ external int _SHEmptyRecycleBin(
 ///
 /// {@category shell32}
 Win32Result<int> SHFileOperation(Pointer<SHFILEOPSTRUCT> lpFileOp) {
-  final result_ = SHFileOperationW_Wrapper(lpFileOp);
-  return .new(value: result_.value.i32, error: result_.error);
+  resolveGetLastError();
+  final result_ = _SHFileOperation(lpFileOp);
+  return .new(value: result_, error: GetLastError());
 }
+
+final _SHFileOperation = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<SHFILEOPSTRUCT>),
+      int Function(Pointer<SHFILEOPSTRUCT>)
+    >('SHFileOperationW');
 
 /// Frees a file name mapping object that was retrieved by the SHFileOperation
 /// function.
@@ -349,8 +368,10 @@ Win32Result<int> SHFileOperation(Pointer<SHFILEOPSTRUCT> lpFileOp) {
 void SHFreeNameMappings(HANDLE? hNameMappings) =>
     _SHFreeNameMappings(hNameMappings ?? nullptr);
 
-@Native<Void Function(Pointer)>(symbol: 'SHFreeNameMappings')
-external void _SHFreeNameMappings(Pointer hNameMappings);
+final _SHFreeNameMappings = _shell32
+    .lookupFunction<Void Function(Pointer), void Function(Pointer)>(
+      'SHFreeNameMappings',
+    );
 
 /// Retrieves the IShellFolder interface for the desktop folder, which is the
 /// root of the Shell's namespace.
@@ -374,8 +395,11 @@ IShellFolder? SHGetDesktopFolder() {
   return .new(result$);
 }
 
-@Native<Int32 Function(Pointer<VTablePointer>)>(symbol: 'SHGetDesktopFolder')
-external int _SHGetDesktopFolder(Pointer<VTablePointer> ppshf);
+final _SHGetDesktopFolder = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<VTablePointer>),
+      int Function(Pointer<VTablePointer>)
+    >('SHGetDesktopFolder');
 
 /// Retrieves disk space information for a disk volume.
 ///
@@ -398,20 +422,21 @@ bool SHGetDiskFreeSpaceEx(
     ) !=
     FALSE;
 
-@Native<
-  Int32 Function(
-    Pointer<Utf16>,
-    Pointer<Uint64>,
-    Pointer<Uint64>,
-    Pointer<Uint64>,
-  )
->(symbol: 'SHGetDiskFreeSpaceExW')
-external int _SHGetDiskFreeSpaceEx(
-  Pointer<Utf16> pszDirectoryName,
-  Pointer<Uint64> pulFreeBytesAvailableToCaller,
-  Pointer<Uint64> pulTotalNumberOfBytes,
-  Pointer<Uint64> pulTotalNumberOfFreeBytes,
-);
+final _SHGetDiskFreeSpaceEx = _shell32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<Utf16>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+      ),
+      int Function(
+        Pointer<Utf16>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+        Pointer<Uint64>,
+      )
+    >('SHGetDiskFreeSpaceExW');
 
 /// Returns the type of media that is in the given drive.
 ///
@@ -433,13 +458,11 @@ int SHGetDriveMedia(PCWSTR pszDrive) {
   return result$;
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Uint32>)>(
-  symbol: 'SHGetDriveMedia',
-)
-external int _SHGetDriveMedia(
-  Pointer<Utf16> pszDrive,
-  Pointer<Uint32> pdwMediaContent,
-);
+final _SHGetDriveMedia = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Uint32>),
+      int Function(Pointer<Utf16>, Pointer<Uint32>)
+    >('SHGetDriveMedia');
 
 /// Retrieves information about an object in the file system, such as a file,
 /// folder, directory, or drive root.
@@ -463,16 +486,17 @@ int SHGetFileInfo(
   uFlags,
 );
 
-@Native<
-  IntPtr Function(Pointer<Utf16>, Uint32, Pointer<SHFILEINFO>, Uint32, Uint32)
->(symbol: 'SHGetFileInfoW')
-external int _SHGetFileInfo(
-  Pointer<Utf16> pszPath,
-  int dwFileAttributes,
-  Pointer<SHFILEINFO> psfi,
-  int cbFileInfo,
-  int uFlags,
-);
+final _SHGetFileInfo = _shell32
+    .lookupFunction<
+      IntPtr Function(
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<SHFILEINFO>,
+        Uint32,
+        Uint32,
+      ),
+      int Function(Pointer<Utf16>, int, Pointer<SHFILEINFO>, int, int)
+    >('SHGetFileInfoW');
 
 /// Deprecated.
 ///
@@ -490,16 +514,11 @@ void SHGetFolderPath(int csidl, HANDLE? hToken, int dwFlags, PWSTR pszPath) {
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Utf16>)>(
-  symbol: 'SHGetFolderPathW',
-)
-external int _SHGetFolderPath(
-  Pointer hwnd,
-  int csidl,
-  Pointer hToken,
-  int dwFlags,
-  Pointer<Utf16> pszPath,
-);
+final _SHGetFolderPath = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer, Int32, Pointer, Uint32, Pointer<Utf16>),
+      int Function(Pointer, int, Pointer, int, Pointer<Utf16>)
+    >('SHGetFolderPathW');
 
 /// Retrieves the full path of a known folder identified by the folder's
 /// KNOWNFOLDERID.
@@ -528,15 +547,11 @@ PWSTR SHGetKnownFolderPath(
   return .new(result$);
 }
 
-@Native<
-  Int32 Function(Pointer<GUID>, Uint32, Pointer, Pointer<Pointer<Utf16>>)
->(symbol: 'SHGetKnownFolderPath')
-external int _SHGetKnownFolderPath(
-  Pointer<GUID> rfid,
-  int dwFlags,
-  Pointer hToken,
-  Pointer<Pointer<Utf16>> ppszPath,
-);
+final _SHGetKnownFolderPath = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<GUID>, Uint32, Pointer, Pointer<Pointer<Utf16>>),
+      int Function(Pointer<GUID>, int, Pointer, Pointer<Pointer<Utf16>>)
+    >('SHGetKnownFolderPath');
 
 /// Retrieves the localized name of a file in a Shell folder.
 ///
@@ -557,15 +572,11 @@ void SHGetLocalizedName(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer<Int32>)>(
-  symbol: 'SHGetLocalizedName',
-)
-external int _SHGetLocalizedName(
-  Pointer<Utf16> pszPath,
-  Pointer<Utf16> pszResModule,
-  int cch,
-  Pointer<Int32> pidsRes,
-);
+final _SHGetLocalizedName = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<Utf16>, Uint32, Pointer<Int32>),
+      int Function(Pointer<Utf16>, Pointer<Utf16>, int, Pointer<Int32>)
+    >('SHGetLocalizedName');
 
 /// Converts an item identifier list to a file system path.
 ///
@@ -577,13 +588,11 @@ external int _SHGetLocalizedName(
 bool SHGetPathFromIDList(Pointer<ITEMIDLIST> pidl, PWSTR pszPath) =>
     _SHGetPathFromIDList(pidl, pszPath) != FALSE;
 
-@Native<Int32 Function(Pointer<ITEMIDLIST>, Pointer<Utf16>)>(
-  symbol: 'SHGetPathFromIDListW',
-)
-external int _SHGetPathFromIDList(
-  Pointer<ITEMIDLIST> pidl,
-  Pointer<Utf16> pszPath,
-);
+final _SHGetPathFromIDList = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<ITEMIDLIST>, Pointer<Utf16>),
+      int Function(Pointer<ITEMIDLIST>, Pointer<Utf16>)
+    >('SHGetPathFromIDListW');
 
 /// Retrieves the size of the Recycle Bin and the number of items in it, for a
 /// specified drive.
@@ -605,10 +614,8 @@ void SHQueryRecycleBin(
   if (hr$.isError) throw WindowsException(hr$);
 }
 
-@Native<Int32 Function(Pointer<Utf16>, Pointer<SHQUERYRBINFO>)>(
-  symbol: 'SHQueryRecycleBinW',
-)
-external int _SHQueryRecycleBin(
-  Pointer<Utf16> pszRootPath,
-  Pointer<SHQUERYRBINFO> pSHQueryRBInfo,
-);
+final _SHQueryRecycleBin = _shell32
+    .lookupFunction<
+      Int32 Function(Pointer<Utf16>, Pointer<SHQUERYRBINFO>),
+      int Function(Pointer<Utf16>, Pointer<SHQUERYRBINFO>)
+    >('SHQueryRecycleBinW');

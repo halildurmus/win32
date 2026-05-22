@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/crypt32.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../com/interface.g.dart';
 import '../com/iunknown.g.dart';
@@ -19,6 +18,7 @@ import '../constants.dart';
 import '../constants.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -34,6 +34,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _crypt32 = DynamicLibrary.open('crypt32.dll');
+
 /// Performs encryption on the data in a DATA_BLOB structure.
 ///
 /// To learn more, see
@@ -48,7 +50,8 @@ Win32Result<bool> CryptProtectData(
   int dwFlags,
   Pointer<CRYPT_INTEGER_BLOB> pDataOut,
 ) {
-  final result_ = CryptProtectData_Wrapper(
+  resolveGetLastError();
+  final result_ = _CryptProtectData(
     pDataIn,
     szDataDescr ?? nullptr,
     pOptionalEntropy ?? nullptr,
@@ -57,8 +60,30 @@ Win32Result<bool> CryptProtectData(
     dwFlags,
     pDataOut,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CryptProtectData = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer<Utf16>,
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT>,
+        Uint32,
+        Pointer<CRYPT_INTEGER_BLOB>,
+      ),
+      int Function(
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer<Utf16>,
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT>,
+        int,
+        Pointer<CRYPT_INTEGER_BLOB>,
+      )
+    >('CryptProtectData');
 
 /// Encrypts memory to prevent others from viewing sensitive information in your
 /// process.
@@ -72,9 +97,16 @@ Win32Result<bool> CryptProtectMemory(
   int cbDataIn,
   int dwFlags,
 ) {
-  final result_ = CryptProtectMemory_Wrapper(pDataIn, cbDataIn, dwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CryptProtectMemory(pDataIn, cbDataIn, dwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CryptProtectMemory = _crypt32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('CryptProtectMemory');
 
 /// Decrypts and does an integrity check of the data in a DATA_BLOB structure.
 ///
@@ -90,7 +122,8 @@ Win32Result<bool> CryptUnprotectData(
   int dwFlags,
   Pointer<CRYPT_INTEGER_BLOB> pDataOut,
 ) {
-  final result_ = CryptUnprotectData_Wrapper(
+  resolveGetLastError();
+  final result_ = _CryptUnprotectData(
     pDataIn,
     ppszDataDescr ?? nullptr,
     pOptionalEntropy ?? nullptr,
@@ -99,8 +132,30 @@ Win32Result<bool> CryptUnprotectData(
     dwFlags,
     pDataOut,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CryptUnprotectData = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer<Pointer<Utf16>>,
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT>,
+        Uint32,
+        Pointer<CRYPT_INTEGER_BLOB>,
+      ),
+      int Function(
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer<Pointer<Utf16>>,
+        Pointer<CRYPT_INTEGER_BLOB>,
+        Pointer,
+        Pointer<CRYPTPROTECT_PROMPTSTRUCT>,
+        int,
+        Pointer<CRYPT_INTEGER_BLOB>,
+      )
+    >('CryptUnprotectData');
 
 /// Decrypts memory that was encrypted using the CryptProtectMemory function.
 ///
@@ -113,9 +168,16 @@ Win32Result<bool> CryptUnprotectMemory(
   int cbDataIn,
   int dwFlags,
 ) {
-  final result_ = CryptUnprotectMemory_Wrapper(pDataIn, cbDataIn, dwFlags);
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  resolveGetLastError();
+  final result_ = _CryptUnprotectMemory(pDataIn, cbDataIn, dwFlags);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CryptUnprotectMemory = _crypt32
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Uint32),
+      int Function(Pointer, int, int)
+    >('CryptUnprotectMemory');
 
 /// Migrates the current user's master keys after the user's security identifier
 /// (SID) has changed.
@@ -131,12 +193,31 @@ Win32Result<bool> CryptUpdateProtectedState(
   Pointer<Uint32>? pdwSuccessCount,
   Pointer<Uint32>? pdwFailureCount,
 ) {
-  final result_ = CryptUpdateProtectedState_Wrapper(
+  resolveGetLastError();
+  final result_ = _CryptUpdateProtectedState(
     pOldSid ?? nullptr,
     pwszOldPassword ?? nullptr,
     dwFlags,
     pdwSuccessCount ?? nullptr,
     pdwFailureCount ?? nullptr,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _CryptUpdateProtectedState = _crypt32
+    .lookupFunction<
+      Int32 Function(
+        Pointer,
+        Pointer<Utf16>,
+        Uint32,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        Pointer,
+        Pointer<Utf16>,
+        int,
+        Pointer<Uint32>,
+        Pointer<Uint32>,
+      )
+    >('CryptUpdateProtectedState');

@@ -36,7 +36,13 @@ void main() {
       deleteCredential(credentialName);
 
       // Validate credential deletion.
-      check(() => readCredential(credentialName)).throws<WindowsException>();
+      check(
+        () => readCredential(credentialName),
+      ).throws<WindowsException>().which(
+        (it) => it
+          ..has((e) => e.hr, 'hr').equals(ERROR_NOT_FOUND.toHRESULT())
+          ..has((e) => e.message, 'message').contains('Element not found.'),
+      );
     });
 
     test('update an existing credential', () {
@@ -65,7 +71,13 @@ void main() {
       deleteCredential(credentialName);
 
       // Validate credential deletion.
-      check(() => readCredential(credentialName)).throws<WindowsException>();
+      check(
+        () => readCredential(credentialName),
+      ).throws<WindowsException>().which(
+        (it) => it
+          ..has((e) => e.hr, 'hr').equals(ERROR_NOT_FOUND.toHRESULT())
+          ..has((e) => e.message, 'message').contains('Element not found.'),
+      );
     });
   });
 }
@@ -80,7 +92,6 @@ void writeCredential({
     final userName = arena.pwstr(username);
     final examplePassword = utf8.encode(password);
     final blob = examplePassword.toNative(allocator: arena);
-
     final credential = arena<CREDENTIAL>();
     credential.ref
       ..Type = CRED_TYPE_GENERIC
@@ -89,9 +100,8 @@ void writeCredential({
       ..UserName = userName
       ..CredentialBlob = blob
       ..CredentialBlobSize = examplePassword.length;
-
-    final Win32Result(:value, :error) = CredWrite(credential, 0);
-    if (!value) throw WindowsException(error.toHRESULT());
+    final result = CredWrite(credential, 0);
+    if (!result.value) throw WindowsException(result.error.toHRESULT());
   });
 }
 
@@ -101,7 +111,6 @@ String readCredential(String credentialName) => using((arena) {
   try {
     final result = CredRead(targetName, CRED_TYPE_GENERIC, credPointer);
     if (!result.value) throw WindowsException(result.error.toHRESULT());
-
     final cred = credPointer.value.ref;
     final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
     final password = utf8.decode(blob);
@@ -114,10 +123,7 @@ String readCredential(String credentialName) => using((arena) {
 void deleteCredential(String credentialName) {
   using((arena) {
     final targetName = arena.pcwstr(credentialName);
-    final Win32Result(:value, :error) = CredDelete(
-      targetName,
-      CRED_TYPE_GENERIC,
-    );
-    if (!value) throw WindowsException(error.toHRESULT());
+    final result = CredDelete(targetName, CRED_TYPE_GENERIC);
+    if (!result.value) throw WindowsException(result.error.toHRESULT());
   });
 }

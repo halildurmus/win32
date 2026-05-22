@@ -40,11 +40,6 @@ dev_dependencies:
   path: ^1.9.1
   win32: ^6.0.0
 
-# hooks:
-#   user_defines:
-#     win32:
-#       local_build: true
-
 melos:
   categories:
     examples:

@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -33,6 +35,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _xinput1_4 = DynamicLibrary.open('xinput1_4.dll');
+
 /// Sets the reporting state of XInput.
 ///
 /// To learn more, see
@@ -42,8 +46,8 @@ import '../win32_result.dart';
 @pragma('vm:prefer-inline')
 void XInputEnable(bool enable) => _XInputEnable(enable ? TRUE : FALSE);
 
-@Native<Void Function(Int32)>(symbol: 'XInputEnable')
-external void _XInputEnable(int enable);
+final _XInputEnable = _xinput1_4
+    .lookupFunction<Void Function(Int32), void Function(int)>('XInputEnable');
 
 /// Retrieves the sound rendering and sound capture audio device IDs that are
 /// associated with the headset connected to the specified controller.
@@ -67,22 +71,23 @@ int XInputGetAudioDeviceIds(
   pCaptureCount ?? nullptr,
 );
 
-@Native<
-  Uint32 Function(
-    Uint32,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-    Pointer<Utf16>,
-    Pointer<Uint32>,
-  )
->(symbol: 'XInputGetAudioDeviceIds')
-external int _XInputGetAudioDeviceIds(
-  int dwUserIndex,
-  Pointer<Utf16> pRenderDeviceId,
-  Pointer<Uint32> pRenderCount,
-  Pointer<Utf16> pCaptureDeviceId,
-  Pointer<Uint32> pCaptureCount,
-);
+final _XInputGetAudioDeviceIds = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(
+        Uint32,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      ),
+      int Function(
+        int,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+        Pointer<Utf16>,
+        Pointer<Uint32>,
+      )
+    >('XInputGetAudioDeviceIds');
 
 /// Retrieves the battery type and charge status of a wireless controller.
 ///
@@ -97,14 +102,11 @@ int XInputGetBatteryInformation(
   Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation,
 ) => _XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation);
 
-@Native<Uint32 Function(Uint32, Uint8, Pointer<XINPUT_BATTERY_INFORMATION>)>(
-  symbol: 'XInputGetBatteryInformation',
-)
-external int _XInputGetBatteryInformation(
-  int dwUserIndex,
-  int devType,
-  Pointer<XINPUT_BATTERY_INFORMATION> pBatteryInformation,
-);
+final _XInputGetBatteryInformation = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint8, Pointer<XINPUT_BATTERY_INFORMATION>),
+      int Function(int, int, Pointer<XINPUT_BATTERY_INFORMATION>)
+    >('XInputGetBatteryInformation');
 
 /// Retrieves the capabilities and features of a connected controller.
 ///
@@ -119,14 +121,11 @@ int XInputGetCapabilities(
   Pointer<XINPUT_CAPABILITIES> pCapabilities,
 ) => _XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities);
 
-@Native<Uint32 Function(Uint32, Uint32, Pointer<XINPUT_CAPABILITIES>)>(
-  symbol: 'XInputGetCapabilities',
-)
-external int _XInputGetCapabilities(
-  int dwUserIndex,
-  int dwFlags,
-  Pointer<XINPUT_CAPABILITIES> pCapabilities,
-);
+final _XInputGetCapabilities = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Pointer<XINPUT_CAPABILITIES>),
+      int Function(int, int, Pointer<XINPUT_CAPABILITIES>)
+    >('XInputGetCapabilities');
 
 /// Retrieves a gamepad input event.
 ///
@@ -138,14 +137,11 @@ external int _XInputGetCapabilities(
 int XInputGetKeystroke(int dwUserIndex, Pointer<XINPUT_KEYSTROKE> pKeystroke) =>
     _XInputGetKeystroke(dwUserIndex, NULL, pKeystroke);
 
-@Native<Uint32 Function(Uint32, Uint32, Pointer<XINPUT_KEYSTROKE>)>(
-  symbol: 'XInputGetKeystroke',
-)
-external int _XInputGetKeystroke(
-  int dwUserIndex,
-  int dwReserved,
-  Pointer<XINPUT_KEYSTROKE> pKeystroke,
-);
+final _XInputGetKeystroke = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Uint32, Pointer<XINPUT_KEYSTROKE>),
+      int Function(int, int, Pointer<XINPUT_KEYSTROKE>)
+    >('XInputGetKeystroke');
 
 /// Retrieves the current state of the specified controller.
 ///
@@ -157,10 +153,11 @@ external int _XInputGetKeystroke(
 int XInputGetState(int dwUserIndex, Pointer<XINPUT_STATE> pState) =>
     _XInputGetState(dwUserIndex, pState);
 
-@Native<Uint32 Function(Uint32, Pointer<XINPUT_STATE>)>(
-  symbol: 'XInputGetState',
-)
-external int _XInputGetState(int dwUserIndex, Pointer<XINPUT_STATE> pState);
+final _XInputGetState = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<XINPUT_STATE>),
+      int Function(int, Pointer<XINPUT_STATE>)
+    >('XInputGetState');
 
 /// Sends data to a connected controller.
 ///
@@ -174,10 +171,8 @@ external int _XInputGetState(int dwUserIndex, Pointer<XINPUT_STATE> pState);
 int XInputSetState(int dwUserIndex, Pointer<XINPUT_VIBRATION> pVibration) =>
     _XInputSetState(dwUserIndex, pVibration);
 
-@Native<Uint32 Function(Uint32, Pointer<XINPUT_VIBRATION>)>(
-  symbol: 'XInputSetState',
-)
-external int _XInputSetState(
-  int dwUserIndex,
-  Pointer<XINPUT_VIBRATION> pVibration,
-);
+final _XInputSetState = _xinput1_4
+    .lookupFunction<
+      Uint32 Function(Uint32, Pointer<XINPUT_VIBRATION>),
+      int Function(int, Pointer<XINPUT_VIBRATION>)
+    >('XInputSetState');

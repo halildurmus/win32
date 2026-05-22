@@ -3,7 +3,8 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
@@ -18,6 +19,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -32,6 +34,10 @@ import '../types.dart';
 import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
+
+final _api_ms_win_service_core_l1_1_3 = DynamicLibrary.open(
+  'api-ms-win-service-core-l1-1-3.dll',
+);
 
 /// Returns a handle for a registry key for a service to read and/or write state
 /// to.
@@ -53,12 +59,8 @@ int GetServiceRegistryStateKey(
   serviceStateKey,
 );
 
-@Native<Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>)>(
-  symbol: 'GetServiceRegistryStateKey',
-)
-external int _GetServiceRegistryStateKey(
-  Pointer serviceStatusHandle,
-  int stateType,
-  int accessMask,
-  Pointer<Pointer> serviceStateKey,
-);
+final _GetServiceRegistryStateKey = _api_ms_win_service_core_l1_1_3
+    .lookupFunction<
+      Uint32 Function(Pointer, Int32, Uint32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('GetServiceRegistryStateKey');

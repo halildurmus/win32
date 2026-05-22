@@ -3,15 +3,14 @@
 // Maps FFI prototypes onto the corresponding Win32 API function calls.
 //
 // ignore_for_file: avoid_positional_boolean_parameters
-// ignore_for_file: non_constant_identifier_names, unused_import
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:ffi_leak_tracker/ffi_leak_tracker.dart';
 
-import '../_internal/magnification.g.dart';
-import '../_internal/win32.dart';
 import '../bstr.dart';
 import '../callbacks.g.dart';
 import '../com/interface.g.dart';
@@ -21,6 +20,7 @@ import '../constants.g.dart';
 import '../enums.g.dart';
 import '../exception.dart';
 import '../extensions/pointer.dart';
+import '../functions.dart';
 import '../hresult.dart';
 import '../hstring.dart';
 import '../macros.dart';
@@ -36,6 +36,8 @@ import '../utils.dart';
 import '../win32_error.dart';
 import '../win32_result.dart';
 
+final _magnification = DynamicLibrary.open('magnification.dll');
+
 /// Gets the color transformation matrix for a magnifier control.
 ///
 /// To learn more, see
@@ -46,10 +48,11 @@ import '../win32_result.dart';
 bool MagGetColorEffect(HWND hwnd, Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagGetColorEffect(hwnd, pEffect) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagGetColorEffect',
-)
-external int _MagGetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
+final _MagGetColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer, Pointer<MAGCOLOREFFECT>)
+    >('MagGetColorEffect');
 
 /// Retrieves the color transformation matrix associated with the full-screen
 /// magnifier.
@@ -62,10 +65,11 @@ external int _MagGetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
 bool MagGetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagGetFullscreenColorEffect(pEffect) != FALSE;
 
-@Native<Int32 Function(Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagGetFullscreenColorEffect',
-)
-external int _MagGetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect);
+final _MagGetFullscreenColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer<MAGCOLOREFFECT>)
+    >('MagGetFullscreenColorEffect');
 
 /// Retrieves the magnification settings for the full-screen magnifier.
 ///
@@ -80,14 +84,11 @@ bool MagGetFullscreenTransform(
   Pointer<Int32> pyOffset,
 ) => _MagGetFullscreenTransform(pMagLevel, pxOffset, pyOffset) != FALSE;
 
-@Native<Int32 Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>)>(
-  symbol: 'MagGetFullscreenTransform',
-)
-external int _MagGetFullscreenTransform(
-  Pointer<Float> pMagLevel,
-  Pointer<Int32> pxOffset,
-  Pointer<Int32> pyOffset,
-);
+final _MagGetFullscreenTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>),
+      int Function(Pointer<Float>, Pointer<Int32>, Pointer<Int32>)
+    >('MagGetFullscreenTransform');
 
 /// Retrieves the registered callback function that implements a custom
 /// transform for image scaling.
@@ -101,11 +102,11 @@ Pointer<NativeFunction<MagImageScalingCallback>> MagGetImageScalingCallback(
   HWND hwnd,
 ) => _MagGetImageScalingCallback(hwnd);
 
-@Native<Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer)>(
-  symbol: 'MagGetImageScalingCallback',
-)
-external Pointer<NativeFunction<MagImageScalingCallback>>
-_MagGetImageScalingCallback(Pointer hwnd);
+final _MagGetImageScalingCallback = _magnification
+    .lookupFunction<
+      Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer),
+      Pointer<NativeFunction<MagImageScalingCallback>> Function(Pointer)
+    >('MagGetImageScalingCallback');
 
 /// Retrieves the current input transformation for pen and touch input,
 /// represented as a source rectangle and a destination rectangle.
@@ -121,14 +122,11 @@ bool MagGetInputTransform(
   Pointer<RECT> pRectDest,
 ) => _MagGetInputTransform(pfEnabled, pRectSource, pRectDest) != FALSE;
 
-@Native<Int32 Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>)>(
-  symbol: 'MagGetInputTransform',
-)
-external int _MagGetInputTransform(
-  Pointer<Int32> pfEnabled,
-  Pointer<RECT> pRectSource,
-  Pointer<RECT> pRectDest,
-);
+final _MagGetInputTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>),
+      int Function(Pointer<Int32>, Pointer<RECT>, Pointer<RECT>)
+    >('MagGetInputTransform');
 
 /// Retrieves the list of windows that are magnified or excluded from
 /// magnification.
@@ -145,15 +143,11 @@ int MagGetWindowFilterList(
   Pointer<Pointer> pHWND,
 ) => _MagGetWindowFilterList(hwnd, pdwFilterMode, count, pHWND);
 
-@Native<Int32 Function(Pointer, Pointer<Uint32>, Int32, Pointer<Pointer>)>(
-  symbol: 'MagGetWindowFilterList',
-)
-external int _MagGetWindowFilterList(
-  Pointer hwnd,
-  Pointer<Uint32> pdwFilterMode,
-  int count,
-  Pointer<Pointer> pHWND,
-);
+final _MagGetWindowFilterList = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<Uint32>, Int32, Pointer<Pointer>),
+      int Function(Pointer, Pointer<Uint32>, int, Pointer<Pointer>)
+    >('MagGetWindowFilterList');
 
 /// Gets the rectangle of the area that is being magnified.
 ///
@@ -165,8 +159,11 @@ external int _MagGetWindowFilterList(
 bool MagGetWindowSource(HWND hwnd, Pointer<RECT> pRect) =>
     _MagGetWindowSource(hwnd, pRect) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<RECT>)>(symbol: 'MagGetWindowSource')
-external int _MagGetWindowSource(Pointer hwnd, Pointer<RECT> pRect);
+final _MagGetWindowSource = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<RECT>),
+      int Function(Pointer, Pointer<RECT>)
+    >('MagGetWindowSource');
 
 /// Retrieves the transformation matrix associated with a magnifier control.
 ///
@@ -178,13 +175,11 @@ external int _MagGetWindowSource(Pointer hwnd, Pointer<RECT> pRect);
 bool MagGetWindowTransform(HWND hwnd, Pointer<MAGTRANSFORM> pTransform) =>
     _MagGetWindowTransform(hwnd, pTransform) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<MAGTRANSFORM>)>(
-  symbol: 'MagGetWindowTransform',
-)
-external int _MagGetWindowTransform(
-  Pointer hwnd,
-  Pointer<MAGTRANSFORM> pTransform,
-);
+final _MagGetWindowTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGTRANSFORM>),
+      int Function(Pointer, Pointer<MAGTRANSFORM>)
+    >('MagGetWindowTransform');
 
 /// Creates and initializes the magnifier run-time objects.
 ///
@@ -195,8 +190,8 @@ external int _MagGetWindowTransform(
 @pragma('vm:prefer-inline')
 bool MagInitialize() => _MagInitialize() != FALSE;
 
-@Native<Int32 Function()>(symbol: 'MagInitialize')
-external int _MagInitialize();
+final _MagInitialize = _magnification
+    .lookupFunction<Int32 Function(), int Function()>('MagInitialize');
 
 /// Sets the color transformation matrix for a magnifier control.
 ///
@@ -208,10 +203,11 @@ external int _MagInitialize();
 bool MagSetColorEffect(HWND hwnd, Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagSetColorEffect(hwnd, pEffect) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagSetColorEffect',
-)
-external int _MagSetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
+final _MagSetColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer, Pointer<MAGCOLOREFFECT>)
+    >('MagSetColorEffect');
 
 /// Changes the color transformation matrix associated with the full-screen
 /// magnifier.
@@ -224,10 +220,11 @@ external int _MagSetColorEffect(Pointer hwnd, Pointer<MAGCOLOREFFECT> pEffect);
 bool MagSetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect) =>
     _MagSetFullscreenColorEffect(pEffect) != FALSE;
 
-@Native<Int32 Function(Pointer<MAGCOLOREFFECT>)>(
-  symbol: 'MagSetFullscreenColorEffect',
-)
-external int _MagSetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect);
+final _MagSetFullscreenColorEffect = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer<MAGCOLOREFFECT>),
+      int Function(Pointer<MAGCOLOREFFECT>)
+    >('MagSetFullscreenColorEffect');
 
 /// Changes the magnification settings for the full-screen magnifier.
 ///
@@ -239,14 +236,11 @@ external int _MagSetFullscreenColorEffect(Pointer<MAGCOLOREFFECT> pEffect);
 bool MagSetFullscreenTransform(double magLevel, int xOffset, int yOffset) =>
     _MagSetFullscreenTransform(magLevel, xOffset, yOffset) != FALSE;
 
-@Native<Int32 Function(Float, Int32, Int32)>(
-  symbol: 'MagSetFullscreenTransform',
-)
-external int _MagSetFullscreenTransform(
-  double magLevel,
-  int xOffset,
-  int yOffset,
-);
+final _MagSetFullscreenTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Float, Int32, Int32),
+      int Function(double, int, int)
+    >('MagSetFullscreenTransform');
 
 /// Sets the callback function for external image filtering and scaling.
 ///
@@ -260,13 +254,11 @@ bool MagSetImageScalingCallback(
   Pointer<NativeFunction<MagImageScalingCallback>> callback,
 ) => _MagSetImageScalingCallback(hwnd, callback) != FALSE;
 
-@Native<
-  Int32 Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>)
->(symbol: 'MagSetImageScalingCallback')
-external int _MagSetImageScalingCallback(
-  Pointer hwnd,
-  Pointer<NativeFunction<MagImageScalingCallback>> callback,
-);
+final _MagSetImageScalingCallback = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>),
+      int Function(Pointer, Pointer<NativeFunction<MagImageScalingCallback>>)
+    >('MagSetImageScalingCallback');
 
 /// Sets the current active input transformation for pen and touch input,
 /// represented as a source rectangle and a destination rectangle.
@@ -280,13 +272,20 @@ Win32Result<bool> MagSetInputTransform(
   Pointer<RECT> pRectSource,
   Pointer<RECT> pRectDest,
 ) {
-  final result_ = MagSetInputTransform_Wrapper(
+  resolveGetLastError();
+  final result_ = _MagSetInputTransform(
     fEnabled ? TRUE : FALSE,
     pRectSource,
     pRectDest,
   );
-  return .new(value: result_.value.i32 != FALSE, error: result_.error);
+  return .new(value: result_ != FALSE, error: GetLastError());
 }
+
+final _MagSetInputTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Int32, Pointer<RECT>, Pointer<RECT>),
+      int Function(int, Pointer<RECT>, Pointer<RECT>)
+    >('MagSetInputTransform');
 
 /// Sets the list of windows to be magnified or the list of windows to be
 /// excluded from magnification.
@@ -303,15 +302,11 @@ bool MagSetWindowFilterList(
   Pointer<Pointer> pHWND,
 ) => _MagSetWindowFilterList(hwnd, dwFilterMode, count, pHWND) != FALSE;
 
-@Native<Int32 Function(Pointer, Uint32, Int32, Pointer<Pointer>)>(
-  symbol: 'MagSetWindowFilterList',
-)
-external int _MagSetWindowFilterList(
-  Pointer hwnd,
-  int dwFilterMode,
-  int count,
-  Pointer<Pointer> pHWND,
-);
+final _MagSetWindowFilterList = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Uint32, Int32, Pointer<Pointer>),
+      int Function(Pointer, int, int, Pointer<Pointer>)
+    >('MagSetWindowFilterList');
 
 /// Sets the source rectangle for the magnification window.
 ///
@@ -323,8 +318,10 @@ external int _MagSetWindowFilterList(
 bool MagSetWindowSource(HWND hwnd, RECT rect) =>
     _MagSetWindowSource(hwnd, rect) != FALSE;
 
-@Native<Int32 Function(Pointer, RECT)>(symbol: 'MagSetWindowSource')
-external int _MagSetWindowSource(Pointer hwnd, RECT rect);
+final _MagSetWindowSource = _magnification
+    .lookupFunction<Int32 Function(Pointer, RECT), int Function(Pointer, RECT)>(
+      'MagSetWindowSource',
+    );
 
 /// Sets the transformation matrix for a magnifier control.
 ///
@@ -336,13 +333,11 @@ external int _MagSetWindowSource(Pointer hwnd, RECT rect);
 bool MagSetWindowTransform(HWND hwnd, Pointer<MAGTRANSFORM> pTransform) =>
     _MagSetWindowTransform(hwnd, pTransform) != FALSE;
 
-@Native<Int32 Function(Pointer, Pointer<MAGTRANSFORM>)>(
-  symbol: 'MagSetWindowTransform',
-)
-external int _MagSetWindowTransform(
-  Pointer hwnd,
-  Pointer<MAGTRANSFORM> pTransform,
-);
+final _MagSetWindowTransform = _magnification
+    .lookupFunction<
+      Int32 Function(Pointer, Pointer<MAGTRANSFORM>),
+      int Function(Pointer, Pointer<MAGTRANSFORM>)
+    >('MagSetWindowTransform');
 
 /// Shows or hides the system cursor.
 ///
@@ -354,8 +349,10 @@ external int _MagSetWindowTransform(
 bool MagShowSystemCursor(bool fShowCursor) =>
     _MagShowSystemCursor(fShowCursor ? TRUE : FALSE) != FALSE;
 
-@Native<Int32 Function(Int32)>(symbol: 'MagShowSystemCursor')
-external int _MagShowSystemCursor(int fShowCursor);
+final _MagShowSystemCursor = _magnification
+    .lookupFunction<Int32 Function(Int32), int Function(int)>(
+      'MagShowSystemCursor',
+    );
 
 /// Destroys the magnifier run-time objects.
 ///
@@ -366,5 +363,5 @@ external int _MagShowSystemCursor(int fShowCursor);
 @pragma('vm:prefer-inline')
 bool MagUninitialize() => _MagUninitialize() != FALSE;
 
-@Native<Int32 Function()>(symbol: 'MagUninitialize')
-external int _MagUninitialize();
+final _MagUninitialize = _magnification
+    .lookupFunction<Int32 Function(), int Function()>('MagUninitialize');

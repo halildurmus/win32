@@ -4,7 +4,7 @@
 // lookupFunction works for all the APIs generated).
 //
 // ignore_for_file: non_constant_identifier_names, unnecessary_ignore
-// ignore_for_file: unused_import
+// ignore_for_file: specify_nonobvious_property_types, unused_import
 
 @TestOn('windows')
 library;
@@ -26,5 +26,12 @@ void main() {
   });
 }
 
-@Native<Int32 Function(Pointer<Double>)>(symbol: 'GetIntegratedDisplaySize')
-external int _GetIntegratedDisplaySize(Pointer<Double> sizeInInches);
+final _api_ms_win_core_sysinfo_l1_2_3 = DynamicLibrary.open(
+  'api-ms-win-core-sysinfo-l1-2-3.dll',
+);
+
+final _GetIntegratedDisplaySize = _api_ms_win_core_sysinfo_l1_2_3
+    .lookupFunction<
+      Int32 Function(Pointer<Double>),
+      int Function(Pointer<Double>)
+    >('GetIntegratedDisplaySize');
