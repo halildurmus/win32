@@ -24,8 +24,7 @@ on:
 
 jobs:
   check-release:
-    if: ${{ github.event_name != 'workflow_dispatch' }}
-
+    if: ${{ github.event_name != 'workflow_dispatch' && github.repository == 'halildurmus/win32' }}
     runs-on: ubuntu-latest
 
     outputs:
@@ -34,7 +33,7 @@ jobs:
 
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: 🔍 Check if There is a Release Commit
         id: check_release
@@ -42,20 +41,51 @@ jobs:
           msg=$(git log -1 --pretty=format:%s)
           echo "📜 Latest commit: $msg"
 
+          # Expected format: chore(release): package:<name> v<semver>
+          # Example:         chore(release): package:win32 v6.3.0
           if [[ "$msg" =~ chore\(release\):[[:space:]]+.*package:([a-zA-Z0-9_]+).*v ]]; then
             pkg="${BASH_REMATCH[1]}"
             echo "🎯 Package: $pkg"
-            echo "package=$pkg" >> $GITHUB_OUTPUT
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+
+            # Ensure the resolved package directory actually exists
+            if [[ ! -d "packages/$pkg" ]]; then
+              echo "❌ Package directory 'packages/$pkg' not found"
+              exit 1
+            fi
+
+            echo "package=$pkg" >> "$GITHUB_OUTPUT"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
           else
-            echo "❌ Not a release commit"
+            echo "❌ Not a release commit — skipping"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           fi
 
+  validate-dispatch:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.repository == 'halildurmus/win32' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: ✅ Validate Package Directory Exists
+        run: |
+          pkg="${{ inputs.package }}"
+          if [[ ! -d "packages/$pkg" ]]; then
+            echo "❌ Directory 'packages/$pkg' does not exist"
+            exit 1
+          fi
+          echo "✅ Directory confirmed: packages/$pkg"
+
   release:
-    needs: [check-release]
-    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-release.outputs.should_publish == 'true' }}
-    uses: halildurmus/workflows/.github/workflows/flutter_release.yml@main
+    needs: [check-release, validate-dispatch]
+    if: |
+      always() &&
+      (
+        (github.event_name == 'workflow_dispatch' && needs.validate-dispatch.result == 'success') ||
+        (github.event_name != 'workflow_dispatch' && needs.check-release.outputs.should_publish == 'true')
+      )
+    uses: halildurmus/workflows/.github/workflows/flutter_release.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/${{ github.event_name == 'workflow_dispatch' && inputs.package || needs.check-release.outputs.package }}
     secrets:

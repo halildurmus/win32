@@ -36,7 +36,7 @@ jobs:
         os: [windows]
         sdk: [main, stable]
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       analyze_directories: bin example lib test
       check_coverage: ${{ matrix.sdk == 'main' }}

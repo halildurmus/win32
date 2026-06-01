@@ -23,17 +23,17 @@ jobs:
 
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - name: 🐦 Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           channel: stable
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
 
       - name: 📦 Activate Melos
-        uses: bluefireteam/melos-action@v3
+        uses: bluefireteam/melos-action@705015c3d2bc4ab94201ac24accb2bbe070cf533
 
       - name: 📦 Install Workspace Dependencies
         run: dart pub get
