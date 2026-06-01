@@ -15,11 +15,29 @@ on:
           - win32_gamepad
           - win32_registry
           - win32_runner
+          - win32_service
           - winmd
 
 jobs:
+  validate:
+    if: ${{ github.repository == 'halildurmus/win32' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - name: ✅ Validate Package Directory Exists
+        run: |
+          if [[ ! -d "packages/${{ inputs.package }}" ]]; then
+            echo "❌ Directory 'packages/${{ inputs.package }}' does not exist"
+            exit 1
+          fi
+          echo "✅ Directory confirmed: packages/${{ inputs.package }}"
+
   prepare-release:
-    uses: halildurmus/workflows/.github/workflows/prepare_release.yml@main
+    needs: [validate]
+    uses: halildurmus/workflows/.github/workflows/prepare_release.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/${{ inputs.package }}
     secrets:

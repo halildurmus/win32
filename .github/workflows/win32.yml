@@ -53,7 +53,7 @@ jobs:
           - os: ubuntu-latest
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: win32
@@ -66,12 +66,12 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
-    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/win32
 
   dart_examples:
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       # Only analyze/format standalone Dart files and the com_interop directory.
       analyze_directories: com_interop $(find . -maxdepth 1 -name '*.dart' -print)
@@ -92,7 +92,7 @@ jobs:
           - tetris
           - usb_drive_monitor
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       analyze_directories: bin lib
       format_directories: bin lib
@@ -106,7 +106,7 @@ jobs:
           - explorer
           - task_manager
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       analyze_directories: lib
       format_directories: lib
@@ -114,6 +114,6 @@ jobs:
       working_directory: examples/${{ matrix.example }}
 
   pana:
-    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    uses: halildurmus/workflows/.github/workflows/pana.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/win32

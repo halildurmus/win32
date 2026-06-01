@@ -45,7 +45,7 @@ jobs:
           - os: ubuntu-latest
             sdk: stable
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       check_coverage: ${{ matrix.sdk == 'main' }}
       codecov_flags: win32_registry
@@ -58,12 +58,12 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
-    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/win32_registry
 
   examples:
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       analyze_directories: example
       format_directories: example
@@ -71,6 +71,6 @@ jobs:
       working_directory: packages/win32_registry
 
   pana:
-    uses: halildurmus/workflows/.github/workflows/pana.yml@main
+    uses: halildurmus/workflows/.github/workflows/pana.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
     with:
       working_directory: packages/win32_registry

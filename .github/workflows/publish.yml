@@ -2,10 +2,11 @@ name: Publish
 
 on:
   push:
-    tags: ['[A-z0-9]+-v[0-9]+.[0-9]+.[0-9]+*']
+    tags: ['[A-z0-9]+-v[0-9]+\.[0-9]+\.[0-9]+*']
 
 jobs:
   get_package_name:
+    if: ${{ github.repository == 'halildurmus/win32' }}
     name: Extract package name
     runs-on: ubuntu-latest
     outputs:
@@ -13,21 +14,25 @@ jobs:
     steps:
       - name: Extract package name from tag
         id: extract
+        env:
+          TAG: ${{ github.ref_name }}
         run: |
-          TAG="${{ github.ref_name }}"
           PACKAGE_NAME="${TAG%-v*}"
           if [[ -z "$PACKAGE_NAME" || "$PACKAGE_NAME" == "$TAG" ]]; then
             echo "ERROR: Could not extract package name from tag: $TAG"
+            exit 1
+          fi
+          if [[ ! "$PACKAGE_NAME" =~ ^[A-Za-z0-9_-]+$ ]]; then
+            echo "ERROR: Invalid package name: $PACKAGE_NAME"
             exit 1
           fi
           echo "package_name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
 
   publish:
     needs: get_package_name
-    if: ${{ github.repository_owner == 'halildurmus' }}
     name: Publish to pub.dev
     permissions:
       id-token: write
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@main
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@cb7127289503113089d94a9c7247ada34feeb436
     with:
       working-directory: packages/${{ needs.get_package_name.outputs.package_name }}
