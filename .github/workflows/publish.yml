@@ -33,6 +33,6 @@ jobs:
     name: Publish to pub.dev
     permissions:
       id-token: write
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@cb7127289503113089d94a9c7247ada34feeb436
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@2bd11704788983a6a210731656d0042e2df8b2c1
     with:
       working-directory: packages/${{ needs.get_package_name.outputs.package_name }}
