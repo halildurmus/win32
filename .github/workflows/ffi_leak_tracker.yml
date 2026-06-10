@@ -34,7 +34,7 @@ jobs:
         os: [macos, ubuntu, windows]
         sdk: [main, stable]
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       analyze_directories: example lib test
       check_coverage: ${{ matrix.sdk == 'main' }}
@@ -47,11 +47,11 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   dartdoc:
-    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/ffi_leak_tracker
 
   pana:
-    uses: halildurmus/workflows/.github/workflows/pana.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/pana.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/ffi_leak_tracker

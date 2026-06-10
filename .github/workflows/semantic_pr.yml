@@ -10,4 +10,4 @@ on:
 
 jobs:
   build:
-    uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/semantic_pr.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee

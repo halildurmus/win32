@@ -37,7 +37,7 @@ jobs:
 
   prepare-release:
     needs: [validate]
-    uses: halildurmus/workflows/.github/workflows/prepare_release.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/prepare_release.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/${{ inputs.package }}
     secrets:

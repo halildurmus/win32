@@ -27,18 +27,18 @@ on:
 
 jobs:
   build:
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       format_directories: lib test
       working_directory: packages/filepicker_windows
 
   dartdoc:
-    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/dartdoc.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/filepicker_windows
 
   dart_examples:
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       # Only analyze/format standalone Dart files.
       analyze_directories: $(find . -maxdepth 1 -name '*.dart' -print)
@@ -52,7 +52,7 @@ jobs:
         example:
           - wallpaper
 
-    uses: halildurmus/workflows/.github/workflows/flutter.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/flutter.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       analyze_directories: lib
       format_directories: lib
@@ -60,6 +60,6 @@ jobs:
       working_directory: packages/filepicker_windows/example/${{ matrix.example }}
 
   pana:
-    uses: halildurmus/workflows/.github/workflows/pana.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/pana.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/filepicker_windows

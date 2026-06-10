@@ -85,7 +85,7 @@ jobs:
         (github.event_name == 'workflow_dispatch' && needs.validate-dispatch.result == 'success') ||
         (github.event_name != 'workflow_dispatch' && needs.check-release.outputs.should_publish == 'true')
       )
-    uses: halildurmus/workflows/.github/workflows/flutter_release.yml@53010d33dbb7d7a10f0865a3a9ee2a2643494727
+    uses: halildurmus/workflows/.github/workflows/flutter_release.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
       working_directory: packages/${{ github.event_name == 'workflow_dispatch' && inputs.package || needs.check-release.outputs.package }}
     secrets:
