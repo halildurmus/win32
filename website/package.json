@@ -27,7 +27,7 @@
     "clsx": "^2.1.1",
     "copy-text-to-clipboard": "^3.2.2",
     "framer-motion": "^12.38.0",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.12",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
