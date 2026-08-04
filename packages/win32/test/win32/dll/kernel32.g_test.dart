@@ -830,6 +830,9 @@ void main() {
         check(_ResizePseudoConsole).isA<Function>();
       },
     );
+    test('ResumeThread can be instantiated', () {
+      check(_ResumeThread).isA<Function>();
+    });
     test('ScrollConsoleScreenBuffer can be instantiated', () {
       check(_ScrollConsoleScreenBuffer).isA<Function>();
     });
@@ -979,6 +982,9 @@ void main() {
     });
     test('SleepEx can be instantiated', () {
       check(_SleepEx).isA<Function>();
+    });
+    test('SuspendThread can be instantiated', () {
+      check(_SuspendThread).isA<Function>();
     });
     test('SystemTimeToFileTime can be instantiated', () {
       check(_SystemTimeToFileTime).isA<Function>();
@@ -3020,6 +3026,11 @@ final _ResizePseudoConsole = _kernel32
       'ResizePseudoConsole',
     );
 
+final _ResumeThread = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'ResumeThread',
+    );
+
 final _ScrollConsoleScreenBuffer = _kernel32
     .lookupFunction<
       Int32 Function(
@@ -3319,6 +3330,11 @@ final _Sleep = _kernel32
 final _SleepEx = _kernel32
     .lookupFunction<Uint32 Function(Uint32, Int32), int Function(int, int)>(
       'SleepEx',
+    );
+
+final _SuspendThread = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'SuspendThread',
     );
 
 final _SystemTimeToFileTime = _kernel32

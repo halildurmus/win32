@@ -6376,6 +6376,26 @@ final _ResizePseudoConsole = _kernel32
       'ResizePseudoConsole',
     );
 
+/// Decrements a thread's suspend count.
+///
+/// When the suspend count is decremented to zero, the execution of the thread
+/// is resumed.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-resumethread>.
+///
+/// {@category kernel32}
+Win32Result<int> ResumeThread(HANDLE hThread) {
+  resolveGetLastError();
+  final result_ = _ResumeThread(hThread);
+  return .new(value: result_, error: GetLastError());
+}
+
+final _ResumeThread = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'ResumeThread',
+    );
+
 /// Moves a block of data in a screen buffer.
 ///
 /// To learn more, see
@@ -7474,6 +7494,23 @@ int SleepEx(int dwMilliseconds, bool bAlertable) =>
 final _SleepEx = _kernel32
     .lookupFunction<Uint32 Function(Uint32, Int32), int Function(int, int)>(
       'SleepEx',
+    );
+
+/// Suspends the specified thread.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-suspendthread>.
+///
+/// {@category kernel32}
+Win32Result<int> SuspendThread(HANDLE hThread) {
+  resolveGetLastError();
+  final result_ = _SuspendThread(hThread);
+  return .new(value: result_, error: GetLastError());
+}
+
+final _SuspendThread = _kernel32
+    .lookupFunction<Uint32 Function(Pointer), int Function(Pointer)>(
+      'SuspendThread',
     );
 
 /// Converts a system time to file time format.
