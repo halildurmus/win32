@@ -6,10 +6,9 @@ FONTENUMPROCW|
 /// <https://learn.microsoft.com/previous-versions/dd162621(v=vs.85)>.
 ///
 /// {@category callback}
-typedef FONTENUMPROC =
-    Int32 Function(
-      Pointer<LOGFONT> param0,
-      Pointer<TEXTMETRIC> param1,
-      Uint32 param2,
-      IntPtr param3,
-    );
+typedef FONTENUMPROC = Int32 Function(
+  Pointer<LOGFONT> param0,
+  Pointer<TEXTMETRIC> param1,
+  Uint32 param2,
+  IntPtr param3,
+);

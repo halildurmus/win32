@@ -6,10 +6,9 @@ MONITORENUMPROC|
 /// <https://learn.microsoft.com/windows/win32/api/winuser/nc-winuser-monitorenumproc>.
 ///
 /// {@category callback}
-typedef MONITORENUMPROC =
-    Int32 Function(
-      Pointer param0,
-      Pointer param1,
-      Pointer<RECT> param2,
-      IntPtr param3,
-    );
+typedef MONITORENUMPROC = Int32 Function(
+  Pointer param0,
+  Pointer param1,
+  Pointer<RECT> param2,
+  IntPtr param3,
+);

@@ -6,10 +6,9 @@ WNDPROC|
 /// <https://learn.microsoft.com/windows/win32/api/winuser/nc-winuser-wndproc>.
 ///
 /// {@category callback}
-typedef WNDPROC =
-    IntPtr Function(
-      Pointer param0,
-      Uint32 param1,
-      IntPtr param2,
-      IntPtr param3,
-    );
+typedef WNDPROC = IntPtr Function(
+  Pointer param0,
+  Uint32 param1,
+  IntPtr param2,
+  IntPtr param3,
+);
