@@ -3294,6 +3294,9 @@
     "originalName": "ResizePseudoConsole",
     "minimumWindowsVersion": "WIN10_RS5"
   },
+  "ResumeThread": {
+    "originalName": "ResumeThread"
+  },
   "RoActivateInstance": {
     "originalName": "RoActivateInstance"
   },
@@ -4150,6 +4153,9 @@
   },
   "SubtractRect": {
     "originalName": "SubtractRect"
+  },
+  "SuspendThread": {
+    "originalName": "SuspendThread"
   },
   "SwapMouseButton": {
     "originalName": "SwapMouseButton"
