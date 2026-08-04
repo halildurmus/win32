@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.1.1] - 2026-08-04
+
+### 📦 Dependencies
+
+- Bump `cli_util` from 0.4.2 to 0.5.1 (#1086)
+
 ## [7.1.0] - 2026-03-06
 
 ### 🚀 Features
