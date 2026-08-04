@@ -15,6 +15,7 @@ sealed class MetadataValue {
 
 /// Represents a boolean value.
 final class BoolValue extends MetadataValue {
+  // ignore: avoid_positional_boolean_parameters
   const BoolValue(this.value) : super(const BoolType());
 
   final bool value;

@@ -69,6 +69,7 @@ extension type const PropVariant<T extends Object?>._(Pointer<PROPVARIANT> _)
 
   /// Creates a [PropVariant] holding a [VARIANT_BOOL] value.
   @pragma('vm:prefer-inline')
+  // ignore: avoid_positional_boolean_parameters
   static PropVariantBool bool$(bool value) => PropVariantBool(value);
 
   /// Creates a [PropVariant] holding a [BSTR] value.
@@ -663,6 +664,7 @@ extension type const PropVariant<T extends Object?>._(Pointer<PROPVARIANT> _)
 extension type PropVariantBool.fromPointer(Pointer<PROPVARIANT> _)
     implements PropVariant<bool> {
   /// Creates a [PropVariant] holding a [VARIANT_BOOL] value.
+  // ignore: avoid_positional_boolean_parameters
   factory PropVariantBool(bool value) {
     final propVariant = adaptiveCalloc<PROPVARIANT>();
     propVariant.ref
