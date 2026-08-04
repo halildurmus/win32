@@ -60,13 +60,12 @@ typedef FONTENUMPROC = Int32 Function(Pointer<LOGFONT> param0, Pointer<TEXTMETRI
         const projection = TestProjection();
         check(projection.toString()).equals('''
 /// {@category callback}
-typedef FONTENUMPROC =
-    Int32 Function(
-      Pointer<LOGFONT> param0,
-      Pointer<TEXTMETRIC> param1,
-      Uint32 param2,
-      LPARAM param3,
-    );
+typedef FONTENUMPROC = Int32 Function(
+  Pointer<LOGFONT> param0,
+  Pointer<TEXTMETRIC> param1,
+  Uint32 param2,
+  LPARAM param3,
+);
 ''');
       });
     });

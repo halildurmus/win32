@@ -829,6 +829,15 @@
   "DnsHostnameToComputerName": {
     "originalName": "DnsHostnameToComputerNameW"
   },
+  "DnsServiceDeRegister": {
+    "originalName": "DnsServiceDeRegister"
+  },
+  "DnsServiceRegister": {
+    "originalName": "DnsServiceRegister"
+  },
+  "DnsServiceRegisterCancel": {
+    "originalName": "DnsServiceRegisterCancel"
+  },
   "DocumentProperties": {
     "originalName": "DocumentPropertiesW"
   },

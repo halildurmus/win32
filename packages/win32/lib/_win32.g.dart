@@ -26,6 +26,7 @@ export 'src/win32/comctl32.g.dart';
 export 'src/win32/comdlg32.g.dart';
 export 'src/win32/crypt32.g.dart';
 export 'src/win32/dbghelp.g.dart';
+export 'src/win32/dnsapi.g.dart';
 export 'src/win32/dwmapi.g.dart';
 export 'src/win32/dxva2.g.dart';
 export 'src/win32/gdi32.g.dart';

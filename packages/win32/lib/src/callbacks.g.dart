@@ -331,6 +331,14 @@ typedef MagImageScalingCallback =
 /// {@category callback}
 typedef NEARPROC = Pointer;
 
+/// {@category callback}
+typedef PDNS_SERVICE_REGISTER_COMPLETE =
+    Void Function(
+      Uint32 status,
+      Pointer pQueryContext,
+      Pointer<DNS_SERVICE_INSTANCE> pInstance,
+    );
+
 /// An application-defined callback function used with the EnumPageFiles
 /// function.
 ///
