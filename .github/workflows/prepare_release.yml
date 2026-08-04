@@ -39,6 +39,7 @@ jobs:
     needs: [validate]
     uses: halildurmus/workflows/.github/workflows/prepare_release.yml@b71996adb8995d4af04fe79ebf5173ae51ebcfee
     with:
+      use_flutter: true
       working_directory: packages/${{ inputs.package }}
     secrets:
       token: ${{ secrets.PAT }}
