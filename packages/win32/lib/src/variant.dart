@@ -65,7 +65,6 @@ extension type const Variant<T extends Object?>._(Pointer<VARIANT> _)
 
   /// Creates a [Variant] holding a [VARIANT_BOOL] value.
   @pragma('vm:prefer-inline')
-  // ignore: avoid_positional_boolean_parameters
   static VariantBool bool$(bool value) => VariantBool(value);
 
   /// Creates a [Variant] holding a [BSTR] value.
@@ -523,7 +522,6 @@ extension type const Variant<T extends Object?>._(Pointer<VARIANT> _)
 extension type const VariantBool.fromPointer(Pointer<VARIANT> _)
     implements Variant<bool> {
   /// Creates a [Variant] holding a [VARIANT_BOOL] value.
-  // ignore: avoid_positional_boolean_parameters
   factory VariantBool(bool value) {
     final variant = adaptiveCalloc<VARIANT>();
     variant.ref
