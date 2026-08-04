@@ -49,9 +49,9 @@ class Application {
 
       case WM_SETTINGCHANGE:
         if (wParam == 0 && lParam != 0) {
-          final lParamString = Pointer.fromAddress(
-            lParam,
-          ).cast<Utf16>().toDartString();
+          final lParamString = Pointer.fromAddress(lParam)
+              .cast<Utf16>()
+              .toDartString();
           if (lParamString == 'ImmersiveColorSet') {
             Window(hWnd).updateTheme();
           }

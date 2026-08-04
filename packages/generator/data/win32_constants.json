@@ -556,6 +556,7 @@
   "Windows.Win32.Foundation.Apis.DISP_E_UNKNOWNINTERFACE": "",
   "Windows.Win32.Foundation.Apis.DISP_E_UNKNOWNLCID": "",
   "Windows.Win32.Foundation.Apis.DISP_E_UNKNOWNNAME": "",
+  "Windows.Win32.Foundation.Apis.DNS_REQUEST_PENDING": "",
   "Windows.Win32.Foundation.Apis.E_ABORT": "",
   "Windows.Win32.Foundation.Apis.E_ACCESSDENIED": "",
   "Windows.Win32.Foundation.Apis.E_FAIL": "",

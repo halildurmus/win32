@@ -6325,6 +6325,142 @@ base class DLLVERSIONINFO extends Struct {
       allocator()..ref = this;
 }
 
+/// Used to cancel an asynchronous DNS-SD operation.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_service_cancel>.
+///
+/// {@category struct}
+base class DNS_SERVICE_CANCEL extends Struct {
+  external Pointer reserved;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DNS_SERVICE_CANCEL> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Represents a DNS service running on the network.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_service_instance>.
+///
+/// {@category struct}
+base class DNS_SERVICE_INSTANCE extends Struct {
+  external Pointer<Utf16> _pszInstanceName;
+  external Pointer<Utf16> _pszHostName;
+
+  /// A pointer to an **IP4_ADDRESS** structure that represents the
+  /// service-associated IPv4 address.
+  external Pointer<Uint32> ip4Address;
+
+  /// A pointer to an `IP6_ADDRESS` structure that represents the
+  /// service-associated IPv6 address.
+  external Pointer<IP6_ADDRESS> ip6Address;
+
+  /// A value that represents the port on which the service is running.
+  @Uint16()
+  external int wPort;
+
+  /// A value that represents the service priority.
+  @Uint16()
+  external int wPriority;
+
+  /// A value that represents the service weight.
+  @Uint16()
+  external int wWeight;
+
+  /// The number of properties&mdash;defines the number of elements in the
+  /// arrays of the `keys` and `values` parameters.
+  @Uint32()
+  external int dwPropertyCount;
+
+  external Pointer<Pointer<Utf16>> keys;
+  external Pointer<Pointer<Utf16>> values;
+
+  /// A value that contains the interface index on which the service was
+  /// discovered.
+  @Uint32()
+  external int dwInterfaceIndex;
+
+  /// A string that represents the service name.
+  PWSTR get pszInstanceName => .new(_pszInstanceName);
+
+  set pszInstanceName(PWSTR value) => _pszInstanceName = value;
+
+  /// A string that represents the name of the host of the service.
+  PWSTR get pszHostName => .new(_pszHostName);
+
+  set pszHostName(PWSTR value) => _pszHostName = value;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DNS_SERVICE_INSTANCE> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
+/// Contains the information necessary to advertise a service using
+/// `DnsServiceRegister`, or to stop advertising it using
+/// `DnsServiceDeRegister`.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_service_register_request>.
+///
+/// {@category struct}
+base class DNS_SERVICE_REGISTER_REQUEST extends Struct {
+  /// The structure version must be **DNS_QUERY_REQUEST_VERSION1**.
+  @Uint32()
+  external int Version;
+
+  /// A value that contains the interface index over which the service is to be
+  /// advertised.
+  @Uint32()
+  external int InterfaceIndex;
+
+  /// A pointer to a `DNS_SERVICE_INSTANCE` structure that describes the service
+  /// to be registered.
+  external Pointer<DNS_SERVICE_INSTANCE> pServiceInstance;
+
+  /// A pointer to a function (of type `DNS_SERVICE_REGISTER_COMPLETE` that
+  /// represents the callback to be invoked asynchronously.
+  external Pointer<NativeFunction<PDNS_SERVICE_REGISTER_COMPLETE>>
+  pRegisterCompletionCallback;
+
+  /// A pointer to a user context.
+  external Pointer pQueryContext;
+
+  external Pointer _hCredentials;
+
+  @Int32()
+  external int _unicastEnabled;
+
+  HANDLE get hCredentials => .new(_hCredentials);
+  set hCredentials(HANDLE value) => _hCredentials = value;
+
+  /// `true` if the DNS protocol should be used to advertise the service;
+  /// `false` if the mDNS protocol should be used.
+  bool get unicastEnabled => _unicastEnabled != FALSE;
+
+  set unicastEnabled(bool value) => _unicastEnabled = value ? TRUE : FALSE;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<DNS_SERVICE_REGISTER_REQUEST> toNative({
+    Allocator allocator = adaptiveCalloc,
+  }) => allocator()..ref = this;
+}
+
 /// Describes a document that will be printed.
 ///
 /// To learn more, see
@@ -9159,6 +9295,36 @@ extension IN_ADDR_0_1_Extension on IN_ADDR {
   set s_w1(int value) => this.S_un.S_un_w.s_w1 = value;
   int get s_w2 => this.S_un.S_un_w.s_w2;
   set s_w2(int value) => this.S_un.S_un_w.s_w2 = value;
+}
+
+/// Stores an IPv6 address.
+///
+/// To learn more, see
+/// <https://learn.microsoft.com/windows/win32/api/windns/ns-windns-ip6_address>.
+///
+/// {@category union}
+sealed class IP6_ADDRESS extends Union {
+  @Array(2)
+  external Array<Uint64> IP6Qword;
+
+  /// An IPv6 address of the form: "ABCD:EF01:2345:6789:ABCD:EF01:2345:6789"as
+  /// defined in <a href="https://www.ietf.org/rfc/rfc4291.txt">RFC 4291</a>.
+  @Array(4)
+  external Array<Uint32> IP6Dword;
+
+  @Array(8)
+  external Array<Uint16> IP6Word;
+
+  @Array(16)
+  external Array<Uint8> IP6Byte;
+
+  /// Allocates native memory and copies the contents of this struct into it.
+  ///
+  /// The returned pointer refers to newly allocated memory. The caller is
+  /// responsible for freeing it, unless a scoped allocator (such as [Arena]) is
+  /// used, in which case the allocator manages the lifetime.
+  Pointer<IP6_ADDRESS> toNative({Allocator allocator = adaptiveCalloc}) =>
+      allocator()..ref = this;
 }
 
 /// The header node for a linked list of addresses for a particular adapter.

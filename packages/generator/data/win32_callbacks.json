@@ -11,6 +11,7 @@
   "Windows.Win32.Graphics.Gdi.GRAYSTRINGPROC": "",
   "Windows.Win32.Graphics.Gdi.MONITORENUMPROC": "",
   "Windows.Win32.Media.Speech.SPNOTIFYCALLBACK": "",
+  "Windows.Win32.NetworkManagement.Dns.PDNS_SERVICE_REGISTER_COMPLETE": "",
   "Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_CALLBACK": "",
   "Windows.Win32.Security.Credentials.LPOCNCHKPROC": "",
   "Windows.Win32.Security.Credentials.LPOCNCONNPROCW": "",

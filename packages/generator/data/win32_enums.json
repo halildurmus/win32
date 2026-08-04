@@ -126,6 +126,7 @@
   "Windows.Win32.Media.Speech.SpeechVoiceEvents": "",
   "Windows.Win32.Media.Speech.SpeechVoicePriority": "",
   "Windows.Win32.Media.Speech.SpeechVoiceSpeakFlags": "",
+  "Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS": "",
   "Windows.Win32.NetworkManagement.IpHelper.GET_ADAPTERS_ADDRESSES_FLAGS": "",
   "Windows.Win32.NetworkManagement.Ndis.IF_OPER_STATUS": "",
   "Windows.Win32.NetworkManagement.Ndis.NET_IF_CONNECTION_TYPE": "",
