@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.4.0] - 2026-08-05
+
+### 🚀 Features
+
+- Add `ResumeThread` and `SuspendThread` APIs (#1117)
+- Add DNS Service Registration functions (#1118)
+
+[6.4.0]: https://github.com/halildurmus/win32/compare/win32-v6.3.0..win32-v6.4.0
+
 ## [6.3.0] - 2026-05-22
 
 ### 🧹 Refactor
