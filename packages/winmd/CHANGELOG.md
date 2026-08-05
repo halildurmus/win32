@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 
 - Bump `cli_util` from 0.4.2 to 0.5.1 (#1086)
 
+[7.1.1]: https://github.com/halildurmus/win32/compare/winmd-v7.1.0..winmd-v7.1.1
+
 ## [7.1.0] - 2026-03-06
 
 ### 🚀 Features
