@@ -33,7 +33,7 @@ jobs:
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
 
       - name: 📦 Activate Melos
-        uses: bluefireteam/melos-action@2982f8e4fc92440a219490009d6d05195cb1a6a5
+        uses: bluefireteam/melos-action@b79b63bcd183f823740a7976cbdb4b0fc95a0eb8
 
       - name: 📦 Install Workspace Dependencies
         run: dart pub get
