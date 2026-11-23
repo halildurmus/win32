@@ -20,6 +20,6 @@ dependencies:
   ffi: ^2.1.4
 
 dev_dependencies:
-  checks: ^0.3.1
+  checks: ^0.4.0
   halildurmus_lints: ^1.1.0
   test: ^1.27.0
